@@ -1,0 +1,6 @@
+%h1
+  = t ".edit"
+  %small
+    = t ".created_by"
+    %b= @project.thinker.name
+= render :partial => 'form'

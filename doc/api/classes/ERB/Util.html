@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ERB::Util</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ERB::Util 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/core_ext/string/output_safety_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/string/output_safety.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-h">h</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-html_escape">html_escape</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-html_escape_once">html_escape_once</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-json_escape">json_escape</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">HTML_ESCAPE</td>
+            <td>=</td>
+            <td class="attr-value">{ &#39;&amp;&#39; =&gt; &#39;&amp;amp;&#39;,  &#39;&gt;&#39; =&gt; &#39;&amp;gt;&#39;,   &#39;&lt;&#39; =&gt; &#39;&amp;lt;&#39;, &#39;&quot;&#39; =&gt; &#39;&amp;quot;&#39;, &quot;&#39;&quot; =&gt; &#39;&amp;#39;&#39; }</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">JSON_ESCAPE</td>
+            <td>=</td>
+            <td class="attr-value">{ &#39;&amp;&#39; =&gt; &#39;\u0026&#39;, &#39;&gt;&#39; =&gt; &#39;\u003e&#39;, &#39;&lt;&#39; =&gt; &#39;\u003c&#39;, &quot;\u2028&quot; =&gt; &#39;\u2028&#39;, &quot;\u2029&quot; =&gt; &#39;\u2029&#39; }</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HTML_ESCAPE_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/[&amp;&quot;&#39;&gt;&lt;]/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HTML_ESCAPE_ONCE_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/[&quot;&gt;&lt;&#39;]|&amp;(?!([a-zA-Z]+|(#\d+)|(#[xX][\dA-Fa-f]+));)/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">JSON_ESCAPE_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/[\u2028\u2029&amp;&gt;&lt;]/u</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-h">
+            
+              <b>h</b>(s)
+            
+            <a href="../../classes/ERB/Util.html#method-c-h" name="method-c-h" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+            <div class="aka">
+              Alias for: <a href="Util.html#method-i-html_escape">html_escape</a>
+            </div>
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-html_escape">
+            
+              <b>html_escape</b>(s)
+            
+            <a href="../../classes/ERB/Util.html#method-c-html_escape" name="method-c-html_escape" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A utility method for escaping HTML tag characters. This method is also
+aliased as <code>h</code>.</p>
+
+<p>In your <a href="../ERB.html">ERB</a> templates, use this method to escape
+any unsafe content. For example:</p>
+
+<pre><code>&lt;%=h @person.name %&gt;
+
+puts html_escape(&#39;is a &gt; 0 &amp; a &lt; 10?&#39;)
+# =&gt; is a &amp;gt; 0 &amp;amp; a &amp;lt; 10?</code></pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Util.html#method-i-h">h</a>
+            </div>
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-html_escape_source')" id="l_method-c-html_escape_source">show</a>
+                
+              </p>
+              <div id="method-c-html_escape_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/string/output_safety.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">html_escape</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-identifier">unwrapped_html_escape</span>(<span class="ruby-identifier">s</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-html_escape_once">
+            
+              <b>html_escape_once</b>(s)
+            
+            <a href="../../classes/ERB/Util.html#method-c-html_escape_once" name="method-c-html_escape_once" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A utility method for escaping HTML without affecting existing escaped
+entities.</p>
+
+<pre><code>html_escape_once(&#39;1 &lt; 2 &amp;amp; 3&#39;)
+# =&gt; &quot;1 &amp;lt; 2 &amp;amp; 3&quot;
+
+html_escape_once(&#39;&amp;lt;&amp;lt; Accept &amp; Checkout&#39;)
+# =&gt; &quot;&amp;lt;&amp;lt; Accept &amp;amp; Checkout&quot;
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-html_escape_once_source')" id="l_method-c-html_escape_once_source">show</a>
+                
+              </p>
+              <div id="method-c-html_escape_once_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/string/output_safety.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">html_escape_once</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">HTML_ESCAPE_ONCE_REGEXP</span>, <span class="ruby-constant">HTML_ESCAPE</span>)
+  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">html_safe?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-json_escape">
+            
+              <b>json_escape</b>(s)
+            
+            <a href="../../classes/ERB/Util.html#method-c-json_escape" name="method-c-json_escape" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A utility method for escaping HTML entities in JSON strings. Specifically,
+the &amp;, &gt; and &lt; characters are replaced with their equivalent
+unicode escaped form - u0026, u003e, and u003c. The Unicode sequences u2028
+and u2029 are also escaped as they are treated as newline characters in
+some JavaScript engines. These sequences have identical meaning as the
+original characters inside the context of a JSON string, so assuming the
+input is a valid and well-formed JSON value, the output will have
+equivalent meaning when parsed:</p>
+
+<pre><code>json = JSON.generate({ name: &quot;&lt;/script&gt;&lt;script&gt;alert(&#39;PWNED!!!&#39;)&lt;/script&gt;&quot;})
+# =&gt; &quot;{\&quot;name\&quot;:\&quot;&lt;/script&gt;&lt;script&gt;alert(&#39;PWNED!!!&#39;)&lt;/script&gt;\&quot;}&quot;
+
+json_escape(json)
+# =&gt; &quot;{\&quot;name\&quot;:\&quot;\\u003C/script\\u003E\\u003Cscript\\u003Ealert(&#39;PWNED!!!&#39;)\\u003C/script\\u003E\&quot;}&quot;
+
+JSON.parse(json) == JSON.parse(json_escape(json))
+# =&gt; true
+</code></pre>
+
+<p>The intended use case for this method is to escape JSON strings before
+including them inside a script tag to avoid XSS vulnerability:</p>
+
+<pre><code>&lt;script&gt;
+  var currentUser = &lt;%= raw json_escape(current_user.to_json) %&gt;;
+&lt;/script&gt;</code></pre>
+
+<p>It is necessary to <code>raw</code> the result of <code>json_escape</code>,
+so that quotation marks don&#39;t get converted to <code>&amp;quot;</code>
+entities. <code>json_escape</code> doesn&#39;t automatically flag the
+result as HTML safe, since the raw value is unsafe to use inside HTML
+attributes.</p>
+
+<p>If you need to output JSON elsewhere in your HTML, you can just do
+something like this, as any unsafe characters (including quotation marks)
+will be automatically escaped for you:</p>
+
+<pre><code>&lt;div data-user-info=&quot;&lt;%= current_user.to_json %&gt;&quot;&gt;...&lt;/div&gt;</code></pre>
+
+<p>WARNING: this helper only works with valid JSON. Using this on non-JSON
+values will open up serious XSS vulnerabilities. For example, if you
+replace the <code>current_user.to_json</code> in the example above with
+user input instead, the browser will happily eval() that string as
+JavaScript.</p>
+
+<p>The escaping performed in this method is identical to those performed in
+the Active Support JSON encoder when
+<code>ActiveSupport.escape_html_entities_in_json</code> is set to true.
+Because this transformation is idempotent, this helper can be applied even
+if <code>ActiveSupport.escape_html_entities_in_json</code> is already true.</p>
+
+<p>Therefore, when you are unsure if
+<code>ActiveSupport.escape_html_entities_in_json</code> is enabled, or if
+you are unsure where your JSON string originated from, it is recommended
+that you always apply this helper (other libraries, such as the JSON gem,
+do not provide this kind of protection by default; also some gems might
+override <code>to_json</code> to bypass Active Support&#39;s encoder).</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-json_escape_source')" id="l_method-c-json_escape_source">show</a>
+                
+              </p>
+              <div id="method-c-json_escape_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/string/output_safety.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">json_escape</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">JSON_ESCAPE_REGEXP</span>, <span class="ruby-constant">JSON_ESCAPE</span>)
+  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">html_safe?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

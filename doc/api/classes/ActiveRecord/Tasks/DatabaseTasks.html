@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Tasks::DatabaseTasks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Tasks::DatabaseTasks 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activerecord-4_2_3/lib/active_record/tasks/database_tasks_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><code>ActiveRecord::Tasks::DatabaseTasks</code> is a utility class, which
+encapsulates logic behind common tasks used to manage database and
+migrations.</p>
+
+<p>The tasks defined here are used with Rake tasks provided by Active Record.</p>
+
+<p>In order to use <a href="DatabaseTasks.html">DatabaseTasks</a>, a few
+config values need to be set. All the needed config values are set by Rails
+already, so it&#39;s necessary to do it only if you want to change the
+defaults or when you want to use Active Record outside of Rails (in such
+case after configuring the database tasks, you can also use the rake tasks
+defined in Active Record).</p>
+
+<p>The possible config values are:</p>
+
+<pre><code>* +env+: current environment (like Rails.env).
+* +database_configuration+: configuration of your databases (as in +config/database.yml+).
+* +db_dir+: your +db+ directory.
+* +fixtures_path+: a path to fixtures directory.
+* +migrations_paths+: a list of paths to directories with migrations.
+* +seed_loader+: an object which will load seeds, it needs to respond to the +load_seed+ method.
+* +root+: a path to the root of the application.</code></pre>
+
+<p>Example usage of <code>DatabaseTasks</code> outside Rails could look as
+such:</p>
+
+<pre><code>include ActiveRecord::Tasks
+DatabaseTasks.database_configuration = YAML.load_file(&#39;my_database_config.yml&#39;)
+DatabaseTasks.db_dir = &#39;db&#39;
+# other settings...
+
+DatabaseTasks.create_current(&#39;production&#39;)
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-charset">charset</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-charset_current">charset_current</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-check_schema_file">check_schema_file</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-collation">collation</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-collation_current">collation_current</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create_all">create_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create_current">create_current</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-current_config">current_config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-db_dir">db_dir</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-drop">drop</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-drop_all">drop_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-drop_current">drop_current</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-env">env</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fixtures_path">fixtures_path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-load_schema">load_schema</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-load_schema_current">load_schema_current</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-load_schema_current_if_exists">load_schema_current_if_exists</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-load_seed">load_seed</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-migrate">migrate</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-migrations_paths">migrations_paths</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-purge">purge</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-purge_all">purge_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-purge_current">purge_current</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-register_task">register_task</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-root">root</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-schema_file">schema_file</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-seed_loader">seed_loader</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-structure_dump">structure_dump</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-structure_load">structure_load</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">LOCAL_HOSTS</td>
+            <td>=</td>
+            <td class="attr-value">[&#39;127.0.0.1&#39;, &#39;localhost&#39;]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>current_config</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>database_configuration</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>db_dir</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>env</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>fixtures_path</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>migrations_paths</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>root</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>seed_loader</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-charset">
+            
+              <b>charset</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-charset" name="method-i-charset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-charset_source')" id="l_method-i-charset_source">show</a>
+                
+              </p>
+              <div id="method-i-charset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">charset</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">charset</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-charset_current">
+            
+              <b>charset_current</b>(environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-charset_current" name="method-i-charset_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-charset_current_source')" id="l_method-i-charset_current_source">show</a>
+                
+              </p>
+              <div id="method-i-charset_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">charset_current</span>(<span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">charset</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>[<span class="ruby-identifier">environment</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-check_schema_file">
+            
+              <b>check_schema_file</b>(filename)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-check_schema_file" name="method-i-check_schema_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-check_schema_file_source')" id="l_method-i-check_schema_file_source">show</a>
+                
+              </p>
+              <div id="method-i-check_schema_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 240</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">check_schema_file</span>(<span class="ruby-identifier">filename</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">message</span> = <span class="ruby-node">%Q{#{filename} doesn&#39;t exist yet. Run `rake db:migrate` to create it, then try again.}</span>
+    <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q{ If you do not intend to use a database, you should instead alter #{Rails.root}/config/application.rb to limit the frameworks that will be loaded.}</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Rails</span>)
+    <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">abort</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-collation">
+            
+              <b>collation</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-collation" name="method-i-collation" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-collation_source')" id="l_method-i-collation_source">show</a>
+                
+              </p>
+              <div id="method-i-collation_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">collation</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">collation</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-collation_current">
+            
+              <b>collation_current</b>(environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-collation_current" name="method-i-collation_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-collation_current_source')" id="l_method-i-collation_current_source">show</a>
+                
+              </p>
+              <div id="method-i-collation_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">collation_current</span>(<span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">collation</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>[<span class="ruby-identifier">environment</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">create</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">DatabaseAlreadyExists</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{configuration[&#39;database&#39;]} already exists&quot;</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">error</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">backtrace</span>)
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Couldn&#39;t create database for #{configuration.inspect}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_all">
+            
+              <b>create_all</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-create_all" name="method-i-create_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_all_source')" id="l_method-i-create_all_source">show</a>
+                
+              </p>
+              <div id="method-i-create_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create_all</span>
+  <span class="ruby-identifier">each_local_configuration</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span> <span class="ruby-identifier">create</span> <span class="ruby-identifier">configuration</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_current">
+            
+              <b>create_current</b>(environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-create_current" name="method-i-create_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_current_source')" id="l_method-i-create_current_source">show</a>
+                
+              </p>
+              <div id="method-i-create_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create_current</span>(<span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">each_current_configuration</span>(<span class="ruby-identifier">environment</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">create</span> <span class="ruby-identifier">configuration</span>
+  }
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">establish_connection</span>(<span class="ruby-identifier">environment</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-current_config">
+            
+              <b>current_config</b>(options = {})
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-current_config" name="method-i-current_config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-current_config_source')" id="l_method-i-current_config_source">show</a>
+                
+              </p>
+              <div id="method-i-current_config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">current_config</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span> <span class="ruby-value">:env</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">env</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:config</span>)
+    <span class="ruby-ivar">@current_config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:config</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_config</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>[<span class="ruby-identifier">options</span>[<span class="ruby-value">:env</span>]]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-db_dir">
+            
+              <b>db_dir</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-db_dir" name="method-i-db_dir" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-db_dir_source')" id="l_method-i-db_dir_source">show</a>
+                
+              </p>
+              <div id="method-i-db_dir_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">db_dir</span>
+  <span class="ruby-ivar">@db_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">paths</span>[<span class="ruby-string">&quot;db&quot;</span>].<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-drop">
+            
+              <b>drop</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-drop" name="method-i-drop" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-drop_source')" id="l_method-i-drop_source">show</a>
+                
+              </p>
+              <div id="method-i-drop_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">drop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">drop</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoDatabaseError</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Database &#39;#{configuration[&#39;database&#39;]}&#39; does not exist&quot;</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">error</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">backtrace</span>)
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Couldn&#39;t drop #{configuration[&#39;database&#39;]}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-drop_all">
+            
+              <b>drop_all</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-drop_all" name="method-i-drop_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-drop_all_source')" id="l_method-i-drop_all_source">show</a>
+                
+              </p>
+              <div id="method-i-drop_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">drop_all</span>
+  <span class="ruby-identifier">each_local_configuration</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span> <span class="ruby-identifier">drop</span> <span class="ruby-identifier">configuration</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-drop_current">
+            
+              <b>drop_current</b>(environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-drop_current" name="method-i-drop_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-drop_current_source')" id="l_method-i-drop_current_source">show</a>
+                
+              </p>
+              <div id="method-i-drop_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">drop_current</span>(<span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">each_current_configuration</span>(<span class="ruby-identifier">environment</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">drop</span> <span class="ruby-identifier">configuration</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-env">
+            
+              <b>env</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-env" name="method-i-env" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-env_source')" id="l_method-i-env_source">show</a>
+                
+              </p>
+              <div id="method-i-env_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">env</span>
+  <span class="ruby-ivar">@env</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-fixtures_path">
+            
+              <b>fixtures_path</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-fixtures_path" name="method-i-fixtures_path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fixtures_path_source')" id="l_method-i-fixtures_path_source">show</a>
+                
+              </p>
+              <div id="method-i-fixtures_path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fixtures_path</span>
+  <span class="ruby-ivar">@fixtures_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;FIXTURES_PATH&#39;</span>]
+                       <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">root</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;FIXTURES_PATH&#39;</span>])
+                     <span class="ruby-keyword">else</span>
+                       <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">root</span>, <span class="ruby-string">&#39;test&#39;</span>, <span class="ruby-string">&#39;fixtures&#39;</span>)
+                     <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_schema">
+            
+              <b>load_schema</b>(format = ActiveRecord::Base.schema_format, file = nil)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-load_schema" name="method-i-load_schema" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_schema_source')" id="l_method-i-load_schema_source">show</a>
+                
+              </p>
+              <div id="method-i-load_schema_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 191</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load_schema</span>(<span class="ruby-identifier">format</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">schema_format</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword">nil</span>)
+        <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&quot;          This method will act on a specific connection in the future.
+          To act on the current connection, use `load_schema_current` instead.
+&quot;</span>.<span class="ruby-identifier">squish</span>)
+
+        <span class="ruby-identifier">load_schema_current</span>(<span class="ruby-identifier">format</span>, <span class="ruby-identifier">file</span>)
+      <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_schema_current">
+            
+              <b>load_schema_current</b>(format = ActiveRecord::Base.schema_format, file = nil, environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-load_schema_current" name="method-i-load_schema_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_schema_current_source')" id="l_method-i-load_schema_current_source">show</a>
+                
+              </p>
+              <div id="method-i-load_schema_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load_schema_current</span>(<span class="ruby-identifier">format</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">schema_format</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">each_current_configuration</span>(<span class="ruby-identifier">environment</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">load_schema_for</span> <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">format</span>, <span class="ruby-identifier">file</span>
+  }
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">establish_connection</span>(<span class="ruby-identifier">environment</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_schema_current_if_exists">
+            
+              <b>load_schema_current_if_exists</b>(format = ActiveRecord::Base.schema_format, file = nil, environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-load_schema_current_if_exists" name="method-i-load_schema_current_if_exists" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_schema_current_if_exists_source')" id="l_method-i-load_schema_current_if_exists_source">show</a>
+                
+              </p>
+              <div id="method-i-load_schema_current_if_exists_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load_schema_current_if_exists</span>(<span class="ruby-identifier">format</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">schema_format</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">schema_file</span>(<span class="ruby-identifier">format</span>))
+    <span class="ruby-identifier">load_schema_current</span>(<span class="ruby-identifier">format</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">environment</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_seed">
+            
+              <b>load_seed</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-load_seed" name="method-i-load_seed" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_seed_source')" id="l_method-i-load_seed_source">show</a>
+                
+              </p>
+              <div id="method-i-load_seed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load_seed</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seed_loader</span>
+    <span class="ruby-identifier">seed_loader</span>.<span class="ruby-identifier">load_seed</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;You tried to load seed data, but no seed loader is specified. Please specify seed &quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-string">&quot;loader with ActiveRecord::Tasks::DatabaseTasks.seed_loader = your_seed_loader\n&quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-string">&quot;Seed loader should respond to load_seed method&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-migrate">
+            
+              <b>migrate</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-migrate" name="method-i-migrate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-migrate_source')" id="l_method-i-migrate_source">show</a>
+                
+              </p>
+              <div id="method-i-migrate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">migrate</span>
+  <span class="ruby-identifier">verbose</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;VERBOSE&quot;</span>] <span class="ruby-operator">?</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;VERBOSE&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">version</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;VERSION&quot;</span>] <span class="ruby-operator">?</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;VERSION&quot;</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">scope</span>   = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;SCOPE&#39;</span>]
+  <span class="ruby-identifier">verbose_was</span>, <span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span>, <span class="ruby-identifier">verbose</span>
+  <span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">migrate</span>(<span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">migrations_paths</span>, <span class="ruby-identifier">version</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">migration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">migration</span>.<span class="ruby-identifier">scope</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">verbose_was</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-migrations_paths">
+            
+              <b>migrations_paths</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-migrations_paths" name="method-i-migrations_paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-migrations_paths_source')" id="l_method-i-migrations_paths_source">show</a>
+                
+              </p>
+              <div id="method-i-migrations_paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">migrations_paths</span>
+  <span class="ruby-ivar">@migrations_paths</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">paths</span>[<span class="ruby-string">&#39;db/migrate&#39;</span>].<span class="ruby-identifier">to_a</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-purge">
+            
+              <b>purge</b>(configuration)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-purge" name="method-i-purge" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-purge_source')" id="l_method-i-purge_source">show</a>
+                
+              </p>
+              <div id="method-i-purge_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">purge</span>(<span class="ruby-identifier">configuration</span>)
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">configuration</span>).<span class="ruby-identifier">purge</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-purge_all">
+            
+              <b>purge_all</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-purge_all" name="method-i-purge_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-purge_all_source')" id="l_method-i-purge_all_source">show</a>
+                
+              </p>
+              <div id="method-i-purge_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">purge_all</span>
+  <span class="ruby-identifier">each_local_configuration</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">purge</span> <span class="ruby-identifier">configuration</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-purge_current">
+            
+              <b>purge_current</b>(environment = env)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-purge_current" name="method-i-purge_current" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-purge_current_source')" id="l_method-i-purge_current_source">show</a>
+                
+              </p>
+              <div id="method-i-purge_current_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">purge_current</span>(<span class="ruby-identifier">environment</span> = <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">each_current_configuration</span>(<span class="ruby-identifier">environment</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">configuration</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">purge</span> <span class="ruby-identifier">configuration</span>
+  }
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">establish_connection</span>(<span class="ruby-identifier">environment</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-register_task">
+            
+              <b>register_task</b>(pattern, task)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-register_task" name="method-i-register_task" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-register_task_source')" id="l_method-i-register_task_source">show</a>
+                
+              </p>
+              <div id="method-i-register_task_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">register_task</span>(<span class="ruby-identifier">pattern</span>, <span class="ruby-identifier">task</span>)
+  <span class="ruby-ivar">@tasks</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-ivar">@tasks</span>[<span class="ruby-identifier">pattern</span>] = <span class="ruby-identifier">task</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-root">
+            
+              <b>root</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-root" name="method-i-root" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-root_source')" id="l_method-i-root_source">show</a>
+                
+              </p>
+              <div id="method-i-root_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">root</span>
+  <span class="ruby-ivar">@root</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-schema_file">
+            
+              <b>schema_file</b>(format = ActiveRecord::Base.schema_format)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-schema_file" name="method-i-schema_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-schema_file_source')" id="l_method-i-schema_file_source">show</a>
+                
+              </p>
+              <div id="method-i-schema_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">schema_file</span>(<span class="ruby-identifier">format</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">schema_format</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:ruby</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">db_dir</span>, <span class="ruby-string">&quot;schema.rb&quot;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:sql</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">db_dir</span>, <span class="ruby-string">&quot;structure.sql&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-seed_loader">
+            
+              <b>seed_loader</b>()
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-seed_loader" name="method-i-seed_loader" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-seed_loader_source')" id="l_method-i-seed_loader_source">show</a>
+                
+              </p>
+              <div id="method-i-seed_loader_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">seed_loader</span>
+  <span class="ruby-ivar">@seed_loader</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-structure_dump">
+            
+              <b>structure_dump</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-structure_dump" name="method-i-structure_dump" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-structure_dump_source')" id="l_method-i-structure_dump_source">show</a>
+                
+              </p>
+              <div id="method-i-structure_dump_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">structure_dump</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">delete_at</span> <span class="ruby-number">1</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">structure_dump</span>(<span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-structure_load">
+            
+              <b>structure_load</b>(*arguments)
+            
+            <a href="../../../classes/ActiveRecord/Tasks/DatabaseTasks.html#method-i-structure_load" name="method-i-structure_load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-structure_load_source')" id="l_method-i-structure_load_source">show</a>
+                
+              </p>
+              <div id="method-i-structure_load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/tasks/database_tasks.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">structure_load</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">configuration</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">delete_at</span> <span class="ruby-number">1</span>
+  <span class="ruby-identifier">class_for_adapter</span>(<span class="ruby-identifier">configuration</span>[<span class="ruby-string">&#39;adapter&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arguments</span>).<span class="ruby-identifier">structure_load</span>(<span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

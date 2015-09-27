@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Listing Licenses
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Url
+      %th{:colspan => "3"}
+  %tbody
+    - @licenses.each do |license|
+      %tr
+        %td= license.name
+        %td= license.description
+        %td= license.url
+        %td= link_to 'Show', license
+        %td= link_to 'Edit', edit_license_path(license)
+        %td= link_to 'Destroy', license, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New License', new_license_path

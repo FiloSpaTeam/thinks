@@ -1,0 +1,16 @@
+= form_for [@project, @task], :html => { :class => '' } do |f|
+  .form-group
+    = f.label :description, :class => "control-label"
+    = f.text_area :description, :class => 'form-control', :rows => 3, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+    %span#help-description.help-block= t "char_in", chars_min: @chars_min, chars_max: @chars_max
+  .form-group
+    = f.label :task_id, t('.task_parent'),:class => 'control-label'
+    = f.select :task_id, options_from_collection_for_select(@task.project.tasks, 'id', 'description', @task.task_id), {include_blank: true}, :class => "form-control"
+  - if [Status.backlog.first, Status.release.first].include?(@task.status)
+    .form-group
+      = f.label :workload_id, t('.workload'),:class => 'control-label'
+      = f.select :workload_id, options_from_collection_for_select(Workload.all, 'id', 'description', @task.workload_id), {include_blank: '?'}, :class => "form-control"
+
+  .form-group
+    = f.submit nil, :class => "btn btn-primary"
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), project_tasks_path(@task.project), :class => 'btn btn-default'              |

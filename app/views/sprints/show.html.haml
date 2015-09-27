@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @sprint.title
+%p
+  %strong Description:
+  = @sprint.description
+%p
+  %strong Goal:
+  = @sprint.goal
+%p
+  %strong Obtained:
+  = @sprint.obtained
+%p
+  %strong Project:
+  = @sprint.project_id
+= link_to 'Edit', edit_sprint_path(@sprint)
+|
+= link_to 'Back', sprints_path

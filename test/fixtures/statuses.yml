@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+backlog:
+  translation_code: backlog
+  description: ToDo
+
+release:
+  translation_code: release
+  description: ToDo next
+
+sprint:
+  translation_code: sprint
+  description: Work planned
+
+working:
+  translation_code: working
+  description: Work in progress
+
+done:
+  translation_code: done
+  description: Work done

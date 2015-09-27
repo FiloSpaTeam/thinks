@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveJob::Callbacks::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveJob::Callbacks::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activejob-4_2_3/lib/active_job/callbacks_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>These methods will be included into any Active Job object, adding callbacks
+for <code>perform</code> and <code>enqueue</code> methods.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-after_enqueue">after_enqueue</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-after_perform">after_perform</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-around_enqueue">around_enqueue</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-around_perform">around_perform</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-before_enqueue">before_enqueue</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-before_perform">before_perform</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-after_enqueue">
+            
+              <b>after_enqueue</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-after_enqueue" name="method-i-after_enqueue" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called right after the job is enqueued.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  after_enqueue do |job|
+    $statsd.increment &quot;enqueue-video-job.success&quot;
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-after_enqueue_source')" id="l_method-i-after_enqueue_source">show</a>
+                
+              </p>
+              <div id="method-i-after_enqueue_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">after_enqueue</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:enqueue</span>, <span class="ruby-value">:after</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-after_perform">
+            
+              <b>after_perform</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-after_perform" name="method-i-after_perform" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called right after the job&#39;s perform
+method has finished.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  after_perform do |job|
+    UserMailer.notify_video_processed(job.arguments.first)
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-after_perform_source')" id="l_method-i-after_perform_source">show</a>
+                
+              </p>
+              <div id="method-i-after_perform_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">after_perform</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:perform</span>, <span class="ruby-value">:after</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-around_enqueue">
+            
+              <b>around_enqueue</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-around_enqueue" name="method-i-around_enqueue" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called before and after the job is
+enqueued.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  around_enqueue do |job, block|
+    $statsd.time &quot;video-job.process&quot; do
+      block.call
+    end
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-around_enqueue_source')" id="l_method-i-around_enqueue_source">show</a>
+                
+              </p>
+              <div id="method-i-around_enqueue_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">around_enqueue</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:enqueue</span>, <span class="ruby-value">:around</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-around_perform">
+            
+              <b>around_perform</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-around_perform" name="method-i-around_perform" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called around the job&#39;s perform
+method.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  around_perform do |job, block|
+    UserMailer.notify_video_started_processing(job.arguments.first)
+    block.call
+    UserMailer.notify_video_processed(job.arguments.first)
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-around_perform_source')" id="l_method-i-around_perform_source">show</a>
+                
+              </p>
+              <div id="method-i-around_perform_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">around_perform</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:perform</span>, <span class="ruby-value">:around</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-before_enqueue">
+            
+              <b>before_enqueue</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-before_enqueue" name="method-i-before_enqueue" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called right before the job is enqueued.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  before_enqueue do |job|
+    $statsd.increment &quot;enqueue-video-job.try&quot;
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-before_enqueue_source')" id="l_method-i-before_enqueue_source">show</a>
+                
+              </p>
+              <div id="method-i-before_enqueue_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">before_enqueue</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:enqueue</span>, <span class="ruby-value">:before</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-before_perform">
+            
+              <b>before_perform</b>(*filters, &amp;blk)
+            
+            <a href="../../../classes/ActiveJob/Callbacks/ClassMethods.html#method-i-before_perform" name="method-i-before_perform" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines a callback that will get called right before the job&#39;s perform
+method is executed.</p>
+
+<pre><code>class VideoProcessJob &lt; ActiveJob::Base
+  queue_as :default
+
+  before_perform do |job|
+    UserMailer.notify_video_started_processing(job.arguments.first)
+  end
+
+  def perform(video_id)
+    Video.find(video_id).process
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-before_perform_source')" id="l_method-i-before_perform_source">show</a>
+                
+              </p>
+              <div id="method-i-before_perform_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/callbacks.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">before_perform</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">set_callback</span>(<span class="ruby-value">:perform</span>, <span class="ruby-value">:before</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

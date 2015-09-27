@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @language.name
+= link_to 'Edit', edit_language_path(@language)
+|
+= link_to 'Back', languages_path

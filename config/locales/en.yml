@@ -1,0 +1,130 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  show                        : "Show"
+  update_failed               : "Update failed. See errors below."
+  actions                     : "Actions"
+  search                      : "Search"
+  sorted_by                   : "Sorted by"
+  cant_edit                   : "You can't edit this."
+  cant_update                 : "You can't update this."
+  wtf_are_you_destroying      : "Do you want really destroy something that is not your??"
+  wtf_the_creator_partecipate : "You are or you are not the creator ??"
+  reset_filters               : "Reset filters"
+  char_minimum                : "Minimum character length: %{chars}"
+  char_limit : "Character limit: %{chars}"
+  char_in: "Character length between %{chars_min} and %{chars_max}"
+
+  layouts:
+    application:
+      projects          : "Projects"
+      current           : "current"
+      profile           : "Profile"
+      donate            : "Donate"
+      logout            : "Logout"
+      sign_in           : "Sign In"
+      sign_up           : "Sign Up"
+      thinkers          : "Thinkers"
+      privacy           : "Privacy"
+      about             : "About"
+      contact           : "Contact Us"
+      sources           : "Source code"
+      toggle_navigation : "Toggle navigation"
+
+  thinkers:
+    show:
+      profile : "Profile"
+
+  projects:
+    index:
+      projects    : "All projects"
+      small_title : "created by community for community"
+      title       : "Title"
+    show:
+      partecipate: "Partecipate"
+    new:
+      new        : "New project"
+      created_by : "created by"
+    edit:
+      edit       : "Edit project"
+      created_by : "created by"
+    list:
+      title           : "Title"
+      description     : "Description"
+      team_number     : "Team"
+      home_url        : "Website"
+      source_code_url : "Source's repository"
+      documentation   : "Documentation"
+      license         : "License"
+      thinker         : "Thinker"
+      created_at      : "Created at"
+      progress        : "Progress"
+      team            : "Team"
+      tasks           : "Tasks"
+      release_at      : "Release at"
+    form:
+      urls       : "URLs"
+      dates      : "Dates"
+      release_at_help: "If release date is before today, the project is declared started."
+    tasks:
+      scrum_table : "Scrum table"
+      tasks       : "tasks"
+      backlog     : "Backlog"
+      release     : "Release"
+      sprint      : "Sprint"
+      in_progress : "In progress"
+      done        : "Done"
+
+  tasks:
+    description: "Description"
+    status: "Status"
+    workload: "Workload"
+    worker: "Worker"
+    new:
+      new_task: "New task"
+      task_parent: "Task parent"
+    index:
+      scrum_table: "Scrum table"
+
+  # ActiveRecord override translation
+  activerecord:
+    attributes:
+      project:
+        home_url          : "Home"
+        source_code_url   : "Source Code"
+        documentation_url : "Documentation"
+
+  #Devise section
+  devise:
+    sessions:
+      new:
+        log_in      : "Log in"
+        remember_me : "Remember me"
+    registrations:
+      new:
+        sign_up           : "Sign up"
+        already_signed_up : "Already signed up?"
+    passwords:
+      new:
+        forgot_password     : "Forgot your password?"
+        send_reset_password : "Send me reset password instructions"
+        need_account        : "Need an account?"

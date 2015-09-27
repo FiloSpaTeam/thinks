@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveJob::TestHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveJob::TestHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activejob-4_2_3/lib/active_job/test_helper_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Provides helper methods for testing Active Job</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-after_teardown">after_teardown</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_enqueued_jobs">assert_enqueued_jobs</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_enqueued_with">assert_enqueued_with</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_enqueued_jobs">assert_no_enqueued_jobs</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_performed_jobs">assert_no_performed_jobs</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_performed_jobs">assert_performed_jobs</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_performed_with">assert_performed_with</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-before_setup">before_setup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear_enqueued_jobs">clear_enqueued_jobs</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-clear_performed_jobs">clear_performed_jobs</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-perform_enqueued_jobs">perform_enqueued_jobs</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Q</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-queue_adapter">queue_adapter</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-serialize_args_for_assertion">serialize_args_for_assertion</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-after_teardown">
+            
+              <b>after_teardown</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-after_teardown" name="method-i-after_teardown" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-after_teardown_source')" id="l_method-i-after_teardown_source">show</a>
+                
+              </p>
+              <div id="method-i-after_teardown_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">after_teardown</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">queue_adapter</span> = <span class="ruby-ivar">@old_queue_adapter</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_enqueued_jobs">
+            
+              <b>assert_enqueued_jobs</b>(number)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_enqueued_jobs" name="method-i-assert_enqueued_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the number of enqueued jobs matches the given number.</p>
+
+<pre><code>def test_jobs
+  assert_enqueued_jobs 0
+  HelloJob.perform_later(&#39;david&#39;)
+  assert_enqueued_jobs 1
+  HelloJob.perform_later(&#39;abdelkader&#39;)
+  assert_enqueued_jobs 2
+end
+</code></pre>
+
+<p>If a block is passed, that block should cause the specified number of jobs
+to be enqueued.</p>
+
+<pre><code>def test_jobs_again
+  assert_enqueued_jobs 1 do
+    HelloJob.perform_later(&#39;cristian&#39;)
+  end
+
+  assert_enqueued_jobs 2 do
+    HelloJob.perform_later(&#39;aaron&#39;)
+    HelloJob.perform_later(&#39;rafael&#39;)
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_enqueued_jobs_source')" id="l_method-i-assert_enqueued_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_enqueued_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_enqueued_jobs</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">original_count</span> = <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">yield</span>
+    <span class="ruby-identifier">new_count</span> = <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">number</span>, <span class="ruby-identifier">new_count</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">original_count</span>,
+                 <span class="ruby-node">&quot;#{number} jobs expected, but #{new_count - original_count} were enqueued&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">enqueued_jobs_size</span> = <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">number</span>, <span class="ruby-identifier">enqueued_jobs_size</span>, <span class="ruby-node">&quot;#{number} jobs expected, but #{enqueued_jobs_size} were enqueued&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_enqueued_with">
+            
+              <b>assert_enqueued_with</b>(args = {}, &amp;_block)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_enqueued_with" name="method-i-assert_enqueued_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the job passed in the block has been enqueued with the given
+arguments.</p>
+
+<pre><code>def test_assert_enqueued_with
+  assert_enqueued_with(job: MyJob, args: [1,2,3], queue: &#39;low&#39;) do
+    MyJob.perform_later(1,2,3)
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_enqueued_with_source')" id="l_method-i-assert_enqueued_with_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_enqueued_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_enqueued_with</span>(<span class="ruby-identifier">args</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-identifier">original_enqueued_jobs</span> = <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">clear_enqueued_jobs</span>
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:job</span>, <span class="ruby-value">:args</span>, <span class="ruby-value">:at</span>, <span class="ruby-value">:queue</span>)
+  <span class="ruby-identifier">serialized_args</span> = <span class="ruby-identifier">serialize_args_for_assertion</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">yield</span>
+  <span class="ruby-identifier">matching_job</span> = <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">serialized_args</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">job</span>[<span class="ruby-identifier">key</span>] }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">matching_job</span>, <span class="ruby-node">&quot;No enqueued job found with #{args}&quot;</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">enqueued_jobs</span> = <span class="ruby-identifier">original_enqueued_jobs</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">enqueued_jobs</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_enqueued_jobs">
+            
+              <b>assert_no_enqueued_jobs</b>(&amp;block)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_no_enqueued_jobs" name="method-i-assert_no_enqueued_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that no jobs have been enqueued.</p>
+
+<pre><code>def test_jobs
+  assert_no_enqueued_jobs
+  HelloJob.perform_later(&#39;jeremy&#39;)
+  assert_enqueued_jobs 1
+end
+</code></pre>
+
+<p>If a block is passed, that block should not cause any job to be enqueued.</p>
+
+<pre><code>def test_jobs_again
+  assert_no_enqueued_jobs do
+    # No job should be enqueued from this block
+  end
+end
+</code></pre>
+
+<p>Note: This assertion is simply a shortcut for:</p>
+
+<pre><code>assert_enqueued_jobs 0, &amp;block
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_enqueued_jobs_source')" id="l_method-i-assert_no_enqueued_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_enqueued_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_enqueued_jobs</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">assert_enqueued_jobs</span> <span class="ruby-number">0</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_performed_jobs">
+            
+              <b>assert_no_performed_jobs</b>(&amp;block)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_no_performed_jobs" name="method-i-assert_no_performed_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that no jobs have been performed.</p>
+
+<pre><code>def test_jobs
+  assert_no_performed_jobs
+
+  perform_enqueued_jobs do
+    HelloJob.perform_later(&#39;matthew&#39;)
+    assert_performed_jobs 1
+  end
+end
+</code></pre>
+
+<p>If a block is passed, that block should not cause any job to be performed.</p>
+
+<pre><code>def test_jobs_again
+  assert_no_performed_jobs do
+    # No job should be performed from this block
+  end
+end
+</code></pre>
+
+<p>Note: This assertion is simply a shortcut for:</p>
+
+<pre><code>assert_performed_jobs 0, &amp;block
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_performed_jobs_source')" id="l_method-i-assert_no_performed_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_performed_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_performed_jobs</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">assert_performed_jobs</span> <span class="ruby-number">0</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_performed_jobs">
+            
+              <b>assert_performed_jobs</b>(number)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_performed_jobs" name="method-i-assert_performed_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the number of performed jobs matches the given number. If no
+block is passed, <code>perform_enqueued_jobs</code> must be called around
+the job call.</p>
+
+<pre><code>def test_jobs
+  assert_performed_jobs 0
+
+  perform_enqueued_jobs do
+    HelloJob.perform_later(&#39;xavier&#39;)
+  end
+  assert_performed_jobs 1
+
+  perform_enqueued_jobs do
+    HelloJob.perform_later(&#39;yves&#39;)
+    assert_performed_jobs 2
+  end
+end
+</code></pre>
+
+<p>If a block is passed, that block should cause the specified number of jobs
+to be performed.</p>
+
+<pre><code>def test_jobs_again
+  assert_performed_jobs 1 do
+    HelloJob.perform_later(&#39;robin&#39;)
+  end
+
+  assert_performed_jobs 2 do
+    HelloJob.perform_later(&#39;carlos&#39;)
+    HelloJob.perform_later(&#39;sean&#39;)
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_performed_jobs_source')" id="l_method-i-assert_performed_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_performed_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_performed_jobs</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">original_count</span> = <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">perform_enqueued_jobs</span> { <span class="ruby-keyword">yield</span> }
+    <span class="ruby-identifier">new_count</span> = <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">number</span>, <span class="ruby-identifier">new_count</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">original_count</span>,
+                 <span class="ruby-node">&quot;#{number} jobs expected, but #{new_count - original_count} were performed&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">performed_jobs_size</span> = <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">number</span>, <span class="ruby-identifier">performed_jobs_size</span>, <span class="ruby-node">&quot;#{number} jobs expected, but #{performed_jobs_size} were performed&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_performed_with">
+            
+              <b>assert_performed_with</b>(args = {}, &amp;_block)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-assert_performed_with" name="method-i-assert_performed_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the job passed in the block has been performed with the given
+arguments.</p>
+
+<pre><code>def test_assert_performed_with
+  assert_performed_with(job: MyJob, args: [1,2,3], queue: &#39;high&#39;) do
+    MyJob.perform_later(1,2,3)
+  end
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_performed_with_source')" id="l_method-i-assert_performed_with_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_performed_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_performed_with</span>(<span class="ruby-identifier">args</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-identifier">original_performed_jobs</span> = <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">clear_performed_jobs</span>
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:job</span>, <span class="ruby-value">:args</span>, <span class="ruby-value">:at</span>, <span class="ruby-value">:queue</span>)
+  <span class="ruby-identifier">serialized_args</span> = <span class="ruby-identifier">serialize_args_for_assertion</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">perform_enqueued_jobs</span> { <span class="ruby-keyword">yield</span> }
+  <span class="ruby-identifier">matching_job</span> = <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">serialized_args</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">job</span>[<span class="ruby-identifier">key</span>] }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">matching_job</span>, <span class="ruby-node">&quot;No performed job found with #{args}&quot;</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">performed_jobs</span> = <span class="ruby-identifier">original_performed_jobs</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">performed_jobs</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-before_setup">
+            
+              <b>before_setup</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-before_setup" name="method-i-before_setup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-before_setup_source')" id="l_method-i-before_setup_source">show</a>
+                
+              </p>
+              <div id="method-i-before_setup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">before_setup</span>
+  <span class="ruby-ivar">@old_queue_adapter</span>  = <span class="ruby-identifier">queue_adapter</span>
+  <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">queue_adapter</span> = <span class="ruby-value">:test</span>
+  <span class="ruby-identifier">clear_enqueued_jobs</span>
+  <span class="ruby-identifier">clear_performed_jobs</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_enqueued_jobs">
+            
+              <b>clear_enqueued_jobs</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-clear_enqueued_jobs" name="method-i-clear_enqueued_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_enqueued_jobs_source')" id="l_method-i-clear_enqueued_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_enqueued_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_enqueued_jobs</span>
+  <span class="ruby-identifier">enqueued_jobs</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_performed_jobs">
+            
+              <b>clear_performed_jobs</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-clear_performed_jobs" name="method-i-clear_performed_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_performed_jobs_source')" id="l_method-i-clear_performed_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_performed_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_performed_jobs</span>
+  <span class="ruby-identifier">performed_jobs</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-perform_enqueued_jobs">
+            
+              <b>perform_enqueued_jobs</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-perform_enqueued_jobs" name="method-i-perform_enqueued_jobs" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-perform_enqueued_jobs_source')" id="l_method-i-perform_enqueued_jobs_source">show</a>
+                
+              </p>
+              <div id="method-i-perform_enqueued_jobs_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">perform_enqueued_jobs</span>
+  <span class="ruby-ivar">@old_perform_enqueued_jobs</span> = <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_jobs</span>
+  <span class="ruby-ivar">@old_perform_enqueued_at_jobs</span> = <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_at_jobs</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_jobs</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_at_jobs</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_jobs</span> = <span class="ruby-ivar">@old_perform_enqueued_jobs</span>
+  <span class="ruby-identifier">queue_adapter</span>.<span class="ruby-identifier">perform_enqueued_at_jobs</span> = <span class="ruby-ivar">@old_perform_enqueued_at_jobs</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-queue_adapter">
+            
+              <b>queue_adapter</b>()
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-queue_adapter" name="method-i-queue_adapter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-queue_adapter_source')" id="l_method-i-queue_adapter_source">show</a>
+                
+              </p>
+              <div id="method-i-queue_adapter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">queue_adapter</span>
+  <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">queue_adapter</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-serialize_args_for_assertion">
+            
+              <b>serialize_args_for_assertion</b>(args)
+            
+            <a href="../../classes/ActiveJob/TestHelper.html#method-i-serialize_args_for_assertion" name="method-i-serialize_args_for_assertion" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-serialize_args_for_assertion_source')" id="l_method-i-serialize_args_for_assertion_source">show</a>
+                
+              </p>
+              <div id="method-i-serialize_args_for_assertion_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activejob-4.2.3/lib/active_job/test_helper.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">serialize_args_for_assertion</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">serialized_args</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_args</span> = <span class="ruby-identifier">serialized_args</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:args</span>)
+    <span class="ruby-identifier">serialized_args</span>[<span class="ruby-value">:args</span>] = <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">Arguments</span>.<span class="ruby-identifier">serialize</span>(<span class="ruby-identifier">job_args</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">serialized_args</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

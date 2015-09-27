@@ -1,0 +1,24 @@
+%p#notice= notice
+%h1 Listing Sprints
+%table
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Goal
+      %th Obtained
+      %th Project
+      %th{:colspan => "3"}
+  %tbody
+    - @sprints.each do |sprint|
+      %tr
+        %td= sprint.title
+        %td= sprint.description
+        %td= sprint.goal
+        %td= sprint.obtained
+        %td= sprint.project_id
+        %td= link_to 'Show', sprint
+        %td= link_to 'Edit', edit_sprint_path(sprint)
+        %td= link_to 'Destroy', sprint, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Sprint', new_sprint_path

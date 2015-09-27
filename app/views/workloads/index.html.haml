@@ -1,0 +1,16 @@
+%p#notice= notice
+%h1 Listing Workloads
+%table
+  %thead
+    %tr
+      %th Value
+      %th{:colspan => "3"}
+  %tbody
+    - @workloads.each do |workload|
+      %tr
+        %td= workload.value
+        %td= link_to 'Show', workload
+        %td= link_to 'Edit', edit_workload_path(workload)
+        %td= link_to 'Destroy', workload, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Workload', new_workload_path

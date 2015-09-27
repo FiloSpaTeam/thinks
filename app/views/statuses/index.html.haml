@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Listing Statuses
+%table
+  %thead
+    %tr
+      %th Translation code
+      %th Description
+      %th{:colspan => "3"}
+  %tbody
+    - @statuses.each do |status|
+      %tr
+        %td= status.translation_code
+        %td= status.description
+        %td= link_to 'Show', status
+        %td= link_to 'Edit', edit_status_path(status)
+        %td= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Status', new_status_path

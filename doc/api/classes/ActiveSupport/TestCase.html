@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::TestCase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::TestCase 
+            
+                <span class="parent">&lt; 
+                    
+                    Minitest::Test
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/test_case_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/test_case.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/test_help_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/test_help.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_nothing_raised">assert_nothing_raised</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-test_order">test_order</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-test_order-3D">test_order=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Testing/SetupAndTeardown.html">
+              ActiveSupport::Testing::SetupAndTeardown
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Testing/Assertions.html">
+              ActiveSupport::Testing::Assertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Testing/TimeHelpers.html">
+              ActiveSupport::Testing::TimeHelpers
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../ActiveRecord/TestFixtures.html">
+              ActiveRecord::TestFixtures
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">Assertion</td>
+            <td>=</td>
+            <td class="attr-value">Minitest::Assertion</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-test_order">
+            
+              <b>test_order</b>()
+            
+            <a href="../../classes/ActiveSupport/TestCase.html#method-c-test_order" name="method-c-test_order" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the order in which test cases are run.</p>
+
+<pre><code>ActiveSupport::TestCase.test_order # =&gt; :sorted
+</code></pre>
+
+<p>Possible values are <code>:random</code>, <code>:parallel</code>,
+<code>:alpha</code>, <code>:sorted</code>. Defaults to
+<code>:sorted</code>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-test_order_source')" id="l_method-c-test_order_source">show</a>
+                
+              </p>
+              <div id="method-c-test_order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/test_case.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_order</span>
+  <span class="ruby-identifier">test_order</span> = <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">test_order</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">test_order</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;You did not specify a value for the &quot;</span>              <span class="ruby-string">&quot;configuration option `active_support.test_order`. In Rails 5, &quot;</span>              <span class="ruby-string">&quot;the default value of this option will change from `:sorted` to &quot;</span>              <span class="ruby-string">&quot;`:random`.\n&quot;</span>              <span class="ruby-string">&quot;To disable this warning and keep the current behavior, you can add &quot;</span>              <span class="ruby-string">&quot;the following line to your `config/environments/test.rb`:\n&quot;</span>              <span class="ruby-string">&quot;\n&quot;</span>              <span class="ruby-string">&quot;  Rails.application.configure do\n&quot;</span>              <span class="ruby-string">&quot;    config.active_support.test_order = :sorted\n&quot;</span>              <span class="ruby-string">&quot;  end\n&quot;</span>              <span class="ruby-string">&quot;\n&quot;</span>              <span class="ruby-string">&quot;Alternatively, you can opt into the future behavior by setting this &quot;</span>              <span class="ruby-string">&quot;option to `:random`.&quot;</span>
+
+    <span class="ruby-identifier">test_order</span> = <span class="ruby-value">:sorted</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">test_order</span> = <span class="ruby-identifier">test_order</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">test_order</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-test_order-3D">
+            
+              <b>test_order=</b>(new_order)
+            
+            <a href="../../classes/ActiveSupport/TestCase.html#method-c-test_order-3D" name="method-c-test_order-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the order in which test cases are run.</p>
+
+<pre><code>ActiveSupport::TestCase.test_order = :random # =&gt; :random
+</code></pre>
+
+<p>Valid values are:</p>
+<ul><li>
+<p><code>:random</code>   (to run tests in random order)</p>
+</li><li>
+<p><code>:parallel</code> (to run tests in parallel)</p>
+</li><li>
+<p><code>:sorted</code>   (to run tests alphabetically by method name)</p>
+</li><li>
+<p><code>:alpha</code>    (equivalent to <code>:sorted</code>)</p>
+</li></ul>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-test_order-3D_source')" id="l_method-c-test_order-3D_source">show</a>
+                
+              </p>
+              <div id="method-c-test_order-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/test_case.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_order=</span>(<span class="ruby-identifier">new_order</span>)
+  <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">test_order</span> = <span class="ruby-identifier">new_order</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_nothing_raised">
+            
+              <b>assert_nothing_raised</b>(*args)
+            
+            <a href="../../classes/ActiveSupport/TestCase.html#method-i-assert_nothing_raised" name="method-i-assert_nothing_raised" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Fails if the block raises an exception.</p>
+
+<pre><code>assert_nothing_raised do
+  ...
+end</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_nothing_raised_source')" id="l_method-i-assert_nothing_raised_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_nothing_raised_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/test_case.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_nothing_raised</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+ogre:
+  external: true
+  url: http://www.ogre3d.org/
+  reason: Good engine for C++ games.
+          Used as base for this beautifull project.
+  project: savage
+
+internal:
+  external: false
+  url:
+  reason: Internal project which use internal API system.
+          Maybe we can use others?
+  project: rethink

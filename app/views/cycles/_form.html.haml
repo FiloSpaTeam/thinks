@@ -1,0 +1,23 @@
+= form_for(@cycle) do |f|
+  - if @cycle.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@cycle.errors.count, "error")
+        prohibited this cycle from being saved:
+      %ul
+        - @cycle.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :translation_code
+    %br/
+    = f.text_field :translation_code
+  .field
+    = f.label :description
+    %br/
+    = f.text_field :description
+  .field
+    = f.label :days
+    %br/
+    = f.number_field :days
+  .actions
+    = f.submit

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+mit:
+  name: MIT
+  description: It is a permissive free software license, meaning that it permits reuse within proprietary software provided all copies of the licensed software include a copy of the MIT License terms and the copyright notice.
+  url: https://en.wikipedia.org/wiki/MIT_License
+
+gplv3:
+  name: GPLv3
+  description: Is the most widely used[6] free software license, which guarantees end users (individuals, organizations, companies) the freedoms to run, study, share (copy), and modify the software. Software that allows these rights is called free software and, if the software is copylefted, requires those rights to be retained
+  url: https://en.wikipedia.org/wiki/GNU_General_Public_License#Version_3

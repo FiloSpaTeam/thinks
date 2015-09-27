@@ -1,0 +1,11 @@
+%h4 My task
+%ul
+- @thinker_tasks.each do |task|
+  %li 
+    = task.description
+
+%h4 My projects
+%ul
+- @thinker_projects.each do |project|
+  %li
+    = project.title

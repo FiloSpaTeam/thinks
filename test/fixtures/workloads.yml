@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+half:
+  value: 0.5
+
+one:
+  value: 1
+
+two:
+  value: 2
+
+three:
+  value: 3
+
+five:
+  value: 5
+
+eight:
+  value: 8
+
+thirteen:
+  value: 13
+
+twenty:
+  value: 20
+
+fourty:
+  value: 40
+
+hundred:
+  value: 100

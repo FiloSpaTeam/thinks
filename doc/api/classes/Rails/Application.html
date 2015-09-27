@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Application 
+            
+                <span class="parent">&lt; 
+                    
+                    Engine
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application/bootstrap_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application/bootstrap.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application/configuration_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application/configuration.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application/default_middleware_stack_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application/default_middleware_stack.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application/finisher_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application/finisher.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/railties-4_2_3/lib/rails/application/routes_reloader_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application/routes_reloader.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>In Rails 3.0, a <a href="Application.html">Rails::Application</a> object
+was introduced which is nothing more than an <a
+href="Engine.html">Engine</a> but with the responsibility of coordinating
+the whole boot process.</p>
+
+<h2 id="class-Rails::Application-label-Initialization">Initialization</h2>
+
+<p><a href="Application.html">Rails::Application</a> is responsible for
+executing all railties and engines initializers. It also executes some
+bootstrap initializers (check <a
+href="Application/Bootstrap.html">Rails::Application::Bootstrap</a>) and
+finishing initializers, after all the others are executed (check <a
+href="Application/Finisher.html">Rails::Application::Finisher</a>).</p>
+
+<h2 id="class-Rails::Application-label-Configuration"><a href="Application/Configuration.html">Configuration</a></h2>
+
+<p>Besides providing the same configuration as <a
+href="Engine.html">Rails::Engine</a> and <a
+href="Railtie.html">Rails::Railtie</a>, the application object has several
+specific configurations, for example “cache_classes”,
+“consider_all_requests_local”, “filter_parameters”, “logger” and so forth.</p>
+
+<p>Check <a
+href="Application/Configuration.html">Rails::Application::Configuration</a>
+to see them all.</p>
+
+<h2 id="class-Rails::Application-label-Routes">Routes</h2>
+
+<p>The application object is also responsible for holding the routes and
+reloading routes whenever the files change in development.</p>
+
+<h2 id="class-Rails::Application-label-Middlewares">Middlewares</h2>
+
+<p>The <a href="Application.html">Application</a> is also responsible for
+building the middleware stack.</p>
+
+<h2 id="class-Rails::Application-label-Booting+process">Booting process</h2>
+
+<p>The application is also responsible for setting up and executing the
+booting process. From the moment you require “config/application.rb” in
+your app, the booting process goes like this:</p>
+
+<pre><code>1)  require &quot;config/boot.rb&quot; to setup load paths
+2)  require railties and engines
+3)  Define Rails.application as &quot;class MyApp::Application &lt; Rails::Application&quot;
+4)  Run config.before_configuration callbacks
+5)  Load config/environments/ENV.rb
+6)  Run config.before_initialize callbacks
+7)  Run Railtie#initializer defined by railties, engines and application.
+    One by one, each engine sets up its load paths, routes and runs its config/initializers/* files.
+8)  Custom Railtie#initializers added by railties, engines and applications are executed
+9)  Build the middleware stack and run to_prepare callbacks
+10) Run config.before_eager_load and eager_load! if eager_load is true
+11) Run config.after_initialize callbacks</code></pre>
+
+<h2 id="class-Rails::Application-label-Multiple+Applications">Multiple Applications</h2>
+
+<p>If you decide to define multiple applications, then the first application
+that is initialized will be set to <code>Rails.application</code>, unless
+you override it with a different application.</p>
+
+<p>To create a new application, you can instantiate a new instance of a class
+that has already been created:</p>
+
+<pre><code>class Application &lt; Rails::Application
+end
+
+first_application  = Application.new
+second_application = Application.new(config: first_application.config)
+</code></pre>
+
+<p>In the above example, the configuration from the first application was used
+to initialize the second application. You can also use the
+<code>initialize_copy</code> on one of the applications to create a copy of
+the application which shares the configuration.</p>
+
+<p>If you decide to define rake tasks, runners, or initializers in an
+application other than <code>Rails.application</code>, then you must run
+those these manually.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Application/Bootstrap.html">Rails::Application::Bootstrap</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Application/Finisher.html">Rails::Application::Finisher</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Application/Configuration.html">Rails::Application::Configuration</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Application/DefaultMiddlewareStack.html">Rails::Application::DefaultMiddlewareStack</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Application/RoutesReloader.html">Rails::Application::RoutesReloader</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-call">call</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-config_for">config_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-console">console</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-env_config">env_config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-find_root">find_root</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-generators">generators</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-inherited">inherited</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-initialized-3F">initialized?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-initializer">initializer</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-instance">instance</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-isolate_namespace">isolate_namespace</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>K</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-key_generator">key_generator</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-message_verifier">message_verifier</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-rake_tasks">rake_tasks</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reload_routes-21">reload_routes!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-runner">runner</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-secrets">secrets</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">INITIAL_VARIABLES</td>
+            <td>=</td>
+            <td class="attr-value">[:config, :railties, :routes_reloader, :reloaders,
+:routes, :helpers, :app_env_config, :secrets]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>assets</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>reloaders</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>sandbox</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>sandbox?</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-create">
+            
+              <b>create</b>(initial_variable_values = {}, &amp;block)
+            
+            <a href="../../classes/Rails/Application.html#method-c-create" name="method-c-create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-create_source')" id="l_method-c-create_source">show</a>
+                
+              </p>
+              <div id="method-c-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create</span>(<span class="ruby-identifier">initial_variable_values</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">initial_variable_values</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">run_load_hooks!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-find_root">
+            
+              <b>find_root</b>(from)
+            
+            <a href="../../classes/Rails/Application.html#method-c-find_root" name="method-c-find_root" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-find_root_source')" id="l_method-c-find_root_source">show</a>
+                
+              </p>
+              <div id="method-c-find_root_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_root</span>(<span class="ruby-identifier">from</span>)
+  <span class="ruby-identifier">find_root_with_flag</span> <span class="ruby-string">&quot;config.ru&quot;</span>, <span class="ruby-identifier">from</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-inherited">
+            
+              <b>inherited</b>(base)
+            
+            <a href="../../classes/Rails/Application.html#method-c-inherited" name="method-c-inherited" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-inherited_source')" id="l_method-c-inherited_source">show</a>
+                
+              </p>
+              <div id="method-c-inherited_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inherited</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">app_class</span> = <span class="ruby-identifier">base</span>
+  <span class="ruby-identifier">add_lib_to_load_path!</span>(<span class="ruby-identifier">find_root</span>(<span class="ruby-identifier">base</span>.<span class="ruby-identifier">called_from</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-instance">
+            
+              <b>instance</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-c-instance" name="method-c-instance" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-instance_source')" id="l_method-c-instance_source">show</a>
+                
+              </p>
+              <div id="method-c-instance_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">instance</span>
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">run_load_hooks!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(initial_variable_values = {}, &amp;block)
+            
+            <a href="../../classes/Rails/Application.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">initial_variable_values</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">super</span>()
+  <span class="ruby-ivar">@initialized</span>       = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@reloaders</span>         = []
+  <span class="ruby-ivar">@routes_reloader</span>   = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@app_env_config</span>    = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@ordered_railties</span>  = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@railties</span>          = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@message_verifiers</span> = {}
+  <span class="ruby-ivar">@ran_load_hooks</span>    = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-comment"># are these actually used?</span>
+  <span class="ruby-ivar">@initial_variable_values</span> = <span class="ruby-identifier">initial_variable_values</span>
+  <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-call">
+            
+              <b>call</b>(env)
+            
+            <a href="../../classes/Rails/Application.html#method-i-call" name="method-i-call" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Implements call according to the <a href="Rack.html">Rack</a> <a
+href="API.html">API</a>. It simply dispatches the request to the underlying
+middleware stack.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-call_source')" id="l_method-i-call_source">show</a>
+                
+              </p>
+              <div id="method-i-call_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">call</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;ORIGINAL_FULLPATH&quot;</span>] = <span class="ruby-identifier">build_original_fullpath</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;ORIGINAL_SCRIPT_NAME&quot;</span>] = <span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;SCRIPT_NAME&quot;</span>]
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-config_for">
+            
+              <b>config_for</b>(name)
+            
+            <a href="../../classes/Rails/Application.html#method-i-config_for" name="method-i-config_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Convenience for loading config/foo.yml for the current Rails env.</p>
+
+<p>Example:</p>
+
+<pre><code># config/exception_notification.yml:
+production:
+  url: http://127.0.0.1:8080
+  namespace: my_app_production
+development:
+  url: http://localhost:3001
+  namespace: my_app_development
+
+# config/production.rb
+Rails.application.configure do
+  config.middleware.use ExceptionNotifier, config_for(:exception_notification)
+end</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_for_source')" id="l_method-i-config_for_source">show</a>
+                
+              </p>
+              <div id="method-i-config_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config_for</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">yaml</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{paths[&quot;config&quot;].existent.first}/#{name}.yml&quot;</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">yaml</span>.<span class="ruby-identifier">exist?</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;erb&quot;</span>
+    (<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">yaml</span>.<span class="ruby-identifier">read</span>).<span class="ruby-identifier">result</span>) <span class="ruby-operator">||</span> {})[<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>] <span class="ruby-operator">||</span> {}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Could not load configuration. No such file - #{yaml}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Psych</span><span class="ruby-operator">::</span><span class="ruby-constant">SyntaxError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;YAML syntax error occurred while parsing #{yaml}. &quot;</span>          <span class="ruby-string">&quot;Please note that YAML must be consistently indented using spaces. Tabs are not allowed. &quot;</span>          <span class="ruby-node">&quot;Error: #{e.message}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-console">
+            
+              <b>console</b>(&amp;blk)
+            
+            <a href="../../classes/Rails/Application.html#method-i-console" name="method-i-console" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends any console called in the instance of a new application up to the
+<code>console</code> method defined in <a
+href="Railtie.html">Rails::Railtie</a>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-console_source')" id="l_method-i-console_source">show</a>
+                
+              </p>
+              <div id="method-i-console_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 289</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">console</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">console</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-env_config">
+            
+              <b>env_config</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-i-env_config" name="method-i-env_config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Stores some of the Rails initial environment parameters which will be used
+by middlewares and engines to configure themselves.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-env_config_source')" id="l_method-i-env_config_source">show</a>
+                
+              </p>
+              <div id="method-i-env_config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">env_config</span>
+  <span class="ruby-ivar">@app_env_config</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">validate_secret_key_config!</span>
+
+    <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>({
+      <span class="ruby-string">&quot;action_dispatch.parameter_filter&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">filter_parameters</span>,
+      <span class="ruby-string">&quot;action_dispatch.redirect_filter&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">filter_redirect</span>,
+      <span class="ruby-string">&quot;action_dispatch.secret_token&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_token</span>,
+      <span class="ruby-string">&quot;action_dispatch.secret_key_base&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_key_base</span>,
+      <span class="ruby-string">&quot;action_dispatch.show_exceptions&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">show_exceptions</span>,
+      <span class="ruby-string">&quot;action_dispatch.show_detailed_exceptions&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">consider_all_requests_local</span>,
+      <span class="ruby-string">&quot;action_dispatch.logger&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>,
+      <span class="ruby-string">&quot;action_dispatch.backtrace_cleaner&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">backtrace_cleaner</span>,
+      <span class="ruby-string">&quot;action_dispatch.key_generator&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">key_generator</span>,
+      <span class="ruby-string">&quot;action_dispatch.http_auth_salt&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">http_auth_salt</span>,
+      <span class="ruby-string">&quot;action_dispatch.signed_cookie_salt&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">signed_cookie_salt</span>,
+      <span class="ruby-string">&quot;action_dispatch.encrypted_cookie_salt&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">encrypted_cookie_salt</span>,
+      <span class="ruby-string">&quot;action_dispatch.encrypted_signed_cookie_salt&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">encrypted_signed_cookie_salt</span>,
+      <span class="ruby-string">&quot;action_dispatch.cookies_serializer&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">cookies_serializer</span>,
+      <span class="ruby-string">&quot;action_dispatch.cookies_digest&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_dispatch</span>.<span class="ruby-identifier">cookies_digest</span>
+    })
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-generators">
+            
+              <b>generators</b>(&amp;blk)
+            
+            <a href="../../classes/Rails/Application.html#method-i-generators" name="method-i-generators" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends any generators called in the instance of a new application up to the
+<code>generators</code> method defined in <a
+href="Railtie.html">Rails::Railtie</a>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-generators_source')" id="l_method-i-generators_source">show</a>
+                
+              </p>
+              <div id="method-i-generators_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generators</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">generators</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-initialized-3F">
+            
+              <b>initialized?</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-i-initialized-3F" name="method-i-initialized-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the application is initialized.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-initialized-3F_source')" id="l_method-i-initialized-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-initialized-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialized?</span>
+  <span class="ruby-ivar">@initialized</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-initializer">
+            
+              <b>initializer</b>(name, opts={}, &amp;block)
+            
+            <a href="../../classes/Rails/Application.html#method-i-initializer" name="method-i-initializer" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends the initializers to the <code>initializer</code> method defined in
+the <a href="Initializable.html">Rails::Initializable</a> module. Each <a
+href="Application.html">Rails::Application</a> class has its own set of
+initializers, as defined by the <a
+href="Initializable.html">Initializable</a> module.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-initializer_source')" id="l_method-i-initializer_source">show</a>
+                
+              </p>
+              <div id="method-i-initializer_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initializer</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">opts</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">initializer</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-isolate_namespace">
+            
+              <b>isolate_namespace</b>(mod)
+            
+            <a href="../../classes/Rails/Application.html#method-i-isolate_namespace" name="method-i-isolate_namespace" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends the <code>isolate_namespace</code> method up to the class method.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-isolate_namespace_source')" id="l_method-i-isolate_namespace_source">show</a>
+                
+              </p>
+              <div id="method-i-isolate_namespace_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 300</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">isolate_namespace</span>(<span class="ruby-identifier">mod</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">isolate_namespace</span>(<span class="ruby-identifier">mod</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-key_generator">
+            
+              <b>key_generator</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-i-key_generator" name="method-i-key_generator" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return the application&#39;s KeyGenerator</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-key_generator_source')" id="l_method-i-key_generator_source">show</a>
+                
+              </p>
+              <div id="method-i-key_generator_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">key_generator</span>
+  <span class="ruby-comment"># number of iterations selected based on consultation with the google security</span>
+  <span class="ruby-comment"># team. Details at https://github.com/rails/rails/pull/6952#issuecomment-7661220</span>
+  <span class="ruby-ivar">@caching_key_generator</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_key_base</span>
+      <span class="ruby-identifier">key_generator</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">KeyGenerator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_key_base</span>, <span class="ruby-identifier">iterations</span><span class="ruby-operator">:</span> <span class="ruby-number">1000</span>)
+      <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">CachingKeyGenerator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key_generator</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">LegacyKeyGenerator</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_token</span>)
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-message_verifier">
+            
+              <b>message_verifier</b>(verifier_name)
+            
+            <a href="../../classes/Rails/Application.html#method-i-message_verifier" name="method-i-message_verifier" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a message verifier object.</p>
+
+<p>This verifier can be used to generate and verify signed messages in the
+application.</p>
+
+<p>It is recommended not to use the same verifier for different things, so you
+can get different verifiers passing the <code>verifier_name</code>
+argument.</p>
+
+<h4 id="method-i-message_verifier-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>verifier_name</code> - the name of the message verifier.</p>
+</li></ul>
+
+<h4 id="method-i-message_verifier-label-Examples">Examples</h4>
+
+<pre><code>message = Rails.application.message_verifier(&#39;sensitive_data&#39;).generate(&#39;my sensible data&#39;)
+Rails.application.message_verifier(&#39;sensitive_data&#39;).verify(message)
+# =&gt; &#39;my sensible data&#39;
+</code></pre>
+
+<p>See the <code>ActiveSupport::MessageVerifier</code> documentation for more
+information.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-message_verifier_source')" id="l_method-i-message_verifier_source">show</a>
+                
+              </p>
+              <div id="method-i-message_verifier_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">message_verifier</span>(<span class="ruby-identifier">verifier_name</span>)
+  <span class="ruby-ivar">@message_verifiers</span>[<span class="ruby-identifier">verifier_name</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">secret</span> = <span class="ruby-identifier">key_generator</span>.<span class="ruby-identifier">generate_key</span>(<span class="ruby-identifier">verifier_name</span>.<span class="ruby-identifier">to_s</span>)
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">MessageVerifier</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">secret</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rake_tasks">
+            
+              <b>rake_tasks</b>(&amp;block)
+            
+            <a href="../../classes/Rails/Application.html#method-i-rake_tasks" name="method-i-rake_tasks" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If you try to define a set of rake tasks on the instance, these will get
+passed up to the rake tasks defined on the application&#39;s class.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rake_tasks_source')" id="l_method-i-rake_tasks_source">show</a>
+                
+              </p>
+              <div id="method-i-rake_tasks_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rake_tasks</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">rake_tasks</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reload_routes-21">
+            
+              <b>reload_routes!</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-i-reload_routes-21" name="method-i-reload_routes-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Reload application routes regardless if they changed or not.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reload_routes-21_source')" id="l_method-i-reload_routes-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reload_routes-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reload_routes!</span>
+  <span class="ruby-identifier">routes_reloader</span>.<span class="ruby-identifier">reload!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-runner">
+            
+              <b>runner</b>(&amp;blk)
+            
+            <a href="../../classes/Rails/Application.html#method-i-runner" name="method-i-runner" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends any runner called in the instance of a new application up to the
+<code>runner</code> method defined in <a
+href="Railtie.html">Rails::Railtie</a>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-runner_source')" id="l_method-i-runner_source">show</a>
+                
+              </p>
+              <div id="method-i-runner_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 283</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">runner</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">runner</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-secrets">
+            
+              <b>secrets</b>()
+            
+            <a href="../../classes/Rails/Application.html#method-i-secrets" name="method-i-secrets" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns secrets added to config/secrets.yml.</p>
+
+<p>Example:</p>
+
+<pre><code>development:
+  secret_key_base: 836fa3665997a860728bcb9e9a1e704d427cfc920e79d847d79c8a9a907b9e965defa4154b2b86bdec6930adbe33f21364523a6f6ce363865724549fdfc08553
+test:
+  secret_key_base: 5a37811464e7d378488b0f073e2193b093682e4e21f5d6f3ae0a4e1781e61a351fdc878a843424e81c73fb484a40d23f92c8dafac4870e74ede6e5e174423010
+production:
+  secret_key_base: &lt;%= ENV[&quot;SECRET_KEY_BASE&quot;] %&gt;
+  namespace: my_app_production</code></pre>
+
+<p><code>Rails.application.secrets.namespace</code> returns
+<code>my_app_production</code> in the production environment.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-secrets_source')" id="l_method-i-secrets_source">show</a>
+                
+              </p>
+              <div id="method-i-secrets_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/railties-4.2.3/lib/rails/application.rb, line 385</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">secrets</span>
+  <span class="ruby-ivar">@secrets</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">secrets</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderedOptions</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">yaml</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">paths</span>[<span class="ruby-string">&quot;config/secrets&quot;</span>].<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">yaml</span>)
+      <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;erb&quot;</span>
+      <span class="ruby-identifier">all_secrets</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">yaml</span>)).<span class="ruby-identifier">result</span>) <span class="ruby-operator">||</span> {}
+      <span class="ruby-identifier">env_secrets</span> = <span class="ruby-identifier">all_secrets</span>[<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>]
+      <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">env_secrets</span>.<span class="ruby-identifier">symbolize_keys</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">env_secrets</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Fallback to config.secret_key_base if secrets.secret_key_base isn&#39;t set</span>
+    <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_key_base</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">secret_key_base</span>
+    <span class="ruby-comment"># Fallback to config.secret_token if secrets.secret_token isn&#39;t set</span>
+    <span class="ruby-identifier">secrets</span>.<span class="ruby-identifier">secret_token</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">secret_token</span>
+
+    <span class="ruby-identifier">secrets</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

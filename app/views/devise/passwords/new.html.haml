@@ -1,0 +1,16 @@
+.row
+  .col-md-4.col-xs-12.col-md-offset-4.col-sm-6.col-sm-offset-3
+    .panel.panel-default
+      .panel-body
+        %h1= t ".forgot_password"
+        = form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: "form-control"
+            - if devise_mapping.registerable?
+              %p.help-block
+                = link_to t(".need_account"), new_registration_path(resource_name)
+              %p.help-block
+                = link_to t("devise.registrations.new.already_signed_up"), new_session_path(resource_name)
+          = f.submit t(".send_reset_password"), class: "btn btn-primary"

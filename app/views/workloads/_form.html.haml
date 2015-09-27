@@ -1,0 +1,15 @@
+= form_for(@workload) do |f|
+  - if @workload.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@workload.errors.count, "error")
+        prohibited this workload from being saved:
+      %ul
+        - @workload.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :value
+    %br/
+    = f.number_field :value, :step => 0.5
+  .actions
+    = f.submit

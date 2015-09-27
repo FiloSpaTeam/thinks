@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::PerThreadRegistry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::PerThreadRegistry 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/per_thread_registry_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/per_thread_registry.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>This module is used to encapsulate access to thread local variables.</p>
+
+<p>Instead of polluting the thread locals namespace:</p>
+
+<pre><code>Thread.current[:connection_handler]
+</code></pre>
+
+<p>you define a class that extends this module:</p>
+
+<pre><code>module ActiveRecord
+  class RuntimeRegistry
+    extend ActiveSupport::PerThreadRegistry
+
+    attr_accessor :connection_handler
+  end
+end
+</code></pre>
+
+<p>and invoke the declared instance accessors as class methods. So</p>
+
+<pre><code>ActiveRecord::RuntimeRegistry.connection_handler = connection_handler
+</code></pre>
+
+<p>sets a connection handler local to the current thread, and</p>
+
+<pre><code>ActiveRecord::RuntimeRegistry.connection_handler
+</code></pre>
+
+<p>returns a connection handler local to the current thread.</p>
+
+<p>This feature is accomplished by instantiating the class and storing the
+instance as a thread local keyed by the class name. In the example above a
+key “ActiveRecord::RuntimeRegistry” is stored in
+<code>Thread.current</code>. The class methods proxy to said thread local
+instance.</p>
+
+<p>If the class has an initializer, it must accept no arguments.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-extended">extended</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-instance">instance</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-extended">
+            
+              <b>extended</b>(object)
+            
+            <a href="../../classes/ActiveSupport/PerThreadRegistry.html#method-c-extended" name="method-c-extended" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-extended_source')" id="l_method-c-extended_source">show</a>
+                
+              </p>
+              <div id="method-c-extended_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/per_thread_registry.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">extended</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-identifier">object</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-string">&#39;@per_thread_registry_key&#39;</span>, <span class="ruby-identifier">object</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-instance">
+            
+              <b>instance</b>()
+            
+            <a href="../../classes/ActiveSupport/PerThreadRegistry.html#method-i-instance" name="method-i-instance" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-instance_source')" id="l_method-i-instance_source">show</a>
+                
+              </p>
+              <div id="method-i-instance_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/per_thread_registry.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">instance</span>
+  <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-ivar">@per_thread_registry_key</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

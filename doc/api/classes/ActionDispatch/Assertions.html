@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Assertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/actionpack-4_2_3/lib/action_dispatch/testing/assertions_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/actionpack-4.2.3/lib/action_dispatch/testing/assertions.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/actionpack-4_2_3/lib/action_dispatch/testing/assertions/response_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/actionpack-4.2.3/lib/action_dispatch/testing/assertions/response.rb</a></li>
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/actionpack-4_2_3/lib/action_dispatch/testing/assertions/routing_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/actionpack-4.2.3/lib/action_dispatch/testing/assertions/routing.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Assertions/ResponseAssertions.html">ActionDispatch::Assertions::ResponseAssertions</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Assertions/RoutingAssertions.html">ActionDispatch::Assertions::RoutingAssertions</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-html_document">html_document</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Assertions/ResponseAssertions.html">
+              ActionDispatch::Assertions::ResponseAssertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Assertions/RoutingAssertions.html">
+              ActionDispatch::Assertions::RoutingAssertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            Rails::Dom::Testing::Assertions
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-html_document">
+            
+              <b>html_document</b>()
+            
+            <a href="../../classes/ActionDispatch/Assertions.html#method-i-html_document" name="method-i-html_document" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-html_document_source')" id="l_method-i-html_document_source">show</a>
+                
+              </p>
+              <div id="method-i-html_document_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/actionpack-4.2.3/lib/action_dispatch/testing/assertions.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">html_document</span>
+  <span class="ruby-ivar">@html_document</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">content_type</span> <span class="ruby-operator">===</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>
+    <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Testing::ConstantLookup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::ConstantLookup 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/testing/constant_lookup_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/constant_lookup.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Resolves a constant from a minitest spec name.</p>
+
+<p>Given the following spec-style test:</p>
+
+<pre><code>describe WidgetsController, :index do
+  describe &quot;authenticated user&quot; do
+    describe &quot;returns widgets&quot; do
+      it &quot;has a controller that exists&quot; do
+        assert_kind_of WidgetsController, @controller
+      end
+    end
+  end
+end
+</code></pre>
+
+<p>The test will have the following name:</p>
+
+<pre><code>&quot;WidgetsController::index::authenticated user::returns widgets&quot;
+</code></pre>
+
+<p>The constant WidgetsController can be resolved from the name. The following
+code will resolve the constant:</p>
+
+<pre><code>controller = determine_constant_from_test_name(name) do |constant|
+  Class === constant &amp;&amp; constant &lt; ::ActionController::Metal
+end
+</code></pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

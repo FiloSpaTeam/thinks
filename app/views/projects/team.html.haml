@@ -1,0 +1,8 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Membro
+  %tbody
+    - @team.each do |member|
+      %tr
+        %td= member.name

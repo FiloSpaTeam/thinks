@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Calculations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Calculations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activerecord-4_2_3/lib/active_record/relation/calculations_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-average">average</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-calculate">calculate</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-count">count</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-ids">ids</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-maximum">maximum</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-minimum">minimum</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-pluck">pluck</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sum">sum</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-average">
+            
+              <b>average</b>(column_name, options = {})
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-average" name="method-i-average" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calculates the average value on a given column. Returns <code>nil</code> if
+there&#39;s no row. See <code>calculate</code> for examples with options.</p>
+
+<pre><code>Person.average(:age) # =&gt; 35.8
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-average_source')" id="l_method-i-average_source">show</a>
+                
+              </p>
+              <div id="method-i-average_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">average</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-comment"># TODO: Remove options argument as soon we remove support to</span>
+  <span class="ruby-comment"># activerecord-deprecated_finders.</span>
+  <span class="ruby-identifier">calculate</span>(<span class="ruby-value">:average</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-calculate">
+            
+              <b>calculate</b>(operation, column_name, options = {})
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-calculate" name="method-i-calculate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This calculates aggregate values in the given column. Methods for count,
+sum, average, minimum, and maximum have been added as shortcuts.</p>
+
+<p>There are two basic forms of output:</p>
+
+<pre><code>* Single aggregate value: The single value is type cast to Fixnum for COUNT, Float
+  for AVG, and the given column&#39;s type for everything else.
+
+* Grouped values: This returns an ordered hash of the values and groups them. It
+  takes either a column name, or the name of a belongs_to association.
+
+    values = Person.group(&#39;last_name&#39;).maximum(:age)
+    puts values[&quot;Drake&quot;]
+    # =&gt; 43
+
+    drake  = Family.find_by(last_name: &#39;Drake&#39;)
+    values = Person.group(:family).maximum(:age) # Person belongs_to :family
+    puts values[drake]
+    # =&gt; 43
+
+    values.each do |family, max_age|
+    ...
+    end
+
+Person.calculate(:count, :all) # The same as Person.count
+Person.average(:age) # SELECT AVG(age) FROM people...
+
+# Selects the minimum age for any family without any minors
+Person.group(:last_name).having(&quot;min(age) &gt; 17&quot;).minimum(:age)
+
+Person.sum(&quot;2 * age&quot;)</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-calculate_source')" id="l_method-i-calculate_source">show</a>
+                
+              </p>
+              <div id="method-i-calculate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">calculate</span>(<span class="ruby-identifier">operation</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-comment"># TODO: Remove options argument as soon we remove support to</span>
+  <span class="ruby-comment"># activerecord-deprecated_finders.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">column_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attribute_alias?</span>(<span class="ruby-identifier">column_name</span>)
+    <span class="ruby-identifier">column_name</span> = <span class="ruby-identifier">attribute_alias</span>(<span class="ruby-identifier">column_name</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_include?</span>(<span class="ruby-identifier">column_name</span>)
+    <span class="ruby-identifier">construct_relation_for_association_calculations</span>.<span class="ruby-identifier">calculate</span>(<span class="ruby-identifier">operation</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">perform_calculation</span>(<span class="ruby-identifier">operation</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-count">
+            
+              <b>count</b>(column_name = nil, options = {})
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-count" name="method-i-count" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Count the records.</p>
+
+<pre><code>Person.count
+# =&gt; the total count of all people
+
+Person.count(:age)
+# =&gt; returns the total count of all people whose age is present in database
+
+Person.count(:all)
+# =&gt; performs a COUNT(*) (:all is an alias for &#39;*&#39;)
+
+Person.distinct.count(:age)
+# =&gt; counts the number of different age values
+</code></pre>
+
+<p>If <code>count</code> is used with <code>group</code>, it returns a <a
+href="../Hash.html">Hash</a> whose keys represent the aggregated column,
+and the values are the respective amounts:</p>
+
+<pre><code>Person.group(:city).count
+# =&gt; { &#39;Rome&#39; =&gt; 5, &#39;Paris&#39; =&gt; 3 }
+</code></pre>
+
+<p>If <code>count</code> is used with <code>group</code> for multiple columns,
+it returns a <a href="../Hash.html">Hash</a> whose keys are an array
+containing the individual values of each column and the value of each key
+would be the <code>count</code>.</p>
+
+<pre><code>Article.group(:status, :category).count
+# =&gt;  {[&quot;draft&quot;, &quot;business&quot;]=&gt;10, [&quot;draft&quot;, &quot;technology&quot;]=&gt;4,
+       [&quot;published&quot;, &quot;business&quot;]=&gt;0, [&quot;published&quot;, &quot;technology&quot;]=&gt;2}</code></pre>
+
+<p>If <code>count</code> is used with <code>select</code>, it will count the
+selected columns:</p>
+
+<pre><code>Person.select(:age).count
+# =&gt; counts the number of different age values
+</code></pre>
+
+<p>Note: not all valid <code>select</code> expressions are valid
+<code>count</code> expressions. The specifics differ between databases. In
+invalid cases, an error from the database is thrown.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-count_source')" id="l_method-i-count_source">show</a>
+                
+              </p>
+              <div id="method-i-count_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">count</span>(<span class="ruby-identifier">column_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-comment"># TODO: Remove options argument as soon we remove support to</span>
+  <span class="ruby-comment"># activerecord-deprecated_finders.</span>
+  <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">column_name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">column_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+  <span class="ruby-identifier">calculate</span>(<span class="ruby-value">:count</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ids">
+            
+              <b>ids</b>()
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-ids" name="method-i-ids" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Pluck all the ID&#39;s for the relation using the table&#39;s primary key</p>
+
+<pre><code>Person.ids # SELECT people.id FROM people
+Person.joins(:companies).ids # SELECT people.id FROM people INNER JOIN companies ON companies.person_id = people.id
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ids_source')" id="l_method-i-ids_source">show</a>
+                
+              </p>
+              <div id="method-i-ids_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ids</span>
+  <span class="ruby-identifier">pluck</span> <span class="ruby-identifier">primary_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-maximum">
+            
+              <b>maximum</b>(column_name, options = {})
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-maximum" name="method-i-maximum" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calculates the maximum value on a given column. The value is returned with
+the same data type of the column, or <code>nil</code> if there&#39;s no
+row. See <code>calculate</code> for examples with options.</p>
+
+<pre><code>Person.maximum(:age) # =&gt; 93
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-maximum_source')" id="l_method-i-maximum_source">show</a>
+                
+              </p>
+              <div id="method-i-maximum_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">maximum</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-comment"># TODO: Remove options argument as soon we remove support to</span>
+  <span class="ruby-comment"># activerecord-deprecated_finders.</span>
+  <span class="ruby-identifier">calculate</span>(<span class="ruby-value">:maximum</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-minimum">
+            
+              <b>minimum</b>(column_name, options = {})
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-minimum" name="method-i-minimum" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calculates the minimum value on a given column. The value is returned with
+the same data type of the column, or <code>nil</code> if there&#39;s no
+row. See <code>calculate</code> for examples with options.</p>
+
+<pre><code>Person.minimum(:age) # =&gt; 7
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-minimum_source')" id="l_method-i-minimum_source">show</a>
+                
+              </p>
+              <div id="method-i-minimum_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">minimum</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-comment"># TODO: Remove options argument as soon we remove support to</span>
+  <span class="ruby-comment"># activerecord-deprecated_finders.</span>
+  <span class="ruby-identifier">calculate</span>(<span class="ruby-value">:minimum</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-pluck">
+            
+              <b>pluck</b>(*column_names)
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-pluck" name="method-i-pluck" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Use <code>pluck</code> as a shortcut to select one or more attributes
+without loading a bunch of records just to grab the attributes you want.</p>
+
+<pre><code>Person.pluck(:name)
+</code></pre>
+
+<p>instead of</p>
+
+<pre><code>Person.all.map(&amp;:name)
+</code></pre>
+
+<p>Pluck returns an <code>Array</code> of attribute values type-casted to
+match the plucked column names, if they can be deduced. Plucking an SQL
+fragment returns <a href="../String.html">String</a> values by default.</p>
+
+<pre><code>Person.pluck(:id)
+# SELECT people.id FROM people
+# =&gt; [1, 2, 3]
+
+Person.pluck(:id, :name)
+# SELECT people.id, people.name FROM people
+# =&gt; [[1, &#39;David&#39;], [2, &#39;Jeremy&#39;], [3, &#39;Jose&#39;]]
+
+Person.pluck(&#39;DISTINCT role&#39;)
+# SELECT DISTINCT role FROM people
+# =&gt; [&#39;admin&#39;, &#39;member&#39;, &#39;guest&#39;]
+
+Person.where(age: 21).limit(5).pluck(:id)
+# SELECT people.id FROM people WHERE people.age = 21 LIMIT 5
+# =&gt; [2, 3]
+
+Person.pluck(&#39;DATEDIFF(updated_at, created_at)&#39;)
+# SELECT DATEDIFF(updated_at, created_at) FROM people
+# =&gt; [&#39;0&#39;, &#39;27761&#39;, &#39;173&#39;]
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-pluck_source')" id="l_method-i-pluck_source">show</a>
+                
+              </p>
+              <div id="method-i-pluck_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pluck</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
+  <span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">column_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attribute_alias?</span>(<span class="ruby-identifier">column_name</span>)
+      <span class="ruby-identifier">attribute_alias</span>(<span class="ruby-identifier">column_name</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">column_name</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_include?</span>(<span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">first</span>)
+    <span class="ruby-identifier">construct_relation_for_association_calculations</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">spawn</span>
+    <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">select_values</span> = <span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cn</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">columns_hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">cn</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">cn</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">cn</span>
+    }
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">select_all</span>(<span class="ruby-identifier">relation</span>.<span class="ruby-identifier">arel</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">bind_values</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bind_values</span>)
+    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">cast_values</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">column_types</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sum">
+            
+              <b>sum</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/Calculations.html#method-i-sum" name="method-i-sum" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calculates the sum of values on a given column. The value is returned with
+the same data type of the column, 0 if there&#39;s no row. See
+<code>calculate</code> for examples with options.</p>
+
+<pre><code>Person.sum(:age) # =&gt; 4562
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sum_source')" id="l_method-i-sum_source">show</a>
+                
+              </p>
+              <div id="method-i-sum_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activerecord-4.2.3/lib/active_record/relation/calculations.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">calculate</span>(<span class="ruby-value">:sum</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

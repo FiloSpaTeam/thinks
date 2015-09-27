@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Thread</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Thread 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/core_ext/thread_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-freeze">freeze</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-thread_variable-3F">thread_variable?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-thread_variable_get">thread_variable_get</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-thread_variable_set">thread_variable_set</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-thread_variables">thread_variables</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">LOCK</td>
+            <td>=</td>
+            <td class="attr-value">Mutex.new</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-freeze">
+            
+              <b>freeze</b>()
+            
+            <a href="../classes/Thread.html#method-i-freeze" name="method-i-freeze" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Freezes the thread so that thread local variables cannot be set via <a
+href="Thread.html#method-i-thread_variable_set">#thread_variable_set</a>,
+nor can fiber local variables be set.</p>
+
+<pre><code>me = Thread.current
+me.freeze
+me.thread_variable_set(:oliver, &quot;a&quot;)  #=&gt; RuntimeError: can&#39;t modify frozen thread locals
+me[:oliver] = &quot;a&quot;                     #=&gt; RuntimeError: can&#39;t modify frozen thread locals
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-freeze_source')" id="l_method-i-freeze_source">show</a>
+                
+              </p>
+              <div id="method-i-freeze_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">freeze</span>
+  <span class="ruby-identifier">_locals</span>.<span class="ruby-identifier">freeze</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-thread_variable-3F">
+            
+              <b>thread_variable?</b>(key)
+            
+            <a href="../classes/Thread.html#method-i-thread_variable-3F" name="method-i-thread_variable-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the given string (or symbol) exists as a
+thread-local variable.</p>
+
+<pre><code>me = Thread.current
+me.thread_variable_set(:oliver, &quot;a&quot;)
+me.thread_variable?(:oliver)    # =&gt; true
+me.thread_variable?(:stanley)   # =&gt; false
+</code></pre>
+
+<p>Note that these are not fiber local variables. Please see <a
+href="Thread.html#method-i-thread_variable_get">#thread_variable_get</a>
+for more details.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-thread_variable-3F_source')" id="l_method-i-thread_variable-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-thread_variable-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">thread_variable?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">_locals</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-thread_variable_get">
+            
+              <b>thread_variable_get</b>(key)
+            
+            <a href="../classes/Thread.html#method-i-thread_variable_get" name="method-i-thread_variable_get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the value of a thread local variable that has been set. Note that
+these are different than fiber local values.</p>
+
+<p><a href="Thread.html">Thread</a> local values are carried along with
+threads, and do not respect fibers. For example:</p>
+
+<pre><code>Thread.new {
+  Thread.current.thread_variable_set(&quot;foo&quot;, &quot;bar&quot;) # set a thread local
+  Thread.current[&quot;foo&quot;] = &quot;bar&quot;                    # set a fiber local
+
+  Fiber.new {
+    Fiber.yield [
+      Thread.current.thread_variable_get(&quot;foo&quot;), # get the thread local
+      Thread.current[&quot;foo&quot;],                     # get the fiber local
+    ]
+  }.resume
+}.join.value # =&gt; [&#39;bar&#39;, nil]
+</code></pre>
+
+<p>The value <code>&quot;bar&quot;</code> is returned for the thread local,
+where <code>nil</code> is returned for the fiber local. The fiber is
+executed in the same thread, so the thread local values are available.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-thread_variable_get_source')" id="l_method-i-thread_variable_get_source">show</a>
+                
+              </p>
+              <div id="method-i-thread_variable_get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">thread_variable_get</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">_locals</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-thread_variable_set">
+            
+              <b>thread_variable_set</b>(key, value)
+            
+            <a href="../classes/Thread.html#method-i-thread_variable_set" name="method-i-thread_variable_set" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets a thread local with <code>key</code> to <code>value</code>. Note that
+these are local to threads, and not to fibers. Please see <a
+href="Thread.html#method-i-thread_variable_get">#thread_variable_get</a>
+for more information.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-thread_variable_set_source')" id="l_method-i-thread_variable_set_source">show</a>
+                
+              </p>
+              <div id="method-i-thread_variable_set_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">thread_variable_set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">_locals</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-thread_variables">
+            
+              <b>thread_variables</b>()
+            
+            <a href="../classes/Thread.html#method-i-thread_variables" name="method-i-thread_variables" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of the names of the thread-local variables (as Symbols).</p>
+
+<pre><code>thr = Thread.new do
+  Thread.current.thread_variable_set(:cat, &#39;meow&#39;)
+  Thread.current.thread_variable_set(&quot;dog&quot;, &#39;woof&#39;)
+end
+thr.join               # =&gt; #&lt;Thread:0x401b3f10 dead&gt;
+thr.thread_variables   # =&gt; [:dog, :cat]
+</code></pre>
+
+<p>Note that these are not fiber local variables. Please see <a
+href="Thread.html#method-i-thread_variable_get">#thread_variable_get</a>
+for more details.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-thread_variables_source')" id="l_method-i-thread_variables_source">show</a>
+                
+              </p>
+              <div id="method-i-thread_variables_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/core_ext/thread.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">thread_variables</span>
+  <span class="ruby-identifier">_locals</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

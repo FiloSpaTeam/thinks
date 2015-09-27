@@ -1,0 +1,11 @@
+= form_for(@dependence) do |f|
+  - if @dependence.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@dependence.errors.count, "error")
+        prohibited this dependence from being saved:
+      %ul
+        - @dependence.errors.full_messages.each do |message|
+          %li= message
+  .actions
+    = f.submit

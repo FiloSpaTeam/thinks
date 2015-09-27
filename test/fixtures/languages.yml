@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+viml:
+  name: VimL
+
+ruby:
+  name: Ruby
+
+csharp:
+  name: C#
+
+php:
+  name: PHP
+
+cplusplus:
+  name: C++
+
+yaml:
+  name: YAML

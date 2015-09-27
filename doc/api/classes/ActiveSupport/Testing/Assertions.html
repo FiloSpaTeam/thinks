@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Testing::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Assertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/testing/assertions_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/assertions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_difference">assert_difference</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_difference">assert_no_difference</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_not">assert_not</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_difference">
+            
+              <b>assert_difference</b>(expression, difference = 1, message = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_difference" name="method-i-assert_difference" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test numeric difference between the return value of an expression as a
+result of what is evaluated in the yielded block.</p>
+
+<pre><code>assert_difference &#39;Article.count&#39; do
+  post :create, article: {...}
+end</code></pre>
+
+<p>An arbitrary expression is passed in and evaluated.</p>
+
+<pre><code>assert_difference &#39;assigns(:article).comments(:reload).size&#39; do
+  post :create, comment: {...}
+end</code></pre>
+
+<p>An arbitrary positive or negative difference can be specified. The default
+is <code>1</code>.</p>
+
+<pre><code>assert_difference &#39;Article.count&#39;, -1 do
+  post :delete, id: ...
+end</code></pre>
+
+<p>An array of expressions can also be passed in and evaluated.</p>
+
+<pre><code>assert_difference [ &#39;Article.count&#39;, &#39;Post.count&#39; ], 2 do
+  post :create, article: {...}
+end</code></pre>
+
+<p>A lambda or a list of lambdas can be passed in and evaluated:</p>
+
+<pre><code>assert_difference -&gt;{ Article.count }, 2 do
+  post :create, article: {...}
+end
+
+assert_difference [-&gt;{ Article.count }, -&gt;{ Post.count }], 2 do
+  post :create, article: {...}
+end</code></pre>
+
+<p>An error message can be specified.</p>
+
+<pre><code>assert_difference &#39;Article.count&#39;, -1, &#39;An Article should be destroyed&#39; do
+  post :delete, id: ...
+end</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_difference_source')" id="l_method-i-assert_difference_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_difference_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/assertions.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-number">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">expressions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">expression</span>)
+
+  <span class="ruby-identifier">exps</span> = <span class="ruby-identifier">expressions</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">block</span>.<span class="ruby-identifier">binding</span>) }
+  }
+  <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">call</span> }
+
+  <span class="ruby-keyword">yield</span>
+
+  <span class="ruby-identifier">expressions</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">exps</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">e</span>), <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">error</span>  = <span class="ruby-node">&quot;#{code.inspect} didn&#39;t change by #{difference}&quot;</span>
+    <span class="ruby-identifier">error</span>  = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">message</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">call</span>, <span class="ruby-identifier">error</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_difference">
+            
+              <b>assert_no_difference</b>(expression, message = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_no_difference" name="method-i-assert_no_difference" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assertion that the numeric result of evaluating an expression is not
+changed before and after invoking the passed in block.</p>
+
+<pre><code>assert_no_difference &#39;Article.count&#39; do
+  post :create, article: invalid_attributes
+end
+</code></pre>
+
+<p>An error message can be specified.</p>
+
+<pre><code>assert_no_difference &#39;Article.count&#39;, &#39;An Article should not be created&#39; do
+  post :create, article: invalid_attributes
+end
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_difference_source')" id="l_method-i-assert_no_difference_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_difference_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/assertions.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">assert_difference</span> <span class="ruby-identifier">expression</span>, <span class="ruby-number">0</span>, <span class="ruby-identifier">message</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_not">
+            
+              <b>assert_not</b>(object, message = nil)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_not" name="method-i-assert_not" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assert that an expression is not truthy. Passes if <code>object</code> is
+<code>nil</code> or <code>false</code>. “Truthy” means “considered true in
+a conditional” like <code>if foo</code>.</p>
+
+<pre><code>assert_not nil    # =&gt; true
+assert_not false  # =&gt; true
+assert_not &#39;foo&#39;  # =&gt; Expected &quot;foo&quot; to be nil or false
+</code></pre>
+
+<p>An error message can be specified.</p>
+
+<pre><code>assert_not foo, &#39;foo should be false&#39;
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_not_source')" id="l_method-i-assert_not_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_not_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/assertions.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_not</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;Expected #{mu_pp(object)} to be nil or false&quot;</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Translation code:
+  = @cycle.translation_code
+%p
+  %strong Description:
+  = @cycle.description
+%p
+  %strong Days:
+  = @cycle.days
+= link_to 'Edit', edit_cycle_path(@cycle)
+|
+= link_to 'Back', cycles_path

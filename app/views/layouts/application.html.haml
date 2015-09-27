@@ -1,0 +1,16 @@
+!!!
+%html{ :lang => "en" }
+  %head
+    = render 'shared/header'
+  %body{:class => "#{controller.controller_name}"}
+    - if content_for?(:body)
+      = yield(:body)
+    - else
+      = render 'shared/navbar'
+      .container
+        - if thinker_signed_in?
+          .sidebar
+            = render 'layouts/sidebar'
+        %div{ thinker_signed_in? ? {:class => :main} : {} }
+          = bootstrap_flash
+          = yield

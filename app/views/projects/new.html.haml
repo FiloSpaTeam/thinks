@@ -1,0 +1,7 @@
+.form-group
+  %h1
+    = t ".new"
+    %small
+      = t ".created_by"
+      %b= current_thinker.name
+= render :partial => 'form'

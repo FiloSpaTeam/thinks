@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Testing::TimeHelpers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.2.3</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::TimeHelpers 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/__/__/__/__/usr/local/lib64/ruby/gems/2_1_0/gems/activesupport-4_2_3/lib/active_support/testing/time_helpers_rb.html">/usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/time_helpers.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Containing helpers that helps you test passage of time.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-travel">travel</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-travel_back">travel_back</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-travel_to">travel_to</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-travel">
+            
+              <b>travel</b>(duration, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Testing/TimeHelpers.html#method-i-travel" name="method-i-travel" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Changes current time to the time in the future or in the past by a given
+time difference by stubbing <code>Time.now</code> and
+<code>Date.today</code>.</p>
+
+<pre><code>Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+travel 1.day
+Time.current # =&gt; Sun, 10 Nov 2013 15:34:49 EST -05:00
+Date.current # =&gt; Sun, 10 Nov 2013
+</code></pre>
+
+<p>This method also accepts a block, which will return the current time back
+to its original state at the end of the block:</p>
+
+<pre><code>Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+travel 1.day do
+  User.create.created_at # =&gt; Sun, 10 Nov 2013 15:34:49 EST -05:00
+end
+Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-travel_source')" id="l_method-i-travel_source">show</a>
+                
+              </p>
+              <div id="method-i-travel_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/time_helpers.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">travel</span>(<span class="ruby-identifier">duration</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">travel_to</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">duration</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-travel_back">
+            
+              <b>travel_back</b>()
+            
+            <a href="../../../classes/ActiveSupport/Testing/TimeHelpers.html#method-i-travel_back" name="method-i-travel_back" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the current time back to its original state, by removing the stubs
+added by `travel` and `travel_to`.</p>
+
+<pre><code>Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+travel_to Time.new(2004, 11, 24, 01, 04, 44)
+Time.current # =&gt; Wed, 24 Nov 2004 01:04:44 EST -05:00
+travel_back
+Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-travel_back_source')" id="l_method-i-travel_back_source">show</a>
+                
+              </p>
+              <div id="method-i-travel_back_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/time_helpers.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">travel_back</span>
+  <span class="ruby-identifier">simple_stubs</span>.<span class="ruby-identifier">unstub_all!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-travel_to">
+            
+              <b>travel_to</b>(date_or_time)
+            
+            <a href="../../../classes/ActiveSupport/Testing/TimeHelpers.html#method-i-travel_to" name="method-i-travel_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Changes current time to the given time by stubbing <code>Time.now</code>
+and <code>Date.today</code> to return the time or date passed into this
+method.</p>
+
+<pre><code>Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+travel_to Time.new(2004, 11, 24, 01, 04, 44)
+Time.current # =&gt; Wed, 24 Nov 2004 01:04:44 EST -05:00
+Date.current # =&gt; Wed, 24 Nov 2004
+</code></pre>
+
+<p>Dates are taken as their timestamp at the beginning of the day in the
+application time zone. <code>Time.current</code> returns said timestamp,
+and <code>Time.now</code> its equivalent in the system time zone.
+Similarly, <code>Date.current</code> returns a date equal to the argument,
+and <code>Date.today</code> the date according to <code>Time.now</code>,
+which may be different. (Note that you rarely want to deal with
+<code>Time.now</code>, or <code>Date.today</code>, in order to honor the
+application time zone please always use <code>Time.current</code> and
+<code>Date.current</code>.)</p>
+
+<p>Note that the usec for the time passed will be set to 0 to prevent rounding
+errors with external services, like MySQL (which will round instead of
+floor, leading to off-by-one-second errors).</p>
+
+<p>This method also accepts a block, which will return the current time back
+to its original state at the end of the block:</p>
+
+<pre><code>Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+travel_to Time.new(2004, 11, 24, 01, 04, 44) do
+  Time.current # =&gt; Wed, 24 Nov 2004 01:04:44 EST -05:00
+end
+Time.current # =&gt; Sat, 09 Nov 2013 15:34:49 EST -05:00
+</code></pre>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-travel_to_source')" id="l_method-i-travel_to_source">show</a>
+                
+              </p>
+              <div id="method-i-travel_to_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File ../../../../usr/local/lib64/ruby/gems/2.1.0/gems/activesupport-4.2.3/lib/active_support/testing/time_helpers.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">travel_to</span>(<span class="ruby-identifier">date_or_time</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">date_or_time</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Date</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">date_or_time</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">DateTime</span>)
+    <span class="ruby-identifier">now</span> = <span class="ruby-identifier">date_or_time</span>.<span class="ruby-identifier">midnight</span>.<span class="ruby-identifier">to_time</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">now</span> = <span class="ruby-identifier">date_or_time</span>.<span class="ruby-identifier">to_time</span>.<span class="ruby-identifier">change</span>(<span class="ruby-identifier">usec</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">simple_stubs</span>.<span class="ruby-identifier">stub_object</span>(<span class="ruby-constant">Time</span>, <span class="ruby-value">:now</span>, <span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">simple_stubs</span>.<span class="ruby-identifier">stub_object</span>(<span class="ruby-constant">Date</span>, <span class="ruby-value">:today</span>, <span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_date</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">yield</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-identifier">travel_back</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

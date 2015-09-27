@@ -1,0 +1,18 @@
+%h1
+  = t '.projects'
+  %small= t ".small_title"
+= form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+  .form-group
+    = f.label t('search'), :class => 'control-label col-md-1'
+    .col-md-3
+      = f.text_field( :search_query, class: 'form-control filterrific-periodically-observed', placeholder: t(".title"))
+    = f.label t('sorted_by'), :class => 'control-label col-md-5'
+    .col-md-3
+      = f.select :sorted_by, @filterrific.select_options[:sorted_by], {} ,:class => 'form-control'
+  .form-group
+    .col-sm-12
+      = link_to t('reset_filters'), reset_filterrific_url, :class => 'btn btn-primary'
+      - if thinker_signed_in?
+        = link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-success pull-right'
+  = render_filterrific_spinner
+= render partial: 'list', locals: { projects: @projects }

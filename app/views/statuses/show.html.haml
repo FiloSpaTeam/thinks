@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Translation code:
+  = @status.translation_code
+%p
+  %strong Description:
+  = @status.description
+= link_to 'Edit', edit_status_path(@status)
+|
+= link_to 'Back', statuses_path

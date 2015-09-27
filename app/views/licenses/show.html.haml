@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @license.name
+%p
+  %strong Description:
+  = @license.description
+%p
+  %strong Url:
+  = @license.url
+= link_to 'Edit', edit_license_path(@license)
+|
+= link_to 'Back', licenses_path

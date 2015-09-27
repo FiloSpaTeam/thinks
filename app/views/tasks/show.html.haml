@@ -1,0 +1,51 @@
+%h1
+  \# 
+  = @task.serial
+  %small
+    by #{@task.thinker.name}
+.row
+  .col-sm-8
+    .form-group
+      = label_tag t('tasks.description'), nil, class: "control-label"
+      %p
+        = @task.description
+  .col-sm-4
+    .form-group
+      .panel.panel-primary
+        .panel-heading
+          = label_tag t('tasks.status'), nil, class: "control-label"
+        .panel-body{:style => "text-align:center;" }
+          %h1
+            = @task.status.translation_code
+    .form-group
+      .panel.panel-primary
+        .panel-heading
+          = label_tag t('tasks.workload'), nil, class: "control-label"
+        .panel-body{:style => "text-align:center;"}
+          %h1
+            = workload_description(@task.workload)
+    .form-group
+      .panel.panel-primary
+        .panel-heading
+          = label_tag t('tasks.worker'), nil, class: "control-label"
+        .panel-body{:style => "text-align:center;"}
+          - if !@task.worker.nil?
+            %h4
+              = @task.worker.name
+          - elsif @task.status == @status_sprint
+            - if @task.project.workers.active.include?(current_thinker)
+              %h4 No one is working over this but you have yet something to do ;-P
+            - else 
+              = link_to "Assigns me", assign_task_path, :method => :put, :class => "btn btn-success btn-block"
+          - else
+            %h4 Actually the team didn't decide to work on. Talk about if you are interested
+= link_to 'Edit', edit_task_path(@task)
+|
+= link_to 'Back', project_tasks_path(@task.project)
+- if @task.status == @status_release
+  |
+  = link_to 'Get in Sprint!', progress_task_path(@task), :method => :put
+- elsif @task.status == @status_in_progress && @task.worker == current_thinker
+  |
+  = link_to 'Work done!', progress_task_path(@task), :method => :put
+  

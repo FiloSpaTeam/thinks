@@ -1,0 +1,23 @@
+= form_for(@license) do |f|
+  - if @license.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@license.errors.count, "error")
+        prohibited this license from being saved:
+      %ul
+        - @license.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :description
+    %br/
+    = f.text_field :description
+  .field
+    = f.label :url
+    %br/
+    = f.text_field :url
+  .actions
+    = f.submit

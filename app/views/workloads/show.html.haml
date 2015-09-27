@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %strong Value:
+  = @workload.value
+= link_to 'Edit', edit_workload_path(@workload)
+|
+= link_to 'Back', workloads_path

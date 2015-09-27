@@ -1,0 +1,14 @@
+%p#notice= notice
+%h1 Listing Dependences
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @dependences.each do |dependence|
+      %tr
+        %td= link_to 'Show', dependence
+        %td= link_to 'Edit', edit_dependence_path(dependence)
+        %td= link_to 'Destroy', dependence, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Dependence', new_dependence_path
