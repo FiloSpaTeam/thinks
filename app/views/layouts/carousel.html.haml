@@ -1,0 +1,96 @@
+- content_for :body do
+  = render 'shared/navbar'
+  .carousel.slide#myCarousel{"data-ride" => "carousel"}
+    %ol.carousel-indicators
+      %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+      %li.active{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+      %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+    .carousel-inner{:role => "listbox"}
+      .item
+        .first-slide.carousel-image
+        .container
+          .carousel-caption
+            %h1 Community handled
+            %p
+              This project and registered projects are only free software projects. Nothing to hide.
+              Share to have better from community!
+            %p
+              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Sign up today
+      .item.active
+        .second-slide.carousel-image
+        .container
+          .carousel-caption
+            %h1 Scrum based
+            %p Agile methodology for the best experience. Organize your sprint, calculate estimated time, estimate your personal ratio and work on!
+            %p
+              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Learn more
+      .item
+        .third-slide.carousel-image
+        .container
+          .carousel-caption
+            %h1 Fair donations
+            %p Someone can work over a lots of hours, someone can't. Someone works over a lot of projects, someone only one. Gives and you'll receive.
+            %p
+              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Thinks (a project)
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next
+  .container.marketing
+    .row
+      .col-lg-4
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
+        %h2 Heading
+        %p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
+        %p
+          %a.btn.btn-default{:href => "#", :role => "button"} View details »
+      .col-lg-4
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
+        %h2 Heading
+        %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.
+        %p
+          %a.btn.btn-default{:href => "#", :role => "button"} View details »
+      .col-lg-4
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
+        %h2 Heading
+        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        %p
+          %a.btn.btn-default{:href => "#", :role => "button"} View details »
+    %hr.featurette-divider
+    .row.featurette
+      .col-md-7
+        %h2.featurette-heading
+          First featurette heading.
+          %span.text-muted It'll blow your mind.
+        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+      .col-md-5
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+    %hr.featurette-divider
+    .row.featurette
+      .col-md-7.col-md-push-5
+        %h2.featurette-heading
+          Oh yeah, it's that good.
+          %span.text-muted See for yourself.
+        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+      .col-md-5.col-md-pull-7
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+    %hr.featurette-divider
+    .row.featurette
+      .col-md-7
+        %h2.featurette-heading
+          And lastly, this one.
+          %span.text-muted Checkmate.
+        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+      .col-md-5
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+    %hr.featurette-divider
+    %footer
+      %p.pull-right
+        %a{:href => "#"} Back to top
+      %p
+        © 2014 Company, Inc. ·
+        %a{:href => "#"} Privacy
+        ·
+        %a{:href => "#"} Terms

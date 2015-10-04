@@ -1,6 +1,5 @@
 %nav.navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
   .container-fluid
-    / Brand and toggle get grouped for better mobile display
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only= t '.toggle_navigation'
@@ -8,7 +7,6 @@
         %span.icon-bar
         %span.icon-bar
       = link_to content_for?(:title) ? yield(:title) : "Think", root_url, :class => "navbar-brand"
-    / Collect the nav links, forms, and other content for toggling
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}

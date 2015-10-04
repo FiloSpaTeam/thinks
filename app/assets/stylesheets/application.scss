@@ -14,8 +14,6 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "dashboard";
-@import "cover";
 @import "bootstrap-datepicker3";
 
 /* CUSTOM VARIABLES
@@ -34,7 +32,7 @@ $box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 -------------------------------------------------- */
 html {
   position: relative;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
@@ -131,6 +129,10 @@ h2, .h2, h3, .h3 {
 
 .dark-grey { color: $dark-grey }
 
+@import "dashboard";
+@import "cover";
+@import "carousel";
+
 /* SCSS Pages files
 -------------------------------------------------- */
-@import "projects.scss";
+@import "projects";

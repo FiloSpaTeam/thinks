@@ -1,30 +1,27 @@
 .row
-  .col-md-4.col-xs-12.col-md-offset-4.col-sm-6.col-sm-offset-3
+  .col-md-8.col-md-offset-2.col-sm-6.col-sm-offset-3.col-xs-12
     .panel.panel-default
       .panel-body
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           %h1= t ".log_in"
-          .form-group
-            = f.label :email
-            %br/
+          = bootstrap_flash
+          .form-group{ :class => resource.errors[:email] ? 'has-error' : '' }
+            = f.label :email, :class => "control-label"
             = f.email_field :email, autofocus: true, class: "form-control"
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to "Need an account?", new_registration_path(resource_name)
-                %br/
-          .form-group
-            = f.label :password
-            %br/
+          .form-group{ :class => resource.errors[:password] ? 'has-error' : '' }
+            = f.label :password, :class => "control-label"
             = f.password_field :password, autocomplete: "off", class: "form-control"
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to "Forgot your password?", new_password_path(resource_name)
-                %br/
           - if devise_mapping.rememberable?
             .checkbox
-              = f.label :remember_me do
+              = f.label :remember_me, :class => "control-label" do
                 = f.check_box :remember_me
                 = t ".remember_me"
-          = f.submit t(".log_in"), class: "btn btn-primary"
+          = f.submit t(".log_in"), class: "btn btn-success btn-block"
 
 = parent_layout :cover

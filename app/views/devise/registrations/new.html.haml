@@ -1,26 +1,29 @@
 .row
-  .col-sm-6.col-xs-12.col-sm-offset-3.col-md-4.col-md-offset-4
+  .col-md-8.col-md-offset-2.col-sm-6.col-sm-offset-3.col-xs-12
     .panel.panel-default
       .panel-body
         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
           %h1= t ".sign_up"
           = devise_error_messages!
-          .form-group
-            = f.label :name
-            = f.email_field :name, autofocus: true, class: "form-control"
-          .form-group
-            = f.label :email
+          = bootstrap_flash
+          .form-group{ :class => resource.errors[:name] ? 'has-error' : '' }
+            = f.label :name, :class => "control-label"
+            = f.text_field :name, autofocus: true, class: "form-control"
+          .form-group{ :class => resource.errors[:email] ? 'has-error' : '' }
+            = f.label :email, :class => "control-label"
             = f.email_field :email, class: "form-control"
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to t(".already_signed_up"), new_session_path(resource_name)
-          .form-group
-            = f.label :password
+          .form-group{ :class => resource.errors[:password] ? 'has-error' : '' }
+            = f.label :password, :class => "control-label"
             = f.password_field :password, autocomplete: "off", class: "form-control"
             - if @minimum_password_length
               %p.help-block
                 = t "char_minimum", chars: @minimum_password_length
-          .form-group
-            = f.label :password_confirmation
+          .form-group{ :class => resource.errors[:password_confirmation] ? 'has-error' : '' }
+            = f.label :password_confirmation, :class => "control-label"
             = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
-          = f.submit t(".sign_up"), class: "btn btn-primary"
+          = f.submit t(".sign_up"), class: "btn btn-success btn-block"
+
+= parent_layout :cover
