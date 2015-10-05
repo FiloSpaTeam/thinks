@@ -6,22 +6,22 @@
           %h1= t ".sign_up"
           = devise_error_messages!
           = bootstrap_flash
-          .form-group{ :class => resource.errors[:name] ? 'has-error' : '' }
+          .form-group{ :class => set_has_error_form_group(resource, :name) }
             = f.label :name, :class => "control-label"
             = f.text_field :name, autofocus: true, class: "form-control"
-          .form-group{ :class => resource.errors[:email] ? 'has-error' : '' }
+          .form-group{ :class => set_has_error_form_group(resource, :email) }
             = f.label :email, :class => "control-label"
             = f.email_field :email, class: "form-control"
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to t(".already_signed_up"), new_session_path(resource_name)
-          .form-group{ :class => resource.errors[:password] ? 'has-error' : '' }
+          .form-group{ :class => set_has_error_form_group(resource, :password) }
             = f.label :password, :class => "control-label"
             = f.password_field :password, autocomplete: "off", class: "form-control"
             - if @minimum_password_length
               %p.help-block
                 = t "char_minimum", chars: @minimum_password_length
-          .form-group{ :class => resource.errors[:password_confirmation] ? 'has-error' : '' }
+          .form-group{ :class => set_has_error_form_group(resource, :password_confirmation) }
             = f.label :password_confirmation, :class => "control-label"
             = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
           = f.submit t(".sign_up"), class: "btn btn-success btn-block"

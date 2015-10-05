@@ -6,8 +6,10 @@
       %li.active{"data-slide-to" => "1", "data-target" => "#myCarousel"}
       %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
     .carousel-inner{:role => "listbox"}
-      .item
-        .first-slide.carousel-image
+      .item.active
+        // https://www.flickr.com/photos/chrischabot/8574770893/
+        // Brucia per scurire molto le luci
+        .first-slide
         .container
           .carousel-caption
             %h1 Community handled
@@ -16,8 +18,10 @@
               Share to have better from community!
             %p
               %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Sign up today
-      .item.active
-        .second-slide.carousel-image
+      .item
+        // https://commons.wikimedia.org/wiki/File:ST_vs_Gloucester_-_Match_-_23.JPG
+        // Brucia diverse volte per scurire il rosso troppo acceso
+        .second-slide
         .container
           .carousel-caption
             %h1 Scrum based
@@ -25,7 +29,9 @@
             %p
               %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Learn more
       .item
-        .third-slide.carousel-image
+        // https://www.flickr.com/photos/megantrace/7125366795/in/photolist-bRDniD-ug3br-5gBQyo-7Sz7nr-mj7di2-5vTqnK-bz29nH-oih2Mt-71ZMnt-8sQvn3-a13tem-7EAY63-6FADUs-kouG2g-7cXkxw-88EEon-pA5Gdk-yXKoU-686uvZ-piSxzz-5E1X1j-HwpLY-n9SMt5-4HJx7M-wWcrU-wWcfd-o9wCui-2T6K14-kSWyCQ-xEzGvn-a9GfJu-6gG1Uf-8MSVyp-xKAxyc-72PWFQ-7pPKxE-78y5gh-8H4CYm-4fgaGY-i6ycVY-dv2kHu-7gUnxA-bR5eq-89xksJ-6hVTTR-97Kfzp-981nQ5-b6iQb2-rbKTgr-5RgyZr
+        // Bilanciamento colore, brucia per scurire un po'
+        .third-slide
         .container
           .carousel-caption
             %h1 Fair donations

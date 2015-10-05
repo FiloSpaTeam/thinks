@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to content_for?(:title) ? yield(:title) : "Think", root_url, :class => "navbar-brand"
+      = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand"
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}

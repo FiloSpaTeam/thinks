@@ -48,26 +48,17 @@ body.start {
         height: 500px;
         background-color: #777;
     }
-    .carousel-inner > .item > img {
-        max-width: none;
-        margin: 0px auto;
-
-        @media (min-width: 1060px) {
-            width: 100%;
-        }
-    }
-
-    /* IMAGES */
-    .carousel-image {
+    .carousel-inner > .item > div {
         background-position: center;
         background-size: cover;
 
         height: 500px;
     }
 
-    .first-slide {background-image: image-url('scrum.jpeg');}
+    /* IMAGES */
+    .first-slide {background-image: image-url('community.jpeg');}
     .second-slide {background-image: image-url('scrum.jpeg');}
-    .third-slide {background-image: image-url('scrum.jpeg');}
+    .third-slide {background-image: image-url('handshake.jpeg');}
 
 
     /* MARKETING CONTENT
