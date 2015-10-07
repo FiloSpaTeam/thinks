@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  me                          : "Me"
   show                        : "Show"
   update_failed               : "Update failed. See errors below."
   actions                     : "Actions"
@@ -31,8 +32,11 @@ en:
   wtf_the_creator_partecipate : "You are or you are not the creator ??"
   reset_filters               : "Reset filters"
   char_minimum                : "Minimum character length: %{chars}"
-  char_limit : "Character limit: %{chars}"
-  char_in: "Character length between %{chars_min} and %{chars_max}"
+  char_limit                  : "Character limit:          %{chars}"
+  char_in                     : "Character length between %{chars_min} and %{chars_max}"
+  previous                    : "Previous"
+  next                        : "Next"
+  view_details                : "View details"
 
   layouts:
     application:
@@ -48,7 +52,38 @@ en:
       about             : "About"
       contact           : "Contact Us"
       sources           : "Source code"
-      toggle_navigation : "Toggle navigation"
+      toggle_navigation : "Toggle"
+
+    carousel:
+      community_handled : "Community handled"
+      community_text    : "This project and registered projects are only free software projects. Nothing to hide. Share to have better from community!"
+      sign_up_today     : "Sign up today"
+      scrum_based       : "Scrum based"
+      scrum_text        : "Agile methodology for the best experience. Organize your sprint, calculate estimated time, estimate your personal ratio and work on!"
+      learn_more        : "Learn more"
+      fair_donations    : "Fair donations"
+      fair_text         : "Someone can work over a lots of hours, someone can't. Someone works over a lot of projects, someone only one. Gives and you'll receive."
+      thinks_a_project  : "Thinks (a project)"
+
+      community: "Community"
+      scrum: "Scrum"
+      donations: "Donations"
+
+      community_heading_text: "Allow community to take part of your project simply. Free software is the key for free knowledge, and we are the main part of this system."
+      scrum_heading_text: "Scrum is one of the best Agile Methodologies that a team can appreciate to solve problems. This software aims to allow the Scrum Master to manage large teams."
+      donations_heading_text: "No one has ever allowed something like that. Get what you deserve, participates and accumulates points by solving task!"
+
+      first_title: "Share your project."
+      first_title_span: "What you think?"
+      first_title_text: "Describe your project. Simply. Details can be studied later. The community need to understand what is the main goal. No more. Share all the informations that can help other to take part! And don't forget to define the rules of your teamwork."
+
+      second_title: "Plan Sprints."
+      second_title_span: "Planning poker and over!"
+      second_title_text: "One week? Two week? One month? Chooses with your team when next Sprint is out! Automatically the software handle the Sprints and generates a unique identifier. Later, plan the first release! Create tasks, give them a value and manage charts to understand your vertical speed! Everyone can help you to increase that speed!"
+
+      third_title: "Donations"
+      third_title_span: "Everyone over one main goal."
+      third_title_text: "Everyone worked over your project with tasks. Thanks to them the system understand how much work they have done. Donations are calibrated over those points. Equal distribution of donations is the goal."
 
   thinkers:
     show:
@@ -104,6 +139,12 @@ en:
       task_parent: "Task parent"
     index:
       scrum_table: "Scrum table"
+
+  # Shared section
+  shared:
+    navbar:
+      faqs: "FAQs"
+      how_does_it_works: "How does it works"
 
   # ActiveRecord override translation
   activerecord:

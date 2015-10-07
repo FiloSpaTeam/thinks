@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     messages = object.errors.full_messages.map { |msg| "<li>#{msg}</li>" }.join
     flash.now[:error] = "<ul>#{messages}</ul>"
 
-    return ''
+    return ""
   end
 
   def set_thinker_projects

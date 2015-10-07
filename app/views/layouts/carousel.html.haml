@@ -1,10 +1,10 @@
 - content_for :body do
   = render 'shared/navbar'
-  .carousel.slide#myCarousel{"data-ride" => "carousel"}
+  .carousel.slide#carousel{"data-ride" => "carousel"}
     %ol.carousel-indicators
-      %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-      %li.active{"data-slide-to" => "1", "data-target" => "#myCarousel"}
-      %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+      %li.active{"data-slide-to" => "0", "data-target" => "#carousel"}
+      %li{"data-slide-to" => "1", "data-target" => "#carousel"}
+      %li{"data-slide-to" => "2", "data-target" => "#carousel"}
     .carousel-inner{:role => "listbox"}
       .item.active
         // https://www.flickr.com/photos/chrischabot/8574770893/
@@ -12,91 +12,118 @@
         .first-slide
         .container
           .carousel-caption
-            %h1 Community handled
+            %h1
+              =t ".community_handled"
             %p
-              This project and registered projects are only free software projects. Nothing to hide.
-              Share to have better from community!
+              =t ".community_text"
             %p
-              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Sign up today
+              =link_to(t(".sign_up_today"), new_thinker_registration_path, :class => "btn btn-lg btn-primary", :role => "button")
       .item
         // https://commons.wikimedia.org/wiki/File:ST_vs_Gloucester_-_Match_-_23.JPG
         // Brucia diverse volte per scurire il rosso troppo acceso
         .second-slide
         .container
           .carousel-caption
-            %h1 Scrum based
-            %p Agile methodology for the best experience. Organize your sprint, calculate estimated time, estimate your personal ratio and work on!
+            %h1 
+              =t ".scrum_based"
+            %p 
+              =t ".scrum_text"
             %p
-              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Learn more
+              =link_to(t(".learn_more"), new_thinker_registration_path, :class => "btn btn-lg btn-primary", :role => "button")
       .item
         // https://www.flickr.com/photos/megantrace/7125366795/in/photolist-bRDniD-ug3br-5gBQyo-7Sz7nr-mj7di2-5vTqnK-bz29nH-oih2Mt-71ZMnt-8sQvn3-a13tem-7EAY63-6FADUs-kouG2g-7cXkxw-88EEon-pA5Gdk-yXKoU-686uvZ-piSxzz-5E1X1j-HwpLY-n9SMt5-4HJx7M-wWcrU-wWcfd-o9wCui-2T6K14-kSWyCQ-xEzGvn-a9GfJu-6gG1Uf-8MSVyp-xKAxyc-72PWFQ-7pPKxE-78y5gh-8H4CYm-4fgaGY-i6ycVY-dv2kHu-7gUnxA-bR5eq-89xksJ-6hVTTR-97Kfzp-981nQ5-b6iQb2-rbKTgr-5RgyZr
         // Bilanciamento colore, brucia per scurire un po'
         .third-slide
         .container
           .carousel-caption
-            %h1 Fair donations
-            %p Someone can work over a lots of hours, someone can't. Someone works over a lot of projects, someone only one. Gives and you'll receive.
+            %h1 
+              =t ".fair_donations"
             %p
-              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} Thinks (a project)
-    %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+              =t ".fair_text"
+            %p
+              %a.btn.btn-lg.btn-primary{:href => "#", :role => "button"} 
+                =t ".thinks_a_project"
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel", :role => "button"}
       %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
-      %span.sr-only Previous
-    %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+      %span.sr-only
+        =t "previous"
+    %a.right.carousel-control{"data-slide" => "next", :href => "#carousel", :role => "button"}
       %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
-      %span.sr-only Next
+      %span.sr-only
+        =t "next"
   .container.marketing
     .row
       .col-lg-4
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
-        %h2 Heading
-        %p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Globe_icon.svg/1000px-Globe_icon.svg.png
+        // Opacita 70%
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("globe"), :width => "140"}
+        %h2
+          =t ".community"
         %p
-          %a.btn.btn-default{:href => "#", :role => "button"} View details »
+          =t ".community_heading_text"
       .col-lg-4
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
-        %h2 Heading
-        %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Refresh_icon_by_Blaise_Sewell.svg/1024px-Refresh_icon_by_Blaise_Sewell.svg.png
+        // Opacita 70%
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("repeat"), :width => "140"}
+        %h2
+          =t ".scrum"
         %p
-          %a.btn.btn-default{:href => "#", :role => "button"} View details »
+          =t ".scrum_heading_text"
       .col-lg-4
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}
-        %h2 Heading
-        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        // https://pixabay.com/p-43994/?no_redirect
+        // Opacita 70%
+        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("money"), :width => "140"}
+        %h2 
+          =t ".donations"
         %p
-          %a.btn.btn-default{:href => "#", :role => "button"} View details »
-    %hr.featurette-divider
+          =t ".donations_heading_text"
+    %hr#first.featurette-divider
     .row.featurette
       .col-md-7
         %h2.featurette-heading
-          First featurette heading.
-          %span.text-muted It'll blow your mind.
-        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          =t ".first_title"
+          %span.text-muted
+            =t ".first_title_span"
+        %p.lead
+          =t ".first_title_text"
       .col-md-5
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Share_font_awesome.svg/2000px-Share_font_awesome.svg.png
+        // Opacita 40%, colore rosso
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("share")}
     %hr.featurette-divider
     .row.featurette
       .col-md-7.col-md-push-5
         %h2.featurette-heading
-          Oh yeah, it's that good.
-          %span.text-muted See for yourself.
-        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          =t ".second_title"
+          %span.text-muted 
+            =t ".second_title_span"
+        %p.lead
+          =t ".second_title_text"
       .col-md-5.col-md-pull-7
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Team_icon_-_noun_project_20586.svg/2000px-Team_icon_-_noun_project_20586.svg.png
+        // Opacita 40%, colore arancio
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("team")}
     %hr.featurette-divider
     .row.featurette
       .col-md-7
         %h2.featurette-heading
-          And lastly, this one.
-          %span.text-muted Checkmate.
-        %p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          =t ".third_title"
+          %span.text-muted 
+            =t ".third_title_span"
+        %p.lead
+          =t ".third_title_text"
       .col-md-5
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}
+        // https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ok_font_awesome.svg/2000px-Ok_font_awesome.svg.png
+        // Opacita 40%, colore verde
+        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("ok")}
     %hr.featurette-divider
     %footer
       %p.pull-right
         %a{:href => "#"} Back to top
       %p
-        © 2014 Company, Inc. ·
+        ©
+        = DateTime.now.year
+        Free Software Team ·
         %a{:href => "#"} Privacy
         ·
         %a{:href => "#"} Terms

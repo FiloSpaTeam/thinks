@@ -16,8 +16,12 @@ gem 'bootstrap-sass-extras', '0.0.6'
 # Datepicker Bootstrap (maybe we can do without that?)
 gem 'bootstrap-datepicker-rails', '1.4.0'
 
+# Holder.js for placeholder images
+gem 'holder_rails', '2.8.0'
+
 # HAML
 gem 'haml', '4.0.7'
+gem 'haml-rails'
 
 # Filter for views
 gem 'filterrific', '2.0.5'

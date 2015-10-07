@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :cycles
   resources :sprints
-  devise_for :thinkers, :controllers => { :sessions => "thinkers/sessions", :registrations => "thinkers/registrations" }
+  devise_for :thinkers, :controllers => {
+    :sessions => "thinkers/sessions",
+    :registrations => "thinkers/registrations"
+  }
 
   resources :workloads
   resources :statuses
@@ -24,6 +27,8 @@ Rails.application.routes.draw do
     end
   end
   resources :start, only: [:index]
+  resources :how_does_it_works
+  resources :faqs
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -13,6 +13,14 @@
           = link_to t(".projects"), projects_path
         %li{:class => active_link_if_current(thinkers_path)}
           = link_to t(".thinkers"), thinkers_path
+        %li.dropdown
+          %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
+            =t (".about")
+            %span.caret
+          %ul.dropdown-menu 
+            %li
+              = link_to t(".how_does_it_works"), how_does_it_works_path 
+              = link_to t(".faqs"), faqs_path 
       %ul.nav.navbar-nav.navbar-right
         - if thinker_signed_in?
           %li 
