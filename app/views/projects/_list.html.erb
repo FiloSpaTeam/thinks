@@ -10,12 +10,15 @@
       <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4> <%= link_to project.title, project_path(project) %> </h4>
+              <h4><strong> <%= project.title %> </strong></h4>
             <p> <%= truncate(project.description, :length => 100) %> </p>
           </div>
           <div class="panel-footer" style="text-align: right">
-          <%= link_to project_tasks_path(project) do %>
+            <%= link_to project_tasks_path(project) do %>
               <span class="glyphicon glyphicon-tasks dark-grey"></span>
+            <% end %>
+            <%= link_to project_path(project) do %>
+              <span class="glyphicon glyphicon-eye-open dark-grey"></span>
             <% end %>
           </div>
         </div>

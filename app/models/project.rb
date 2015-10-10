@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
 
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :thinkers
-  
+
   has_many :dependencies
   has_many :tasks
   has_many :workers, through: :tasks do
@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
       where("tasks.status_id = ?", Status.in_progress.first.id)
     end
   end
-  
+
   belongs_to :license
   belongs_to :thinker
   belongs_to :cycle
@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
   #     errors.add(:release_at, "can't be in the past")
   #   end
   # end
-  
+
   scope :search_query, lambda { |query|
     where(title: [*query])
   }
@@ -49,7 +49,7 @@ class Project < ActiveRecord::Base
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
-  
+
   # This method provides select options for the `sorted_by` filter select input.
   # It is called in the controller as part of `initialize_filterrific`.
   def self.options_for_sorted_by
@@ -65,7 +65,7 @@ class Project < ActiveRecord::Base
 
     total_tasks_number      = tasks.length
     total_tasks_done_number = tasks_done.length
-    
+
     @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
   end
 end

@@ -1,14 +1,14 @@
 %h1
-  \# 
+  \#
   = @task.serial
+  = @task.title
   %small
     by #{@task.thinker.name}
 .row
   .col-sm-8
     .form-group
-      = label_tag t('tasks.description'), nil, class: "control-label"
-      %p
-        = @task.description
+      %p.lead
+        = markdown(@task.description)
   .col-sm-4
     .form-group
       .panel.panel-primary
@@ -35,7 +35,7 @@
           - elsif @task.status == @status_sprint
             - if @task.project.workers.active.include?(current_thinker)
               %h4 No one is working over this but you have yet something to do ;-P
-            - else 
+            - else
               = link_to "Assigns me", assign_task_path, :method => :put, :class => "btn btn-success btn-block"
           - else
             %h4 Actually the team didn't decide to work on. Talk about if you are interested
@@ -48,4 +48,3 @@
 - elsif @task.status == @status_in_progress && @task.worker == current_thinker
   |
   = link_to 'Work done!', progress_task_path(@task), :method => :put
-  

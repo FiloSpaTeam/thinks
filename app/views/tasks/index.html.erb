@@ -31,9 +31,9 @@
         <h4 class="list-group-item-heading"><%= t(".#{status.translation_code}") %></h4>
       <% end %>
       <% status_tasks.each do |status_task| %>
-        <%= link_to task_path(status_task), :class => "list-group-item #{color_list_group_item(status_task)}" do %>
+        <%= link_to task_path(status_task), :class => "list-group-item #{color_list_group_item(status_task)}", :title => status_task.title do %>
           <%= badge workload_description(status_task.workload) %>
-          <%= status_task.description %>
+          <%= status_task.title.truncate(45) %>
         <% end %>
       <% end %>
     </div>

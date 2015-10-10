@@ -44,8 +44,8 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    border-right: 1px solid #eee;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    border-right: 1px solid #F5F5F5;
+    background-color: #FFF;
     width: $width-sidebar;
   }
 }

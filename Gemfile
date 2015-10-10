@@ -21,7 +21,7 @@ gem 'holder_rails', '2.8.0'
 
 # HAML
 gem 'haml', '4.0.7'
-gem 'haml-rails'
+gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
 gem 'filterrific', '2.0.5'
@@ -76,5 +76,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'pry'
+  gem 'pry-doc', '>= 0.6.0'
+  gem 'method_source', '>= 0.8.2'
 end
 

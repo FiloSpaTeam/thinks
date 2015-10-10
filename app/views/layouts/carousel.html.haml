@@ -17,7 +17,8 @@
             %p
               =t ".community_text"
             %p
-              =link_to(t(".sign_up_today"), new_thinker_registration_path, :class => "btn btn-lg btn-primary", :role => "button")
+              =link_to_if(current_thinker.nil? ,t(".sign_up_today"), new_thinker_registration_path, :class => "btn btn-lg btn-primary", :role => "button") do
+                =link_to(t("shared.navbar.projects"), projects_path, :class => "btn btn-lg btn-primary", :role => "button")
       .item
         // https://commons.wikimedia.org/wiki/File:ST_vs_Gloucester_-_Match_-_23.JPG
         // Brucia diverse volte per scurire il rosso troppo acceso
@@ -29,7 +30,7 @@
             %p 
               =t ".scrum_text"
             %p
-              =link_to(t(".learn_more"), new_thinker_registration_path, :class => "btn btn-lg btn-primary", :role => "button")
+              =link_to(t(".learn_more"),  how_does_it_works_path, :class => "btn btn-lg btn-primary", :role => "button")
       .item
         // https://www.flickr.com/photos/megantrace/7125366795/in/photolist-bRDniD-ug3br-5gBQyo-7Sz7nr-mj7di2-5vTqnK-bz29nH-oih2Mt-71ZMnt-8sQvn3-a13tem-7EAY63-6FADUs-kouG2g-7cXkxw-88EEon-pA5Gdk-yXKoU-686uvZ-piSxzz-5E1X1j-HwpLY-n9SMt5-4HJx7M-wWcrU-wWcfd-o9wCui-2T6K14-kSWyCQ-xEzGvn-a9GfJu-6gG1Uf-8MSVyp-xKAxyc-72PWFQ-7pPKxE-78y5gh-8H4CYm-4fgaGY-i6ycVY-dv2kHu-7gUnxA-bR5eq-89xksJ-6hVTTR-97Kfzp-981nQ5-b6iQb2-rbKTgr-5RgyZr
         // Bilanciamento colore, brucia per scurire un po'

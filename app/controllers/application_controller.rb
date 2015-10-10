@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-   
+
   helper_method :set_form_errors
-  
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_thinker_projects
-    @thinker_projects = current_thinker.projects
+    @thinker_projects = current_thinker.projects.order("created_at DESC").first(5)
   end
 
   def set_thinker_tasks
-    @thinker_tasks = current_thinker.tasks.in_progress
+    @thinker_tasks = current_thinker.tasks.in_progress.order("created_at DESC").first(10)
   end
 end

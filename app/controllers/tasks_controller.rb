@@ -41,6 +41,7 @@ class TasksController < ApplicationController
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@task)
+        set_validators_for_form_help
 
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -115,13 +116,15 @@ class TasksController < ApplicationController
 
     def set_validators_for_form_help
       description_validators = Task.validators_on(:description)[0]
-      @chars_min = description_validators.options[:minimum]
-      @chars_max = description_validators.options[:maximum]
+      @chars_min_description = description_validators.options[:minimum]
+
+      title_validators = Task.validators_on(:title)[0]
+      @chars_max_title = title_validators.options[:maximum]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      allowed_params = [:serial, :description, :project_id, :task_id, :thinker_id, :worker_thinker_id, :status_id, :workload_id]
+      allowed_params = [:serial, :description, :project_id, :task_id, :thinker_id, :worker_thinker_id, :status_id, :workload_id, :title]
 
       params.require(:task).permit(allowed_params)
     end

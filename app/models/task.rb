@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   has_many :tasks
-  
+
   belongs_to :task
   belongs_to :project
   belongs_to :thinker
@@ -13,10 +13,11 @@ class Task < ActiveRecord::Base
 
   before_save :set_progress
 
-  validates :description, length: { in: 30..1600 }
+  validates :title, length: { maximum: 30 }, presence: true
+  validates :description, length: { minimum: 30 }
 
-  scope :status_progress, -> (status) { where status: status } 
-  scope :in_progress, -> () { where status: Status.in_progress }
+  scope :status_progress, lambda { |status| where status: status }
+  scope :in_progress, lambda { where status: Status.in_progress }
 
   def progress
     statuses = Status.all
@@ -29,11 +30,11 @@ class Task < ActiveRecord::Base
   end
 
   private
-  
+
     def generate_serial
       tasks_count = Task.where({project_id: self.project.id}).count
       tasks_count += 1
-      
+
       self.serial = tasks_count
     end
 
