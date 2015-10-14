@@ -18,7 +18,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should create task" do
     assert_difference('Task.count') do
-      post :create, task: { description: @task.description, project_id: @task.project_id, serial: @task.serial, status_id: @task.status_id, task_id: @task.task_id, thinker_id: @task.thinker_id, worker_thinker_id: @task.worker_thinker_id, workload_id: @task.workload_id }
+      post :create, task: { description: @task.description, project_id: @task.project_id, serial: @task.serial, status_id: @task.status_id, thinker_id: @task.thinker_id, worker_thinker_id: @task.worker_thinker_id, workload_id: @task.workload_id }
     end
 
     assert_redirected_to task_path(assigns(:task))
@@ -35,7 +35,7 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test "should update task" do
-    patch :update, id: @task, task: { description: @task.description, project_id: @task.project_id, serial: @task.serial, status_id: @task.status_id, task_id: @task.task_id, thinker_id: @task.thinker_id, worker_thinker_id: @task.worker_thinker_id, workload_id: @task.workload_id }
+    patch :update, id: @task, task: { description: @task.description, project_id: @task.project_id, serial: @task.serial, status_id: @task.status_id, thinker_id: @task.thinker_id, worker_thinker_id: @task.worker_thinker_id, workload_id: @task.workload_id }
     assert_redirected_to task_path(assigns(:task))
   end
 

@@ -4,7 +4,6 @@ one:
   serial: 1
   description: Come sviluppatore voglio terminare il sistema di logging
   project: rethink
-  task_id: 0
   thinker: admin
   worker_thinker_id: 1
   status: sprint
@@ -14,7 +13,6 @@ two:
   serial: 1
   description: Come ricercatore voglio completare la ricerca scientifica sul sistema cellulare
   project: savage
-  task_id: 0
   thinker: marcus
   worker_thinker_id: 1
   status: sprint
@@ -24,7 +22,6 @@ three:
   serial: 2
   description: Come ricercatore voglio completare la ricerca anatomica sul sistema cellulare
   project: savage
-  task_id: 0
   thinker: marcus
   worker_thinker_id: 1
   status: backlog

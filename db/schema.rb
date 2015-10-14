@@ -98,14 +98,12 @@ ActiveRecord::Schema.define(version: 20151009223429) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "progress_order"
-    t.integer  "print_order"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "serial"
     t.string   "description"
     t.integer  "project_id"
-    t.integer  "task_id"
     t.integer  "thinker_id"
     t.integer  "worker_thinker_id"
     t.integer  "status_id"

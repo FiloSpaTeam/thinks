@@ -10,7 +10,7 @@
         = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
           - @statuses.each do |status|
             = content_tag(:li) do
-              = link_to({ "filterrific[status_progress]" => status }, method: :get, remote: true) do
+              = link_to(params.merge("filterrific[status_progress]" => status ), method: :get, remote: true) do
                 .round.round-sm.pull-left{ :class => color_list_round_div(status.translation_code) }
                 = t("projects.tasks.#{status.translation_code}")
     %td

@@ -153,7 +153,10 @@
         }
     }
 
-    .panel {background-color: rgba(0, 0, 0, 0.2);}
+    .panel {
+        background-color: rgba(0, 0, 0, 0.2);
+        border: none !important;
+    }
 
     .form-group, .checkbox, .alert {text-align: left;}
 }

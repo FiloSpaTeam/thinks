@@ -8,9 +8,6 @@ class Task < ActiveRecord::Base
     ]
   )
 
-  has_many :tasks
-
-  belongs_to :task
   belongs_to :project
   belongs_to :thinker
   belongs_to :worker, class_name: "Thinker", foreign_key: "worker_thinker_id"
@@ -40,7 +37,7 @@ class Task < ActiveRecord::Base
       order("LOWER(tasks.title) #{ direction }")
     when /^workload_/
       # Simple sort over workload
-      order("tasks.workload_id #{ direction }")
+      joins(:workload).order("workloads.value #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end

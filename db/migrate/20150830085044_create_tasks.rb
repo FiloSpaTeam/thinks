@@ -4,7 +4,6 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :serial
       t.string :description
       t.integer :project_id
-      t.integer :task_id
       t.integer :thinker_id
       t.integer :worker_thinker_id
       t.integer :status_id

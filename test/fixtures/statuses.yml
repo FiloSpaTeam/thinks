@@ -3,19 +3,24 @@
 backlog:
   translation_code: backlog
   description: ToDo
+  progress_order: 1
 
 release:
   translation_code: release
   description: ToDo next
+  progress_order: 2
 
 sprint:
   translation_code: sprint
   description: Work planned
+  progress_order: 3
 
 working:
   translation_code: working
   description: Work in progress
+  progress_order: 4
 
 done:
   translation_code: done
   description: Work done
+  progress_order: 5
