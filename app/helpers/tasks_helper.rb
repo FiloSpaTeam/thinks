@@ -1,11 +1,11 @@
 module TasksHelper
-  def color_list_group_header(status)
+  def color_list_round_div(status)
     color_list = { 
-      "backlog"     => "list-group-header-backlog",
-      "release"     => "list-group-header-info",
-      "sprint"      => "list-group-header-danger",
-      "in_progress" => "list-group-header-warning",
-      "done"        => "list-group-header-success"
+      "backlog"     => "bg-backlog",
+      "release"     => "bg-info",
+      "sprint"      => "bg-danger",
+      "in_progress" => "bg-warning",
+      "done"        => "bg-success"
     }
   
     return color_list[status]

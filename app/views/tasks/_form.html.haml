@@ -14,7 +14,5 @@
     .form-group
       = f.label :workload_id, t('.workload'),:class => 'control-label'
       = f.select :workload_id, options_from_collection_for_select(Workload.all, 'id', 'description', @task.workload_id), {include_blank: '?'}, :class => "form-control"
-
   .form-group
     = f.submit nil, :class => "btn btn-primary"
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), task_path(@task), :class => 'btn btn-default'              |

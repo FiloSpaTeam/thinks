@@ -1,7 +1,7 @@
 .form-group
-  %h1
+  %h1.chapter-title
     = t ".new"
     %small
       = t ".created_by"
-      %b= current_thinker.name
+      %b = current_thinker.name
 = render :partial => 'form'

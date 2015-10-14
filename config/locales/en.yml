@@ -37,6 +37,7 @@ en:
   previous                    : "Previous"
   next                        : "Next"
   view_details                : "View details"
+  task  : "Task"
 
   layouts:
     application:
@@ -139,6 +140,7 @@ en:
       task_parent: "Task parent"
     index:
       scrum_table: "Scrum table"
+      title: "Title"
 
   # Shared section
   shared:

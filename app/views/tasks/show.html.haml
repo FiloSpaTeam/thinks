@@ -1,9 +1,9 @@
-%h1
-  \#
-  = @task.serial
-  = @task.title
-  %small
-    by #{@task.thinker.name}
+.form-group
+  %h2
+    \##{@task.serial}
+    = @task.title
+    %small
+      by #{@task.thinker.name}
 .row
   .col-sm-8
     .form-group

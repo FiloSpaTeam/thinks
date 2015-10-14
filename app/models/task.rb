@@ -1,4 +1,13 @@
 class Task < ActiveRecord::Base
+  filterrific(
+    default_filter_params: { sorted_by: 'title_desc' },
+    available_filters: [
+      :sorted_by,
+      :search_query,
+      :status_progress
+    ]
+  )
+
   has_many :tasks
 
   belongs_to :task
@@ -18,6 +27,41 @@ class Task < ActiveRecord::Base
 
   scope :status_progress, lambda { |status| where status: status }
   scope :in_progress, lambda { where status: Status.in_progress }
+
+  scope :search_query, lambda { |query|
+    where(title: [*query]) 
+  }
+
+  scope :sorted_by, lambda { |sort_option|
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^title_/
+      # Simple sort on the name colums
+      order("LOWER(tasks.title) #{ direction }")
+    when /^workload_/
+      # Simple sort over workload
+      order("tasks.workload_id #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  # This method provides select options for the `sorted_by` filter select input.
+  # It is called in the controller as part of `initialize_filterrific`.
+  def self.options_for_sorted_by sort_option
+    options = {
+      :title => [
+        ['Title (a-z)', 'title_asc'],
+        ['Title (z-a)', 'title_desc']
+      ],
+      :workload => [
+        ['Low -> High', 'workload_asc'],
+        ['High -> Low', 'workload_desc']
+      ]
+    }
+
+    return options[sort_option]
+  end
 
   def progress
     statuses = Status.all

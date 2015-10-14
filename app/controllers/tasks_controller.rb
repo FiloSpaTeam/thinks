@@ -6,8 +6,20 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
-    @tasks    = Task.where(project: @project)
-    @statuses = Status.unscoped.for_print
+    @filterrific = initialize_filterrific(
+      Task,
+      params[:filterrific],
+      select_options: {
+        sorted_by_title: Task.options_for_sorted_by(:title),
+        sorted_by_workload: Task.options_for_sorted_by(:workload)
+      },
+    ) or return
+    @tasks    = @filterrific.find.page params[:page]
+    @statuses = Status.all
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   # GET /tasks/1

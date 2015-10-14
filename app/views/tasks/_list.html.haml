@@ -1,0 +1,35 @@
+%thead
+  %tr
+    %td.col-lg-10.col-md-10.col-sm-9.col-xs-9
+      .dropdown.col-xs-12
+        %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
+          %h5
+            %strong
+              = t "task"
+              %span.caret
+        = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
+          - @statuses.each do |status|
+            = content_tag(:li) do
+              = link_to({ "filterrific[status_progress]" => status }, method: :get, remote: true) do
+                .round.round-sm.pull-left{ :class => color_list_round_div(status.translation_code) }
+                = t("projects.tasks.#{status.translation_code}")
+    %td
+      .col-xs-12
+        %h5
+          %strong
+            = filterrific_sorting_link(@filterrific, :workload)
+%tbody
+  - @tasks.each do |task|
+    %tr
+      %td
+        .round.pull-left{ :class => color_list_round_div(task.status.translation_code) }
+        %strong
+          = link_to task.title, task_path(task)
+        .dark-grey
+          %small
+            %strong
+              \##{task.serial}
+            created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
+      %td
+        .col-xs-12.workload-table
+          =  workload_description(task.workload)
