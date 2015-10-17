@@ -1,4 +1,6 @@
 module ApplicationHelper
+  require_dependency "modules/redcarpet/render/cleanerhtml"
+
   def active_link_if_current(path)
     return "active" if current_page?(path)
   end
@@ -9,21 +11,21 @@ module ApplicationHelper
 
   def markdown(text)
     options = {
-      filter_html:     true,
-      hard_wrap:       true, 
-      link_attributes: { rel: 'nofollow', target: "_blank" },
+      filter_html:         true,
+      hard_wrap:           true, 
+      link_attributes:     { rel: 'nofollow', target: "_blank" },
       space_after_headers: true, 
-      fenced_code_blocks: true,
-      prettify: true
+      fenced_code_blocks:  true,
+      prettify:            true
     }
 
     extensions = {
-      autolink:           true,
-      superscript:        true,
+      autolink:                     true,
+      superscript:                  true,
       disable_indented_code_blocks: true
     }
 
-    renderer = Redcarpet::Render::HTML.new(options)
+    renderer = Redcarpet::Render::CleanerHTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe

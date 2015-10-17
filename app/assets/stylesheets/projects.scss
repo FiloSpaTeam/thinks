@@ -3,11 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .projects {
-  .table > tbody > tr > td {
-    vertical-align: middle;
+    .table > tbody > tr > td {
+        vertical-align: middle;
 
-    .progress {
-      margin-bottom: 0;
+        .progress {
+            margin-bottom: 0;
+        }
     }
-  }
+
+    .panel-body {
+        h2 {
+            font-size: 17px;
+        }
+    }
 }

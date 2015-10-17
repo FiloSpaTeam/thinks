@@ -5,10 +5,7 @@
     "#{@project.title}"
   %small
     by #{@project.thinker.name}
-.form-group
-  = label_tag t('projects.list.description'), nil,class: "control-label"
-  %p
-    = @project.description
+  = markdown(@project.description)
 .form-group
   = label_tag t('projects.list.progress')
   .progress

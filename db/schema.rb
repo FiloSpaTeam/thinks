@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009223429) do
+ActiveRecord::Schema.define(version: 20151017100207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "t_name"
+    t.text     "t_description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "color"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "text"
+    t.boolean  "approved"
+    t.integer  "task_id"
+    t.integer  "thinker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
+  add_index "comments", ["thinker_id"], name: "index_comments_on_thinker_id", using: :btree
 
   create_table "cycles", force: :cascade do |t|
     t.string   "translation_code"
@@ -70,6 +90,7 @@ ActiveRecord::Schema.define(version: 20151009223429) do
     t.datetime "updated_at",                                   null: false
     t.integer  "thinker_id"
     t.integer  "cycle_id"
+    t.integer  "category_id"
   end
 
   add_index "projects", ["license_id"], name: "index_projects_on_license_id", using: :btree
@@ -81,6 +102,17 @@ ActiveRecord::Schema.define(version: 20151009223429) do
 
   add_index "projects_thinkers", ["project_id"], name: "index_projects_thinkers_on_project_id", using: :btree
   add_index "projects_thinkers", ["thinker_id"], name: "index_projects_thinkers_on_thinker_id", using: :btree
+
+  create_table "reasons", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "comment_id"
+    t.integer  "thinker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reasons", ["comment_id"], name: "index_reasons_on_comment_id", using: :btree
+  add_index "reasons", ["thinker_id"], name: "index_reasons_on_thinker_id", using: :btree
 
   create_table "sprints", force: :cascade do |t|
     t.string   "title"

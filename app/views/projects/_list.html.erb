@@ -8,10 +8,10 @@
       <% end %>
 
       <div class="col-sm-4">
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-<%= project.category.color %>">
           <div class="panel-body">
-              <h4><strong> <%= project.title %> </strong></h4>
-            <p> <%= truncate(project.description, :length => 100) %> </p>
+            <h4><strong> <%= project.title %> </strong></h4>
+            <%= markdown(truncate(project.description.lines.first, :length => 100)) %>
           </div>
           <div class="panel-footer" style="text-align: right">
             <%= link_to project_tasks_path(project) do %>
@@ -25,44 +25,6 @@
       </div>
     <% end %>
   </div>
-
-  <%# <div class="row"> %>
-  <%#   <%= label_tag '', page_entries_info(projects), :class => 'control-label col-md-4' %1> %>
-  <%# </div> %>
-
-  <%# <table class="table table-condensed"> %>
-  <%#   <thead> %>
-  <%#     <tr> %>
-  <%#       <th><%= t ".title" %1></th> %>
-  <%#       <th class="hidden-xs"><%= t ".description" %1></th> %>
-  <%#       <th><%= t ".team" %1></th> %>
-  <%#       <th><%= t ".progress" %1></th> %>
-  <%#       <th><%= t ".tasks" %1></th> %>
-  <%#       <th><%= t ".license" %1></th> %>
-  <%#       <th class="hidden-xs"><%= t ".release_at" %1></th> %>
-  <%#     </tr> %>
-  <%#   </thead> %>
-  <%#   <tbody> %>
-  <%#     <% projects.each do |project| %1> %>
-  <%#       <tr class="<%= project.release_at < DateTime.now.to_date ? 'warning' : 'danger' %1>"> %>
-  <%#         <td style="min-width: 11%"><%= link_to(project.title, project_path(project)) %1></td> %>
-  <%#         <td style="width: 55%" class="hidden-xs"><%= truncate(project.description, :length => 100) %1></td> %>
-  <%#         <td><%= link_to(project.thinkers.length, team_project_path(project)) %1> / <%= project.minimum_team_number %1> </td> %>
-  <%#         <td style="width: 90%"> %>
-  <%#           <div class="progress"> %>
-  <%#             <div class="progress-bar progress-bar-striped <%= progress_bar_color(project.progress_percentage) %1>" role="progressbar" aria-valuenow="<%= project.progress_percentage %1>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= project.progress_percentage %1>%;"> %>
-  <%#               <%= project.progress_percentage %1>% %>
-  <%#             </div> %>
-  <%#           </div> %>
-  <%#         </td> %>
-  <%#         <td><%= link_to project.tasks.status(Status.done).length, project_tasks_path(project) %1> / <%= project.tasks.length %1></td> %>
-  <%#         <td><%= link_to(project.license.name, license_path(project.license)) %1></td> %>
-  <%#         <td class="hidden-xs"><%= project.release_at %1></td> %>
-  <%#       </tr> %>
-  <%#     <% end %1> %>
-  <%#   </tbody> %>
-  <%# </table> %>
-
 </div>
 
 <%= paginate projects %>

@@ -128,6 +128,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :minimum_team_number, :release_at, :license_id, :source_code_url, :home_url, :documentation_url)
+      params.require(:project).permit(:title, :description, :minimum_team_number, :release_at, :license_id, :source_code_url, :home_url, :documentation_url, :cycle_id, :category_id)
     end
 end

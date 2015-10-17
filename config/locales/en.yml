@@ -38,6 +38,7 @@ en:
   next                        : "Next"
   view_details                : "View details"
   task  : "Task"
+  no_record: "No records found."
 
   layouts:
     application:
@@ -129,6 +130,16 @@ en:
       sprint      : "Sprint"
       in_progress : "In progress"
       done        : "Done"
+  category:
+    web_applications:       "Web applications"
+    libraries:              "Libraries"
+    games:                  "Games"
+    sysadmin_applications:  "Sysadmin applications"
+    didactics_applications: "Didactics applications"
+    system_applications:    "System applications"
+    media_applications:     "Media applications"
+    graphics_applications:  "Graphics applications"
+    tools_applications:     "Tools applications"
 
   tasks:
     description: "Description"

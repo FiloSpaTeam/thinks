@@ -18,8 +18,9 @@
             =t (".about")
             %span.caret
           %ul.dropdown-menu 
-            %li
+            %li{current_page?(how_does_it_works_path) ? { :class => :active } : {} }
               = link_to t(".how_does_it_works"), how_does_it_works_path 
+            %li{current_page?(faqs_path) ? { :class => :active } : {} }
               = link_to t(".faqs"), faqs_path 
       %ul.nav.navbar-nav.navbar-right
         - if thinker_signed_in?

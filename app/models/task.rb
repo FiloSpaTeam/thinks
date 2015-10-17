@@ -1,6 +1,5 @@
 class Task < ActiveRecord::Base
   filterrific(
-    default_filter_params: { sorted_by: 'title_desc' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -19,8 +18,10 @@ class Task < ActiveRecord::Base
 
   before_save :set_progress
 
-  validates :title, length: { maximum: 30 }, presence: true
+  validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
+
+  default_scope { order('serial DESC') }
 
   scope :status_progress, lambda { |status| where status: status }
   scope :in_progress, lambda { where status: Status.in_progress }

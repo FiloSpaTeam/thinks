@@ -58,3 +58,19 @@ cycles_list = [
 cycles_list.each do |tcode, description, days|
   Cycle.create(translation_code: tcode, description: description, days: days)
 end
+
+categories_list = [
+  ["web_applications",       "web_applications_description",       "cream"],
+  ["libraries",              "libraries_description",              "green"],
+  ["games",                  "games_description",                  "red"],
+  ["sysadmin_applications",  "sysadmins_applications_description", "black"],
+  ["didactics_applications", "didactics_applications_description", "yellow"],
+  ["system_applications",    "system_applications_description",    "orange"],
+  ["media_applications",     "media_applications_description",     "violet"],
+  ["graphics_applications",  "graphics_applications_description",  "lightblue"],
+  ["tools_applications",     "tools_applications_description",     "gray"]
+]
+
+categories_list.each do |tname, tdescription, color|
+  Category.create(t_name: tname, t_description: tdescription, color: color)
+end

@@ -5,11 +5,14 @@
     = f.text_field :title, :class => 'form-control', :placeholder => "My project"
   .form-group
     = f.label :description, :class => 'control-label'
-    = f.text_area :description, :class => 'form-control', :rows => 3, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
     %span#help-description.help-block= t "char_limit", chars: Project.validators_on(:description)[0].options[:maximum]
   .form-group
+    = f.label :category_id, :class => 'control-label'
+    = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
+  .form-group
     = f.label :license_id, :class => 'control-label'
-    = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name'), {}, :class => 'form-control'
+    = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name', @project.license_id), {}, :class => 'form-control'
   .form-group
     = f.label :minimum_team_number, :class => 'control-label'
     = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
@@ -20,7 +23,7 @@
   %h3.chapter-subtitle Sprint settings
   .form-group
     = f.label :cycle_id, :class => "control-label"
-    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description'), {include_blank: true}, :class => "form-control"
+    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {include_blank: true}, :class => "form-control"
   %h3.chapter-subtitle URLs
   .form-group.has-feedback
     = f.label :home_url, :class => 'control-label'

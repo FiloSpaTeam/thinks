@@ -21,6 +21,7 @@ class Project < ActiveRecord::Base
   belongs_to :license
   belongs_to :thinker
   belongs_to :cycle
+  belongs_to :category
 
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
