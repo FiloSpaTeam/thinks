@@ -24,6 +24,8 @@
       %tr
         %td
           .round.pull-left{ :class => color_list_round_div(task.status.translation_code) }
+          %a.pull-right{ :href => task.goal.nil? ? "javascript:;" : "#", :title => "Obiettivo", :role => "button" }
+            %span.glyphicon.glyphicon-screenshot{ "aria-hidden" => "true", :class => color_link_icon(task.goal) }
           %strong
             = link_to task.title, task_path(task)
           .dark-grey

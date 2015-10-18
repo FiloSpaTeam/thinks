@@ -25,6 +25,7 @@ $warning: #ffc107;
 $backlog: #607d8b;
 
 $dark-grey: #555;
+$light-grey: #DDD;
 
 $box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 
@@ -148,6 +149,7 @@ div .alert {
 }
 
 .dark-grey { color: $dark-grey }
+.light-grey { color: $light-grey }
 
 .clip-text {
     white-space: nowrap;

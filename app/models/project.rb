@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :thinkers
 
   has_many :dependencies
+  has_many :goals
   has_many :tasks
   has_many :workers, through: :tasks do
     def active

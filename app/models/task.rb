@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
   )
 
   belongs_to :project
+  belongs_to :goal
   belongs_to :thinker
   belongs_to :worker, class_name: "Thinker", foreign_key: "worker_thinker_id"
   belongs_to :status

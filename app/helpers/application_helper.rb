@@ -30,4 +30,10 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def color_link_icon(condition)
+    return "light-grey" if (condition.nil? || condition.empty?)
+
+    "dark-grey"
+  end
 end
