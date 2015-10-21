@@ -63,6 +63,8 @@ class Project < ActiveRecord::Base
 
   def progress_percentage
     tasks      = self.tasks
+    0 if tasks.empty? || tasks.nil?
+
     tasks_done = tasks.where({ status_id: Status.done })
 
     total_tasks_number      = tasks.length

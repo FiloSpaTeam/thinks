@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :goals
   resources :cycles
   resources :sprints
   devise_for :thinkers, :controllers => {
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
         put :assign
       end
     end
+
+    resources :goals, shallow: true
   end
   resources :start, only: [:index]
   resources :how_does_it_works

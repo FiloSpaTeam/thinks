@@ -24,15 +24,15 @@
       %tr
         %td
           .round.pull-left{ :class => color_list_round_div(task.status.translation_code) }
-          %a.pull-right{ :href => task.goal.nil? ? "javascript:;" : "#", :title => "Obiettivo", :role => "button" }
-            %span.glyphicon.glyphicon-screenshot{ "aria-hidden" => "true", :class => color_link_icon(task.goal) }
+          %a.pull-right.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.title, :role => "button" }
+            %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
           %strong
             = link_to task.title, task_path(task)
           .dark-grey
             %small
               %strong
                 \##{task.serial}
-                created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
+              created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
         %td.text-center
           .col-xs-12.workload-table
             =  workload_description(task.workload)

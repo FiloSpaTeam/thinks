@@ -14,6 +14,9 @@
             <%= markdown(truncate(project.description.lines.first, :length => 100)) %>
           </div>
           <div class="panel-footer" style="text-align: right">
+            <%= link_to project_goals_path(project) do %>
+              <span class="glyphicon glyphicon-screenshot dark-grey"></span>
+            <% end %>
             <%= link_to project_tasks_path(project) do %>
               <span class="glyphicon glyphicon-tasks dark-grey"></span>
             <% end %>

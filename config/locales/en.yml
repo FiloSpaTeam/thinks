@@ -152,6 +152,9 @@ en:
     index:
       scrum_table: "Scrum table"
       title: "Title"
+  goals:
+    index:
+      title: "Title"
 
   # Shared section
   shared:
