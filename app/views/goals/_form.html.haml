@@ -1,10 +1,10 @@
-= form_for @goal do |f|
-  - if @goal.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@goal.errors.count, "error")} prohibited this goal from being saved:"
-      %ul
-        - @goal.errors.full_messages.each do |msg|
-          %li= msg
-
-  .actions
-    = f.submit 'Save'
+= form_for [@project, @goal] do |f|
+  .form-group
+    = f.label :title, :class => "control-label"
+    = f.text_field :title, :class => "form-control", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    %span#help-title.help-block= t "char_limit", chars: @chars_max_title
+  .form-group
+    = f.label :description, :class => "control-label"
+    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+  .form-group
+    = f.submit nil, :class => "btn btn-primary"

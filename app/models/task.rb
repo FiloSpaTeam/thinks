@@ -39,7 +39,7 @@ class Task < ActiveRecord::Base
       order("LOWER(tasks.title) #{ direction }")
     when /^workload_/
       # Simple sort over workload
-      joins(:workload).order("workloads.value #{ direction }")
+      unscoped.joins(:workload).order("workloads.value #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -63,11 +63,10 @@ class Task < ActiveRecord::Base
   end
 
   def progress
-    statuses = Status.all
-
-    actual_index = statuses.index(self.status)
-
     return false if self.workload == Workload.infinity.first
+
+    statuses = Status.all
+    actual_index = statuses.index(self.status)
 
     self.status = statuses.fetch(actual_index + 1)
   end

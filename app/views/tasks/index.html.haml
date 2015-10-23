@@ -1,6 +1,4 @@
-%h1.chapter-title
-  = t '.scrum_table'
-  %small= @project.title
+= render 'shared/projectbar'
 = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
   .form-group
     .col-xs-12

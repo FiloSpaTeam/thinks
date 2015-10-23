@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:new, :index, :create]
+  before_action :set_validators_for_form_help, only: [:new, :edit]
 
   # GET /goals
   # GET /goals.json
@@ -34,7 +36,9 @@ class GoalsController < ApplicationController
   # POST /goals
   # POST /goals.json
   def create
-    @goal = Goal.new(goal_params)
+    @goal         = Goal.new(goal_params)
+    @goal.project = @project
+    @goal.thinker = current_thinker
 
     respond_to do |format|
       if @goal.save
@@ -72,13 +76,22 @@ class GoalsController < ApplicationController
   end
 
   private
+    def set_validators_for_form_help
+      title_validators = Goal.validators_on(:title)[0]
+      @chars_max_title = title_validators.options[:maximum]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
       @goal = Goal.find(params[:id])
     end
 
+    def set_project
+      @project = Project.friendly.find(params[:project_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params[:goal]
+      params[:goal].permit(:title, :description)
     end
 end

@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 
   # GET /projects/1/tasks/new
   def new
-    @task = Task.new
+    @task         = Task.new
     @task.project = @project
   end
 
@@ -123,7 +123,7 @@ class TasksController < ApplicationController
     end
 
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = Project.friendly.find(params[:project_id])
     end
 
     def set_validators_for_form_help

@@ -141,6 +141,10 @@ div .alert {
 
 .chapter-title {
   margin-bottom: 30px;
+
+  a {
+      label {margin-bottom: 0px;}
+  }
 }
 
 .chapter-subtitle {

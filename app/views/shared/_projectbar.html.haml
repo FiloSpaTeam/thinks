@@ -1,0 +1,18 @@
+%h1.chapter-title{ :style => "border-bottom: 1px solid #eee; padding-bottom: 30px;" }
+  %a.pull-right.btn.btn-default{ :href => team_project_path(@project), :title => t(".team"), :role => "button", :class => active_link_if_current(team_project_path(@project)) }
+    %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
+    %label.hidden-xs
+      = t ".team"
+  %a.pull-right.btn.btn-default{ :href => project_tasks_path(@project), :title => t(".tasks"), :role => "button", :class => active_link_if_current(project_tasks_path(@project)) }
+    %span.glyphicon.glyphicon-tasks.dark-grey{ "aria-hidden" => "true" }
+    %label.hidden-xs
+      = t ".tasks"
+  %a.pull-right.btn.btn-default{ :href => project_goals_path(@project), :title => t(".goals"), :role => "button", :class => active_link_if_current(project_goals_path(@project)) }
+    %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
+    %label.hidden-xs
+      = t ".goals"
+  %a.pull-right.btn.btn-default{ :href => project_path(@project), :title => t(".project"), :role => "button", :class => active_link_if_current(project_path(@project)) }
+    %span.glyphicon.glyphicon-eye-open.dark-grey{ "aria-hidden" => "true" }
+    %label.hidden-xs
+      = t ".project"
+  = @project.title

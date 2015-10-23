@@ -1,6 +1,4 @@
-%h1.chapter-title
-  = t '.goals'
-  %small= t ".small_title"
+= render 'shared/projectbar'
 = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
   .form-group
     = f.label t('search'), :class => 'control-label col-md-1'

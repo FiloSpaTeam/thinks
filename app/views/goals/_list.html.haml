@@ -16,10 +16,9 @@
             = link_to goal.title, goal_path(goal)
           .dark-grey
             %small
-              = goal.description.truncate(80)
-            - unless goal.progress_percentage.zero?
+              = goal.description.truncate(140)
               .progress
-                .progress-bar.progress-bar-striped{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress_percentage}", :class => "#{progress_bar_color(goal.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{goal.progress_percentage}%;"}
+                .progress-bar.progress-bar-striped{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress_percentage}", :class => "#{progress_bar_color(goal.progress_percentage)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress_percentage}%;"}
                   = goal.progress_percentage
                   \%
   - else

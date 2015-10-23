@@ -11,6 +11,8 @@ class Goal < ActiveRecord::Base
 
   has_many :tasks
 
+  validates :title, length: {maximum: 60}, presence: true
+
   scope :search_query, lambda { |query|
     where(title: [*query]) 
   }

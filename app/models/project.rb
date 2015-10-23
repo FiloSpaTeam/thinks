@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  extend FriendlyId
+
   filterrific(
     default_filter_params: { sorted_by: 'title_asc' },
     available_filters: [
@@ -6,6 +8,8 @@ class Project < ActiveRecord::Base
       :search_query
     ]
   )
+
+  friendly_id :title, :use => :slugged
 
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :thinkers
@@ -29,6 +33,8 @@ class Project < ActiveRecord::Base
   validates :description, length: { in: 2..1600 }
   validates :license_id, presence: true
   validates :thinker_id, presence: true, on: create
+  validates :slug, presence: true
+
   # validate :expiration_date_cannot_be_in_the_past
 
   # def expiration_date_cannot_be_in_the_past

@@ -56,6 +56,9 @@ gem 'redcarpet', '~> 3.1.2'
 # Devise, authentication framework
 gem 'devise', '~> 3.5'
 
+# Friendly urls
+gem 'friendly_id', '~> 5.1.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
