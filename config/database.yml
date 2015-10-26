@@ -30,3 +30,5 @@ production:
   database: rethink_production
   username: hosting-db
   password: 
+  host: localhost
+  port: 5432
