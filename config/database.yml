@@ -28,5 +28,5 @@ test:
 production:
   <<: *default
   database: rethink_production
-  username: <%= ENV['POSTGRES_USERNAME'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  username: hosting-db
+  password: 
