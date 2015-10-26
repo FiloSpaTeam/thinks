@@ -32,3 +32,4 @@ production:
   password: 
   host: localhost
   port: 5432
+  template: template0
