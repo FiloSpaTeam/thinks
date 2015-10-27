@@ -59,6 +59,9 @@ gem 'devise', '~> 3.5'
 # Friendly urls
 gem 'friendly_id', '~> 5.1.0'
 
+# Env
+gem 'dotenv-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
