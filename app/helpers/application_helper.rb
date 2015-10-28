@@ -1,6 +1,13 @@
 module ApplicationHelper
   require_dependency "modules/redcarpet/render/cleanerhtml"
 
+  def link_to_button(path, text, icon)
+    link_to(path, :class => "#{active_link_if_current(path)} pull-right btn btn-default", :title => t(text), :role => "button") do
+      content_tag("span", "", class: ["glyphicon", "glyphicon-#{icon}", "dark-grey"], "aria-hidden" => "true") +
+      label_tag(nil, t(text), :class => "hidden-xs")
+    end
+  end
+
   def active_link_if_current(path)
     return "active" if current_page?(path)
   end

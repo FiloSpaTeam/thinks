@@ -1,14 +1,14 @@
 = render 'shared/projectbar'
 = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
   .form-group
-    = f.label t('search'), :class => 'control-label col-md-1'
-    .col-md-3
-      = f.text_field( :search_query, class: 'form-control filterrific-periodically-observed', placeholder: t(".title"))
-  .form-group
-    .col-sm-12
-      = link_to t('reset_filters'), reset_filterrific_url, :class => 'btn btn-primary'
-      - if thinker_signed_in?
-        = link_to t('.new', :default => t("helpers.links.new")), new_project_goal_path, :class => 'btn btn-success pull-right'
+    .col-xs-12
+      .input-group
+        .input-group-btn
+          = link_to_button(reset_filterrific_url, "reset_filters", "remove")
+        = f.text_field :search_query, :class => 'form-control filterrific-periodically-observed'
+        - if thinker_signed_in?
+          .input-group-btn
+            = link_to_button(new_project_goal_path, "new", "plus")
   = render_filterrific_spinner
 .form-group
   %table.table.table-responsive.table-bordered.table-hover#filterrific_results

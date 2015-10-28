@@ -4,7 +4,7 @@
       My last tasks
   - @thinker_tasks.each do |task|
     %li{ :class => current_page?(task_path(task)) ? "active" : '' }
-      = link_to(task.title, task_path(task), :title => task.title, :class => "clip-text")
+      = link_to("<strong>##{task.serial}</strong> #{task.title}".html_safe, task_path(task), :title => task.title, :class => "clip-text")
 
 %ul.nav.nav-sidebar
   %li.dropdown-header

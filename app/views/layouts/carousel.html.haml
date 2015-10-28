@@ -57,7 +57,7 @@
       .col-lg-4
         // https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Globe_icon.svg/1000px-Globe_icon.svg.png
         // Opacita 70%
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("globe"), :width => "140"}
+        = image_tag("globe", :class => "img-circle", :alt => "Globe image", :height => 140, :width => 140)
         %h2
           =t ".community"
         %p
@@ -65,7 +65,7 @@
       .col-lg-4
         // https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Refresh_icon_by_Blaise_Sewell.svg/1024px-Refresh_icon_by_Blaise_Sewell.svg.png
         // Opacita 70%
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("repeat"), :width => "140"}
+        = image_tag("repeat", :class => "img-circle", :alt => "Repeat image", :height => 140, :width => 140)
         %h2
           =t ".scrum"
         %p
@@ -73,7 +73,7 @@
       .col-lg-4
         // https://pixabay.com/p-43994/?no_redirect
         // Opacita 70%
-        %img.img-circle{:alt => "Generic placeholder image", :height => "140", :src => image_url("money"), :width => "140"}
+        = image_tag("money", :class => "img-circle", :alt => "Money image", :height => 140, :width => 140)
         %h2 
           =t ".donations"
         %p
@@ -90,7 +90,7 @@
       .col-md-5
         // https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Share_font_awesome.svg/2000px-Share_font_awesome.svg.png
         // Opacita 40%, colore rosso
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("share")}
+        = image_tag("share", :class => "featurette-image img-responsive center-block", :alt => "Sharing image")
     %hr.featurette-divider
     .row.featurette
       .col-md-7.col-md-push-5
@@ -103,7 +103,7 @@
       .col-md-5.col-md-pull-7
         // https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Team_icon_-_noun_project_20586.svg/2000px-Team_icon_-_noun_project_20586.svg.png
         // Opacita 40%, colore arancio
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("team")}
+        = image_tag("team", :class => "featurette-image img-responsive center-block", :alt => "Team image")
     %hr.featurette-divider
     .row.featurette
       .col-md-7
@@ -116,7 +116,7 @@
       .col-md-5
         // https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ok_font_awesome.svg/2000px-Ok_font_awesome.svg.png
         // Opacita 40%, colore verde
-        %img.featurette-image.img-responsive.center-block{:alt => "Generic placeholder image", "src" => image_url("ok")}
+        = image_tag("ok", :class => "featurette-image img-responsive center-block", :alt => "Ok image")
     %hr.featurette-divider
     %footer
       %p.pull-right

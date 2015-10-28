@@ -139,17 +139,19 @@ div .alert {
   border-top: 2px solid $backlog;
 }
 
-.chapter-title {
-  margin-bottom: 30px;
-
-  a {
-      label {margin-bottom: 0px;}
-  }
-}
+.chapter-title {margin-bottom: 30px;}
 
 .chapter-subtitle {
   padding-top: 24px;
   margin-bottom: 20px;
+}
+
+a {
+    label {
+        margin-bottom: 0;
+        margin-left: 5px;
+        font-weight: normal;
+    }
 }
 
 .dark-grey { color: $dark-grey }

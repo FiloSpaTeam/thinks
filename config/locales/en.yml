@@ -39,6 +39,7 @@ en:
   view_details                : "View details"
   task  : "Task"
   no_record: "No records found."
+  new: "New"
 
   layouts:
     application:
@@ -161,6 +162,12 @@ en:
     navbar:
       faqs: "FAQs"
       how_does_it_works: "How does it works"
+    projectbar:
+      goals: "Goals"
+      team: "Team"
+      tasks: "Tasks"
+      project: "Project"
+
 
   # ActiveRecord override translation
   activerecord:
