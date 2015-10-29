@@ -185,7 +185,15 @@ a {
             background-color: #DDD;
         }
     }
+
+    ul.list-group {
+        min-width: 230px;
+        max-width: 300px;
+        max-height: 350px;
+    }
 }
+
+.scrollbar { overflow-y: auto; }
 
 .bg-success {background-color: $success;}
 .bg-warning {background-color: $warning;}

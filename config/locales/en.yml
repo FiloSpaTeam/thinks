@@ -40,6 +40,10 @@ en:
   task  : "Task"
   no_record: "No records found."
   new: "New"
+  advanced_filters: "Advanced filters"
+  value: "Value"
+  lower_than: "Lower than"
+  no_goal: "No goal related"
 
   layouts:
     application:

@@ -1,0 +1,48 @@
+#collapseFilters.collapse
+  .form-group
+    .col-xs-12
+      .well{ :style => "margin-bottom: 0" }
+        %ul.nav.nav-pills
+          %li{ :role => "presentation" }
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+              = t(".goal")
+              %span.caret
+            %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+              .panel-heading
+                = f.text_field :search_goal, class: "form-control filterrific-periodically-observed", placeholder: t("search")
+              %ul.list-group.scrollbar
+                - @project.goals.each do |goal|
+                  %li.list-group-item
+                    = link_to("filterrific[with_goal]" => goal, method: :get, remote: true) do
+                      = goal.title
+          %li{ :role => "presentation" }
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+              = t(".workload")
+              %span.caret
+            %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+              .panel-heading
+                = f.text_field :workload_lower_than, class: 'form-control filterrific-periodically-observed', placeholder: t("lower_than")
+          %li{ :role => "presentation" }
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+              = t(".worker")
+              %span.caret
+            %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+              .panel-heading
+                %input.form-control{ :type => "text", :placeholder => t("search") }
+              %ul.list-group.scrollbar
+                - @project.workers.unscoped.each do |worker|
+                  %li.list-group-item
+                    = link_to("filterrific[with_worker]" => worker, method: :get, remote: true) do
+                      = worker.name
+          %li{ :role => "presentation" }
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+              = t(".thinker")
+              %span.caret
+            %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+              .panel-heading
+                %input.form-control{ :type => "text", :placeholder => t("search") }
+              %ul.list-group.scrollbar
+                - @project.thinkers.unscoped.each do |thinker|
+                  %li.list-group-item
+                    = link_to("filterrific[with_thinker]" => thinker, method: :get, remote: true) do
+                      = thinker.name

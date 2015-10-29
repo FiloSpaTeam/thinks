@@ -12,7 +12,7 @@ class TasksController < ApplicationController
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
         sorted_by_workload: Task.options_for_sorted_by(:workload)
-      },
+      }
     ) or return
     @tasks    = @filterrific.find.page params[:page]
     @statuses = Status.all

@@ -1,9 +1,15 @@
 class Task < ActiveRecord::Base
+  paginates_per 15
+  max_paginates_per 50
+
   filterrific(
     available_filters: [
       :sorted_by,
       :search_query,
-      :status_progress
+      :search_goal,
+      :status_progress,
+      :with_goal,
+      :workload_lower_than
     ]
   )
 
@@ -27,8 +33,28 @@ class Task < ActiveRecord::Base
   scope :status_progress, lambda { |status| where status: status }
   scope :in_progress, lambda { where status: Status.in_progress }
 
+  scope :workload_lower_than, lambda { |value|
+    joins(:workload).where("workloads.value < ?", value)
+  }
+
+  scope :with_goal, lambda { |goal| 
+    where(:goal => goal)
+  }
+
+  scope :with_worker, lambda { |worker| 
+    where(:worker => worker)
+  }
+
+  scope :with_thinker, lambda { |thinker| 
+    where(:thinker => thinker)
+  }
+
   scope :search_query, lambda { |query|
     where(title: [*query]) 
+  }
+
+  scope :search_goal, lambda { |title| 
+    joins(:goal).where("goals.title LIKE ?", "%#{title}%")
   }
 
   scope :sorted_by, lambda { |sort_option|
