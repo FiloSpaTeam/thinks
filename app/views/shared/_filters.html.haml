@@ -28,7 +28,7 @@
               %span.caret
             %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
               .panel-heading
-                %input.form-control{ :type => "text", :placeholder => t("search") }
+                = f.text_field :search_worker, class: 'form-control filterrific-periodically-observed', placeholder: t("search")
               %ul.list-group.scrollbar
                 - @project.workers.unscoped.each do |worker|
                   %li.list-group-item
@@ -40,7 +40,7 @@
               %span.caret
             %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
               .panel-heading
-                %input.form-control{ :type => "text", :placeholder => t("search") }
+                = f.text_field :search_thinker, class: 'form-control filterrific-periodically-observed', placeholder: t("search")
               %ul.list-group.scrollbar
                 - @project.thinkers.unscoped.each do |thinker|
                   %li.list-group-item

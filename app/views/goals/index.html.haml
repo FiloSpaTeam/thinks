@@ -9,6 +9,7 @@
         - if thinker_signed_in?
           .input-group-btn
             = link_to_button(new_project_goal_path, "new", "plus")
+  = render partial: 'shared/filters', :locals => { :f => f }
   = render_filterrific_spinner
 .form-group
   %table.table.table-responsive.table-bordered.table-hover#filterrific_results

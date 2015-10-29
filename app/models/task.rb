@@ -5,10 +5,18 @@ class Task < ActiveRecord::Base
   filterrific(
     available_filters: [
       :sorted_by,
-      :search_query,
+
+      :search_title,
       :search_goal,
+      :search_thinker,
+      :search_worker,
+
       :status_progress,
+
       :with_goal,
+      :with_worker,
+      :with_thinker,
+      
       :workload_lower_than
     ]
   )
@@ -49,12 +57,20 @@ class Task < ActiveRecord::Base
     where(:thinker => thinker)
   }
 
-  scope :search_query, lambda { |query|
-    where(title: [*query]) 
+  scope :search_title, lambda { |query|
+    where("title LIKE ?", "%#{query}%") 
   }
 
   scope :search_goal, lambda { |title| 
     joins(:goal).where("goals.title LIKE ?", "%#{title}%")
+  }
+
+  scope :search_thinker, lambda { |name| 
+    joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
+  }
+
+  scope :search_worker, lambda { |name| 
+    joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
   }
 
   scope :sorted_by, lambda { |sort_option|
