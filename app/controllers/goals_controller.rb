@@ -7,12 +7,11 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @filterrific = initialize_filterrific(
-      Task,
+      Goal,
       params[:filterrific],
       select_options: {},
     ) or return
-    @tasks    = @filterrific.find.page params[:page]
-    @goals = Goal.all
+    @goals = @filterrific.find.page params[:page]
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"

@@ -5,7 +5,7 @@
       .input-group
         .input-group-btn
           = link_to_button(reset_filterrific_url, "reset_filters", "remove")
-        = f.text_field :search_query, :class => 'form-control filterrific-periodically-observed'
+        = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
         - if thinker_signed_in?
           .input-group-btn
             = link_to_button(new_project_goal_path, "new", "plus")
@@ -13,4 +13,5 @@
   = render_filterrific_spinner
 .form-group
   %table.table.table-responsive.table-bordered.table-hover#filterrific_results
-    = render partial: 'list', locals: { projects: @goals }
+    = render partial: 'list', locals: { goals: @goals }
+= paginate @goals

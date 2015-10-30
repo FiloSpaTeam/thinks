@@ -1,8 +1,15 @@
 class Goal < ActiveRecord::Base
+  paginates_per 15
+  max_paginates_per 50
+
   filterrific(
     available_filters: [
       :sorted_by,
-      :search_query
+
+      :search_title,
+      :search_task,
+
+      :with_task
     ]
   )
 
@@ -13,8 +20,25 @@ class Goal < ActiveRecord::Base
 
   validates :title, length: {maximum: 60}, presence: true
 
-  scope :search_query, lambda { |query|
-    where(title: [*query]) 
+  scope :search_title, lambda { |title|
+    where("title LIKE ?", "%#{title}%")
+  }
+
+  scope :search_task, lambda { |title|
+    joins(:tasks).where('tasks.title LIKE ?', "%#{title}%").distinct
+  }
+
+  scope :with_task, lambda { |task|
+    where([
+        %(
+        EXISTS (
+            SELECT 1
+            FROM tasks
+            WHERE goals.id = tasks.goal_id
+            AND tasks.id = ?)
+        ),
+        task
+    ])
   }
 
   scope :sorted_by, lambda { |sort_option|

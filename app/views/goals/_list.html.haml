@@ -11,11 +11,11 @@
             %strong
               = t("advanced_filters")
 %tbody
-  - if (!@goals.empty?)
+  - unless (@goals.empty?)
     - @goals.each do |goal|
       %tr
         %td
-          %a.pull-right.btn{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project), :title => pluralize(goal.tasks.count, 'task') , :role => "button" }
+          %a.pull-right.btn{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => pluralize(goal.tasks.count, 'task') , :role => "button" }
             %span.glyphicon.glyphicon-tasks.dark-grey{ "aria-hidden" => "true" }
           %strong
             = link_to goal.title, goal_path(goal)
@@ -29,3 +29,5 @@
   - else
     %td.text-center
       = t('no_record')
+- unless @goals.empty?
+  = page_entries_info @goals
