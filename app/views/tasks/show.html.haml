@@ -1,34 +1,38 @@
-.form-group
-  %h2
-    \##{@task.serial}
-    = @task.title
-    %small
-      by #{@task.thinker.name}
 .row
   .col-sm-8
+    .form-group
+      %h1
+        = @task.title
+      %p.dark-grey
+        %strong
+          \##{@task.serial}
+        created at #{@task.created_at.to_s(:long)} by #{@task.thinker.name}
     .form-group
       %p.lead
         = markdown(@task.description)
   .col-sm-4
     .form-group
-      .panel.panel-primary
-        .panel-heading
-          = label_tag t('tasks.status'), nil, class: "control-label"
-        .panel-body{:style => "text-align:center;" }
-          %h1
+      .panel.panel-default
+        .panel-body
+          %h4
+            %strong
+              = label_tag t('tasks.status'), nil, class: "control-label"
+          %h4
             = @task.status.translation_code
     .form-group
-      .panel.panel-primary
-        .panel-heading
-          = label_tag t('tasks.workload'), nil, class: "control-label"
-        .panel-body{:style => "text-align:center;"}
-          %h1
+      .panel.panel-default
+        .panel-body
+          %h4
+            %strong
+              = label_tag t('tasks.workload'), nil, class: "control-label"
+          %h4
             = workload_description(@task.workload)
     .form-group
-      .panel.panel-primary
-        .panel-heading
-          = label_tag t('tasks.worker'), nil, class: "control-label"
-        .panel-body{:style => "text-align:center;"}
+      .panel.panel-default
+        .panel-body
+          %h4
+            %strong
+              = label_tag t('tasks.worker'), nil, class: "control-label"
           - if !@task.worker.nil?
             %h4
               = @task.worker.name
