@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023222416) do
+ActiveRecord::Schema.define(version: 20151102225819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,11 @@ ActiveRecord::Schema.define(version: 20151023222416) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "comment_id"
+    t.integer "thinker_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "title",               limit: 60
     t.string   "description",         limit: 1600
@@ -166,12 +171,23 @@ ActiveRecord::Schema.define(version: 20151023222416) do
     t.integer  "thinker_id"
     t.integer  "worker_thinker_id"
     t.integer  "status_id"
-    t.integer  "workload_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "title"
     t.integer  "goal_id"
+    t.float    "workload"
+    t.float    "variance"
   end
+
+  create_table "tasks_workloads", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "thinker_id"
+    t.integer "workload_id"
+  end
+
+  add_index "tasks_workloads", ["task_id"], name: "index_tasks_workloads_on_task_id", using: :btree
+  add_index "tasks_workloads", ["thinker_id"], name: "index_tasks_workloads_on_thinker_id", using: :btree
+  add_index "tasks_workloads", ["workload_id"], name: "index_tasks_workloads_on_workload_id", using: :btree
 
   create_table "thinkers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

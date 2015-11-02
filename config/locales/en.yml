@@ -44,6 +44,11 @@ en:
   value: "Value"
   lower_than: "Lower than"
   no_goal: "No goal related"
+  back: "Back"
+  edit: "Edit"
+  no_comments: "No comments"
+  submit: "Submit"
+  you_voted_yet: "You voted yet"
 
   layouts:
     application:
@@ -157,6 +162,8 @@ en:
     index:
       scrum_table: "Scrum table"
       title: "Title"
+    show:
+      your_small_thought_about: "Your small 'thought' about"
   goals:
     index:
       title: "Title"

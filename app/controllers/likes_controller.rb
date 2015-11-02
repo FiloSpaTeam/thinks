@@ -1,0 +1,28 @@
+class LikesController < ApplicationController
+  before_filter :set_comment, only: [:create]
+
+  def create
+    @like         = Like.new()
+    @like.comment = @comment
+    @like.thinker = current_thinker
+
+    @task = @comment.task
+
+    respond_to do |format|
+      if @like.save
+        format.html { redirect_to @task, notice: 'You like it!' }
+        format.json { render :show, status: :created, location: @task }
+      else
+        set_form_errors(@like)
+
+        format.html { render :new }
+        format.json { render json: @like.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  private
+    def set_comment
+      @comment = Comment.find(params[:comment_id])
+    end
+end

@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
+  before_action :set_validators_for_show, only: [:show]
 
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
@@ -28,6 +29,9 @@ class TasksController < ApplicationController
     @status_sprint      = Status.sprint.first
     @status_release     = Status.release.first
     @status_in_progress = Status.in_progress.first
+
+    @comments = @task.comments
+    @comment  = Comment.new
   end
 
   # GET /projects/1/tasks/new
@@ -132,6 +136,11 @@ class TasksController < ApplicationController
 
       title_validators = Task.validators_on(:title)[0]
       @chars_max_title = title_validators.options[:maximum]
+    end
+
+    def set_validators_for_show
+      comment_validators = Comment.validators_on(:text)[0]
+      @chars_max_comment = comment_validators.options[:maximum]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

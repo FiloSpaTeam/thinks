@@ -25,6 +25,10 @@ Rails.application.routes.draw do
         put :progress 
         put :assign
       end
+
+      resources :comments, shallow: true do
+        resources :likes, shallow: true
+      end
     end
 
     resources :goals, shallow: true

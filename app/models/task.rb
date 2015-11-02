@@ -21,12 +21,14 @@ class Task < ActiveRecord::Base
     ]
   )
 
+  has_many :workloads
+  has_many :comments
+
   belongs_to :project
   belongs_to :goal
   belongs_to :thinker
   belongs_to :worker, class_name: "Thinker", foreign_key: "worker_thinker_id"
   belongs_to :status
-  belongs_to :workload
 
   before_create :generate_serial
   before_create :default_values
@@ -42,7 +44,7 @@ class Task < ActiveRecord::Base
   scope :in_progress, lambda { where status: Status.in_progress }
 
   scope :workload_lower_than, lambda { |value|
-    joins(:workload).where("workloads.value < ?", value)
+    where("workload < ?", value)
   }
 
   scope :with_goal, lambda { |goal| 
@@ -123,7 +125,6 @@ class Task < ActiveRecord::Base
     end
 
     def default_values
-      self.workload ||= Workload.find_by(:value => nil)
       self.status ||= Status.find_by(:translation_code => :backlog)
     end
 
