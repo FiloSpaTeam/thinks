@@ -3,7 +3,7 @@
     = @task.title
 
     = link_to_button(edit_task_path(@task), "edit", "edit")
-    = link_to_button(:back, "back", "arrow-left")
+    = link_to_button(project_tasks_path(@task.project), "back", "arrow-left")
   %p.dark-grey
     %strong
       \##{@task.serial}
@@ -57,10 +57,18 @@
                 %span.glyphicon.glyphicon-ok{ "aria-hidden" => "true", :class => "#{ comment.approved ? '' : 'dark-grey' }" }
             = link_to comment.current_thinker?(current_thinker) || !comment.likes.current_thinker(current_thinker).empty? ? 'javascript:;' : comment_likes_path(comment), :class => "pull-right btn", :role => "button", :title => comment.current_thinker?(current_thinker) ? t("you_voted_yet") : "", method: :post do
               %span.glyphicon.glyphicon-arrow-up{ "aria-hidden" => "true", :class => "#{ comment.current_thinker?(current_thinker) || !comment.likes.current_thinker(current_thinker).empty? ? 'dark-grey' : '' }" }
-            = comment.text
+              %span
+                = like_count(comment.likes.length)
             .dark-grey
-              %small
-                #{comment.created_at.to_s(:long)} by #{comment.thinker.name}
+              = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
+              by
+              %strong
+                #{comment.thinker.name}
+            %small
+              #{comment.created_at.to_s(:long)}
+            .collapse{ :id => "collapseComment#{ comment.id }" }
+              .form-group
+              = comment.text
       .panel-footer
         = form_for [@task, @comment] do |f|
           .form-group
