@@ -8,6 +8,8 @@ class Comment < ActiveRecord::Base
 
   validates :text, length: { maximum: 240 }, presence: true
 
+  default_scope { order("likes_count DESC").order("updated_at DESC") }
+
   scope :approved, lambda {
     where(approved: true)
   }

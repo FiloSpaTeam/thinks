@@ -24,6 +24,8 @@ class Task < ActiveRecord::Base
   has_many :workloads
   has_many :comments
 
+  has_many :likes, through: :comments
+
   belongs_to :project
   belongs_to :goal
   belongs_to :thinker

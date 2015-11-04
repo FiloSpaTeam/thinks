@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_thinker_tasks
-    @thinker_tasks = current_thinker.tasks.in_progress.order("created_at DESC").first(10)
+    @thinker_tasks = current_thinker.working_tasks.in_progress.order("created_at DESC").first(10)
   end
 end

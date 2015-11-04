@@ -30,7 +30,8 @@ class TasksController < ApplicationController
     @status_release     = Status.release.first
     @status_in_progress = Status.in_progress.first
 
-    @comments = @task.comments
+    @comments = @task.comments(:include => :likes)
+    @likes    = @task.likes
     @comment  = Comment.new
   end
 
