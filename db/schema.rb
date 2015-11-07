@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104173121) do
+ActiveRecord::Schema.define(version: 20151107110649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,16 +180,6 @@ ActiveRecord::Schema.define(version: 20151104173121) do
     t.float    "variance"
   end
 
-  create_table "tasks_workloads", force: :cascade do |t|
-    t.integer "task_id"
-    t.integer "thinker_id"
-    t.integer "workload_id"
-  end
-
-  add_index "tasks_workloads", ["task_id"], name: "index_tasks_workloads_on_task_id", using: :btree
-  add_index "tasks_workloads", ["thinker_id"], name: "index_tasks_workloads_on_thinker_id", using: :btree
-  add_index "tasks_workloads", ["workload_id"], name: "index_tasks_workloads_on_workload_id", using: :btree
-
   create_table "thinkers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -208,6 +198,16 @@ ActiveRecord::Schema.define(version: 20151104173121) do
 
   add_index "thinkers", ["email"], name: "index_thinkers_on_email", unique: true, using: :btree
   add_index "thinkers", ["reset_password_token"], name: "index_thinkers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", id: false, force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "thinker_id"
+    t.integer "workload_id"
+  end
+
+  add_index "votes", ["task_id"], name: "index_votes_on_task_id", using: :btree
+  add_index "votes", ["thinker_id"], name: "index_votes_on_thinker_id", using: :btree
+  add_index "votes", ["workload_id"], name: "index_votes_on_workload_id", using: :btree
 
   create_table "workloads", force: :cascade do |t|
     t.float    "value"

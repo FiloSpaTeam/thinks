@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :cycles
   resources :sprints
   devise_for :thinkers, :controllers => {
-    :sessions => "thinkers/sessions",
+    :sessions      => "thinkers/sessions",
     :registrations => "thinkers/registrations"
   }
 
@@ -24,10 +24,15 @@ Rails.application.routes.draw do
       member do
         put :progress 
         put :assign
+        put :judge
       end
 
       resources :comments, shallow: true do
         resources :likes, shallow: true
+
+        member do
+          put :approve
+        end
       end
     end
 

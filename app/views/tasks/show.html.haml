@@ -25,6 +25,13 @@
             = label_tag t('tasks.workload'), nil, class: "control-label"
         %h4
           = workload_description(@task.workload)
+      - if @task.contributed?(current_thinker)
+        .panel-footer
+          = form_for @task, :url => judge_task_path(@task), method: :put do |f|
+            .form-group
+              = f.label :workload, t('.define_workload'), class: "control-label"
+              = f.select :workload, options_from_collection_for_select(@workloads, :id, :description, @workload_voted.workload.id), {}, :class => "form-control"
+            = f.submit t("submit"), :class => "btn btn-primary"
     .panel.panel-default
       .panel-body
         %h4
@@ -50,23 +57,19 @@
       %ul.list-group
         - if @comments.empty?
           = content_tag(:li, t("no_comments"), :class => "list-group-item")
-        - @comments.each do |comment|
+        - @comments.each_with_index do |comment, index|
           = content_tag(:li, :class => "list-group-item #{comment.approved ? 'list-group-item-success' : ''}") do
             - if @task.worker == current_thinker
-              %a.pull-right.btn{ :href => "", :title => "", :role => "button" }
-                %span.glyphicon.glyphicon-ok{ "aria-hidden" => "true", :class => "#{ comment.approved ? '' : 'dark-grey' }" }
-            = link_to comment.current_thinker?(current_thinker) || !comment.likes.current_thinker(current_thinker).empty? ? 'javascript:;' : comment_likes_path(comment), :class => "pull-right btn", :role => "button", :title => comment.current_thinker?(current_thinker) ? t("you_voted_yet") : "", method: :post do
-              %span.glyphicon.glyphicon-arrow-up{ "aria-hidden" => "true", :class => "#{ comment.current_thinker?(current_thinker) || !comment.likes.current_thinker(current_thinker).empty? ? 'dark-grey' : '' }" }
-              %span
-                = like_count(comment.likes.length)
+              = approve_button(comment)
+            = like_button(comment)
             .dark-grey
               = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
               by
               %strong
-                #{comment.thinker.name}
+                = comment.thinker.name
             %small
-              #{comment.created_at.to_s(:long)}
-            .collapse{ :id => "collapseComment#{ comment.id }" }
+              = comment.created_at.to_s(:long)
+            .collapse{ :id => "collapseComment#{ comment.id }", :class => index < 3 ? "in" : ""}
               .form-group
               = comment.text
       .panel-footer

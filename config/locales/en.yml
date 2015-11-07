@@ -49,6 +49,10 @@ en:
   no_comments: "No comments"
   submit: "Submit"
   you_voted_yet: "You voted yet"
+  not_defined_yet: "Not defined yet"
+  you_cannot_vote_yourself: "You cannot vote yourself"
+  vote: "Vote"
+  approve: "Approve"
 
   layouts:
     application:
@@ -164,6 +168,7 @@ en:
       title: "Title"
     show:
       your_small_thought_about: "Your small 'thought' about"
+      define_workload: "Define workload"
   goals:
     index:
       title: "Title"

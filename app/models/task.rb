@@ -21,7 +21,8 @@ class Task < ActiveRecord::Base
     ]
   )
 
-  has_many :workloads
+  has_many :votes
+  has_many :workloads, through: :votes
   has_many :comments
 
   has_many :likes, through: :comments
@@ -59,62 +60,73 @@ class Task < ActiveRecord::Base
 
   scope :with_thinker, lambda { |thinker| 
     where(:thinker => thinker)
-  }
-
-  scope :search_title, lambda { |query|
-    where("title LIKE ?", "%#{query}%") 
-  }
-
-  scope :search_goal, lambda { |title| 
-    joins(:goal).where("goals.title LIKE ?", "%#{title}%")
-  }
-
-  scope :search_thinker, lambda { |name| 
-    joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
-  }
-
-  scope :search_worker, lambda { |name| 
-    joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
-  }
-
-  scope :sorted_by, lambda { |sort_option|
-    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-    case sort_option.to_s
-    when /^title_/
-      # Simple sort on the name colums
-      order("LOWER(tasks.title) #{ direction }")
-    when /^workload_/
-      # Simple sort over workload
-      unscoped.joins(:workload).order("workloads.value #{ direction }")
-    else
-      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
-    end
-  }
-
-  # This method provides select options for the `sorted_by` filter select input.
-  # It is called in the controller as part of `initialize_filterrific`.
-  def self.options_for_sorted_by sort_option
-    options = {
-      :title => [
-        ['Title (a-z)', 'title_asc'],
-        ['Title (z-a)', 'title_desc']
-      ],
-      :workload => [
-        ['Low -> High', 'workload_asc'],
-        ['High -> Low', 'workload_desc']
-      ]
     }
 
-    return options[sort_option]
-  end
+    scope :search_title, lambda { |query|
+        where("title LIKE ?", "%#{query}%") 
+    }
 
-  def progress
-    return false if self.workload == Workload.infinity.first
+    scope :search_goal, lambda { |title| 
+        joins(:goal).where("goals.title LIKE ?", "%#{title}%")
+    }
 
-    statuses = Status.all
-    actual_index = statuses.index(self.status)
+    scope :search_thinker, lambda { |name| 
+        joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
+    }
 
-    self.status = statuses.fetch(actual_index + 1)
+    scope :search_worker, lambda { |name| 
+        joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
+    }
+
+    scope :sorted_by, lambda { |sort_option|
+        direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+        case sort_option.to_s
+        when /^title_/
+        # Simple sort on the name colums
+        order("LOWER(tasks.title) #{ direction }")
+        when /^workload_/
+        # Simple sort over workload
+        unscoped.joins(:workload).order("workloads.value #{ direction }")
+        else
+        raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+        end
+    }
+
+    # This method provides select options for the `sorted_by` filter select input.
+    # It is called in the controller as part of `initialize_filterrific`.
+    def self.options_for_sorted_by sort_option
+        options = {
+        :title => [
+            ['Title (a-z)', 'title_asc'],
+            ['Title (z-a)', 'title_desc']
+        ],
+        :workload => [
+            ['Low -> High', 'workload_asc'],
+            ['High -> Low', 'workload_desc']
+        ]
+        }
+
+        return options[sort_option]
+    end
+
+    def progress
+        return false if self.workload == Workload.infinity.first
+
+        statuses = Status.all
+        actual_index = statuses.index(self.status)
+
+        self.status = statuses.fetch(actual_index + 1)
+    end
+
+    def contributed?(thinker)
+        comments = self.comments
+        comments.where(:thinker => thinker).present? or liked?(thinker)
+    end
+
+    def liked?(thinker)
+        likes = self.likes
+
+        likes.where(:thinker => thinker).present?
   end
 
   private

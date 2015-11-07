@@ -21,6 +21,9 @@ class LikesController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
     def set_comment
       @comment = Comment.find(params[:comment_id])
