@@ -127,7 +127,7 @@ class Task < ActiveRecord::Base
         likes = self.likes
 
         likes.where(:thinker => thinker).present?
-  end
+    end
 
   private
 

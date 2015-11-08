@@ -27,11 +27,15 @@
           = workload_description(@task.workload)
       - if @task.contributed?(current_thinker)
         .panel-footer
-          = form_for @task, :url => judge_task_path(@task), method: :put do |f|
-            .form-group
-              = f.label :workload, t('.define_workload'), class: "control-label"
-              = f.select :workload, options_from_collection_for_select(@workloads, :id, :description, @workload_voted.workload.id), {}, :class => "form-control"
-            = f.submit t("submit"), :class => "btn btn-primary"
+          - if @workload_voted.nil?
+            = form_for @task, :url => judge_task_path(@task), method: :put do |f|
+              .form-group
+                = f.label :workload, t('.define_workload'), class: "control-label"
+                = f.select :workload, options_from_collection_for_select(@workloads, :id, :description), {}, :class => "form-control"
+              = f.submit t("submit"), :class => "btn btn-primary"
+          - else
+            %strong
+              = t ".you_voted", vote: @workload_voted.workload.value
     .panel.panel-default
       .panel-body
         %h4

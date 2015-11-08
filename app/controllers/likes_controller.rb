@@ -2,11 +2,13 @@ class LikesController < ApplicationController
   before_filter :set_comment, only: [:create]
 
   def create
+    @task = @comment.task
+
+    @other_like = @task.likes.where(thinker: current_thinker).first
+
     @like         = Like.new()
     @like.comment = @comment
     @like.thinker = current_thinker
-
-    @task = @comment.task
 
     respond_to do |format|
       if @like.save
