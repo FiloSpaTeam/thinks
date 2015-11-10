@@ -100,14 +100,14 @@ class TasksController < ApplicationController
   def judge
     workload = Workload.find(task_params[:workload])
 
-    @tasks_workloads = TasksWorkload.new
+    @vote = Vote.new
 
-    @tasks_workloads.thinker  = current_thinker
-    @tasks_workloads.task     = @task
-    @tasks_workloads.workload = workload
+    @vote.thinker  = current_thinker
+    @vote.task     = @task
+    @vote.workload = workload
 
     respond_to do |format|
-      if @tasks_workloads.save
+      if @vote.save
         format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
         format.json { render :show, status: :ok, location: @task }
       else

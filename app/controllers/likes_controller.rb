@@ -4,14 +4,15 @@ class LikesController < ApplicationController
   def create
     @task = @comment.task
 
-    @other_like = @task.likes.where(thinker: current_thinker).first
+    @other_like = @task.likes.where(thinker: current_thinker)
+    @vote       = @task.votes.where(thinker: current_thinker)
 
     @like         = Like.new()
     @like.comment = @comment
     @like.thinker = current_thinker
 
     respond_to do |format|
-      if @like.save
+      if @other_like.delete_all && @vote.delete_all && @like.save
         format.html { redirect_to @task, notice: 'You like it!' }
         format.json { render :show, status: :created, location: @task }
       else
