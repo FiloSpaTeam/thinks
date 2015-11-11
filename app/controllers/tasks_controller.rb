@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     @comment  = Comment.new
     @workload = Workload.new
 
-    @workload_voted = @task.votes.where(thinker: current_thinker).where(task: @task).first
+    @workload_voted = @task.votes.where(thinker: current_thinker).first
 
     @liked   = @task.liked?(current_thinker)
     @average = @task.average

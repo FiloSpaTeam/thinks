@@ -22,4 +22,14 @@ module TasksHelper
       end
     end
   end
+
+  def sd_class(sd)
+    if sd >= 3
+      "text-danger"
+    elsif sd >= 1
+      "text-warning"
+    else
+      "text-success"
+    end
+  end
 end

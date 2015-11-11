@@ -1,6 +1,11 @@
 module ApplicationHelper
   require_dependency "modules/redcarpet/render/cleanerhtml"
 
+  def application_version
+    version = "0.0.1"
+    "Version: #{version}"
+  end
+
   def link_to_button(path, text, icon)
     link_to(path, :class => "#{active_link_if_current(path)} pull-right btn btn-default", :title => t(text), :role => "button") do
       content_tag("span", "", class: ["glyphicon", "glyphicon-#{icon}", "dark-grey"], "aria-hidden" => "true") +

@@ -113,34 +113,41 @@ class Task < ActiveRecord::Base
       @average ||= workloads.average(:value).round(2) if workloads.length > 0
     end
 
-    def variance
-      average = self.average
-      votes   = workloads.pluck(:value)
+    def id_average
+      workloads.average(:id) if workloads.length > 0
+    end
 
-      puts votes
+    def standard_deviation
+      average = self.id_average
+      votes   = workloads.pluck(:id)
 
-      @variance ||= (votes.inject(0) { |accum, i| accum + (i - average)**2 }) / (votes.length - 1).round(2)
+      @variance ||= (votes.inject(0) { |accum, i| accum + (i - average)**2 }) / (votes.length - 1)
 
+      @standard_deviation ||= Math.sqrt(@variance).to_int;
     end
 
     def progress
-        return false if self.workload == Workload.infinity.first
+      return false if self.workload == Workload.infinity.first
 
-        statuses = Status.all
-        actual_index = statuses.index(self.status)
+      statuses = Status.all
+      actual_index = statuses.index(self.status)
 
-        self.status = statuses.fetch(actual_index + 1)
+      self.status = statuses.fetch(actual_index + 1)
+    end
+
+    def voted?(thinker)
+      self.votes.where(:thinker => thinker).first().present?
     end
 
     def contributed?(thinker)
-        comments = self.comments
-        comments.where(:thinker => thinker).present? or liked?(thinker)
+      comments = self.comments
+      comments.where(:thinker => thinker).present? or liked?(thinker)
     end
 
     def liked?(thinker)
-        likes = self.likes
+      likes = self.likes
 
-        likes.where(:thinker => thinker).present?
+      likes.where(:thinker => thinker).present?
     end
 
   private
