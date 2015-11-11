@@ -1,7 +1,10 @@
 module WorkloadsHelper
-  def workload_description workload
-    return t("not_defined_yet") if workload.nil?
+  def workload_description task
+    return t("not_defined_yet") if task.average.nil?
 
-    workload.description
+    " 
+        #{task.average}
+        #{task.variance}
+    "
   end
 end

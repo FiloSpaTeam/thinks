@@ -40,7 +40,7 @@
               created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
         %td.text-center
           .col-xs-12.workload-table
-            =  workload_description(task.workload)
+            =  workload_description(task)
   - else
     %td.text-center{ :colspan => 2 }
       = t('no_record')

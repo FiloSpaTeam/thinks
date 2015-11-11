@@ -16,7 +16,7 @@ class Task < ActiveRecord::Base
       :with_goal,
       :with_worker,
       :with_thinker,
-      
+
       :workload_lower_than
     ]
   )
@@ -50,31 +50,31 @@ class Task < ActiveRecord::Base
     where("workload < ?", value)
   }
 
-  scope :with_goal, lambda { |goal| 
+  scope :with_goal, lambda { |goal|
     where(:goal => goal)
   }
 
-  scope :with_worker, lambda { |worker| 
+  scope :with_worker, lambda { |worker|
     where(:worker => worker)
   }
 
-  scope :with_thinker, lambda { |thinker| 
+  scope :with_thinker, lambda { |thinker|
     where(:thinker => thinker)
     }
 
     scope :search_title, lambda { |query|
-        where("title LIKE ?", "%#{query}%") 
+        where("title LIKE ?", "%#{query}%")
     }
 
-    scope :search_goal, lambda { |title| 
+    scope :search_goal, lambda { |title|
         joins(:goal).where("goals.title LIKE ?", "%#{title}%")
     }
 
-    scope :search_thinker, lambda { |name| 
+    scope :search_thinker, lambda { |name|
         joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
     }
 
-    scope :search_worker, lambda { |name| 
+    scope :search_worker, lambda { |name|
         joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
     }
 
@@ -107,6 +107,20 @@ class Task < ActiveRecord::Base
         }
 
         return options[sort_option]
+    end
+
+    def average
+      @average ||= workloads.average(:value).round(2) if workloads.length > 0
+    end
+
+    def variance
+      average = self.average
+      votes   = workloads.pluck(:value)
+
+      puts votes
+
+      @variance ||= (votes.inject(0) { |accum, i| accum + (i - average)**2 }) / (votes.length - 1).round(2)
+
     end
 
     def progress

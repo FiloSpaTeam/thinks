@@ -39,7 +39,8 @@ class TasksController < ApplicationController
 
     @workload_voted = @task.votes.where(thinker: current_thinker).where(task: @task).first
 
-    @liked = @task.liked?(current_thinker)
+    @liked   = @task.liked?(current_thinker)
+    @average = @task.average
   end
 
   # GET /projects/1/tasks/new

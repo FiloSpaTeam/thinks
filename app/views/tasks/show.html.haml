@@ -24,7 +24,7 @@
           %strong
             = label_tag t('tasks.workload'), nil, class: "control-label"
         %h4
-          = workload_description(@task.workload)
+          = workload_description(@task)
       - if @task.contributed?(current_thinker)
         .panel-footer
           - if @workload_voted.nil?
