@@ -86,7 +86,7 @@ class Task < ActiveRecord::Base
         order("LOWER(tasks.title) #{ direction }")
         when /^workload_/
         # Simple sort over workload
-        unscoped.joins(:workload).order("workloads.value #{ direction }")
+          unscoped.joins(:workloads).group("tasks.id").order("AVG(workloads.value) #{direction}")
         else
         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
         end
@@ -110,6 +110,8 @@ class Task < ActiveRecord::Base
     end
 
     def average
+      return 0 if workloads.length.zero?
+
       @average ||= workloads.average(:value).round(2) if workloads.length > 0
     end
 
@@ -118,11 +120,10 @@ class Task < ActiveRecord::Base
     end
 
     def standard_deviation
-      average = self.id_average
       votes   = workloads.pluck(:id)
 
+      average = self.id_average
       @variance ||= (votes.inject(0) { |accum, i| accum + (i - average)**2 }) / (votes.length - 1)
-
       @standard_deviation ||= Math.sqrt(@variance).to_int;
     end
 
