@@ -1,10 +1,10 @@
 .row
-  .col-md-4.col-xs-12.col-md-offset-4.col-sm-6.col-sm-offset-3
+  .col-md-8.col-md-offset-2.col-sm-6.col-sm-offset-3.col-xs-12
     .panel.panel-default
       .panel-body
-        %h1= t ".forgot_password"
         = form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
-          = devise_error_messages!
+          %h1= t ".forgot_password"
+          = bootstrap_flash
           .form-group
             = f.label :email
             = f.email_field :email, autofocus: true, class: "form-control"
@@ -14,3 +14,5 @@
               %p.help-block
                 = link_to t("devise.registrations.new.already_signed_up"), new_session_path(resource_name)
           = f.submit t(".send_reset_password"), class: "btn btn-primary"
+
+= parent_layout :cover
