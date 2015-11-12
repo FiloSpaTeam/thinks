@@ -54,7 +54,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'redcarpet', '~> 3.1.2'
 
 # Devise, authentication framework
-gem 'devise', '3.4.0'
+gem 'devise', '3.5.2'
 
 # Friendly urls
 gem 'friendly_id', '~> 5.1.0'
