@@ -23,9 +23,11 @@ class CommentsController < ApplicationController
   def approve
     @comment.approved = true
     @task             = @comment.task
+
+    @task.status = Status.done.first
     respond_to do |format|
-      if @task.worker == current_thinker && @comment.save
-        format.html { redirect_to @task, notice: 'Comment approved!' }
+      if @task.worker == current_thinker && @task.save && @comment.save
+        format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@comment)

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -98,17 +98,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def judge
-    workload = Workload.find(task_params[:workload])
-
-    @vote = Vote.new
-
-    @vote.thinker  = current_thinker
-    @vote.task     = @task
-    @vote.workload = workload
+  # PATCH/PUT /tasks/1/judge
+  # PATCH/PUT /tasks/1/judge.json
+  def sprint
+    @task.status = Status.sprint.first
 
     respond_to do |format|
-      if @vote.save
+      if @task.save
         format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -118,16 +114,25 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1/progress
-  # PATCH/PUT /tasks/1/progress.json
-  def progress
+  # PATCH/PUT /tasks/1/judge
+  # PATCH/PUT /tasks/1/judge.json
+  def judge
+    workload = Workload.find(task_params[:workload])
+
+    @vote = Vote.new
+
+    @vote.thinker  = current_thinker
+    @vote.task     = @task
+    @vote.workload = workload
+
+    task_progress
+
     respond_to do |format|
-      if @task.progress && @task.save
-        format.html { redirect_to @task, notice: 'Task is scheduled in release' }
+      if @task.save && @vote.save
+        format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
         format.json { render :show, status: :ok, location: @task }
       else
-        flash.now[:error] = "Maybe workload is too high to allow progress task in Sprint. Make team get better decision over them."
-        format.html { render :show, notice: "Error" }
+        format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -170,6 +175,12 @@ class TasksController < ApplicationController
     def set_validators_for_show
       comment_validators = Comment.validators_on(:text)[0]
       @chars_max_comment = comment_validators.options[:maximum]
+    end
+
+    def task_progress
+      if @task.status == Status.backlog.first
+        @task.status = Status.release.first if @task.status == Status.backlog.first && @task.votes.length == @task.project.minimum_team_number
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

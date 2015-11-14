@@ -17,7 +17,10 @@
           %strong
             = label_tag t('tasks.status'), nil, class: "control-label"
         %h4
-          = @task.status.translation_code
+          = t("projects.tasks.#{@task.status.translation_code}")
+      - if (@task.project.thinker == current_thinker && @task.status == Status.release.first && @task.ready?)
+        .panel-footer
+          = link_to "Get in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-primary btn-block"
     .panel.panel-default
       .panel-body
         %h4
@@ -63,7 +66,7 @@
           = content_tag(:li, t("no_comments"), :class => "list-group-item")
         - @comments.each_with_index do |comment, index|
           = content_tag(:li, :class => "list-group-item #{comment.approved ? 'list-group-item-success' : ''}") do
-            - if @task.worker == current_thinker
+            - if @task.worker == current_thinker && !@task.done?
               = approve_button(comment)
             = like_button(comment)
             .dark-grey

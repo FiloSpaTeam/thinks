@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :goals
   resources :cycles
-  resources :sprints
   devise_for :thinkers, :controllers => {
     :sessions      => "thinkers/sessions",
     :registrations => "thinkers/registrations"
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
 
     resources :tasks, shallow: true do
       member do
-        put :progress 
+        put :sprint
         put :assign
         put :judge
       end

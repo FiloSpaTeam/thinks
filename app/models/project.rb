@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   has_many :dependencies
   has_many :goals
   has_many :tasks
-  has_many :workers, lambda { distinct }, through: :tasks do
+  has_many :workers, lambda { distinct.unscoped }, through: :tasks do
     def active
       where("tasks.status_id = ?", Status.in_progress.first.id)
     end
