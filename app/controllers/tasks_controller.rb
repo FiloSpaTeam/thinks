@@ -15,7 +15,11 @@ class TasksController < ApplicationController
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
     ) or return
-    @tasks    = @filterrific.find.page params[:page]
+    if params.has_key?(:filterrific) && params[:filterrific].has_key?("current_thinker")
+      @tasks    = @filterrific.find.with_current_thinker(current_thinker).page params[:page]
+    else
+      @tasks    = @filterrific.find.page params[:page]
+    end
     @statuses = Status.all
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.

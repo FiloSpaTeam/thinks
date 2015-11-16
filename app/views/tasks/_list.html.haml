@@ -22,7 +22,7 @@
       .col-xs-12
         %h5
           %strong
-            = filterrific_sorting_link(@filterrific, :workload)
+            = filterrific_sorting_link(@filterrific, :workload, :url_for_attrs => { "filterrific[current_thinker]" => current_thinker } )
 %tbody
   - if (!@tasks.empty?)
     - @tasks.each do |task|

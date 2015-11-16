@@ -18,9 +18,13 @@
             = label_tag t('tasks.status'), nil, class: "control-label"
         %h4
           = t("projects.tasks.#{@task.status.translation_code}")
-      - if (@task.project.thinker == current_thinker && @task.status == Status.release.first && @task.ready?)
+      - if @task.project.thinker == current_thinker && @task.status == Status.release.first
         .panel-footer
-          = link_to "Get in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-primary btn-block"
+          - if @task.ready?
+            = link_to "Get in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-primary btn-block"
+          - else
+            %strong
+              = t(".standard_deviation_too_high")
     .panel.panel-default
       .panel-body
         %h4

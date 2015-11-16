@@ -47,9 +47,9 @@ class Task < ActiveRecord::Base
   scope :in_progress, lambda { where status: Status.in_progress }
 
   scope :workload_lower_than, lambda { |value|
-    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average") 
+    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id") 
 
-    unscoped.from("(#{subquery.to_sql}) t").where("t.average < ?", value).select("t.average")
+    unscoped.from("(#{subquery.to_sql}) t").where("t.average < ?", value).select("t.average, tasks.*").joins("INNER JOIN tasks on t.id = tasks.id ")
   }
 
   scope :with_goal, lambda { |goal|
@@ -92,6 +92,10 @@ class Task < ActiveRecord::Base
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
+  }
+
+  scope :with_current_thinker, lambda { |current_thinker| 
+    joins(:votes).where("votes.thinker_id = ?", current_thinker)
   }
 
   # This method provides select options for the `sorted_by` filter select input.
