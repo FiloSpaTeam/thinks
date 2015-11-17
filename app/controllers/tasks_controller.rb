@@ -41,6 +41,11 @@ class TasksController < ApplicationController
     @comment  = Comment.new
     @workload = Workload.new
 
+    if @task.status == Status.done.first
+      @comment_approved = @comments.approved.first
+      @reason           = Reason.new
+    end
+
     @workload_voted = @task.votes.where(thinker: current_thinker).first
 
     @liked   = @task.liked?(current_thinker)

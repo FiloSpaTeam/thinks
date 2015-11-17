@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
       resources :comments, shallow: true do
         resources :likes, shallow: true
+        resources :reasons, shallow: true
 
         member do
           put :approve

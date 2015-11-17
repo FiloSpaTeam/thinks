@@ -1,0 +1,13 @@
+#approve-modal.modal.fade.in{ :tabindex => "-1", :role => "dialog", "aria-labelledby" => "approve-modal-title", "aria-hidden" => "true", "style" => "display: block;"}
+  .modal-dialog{ :role => "document" }
+    .modal-content
+      = form_for [@comment_approved, @reason] do |f|
+        .modal-header
+          %h4.modal-title#approve-modal-title
+            Why you have choosen this solution?
+        .modal-body
+          .form-group
+            = f.text_area :text, :class => "form-control"
+        .modal-footer
+          = f.submit "Motivate", :class => "btn btn-primary"
+.modal-backdrop.fade.in

@@ -8,7 +8,7 @@
     %strong
       \##{@task.serial}
     created at #{@task.created_at.to_s(:long)} by #{@task.thinker.name}
-  
+
 .row
   .col-sm-4
     .panel.panel-default
@@ -90,3 +90,6 @@
             = f.text_area(:text, :class => "form-control")
             %span#help-text.help-block= t "char_limit", chars: @chars_max_comment
           = f.submit t("submit"), :class => "btn btn-primary"
+
+- if @task.status == Status.done.first
+  = render "tasks/approve"
