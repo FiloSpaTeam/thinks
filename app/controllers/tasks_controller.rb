@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
     if @task.status == Status.done.first
       @comment_approved = @comments.approved.first
-      @reason           = Reason.new
+      @reason           = @comment_approved.reason || Reason.new
     end
 
     @workload_voted = @task.votes.where(thinker: current_thinker).first
@@ -188,13 +188,13 @@ class TasksController < ApplicationController
 
     def task_progress
       if @task.status == Status.backlog.first
-        @task.status = Status.release.first if @task.status == Status.backlog.first && @task.votes.length == @task.project.minimum_team_number
+        @task.status = Status.release.first if @task.workloads.length + 1 >= @task.project.minimum_team_number
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      allowed_params = [:serial, :description, :project_id, :thinker_id, :worker_thinker_id, :status_id, :workload, :title]
+      allowed_params = [:description, :status_id, :workload, :title, :goal_id]
 
       params.require(:task).permit(allowed_params)
     end

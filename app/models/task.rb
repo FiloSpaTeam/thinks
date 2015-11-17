@@ -95,7 +95,9 @@ class Task < ActiveRecord::Base
   }
 
   scope :with_current_thinker, lambda { |current_thinker| 
-    joins(:votes).where("votes.thinker_id = ?", current_thinker)
+    status_done = Status.done.first
+
+    joins(:votes).where("(votes.thinker_id = ? and tasks.status_id != ?) or (tasks.status_id = ?)", current_thinker, status_done, status_done)
   }
 
   # This method provides select options for the `sorted_by` filter select input.
@@ -166,7 +168,7 @@ class Task < ActiveRecord::Base
   end
 
   def ready?
-    if project.minimum_team_number > workloads.length || self.standard_deviation > 2
+    if project.minimum_team_number > self.votes.length || self.standard_deviation > 2
       return false
     else
       return true
