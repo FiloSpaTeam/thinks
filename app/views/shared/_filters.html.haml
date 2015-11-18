@@ -3,6 +3,9 @@
     .col-xs-12
       .well{ :style => "margin-bottom: 0" }
         %ul.nav.nav-pills
+          - if current_page?(projects_path)
+            %li{ :role => "presentation" }
+              = f.select :sorted_by, @filterrific.select_options[:sorted_by], {}, :class => "form-control"
           - if !current_page?(projects_path) && !current_page?(project_tasks_path)
             %li{ :role => "presentation" }
               %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
