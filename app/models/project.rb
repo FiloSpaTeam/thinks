@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
     default_filter_params: { sorted_by: 'title_asc' },
     available_filters: [
       :sorted_by,
-      :search_query
+      :search_title
     ]
   )
 
@@ -43,8 +43,8 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  scope :search_query, lambda { |query|
-    where(title: [*query])
+  scope :search_title, lambda { |query|
+    where("title LIKE ?", "%#{query}%")
   }
 
   scope :sorted_by, lambda { |sort_option|

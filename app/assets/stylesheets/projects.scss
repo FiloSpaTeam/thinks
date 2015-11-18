@@ -3,6 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .projects {
+    .panel > .panel-body {
+        .progress {
+            min-width: 2em;
+
+            height: 10px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+    }
+
     .table > tbody > tr > td {
         vertical-align: middle;
 
@@ -14,6 +24,12 @@
     .panel-body {
         h2 {
             font-size: 17px;
+        }
+    }
+
+    @media(min-width: 768px) {
+        .thumbnail {
+            margin-bottom: 0;
         }
     }
 }
