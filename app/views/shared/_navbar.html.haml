@@ -11,8 +11,6 @@
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}
           = link_to t(".projects"), projects_path
-        %li{:class => active_link_if_current(thinkers_path)}
-          = link_to t(".thinkers"), thinkers_path
         %li.dropdown
           %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
             =t (".about")

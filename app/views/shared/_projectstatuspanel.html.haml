@@ -1,0 +1,14 @@
+.panel.panel-lightblue.panel-default
+  .panel-heading
+    Status
+  .panel-body
+    .progress
+      %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar", :role => "progressbar", :style => "min-width: 2em; width: #{(project.actual_day_of_sprint / project.cycle.days * 100).to_int}%;"}
+    = project.actual_day_of_sprint
+    = project.cycle.days
+    - if project.started?
+      Sprint
+      = project.sprint
+    - else
+      = project.countdown
+      days left

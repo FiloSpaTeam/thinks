@@ -78,4 +78,50 @@ class Project < ActiveRecord::Base
 
     @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
   end
+
+  def started?
+    return false if release_at >= DateTime.now.to_date
+
+    true
+  end
+
+  def countdown
+    return 0 if self.started?
+
+    (release_at - DateTime.now.to_date).to_i
+  end
+
+  def sprint
+    return self.countdown if !self.started?
+
+    number_of_weeks = ((DateTime.now.to_date - release_at) / 7).to_int
+    if cycle.days == 14
+      number_of_weeks /= 2
+    elsif cycle.days == 28
+      number_of_weeks /= 4
+    end
+
+    return 1 if number_of_weeks < 1
+
+    number_of_weeks
+  end
+
+  def actual_day_of_sprint
+    number_of_days = 1
+
+    number_of_days = (DateTime.now.to_date - release_at).to_i
+    if (self.sprint > 1)
+      prev_sprint = sprint - 1
+
+      number_of_days = number_of_days - prev_sprint * 7
+
+      if cycle.days == 14
+        number_of_days *= 2
+      else
+        number_of_days *= 4
+      end
+    end
+
+    return number_of_days.to_int
+  end
 end

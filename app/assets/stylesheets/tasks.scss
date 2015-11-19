@@ -6,4 +6,10 @@
         font-size: 20px;
         margin-top: 5px;
     }
+
+    .panel > .panel-body {
+        .progress {
+            margin-bottom: 0;
+        }
+    }
 }
