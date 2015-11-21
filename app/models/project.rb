@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   has_many :dependencies
   has_many :goals
   has_many :tasks
+  has_many :workloads, through: :tasks
   has_many :workers, lambda { distinct.unscoped }, through: :tasks do
     def active
       where("tasks.status_id = ?", Status.in_progress.first.id)
@@ -94,34 +95,41 @@ class Project < ActiveRecord::Base
   def sprint
     return self.countdown if !self.started?
 
-    number_of_weeks = ((DateTime.now.to_date - release_at) / 7).to_int
+    div = 7
     if cycle.days == 14
-      number_of_weeks /= 2
+      div *= 2
     elsif cycle.days == 28
-      number_of_weeks /= 4
+      div *= 4
     end
+
+    number_of_weeks = ((DateTime.now.to_date - release_at) / div).to_int
 
     return 1 if number_of_weeks < 1
 
-    number_of_weeks
+    return number_of_weeks
   end
 
   def actual_day_of_sprint
-    number_of_days = 1
+    number_of_day = 1
 
     number_of_days = (DateTime.now.to_date - release_at).to_i
     if (self.sprint > 1)
-      prev_sprint = sprint - 1
+      prev_sprint = self.sprint - 1
 
-      number_of_days = number_of_days - prev_sprint * 7
-
+      div = 7
       if cycle.days == 14
-        number_of_days *= 2
-      else
-        number_of_days *= 4
+        div *= 2
+      elsif cycle.days == 28
+        div *= 4
       end
+
+      number_of_day = number_of_days - (prev_sprint * div)
     end
 
-    return number_of_days.to_int
+    return number_of_day
+  end
+
+  def days_percentage
+    return 100 * (self.actual_day_of_sprint / cycle.days)
   end
 end

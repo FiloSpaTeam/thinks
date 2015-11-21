@@ -1,14 +1,22 @@
 .panel.panel-lightblue.panel-default
-  .panel-heading
-    Status
   .panel-body
     .progress
-      %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar", :role => "progressbar", :style => "min-width: 2em; width: #{(project.actual_day_of_sprint / project.cycle.days * 100).to_int}%;"}
-    = project.actual_day_of_sprint
-    = project.cycle.days
+      %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
     - if project.started?
       Sprint
       = project.sprint
     - else
       = project.countdown
       days left
+
+    - if project.started?
+      - tasks_done = project.tasks.done.where("tasks.updated_at > ?", DateTime.now - project.actual_day_of_sprint)
+      %h3
+        = tasks_done.map(&:average).sum
+      workload reached
+      %h3
+        = tasks_done.map(&:standard_deviation).sum / project.tasks.done.map(&:standard_deviation).size
+      average standard deviation
+      %h3
+        = tasks_done.count
+      tasks done

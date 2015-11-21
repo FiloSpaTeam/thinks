@@ -5,7 +5,7 @@ module ProjectsHelper
 
   def progress_bar_color(percentage)
     case percentage
-    when 0..25
+    when -Float::INFINITY..25
       "progress-bar-danger"
     when 25..50
       "progress-bar-warning"

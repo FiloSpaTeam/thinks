@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks.json
   def index
     @filterrific = initialize_filterrific(
-      Task,
+      Task.where(:project => @project),
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),

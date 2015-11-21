@@ -1,6 +1,6 @@
 %thead
   %tr
-    %td.col-lg-10.col-md-10.col-sm-9.col-xs-9
+    %td.col-lg-9.col-md-9.col-sm-9.col-xs-8
       .dropdown.col-xs-3
         %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
           %h5
@@ -13,11 +13,6 @@
               = link_to("filterrific[status_progress]" => status, method: :get, remote: true) do
                 .round.round-sm.pull-left{ :class => color_list_round_div(status.translation_code) }
                 = t("projects.tasks.#{status.translation_code}")
-      .col-xs-6.col-xs-offset-3
-        %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
-          %h5.text-right
-            %strong
-              = t("advanced_filters")
     %td.text-center
       .col-xs-12
         %h5
@@ -28,7 +23,7 @@
     - @tasks.each do |task|
       %tr
         %td
-          .round.pull-left{ :class => color_list_round_div(task.status.translation_code) }
+          .round-sm.pull-left{ :class => color_list_round_div(task.status.translation_code) }
           %a.pull-right.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
             %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
           %strong
@@ -44,4 +39,3 @@
   - else
     %td.text-center{ :colspan => 2 }
       = t('no_record')
-= page_entries_info @tasks

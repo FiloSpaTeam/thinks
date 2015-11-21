@@ -163,19 +163,13 @@ a {
     text-overflow: ellipsis;
 }
 
-.round {
-    width: 20px;
-    height: 20px;
-    border-radius: 100px;
-    margin-top: 10px;
-    margin-right: 8px;
-}
-
 .round-sm {
     width: 14px;
     height: 14px;
     margin-top: 3px;
     margin-right: 5px;
+
+    border-radius: 2px;
 }
 
 .dropdown-menu {

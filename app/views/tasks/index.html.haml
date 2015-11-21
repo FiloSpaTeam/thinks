@@ -3,8 +3,8 @@
   .col-md-3
     = render partial: 'shared/projectstatuspanel', locals: { project: @project }
   .col-md-9
-    .panel.panel-green.panel-default
-      .panel-body
+    .panel.panel-lightblue.panel-default
+      .panel-heading
         = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
           .form-group
             .col-xs-12
@@ -15,10 +15,14 @@
                 - if thinker_signed_in?
                   .input-group-btn
                     = link_to_button(new_project_task_path, "new", "plus")
+          %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
+            %h5.text-right
+              %strong
+                = t("advanced_filters")
+
           = render partial: 'shared/filters', :locals => { :f => f }
-          = render_filterrific_spinner
-          .form-group
-            .col-xs-12
-              %table.table.table-responsive.table-hover#filterrific_results
-                = render partial: 'list', locals: { tasks: @tasks }
-        = paginate @tasks
+      .panel-body{ :style => "padding: 0;" }
+        = render_filterrific_spinner
+        %table.table.table-condensed.table-responsive.table-hover#filterrific_results
+          = render partial: 'list', locals: { tasks: @tasks }
+    = paginate @tasks

@@ -7,9 +7,13 @@
         margin-top: 5px;
     }
 
-    .panel > .panel-body {
+    .panel {
         .progress {
             margin-bottom: 0;
         }
+    }
+
+    .pagination {
+        margin: 0;
     }
 }

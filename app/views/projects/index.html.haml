@@ -1,20 +1,22 @@
 %h1.chapter-title
   = t '.projects'
   %small= t ".small_title"
-= form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
-  .form-group
-    .col-xs-12
-      .input-group
-        .input-group-btn
-          = link_to_button(reset_filterrific_url, "reset_filters", "remove")
-        = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
-        - if thinker_signed_in?
-          .input-group-btn
-            = link_to_button(new_project_path, "new", "plus")
-  = render partial: 'shared/filters', :locals => { :f => f }
-  %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
-    %h5.text-right
-      %strong
-        = t("advanced_filters")
-  = render_filterrific_spinner
+.panel.panel-gray.panel-default
+  .panel-heading
+    = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+      .form-group
+        .col-xs-12
+          .input-group
+            .input-group-btn
+              = link_to_button(reset_filterrific_url, "reset_filters", "remove")
+            = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
+            - if thinker_signed_in?
+              .input-group-btn
+                = link_to_button(new_project_path, "new", "plus")
+      %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
+        %h5.text-right
+          %strong
+            = t("advanced_filters")
+      = render partial: 'shared/filters', :locals => { :f => f }
+= render_filterrific_spinner
 = render partial: 'list', locals: { projects: @projects }

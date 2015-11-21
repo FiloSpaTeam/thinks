@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  paginates_per 15
+  paginates_per 10
   max_paginates_per 50
 
   filterrific(
@@ -45,6 +45,7 @@ class Task < ActiveRecord::Base
 
   scope :status_progress, lambda { |status| where status: status }
   scope :in_progress, lambda { where status: Status.in_progress }
+  scope :done, lambda { where status: Status.done }
 
   scope :workload_lower_than, lambda { |value|
     subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id") 
