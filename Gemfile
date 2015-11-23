@@ -26,7 +26,7 @@ gem 'haml-rails', '~> 0.9.0'
 # Filter for views
 gem 'filterrific', '2.0.5'
 
-# Pagination 
+# Pagination
 gem 'kaminari', '0.16.3'
 
 # Use SCSS for stylesheets
@@ -84,4 +84,3 @@ group :development, :test do
   gem 'pry-doc', '>= 0.6.0'
   gem 'method_source', '>= 0.8.2'
 end
-
