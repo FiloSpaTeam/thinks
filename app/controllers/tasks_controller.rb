@@ -134,10 +134,8 @@ class TasksController < ApplicationController
     @vote.task     = @task
     @vote.workload = workload
 
-    task_progress
-
     respond_to do |format|
-      if @task.save && @vote.save
+      if @vote.save
         format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -184,12 +182,6 @@ class TasksController < ApplicationController
     def set_validators_for_show
       comment_validators = Comment.validators_on(:text)[0]
       @chars_max_comment = comment_validators.options[:maximum]
-    end
-
-    def task_progress
-      if @task.status == Status.backlog.first
-        @task.status = Status.release.first if @task.workloads.length + 1 >= @task.project.minimum_team_number
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,7 +11,7 @@
           - @statuses.each do |status|
             = content_tag(:li) do
               = link_to("filterrific[status_progress]" => status, method: :get, remote: true) do
-                .round.round-sm.pull-left{ :class => color_list_round_div(status.translation_code) }
+                .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("projects.tasks.#{status.translation_code}")
     %td.text-center
       .col-xs-12
@@ -21,9 +21,8 @@
 %tbody
   - if (!@tasks.empty?)
     - @tasks.each do |task|
-      %tr
+      %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
-          .round-sm.pull-left{ :class => color_list_round_div(task.status.translation_code) }
           %a.pull-right.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
             %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
           %strong
