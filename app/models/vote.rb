@@ -8,10 +8,8 @@ class Vote < ActiveRecord::Base
   private
 
   def save_vote_and_update_task_status
-    logger.debug self.task.workloads.length
-
-    if self.task.status == Status.backlog.first
-      self.task.update_attribute(:status, Status.release.first) if self.task.workloads.length >= self.task.project.minimum_team_number
+    if self.task.status == Status.backlog.first && self.task.workloads.length >= self.task.project.minimum_team_number
+      self.task.update_attribute(:status, Status.release.first)
     end
   end
 end
