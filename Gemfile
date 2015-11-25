@@ -6,8 +6,6 @@ gem 'rails', '4.2.3'
 # PostgreSQL support
 gem 'pg', '0.18.3'
 
-gem 'minitest', '5.8.2'
-
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'bootstrap-sass-extras', '0.0.6'
