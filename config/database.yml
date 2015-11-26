@@ -24,12 +24,3 @@ test:
   database: rethink_test
   username: <%= ENV['POSTGRES_USERNAME'] %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
-
-production:
-  <<: *default
-  database: <%= ENV["OPENSHIFT_APP_NAME"] %>
-  host: <%= ENV["OPENSHIFT_POSTGRESQL_DB_HOST"] %>
-  port: <%= ENV["OPENSHIFT_POSTGRESQL_DB_PORT"] %>
-  username: <%= ENV["OPENSHIFT_POSTGRESQL_DB_USERNAME"] %>
-  password: <%= ENV["OPENSHIFT_POSTGRESQL_DB_PASSWORD"] %>
-  template: template0
