@@ -36,7 +36,7 @@ class Task < ActiveRecord::Base
   before_create :generate_serial
   before_create :default_values
 
-  before_save :set_progress
+  before_save :set_release
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
@@ -190,11 +190,11 @@ class Task < ActiveRecord::Base
     end
 
     def default_values
-      self.status ||= Status.find_by(:translation_code => :backlog)
+      self.status ||= Status.backlog.first
     end
 
-    def set_progress
-      if !self.workload.nil? && self.status == Status.backlog.first
+    def set_release
+      if self.status == Status.backlog.first && self.workloads.size >= self.project.minimum_team_number
         self.status = Status.release.first
       end
     end

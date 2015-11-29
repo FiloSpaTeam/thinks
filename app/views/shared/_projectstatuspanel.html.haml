@@ -12,7 +12,7 @@
     - if project.started?
       - tasks_done = project.tasks.done.where("tasks.updated_at > ?", DateTime.now - project.actual_day_of_sprint)
       %h3
-        = tasks_done.map(&:average).sum
+        = tasks_done.sum(:workload)
       workload reached
       %h3
         = tasks_done.map(&:standard_deviation).sum / project.tasks.done.map(&:standard_deviation).size

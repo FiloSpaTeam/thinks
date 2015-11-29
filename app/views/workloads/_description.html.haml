@@ -1,6 +1,6 @@
 = label_tag "" do
   - if task.voted?(current_thinker) || task.status == Status.done.first
-    = closest_workload task
+    = task.workload
   - else
     = content_tag(:span, "", :class => "glyphicon glyphicon-ban-circle", "aria-hidden" => "true")
   = content_tag(:small, :class => sd_class(task.standard_deviation)) do

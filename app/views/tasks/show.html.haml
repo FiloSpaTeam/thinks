@@ -54,8 +54,10 @@
         - elsif @task.status == @status_sprint
           - if @task.project.workers.active.include?(current_thinker)
             %h4 No one is working over this but you have yet something to do ;-P
-          - else
+          - elsif @task.project.started?
             = link_to "Assigns me", assign_task_path, :method => :put, :class => "btn btn-success btn-block"
+          - else
+            %h4 The project is not started yet, wait. Your moment will come soon.
         - else
           %h4 Actually the team didn't decide to work on. Talk about if you are interested
   .col-sm-8

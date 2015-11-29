@@ -17,7 +17,9 @@
                 <% end %>
               </div>
               <div class="col-md-8 col-sm-8">
-                <h4><strong> <%= project.title %> </strong></h4>
+                <%= link_to project_path(project) do %> 
+                  <h4><strong> <%= project.title %> </strong></h4>
+                <% end %>
                 <%= markdown(truncate(project.description.lines.first, :length => 100)) %>
               </div>
             </div>
