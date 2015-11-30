@@ -8,6 +8,7 @@ gem 'pg', '0.18.3'
 
 # Heroku
 gem 'rails_12factor', group: :production
+gem 'heroku-deflater', :group => :production
 
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'
