@@ -95,6 +95,8 @@ GEM
       haml (~> 4.0)
       rubocop (>= 0.25.0)
       sysexits (~> 1.1)
+    heroku-deflater (0.6.2)
+      rack (>= 1.4.5)
     holder_rails (2.8.0)
       railties (>= 3.1.0)
     html2haml (2.0.0)
@@ -243,6 +245,7 @@ DEPENDENCIES
   haml (= 4.0.7)
   haml-rails (~> 0.9.0)
   haml_lint (= 0.13.0)
+  heroku-deflater
   holder_rails (= 2.8.0)
   jbuilder (~> 2.0)
   jquery-rails (= 4.0.5)
