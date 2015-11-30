@@ -34,6 +34,8 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+
+    @project.description = "## Put here your short description, will be used for index your project \n\nDescribe your project, and remember, you can use MARKDOWN!"
   end
 
   # GET /projects/1/edit
@@ -121,9 +123,12 @@ class ProjectsController < ApplicationController
   # end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.friendly.find(params[:id])
+
+      load_project_session
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,7 +11,7 @@
     %p.lead
       My last projects
   - @thinker_projects.each do |project|
-    %li{ :class => current_page?(project_path(project)) || current_page?(project_tasks_path(project)) ? "active" : '' }
+    %li{ :class => session[:project_id] === project.id ? "active" : '' }
       = link_to(project.title, project_path(project), :title => project.title, :class => "clip-text")
 
 = content_tag :small, application_version, :class => "pull-right"

@@ -36,7 +36,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :goals, shallow: true
+    resources :goals, shallow: true do
+      member do
+        put :tasks_in_sprint
+      end
+    end
   end
   resources :start, only: [:index]
   resources :how_does_it_works

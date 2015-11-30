@@ -166,10 +166,6 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-    def set_project
-      @project = Project.friendly.find(params[:project_id])
-    end
-
     def set_validators_for_form_help
       description_validators = Task.validators_on(:description)[0]
       @chars_min_description = description_validators.options[:minimum]

@@ -47,6 +47,10 @@ class Task < ActiveRecord::Base
   scope :in_progress, lambda { where status: Status.in_progress }
   scope :done, lambda { where status: Status.done }
 
+  scope :ready_to_sprint, lambda {
+    where("standard_deviation < ?", 3).where(status: Status.release)
+  }
+
   scope :workload_lower_than, lambda { |value|
     subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id") 
 

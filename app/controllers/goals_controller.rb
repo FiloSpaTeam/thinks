@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  include ActionView::Helpers::TextHelper
+
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :tasks_in_sprint]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
@@ -74,6 +76,18 @@ class GoalsController < ApplicationController
     end
   end
 
+  def tasks_in_sprint
+    tasks_ready      = @goal.tasks.ready_to_sprint
+    n_of_tasks_ready = tasks_ready.count
+
+    tasks_ready.update_all(status_id: Status.sprint.first)
+
+    respond_to do |format|
+      format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def set_validators_for_form_help
       title_validators = Goal.validators_on(:title)[0]
@@ -83,10 +97,6 @@ class GoalsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
       @goal = Goal.find(params[:id])
-    end
-
-    def set_project
-      @project = Project.friendly.find(params[:project_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
