@@ -9,14 +9,38 @@
       = project.countdown
       days left
 
-    - if project.started?
-      - tasks_done = project.tasks.done.where("tasks.updated_at > ?", DateTime.now - project.actual_day_of_sprint)
-      %h3
-        = tasks_done.sum(:workload)
-      workload reached
-      %h3
-        = tasks_done.map(&:standard_deviation).sum / project.tasks.done.map(&:standard_deviation).size
-      average standard deviation
-      %h3
-        = tasks_done.count
-      tasks done
+  - if project.tasks.count.nonzero?
+    .panel-body
+      %strong
+        Tasks
+
+    .list-group
+      .list-group-item
+        = badge(project.tasks.count)
+        Backlog
+      .list-group-item
+        = badge(project.tasks.release.count)
+        in release
+      .list-group-item
+        = badge(project.tasks.in_sprint.count)
+        ready for work
+      .list-group-item
+        = badge(project.tasks.in_progress.count)
+        in progress
+      .list-group-item
+        = badge(project.tasks.done.count)
+        done
+
+
+  - if project.tasks.in_sprint.count.nonzero?
+    .panel-body
+      %strong
+        Workload
+
+    .list-group
+      .list-group-item
+        = badge(project.tasks.in_sprint.sum(:workload))
+        Current
+      .list-group-item
+        = badge(project.tasks.in_sprint.average(:standard_deviation).to_int)
+        Average standard deviation

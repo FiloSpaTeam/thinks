@@ -70,6 +70,14 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       unless creator?(@project.thinker.id)
         format.html { redirect_to project_path(@project), error: t(:cant_update) }
+        format.json { render json: @project.errors, status: :cant_update }
+      end
+
+      if @project.started?
+        if @project.release_at != project_params[:release_at]
+          format.html { redirect_to project_path(@project), error: t(:cant_update_release_at) }
+          format.json { render json: @project.errors, status: :cant_update_release_at }
+        end
       end
 
       if @project.update(project_params)
