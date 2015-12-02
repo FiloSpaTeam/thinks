@@ -25,4 +25,6 @@ every 1.day, :at => '0:00 am' do
   puts "Sprint update system (Cron)"
 
   runner "Project.update_sprint_system"
+
+  puts "Sprint update done"
 end
