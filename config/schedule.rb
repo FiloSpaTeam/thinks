@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '0:00 am' do 
-  puts "Sprint creation cron system"
+set :output, { :error => '~/logs/error_cron.log', :standard => '~/logs/standard_cron.log' }
+
+every 1.day, :at => '0:00 am' do
+  puts "Sprint update system (Cron)"
+
+  runner "Project.update_sprint_system"
 end

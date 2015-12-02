@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121120207) do
+ActiveRecord::Schema.define(version: 20151202222709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,13 +148,10 @@ ActiveRecord::Schema.define(version: 20151121120207) do
   add_index "reasons", ["thinker_id"], name: "index_reasons_on_thinker_id", using: :btree
 
   create_table "sprints", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "goal"
     t.integer  "obtained"
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "statuses", force: :cascade do |t|
