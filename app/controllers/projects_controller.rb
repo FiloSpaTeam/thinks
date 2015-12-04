@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   include ProjectsHelper
 
   before_action :set_project, only: [:show, :edit, :update, :destroy, :partecipate, :team, :tasks]
+
   before_action :authenticate_thinker!, except: [:index, :show]
 
   # GET /projects
