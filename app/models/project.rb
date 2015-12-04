@@ -82,7 +82,7 @@ class Project < ActiveRecord::Base
   end
 
   def started?
-    return false if release_at >= DateTime.now.to_date
+    return false if release_at > DateTime.now.to_date
 
     true
   end
