@@ -1,4 +1,11 @@
-%h1
-  = t ".new_task"
-  %small= @project.title
-= render :partial => 'form'
+= render partial: 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @project }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %strong
+            = t ".new_task"
+      = render :partial => 'form'

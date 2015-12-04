@@ -1,5 +1,11 @@
-%h1 New goal
-
-= render 'form'
-
-= link_to 'Back', goals_path
+= render partial: 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @project }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %strong
+            = t ".new_goal"
+      = render :partial => 'form'

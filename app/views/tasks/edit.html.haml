@@ -1,2 +1,11 @@
-%h1 Editing Task
-= render 'form'
+= render partial: 'shared/projectbar', locals: { project: @task.project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @task.project }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %strong
+            = t ".edit_task"
+      = render :partial => 'form'

@@ -1,14 +1,4 @@
-.form-group
-  %h1.chapter-title
-    = @task.title
-
-    = link_to_button(edit_task_path(@task), "edit", "edit")
-    = link_to_button(project_tasks_path(@task.project), "back", "arrow-left")
-  %p.dark-grey
-    %strong
-      \##{@task.serial}
-    created at #{@task.created_at.to_s(:long)} by #{@task.thinker.name}
-
+= render partial: 'shared/projectbar', locals: { project: @project }
 .row
   .col-sm-4
     .panel.panel-default
@@ -25,7 +15,6 @@
           - else
             %strong
               = t(".standard_deviation_too_high")
-    .panel.panel-default
       .panel-body
         %h4
           %strong
@@ -43,7 +32,6 @@
           - else
             %strong
               = t ".you_voted", vote: @workload_voted.workload.value
-    .panel.panel-default
       .panel-body
         %h4
           %strong
@@ -61,12 +49,27 @@
         - else
           %h4 Actually the team didn't decide to work on. Talk about if you are interested
   .col-sm-8
-    .panel.panel-default
+    .panel.panel-default{ :class => "panel-#{ color_list_round_div(@task.status.translation_code) }" }
+      .panel-heading
+        %h4
+          %strong
+            = @task.title
+        %p.dark-grey
+          %strong
+            \##{@task.serial}
+          created at #{@task.created_at.to_s(:long)} by #{@task.thinker.name}
       .panel-body
         %h4
           %strong
             Descrizione
         = markdown(@task.description)
+      - if @task.thinker == current_thinker
+        .panel-footer
+          = link_to t('edit'), edit_task_path(@task), :class => "btn btn-primary"
+    .panel.panel-default
+      .panel-heading
+        %strong
+          Comments
       %ul.list-group
         - if @comments.empty?
           = content_tag(:li, t("no_comments"), :class => "list-group-item")

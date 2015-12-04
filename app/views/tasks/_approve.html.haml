@@ -2,11 +2,11 @@
   .modal-dialog{ :role => "document" }
     .modal-content
       = form_for [@comment_approved, @reason] do |f|
-        = bootstrap_flash
         .modal-header
           %h4.modal-title#approve-modal-title
             Why you have choosen this solution?
         .modal-body
+          = bootstrap_flash
           .form-group
             = f.text_area :text, :class => "form-control"
         .modal-footer

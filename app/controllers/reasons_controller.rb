@@ -13,7 +13,7 @@ class ReasonsController < ApplicationController
       else
         set_form_errors(@reason)
 
-        format.html { redirect_to @comment.task }
+        format.html { redirect_to @comment.task, alert: "Reason can't be empty!" }
         format.json { render json: @reason.errors, status: :unprocessable_entity }
       end
     end
