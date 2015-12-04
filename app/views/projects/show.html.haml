@@ -1,5 +1,5 @@
 - model_class = Project
-= render 'shared/projectbar'
+= render :partial => 'shared/projectbar', locals: { project: @project }
 = markdown(@project.description)
 .form-group
   = label_tag t('projects.list.progress')
