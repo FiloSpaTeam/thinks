@@ -54,7 +54,7 @@ class Task < ActiveRecord::Base
   }
 
   scope :workload_lower_than, lambda { |value|
-    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id") 
+    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id")
 
     unscoped.from("(#{subquery.to_sql}) t").where("t.average < ?", value).select("t.average, tasks.*").joins("INNER JOIN tasks on t.id = tasks.id ")
   }
@@ -101,7 +101,7 @@ class Task < ActiveRecord::Base
     end
   }
 
-  scope :with_current_thinker, lambda { |current_thinker| 
+  scope :with_current_thinker, lambda { |current_thinker|
     status_done = Status.done.first
 
     joins(:votes).where("(votes.thinker_id = ? and tasks.status_id != ?) or (tasks.status_id = ?)", current_thinker, status_done, status_done)

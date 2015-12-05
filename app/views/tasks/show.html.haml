@@ -49,7 +49,7 @@
         - else
           %h4 Actually the team didn't decide to work on. Talk about if you are interested
   .col-sm-8
-    .panel.panel-default{ :class => "panel-#{ color_list_round_div(@task.status.translation_code) }" }
+    .panel.panel-default
       .panel-heading
         %h4
           %strong
@@ -59,9 +59,6 @@
             \##{@task.serial}
           created at #{@task.created_at.to_s(:long)} by #{@task.thinker.name}
       .panel-body
-        %h4
-          %strong
-            Descrizione
         = markdown(@task.description)
       - if @task.thinker == current_thinker
         .panel-footer

@@ -1,5 +1,7 @@
-%p#notice= notice
-
-= link_to 'Edit', edit_goal_path(@goal)
-\|
-= link_to 'Back', project_goals_path(@goal.project)
+= render partial: 'shared/projectbar', locals: { project: @goal.project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @goal.project }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading

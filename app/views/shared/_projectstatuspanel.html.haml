@@ -34,15 +34,17 @@
         done
 
 
-  - if project.tasks.in_sprint.count.nonzero?
-    .panel-body
-      %strong
-        Workload
+  .panel-body
+    %strong
+      Workload
 
-    .list-group
-      .list-group-item
-        = badge(project.tasks.in_sprint.sum(:workload))
-        Current
-      .list-group-item
-        = badge(project.tasks.in_sprint.average(:standard_deviation).to_int)
-        Average standard deviation
+  .list-group
+    .list-group-item
+      = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
+      current
+    .list-group-item
+      = badge(project.tasks.done.sum(:workload))
+      done
+    .list-group-item
+      = badge(project.tasks.average(:standard_deviation))
+      average standard deviation
