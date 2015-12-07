@@ -10,9 +10,6 @@ gem 'pg', '0.18.3'
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', :group => :production
 
-# Easy Cron
-gem 'whenever', :require => false
-
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'bootstrap-sass-extras', '0.0.6'

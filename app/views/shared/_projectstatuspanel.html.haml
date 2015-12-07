@@ -46,5 +46,5 @@
       = badge(project.tasks.done.sum(:workload))
       done
     .list-group-item
-      = badge(project.tasks.average(:standard_deviation))
+      = badge(project.tasks.average(:standard_deviation).try(:round, 2))
       average standard deviation
