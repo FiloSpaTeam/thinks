@@ -36,6 +36,7 @@ class Project < ActiveRecord::Base
   validates :license_id, presence: true
   validates :thinker_id, presence: true, on: create
   validates :slug, presence: true
+  validates :cycle, presence: true
 
   # validate :expiration_date_cannot_be_in_the_past
 

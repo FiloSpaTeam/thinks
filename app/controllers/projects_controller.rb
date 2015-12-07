@@ -18,6 +18,10 @@ class ProjectsController < ApplicationController
     @projects = @filterrific.find.page params[:page]
 
     respond_to do |format|
+      if Project.all.empty?
+        format.html { redirect_to new_project_path, notice: "You are the first one! Create the first project and share what you think!" }
+      end
+
       format.html
       format.js
     end

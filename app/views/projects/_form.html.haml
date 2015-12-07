@@ -23,7 +23,7 @@
   %h3.chapter-subtitle Sprint settings
   .form-group
     = f.label :cycle_id, :class => "control-label"
-    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {include_blank: true}, :class => "form-control"
+    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
   %h3.chapter-subtitle URLs
   .form-group.has-feedback
     = f.label :home_url, :class => 'control-label'
