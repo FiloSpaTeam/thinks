@@ -17,7 +17,7 @@ namespace :admin do
       if project.started?
         day = project.actual_day_of_sprint
 
-        if day == 1
+        if day == project.cycle.days
 
           sprint = Sprint.new
 
