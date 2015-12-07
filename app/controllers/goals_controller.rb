@@ -88,9 +88,13 @@ class GoalsController < ApplicationController
     tasks_ready      = @goal.tasks.ready_to_sprint
     n_of_tasks_ready = tasks_ready.count
 
-    tasks_ready.update_all(status_id: Status.sprint.first)
-
     respond_to do |format|
+      unless n_of_tasks_ready > 0
+        format.html { redirect_to goal_path(@goal), alert: "No task can be put in Sprint! Check out some and analize with your team!" }
+      end
+
+      tasks_ready.update_all(status_id: Status.sprint.first)
+
       format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
       format.json { head :no_content }
     end

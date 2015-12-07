@@ -13,5 +13,4 @@
       - if @goal.thinker == current_thinker
         .panel-footer
           = link_to t('edit'), edit_goal_path(@goal), :class => "btn btn-primary"
-
-
+          = link_to "Get tasks in sprint!", tasks_in_sprint_goal_path(@goal), :class => "btn btn-success", :method => :put
