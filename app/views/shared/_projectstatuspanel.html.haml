@@ -14,7 +14,7 @@
   - if project.tasks.count.nonzero?
     .panel-body
       %strong
-        Tasks
+        = link_to "Tasks", project_tasks_path(project)
 
     .list-group
       .list-group-item

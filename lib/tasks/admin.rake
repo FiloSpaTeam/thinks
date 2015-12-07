@@ -26,7 +26,7 @@ namespace :admin do
 
           if project.sprints.count > 1
             last_sprint       = project.sprints.where('id < ?', sprint.id).last
-            tasks_last_sprint = project.tasks.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
+            tasks_last_sprint = project.tasks.done.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
 
             last_sprint.obtained = tasks_last_sprint.sum(:workload)
             last_sprint.save

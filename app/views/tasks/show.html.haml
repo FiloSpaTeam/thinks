@@ -5,6 +5,12 @@
       .panel-body
         %h4
           %strong
+            Goal
+        %h4
+          = link_to @task.goal.title, goal_path(@task.goal)
+      .panel-body
+        %h4
+          %strong
             = label_tag t('tasks.status'), nil, class: "control-label"
         %h4
           = t("projects.tasks.#{@task.status.translation_code}")

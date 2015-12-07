@@ -1,7 +1,17 @@
 = render partial: 'shared/projectbar', locals: { project: @goal.project }
 .row
   .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @goal.project }
+    = render partial: 'shared/goalstatuspanel', locals: { goal: @goal }
   .col-md-8
     .panel.panel-default
       .panel-heading
+        %h4
+          %strong
+            = @goal.title
+      .panel-body
+        = markdown(@goal.description)
+      - if @goal.thinker == current_thinker
+        .panel-footer
+          = link_to t('edit'), edit_goal_path(@goal), :class => "btn btn-primary"
+
+

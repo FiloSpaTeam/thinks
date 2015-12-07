@@ -19,6 +19,7 @@ class Goal < ActiveRecord::Base
   has_many :tasks
 
   validates :title, length: {maximum: 60}, presence: true
+  validates :description, length: {minimum: 30}, presence: true
 
   scope :search_title, lambda { |title|
     where("title LIKE ?", "%#{title}%")
