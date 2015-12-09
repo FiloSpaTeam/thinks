@@ -1,24 +1,24 @@
-%p#notice= notice
-%h1 Listing Sprints
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Goal
-      %th Obtained
-      %th Project
-      %th{:colspan => "3"}
-  %tbody
-    - @sprints.each do |sprint|
-      %tr
-        %td= sprint.title
-        %td= sprint.description
-        %td= sprint.goal
-        %td= sprint.obtained
-        %td= sprint.project_id
-        %td= link_to 'Show', sprint
-        %td= link_to 'Edit', edit_sprint_path(sprint)
-        %td= link_to 'Destroy', sprint, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Sprint', new_sprint_path
+= render partial: 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @project }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+          .form-group
+            .col-xs-12
+              .input-group
+                .input-group-btn
+                  = link_to_button(reset_filterrific_url, "reset_filters", "remove")
+                = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
+          %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
+            %h5.text-right
+              %strong
+                = t("advanced_filters")
+          = render partial: 'shared/filters', :locals => { :f => f }
+      .panel-body{ :style => 'padding: 0;' }
+        = render_filterrific_spinner
+        %table.table.table-condensed.table-hover#filterrific_results
+          = render partial: 'list', locals: { sprints: @sprints }
+    = paginate @sprints

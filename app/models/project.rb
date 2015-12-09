@@ -97,15 +97,19 @@ class Project < ActiveRecord::Base
   def sprint
     return self.countdown if !self.started?
 
-    sprints.count
+    (self.days_from_start / cycle.days).round
   end
 
   def actual_day_of_sprint
-    return 0 if !self.started?
+    number_of_day = 1
 
-    last_sprint = sprints.last
+    if (self.sprint > 1)
+      prev_sprint = self.sprint - 1
 
-    (DateTime.now.to_date - last_sprint.created_at.to_date).to_i
+      number_of_day = (self.days_from_start - (prev_sprint * cycle.days)).to_int
+    end
+
+    number_of_day
   end
 
   def days_percentage

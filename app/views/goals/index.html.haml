@@ -12,7 +12,7 @@
                 .input-group-btn
                   = link_to_button(reset_filterrific_url, "reset_filters", "remove")
                 = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
-                - if thinker_signed_in?
+                - if thinker_signed_in? && @project.thinker == current_thinker
                   .input-group-btn
                     = link_to_button(new_project_goal_path, "new", "plus")
           %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }

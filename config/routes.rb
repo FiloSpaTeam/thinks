@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       put :partecipate
     end
 
+    resources :sprints, shallow: true
+
     resources :tasks, shallow: true do
       member do
         put :sprint

@@ -9,6 +9,8 @@
     = link_to project.title, project_path(project), :class => "navbar-brand"
   .collapse.navbar-collapse#bs-example-navbar-collapse-1
     %ul.nav.navbar-nav.navbar-right
+      %li{ :class => current_page?(project_sprints_path(project)) ? "active" : "" }
+        = link_to t(".sprints"), project_sprints_path(project)
       %li{ :class => current_page?(project_goals_path(project)) ? "active" : "" }
         = link_to t(".goals"), project_goals_path(project)
       %li{ :class => current_page?(project_tasks_path(project)) ? "active" : "" }

@@ -6,6 +6,7 @@ class GoalsController < ApplicationController
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
   before_action :authenticate_thinker!, except: [:index, :show]
+  before_action :creator!, except: [:index, :show]
 
   # GET /goals
   # GET /goals.json
@@ -114,5 +115,12 @@ class GoalsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
       params[:goal].permit(:title, :description)
+    end
+
+    def creator!
+      if current_thinker != @project.thinker
+        flash[:alert] = "You are not the Project thinker!"
+        redirect_to project_goals_url(@project)
+      end
     end
 end

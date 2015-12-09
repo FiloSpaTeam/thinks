@@ -5,7 +5,7 @@
         - if current_page?(projects_path)
           %li{ :role => "presentation" }
             = f.select :sorted_by, @filterrific.select_options[:sorted_by], {}, :class => "form-control"
-        - if !current_page?(projects_path) && !current_page?(project_tasks_path)
+        - if !current_page?(projects_path) && !current_page?(project_tasks_path) && !current_page?(project_sprints_path)
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
               = t(".task")
@@ -18,7 +18,7 @@
                   %li.list-group-item
                     = link_to("filterrific[with_task]" => task, method: :get, remote: true) do
                       = task.title
-        - if !current_page?(projects_path) && !current_page?(project_goals_path)
+        - if !current_page?(projects_path) && !current_page?(project_goals_path) && !current_page?(project_sprints_path)
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
               = t(".goal")
@@ -31,7 +31,7 @@
                   %li.list-group-item
                     = link_to("filterrific[with_goal]" => goal, method: :get, remote: true) do
                       = goal.title
-        - if !current_page?(projects_path) && !current_page?(project_goals_path)
+        - if !current_page?(projects_path) && !current_page?(project_goals_path) && !current_page?(project_sprints_path)
           -# %li{ :role => "presentation" }
           -#   %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
           -#     = t(".workload")

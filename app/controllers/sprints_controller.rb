@@ -1,10 +1,22 @@
 class SprintsController < ApplicationController
   before_action :set_sprint, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:new, :index, :create]
+
+  before_action :authenticate_thinker!, except: [:index, :show]
 
   # GET /sprints
   # GET /sprints.json
   def index
-    @sprints = Sprint.all
+    @filterrific = initialize_filterrific(
+      Sprint,
+      params[:filterrific],
+      select_options: {},
+    ) or return
+    @sprints = @filterrific.find.page params[:page]
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   # GET /sprints/1
