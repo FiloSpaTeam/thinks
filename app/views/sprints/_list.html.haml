@@ -1,14 +1,37 @@
 %thead
   %tr
-    %td.col-lg-10.col-md-10.col-sm-9.col-xs-9
+    %td
       .col-xs-3
         %h5
           %strong
             = t "sprint"
+    %td
+      .col-xs-10
+        %h5
+          %strong
+            = t "created_at"
+    %td
+      .col-xs-10
+        %h5
+          %strong
+            = t "updated_at"
+    %td
+      .col-xs-3
+        %h5
+          %strong
+            = t "obtained"
 %tbody
   - unless (@sprints.empty?)
-    - @sprints.each do |sprint|
-      Ciao
+    - @sprints.each_with_index do |sprint, index|
+      %tr{ :class => @sprints.length == (index + 1) ? "warning" : "success" }
+        %td
+          Sprint #{index}
+        %td
+          = sprint.created_at.to_s(:long)
+        %td
+          = sprint.updated_at.to_s(:long)
+        %td.text-center
+          = sprint.obtained
   - else
     %td.text-center
       = t('no_record')
