@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
 
-  before_action :authenticate_thinker!, except: [:index]
+  before_action :authenticate_thinker!
 
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json

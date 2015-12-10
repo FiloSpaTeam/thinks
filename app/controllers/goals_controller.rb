@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
-  before_action :authenticate_thinker!, except: [:index, :show]
+  before_action :authenticate_thinker!
   before_action :creator!, except: [:index, :show]
 
   # GET /goals

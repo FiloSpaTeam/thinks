@@ -2,7 +2,7 @@ class SprintsController < ApplicationController
   before_action :set_sprint, only: [:show, :edit, :update, :destroy]
   before_action :set_project, only: [:new, :index, :create]
 
-  before_action :authenticate_thinker!, except: [:index, :show]
+  before_action :authenticate_thinker!
 
   # GET /sprints
   # GET /sprints.json
