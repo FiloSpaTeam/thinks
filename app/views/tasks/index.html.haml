@@ -15,11 +15,6 @@
                 - if thinker_signed_in?
                   .input-group-btn
                     = link_to_button(new_project_task_path, "new", "plus")
-          %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
-            %h5.text-right
-              %strong
-                = t("advanced_filters")
-
           = render partial: 'shared/filters', :locals => { :f => f }
       .panel-body{ :style => "padding: 0;" }
         = render_filterrific_spinner
