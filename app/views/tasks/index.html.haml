@@ -9,8 +9,6 @@
           .form-group
             .col-xs-12
               .input-group
-                .input-group-btn
-                  = link_to_button(reset_filterrific_url, "reset_filters", "remove")
                 = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
                 - if thinker_signed_in?
                   .input-group-btn
