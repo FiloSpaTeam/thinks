@@ -97,7 +97,7 @@ class Project < ActiveRecord::Base
   def sprint
     return self.countdown if !self.started?
 
-    (self.days_from_start / cycle.days).round
+    sprints.last.serial
   end
 
   def actual_day_of_sprint

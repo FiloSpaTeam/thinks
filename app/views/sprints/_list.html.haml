@@ -22,10 +22,10 @@
             = t "obtained"
 %tbody
   - unless (@sprints.empty?)
-    - @sprints.each_with_index do |sprint, index|
-      %tr{ :class => @sprints.length == (index + 1) ? "warning" : "success" }
+    - @sprints.each do |sprint|
+      %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
         %td
-          Sprint #{index}
+          Sprint #{sprint.serial}
         %td
           = sprint.created_at.to_s(:long)
         %td
