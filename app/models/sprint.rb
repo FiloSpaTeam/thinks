@@ -10,6 +10,7 @@ class Sprint < ActiveRecord::Base
 
   belongs_to :project
 
+  before_create :generate_serial
   before_create :default_values
 
   scope :sorted_by, lambda { |sort_option|
@@ -23,8 +24,14 @@ class Sprint < ActiveRecord::Base
   }
 
   private
+    def generate_serial
+      sprints_count = Sprint.where({project_id: self.project.id}).count
+      sprints_count += 1
 
-  def default_values
-    self.obtained ||= 0
-  end
+      self.serial = sprints_count
+    end
+
+    def default_values
+      self.obtained ||= 0
+    end
 end
