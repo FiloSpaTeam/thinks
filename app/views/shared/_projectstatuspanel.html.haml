@@ -11,7 +11,7 @@
       = project.countdown
       days left to start
 
-  - if project.tasks.count.nonzero?
+  - if project.started?
     .panel-body
       %strong
         = link_to "Tasks", project_tasks_path(project)
