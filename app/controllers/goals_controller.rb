@@ -12,7 +12,7 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @filterrific = initialize_filterrific(
-      Goal,
+      Goal.where(:project => @project),
       params[:filterrific],
       select_options: {},
     ) or return
