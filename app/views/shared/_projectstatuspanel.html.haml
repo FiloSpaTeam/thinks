@@ -7,6 +7,8 @@
     - if project.started?
       Sprint
       = project.sprint
+    - elsif project.countdown < 0
+      = t("release_date_not_defined_yet")
     - else
       = project.countdown
       days left to start

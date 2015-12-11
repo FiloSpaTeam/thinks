@@ -83,13 +83,15 @@ class Project < ActiveRecord::Base
   end
 
   def started?
-    return false if release_at > DateTime.now.to_date
+    return false if self.release_at.nil? || (self.release_at > DateTime.now.to_date)
 
     true
   end
 
   def countdown
     return 0 if self.started?
+
+    return -1 if release_at.nil?
 
     (release_at - DateTime.now.to_date).to_i
   end

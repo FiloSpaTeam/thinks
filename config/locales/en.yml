@@ -53,6 +53,7 @@ en:
   you_cannot_vote_yourself: "You cannot vote yourself"
   vote: "Vote"
   approve: "Approve"
+  release_date_not_defined_yet: "Release date not defined yet"
 
   layouts:
     application:
