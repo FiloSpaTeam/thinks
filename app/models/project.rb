@@ -89,15 +89,13 @@ class Project < ActiveRecord::Base
   end
 
   def countdown
-    return 0 if self.started?
-
     return -1 if release_at.nil?
 
     (release_at - DateTime.now.to_date).to_i
   end
 
   def sprint
-    return self.countdown if !self.started?
+    return 0 if !started?
 
     sprints.last.serial
   end
