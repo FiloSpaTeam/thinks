@@ -62,6 +62,12 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    if current_thinker != @task.thinker
+      respond_to do |format|
+        format.html { redirect_to @task, alert: "You cannot edit this." }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /projects/1/tasks
@@ -89,7 +95,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
+      if current_thinker == @task.thinker && @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -102,10 +108,15 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+      if current_thinker == @task.thinker
+        @task.destroy
+        format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @task, alert: 'You cannot destroy this task!' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -6,7 +6,7 @@ class GoalsController < ApplicationController
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
   before_action :authenticate_thinker!
-  before_action :creator!, except: [:index, :show]
+  before_action :creator!, except: [:index, :show, :edit]
 
   # GET /goals
   # GET /goals.json
@@ -35,6 +35,12 @@ class GoalsController < ApplicationController
 
   # GET /goals/1/edit
   def edit
+    if current_thinker != @goal.thinker
+      respond_to do |format|
+        format.html { redirect_to @goal, alert: "You cannot edit this." }
+        format.json { render json: @goal.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /goals
@@ -62,7 +68,7 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1.json
   def update
     respond_to do |format|
-      if @goal.update(goal_params)
+      if current_thinker == @goal.thinker && @goal.update(goal_params)
         format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
         format.json { render :show, status: :ok, location: @goal }
       else
@@ -78,10 +84,15 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
-    @goal.destroy
     respond_to do |format|
-      format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
-      format.json { head :no_content }
+      if current_thinker == @goal.thinker
+        @goal.destroy
+        format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @goal, alert: 'You cannot destroy this goal!' }
+        format.json { render json: @goal.errors, status: :unprocessable_entity }
+      end
     end
   end
 
