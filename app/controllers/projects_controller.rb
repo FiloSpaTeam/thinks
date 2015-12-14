@@ -102,7 +102,7 @@ class ProjectsController < ApplicationController
       unless creator?(@project.thinker.id)
         format.html { redirect_to project_path(@project), error: t(:wtf_are_you_destroying) }
       end
-    
+
       @project.destroy
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
@@ -116,7 +116,7 @@ class ProjectsController < ApplicationController
       unless creator?(@project.thinker.id)
         format.html { redirect_to project_path(@project), warning: t(:wtf_the_creator_partecipate) }
       end
-  
+
       @project.thinkers << current_thinker
       format.html { redirect_to project_path(@project), notice: 'Now you are an active member of the team! Congratz ;-)' }
     end

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Project:
+  = @notification.project_id
+%p
+  %b Thinker:
+  = @notification.thinker_id
+
+= link_to 'Edit', edit_notification_path(@notification)
+\|
+= link_to 'Back', notifications_path

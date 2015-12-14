@@ -70,6 +70,10 @@ class Project < ActiveRecord::Base
     ]
   end
 
+  def part_of_team?(thinker)
+    return thinkers.exists?(thinker)
+  end
+
   def progress_percentage
     tasks      = self.tasks
     0 if tasks.empty? || tasks.nil?

@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   before_action :set_validators_for_show, only: [:show]
 
   before_action :authenticate_thinker!
+  before_action :teammate!, only: [:new, :create]
 
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
@@ -191,6 +192,13 @@ class TasksController < ApplicationController
     def set_validators_for_show
       comment_validators = Comment.validators_on(:text)[0]
       @chars_max_comment = comment_validators.options[:maximum]
+    end
+
+    def teammate!
+      if !@project.part_of_team?(current_thinker)
+        flash[:alert] = "You are not part of the team!"
+        redirect_to project_tasks_path(@project)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
