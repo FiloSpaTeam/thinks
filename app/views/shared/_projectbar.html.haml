@@ -1,28 +1,13 @@
 .navbar.navbar-default
-  .navbar-header
-    %button.navbar-toggle.collapsed{ :type => "button", "data-toggle" => "collapse", "data-target" => "#bs-example-navbar-collapse-1", "aria-expanded" => "false" }
-      %span.sr-only
-        Toggle navigation
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
+  .navbar-header.pull-left
     = link_to project.title, project_path(project), :class => "navbar-brand"
-  .collapse.navbar-collapse#bs-example-navbar-collapse-1
-    %ul.nav.navbar-nav.navbar-right
-      %li{ :class => current_page?(project_sprints_path(project)) ? "active" : "" }
-        = link_to t(".sprints"), project_sprints_path(project)
-      %li{ :class => current_page?(project_goals_path(project)) ? "active" : "" }
-        = link_to t(".goals"), project_goals_path(project)
-      %li{ :class => current_page?(project_tasks_path(project)) ? "active" : "" }
-        = link_to t(".tasks"), project_tasks_path(project)
-      -# %li.dropdown
-      -#   %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
-      -#     Settings
-      -#     %span.caret
-      -#   %ul.dropdown-menu
-      -#     %li
-      -#       %a
-      -#         Action
-      -#     %li
-      -#       %a
-      -#         Action
+  .navbar-header.pull-right
+    = link_to project_sprints_path(project), :class => "btn navbar-btn" do
+      = icon('flag', :class => "fa-lg dark-grey")
+      = t(".sprints")
+    = link_to project_goals_path(project), :class => "btn navbar-btn" do
+      = icon('crosshairs', :class => "fa-lg dark-grey")
+      = t(".goals")
+    = link_to project_tasks_path(project), :class => "btn navbar-btn" do
+      = icon('tasks', :class => "fa-lg dark-grey")
+      = t(".tasks")

@@ -10,9 +10,12 @@
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}
-          = link_to t(".projects"), projects_path
+          = link_to projects_path do
+            = icon('globe', :class => "fa-lg")
+            = t(".projects")
         %li.dropdown
           %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
+            = icon('question-circle', :class => "fa-lg")
             =t (".about")
             %span.caret
           %ul.dropdown-menu
@@ -21,11 +24,16 @@
             %li{current_page?(faqs_path) ? { :class => :active } : {} }
               = link_to t(".faqs"), faqs_path
       %ul.nav.navbar-nav.navbar-right
+        %li
+          %a{:role => :button}
+            = icon('comments', :class => "fa-lg")
+            Notifies
         - if thinker_signed_in?
           -# %li
           -#   = link_to t(".donate"), projects_path
           %li.dropdown
             = link_to "javascript:;", :class => "dropdown-toggle", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
+              = icon('user', :class => "fa-lg")
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %ul.dropdown-menu
@@ -38,6 +46,10 @@
               %li= link_to t(".logout"), destroy_thinker_session_path, :method => :delete
         - else
           %li{current_page?(new_thinker_registration_path) ? { :class => :active } : {} }
-            = link_to t(".sign_up"), new_thinker_registration_path
+            = link_to new_thinker_registration_path do
+              = icon('user-plus', :class => "fa-lg")
+              = t(".sign_up")
           %li{current_page?(new_thinker_session_path) ? { :class => :active } : {} }
-            = link_to t(".sign_in"), new_thinker_session_path
+            = link_to new_thinker_session_path do
+              = icon('sign-in', :class => "fa-lg")
+              = t(".sign_in")

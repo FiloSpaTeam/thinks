@@ -2,6 +2,6 @@
   - if task.voted?(current_thinker) || task.status == Status.done.first
     = task.workload
   - else
-    = content_tag(:span, "", :class => "glyphicon glyphicon-ban-circle", "aria-hidden" => "true")
+    = icon('ban', :class => "dark-grey")
   = content_tag(:small, :class => sd_class(task.standard_deviation)) do
     (&#963;: #{task.standard_deviation})

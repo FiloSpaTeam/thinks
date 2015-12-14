@@ -24,7 +24,7 @@
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
           %a.pull-right.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
-            %span.glyphicon.glyphicon-screenshot.dark-grey{ "aria-hidden" => "true" }
+            = icon('crosshairs', :class => "dark-grey fa-lg")
           %strong
             = link_to task.title, task_path(task)
           .dark-grey

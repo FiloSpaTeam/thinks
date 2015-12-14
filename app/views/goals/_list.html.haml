@@ -11,11 +11,11 @@
       %tr
         %td
           %a.pull-right.btn{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
-            %span.glyphicon.glyphicon-tasks.dark-grey{ "aria-hidden" => "true" }
+            = icon('tasks', :class => "dark-grey")
           - if current_thinker == goal.project.thinker
             - tasks_ready = goal.tasks.ready_to_sprint
             %a.pull-right.btn{ :class => tasks_ready.empty? ? "disabled" : "", :href => tasks_ready.empty? ? "javascript:;" : tasks_in_sprint_goal_path(goal), :title => release_btn_title(tasks_ready) , :role => "button", "data-method" => :put }
-              %span.glyphicon.glyphicon-edit.dark-grey{ "aria-hidden" => "true" }
+              = icon('flag-checkered', :class => "dark-grey")
           %strong
             = link_to goal.title, goal_path(goal)
           .dark-grey

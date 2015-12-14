@@ -6,9 +6,9 @@ module ApplicationHelper
     "Version: #{version}"
   end
 
-  def link_to_button(path, text, icon)
+  def link_to_button(path, text, icon_source)
     link_to(path, :class => "#{active_link_if_current(path)} pull-right btn btn-default", :title => t(text), :role => "button") do
-      content_tag("span", "", class: ["glyphicon", "glyphicon-#{icon}", "dark-grey"], "aria-hidden" => "true") +
+      icon(icon_source, :class => "dark-grey") +
       label_tag(nil, t(text), :class => "hidden-xs")
     end
   end
