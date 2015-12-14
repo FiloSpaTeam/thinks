@@ -4,7 +4,19 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @filterrific = initialize_filterrific(
+      Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).order('project_id DESC'),
+      params[:filterrific],
+      select_options: {
+        sorted_by_title: Task.options_for_sorted_by(:title),
+        sorted_by_workload: Task.options_for_sorted_by(:workload)
+      }
+    ) or return
+    @notifications = @filterrific.find.page params[:page]
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   # GET /notifications/1

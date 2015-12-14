@@ -7,6 +7,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.belongs_to :goal
       t.belongs_to :task
 
+      t.string :controller
       t.string :action
 
       t.timestamps null: false

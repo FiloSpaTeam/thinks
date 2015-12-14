@@ -55,7 +55,9 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    @project.thinker_id = current_thinker.id
+    @project.thinker = current_thinker
+
+    @project.thinkers << current_thinker
 
     respond_to do |format|
       if @project.save

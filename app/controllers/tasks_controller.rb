@@ -79,7 +79,8 @@ class TasksController < ApplicationController
     @task.thinker = current_thinker
 
     respond_to do |format|
-      if @task.save
+      if @task.save && create_notification
+
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
@@ -199,6 +200,19 @@ class TasksController < ApplicationController
         flash[:alert] = "You are not part of the team!"
         redirect_to project_tasks_path(@project)
       end
+    end
+
+    def create_notification
+      @notification = Notification.new
+
+      @notification.thinker = current_thinker
+      @notification.project = @project
+      @notification.task    = @task
+
+      @notification.controller = params[:controller]
+      @notification.action     = params[:action]
+
+      @notification.save
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

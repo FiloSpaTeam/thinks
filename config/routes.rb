@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :cycles
   devise_for :thinkers, :controllers => {
     :sessions      => "thinkers/sessions",
-    :registrations => "thinkers/registrations"
+    :registrations => "thinkers/registrations",
+    :notifications => "notifications"
   }
 
   resources :workloads

@@ -71,7 +71,7 @@ class Project < ActiveRecord::Base
   end
 
   def part_of_team?(thinker)
-    return thinkers.exists?(thinker)
+    return thinkers.exists?(thinker) || thinker == self.thinker
   end
 
   def progress_percentage

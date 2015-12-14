@@ -1,0 +1,21 @@
+<%- project_id = nil %>
+<div class="panel panel-default">
+    <% @notifications.each do |notification| %>
+        <% if notification.project.id != project_id %>
+            <% if !project_id.nil? %>
+                </div>
+            <% end %>
+            <% project_id = notification.project.id %>
+            <div class="panel-body">
+                <strong>
+                    <%= notification.project.title %>
+                </strong>
+            </div>
+            <div class="list-group">
+        <% end %>
+
+        <div class="list-group-item">
+            Notifica
+        </div>
+    <% end %>
+</div>

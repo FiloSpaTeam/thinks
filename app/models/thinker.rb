@@ -4,6 +4,8 @@ class Thinker < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_and_belongs_to_many :teams, class_name: "Project"
+
   has_many :projects
   has_many :working_tasks, class_name: "Task", :foreign_key => :worker_thinker_id
   has_many :tasks
