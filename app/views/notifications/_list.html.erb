@@ -1,3 +1,6 @@
+<h1 class="chapter-title">
+  <%= t('.notifications') %>
+</h1>
 <%- project_id = nil %>
 <div class="panel panel-default">
     <% @notifications.each do |notification| %>
@@ -6,7 +9,7 @@
                 </div>
             <% end %>
             <% project_id = notification.project.id %>
-            <div class="panel-body">
+            <div class="panel-heading">
                 <strong>
                     <%= notification.project.title %>
                 </strong>
@@ -14,8 +17,9 @@
             <div class="list-group">
         <% end %>
 
-        <div class="list-group-item">
-            Notifica
-        </div>
+        <%= link_to url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id), :class => "list-group-item" do %>
+            <%= icon_for(notification) %>
+            <%= title_for(notification) %>
+        <% end %>
     <% end %>
 </div>

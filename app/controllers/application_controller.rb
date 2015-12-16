@@ -34,6 +34,21 @@ class ApplicationController < ActionController::Base
     load_project_session
   end
 
+  def create_notification(model)
+    @notification = Notification.new
+
+    @notification.thinker = current_thinker
+    @notification.project = @project
+
+    @notification.model    = model.class.name
+    @notification.model_id = model.id
+
+    @notification.controller = params[:controller]
+    @notification.action     = params[:action]
+
+    @notification.save
+  end
+
   private
 
   def load_project_session

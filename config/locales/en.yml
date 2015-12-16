@@ -176,6 +176,18 @@ en:
     index:
       title: "Title"
 
+  notifications:
+    list:
+      tasks:
+        create: "%{thinker} created a new task."
+        update: "%{thinker} updated a task."
+      goals:
+        create: "%{thinker} created a new goal."
+        update: "%{thinker} updated a goal."
+      sprints:
+        create: "Sprint %{serial}, started."
+        update: "The Sprint %{serial}, was updated (%{total} points)."
+
   # Shared section
   shared:
     navbar:

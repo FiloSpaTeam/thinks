@@ -20,6 +20,17 @@ namespace :admin do
 
           sprint.project = project
           sprint.save
+
+          notification = Notification.new
+
+          notification.project    = project
+          notification.thinker_id = 0
+          notification.model      = sprint.class.name
+          notification.model_id   = sprint.id
+          notification.controller = 'sprints'
+          notification.action     = 'create'
+
+          notification.save
         else
           last_sprint = project.sprints.last
 
@@ -28,26 +39,37 @@ namespace :admin do
 
             sprint.project = project
             sprint.save
+
+            tasks_last_sprint = project.tasks.done.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
+
+            last_sprint.obtained = tasks_last_sprint.sum(:workload)
+            last_sprint.save
+
+            Notification.create()
+
+            notification = Notification.new
+
+            notification.project    = project
+            notification.thinker_id = 0
+            notification.model      = sprint.class.name
+            notification.model_id   = sprint.id
+            notification.controller = 'sprints'
+            notification.action     = 'create'
+
+            notification.save
+
+            notification = Notification.new
+
+            notification.project    = project
+            notification.thinker_id = 0
+            notification.model      = sprint.class.name
+            notification.model_id   = sprint.id
+            notification.controller = 'sprints'
+            notification.action     = 'update'
+
+            notification.save
           end
         end
-
-        # day = project.actual_day_of_sprint
-
-        # if day == 1
-
-        #   sprint = Sprint.new
-
-        #   sprint.project = project
-        #   sprint.save
-
-        #   if project.sprints.count > 1
-        #     last_sprint       = project.sprints.where('id < ?', sprint.id).last
-        #     tasks_last_sprint = project.tasks.done.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
-
-        #     last_sprint.obtained = tasks_last_sprint.sum(:workload)
-        #     last_sprint.save
-        #   end
-        # end
       end
     end
 
