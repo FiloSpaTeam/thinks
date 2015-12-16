@@ -8,7 +8,7 @@
             Goal
         %h4
           - if @task.goal.present?
-            = link_to_if @task.goal.title, goal_path(@task.goal)
+            = link_to @task.goal.title, goal_path(@task.goal)
           - else
             = t("not_defined_yet")
       .panel-body
