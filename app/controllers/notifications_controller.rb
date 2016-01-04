@@ -4,7 +4,6 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @sql = Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).where('id NOT IN (?)', current_thinker.notifications.pluck(:id)).order('project_id DESC').to_sql
     @filterrific = initialize_filterrific(
       Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).where.not(id: current_thinker.notifications.pluck(:id)).order('project_id DESC'),
       params[:filterrific],
