@@ -73,6 +73,18 @@ class NotificationsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /notifications_read/1
+  # PATCH/PUT /notifications_read/1.json
+  def read
+    @notification = Notification.find(params[:notification_id])
+
+    current_thinker.notifications << @notification
+    respond_to do |format|
+      format.html { redirect_to notifications_url, notice: 'Notification read.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_notification

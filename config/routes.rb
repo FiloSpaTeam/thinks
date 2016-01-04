@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :notifications
+  resources :notifications do
+    put :read
+  end
   resources :goals
   resources :cycles
   devise_for :thinkers, :controllers => {

@@ -23,10 +23,14 @@
             </div>
             <div class="list-group">
         <% end %>
-
-        <%= link_to url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id), :class => "list-group-item" do %>
+        <div class="list-group-item">
             <%= icon_for(notification) %>
-            <%= title_for(notification) %>
-        <% end %>
+            <%= link_to url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id) do %>
+                <%= title_for(notification) %>
+            <% end %>
+            <%= link_to notification_read_path(notification), :class => "pull-right fa-fw", :method => :put do %>
+                <%= icon('check') %>
+            <% end %>
+        </div>
     <% end %>
 </div>
