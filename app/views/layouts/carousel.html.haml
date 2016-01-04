@@ -119,12 +119,21 @@
         = image_tag("ok", :class => "featurette-image img-responsive center-block", :alt => "Ok image")
     %hr.featurette-divider
     %footer
-      %p.pull-right
+      %p.pull-right.text-right{ :style => "width: 30%;" }
         %a{:href => "#"} Back to top
-      %p
+      %p.pull-left{ :style => "width: 30%;" }
         ©
         = DateTime.now.year
         Free Software Team ·
         %a{:href => "#"} Privacy
         ·
         %a{:href => "#"} Terms
+      %p.text-center
+        = link_to "https://github.com/FiloSpaTeam/thinks" do
+          %i.fa.fa-github.fa-lg
+        ·
+        = link_to "https://twitter.com/CMaradonna" do
+          %i.fa.fa-twitter.fa-lg
+        ·
+        = link_to "https://joindiaspora.com/people/decebafef6625a64" do
+          %i.fa.fa-asterisk.fa-lg
