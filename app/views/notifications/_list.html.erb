@@ -3,6 +3,13 @@
 </h1>
 <%- project_id = nil %>
 <div class="panel panel-default">
+    <% if @notifications.empty? %>
+        <div class="list-group">
+            <div class="list-group-item">
+                <%= t ".no_notifications_found" %>
+            </div>
+        </div>
+    <% end %>
     <% @notifications.each do |notification| %>
         <% if notification.project.id != project_id %>
             <% if !project_id.nil? %>

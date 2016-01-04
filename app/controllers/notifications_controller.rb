@@ -4,15 +4,16 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
+    @sql = Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).where('id NOT IN (?)', current_thinker.notifications.pluck(:id)).order('project_id DESC').to_sql
     @filterrific = initialize_filterrific(
-      Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).order('project_id DESC'),
+      Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).where.not(id: current_thinker.notifications.pluck(:id)).order('project_id DESC'),
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
     ) or return
-    @notifications = @filterrific.find.page params[:page]
+    @notifications         = @filterrific.find.page params[:page]
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"

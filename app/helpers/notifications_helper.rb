@@ -1,9 +1,9 @@
 module NotificationsHelper
   def icon_for(notification)
     if notification.action == 'create'
-      icon('plus-circle', :class => "fa-lg")
+      icon('plus-circle', :class => "fa-lg fa-fw")
     elsif notification.action == 'update'
-      icon('refresh', :class => "fa-lg")
+      icon('refresh', :class => "fa-lg fa-fw")
     end
   end
 

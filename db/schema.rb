@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216203618) do
+ActiveRecord::Schema.define(version: 20160104222259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,14 @@ ActiveRecord::Schema.define(version: 20151216203618) do
     t.string   "model"
     t.integer  "model_id"
   end
+
+  create_table "notifications_thinkers", id: false, force: :cascade do |t|
+    t.integer "notification_id"
+    t.integer "thinker_id"
+  end
+
+  add_index "notifications_thinkers", ["notification_id"], name: "index_notifications_thinkers_on_notification_id", using: :btree
+  add_index "notifications_thinkers", ["thinker_id"], name: "index_notifications_thinkers_on_thinker_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",               limit: 60

@@ -178,6 +178,7 @@ en:
 
   notifications:
     list:
+      no_notifications_found: "No notifications found"
       tasks:
         create: "%{thinker} created a new task."
         update: "%{thinker} updated a task."
