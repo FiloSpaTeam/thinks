@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :tasks, shallow: true do
       member do
         put :sprint
+        put :release
         put :assign
         put :judge
       end

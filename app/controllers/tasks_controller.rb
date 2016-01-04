@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -128,6 +128,22 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /tasks/1/judge
+  # PATCH/PUT /tasks/1/judge.json
+  def release
+    @task.status = Status.release.first
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Your thinks is ready for next Sprint!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }

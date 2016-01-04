@@ -23,7 +23,12 @@
             = link_to "Get in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-primary btn-block"
           - else
             %strong
+              = link_to "Force in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-warning btn-block"
               = t(".standard_deviation_too_high")
+      - elsif @task.project.thinker == current_thinker && @task.status == Status.backlog.first && @task.workloads.count > 0
+        .panel-footer
+          = link_to "Force in Release", release_task_path, :method => :put, :class => "btn btn-warning btn-block"
+
       .panel-body
         %h4
           %strong
