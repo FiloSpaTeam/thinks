@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def set_project
     @project = Project.friendly.find(params[:project_id])
-    
+
     load_project_session
   end
 
