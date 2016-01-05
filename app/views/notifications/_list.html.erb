@@ -25,7 +25,7 @@
         <% end %>
         <div class="list-group-item">
             <%= icon_for(notification) %>
-            <%= link_to url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id) do %>
+            <%= link_to (url_for_notifications(notification)) do %>
                 <%= title_for(notification) %>
             <% end %>
             <%= link_to notification_read_path(notification), :class => "pull-right fa-fw", :method => :put do %>

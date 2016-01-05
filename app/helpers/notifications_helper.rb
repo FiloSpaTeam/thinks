@@ -1,4 +1,15 @@
 module NotificationsHelper
+  def url_for_notifications(notification)
+    if notification.controller == 'comments'
+      comment_klass = notification.model.constantize
+      comment = comment_klass.find(notification.model_id)
+
+      return url_for(:controller => 'tasks', :action => 'show', :id => comment.task.id)
+    end
+
+    url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id)
+  end
+
   def icon_for(notification)
     if notification.action == 'create'
       icon('plus-circle', :class => "fa-lg fa-fw")
@@ -23,6 +34,9 @@ module NotificationsHelper
       t ".#{ notification.controller }.#{ notification.action }",
         serial: model.serial,
         total: model.obtained
+    elsif notification.controller == 'comments'
+      t ".#{ notification.controller }.#{ notification.action }",
+        thinker: notification.thinker.name
     end
   end
 end

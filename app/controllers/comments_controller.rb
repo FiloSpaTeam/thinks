@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
     @comment.task    = @task
     @comment.thinker = current_thinker
 
+    @project = @task.project
+
     respond_to do |format|
-      if @comment.save
+      if @comment.save && create_notification(@comment)
         format.html { redirect_to @task, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else

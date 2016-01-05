@@ -188,6 +188,8 @@ en:
       sprints:
         create: "Sprint %{serial}, started."
         update: "The Sprint %{serial}, was updated (%{total} points)."
+      comments:
+        create: "%{thinker} comment the task."
 
   # Shared section
   shared:
