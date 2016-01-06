@@ -45,8 +45,6 @@ namespace :admin do
             last_sprint.obtained = tasks_last_sprint.sum(:workload)
             last_sprint.save
 
-            Notification.create()
-
             notification = Notification.new
 
             notification.project    = project
@@ -63,7 +61,7 @@ namespace :admin do
             notification.project    = project
             notification.thinker_id = 0
             notification.model      = sprint.class.name
-            notification.model_id   = sprint.id
+            notification.model_id   = last_sprint.id
             notification.controller = 'sprints'
             notification.action     = 'update'
 
