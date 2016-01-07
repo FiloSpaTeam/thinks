@@ -6,14 +6,15 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
-  include Devise::TestHelpers
-
   def random_string(length)
     o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
 
     (0...length).map { o[rand(o.length)] }.join
   end
+end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
 
   def authenticate
     @request.env["devise.mapping"] = Devise.mappings[:admin]

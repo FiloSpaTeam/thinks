@@ -49,48 +49,6 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_redirected_to projects_path
   end
 
-  test "should check minimum team number of 2" do
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 0, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-  end
-
-  test "should check value's correctness of minimum team number" do
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2.43, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-  end
-
-  test "should check length of title between 2 and 60" do
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: "", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-
-    too_long_string = random_string(61)
-
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: too_long_string, license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-  end
-
-  test "should check uniqueness of title" do
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-  end
-
-  test "should check length of description between 2 and 1600" do
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "", minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-
-    too_long_string = random_string(1601)
-
-    assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: too_long_string, minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
-    end
-  end
-
   # test "should check a project that cannot be created in the past" do
   #   assert_no_difference('Project.count') do
   #     post :create, project: { release_at: Date.yesterday, description: "Fantastic outdated project", minimum_team_number: 3, title: "Eureka", license_id: 4 }
