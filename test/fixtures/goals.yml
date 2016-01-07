@@ -1,13 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  thinker_id: 1
-  project_id: 1
-
-two:
-  title: MyString
-  description: MyText
-  thinker_id: 1
+notification_system:
+  title: Notification system
+  description: All about notification system like view, models and so on..
+  thinker_id: 135138680
   project_id: 1
