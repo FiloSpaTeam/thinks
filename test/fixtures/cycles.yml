@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  translation_code: MyString
-  description: MyString
-  days: 1
+one_week:
+  translation_code: one_week
+  description: The shortest cycle, only 1 week
+  days: 7
 
-two:
-  translation_code: MyString
-  description: MyString
-  days: 1
+two_weeks:
+  translation_code: two_weeks
+  description: A cycle of two weeks
+  days: 14

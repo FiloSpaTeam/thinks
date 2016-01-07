@@ -20,7 +20,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should create project" do
     assert_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 5, title: "Eureka", license_id: 4, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc" }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 5, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
 
     assert_redirected_to project_path(assigns(:project))
@@ -37,7 +37,7 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test "should update project" do
-    patch :update, id: @project, project: { release_at: @project.release_at, description: @project.description, minimum_team_number: @project.minimum_team_number, title: @project.title, license_id: @project.license_id }
+    patch :update, id: @project, project: { release_at: @project.release_at, description: @project.description, minimum_team_number: @project.minimum_team_number, title: @project.title, license_id: @project.license_id, home_url: @project.home_url, source_code_url: @project.source_code_url, documentation_url: @project.documentation_url }
     assert_redirected_to project_path(assigns(:project))
   end
 
@@ -51,43 +51,43 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should check minimum team number of 2" do
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 0, title: "Eureka", license_id: 4 }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 0, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
   end
 
   test "should check value's correctness of minimum team number" do
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 1.4, title: "Eureka", license_id: 4 }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2.43, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
   end
 
   test "should check length of title between 2 and 60" do
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "My beautifull project", minimum_team_number: 3, title: "A", license_id: 4 }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: "", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
 
-    too_long_title = random_string(61)
+    too_long_string = random_string(61)
 
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "My beautifull project", minimum_team_number: 3, title: too_long_title, license_id: 4 }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: too_long_string, license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
   end
 
   test "should check uniqueness of title" do
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: @project.release_at, description: @project.description, minimum_team_number: @project.minimum_team_number, title: @project.title, license_id: @project.license_id }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
   end
 
   test "should check length of description between 2 and 1600" do
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "", minimum_team_number: 3, title: "Eureka", license_id: 4 }
+      post :create, project: { release_at: Date.today, description: "", minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
 
     too_long_string = random_string(1601)
 
     assert_no_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: too_long_string, minimum_team_number: 3, title: "Eureka", license_id: 4 }
+      post :create, project: { release_at: Date.today, description: too_long_string, minimum_team_number: 2, title: "Rethink", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
     end
   end
 

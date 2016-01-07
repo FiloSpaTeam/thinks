@@ -9,6 +9,7 @@ rethink:
   languages: ruby, yaml
   license: mit
   thinker: admin
+  cycle: one_week
 
 savage:
   id: 2
@@ -18,4 +19,4 @@ savage:
   release_at: 2015-08-21
   languages: cplusplus
   license: mit
-  thinker: admin
+  thinker: two_weeks
