@@ -24,7 +24,7 @@ class CommentTest < ActiveSupport::TestCase
 
     assert_not comment.save, 'Saved a comment without thinker.'
   end
-  
+
   test 'should not save comment without related task' do
     comment = comments(:comment_one)
 
