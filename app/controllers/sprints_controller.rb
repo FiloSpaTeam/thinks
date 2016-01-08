@@ -8,7 +8,7 @@ class SprintsController < ApplicationController
   # GET /sprints.json
   def index
     @filterrific = initialize_filterrific(
-      Sprint.where(:project => @project),
+      Sprint.where(:project => @project).order('created_at'),
       params[:filterrific],
       select_options: {},
     ) or return
