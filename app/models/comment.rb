@@ -7,6 +7,8 @@ class Comment < ActiveRecord::Base
   has_many :likes
 
   validates :text, length: { maximum: 240 }, presence: true
+  validates :thinker, presence: true
+  validates :task, presence: true
 
   default_scope { order('approved').order("likes_count DESC").order("updated_at DESC") }
 
@@ -15,6 +17,6 @@ class Comment < ActiveRecord::Base
   }
 
   def current_thinker?(current_thinker)
-    self.thinker == current_thinker
+    thinker == current_thinker
   end
 end

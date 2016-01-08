@@ -5,9 +5,11 @@ comment_one:
   approved: true
   task_id: 980190962
   thinker_id: 135138680
+  likes_count: 0
 
 comment_two:
   text: I don\'t think it\'useful use that..
   approved: false
   task_id: 980190962
   thinker_id: 135138680
+  likes_count: 40
