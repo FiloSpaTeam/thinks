@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  text: MyText
-  approved: false
+comment_one:
+  text: I should try with this....
+  approved: true
+  task_id: 980190962
+  thinker_id: 135138680
 
-two:
-  text: MyText
+comment_two:
+  text: I don\'t think it\'useful use that..
   approved: false
+  task_id: 980190962
+  thinker_id: 135138680

@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+task_one:
   serial: 1
   description: Come sviluppatore voglio terminare il sistema di logging
   project: rethink
@@ -9,7 +9,7 @@ one:
   status: sprint
   workload: fourty
 
-two:
+task_two:
   serial: 1
   description: Come ricercatore voglio completare la ricerca scientifica sul sistema cellulare
   project: savage
@@ -18,7 +18,7 @@ two:
   status: sprint
   workload: twenty
 
-three:
+task_three:
   serial: 2
   description: Come ricercatore voglio completare la ricerca anatomica sul sistema cellulare
   project: savage
