@@ -22,6 +22,9 @@ class CommentsController < ApplicationController
     end
   end
 
+  def index
+  end
+
   def approve
     @comment.approved = true
     @task             = @comment.task
