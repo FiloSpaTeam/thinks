@@ -7,7 +7,7 @@ class LikesController < ApplicationController
     @other_like = @task.likes.where(thinker: current_thinker)
     @vote       = @task.votes.where(thinker: current_thinker)
 
-    @like         = Like.new()
+    @like         = Like.new
     @like.comment = @comment
     @like.thinker = current_thinker
 
@@ -22,9 +22,6 @@ class LikesController < ApplicationController
         format.json { render json: @like.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def destroy
   end
 
   private
