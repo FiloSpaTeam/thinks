@@ -50,41 +50,48 @@ class Task < ActiveRecord::Base
   scope :in_sprint, lambda { where status: Status.sprint }
 
   scope :ready_to_sprint, lambda {
-    where("standard_deviation < ?", 3).where(status: Status.release)
+    where('standard_deviation < ?', 3).where(status: Status.release)
   }
 
   scope :workload_lower_than, lambda { |value|
-    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id")
+    subquery = unscoped
+               .select('AVG(workloads.value) as average, tasks.id')
+               .joins(:workloads)
+               .group('tasks.id')
 
-    unscoped.from("(#{subquery.to_sql}) t").where("t.average < ?", value).select("t.average, tasks.*").joins("INNER JOIN tasks on t.id = tasks.id ")
+    unscoped
+      .select('t.average, tasks.*')
+      .from("(#{subquery.to_sql}) t")
+      .joins('INNER JOIN tasks on t.id = tasks.id ')
+      .where('t.average < ?', value)
   }
 
   scope :with_goal, lambda { |goal|
-    where(:goal => goal)
+    where(goal: goal)
   }
 
   scope :with_worker, lambda { |worker|
-    where(:worker => worker)
+    where(worker: worker)
   }
 
   scope :with_thinker, lambda { |thinker|
-    where(:thinker => thinker)
+    where(thinker: thinker)
   }
 
   scope :search_title, lambda { |query|
-    where("title LIKE ?", "%#{query}%")
+    where('title LIKE ?', "%#{query}%")
   }
 
   scope :search_goal, lambda { |title|
-    joins(:goal).where("goals.title LIKE ?", "%#{title}%")
+    joins(:goal).where('goals.title LIKE ?', "%#{title}%")
   }
 
   scope :search_thinker, lambda { |name|
-    joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
+    joins(:thinker).where('thinkers.name LIKE ?', "%#{name}%")
   }
 
   scope :search_worker, lambda { |name|
-    joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
+    joins(:thinker, :worker).where('thinkers.name LIKE ?', "%#{name}%")
   }
 
   scope :sorted_by, lambda { |sort_option|
