@@ -43,11 +43,11 @@ class Task < ActiveRecord::Base
 
   default_scope { order('serial DESC') }
 
-  scope :status_progress, lambda { |status| where status: status }
-  scope :in_progress, lambda { where status: Status.in_progress }
-  scope :done, lambda { where status: Status.done }
-  scope :release, lambda { where status: Status.release }
-  scope :in_sprint, lambda { where status: Status.sprint }
+  scope :status_progress, ->(status) { where status: status }
+  scope :in_progress, -> { where status: Status.in_progress }
+  scope :done, -> { where status: Status.done }
+  scope :release, -> { where status: Status.release }
+  scope :in_sprint, -> { where status: Status.sprint }
 
   scope :ready_to_sprint, lambda {
     where('standard_deviation < ?', 3).where(status: Status.release)
