@@ -99,12 +99,15 @@ class Task < ActiveRecord::Base
     case sort_option.to_s
     when /^title_/
       # Simple sort on the name colums
-      order("LOWER(tasks.title) #{ direction }")
+      order("LOWER(tasks.title) #{direction}")
     when /^workload_/
       # Simple sort over workload
-      unscoped.joins(:workloads).group("tasks.id").order("AVG(workloads.value) #{direction}")
+      unscoped
+        .joins(:workloads)
+        .group('tasks.id')
+        .order("AVG(workloads.value) #{direction}")
     else
-      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+      fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
 
