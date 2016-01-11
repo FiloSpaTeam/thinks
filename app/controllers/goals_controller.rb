@@ -11,11 +11,12 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @filterrific = initialize_filterrific(
-      Goal.where(:project => @project),
+      Goal .where(project: @project)
+      .order('progress DESC') .order('created_at DESC'),
       params[:filterrific],
-      select_options: {},
-    ) or return
-    @goals = @filterrific.find.page params[:page]
+      select_options: {}
+    ) || return
+    @goals = @filterrific.find.page(params[:page])
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"
@@ -36,7 +37,7 @@ class GoalsController < ApplicationController
   def edit
     if current_thinker != @goal.thinker
       respond_to do |format|
-        format.html { redirect_to @goal, alert: "You cannot edit this." }
+        format.html { redirect_to @goal, alert: 'You cannot edit this.' }
         format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end

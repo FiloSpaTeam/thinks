@@ -25,9 +25,10 @@
               = link_to t(".faqs"), faqs_path
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to notifications_path do
-            = icon('comments', :class => "fa-lg")
-            = t(".notifications")
+          - if thinker_signed_in?
+            = link_to notifications_path do
+              = icon('comments', :class => "fa-lg")
+              = t(".notifications")
         - if thinker_signed_in?
           -# %li
           -#   = link_to t(".donate"), projects_path

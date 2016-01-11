@@ -38,53 +38,62 @@ class Task < ActiveRecord::Base
 
   before_save :set_release
 
+  after_save :update_goal
+
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
 
   default_scope { order('serial DESC') }
 
-  scope :status_progress, lambda { |status| where status: status }
-  scope :in_progress, lambda { where status: Status.in_progress }
-  scope :done, lambda { where status: Status.done }
-  scope :release, lambda { where status: Status.release }
-  scope :in_sprint, lambda { where status: Status.sprint }
+  scope :status_progress, ->(status) { where status: status }
+  scope :in_progress, -> { where status: Status.in_progress }
+  scope :done, -> { where status: Status.done }
+  scope :release, -> { where status: Status.release }
+  scope :in_sprint, -> { where status: Status.sprint }
 
   scope :ready_to_sprint, lambda {
-    where("standard_deviation < ?", 3).where(status: Status.release)
+    where('standard_deviation < ?', 3).where(status: Status.release)
   }
 
   scope :workload_lower_than, lambda { |value|
-    subquery = unscoped.joins(:workloads).group("tasks.id").select("AVG(workloads.value) as average, tasks.id")
+    subquery = unscoped
+               .select('AVG(workloads.value) as average, tasks.id')
+               .joins(:workloads)
+               .group('tasks.id')
 
-    unscoped.from("(#{subquery.to_sql}) t").where("t.average < ?", value).select("t.average, tasks.*").joins("INNER JOIN tasks on t.id = tasks.id ")
+    unscoped
+      .select('t.average, tasks.*')
+      .from("(#{subquery.to_sql}) t")
+      .joins('INNER JOIN tasks on t.id = tasks.id ')
+      .where('t.average < ?', value)
   }
 
   scope :with_goal, lambda { |goal|
-    where(:goal => goal)
+    where(goal: goal)
   }
 
   scope :with_worker, lambda { |worker|
-    where(:worker => worker)
+    where(worker: worker)
   }
 
   scope :with_thinker, lambda { |thinker|
-    where(:thinker => thinker)
+    where(thinker: thinker)
   }
 
   scope :search_title, lambda { |query|
-    where("title LIKE ?", "%#{query}%")
+    where('title LIKE ?', "%#{query}%")
   }
 
   scope :search_goal, lambda { |title|
-    joins(:goal).where("goals.title LIKE ?", "%#{title}%")
+    joins(:goal).where('goals.title LIKE ?', "%#{title}%")
   }
 
   scope :search_thinker, lambda { |name|
-    joins(:thinker).where("thinkers.name LIKE ?", "%#{name}%")
+    joins(:thinker).where('thinkers.name LIKE ?', "%#{name}%")
   }
 
   scope :search_worker, lambda { |name|
-    joins(:thinker, :worker).where("thinkers.name LIKE ?", "%#{name}%")
+    joins(:thinker, :worker).where('thinkers.name LIKE ?', "%#{name}%")
   }
 
   scope :sorted_by, lambda { |sort_option|
@@ -92,12 +101,15 @@ class Task < ActiveRecord::Base
     case sort_option.to_s
     when /^title_/
       # Simple sort on the name colums
-      order("LOWER(tasks.title) #{ direction }")
+      order("LOWER(tasks.title) #{direction}")
     when /^workload_/
       # Simple sort over workload
-      unscoped.joins(:workloads).group("tasks.id").order("AVG(workloads.value) #{direction}")
+      unscoped
+        .joins(:workloads)
+        .group('tasks.id')
+        .order("AVG(workloads.value) #{direction}")
     else
-      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+      fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
 
@@ -109,19 +121,19 @@ class Task < ActiveRecord::Base
 
   # This method provides select options for the `sorted_by` filter select input.
   # It is called in the controller as part of `initialize_filterrific`.
-  def self.options_for_sorted_by sort_option
+  def self.options_for_sorted_by(sort_option)
     options = {
-      :title => [
+      title: [
         ['Title (a-z)', 'title_asc'],
         ['Title (z-a)', 'title_desc']
       ],
-      :workload => [
+      workload: [
         ['Low -> High', 'workload_asc'],
         ['High -> Low', 'workload_desc']
       ]
     }
 
-    return options[sort_option]
+    options[sort_option]
   end
 
   def average
@@ -131,11 +143,11 @@ class Task < ActiveRecord::Base
   end
 
   def variance
-    votes   = workloads.pluck(:id)
+    votes = workloads.pluck(:id)
 
     return 0 if votes.length == 1
 
-    average = self.id_average
+    average = id_average
 
     @variance ||= (votes.inject(0) { |accum, i| accum + (i - average)**2 }) / (votes.length - 1)
   end
@@ -145,37 +157,34 @@ class Task < ActiveRecord::Base
   end
 
   def standard_deviation
-    variance = self.variance
-
-    @standard_deviation ||= Math.sqrt(variance).to_int;
+    @standard_deviation ||= Math.sqrt(variance).to_int
   end
 
   def progress
-    return false if self.workload == Workload.infinity.first
+    return false if workload == Workload.infinity.first
 
     statuses = Status.all
-    actual_index = statuses.index(self.status)
+    actual_index = statuses.index(status)
 
     self.status = statuses.fetch(actual_index + 1)
   end
 
   def voted?(thinker)
-    self.votes.where(:thinker => thinker).first().present?
+    votes.where(thinker: thinker).first().present?
   end
 
   def contributed?(thinker)
     comments = self.comments
-    comments.where(:thinker => thinker).present? or liked?(thinker)
+    comments.where(thinker: thinker).present? || liked?(thinker)
   end
 
   def liked?(thinker)
-    likes = self.likes
-
-    likes.where(:thinker => thinker).present?
+    likes.where(thinker: thinker).present?
   end
 
   def ready?
-    if project.minimum_team_number > self.votes.length || self.standard_deviation > 2
+    if project.minimum_team_number > votes.length ||
+       standard_deviation > 2
       return false
     else
       return true
@@ -188,20 +197,28 @@ class Task < ActiveRecord::Base
 
   private
 
-    def generate_serial
-      tasks_count = Task.where({project_id: self.project.id}).count
-      tasks_count += 1
+  def update_goal
+    return if status != Status.done.first
 
-      self.serial = tasks_count
-    end
+    goal.progress = goal.progress_percentage
+    goal.save
+  end
 
-    def default_values
-      self.status ||= Status.backlog.first
-    end
+  def generate_serial
+    tasks_count = Task.where(project_id: project.id).count
+    tasks_count += 1
 
-    def set_release
-      if self.status == Status.backlog.first && self.workloads.size >= self.project.minimum_team_number
-        self.status = Status.release.first
-      end
+    self.serial = tasks_count
+  end
+
+  def default_values
+    self.status ||= Status.backlog.first
+  end
+
+  def set_release
+    if self.status == Status.backlog.first &&
+       workloads.size >= project.minimum_team_number
+      self.status = Status.release.first
     end
+  end
 end

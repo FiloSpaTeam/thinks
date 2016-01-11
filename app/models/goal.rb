@@ -22,7 +22,7 @@ class Goal < ActiveRecord::Base
   validates :description, length: { minimum: 30 }, presence: true
 
   scope :search_title, lambda { |title|
-    where("title LIKE ?", "%#{title}%")
+    where('title LIKE ?', "%#{title}%")
   }
 
   scope :search_task, lambda { |title|
@@ -53,10 +53,9 @@ class Goal < ActiveRecord::Base
   }
 
   def progress_percentage
-    tasks      = self.tasks
     0 if tasks.empty? || tasks.nil?
 
-    tasks_done = tasks.where({ status_id: Status.done })
+    tasks_done = tasks.where(status_id: Status.done)
 
     total_tasks_number      = tasks.length
     total_tasks_done_number = tasks_done.length
