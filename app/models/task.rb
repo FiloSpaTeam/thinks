@@ -38,6 +38,8 @@ class Task < ActiveRecord::Base
 
   before_save :set_release
 
+  after_save :update_goal
+
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
 
@@ -194,6 +196,13 @@ class Task < ActiveRecord::Base
   end
 
   private
+
+  def update_goal
+    return if status != Status.done.first
+
+    goal.progress = goal.progress_percentage
+    goal.save
+  end
 
   def generate_serial
     tasks_count = Task.where(project_id: project.id).count
