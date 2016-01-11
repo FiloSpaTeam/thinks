@@ -11,7 +11,7 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @filterrific = initialize_filterrific(
-      Goal.where(project: @project),
+      Goal.where(project: @project).order('progress DESC').order('created_at DESC'),
       params[:filterrific],
       select_options: {}
     ) || return
