@@ -20,8 +20,9 @@ class Goal < ActiveRecord::Base
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }, presence: true
-  validates :progress, numericality: { greater_than_or_equal_to: 0,
-                                       less_than_or_equal_to: 100 }
+
+  validates_numericality_of :progress, greater_than_or_equal_to: 0
+  validates_numericality_of :progress, less_than_or_equal_to: 100
 
   scope :search_title, lambda { |title|
     where('title LIKE ?', "%#{title}%")

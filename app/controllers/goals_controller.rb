@@ -46,9 +46,10 @@ class GoalsController < ApplicationController
   # POST /goals
   # POST /goals.json
   def create
-    @goal         = Goal.new(goal_params)
-    @goal.project = @project
-    @goal.thinker = current_thinker
+    @goal          = Goal.new(goal_params)
+    @goal.project  = @project
+    @goal.thinker  = current_thinker
+    @goal.progress = 0.0
 
     respond_to do |format|
       if @goal.save && create_notification(@goal)
