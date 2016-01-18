@@ -38,6 +38,8 @@ class Project < ActiveRecord::Base
   validates :slug, presence: true
   validates :cycle, presence: true
 
+  after_save :check_if_past_project
+
   # validate :expiration_date_cannot_be_in_the_past
 
   # def expiration_date_cannot_be_in_the_past
@@ -120,5 +122,11 @@ class Project < ActiveRecord::Base
 
   def days_from_start
     (DateTime.now.to_date - release_at)
+  end
+
+  def check_if_past_project
+    if started?
+      Sprint.update_sprint_system
+    end
   end
 end
