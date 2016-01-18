@@ -2,7 +2,9 @@ require 'test_helper'
 
 class TasksControllerTest < ActionController::TestCase
   setup do
-    @task = tasks(:one)
+    @task = tasks(:task_one)
+
+    authenticate
   end
 
   test "should get index" do

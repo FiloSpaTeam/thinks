@@ -8,15 +8,15 @@ class SprintsController < ApplicationController
   # GET /sprints.json
   def index
     @filterrific = initialize_filterrific(
-      Sprint.where(:project => @project).order('created_at'),
+      Sprint.where(project: @project).order('created_at'),
       params[:filterrific],
-      select_options: {},
-    ) or return
+      select_options: {}
+    ) || return
     @sprints = @filterrific.find.page params[:page]
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
+    puts "Had to reset filterrific params: #{e.message}"
+    redirect_to(reset_filterrific_url(format: :html)) && return
   end
 
   # GET /sprints/1
@@ -74,13 +74,14 @@ class SprintsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sprint
-      @sprint = Sprint.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sprint_params
-      params.require(:sprint).permit(:title, :description, :goal, :obtained, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sprint
+    @sprint = Sprint.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sprint_params
+    params.require(:sprint).permit(:title, :description, :goal, :obtained, :project_id)
+  end
 end

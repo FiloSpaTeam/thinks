@@ -1,4 +1,4 @@
-= form_for(@sprint) do |f|
+= form_for([@project, @sprint]) do |f|
   - if @sprint.errors.any?
     #error_explanation
       %h2
@@ -8,17 +8,9 @@
         - @sprint.errors.full_messages.each do |message|
           %li= message
   .field
-    = f.label :title
+    = f.label :serial
     %br/
-    = f.text_field :title
-  .field
-    = f.label :description
-    %br/
-    = f.text_field :description
-  .field
-    = f.label :goal
-    %br/
-    = f.number_field :goal
+    = f.number_field :serial
   .field
     = f.label :obtained
     %br/

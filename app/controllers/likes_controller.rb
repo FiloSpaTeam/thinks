@@ -1,15 +1,16 @@
 class LikesController < ApplicationController
-  before_filter :set_comment, only: [:create]
-
   def create
-    @task = @comment.task
+    @comment = Comment.find(params[:comment_id])
+    @task    = @comment.task
 
-    @other_like = @task.likes.where(thinker: current_thinker)
-    @vote       = @task.votes.where(thinker: current_thinker)
+    if @task.likes.present?
+      @other_like = @task.likes.where(thinker: current_thinker)
+    end
 
-    @like         = Like.new
+    @vote = @task.votes.where(thinker: current_thinker)
+
+    @like         = Like.new(like_params)
     @like.comment = @comment
-    @like.thinker = current_thinker
 
     respond_to do |format|
       if @other_like.delete_all && @vote.delete_all && @like.save
@@ -23,9 +24,4 @@ class LikesController < ApplicationController
       end
     end
   end
-
-  private
-    def set_comment
-      @comment = Comment.find(params[:comment_id])
-    end
 end
