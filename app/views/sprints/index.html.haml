@@ -11,4 +11,4 @@
         = render_filterrific_spinner
         %table.table.table-condensed.table-hover#filterrific_results
           = render partial: 'list', locals: { sprints: @sprints }
-    = paginate @sprints
+    = paginate @sprints, :remote => true

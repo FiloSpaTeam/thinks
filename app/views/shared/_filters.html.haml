@@ -1,3 +1,7 @@
+- puts "Controller: " + params[:controller]
+- puts "Controller: " + controller_name
+- puts "Action: " + params[:action]
+- puts current_page?(controller: :tasks)
 .form-group
   .col-xs-3
     = link_to reset_filterrific_url do
@@ -13,10 +17,10 @@
   .form-group
     .col-xs-12
       %ul.nav.nav-pills
-        - if current_page?(projects_path)
+        - if current_page?(controller: :projects, action: :index)
           %li{ :role => "presentation" }
             = f.select :sorted_by, @filterrific.select_options[:sorted_by], {}, :class => "form-control"
-        - if !current_page?(projects_path) && !current_page?(project_tasks_path) && !current_page?(project_sprints_path)
+        - if !current_page?(:controller => 'projects', :action => 'index') && !current_page?(:controller => 'tasks', :action => 'index') && !current_page?(:controller => 'sprints', :action => 'index')
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
               = t(".task")

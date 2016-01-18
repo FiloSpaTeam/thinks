@@ -1,6 +1,6 @@
 - js = escape_javascript(
 - render(partial: 'tasks/list', locals: { tasks: @tasks })
 - )
-- new_paginate = escape_javascript(paginate(@tasks))
+- new_paginate = escape_javascript(paginate(@tasks, :remote => true))
 $("#filterrific_results").html("#{js}");
 $("ul.pagination").html("#{new_paginate}");
