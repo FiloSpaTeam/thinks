@@ -44,17 +44,18 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_task
-      @task = Task.find(params[:task_id])
-    end
 
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_task
+    @task = Task.find(params[:task_id])
+  end
 
-    def comment_params
-      allowed_params = [:text]
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-      params.require(:comment).permit(allowed_params)
-    end
+  def comment_params
+    allowed_params = [:text]
+
+    params.require(:comment).permit(allowed_params)
+  end
 end
