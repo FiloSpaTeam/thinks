@@ -9,7 +9,9 @@ class Goal < ActiveRecord::Base
       :search_title,
       :search_task,
 
-      :with_task
+      :with_task,
+
+      :progress_lower_than
     ]
   )
 
@@ -53,6 +55,10 @@ class Goal < ActiveRecord::Base
       order("LOWER(goals.title) #{ direction }")
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
+  }
+
+  scope :progress_lower_than, lambda { |value|
+    where('progress < ?', value)
   }
 
   def progress_percentage
