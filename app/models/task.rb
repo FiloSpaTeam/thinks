@@ -30,7 +30,7 @@ class Task < ActiveRecord::Base
   belongs_to :project
   belongs_to :goal
   belongs_to :thinker
-  belongs_to :worker, class_name: "Thinker", foreign_key: "worker_thinker_id"
+  belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
   belongs_to :status
 
   before_create :generate_serial
@@ -114,6 +114,10 @@ class Task < ActiveRecord::Base
     else
       fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
+  }
+
+  scope :with_project, lambda { |project_id|
+    where(project: project_id)
   }
 
   scope :with_current_thinker, lambda { |current_thinker|

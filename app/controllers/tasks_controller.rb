@@ -10,18 +10,31 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
+    puts params
     @filterrific = initialize_filterrific(
-      Task.where(project: @project),
+      Task,
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
     ) || return
-    if params.key?(:filterrific) && params[:filterrific].key?('current_thinker')
-      @tasks = @filterrific.find.with_current_thinker(current_thinker).page params[:page]
+    if params.key?(:filterrific)
+      puts 'First cond.'
+      @tasks = @filterrific.find
+
+      if params[:filterrific].key?('current_thinker')
+        @tasks = @tasks.with_current_thinker(current_thinker)
+      end
+
+      if params[:filterrific].key?('project_id')
+        @tasks = @tasks.with_project(params[:filterrific][:project_id])
+      end
+
+      @tasks = @tasks.page params[:page]
     else
-      @tasks = @filterrific.find.page params[:page]
+      puts 'Second cond.'
+      @tasks = @filterrific.find.where(project: @project).page params[:page]
     end
     @statuses = Status.all
   rescue ActiveRecord::RecordNotFound => e
@@ -195,35 +208,36 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def set_validators_for_form_help
+    description_validators = Task.validators_on(:description)[0]
+    @chars_min_description = description_validators.options[:minimum]
+
+    title_validators = Task.validators_on(:title)[0]
+    @chars_max_title = title_validators.options[:maximum]
+  end
+
+  def set_validators_for_show
+    comment_validators = Comment.validators_on(:text)[0]
+    @chars_max_comment = comment_validators.options[:maximum]
+  end
+
+  def teammate!
+    if !@project.part_of_team?(current_thinker)
+      flash[:alert] = 'You are not part of the team!'
+      redirect_to project_tasks_path(@project)
     end
+  end
 
-    def set_validators_for_form_help
-      description_validators = Task.validators_on(:description)[0]
-      @chars_min_description = description_validators.options[:minimum]
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_params
+    allowed_params = [:description, :status_id, :workload, :title, :goal_id]
 
-      title_validators = Task.validators_on(:title)[0]
-      @chars_max_title = title_validators.options[:maximum]
-    end
-
-    def set_validators_for_show
-      comment_validators = Comment.validators_on(:text)[0]
-      @chars_max_comment = comment_validators.options[:maximum]
-    end
-
-    def teammate!
-      if !@project.part_of_team?(current_thinker)
-        flash[:alert] = "You are not part of the team!"
-        redirect_to project_tasks_path(@project)
-      end
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_params
-      allowed_params = [:description, :status_id, :workload, :title, :goal_id]
-
-      params.require(:task).permit(allowed_params)
-    end
+    params.require(:task).permit(allowed_params)
+  end
 end

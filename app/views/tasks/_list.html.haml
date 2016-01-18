@@ -10,14 +10,14 @@
         = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
           - @statuses.each do |status|
             = content_tag(:li) do
-              = link_to("filterrific[status_progress]" => status, method: :get, remote: true) do
+              = link_to("filterrific[status_progress]" => status, "filterrific[project_id]" => @project.id, method: :get, remote: true) do
                 .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("projects.tasks.#{status.translation_code}")
     %td.text-center
       .col-xs-12
         %h5
           %strong
-            = filterrific_sorting_link(@filterrific, :workload, :url_for_attrs => { "filterrific[current_thinker]" => current_thinker } )
+            = filterrific_sorting_link(@filterrific, :workload, :url_for_attrs => { "filterrific[current_thinker]" => current_thinker, "filterrific[project_id]" => @project.id } )
 %tbody
   - if (!@tasks.empty?)
     - @tasks.each do |task|
