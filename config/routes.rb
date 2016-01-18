@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :thinkers
   resources :licenses
   resources :languages
-  resources :projects do 
+  resources :projects do
     member do
       get :team
 

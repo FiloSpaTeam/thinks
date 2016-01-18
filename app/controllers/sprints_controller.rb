@@ -74,13 +74,14 @@ class SprintsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sprint
-      @sprint = Sprint.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sprint_params
-      params.require(:sprint).permit(:title, :description, :goal, :obtained, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sprint
+    @sprint = Sprint.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sprint_params
+    params.require(:sprint).permit(:title, :description, :goal, :obtained, :project_id)
+  end
 end

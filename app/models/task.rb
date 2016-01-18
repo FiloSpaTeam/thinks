@@ -42,6 +42,9 @@ class Task < ActiveRecord::Base
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
+  validates :status_id, presence: true
+  validates :thinker_id, presence: true
+  validates :project_id, presence: true
 
   default_scope { order('serial DESC') }
 

@@ -1,11 +1,11 @@
 class LikesController < ApplicationController
-  before_filter :set_comment, only: [:create]
-
   def create
-    @task = @comment.task
+    @comment = Comment.find(params[:comment_id])
 
+    @task       = @comment.task
     @other_like = @task.likes.where(thinker: current_thinker)
-    @vote       = @task.votes.where(thinker: current_thinker)
+
+    @vote = @task.votes.where(thinker: current_thinker)
 
     @like         = Like.new
     @like.comment = @comment
@@ -23,9 +23,4 @@ class LikesController < ApplicationController
       end
     end
   end
-
-  private
-    def set_comment
-      @comment = Comment.find(params[:comment_id])
-    end
 end

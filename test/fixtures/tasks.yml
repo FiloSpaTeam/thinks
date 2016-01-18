@@ -3,26 +3,29 @@
 task_one:
   serial: 1
   description: Come sviluppatore voglio terminare il sistema di logging
-  project: rethink
+  project_id: 1
   thinker: admin
-  worker_thinker_id: 1
+  worker_thinker_id: 135138680
   status: sprint
   workload: fourty
+  title: We want that finally
 
 task_two:
   serial: 1
   description: Come ricercatore voglio completare la ricerca scientifica sul sistema cellulare
-  project: savage
+  project_id: 2
   thinker: marcus
-  worker_thinker_id: 1
+  worker_thinker_id: 135138680
   status: sprint
   workload: twenty
+  title: Need that to survive
 
 task_three:
   serial: 2
   description: Come ricercatore voglio completare la ricerca anatomica sul sistema cellulare
-  project: savage
+  project_id: 2
   thinker: marcus
-  worker_thinker_id: 1
+  worker_thinker_id: 135138680
   status: backlog
   workload: eight
+  title: So, finally build with..

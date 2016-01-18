@@ -19,9 +19,9 @@ class Project < ActiveRecord::Base
   has_many :tasks
   has_many :workloads, through: :tasks
   has_many :sprints
-  has_many :workers, lambda { distinct.unscoped }, through: :tasks do
+  has_many :workers, -> { distinct.unscoped }, through: :tasks do
     def active
-      where("tasks.status_id = ?", Status.in_progress.first.id)
+      where('tasks.status_id = ?', Status.in_progress.first.id)
     end
   end
 
@@ -73,7 +73,7 @@ class Project < ActiveRecord::Base
   end
 
   def part_of_team?(thinker)
-    return thinkers.exists?(thinker) || thinker == self.thinker
+    return thinkers.exists?(thinker.id) || thinker == self.thinker
   end
 
   def progress_percentage
