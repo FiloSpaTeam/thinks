@@ -2,7 +2,7 @@ class Status < ActiveRecord::Base
   has_many :tasks
 
   default_scope { order(:progress_order) }
-  
+
   scope :backlog, lambda { where translation_code: :backlog }
   scope :done, lambda { where translation_code: :done }
   scope :release, lambda { where translation_code: :release }

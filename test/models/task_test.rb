@@ -22,7 +22,7 @@ class TaskTest < ActiveSupport::TestCase
 
     task.status_id = nil
 
-    assert_not task.save, 'Saved task without related thinker.'
+    assert_not task.save, 'Saved task without related status.'
   end
 
   test 'should not save task if title is empty' do
