@@ -10,7 +10,6 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
-    puts params
     @filterrific = initialize_filterrific(
       Task,
       params[:filterrific],
@@ -20,7 +19,6 @@ class TasksController < ApplicationController
       }
     ) || return
     if params.key?(:filterrific)
-      puts 'First cond.'
       @tasks = @filterrific.find
 
       if params[:filterrific].key?('current_thinker')
@@ -33,7 +31,6 @@ class TasksController < ApplicationController
 
       @tasks = @tasks.page params[:page]
     else
-      puts 'Second cond.'
       @tasks = @filterrific.find.where(project: @project).page params[:page]
     end
     @statuses = Status.all
