@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   # GET /notifications.json
   def index
     @filterrific = initialize_filterrific(
-      Notification.where.not(:thinker => current_thinker).where(:project => current_thinker.teams.collect(&:id)).where.not(id: current_thinker.notifications.pluck(:id)).order('project_id DESC'),
+      Notification.where.not(thinker: current_thinker).where(project: current_thinker.teams.collect(&:id)).where.not(id: current_thinker.notifications.pluck(:id)).order('project_id DESC'),
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
