@@ -8,9 +8,8 @@ class LikesControllerTest < ActionController::TestCase
   end
 
   test 'should create like' do
-    comment = comments(:comment_one)
-
     assert_difference('Like.count') do
+      comment = comments(:comment_one)
       post :create, comment_id: comment.id, like: { thinker_id: 135_138_680 }
     end
 
