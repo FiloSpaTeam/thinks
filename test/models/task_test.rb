@@ -27,11 +27,10 @@ class TaskTest < ActiveSupport::TestCase
     task = Task.new
     task.title       = 'The best title'
     task.description = 'The best description in the world, very useful. I think that: we can win together!'
-    task.status_id   = nil
     task.project_id  = 1
     task.thinker_id  = 135138680
 
-    assert_not task.save, 'Saved task without related status.'
+    assert task.save, 'Saved task without related status.'
   end
 
   test 'should not save task if title is empty' do
