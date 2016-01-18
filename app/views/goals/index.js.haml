@@ -1,4 +1,6 @@
 - js = escape_javascript(
 - render(partial: 'goals/list', locals: { goals: @goals })
 - )
+- new_paginate = escape_javascript(paginate(@goals))
 $("#filterrific_results").html("#{js}");
+$("ul.pagination").html("#{new_paginate}");
