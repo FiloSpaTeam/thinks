@@ -34,7 +34,7 @@ class Task < ActiveRecord::Base
   belongs_to :status
 
   before_create :generate_serial
-  before_create :default_values
+  before_validation :default_values
 
   before_save :set_release
 
