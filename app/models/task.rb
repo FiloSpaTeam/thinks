@@ -201,7 +201,7 @@ class Task < ActiveRecord::Base
   private
 
   def update_goal
-    return if status != Status.done.first
+    return if status != Status.done.first || goal.nil?
 
     goal.progress = goal.progress_percentage
     goal.save
