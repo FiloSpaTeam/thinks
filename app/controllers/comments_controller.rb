@@ -15,10 +15,9 @@ class CommentsController < ApplicationController
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@comment)
-        set_validators_for_form_help
 
-        format.html { redirect_to @task, alert: flash[:error], "comment[text]": @comment.text }
-        format.json { render json: @task.comment, status: :unprocessable_entity }
+        format.html { render 'tasks/show' }
+        format.json { render json: @comment, status: :unprocessable_entity }
       end
     end
   end

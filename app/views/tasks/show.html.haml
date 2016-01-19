@@ -1,4 +1,4 @@
-= render partial: 'shared/projectbar', locals: { project: @project }
+= render partial: 'shared/projectbar', locals: { project: @task.project }
 .row
   .col-sm-4
     .panel.panel-default
@@ -41,7 +41,7 @@
             = form_for @task, :url => judge_task_path(@task), method: :put do |f|
               .form-group
                 = f.label :workload, t('.define_workload'), class: "control-label"
-                = f.select :workload, options_from_collection_for_select(@workloads, :id, :description), {}, :class => "form-control"
+                = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
               = f.submit t("submit"), :class => "btn btn-primary"
           - else
             %strong
@@ -53,7 +53,7 @@
         - if !@task.worker.nil?
           %h4
             = @task.worker.name
-        - elsif @task.status == @status_sprint
+        - elsif @task.status == Status.sprint.first
           - if @task.project.workers.active.include?(current_thinker)
             %h4 No one is working over this but you have yet something to do ;-P
           - elsif @task.project.started?
@@ -111,7 +111,7 @@
               .form-group
               = comment.text
       .panel-footer
-        = form_for [@task, @comment] do |f|
+        = form_for [@task, Comment.new], remote: true do |f|
           .form-group
             = f.label :text, t(".your_small_thought_about"), :class => "control-label"
             = f.text_area(:text, :class => "form-control")

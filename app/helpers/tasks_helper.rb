@@ -1,13 +1,13 @@
 module TasksHelper
   def color_list_round_div(status)
-    color_list = { 
+    color_list = {
       "backlog"     => "backlog",
       "release"     => "info",
       "sprint"      => "danger",
       "in_progress" => "warning",
       "done"        => "success"
     }
-  
+
     return color_list[status]
   end
 

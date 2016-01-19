@@ -43,26 +43,12 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @status_sprint      = Status.sprint.first
-    @status_release     = Status.release.first
-    @status_in_progress = Status.in_progress.first
-
-    @workloads = Workload.all
-
     @comments = @task.comments(:include => :likes)
-    @likes    = @task.likes
-    @comment  = Comment.new
-    @workload = Workload.new
-
     if @task.status == Status.done.first
       @comment_approved = @comments.approved.first
       @reason           = @comment_approved.reason || Reason.new
     end
-
     @workload_voted = @task.votes.where(thinker: current_thinker).first
-
-    @liked   = @task.liked?(current_thinker)
-    @project = @task.project
   end
 
   # GET /projects/1/tasks/new
