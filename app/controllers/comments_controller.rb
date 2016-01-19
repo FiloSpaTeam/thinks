@@ -15,8 +15,9 @@ class CommentsController < ApplicationController
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@comment)
+        set_validators_for_form_help
 
-        format.html { render :new }
+        format.html { redirect_to @task, alert: flash[:error], "comment[text]": @comment.text }
         format.json { render json: @task.comment, status: :unprocessable_entity }
       end
     end
@@ -44,6 +45,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_validators_for_form_help
+    # description_validators = Task.validators_on(:description)[0]
+    # @chars_min_description = description_validators.options[:minimum]
+
+    # title_validators = Task.validators_on(:title)[0]
+    # @chars_max_title = title_validators.options[:maximum]
+  end
 
   def set_task
     @task = Task.find(params[:task_id])

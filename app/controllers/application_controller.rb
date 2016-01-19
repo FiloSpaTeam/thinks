@@ -22,8 +22,6 @@ class ApplicationController < ActionController::Base
 
     messages = object.errors.full_messages.map { |msg| "<li>#{msg}</li>" }.join
     flash.now[:error] = "<ul>#{messages}</ul>"
-
-    return ""
   end
 
   protected
