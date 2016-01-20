@@ -11,13 +11,15 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save && create_notification(@comment)
-        format.html { redirect_to @task, notice: 'Comment was successfully created.' }
+        flash[:notice] = 'Comment was successfully created.'
+
         format.json { render :show, status: :created, location: @task }
+        format.js { render js: "window.location = '#{task_path @task}'" }
       else
         set_form_errors(@comment)
 
-        format.html { render 'tasks/show' }
         format.json { render json: @comment, status: :unprocessable_entity }
+        format.js {}
       end
     end
   end
