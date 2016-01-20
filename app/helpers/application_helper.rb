@@ -42,4 +42,8 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def percentage_from_value_and_total(value, total)
+    (100 * value) / total
+  end
 end
