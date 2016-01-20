@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111194652) do
+ActiveRecord::Schema.define(version: 20160120205029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,10 +213,12 @@ ActiveRecord::Schema.define(version: 20160111194652) do
     t.datetime "updated_at",                             null: false
     t.string   "name"
     t.boolean  "admin",                  default: false
+    t.string   "slug"
   end
 
   add_index "thinkers", ["email"], name: "index_thinkers_on_email", unique: true, using: :btree
   add_index "thinkers", ["reset_password_token"], name: "index_thinkers_on_reset_password_token", unique: true, using: :btree
+  add_index "thinkers", ["slug"], name: "index_thinkers_on_slug", unique: true, using: :btree
 
   create_table "votes", id: false, force: :cascade do |t|
     t.integer "task_id"

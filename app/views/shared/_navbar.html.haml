@@ -38,10 +38,7 @@
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %ul.dropdown-menu
-              %li
-                %a
-                  %strong
-                    = current_thinker.name
+              %li= link_to current_thinker.name, thinker_path(current_thinker)
               -# %li= link_to t(".show"), current_thinker
               -# %li
               -#   %a{:href => "#"} My projects
