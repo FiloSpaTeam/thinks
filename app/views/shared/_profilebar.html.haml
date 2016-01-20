@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading
+    %strong=t '.general'
+  .list-group
+    %a{ href: "#", class: "list-group-item active" }
+      =t ('.account')
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.design')
+  .panel-heading
+    %strong=t '.security_and_privacy'
+  .list-group
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.password')
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.double_authentication')
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.privacy')
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.data')
+  .panel-heading
+    %strong=t '.preferences'
+  .list-group
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.views')
+    %a{ href: "#", class: "list-group-item disabled" }
+      =t ('.printing')
