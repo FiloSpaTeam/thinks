@@ -11,10 +11,10 @@ class CommentsControllerTest < ActionController::TestCase
     task = tasks(:task_one)
 
     assert_difference('Comment.count') do
-      post :create, task_id: task.id, comment:
+      post :create, format: :js, task_id: task.id, comment:
         { text: 'New comment', approved: true, thinker_id: 135_138_680 }
     end
 
-    assert_redirected_to task_path(task)
+    assert_response(200)
   end
 end
