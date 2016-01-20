@@ -4,10 +4,10 @@
   .navbar-header.pull-right
     = link_to project_sprints_path(project), :class => "btn navbar-btn" do
       = icon('flag', :class => "fa-lg dark-grey")
-      = t(".sprints")
+      %span.hidden-xs= t(".sprints")
     = link_to project_goals_path(project), :class => "btn navbar-btn" do
       = icon('crosshairs', :class => "fa-lg dark-grey")
-      = t(".goals")
+      %span.hidden-xs= t(".goals")
     = link_to project_tasks_path(project), :class => "btn navbar-btn" do
       = icon('tasks', :class => "fa-lg dark-grey")
-      = t(".tasks")
+      %span.hidden-xs= t(".tasks")

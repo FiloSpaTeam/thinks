@@ -2,7 +2,7 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version = '0.1.1.25'
+    version = '0.1.1.28'
     "Version: #{version}"
   end
 
@@ -41,5 +41,9 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe
+  end
+
+  def percentage_from_value_and_total(value, total)
+    (100 * value) / total
   end
 end
