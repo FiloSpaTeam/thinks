@@ -3,7 +3,7 @@ module ApplicationHelper
 
   def application_version
     version = '0.1.1.30'
-    "Version: #{version}"
+    "Version: #{version} (build: 2016.01.21)"
   end
 
   def link_to_button(path, text, icon_source)
