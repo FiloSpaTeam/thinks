@@ -1,31 +1,31 @@
 .panel.panel-default
-  - if goal.tasks.count.nonzero?
-    .panel-body
-      %strong
-        = link_to "Tasks", project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal)
-      .progress.progress-tiny
+  .panel-body
+    %strong
+      = link_to "Tasks", project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal)
+    .progress.progress-tiny
+      - if goal.tasks.size.nonzero?
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(goal.tasks.release.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_sprint.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_progress.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.done.size, goal.tasks.size)}%;" }
-      =pluralize goal.tasks.size, 'task'
+    =pluralize goal.tasks.size, 'task'
 
-    .list-group.hidden-xs.hidden-sm
-      .list-group-item
-        = badge(goal.tasks.count)
-        total
-      .list-group-item
-        = badge(goal.tasks.release.count)
-        in release
-      .list-group-item
-        = badge(goal.tasks.in_sprint.count)
-        ready for work
-      .list-group-item
-        = badge(goal.tasks.in_progress.count)
-        in progress
-      .list-group-item
-        = badge(goal.tasks.done.count)
-        done
+  .list-group.hidden-xs.hidden-sm
+    .list-group-item
+      = badge(goal.tasks.count)
+      total
+    .list-group-item
+      = badge(goal.tasks.release.count)
+      in release
+    .list-group-item
+      = badge(goal.tasks.in_sprint.count)
+      ready for work
+    .list-group-item
+      = badge(goal.tasks.in_progress.count)
+      in progress
+    .list-group-item
+      = badge(goal.tasks.done.count)
+      done
 
 
   .panel-body.hidden-xs.hidden-sm

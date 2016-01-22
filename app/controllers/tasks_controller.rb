@@ -21,14 +21,6 @@ class TasksController < ApplicationController
     if params.key?(:filterrific)
       @tasks = @filterrific.find
 
-      if params[:filterrific].key?('current_thinker')
-        @tasks = @tasks.with_current_thinker(current_thinker)
-      end
-
-      if params[:filterrific].key?('project_id')
-        @tasks = @tasks.with_project(params[:filterrific][:project_id])
-      end
-
       @tasks = @tasks.page params[:page]
     else
       @tasks = @filterrific.find.where(project: @project).page params[:page]
