@@ -4,7 +4,7 @@
 .panel.panel-default
   .panel-heading
     = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
-      .form-group
+      .row
         .col-xs-12
           .input-group
             = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'

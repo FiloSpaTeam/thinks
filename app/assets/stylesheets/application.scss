@@ -194,6 +194,10 @@ a {
 
 .navbar-toggle { border: none; }
 
+.progress-tiny {
+    height: 14px;
+}
+
 @import "dashboard";
 @import "cover";
 @import "carousel";
