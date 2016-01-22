@@ -2,8 +2,9 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version = '0.1.1.28'
-    "Version: #{version}"
+    version = '0.1.1.30'
+    date    = '2016.01.21'
+    "Version: #{version} (build: #{date})"
   end
 
   def link_to_button(path, text, icon_source)

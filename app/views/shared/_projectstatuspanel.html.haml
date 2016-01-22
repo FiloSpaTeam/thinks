@@ -18,10 +18,10 @@
       %strong
         = link_to "Tasks", project_tasks_path(project)
       .progress
-        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
-        .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
-        .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
       =pluralize project.tasks.size, 'task'
 
     .list-group.hidden-xs.hidden-sm
