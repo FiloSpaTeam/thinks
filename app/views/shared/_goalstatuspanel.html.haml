@@ -1,16 +1,9 @@
 .panel.panel-default
-  .panel-body
-    %strong
-      Goal
-    .progress
-      %div{"aria-valuemax" => "100", "aria-valuemin" => "1", "aria-valuenow" => "#{goal.progress_percentage}", :class => "progress-bar #{progress_bar_color(goal.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{goal.progress_percentage}%;"}
-    progress
-
   - if goal.tasks.count.nonzero?
     .panel-body
       %strong
         = link_to "Tasks", project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal)
-      .progress
+      .progress.progress-tiny
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(goal.tasks.release.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_sprint.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_progress.size, goal.tasks.size)}%;" }
