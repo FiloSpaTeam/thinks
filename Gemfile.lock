@@ -271,7 +271,7 @@ DEPENDENCIES
   friendly_id (~> 5.1.0)
   haml (~> 4.0.7)
   haml-rails (~> 0.9.0)
-  haml_lint (= 0.16.0)
+  haml_lint
   heroku-deflater
   holder_rails (~> 2.9.0)
   jbuilder (~> 2.0)
@@ -290,7 +290,7 @@ DEPENDENCIES
   therubyracer (~> 0.12.2)
   turbolinks (~> 2.5)
   uglifier (= 2.7.2)
-  web-console (~> 2.0)
+  web-console
 
 BUNDLED WITH
    1.11.2
