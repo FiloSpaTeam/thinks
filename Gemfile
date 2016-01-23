@@ -74,7 +74,7 @@ gem 'dotenv-rails', '2.1.0'
 # gem 'capistrano-rails', group: :development
 
 # Access an IRB console on exception pages or by using <%= console %> in views
-gem 'web-console', group: :development
+gem 'web-console', '2.2.1', group: :development
 
 group :development, :test do
   # Linters
