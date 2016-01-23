@@ -42,9 +42,12 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  /* background-color: #eceff1; */
 
-  .container { padding: 60px 15px; }
+  .container { padding: 20px 15px; }
+
+  @media screen and (min-width: 992px) {
+    .container { padding: 60px 15px; }
+  }
 }
 
 .footer {
@@ -193,10 +196,6 @@ a {
 .bg-backlog {background-color: $backlog;}
 
 .navbar-toggle { border: none; }
-
-.progress-tiny {
-    height: 14px;
-}
 
 @import "dashboard";
 @import "cover";

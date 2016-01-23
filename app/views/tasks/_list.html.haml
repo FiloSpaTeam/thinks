@@ -1,6 +1,6 @@
 %thead
   %tr
-    %td.col-lg-9.col-md-9.col-sm-9.col-xs-8
+    %td.col-lg-8.col-md-8.col-sm-10.col-xs-9
       .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
         %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
           %h5
@@ -18,23 +18,29 @@
         %h5
           %strong
             = filterrific_sorting_link(@filterrific, :workload, :url_for_attrs => { "filterrific[with_project]" => @project.id } )
+    %td.col-lg-2.col-xs-1.col-sm-2
 %tbody
   - if (!@tasks.empty?)
     - @tasks.each do |task|
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
-          %a.pull-right.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
-            = icon('crosshairs', :class => "dark-grey fa-lg")
           %strong
             = link_to task.title, task_path(task)
           .dark-grey
             %small
               %strong
                 \##{task.serial}
-              created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
+              at #{task.created_at.to_s(:long)}
+              %span.hidden-xs
+                by #{task.thinker.name}
         %td.text-center
           .col-xs-12.workload-table
             = workload_description(task)
+        %td.text-right
+          %a.btn.pull-right.hidden-xs{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
+            = icon('bullseye', :class => "dark-grey fa-lg")
+          %a.btn.pull-right{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
+            = icon('crosshairs', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 2 }
       = t('no_record')

@@ -2,7 +2,7 @@
   .panel-body
     %strong
       Project
-    .progress.progress-tiny
+    .progress
       %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
     - if project.started?
       Sprint
@@ -17,7 +17,7 @@
     .panel-body
       %strong
         = link_to "Tasks", project_tasks_path(project)
-      .progress.progress-tiny
+      .progress
         - if project.tasks.size.nonzero?
           .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
           .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
