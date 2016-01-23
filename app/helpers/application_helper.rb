@@ -2,7 +2,7 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version = '0.1.1.34'
+    version = '0.1.1.37'
     date    = '2016.01.23'
     "Version: #{version} (build: #{date})"
   end
