@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :notifications do
     put :read
   end
+
   resources :goals
   resources :cycles
   devise_for :thinkers, :controllers => {
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
   resources :licenses
   resources :languages
   resources :projects do
+    put :read_all
+
     member do
       get :team
 
