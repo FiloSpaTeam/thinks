@@ -43,11 +43,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 
-  .container { padding: 20px 15px; }
-
-  @media screen and (min-width: 992px) {
-    .container { padding: 60px 15px; }
-  }
+  .container { padding: 60px 15px; }
 }
 
 .footer {
@@ -200,6 +196,7 @@ a {
 @import "dashboard";
 @import "cover";
 @import "carousel";
+@import "mobile";
 
 /* SCSS Pages files
 -------------------------------------------------- */

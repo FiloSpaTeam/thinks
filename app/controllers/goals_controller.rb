@@ -26,6 +26,7 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
+    @project = @goal.project
   end
 
   # GET /goals/new

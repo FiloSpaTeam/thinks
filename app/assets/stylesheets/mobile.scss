@@ -1,0 +1,41 @@
+@media screen and (max-width: 991px) {
+    body {
+        .container { padding: 20px 15px; }
+    }
+
+    @media screen and (max-width: 767px) {
+        body {
+            .container { padding: 0; }
+
+            .panel {
+                margin-bottom: 0;
+                border-radius: 0;
+
+                border-top: 0;
+                border-right: 0;
+                border-left: 0;
+
+                box-shadow: none;
+
+                .panel-body {
+                    padding-bottom: 5;
+                    padding-top: 5;
+                }
+            }
+
+            .navbar {
+                margin-bottom: 0;
+
+                .navbar-brand {
+                    float: none;
+
+                    padding-right: 116px;
+                }
+
+                .navbar-btn {
+                    padding: 6px;
+                }
+            }
+        }
+    }
+}
