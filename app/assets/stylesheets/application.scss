@@ -42,7 +42,6 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  /* background-color: #eceff1; */
 
   .container { padding: 60px 15px; }
 }
@@ -194,13 +193,10 @@ a {
 
 .navbar-toggle { border: none; }
 
-.progress-tiny {
-    height: 14px;
-}
-
 @import "dashboard";
 @import "cover";
 @import "carousel";
+@import "mobile";
 
 /* SCSS Pages files
 -------------------------------------------------- */

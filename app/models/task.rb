@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
       :with_goal,
       :with_worker,
       :with_thinker,
+      :with_project,
 
       :workload_lower_than
     ]
@@ -29,8 +30,8 @@ class Task < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :goal
-  belongs_to :thinker
   belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
+  belongs_to :thinker
   belongs_to :status
 
   before_create :generate_serial
@@ -83,6 +84,10 @@ class Task < ActiveRecord::Base
     where(thinker: thinker)
   }
 
+  scope :with_project, lambda { |project|
+    where(project: project)
+  }
+
   scope :search_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
   }
@@ -114,16 +119,6 @@ class Task < ActiveRecord::Base
     else
       fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
-  }
-
-  scope :with_project, lambda { |project_id|
-    where(project: project_id)
-  }
-
-  scope :with_current_thinker, lambda { |current_thinker|
-    status_done = Status.done.first
-
-    joins(:votes).where("(votes.thinker_id = ? and tasks.status_id != ?) or (tasks.status_id = ?)", current_thinker, status_done, status_done)
   }
 
   # This method provides select options for the `sorted_by` filter select input.

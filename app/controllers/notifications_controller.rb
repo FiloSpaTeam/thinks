@@ -6,18 +6,22 @@ class NotificationsController < ApplicationController
   # GET /notifications.json
   def index
     @filterrific = initialize_filterrific(
-      Notification.where.not(thinker: current_thinker).where(project: current_thinker.teams.collect(&:id)).where.not(id: current_thinker.notifications.pluck(:id)).order('project_id DESC'),
+      Notification
+        .where.not(thinker: current_thinker)
+        .where(project: current_thinker.teams.collect(&:id))
+        .where.not(id: current_thinker.notifications.pluck(:id))
+        .order('project_id DESC'),
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
-    ) or return
-    @notifications         = @filterrific.find.page params[:page]
+    ) || return
+    @notifications = @filterrific.find.page params[:page]
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
+    puts "Had to reset filterrific params: #{e.message}"
+    redirect_to(reset_filterrific_url(format: :html)) && return
   end
 
   # GET /notifications/1
@@ -74,8 +78,8 @@ class NotificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /notifications_read/1
-  # PATCH/PUT /notifications_read/1.json
+  # PATCH/PUT /notifications/1/read
+  # PATCH/PUT /notifications/1/read.json
   def read
     @notification = Notification.find(params[:notification_id])
 
@@ -87,13 +91,14 @@ class NotificationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notification
-      @notification = Notification.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def notification_params
-      params.require(:notification).permit(:project_id, :thinker_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_notification
+    @notification = Notification.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def notification_params
+    params.require(:notification).permit(:project_id, :thinker_id)
+  end
 end

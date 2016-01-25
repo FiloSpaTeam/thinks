@@ -82,5 +82,5 @@
               %ul.list-group.scrollbar
                 - @project.thinkers.unscoped.each do |thinker|
                   %li.list-group-item
-                    = link_to("filterrific[with_thinker]" => thinker, method: :get, remote: true) do
+                    = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project.id, method: :get, remote: true) do
                       = thinker.name

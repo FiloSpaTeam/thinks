@@ -6,7 +6,19 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand"
+      = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg"
+      - if @project.present? && @project.id.present?
+        .navbar-header.pull-left.visible-xs{:style => "width: 116px;"}
+          = link_to project_sprints_path(@project), :class => "btn navbar-btn" do
+            = icon('flag', :class => "fa-lg fa-inverse")
+            %span.hidden-xs= t(".sprints")
+          = link_to project_goals_path(@project), :class => "btn navbar-btn" do
+            = icon('crosshairs', :class => "fa-lg fa-inverse")
+            %span.hidden-xs= t(".goals")
+          = link_to project_tasks_path(@project), :class => "btn navbar-btn" do
+            = icon('tasks', :class => "fa-lg fa-inverse")
+            %span.hidden-xs= t(".tasks")
+        = link_to truncate(@project.title, length: 16), project_path(@project), :class => 'visible-xs text-center navbar-brand'
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}
