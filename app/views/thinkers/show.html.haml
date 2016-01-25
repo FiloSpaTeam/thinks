@@ -1,13 +1,18 @@
-.navbar.navbar-default
-  .navbar-header.pull-left
-    %a{ href: "javascript:;", class: "navbar-brand" }= @thinker.name
-  .navbar-header.pull-right
-    %a{ href: "javascript:;", class: "navbar-brand" }
-      %small= @thinker.email
+= render partial: 'shared/profileheader', locals: { thinker: @thinker }
 .row
   .col-md-4
     = render partial: 'shared/profilebar', locals: { thinker: @thinker }
   .col-md-8
     .panel.panel-default
       .panel-body
-        Body
+        .form-group
+          %label.control-label=t '.name'
+          %input.form-control{ value: @thinker.name, readonly: true }
+        .form-group
+          %label.control-label=t '.email'
+          %input.form-control{ value: @thinker.email, readonly: true }
+        .form-group
+          %label.control-label=t '.created_at'
+          %input.form-control{ value: @thinker.created_at.to_s(:long), readonly: true }
+      .panel-footer
+        = link_to t('edit'), edit_thinker_path(@thinker), :class => "btn btn-primary"
