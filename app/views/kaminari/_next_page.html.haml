@@ -1,2 +1,4 @@
-%li
+%li.hidden-xs
   = link_to_unless current_page.last?, raw(t 'views.pagination.next'), url, :rel => 'next', :remote => remote
+%li.visible-xs.next
+  = link_to_unless current_page.last?, icon('caret-right', :class => 'fa-2x dark-grey'), url, :rel => 'next', :remote => remote

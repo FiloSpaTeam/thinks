@@ -3,4 +3,6 @@
 - )
 - new_paginate = escape_javascript(paginate(@goals, :remote => true))
 $("#filterrific_results").html("#{js}");
-$("ul.pagination").html("#{new_paginate}");
+var $col = $('ul.pagination').parent();
+$col.find('ul.pagination, nav').remove();
+$col.append("#{new_paginate}");
