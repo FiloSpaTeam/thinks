@@ -1,42 +1,12 @@
-= form_for @thinker, :html => { :class => 'form-horizontal' } do |f|
-  .form-group
-    = f.label :email, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :email, :class => 'text_field form-control'
-  .form-group
-    = f.label :encrypted_password, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :encrypted_password, :class => 'text_field form-control'
-  .form-group
-    = f.label :reset_password_token, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :reset_password_token, :class => 'text_field form-control'
-  .form-group
-    = f.label :reset_password_sent_at, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :reset_password_sent_at, :class => 'text_field form-control'
-  .form-group
-    = f.label :remember_created_at, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :remember_created_at, :class => 'text_field form-control'
-  .form-group
-    = f.label :current_sign_in_at, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :current_sign_in_at, :class => 'text_field form-control'
-  .form-group
-    = f.label :last_sign_in_at, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :last_sign_in_at, :class => 'text_field form-control'
-  .form-group
-    = f.label :current_sign_in_ip, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :current_sign_in_ip, :class => 'text_field form-control'
-  .form-group
-    = f.label :last_sign_in_ip, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :last_sign_in_ip, :class => 'text_field form-control'
-  .form-group
-    .col-md-offset-2.col-md-10
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        thinkers_path, :class => 'btn btn-default'                   |
+= form_for @thinker, :html => { :class => '' } do |f|
+  .panel-body
+    .form-group
+      = f.label :name, :class => "control-label"
+      = f.text_field :name, :class => "form-control", :placeholder => 'Your real name', :value => @thinker.name
+    .form-group
+      = f.label :email, :class => "control-label"
+      = f.text_field :email, :class => "form-control", :placeholder => 'Your real name', :value => @thinker.email
+  .panel-footer
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+      thinker_path(@thinker), :class => 'btn btn-default'                   |

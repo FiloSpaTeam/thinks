@@ -1,4 +1,7 @@
-- model_class = Thinker
-.page-header
-  %h1= t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
-= render :partial => 'form'
+= render partial: 'shared/profileheader', locals: { thinker: @thinker }
+.row
+  .col-md-4
+    = render partial: 'shared/profilebar', locals: { thinker: @thinker }
+  .col-md-8
+    .panel.panel-default
+      = render :partial => 'form'
