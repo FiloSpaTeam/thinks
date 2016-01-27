@@ -30,8 +30,8 @@ class Task < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :goal
-  belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
   belongs_to :thinker
+  belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
   belongs_to :status
 
   before_create :generate_serial
@@ -77,15 +77,15 @@ class Task < ActiveRecord::Base
   }
 
   scope :with_worker, lambda { |worker|
-    where(worker: worker)
+    where(worker: Thinker.friendly.find(worker))
   }
 
   scope :with_thinker, lambda { |thinker|
-    where(thinker: thinker)
+    where(thinker: Thinker.friendly.find(thinker))
   }
 
   scope :with_project, lambda { |project|
-    where(project: project)
+    where(project: Project.friendly.find(project))
   }
 
   scope :search_title, lambda { |query|

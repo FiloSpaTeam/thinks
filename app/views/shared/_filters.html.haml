@@ -69,7 +69,7 @@
               %ul.list-group.scrollbar
                 - @project.workers.unscoped.each do |worker|
                   %li.list-group-item
-                    = link_to("filterrific[with_worker]" => worker, method: :get, remote: true) do
+                    = link_to("filterrific[with_worker]" => worker, "filterrific[with_project]" => @project, method: :get, remote: true) do
                       = worker.name
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
@@ -82,5 +82,5 @@
               %ul.list-group.scrollbar
                 - @project.thinkers.unscoped.each do |thinker|
                   %li.list-group-item
-                    = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project.id, method: :get, remote: true) do
+                    = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project, method: :get, remote: true) do
                       = thinker.name

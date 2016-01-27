@@ -1,6 +1,6 @@
 %thead
   %tr
-    %td.col-lg-8.col-md-8.col-sm-10.col-xs-9
+    %td.col-lg-7.col-md-7.col-sm-7.col-xs-7
       .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
         %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
           %h5
@@ -10,15 +10,15 @@
         = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
           - @statuses.each do |status|
             = content_tag(:li) do
-              = link_to("filterrific[status_progress]" => status, "filterrific[with_project]" => @project.id, method: :get, remote: true) do
+              = link_to("filterrific[status_progress]" => status, "filterrific[with_project]" => @project, method: :get, remote: true) do
                 .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("projects.tasks.#{status.translation_code}")
     %td.text-center
       .col-xs-12
         %h5
           %strong
-            = filterrific_sorting_link(@filterrific, :workload, :url_for_attrs => { "filterrific[with_project]" => @project.id } )
-    %td.col-lg-2.col-xs-1.col-sm-2
+            = filterrific_sorting_link(@filterrific, :workload)
+    %td.col-lg-2.col-xs-1.col-sm-2.col-xs-1
 %tbody
   - if (!@tasks.empty?)
     - @tasks.each do |task|
