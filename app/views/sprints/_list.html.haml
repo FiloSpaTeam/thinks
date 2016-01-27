@@ -27,9 +27,15 @@
         %td
           Sprint #{sprint.serial}
         %td
-          = sprint.created_at.to_s(:long)
+          %span.hidden-xs
+            = sprint.created_at.to_s(:long)
+          %span.visible-xs
+            = sprint.created_at.to_s(:short)
         %td
-          = sprint.updated_at.to_s(:long)
+          %span.hidden-xs
+            = sprint.updated_at.to_s(:long)
+          %span.visible-xs
+            = sprint.updated_at.to_s(:short)
         %td.text-center
           = sprint.obtained
   - else
