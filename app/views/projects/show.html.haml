@@ -1,16 +1,16 @@
 - model_class = Project
 = render :partial => 'shared/projectbar', locals: { project: @project }
-= markdown(@project.description)
-.form-group
-  = label_tag t('projects.list.progress')
-  .progress
-    %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@project.progress_percentage}", :class => "progress-bar #{progress_bar_color(@project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{@project.progress_percentage}%;"}
-      = @project.progress_percentage
-      \%
-.form-group
-  = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn btn-default'
-  - if creator?(@project.thinker.id)
-    = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-default'
-    = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
-  - if thinker_signed_in? && !creator?(@project.thinker.id) && !@project.part_of_team?(current_thinker)
-    = link_to t('.partecipate'), partecipate_project_path(@project), :class => 'btn btn-success', :method => :put
+.row
+  .col-md-4
+    = render :partial => 'projectsummary', locals: { project: @project }
+  .col-md-8
+    .panel.panel-default
+      .panel-body
+        = markdown(@project.description)
+      .panel-footer
+        - if creator?(@project.thinker.id)
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-primary'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger pull-right'
+        = link_to t('.back', :default => t("helpers.links.back")), projects_path, :class => 'btn btn-default'
+        - if thinker_signed_in? && !creator?(@project.thinker.id) && !@project.part_of_team?(current_thinker)
+          = link_to t('.partecipate'), partecipate_project_path(@project), :class => 'btn btn-success', :method => :put
