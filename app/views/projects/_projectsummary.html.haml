@@ -5,7 +5,51 @@
         = project.progress_percentage
         \%
     = t('projects.list.progress')
-  .list-group
+  .list-group.hidden-xs
+    .list-group-item
+      founder
+      %strong
+        = content_tag :span, project.thinker.name, :class => "pull-right"
+    .list-group-item
+      category
+      %strong
+        = content_tag :span, t("category.#{project.category.t_name}"), :class => "pull-right"
+    .list-group-item
+      license
+      %strong
+        = content_tag :span, project.license.description, :class => "pull-right"
+    .list-group-item
+      sprint every
+      %strong
+        = content_tag :span, project.cycle.description, :class => "pull-right"
+    .list-group-item
+      minimum team number
+      %strong
+        = content_tag :span, project.minimum_team_number, :class => "pull-right"
+    .list-group-item
+      release date
+      %strong
+        = content_tag :span, project.release_at.to_s(:long), :class => "pull-right"
+  .panel-body.hidden-xs
+    %strong
+      URLs
+  .list-group.hidden-xs
+    .list-group-item
+      = link_to project.home_url, :class => "pull-right" do
+        = icon('home', :class => "dark-grey")
+      website
+    .list-group-item
+      sources
+      = link_to project.source_code_url, :class => "pull-right" do
+        = icon('github-alt', :class => "dark-grey")
+    .list-group-item
+      documentation
+      = link_to project.documentation_url, :class => "pull-right" do
+        = icon('book', :class => "dark-grey")
+  .panel-body.hidden-xs
+    %strong
+      Summary
+  .list-group.hidden-xs
     .list-group-item
       = badge(project.thinkers.distinct.size)
       thinkers

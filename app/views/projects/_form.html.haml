@@ -1,5 +1,5 @@
 = form_for @project, :html => { :class => '' } do |f|
-  %h3.chapter-subtitle General informations
+  %h3 General informations
   .form-group
     = f.label :title, :class => 'control-label'
     = f.text_field :title, :class => 'form-control', :placeholder => "My project"
@@ -20,11 +20,11 @@
     = f.label :release_at, :class => 'control-label'
     = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
     %span#help-release_at.help-block= t ".release_at_help"
-  %h3.chapter-subtitle Sprint settings
+  %h3 Sprint settings
   .form-group
     = f.label :cycle_id, :class => "control-label"
     = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
-  %h3.chapter-subtitle URLs
+  %h3 URLs
   .form-group.has-feedback
     = f.label :home_url, :class => 'control-label'
     = f.text_field :home_url, :class => 'form-control'
