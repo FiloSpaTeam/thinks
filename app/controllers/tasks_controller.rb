@@ -18,13 +18,7 @@ class TasksController < ApplicationController
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
     ) || return
-    if params.key?(:filterrific)
-      @tasks = @filterrific.find
-
-      @tasks = @tasks.page params[:page]
-    else
-      @tasks = @filterrific.find.where(project: @project).page params[:page]
-    end
+    @tasks    = @filterrific.find.where(project: @project).page params[:page]
     @statuses = Status.all
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
