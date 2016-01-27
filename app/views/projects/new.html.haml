@@ -1,8 +1,9 @@
-.form-group
-  %h1.chapter-title
-    = t ".new"
-    %small
-      = t ".created_by"
-      %b
-        = current_thinker.name
-= render :partial => 'form'
+.panel.panel-default
+  .panel-heading
+    %h4
+      %strong
+        = t ".new"
+      %small
+        = t ".created_by"
+        %b= current_thinker.name
+  = render :partial => 'form'

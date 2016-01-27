@@ -5,28 +5,28 @@
         = project.progress_percentage
         \%
     = t('projects.list.progress')
-  .list-group.hidden-xs
+  .list-group
     .list-group-item
       founder
       %strong
         = content_tag :span, project.thinker.name, :class => "pull-right"
-    .list-group-item
+    .list-group-item.hidden-xs
       category
       %strong
         = content_tag :span, t("category.#{project.category.t_name}"), :class => "pull-right"
-    .list-group-item
+    .list-group-item.hidden-xs
       license
       %strong
         = content_tag :span, project.license.description, :class => "pull-right"
-    .list-group-item
+    .list-group-item.hidden-xs
       sprint every
       %strong
         = content_tag :span, project.cycle.description, :class => "pull-right"
-    .list-group-item
+    .list-group-item.hidden-xs
       minimum team number
       %strong
         = content_tag :span, project.minimum_team_number, :class => "pull-right"
-    .list-group-item
+    .list-group-item.hidden-xs
       release date
       %strong
         = content_tag :span, project.release_at.to_s(:long), :class => "pull-right"
