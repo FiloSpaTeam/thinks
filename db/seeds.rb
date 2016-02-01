@@ -64,7 +64,7 @@ cycles_list = [
 ]
 
 cycles_list.each do |tcode, description, days|
-  Cycle.where(translation_code: tcode) do |cycle|
+  Cycle.where(translation_code: tcode).first_or_create do |cycle|
     cycle.description = description
     cycle.days        = days
   end
