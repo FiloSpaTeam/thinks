@@ -12,6 +12,9 @@
           %label.control-label=t '.name'
           %input.form-control{ value: @thinker.name, readonly: true }
         .form-group
+          %label.control-label=t '.sex'
+          %input.form-control{ value: @thinker.sex.try(:t_name) ? t("sex.#{@thinker.sex.t_name}") : t(:not_defined_yet), readonly: true }
+        .form-group
           %label.control-label=t '.birthday'
           %input.form-control{ value: @thinker.born_at.try(:to_s) ? @thinker.born_at.to_s(:long) : t('not_defined_yet'), readonly: true }
         %h4=t '.profile'

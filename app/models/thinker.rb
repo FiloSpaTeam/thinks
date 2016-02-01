@@ -15,4 +15,6 @@ class Thinker < ActiveRecord::Base
   has_many :tasks
   has_many :comments
   has_many :likes
+
+  belongs_to :sex
 end

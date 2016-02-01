@@ -191,6 +191,10 @@ en:
       comments:
         create: "%{thinker} comment the task."
 
+  sex:
+    male: "Male"
+    female: "Female"
+
   # Shared section
   shared:
     navbar:
