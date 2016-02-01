@@ -11,6 +11,7 @@ gem 'pg', '0.18.4'
 # Heroku
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
+gem 'carrierwave'
 gem 'cloudinary'
 
 # Bootstrap SASS port

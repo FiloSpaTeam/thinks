@@ -5,9 +5,16 @@
   .col-md-8
     .panel.panel-default
       .panel-body
+        %h4=t '.identity'
+        .form-group
+          %label.control-label=t '.photo'
         .form-group
           %label.control-label=t '.name'
           %input.form-control{ value: @thinker.name, readonly: true }
+        .form-group
+          %label.control-label=t '.birthday'
+          %input.form-control{ value: @thinker.born_at.try(:to_s) ? @thinker.born_at.to_s(:long) : t('not_defined_yet'), readonly: true }
+        %h4=t '.profile'
         .form-group
           %label.control-label=t '.email'
           %input.form-control{ value: @thinker.email, readonly: true }

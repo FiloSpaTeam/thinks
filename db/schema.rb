@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120205029) do
+ActiveRecord::Schema.define(version: 20160130113751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,10 @@ ActiveRecord::Schema.define(version: 20160120205029) do
   add_index "reasons", ["comment_id"], name: "index_reasons_on_comment_id", using: :btree
   add_index "reasons", ["thinker_id"], name: "index_reasons_on_thinker_id", using: :btree
 
+  create_table "sexes", force: :cascade do |t|
+    t.string "t_name"
+  end
+
   create_table "sprints", force: :cascade do |t|
     t.integer  "obtained"
     t.integer  "project_id"
@@ -214,10 +218,14 @@ ActiveRecord::Schema.define(version: 20160120205029) do
     t.string   "name"
     t.boolean  "admin",                  default: false
     t.string   "slug"
+    t.date     "born_at"
+    t.string   "photo_id"
+    t.integer  "sex_id"
   end
 
   add_index "thinkers", ["email"], name: "index_thinkers_on_email", unique: true, using: :btree
   add_index "thinkers", ["reset_password_token"], name: "index_thinkers_on_reset_password_token", unique: true, using: :btree
+  add_index "thinkers", ["sex_id"], name: "index_thinkers_on_sex_id", using: :btree
   add_index "thinkers", ["slug"], name: "index_thinkers_on_slug", unique: true, using: :btree
 
   create_table "votes", id: false, force: :cascade do |t|

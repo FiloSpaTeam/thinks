@@ -29,7 +29,7 @@
     .list-group-item.hidden-xs
       release date
       %strong
-        = content_tag :span, project.release_at.to_s(:long), :class => "pull-right"
+        = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
   .panel-body.hidden-xs
     %strong
       URLs
