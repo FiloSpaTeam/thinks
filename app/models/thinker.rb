@@ -7,7 +7,7 @@ class Thinker < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  mount_uploader :avatar, AvatarUploader
+  has_attachment :avatar, accept: [:jpg, :png, :gif]
 
   has_and_belongs_to_many :teams, class_name: 'Project'
   has_and_belongs_to_many :notifications

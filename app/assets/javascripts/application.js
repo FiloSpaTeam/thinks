@@ -17,4 +17,9 @@
 //= require turbolinks
 //= require filterrific/filterrific-jquery
 //= require holder
+//= require jquery.ui.widget
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require cloudinary/jquery.cloudinary
+//= require attachinary
 //= require_tree .

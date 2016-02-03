@@ -7,8 +7,7 @@
       .panel-body
         %h4=t '.identity'
         .form-group
-          %label.control-label=t '.photo'
-          = image_tag(@thinker.avatar.url) if @thinker.avatar?
+          = cl_image_tag(@thinker.avatar.path, alt: t('.photo'), size: '50x50', crop: :thumb, gravity: :face) if @thinker.avatar?
         .form-group
           %label.control-label=t '.name'
           %input.form-control{ value: @thinker.name, readonly: true }

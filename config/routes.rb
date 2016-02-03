@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     put :read
   end
 
+  mount Attachinary::Engine => "/attachinary"
+
   resources :goals
   resources :cycles
   devise_for :thinkers, :controllers => {

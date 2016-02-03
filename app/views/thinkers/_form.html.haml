@@ -1,11 +1,9 @@
-= form_for @thinker, :html => { :class => '' } do |f|
+= form_for @thinker do |f|
   .panel-body
     %h4=t '.identity'
     .form-group
-      = f.label :avatar, :class => "control-label"
-      = image_tag(@thinker.avatar_url) if @thinker.avatar?
-      = f.hidden_field :avatar_cache
-      = f.file_field :avatar
+      = cl_image_tag(@thinker.avatar.path, alt: t('.photo'), size: '50x50', crop: :thumb, gravity: :face) if @thinker.avatar?
+      = f.attachinary_file_field :avatar
     .form-group
       = f.label :name, :class => "control-label"
       = f.text_field :name, :class => "form-control", :placeholder => 'Your real name', :value => @thinker.name

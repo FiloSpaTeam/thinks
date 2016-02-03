@@ -13,6 +13,7 @@ gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'attachinary'
 
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'

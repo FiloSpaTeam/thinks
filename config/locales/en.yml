@@ -105,6 +105,9 @@ en:
   thinkers:
     show:
       profile : "Profile"
+      photo: "Photo"
+    form:
+      photo: "Photo"
 
   projects:
     index:
