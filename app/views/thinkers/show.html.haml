@@ -8,6 +8,7 @@
         %h4=t '.identity'
         .form-group
           %label.control-label=t '.photo'
+          = image_tag(@thinker.avatar.url) if @thinker.avatar?
         .form-group
           %label.control-label=t '.name'
           %input.form-control{ value: @thinker.name, readonly: true }
