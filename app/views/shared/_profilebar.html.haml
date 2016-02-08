@@ -2,8 +2,7 @@
   .panel-heading
     %strong=t '.general'
   .list-group
-    %a{ href: "#", class: "list-group-item active" }
-      =t ('.personal')
+    = link_to(t('.personal'), thinker_path(@thinker), :class => "list-group-item #{ current_page?(thinker_path) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.design')
   .panel-heading
