@@ -19,4 +19,5 @@ class Thinker < ActiveRecord::Base
   has_many :likes
 
   belongs_to :sex
+  belongs_to :country
 end
