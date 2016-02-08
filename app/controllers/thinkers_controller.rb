@@ -42,7 +42,7 @@ class ThinkersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def thinker_params
-    allowed_params = [:name, :email, :born_at, :sex_id, :avatar]
+    allowed_params = [:name, :email, :born_at, :sex_id, :avatar, :country_iso]
 
     params.require(:thinker).permit(allowed_params)
   end

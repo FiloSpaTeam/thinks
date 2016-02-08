@@ -245,7 +245,7 @@ ActiveRecord::Schema.define(version: 20160208215222) do
     t.string   "photo_id"
     t.integer  "sex_id"
     t.string   "avatar"
-    t.integer  "country_id"
+    t.string   "country_iso"
   end
 
   add_index "thinkers", ["email"], name: "index_thinkers_on_email", unique: true, using: :btree

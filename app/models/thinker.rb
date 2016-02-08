@@ -19,5 +19,5 @@ class Thinker < ActiveRecord::Base
   has_many :likes
 
   belongs_to :sex
-  belongs_to :country
+  belongs_to :country, class_name: 'Country', foreign_key: :country_iso
 end
