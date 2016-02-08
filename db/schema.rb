@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203223228) do
+ActiveRecord::Schema.define(version: 20160208183056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 20160203223228) do
 
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["thinker_id"], name: "index_comments_on_thinker_id", using: :btree
+
+  create_table "countries", primary_key: "iso", force: :cascade do |t|
+    t.string  "name",           null: false
+    t.string  "printable_name", null: false
+    t.string  "iso3"
+    t.integer "numcode"
+  end
 
   create_table "cycles", force: :cascade do |t|
     t.string   "translation_code"

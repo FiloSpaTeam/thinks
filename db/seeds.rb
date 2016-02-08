@@ -6,6 +6,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
 
 statuses_list = [
   ['backlog',     'ToDo',             1],
@@ -93,4 +94,12 @@ sexes_list = %w(male female)
 
 sexes_list.each do |tname|
   Sex.where(t_name: tname).first_or_create
+end
+CSV.foreach(File.join(Rails.root, 'db', 'iso_country_list.csv'), headers: false, col_sep: ',') do |row|
+  Country.where(iso: row[0]).first_or_create do |country|
+    country.name           = row[1]
+    country.printable_name = row[2]
+    country.iso3           = row[3]
+    country.numcode        = row[4].to_i
+  end
 end
