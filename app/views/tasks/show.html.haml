@@ -96,6 +96,8 @@
               = approve_button(comment)
             - if !@task.done?
               = like_button(comment)
+            - if comment.thinker == current_thinker
+              = edit_button(comment)
             - else
               .pull-right
                 %span
@@ -111,12 +113,6 @@
               .form-group
               = comment.text
       .panel-footer
-        = form_for [@task, Comment.new], remote: true do |f|
-          .form-group
-            = f.label :text, t(".your_small_thought_about"), :class => "control-label"
-            = f.text_area(:text, :class => "form-control")
-            %span#help-text.help-block= t "char_limit", chars: @chars_max_comment
-          = f.submit t("submit"), :class => "btn btn-primary"
-
+        = render :partial => 'comments/form'
 - if @task.done? && @comment_approved.reason.nil?
   = render "tasks/approve"

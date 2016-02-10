@@ -37,6 +37,7 @@ class TasksController < ApplicationController
     @workload_voted = @task.votes.where(thinker: current_thinker).first
 
     @project = @task.project
+    @comment = Comment.new
   end
 
   # GET /projects/1/tasks/new

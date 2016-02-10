@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_task, only: [:create]
-  before_action :set_comment, only: [:approve]
+  before_action :set_comment, only: [:approve, :edit, :update]
+  before_action :set_validators_for_form_help, only: [:edit]
 
   def create
     @comment         = Comment.new(comment_params)
@@ -25,6 +26,23 @@ class CommentsController < ApplicationController
   end
 
   def index
+  end
+
+  def edit
+  end
+
+  def update
+    @task = @comment.task
+
+    respond_to do |format|
+      if current_thinker == @comment.thinker && @comment.update(comment_params) && create_notification(@comment)
+        format.html { redirect_to @task, notice: 'Comment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def approve
@@ -53,6 +71,9 @@ class CommentsController < ApplicationController
 
     # title_validators = Task.validators_on(:title)[0]
     # @chars_max_title = title_validators.options[:maximum]
+
+    comment_validators = Comment.validators_on(:text)[0]
+    @chars_max_comment = comment_validators.options[:maximum]
   end
 
   def set_task
