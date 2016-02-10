@@ -1,0 +1,9 @@
+= form_for [@task, @comment] do |f|
+  .form-group
+    - if @comment.text.nil?
+      = f.label :text, t(".your_small_thought_about"), :class => "control-label"
+    - else
+      .form-group
+    = f.text_area(:text, :class => "form-control")
+    %span#help-text.help-block= t "char_limit", chars: @chars_max_comment
+  = f.submit @comment.text.nil? ? t('submit') : t('update'), :class => "btn btn-primary"
