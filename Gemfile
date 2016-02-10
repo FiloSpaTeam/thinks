@@ -69,6 +69,12 @@ gem 'friendly_id', '~> 5.1.0'
 # Env
 gem 'dotenv-rails', '2.1.0'
 
+# Charts
+gem 'hightop', '~> 0.1.4'
+gem 'groupdate', '~> 2.5.1'
+gem 'active_median', '~> 0.1.2'
+gem 'chartkick', '~> 1.4.1'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

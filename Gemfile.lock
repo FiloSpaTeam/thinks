@@ -29,6 +29,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_median (0.1.2)
+      activerecord
     activejob (4.2.5)
       activesupport (= 4.2.5)
       globalid (>= 0.3.0)
@@ -50,7 +52,7 @@ GEM
     attachinary (1.3.1)
       cloudinary (~> 1.1.0)
       rails (>= 3.2)
-    autoprefixer-rails (6.3.1)
+    autoprefixer-rails (6.3.2)
       execjs
       json
     aws_cf_signer (0.1.3)
@@ -71,6 +73,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    chartkick (1.4.1)
     cloudinary (1.1.2)
       aws_cf_signer
       rest-client
@@ -107,6 +110,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    groupdate (2.5.1)
+      activesupport (>= 3)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -122,6 +127,8 @@ GEM
       sysexits (~> 1.1)
     heroku-deflater (0.6.2)
       rack (>= 1.4.5)
+    hightop (0.1.4)
+      activerecord
     holder_rails (2.9.1)
       railties (>= 3.1.0)
     html2haml (2.0.0)
@@ -132,7 +139,7 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
-    jbuilder (2.4.0)
+    jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.1.0)
@@ -157,7 +164,7 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
-    parser (2.3.0.2)
+    parser (2.3.0.4)
       ast (~> 2.2)
     pg (0.18.4)
     powerpack (0.1.1)
@@ -210,11 +217,12 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rubocop (0.36.0)
-      parser (>= 2.3.0.0, < 3.0)
+    rubocop (0.37.1)
+      parser (>= 2.3.0.4, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 0.3)
     ruby-progressbar (1.7.5)
     ruby_parser (3.7.3)
       sexp_processor (~> 4.1)
@@ -227,7 +235,7 @@ GEM
       tilt (>= 1.1, < 3)
     sexp_processor (4.6.1)
     slop (3.6.0)
-    spring (1.6.2)
+    spring (1.6.3)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -252,6 +260,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    unicode-display_width (0.3.1)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -265,6 +274,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_median (~> 0.1.2)
   attachinary
   bcrypt (~> 3.1.7)
   bootstrap-datepicker-rails (= 1.5.0)
@@ -272,6 +282,7 @@ DEPENDENCIES
   bootstrap-sass-extras (= 0.0.6)
   byebug
   carrierwave
+  chartkick (~> 1.4.1)
   cloudinary
   coffee-rails (~> 4.1.1)
   devise (= 3.5.5)
@@ -279,10 +290,12 @@ DEPENDENCIES
   filterrific (= 2.0.5)
   font-awesome-sass (~> 4.5.0)
   friendly_id (~> 5.1.0)
+  groupdate (~> 2.5.1)
   haml (~> 4.0.7)
   haml-rails (~> 0.9.0)
   haml_lint
   heroku-deflater
+  hightop (~> 0.1.4)
   holder_rails (~> 2.9.0)
   jbuilder (~> 2.0)
   jquery-rails (~> 4.1.0)
