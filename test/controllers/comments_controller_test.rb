@@ -17,4 +17,10 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_response(200)
   end
+
+  test 'should update comment' do
+    patch :update, id: @comment, comment: { text: 'Updated text' }
+
+    assert_redirected_to task_path(@comment.task)
+  end
 end
