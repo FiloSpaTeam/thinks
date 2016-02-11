@@ -13,33 +13,10 @@
 
   - if project.started?
     .panel-body
-      %strong
-      .progress
-        - if project.tasks.size.nonzero?
-          .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
       = link_to project_tasks_path(project) do
         = pluralize project.tasks.size, 'task'
-
-    .list-group.hidden-xs.hidden-sm
-      .list-group-item
-        = badge(project.tasks.size)
-        total
-      .list-group-item
-        = badge(project.tasks.release.size)
-        in release
-      .list-group-item
-        = badge(project.tasks.in_sprint.size)
-        ready for work
-      .list-group-item
-        = badge(project.tasks.in_progress.size)
-        in progress
-      .list-group-item
-        = badge(project.tasks.done.size)
-        done
-
+      - if project.tasks.size.nonzero?
+        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, width: "300px", height: "200px", library: { chartArea: { }, legend: 'bottom', colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
     .panel-body.hidden-xs.hidden-sm
       %strong

@@ -1,4 +1,7 @@
-= form_for [@task, @comment] do |f|
+- remote = false
+- if @comment.text.nil?
+  - remote = true
+= form_for [@task, @comment], remote: remote do |f|
   .form-group
     - if @comment.text.nil?
       = f.label :text, t(".your_small_thought_about"), :class => "control-label"
