@@ -16,7 +16,7 @@
       = link_to project_tasks_path(project) do
         = pluralize project.tasks.size, 'task'
       - if project.tasks.size.nonzero?
-        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, width: "300px", height: "200px", library: { chartArea: { }, legend: 'bottom', colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
     .panel-body.hidden-xs.hidden-sm
       %strong
