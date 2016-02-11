@@ -88,6 +88,14 @@ class Task < ActiveRecord::Base
     where(project: Project.friendly.find(project))
   }
 
+  scope :in_sprint, lambda { |sprint|
+    result = where('updated_at >= ?', sprint.created_at)
+
+    return result if sprint.next.nil?
+
+    result.where('updated_at < ?', sprint.next.created_at)
+  }
+
   scope :search_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
   }

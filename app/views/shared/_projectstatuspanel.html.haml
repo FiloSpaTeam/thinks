@@ -13,16 +13,24 @@
 
   - if project.started?
     .panel-body
-      = link_to project_tasks_path(project) do
-        = pluralize project.tasks.size, 'task'
-      - if project.tasks.size.nonzero?
-        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+      %strong
+        = link_to project_tasks_path(project) do
+          = pluralize project.tasks.size, 'task'
+
+    .list-group
+      .list-group-item
+        - if project.tasks.size.nonzero?
+          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
     .panel-body.hidden-xs.hidden-sm
       %strong
         Workload
 
     .list-group.hidden-xs.hidden-sm
+      - if project.sprints.size.nonzero?
+        .list-group-item
+          = line_chart project.tasks.done.in_sprint(project.sprints.last)
+
       .list-group-item
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
         current
