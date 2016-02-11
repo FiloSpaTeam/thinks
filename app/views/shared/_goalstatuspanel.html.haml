@@ -10,23 +10,10 @@
         .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.done.size, goal.tasks.size)}%;" }
     =pluralize goal.tasks.size, 'task'
 
-  .list-group.hidden-xs.hidden-sm
-    .list-group-item
-      = badge(goal.tasks.count)
-      total
-    .list-group-item
-      = badge(goal.tasks.release.count)
-      in release
-    .list-group-item
-      = badge(goal.tasks.in_sprint.count)
-      ready for work
-    .list-group-item
-      = badge(goal.tasks.in_progress.count)
-      in progress
-    .list-group-item
-      = badge(goal.tasks.done.count)
-      done
-
+  - if goal.tasks.size.nonzero?
+    .list-group
+      .list-group-item
+        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), goal.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
   .panel-body.hidden-xs.hidden-sm
     %strong
