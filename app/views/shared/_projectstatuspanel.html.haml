@@ -29,7 +29,7 @@
     .list-group.hidden-xs.hidden-sm
       - if project.sprints.size.nonzero?
         .list-group-item
-          = line_chart project.tasks.done.in_sprint(project.sprints.last)
+          = line_chart project.tasks.done.updated_at_in_sprint(project.sprints.last)
 
       .list-group-item
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))

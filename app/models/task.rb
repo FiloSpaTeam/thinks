@@ -88,7 +88,7 @@ class Task < ActiveRecord::Base
     where(project: Project.friendly.find(project))
   }
 
-  scope :in_sprint, lambda { |sprint|
+  scope :updated_at_in_sprint, lambda { |sprint|
     result = where('updated_at >= ?', sprint.created_at)
 
     return result if sprint.next.nil?
