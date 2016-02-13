@@ -13,23 +13,29 @@
 
   - if project.started?
     .panel-body
+      - if project.tasks.size.nonzero?
+        .progress.visible-xs
+          .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
+          .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
+          .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
+          .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
       %strong
         = link_to project_tasks_path(project) do
           = pluralize project.tasks.size, 'task'
-
-    .list-group
-      .list-group-item
+      .hidden-xs
         - if project.tasks.size.nonzero?
-          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "170px", library: { chartArea: { height: '100%', width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
-    .panel-body.hidden-xs.hidden-sm
+    .panel-body.hidden-xs
       %strong
         Workload
 
-    .list-group.hidden-xs.hidden-sm
+    .list-group.hidden-xs
       - if project.sprints.size.nonzero?
         .list-group-item
-          = line_chart project.sprints.group(:serial).sum(:obtained)
+          - total_workload = 0
+          - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :updated_at).sum(:workload)
+          = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { isStacked: 'true', chartArea: { width: '93%', height: '90%' }, hAxis: { textPosition: 'none' }, vAxis: { textPosition: 'none' }, pointSize: 8 }
 
       .list-group-item
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
