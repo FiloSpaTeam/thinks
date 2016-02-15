@@ -6,7 +6,7 @@
     .panel.panel-default.hidden-xs
       .panel-body
         - if @sprints.size >= 2
-          = line_chart @sprints.unscoped.limit(10).offset(1).group_by_day(:created_at, format: "%b %d, %Y").order("day desc").sum(:obtained), height: '180px', library: { hAxis: { textPosition: 'none', format: 'dd/mm' }, chartArea: { width: '90%', height: '80%' }, vAxis: { gridlines: { color: '#EEE' } } }
+          = line_chart @sprints.unscoped.limit(10).offset(1).group_by_day(:created_at, format: "%b %d, %Y").order("day").sum(:obtained), height: '180px', discrete: true, library: { hAxis: { textPosition: 'none' }, chartArea: { width: '90%', height: '80%' }, vAxis: { gridlines: { color: '#EEE' } } }
     .panel.panel-default
       -# .panel-heading
       -#   = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
