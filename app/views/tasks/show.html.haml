@@ -98,10 +98,6 @@
               = like_button(comment)
             - if comment.thinker == current_thinker
               = edit_button(comment)
-            - else
-              .pull-right
-                %span
-                  = like_count comment.likes.length
             .dark-grey
               = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
               by

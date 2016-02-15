@@ -33,7 +33,7 @@ module LikesHelper
 
   def approve_button(comment)
     link_to comment.approved ? 'javascript:;' : approve_comment_path(comment), :class => "pull-right btn", :role => "button", :title => t("approve"), method: :put do
-        content_tag(:span, "", :class => "glyphicon glyphicon-ok #{ comment.approved ? 'dark-grey' : '' }", "aria-hidden" => "true")
+      content_tag(:span, "", :class => "glyphicon glyphicon-ok #{ comment.approved ? 'dark-grey' : '' }", "aria-hidden" => "true")
     end
   end
 end
