@@ -33,8 +33,10 @@
     .list-group.hidden-xs
       - if project.sprints.size.nonzero?
         .list-group-item
+          Burn up
           - total_workload = 0
-          - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :updated_at).sum(:workload)
+          - last_sprint    = project.sprints.last
+          - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :updated_at).where('updated_at >= ?', last_sprint.created_at).sum(:workload)
           = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { isStacked: 'true', chartArea: { width: '93%', height: '90%' }, hAxis: { textPosition: 'none' }, vAxis: { textPosition: 'none' }, pointSize: 8 }
 
       .list-group-item
