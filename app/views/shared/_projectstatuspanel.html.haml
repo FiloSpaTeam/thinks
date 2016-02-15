@@ -37,6 +37,8 @@
           - total_workload = 0
           - last_sprint    = project.sprints.last
           - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :updated_at).where('updated_at >= ?', last_sprint.created_at).sum(:workload)
+          - if burn_up_data.empty?
+            - burn_up_data = { last_sprint.created_at => 0 }
           = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { isStacked: 'true', chartArea: { width: '93%', height: '90%' }, hAxis: { textPosition: 'none' }, vAxis: { textPosition: 'none' }, pointSize: 8 }
 
       .list-group-item
