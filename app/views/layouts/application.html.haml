@@ -14,3 +14,4 @@
         %div{ thinker_signed_in? ? {:class => :main} : {} }
           = bootstrap_flash
           = yield
+    = yield :charts_js
