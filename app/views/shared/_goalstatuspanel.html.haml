@@ -1,19 +1,16 @@
 .panel.panel-default
   .panel-body
-    %strong
-      = link_to "Tasks", project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal)
     .progress
       - if goal.tasks.size.nonzero?
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(goal.tasks.release.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_sprint.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_progress.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.done.size, goal.tasks.size)}%;" }
-    =pluralize goal.tasks.size, 'task'
+    = link_to project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal) do
+      =pluralize goal.tasks.size, 'task'
 
   - if goal.tasks.size.nonzero?
-    .list-group
-      .list-group-item
-        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), goal.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+    = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), goal.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
   .panel-body.hidden-xs.hidden-sm
     %strong
