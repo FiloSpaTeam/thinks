@@ -1,7 +1,21 @@
 = render partial: 'shared/projectbar', locals: { project: @task.project }
 .row
   .col-sm-4
-    .panel.panel-default
+    .panel.panel-default.visible-xs
+      .panel-body
+        .col-xs-4
+          %label.control-label
+            Goal
+          = goal_button(@task)
+        .col-xs-2.col-xs-offset-1{ style: 'padding-top: 6px;' }
+          .round-sm.pull-right{ :class => "bg-#{color_list_round_div(@task.status.translation_code)}" }
+          %label.control-label
+            Status
+        .col-xs-4.col-xs-offset-1{ style: 'padding-top: 6px;' }
+          %label.control-label
+            Workload
+          = workload_description(@task)
+    .panel.panel-default.hidden-xs
       .panel-body
         %h4
           %strong

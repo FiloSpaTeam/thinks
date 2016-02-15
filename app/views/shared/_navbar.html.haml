@@ -8,7 +8,7 @@
         %span.icon-bar
       = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg"
       - if @project.present? && @project.id.present?
-        .navbar-header.pull-left.visible-xs{:style => "width: 116px;"}
+        .navbar-header.pull-left.visible-xs{:style => "width: 118px;"}
           = link_to project_sprints_path(@project), :class => "btn navbar-btn" do
             = icon('flag', :class => "fa-lg fa-inverse")
             %span.hidden-xs= t(".sprints")
