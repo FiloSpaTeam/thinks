@@ -6,6 +6,7 @@ class TasksController < ApplicationController
 
   before_action :authenticate_thinker!
   before_action :teammate!, only: [:new, :create]
+  before_action :check_assign!, only: [:assign]
 
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
@@ -203,6 +204,13 @@ class TasksController < ApplicationController
     if !@project.part_of_team?(current_thinker)
       flash[:alert] = 'You are not part of the team!'
       redirect_to project_tasks_path(@project)
+    end
+  end
+
+  def check_assign!
+    if current_thinker.working_tasks.in_progress.present?
+      flash[:alert] = 'You have already something to do :P'
+      redirect_to task_path(@task)
     end
   end
 
