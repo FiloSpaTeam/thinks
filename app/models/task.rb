@@ -208,7 +208,11 @@ class Task < ActiveRecord::Base
   private
 
   def update_goal
-    return if status != Status.done.first || goal.nil?
+    if goal.nil?
+      goal = Goal.find(goal_id_was)
+    end
+
+    return if goal.nil?
 
     goal.progress = goal.progress_percentage
     goal.save
