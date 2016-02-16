@@ -15,4 +15,13 @@ namespace :admin do
 
     puts 'Sprint update done'
   end
+
+  desc 'Update wrong goal progress'
+  task update_goal_progress: :environment do
+    puts 'Update goal progress'
+
+    Goal.all.each { |goal| goal.update_attribute(:progress, goal.progress_percentage) }
+
+    puts 'Update goal progress done'
+  end
 end
