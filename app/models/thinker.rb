@@ -18,8 +18,6 @@ class Thinker < ActiveRecord::Base
   has_many :comments
   has_many :likes
 
-  has_one :task
-
   belongs_to :sex
   belongs_to :country, class_name: 'Country', foreign_key: :country_iso
 end

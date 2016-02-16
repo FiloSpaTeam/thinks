@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_task, only: [:create]
-  before_action :set_comment, only: [:approve, :edit, :update]
+  before_action :set_comment, only: [:approve, :edit, :update, :destroy]
   before_action :set_validators_for_form_help, only: [:edit]
 
   def create
@@ -29,6 +29,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
+  end
+
+  def destroy
+    @comment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @comment.task, notice: 'Comment was successfully deleted.' }
+      format.json { render :show, status: :ok, location: @comment.task }
+    end
   end
 
   def update

@@ -4,4 +4,10 @@ module CommentsHelper
       content_tag(:span, '', :class => 'glyphicon glyphicon-pencil dark-grey', 'aria-hidden' => 'true')
     end
   end
+
+  def delete_button(comment)
+    link_to comment_path(comment), :class => "pull-right btn", :role => "button", :title => t("delete"), method: :delete do
+      content_tag(:span, '', :class => 'glyphicon glyphicon-remove dark-grey', 'aria-hidden' => 'true')
+    end
+  end
 end

@@ -112,6 +112,8 @@
               = like_button(comment)
             - if comment.thinker == current_thinker
               = edit_button(comment)
+              - if !@task.done?
+                = delete_button(comment)
             .dark-grey
               = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
               by

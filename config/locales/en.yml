@@ -47,6 +47,7 @@ en:
   back: "Back"
   edit: "Edit"
   update: "Update"
+  delete: 'Delete'
   no_comments: "No comments"
   submit: "Submit"
   you_voted_yet: "You voted yet"

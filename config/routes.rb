@@ -38,7 +38,7 @@ Rails.application.routes.draw do
         put :judge
       end
 
-      resources :comments, only: [:create, :edit, :update], shallow: true do
+      resources :comments, only: [:create, :edit, :update, :destroy], shallow: true do
         resources :likes, shallow: true
         resources :reasons, shallow: true
 
