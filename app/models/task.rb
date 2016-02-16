@@ -208,14 +208,19 @@ class Task < ActiveRecord::Base
   private
 
   def update_goal
-    if goal.nil?
-      goal = Goal.find(goal_id_was)
+    if goal.blank?
+      return if goal_id_was.blank?
+
+      goal_was = Goal.find(goal_id_was)
+
+      return if goal_was.blank?
+
+      goal_was.progress = goal_was.progress_percentage
+      goal_was.save
+    else
+      goal.progress = goal.progress_percentage
+      goal.save
     end
-
-    return if goal.nil?
-
-    goal.progress = goal.progress_percentage
-    goal.save
   end
 
   def generate_serial
