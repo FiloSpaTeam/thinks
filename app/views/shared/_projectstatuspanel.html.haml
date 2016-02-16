@@ -39,7 +39,8 @@
           - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :updated_at).where('updated_at >= ?', last_sprint.created_at).order('max(updated_at)').sum(:workload)
           - if burn_up_data.empty?
             - burn_up_data = { last_sprint.created_at => 0 }
-          = area_chart burn_up_data.transform_keys { |key| key.strftime('%B %d') }.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '80%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
+          - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
+          = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '80%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
 
       .list-group-item
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
