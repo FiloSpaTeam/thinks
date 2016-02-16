@@ -205,6 +205,10 @@ class Task < ActiveRecord::Base
     return true if status == Status.done.first
   end
 
+  def in_progress?
+    return true if status == Status.in_progress.first
+  end
+
   private
 
   def update_goal

@@ -70,10 +70,12 @@
         - elsif @task.status == Status.sprint.first
           - if current_thinker.working_tasks.in_progress.present?
             %h4 No one is working over this but you have yet something to do ;-P
-          - elsif @task.project.started?
+          - elsif !@task.project.started?
+            %h4 The project is not started yet, wait. Your moment will come soon.
+          - elsif @task.workloads.size.nonzero?
             = link_to "Assigns me", assign_task_path, :method => :put, :class => "btn btn-success btn-block"
           - else
-            %h4 The project is not started yet, wait. Your moment will come soon.
+            %h4 There are no opinions about this task. Share with a comment and vote!
         - else
           %h4 Actually the team didn't decide to work on. Talk about if you are interested
   .col-sm-8
@@ -112,7 +114,7 @@
               = like_button(comment)
             - if comment.thinker == current_thinker
               = edit_button(comment)
-              - if !@task.done?
+              - if !@task.done? && !@task.in_progress?
                 = delete_button(comment)
             .dark-grey
               = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")

@@ -32,11 +32,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    task = @comment.task
+    task_votes = task.votes.all
+    task_votes.delete_all(thinker_id: current_thinker)
+
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to @comment.task, notice: 'Comment was successfully deleted.' }
-      format.json { render :show, status: :ok, location: @comment.task }
+      format.html { redirect_to task, notice: 'Comment was successfully deleted.' }
+      format.json { render :show, status: :ok, location: task }
     end
   end
 
