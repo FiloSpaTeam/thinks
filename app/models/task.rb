@@ -20,7 +20,9 @@ class Task < ActiveRecord::Base
       :with_thinker,
       :with_project,
 
-      :workload_lower_than
+      :workload_lower_than,
+
+      :with_deleted_at
     ]
   )
 
@@ -88,6 +90,10 @@ class Task < ActiveRecord::Base
 
   scope :with_project, lambda { |project|
     where(project: Project.friendly.find(project))
+  }
+
+  scope :with_deleted_at, lambda { |value| 
+    only_deleted
   }
 
   scope :updated_at_in_sprint, lambda { |sprint|
