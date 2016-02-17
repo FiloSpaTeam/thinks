@@ -84,7 +84,7 @@
                   %li.list-group-item
                     = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project, method: :get, remote: true) do
                       = thinker.name
-        - if current_page?(project_tasks_path)
+        - if !current_page?(projects_path) && params.key?(:project_id) && current_page?(project_tasks_path)
           = f.label :closed, :class => "control-label pull-right" do
             = f.check_box(:with_deleted_at, {}, true, false)
             = t "closed"
