@@ -8,6 +8,9 @@ gem 'sprockets-rails', '2.3.3'
 # PostgreSQL support
 gem 'pg', '0.18.4'
 
+# Soft deletion
+gem 'paranoia', '~> 2.0'
+
 # Heroku
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
@@ -44,7 +47,7 @@ gem 'coffee-rails', '~> 4.1.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', '~> 0.12.2'
 
-#Fontawesome
+# Fontawesome
 gem 'font-awesome-sass', '~> 4.5.0'
 
 # Use jquery as the JavaScript library

@@ -101,7 +101,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if current_thinker == @task.thinker
         @task.destroy
-        format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+
+        format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
         format.json { head :no_content }
       else
         format.html { redirect_to @task, alert: 'You cannot destroy this task!' }
