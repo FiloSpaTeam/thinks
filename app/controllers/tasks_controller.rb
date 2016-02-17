@@ -185,7 +185,7 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.with_deleted.find(params[:id])
   end
 
   def set_validators_for_form_help
