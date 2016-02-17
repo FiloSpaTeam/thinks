@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -178,6 +178,14 @@ class TasksController < ApplicationController
         format.html { render :show }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def reopen
+    @task.restore
+    respond_to do |format|
+      format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
+      format.json { render :show, status: :ok, location: @task }
     end
   end
 

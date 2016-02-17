@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         put :release
         put :assign
         put :judge
+        put :reopen
       end
 
       resources :comments, only: [:create, :edit, :update, :destroy], shallow: true do
