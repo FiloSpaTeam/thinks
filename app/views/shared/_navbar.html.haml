@@ -39,7 +39,7 @@
         %li
           - if thinker_signed_in?
             = link_to notifications_path do
-              = icon('comments', :class => "fa-lg")
+              = notification_icon(Notification.user(current_thinker))
               = t(".notifications")
         - if thinker_signed_in?
           -# %li

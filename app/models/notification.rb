@@ -22,4 +22,10 @@ class Notification < ActiveRecord::Base
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
+
+  def self.user(thinker)
+    where.not(thinker: thinker)
+         .where(project: thinker.teams.collect(&:id))
+         .where.not(id: thinker.notifications.pluck(:id))
+  end
 end

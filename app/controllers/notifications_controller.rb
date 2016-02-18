@@ -7,9 +7,7 @@ class NotificationsController < ApplicationController
   def index
     @filterrific = initialize_filterrific(
       Notification
-        .where.not(thinker: current_thinker)
-        .where(project: current_thinker.teams.collect(&:id))
-        .where.not(id: current_thinker.notifications.pluck(:id))
+        .user(current_thinker)
         .order('project_id DESC'),
       params[:filterrific],
       select_options: {
@@ -87,6 +85,12 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notifications_url, notice: 'Notification read.' }
       format.json { head :no_content }
+    end
+  end
+
+  def check
+    respond_to do |format|
+      format.js { render :layout => false }
     end
   end
 

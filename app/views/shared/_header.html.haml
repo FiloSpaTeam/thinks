@@ -29,3 +29,6 @@
 = cloudinary_js_config
 :javascript
   $('.attachinary-input').attachinary()
+  setInterval(function() {
+    $.ajax({ url: 'notifications_check', type: 'GET', dataType: 'script' })
+  }, 5000)

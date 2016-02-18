@@ -39,4 +39,12 @@ module NotificationsHelper
         thinker: notification.thinker.name
     end
   end
+
+  def notification_icon(notifications)
+    if notifications.empty?
+      icon('comments', class: 'fa-lg notification-icon')
+    else
+      icon('commenting', class: 'fa-lg fa-inverse notification-icon')
+    end
+  end
 end
