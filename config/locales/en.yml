@@ -176,6 +176,7 @@ en:
       your_small_thought_about: "Your small 'thought' about"
       define_workload: "Define workload"
       you_voted: "You voted %{vote}"
+      you_cannot_vote: "You cannot vote, the task is already assigned!"
       standard_deviation_too_high: "The standard deviation is too high, need to allineate your team!"
   goals:
     index:
