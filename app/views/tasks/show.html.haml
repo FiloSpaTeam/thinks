@@ -63,7 +63,7 @@
                 = f.submit t("submit"), :class => "btn btn-primary"
             - else
               %strong
-                = t ".you_cannot_vote", vote: @workload_voted.workload.value
+                = t ".you_cannot_vote"
           - else
             %strong
               = t ".you_voted", vote: @workload_voted.workload.value
