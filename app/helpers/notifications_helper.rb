@@ -19,7 +19,7 @@ module NotificationsHelper
   end
 
   def title_for(notification)
-    model = Object.const_get(notification.model)
+    model = Object.const_get(notification.model).try(:with_deleted)
     model = model.find(notification.model_id)
 
     if notification.controller == 'tasks'
