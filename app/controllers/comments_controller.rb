@@ -90,7 +90,7 @@ class CommentsController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:task_id])
+    @task = Task.with_deleted.find(params[:task_id])
   end
 
   def set_comment
