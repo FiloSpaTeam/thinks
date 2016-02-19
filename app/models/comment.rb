@@ -10,7 +10,14 @@ class Comment < ActiveRecord::Base
   validates :thinker, presence: true
   validates :task, presence: true
 
-  default_scope { order('approved').order("likes_count DESC").order("updated_at DESC") }
+  default_scope { order('approved').order('likes_count DESC').order('updated_at DESC') }
+
+  after_destroy lambda { |comment|
+    Notification
+      .where('model LIKE ?', comment.class.name)
+      .where(model_id: comment.id)
+      .destroy_all
+  }
 
   scope :approved, lambda {
     where(approved: true)
