@@ -25,21 +25,11 @@ namespace :admin do
     puts 'Update goal progress done'
   end
 
-  desc 'Delete notifications without related model'
-  task delete_unrelated_notifications: :environment do
-    puts 'Delete notifications without relation'
+  task delete_notifications: :environment do
+    puts 'Delete notifications'
 
-    Notification.all.each { |notification|
-      model = Object.const_get(notification.model)
-
-      if notification.controller == 'tasks'
-        model = model.try(:with_deleted)
-      end
-
-      model = model.find_by_id notification.model_id
-
-      notification.destroy if model.nil?
-    }
+    Notification.destroy_all
+    ActiveRecord::Base.connection.execute('TRUNCATE TABLE notifications_thinkers')
 
     puts 'Notifications clean up done'
   end
