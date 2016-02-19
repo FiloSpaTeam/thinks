@@ -27,8 +27,15 @@
 = javascript_include_tag 'application'
 = javascript_include_tag 'https://www.google.com/jsapi', 'chartkick'
 = cloudinary_js_config
-:javascript
-  $('.attachinary-input').attachinary()
-  setInterval(function() {
-    $.ajax({ url: 'notifications_check', type: 'GET', dataType: 'script' })
-  }, 5000)
+%script{ defer: true }
+  :plain
+    $(document).ready(function() {
+      $('.attachinary-input').attachinary();
+    });
+  - if thinker_signed_in?
+    :plain
+      $(document).ready(function() {
+        setInterval(function() {
+          $.get({ url: 'notifications_check.js', dataType: "script" })
+        }, 1000 * 60 * 5)
+      });
