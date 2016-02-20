@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :task
+  belongs_to :task, -> { with_deleted }
   belongs_to :thinker
 
   has_one :reason

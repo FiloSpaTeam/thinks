@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
   belongs_to :sprint
   belongs_to :project
   belongs_to :goal
-  belongs_to :task
+  belongs_to :task, -> { with_deleted }
 
   scope :sorted_by, lambda { |sort_option|
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
