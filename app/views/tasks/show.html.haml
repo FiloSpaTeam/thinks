@@ -55,7 +55,7 @@
       - if @task.contributed?(current_thinker) && !@task.deleted?
         .panel-footer
           - if @workload_voted.nil?
-            - if !@task.in_progress? && !@task.done? 
+            - if !@task.in_progress? && !@task.done?
               = form_for @task, :url => judge_task_path(@task), method: :put do |f|
                 .form-group
                   = f.label :workload, t('.define_workload'), class: "control-label"
