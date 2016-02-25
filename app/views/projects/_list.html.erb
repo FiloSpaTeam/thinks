@@ -12,12 +12,12 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-12">
-                <%= link_to project_path(project), :class => "thumbnail" do %> 
+                <%= link_to project_path(project), :class => "thumbnail" do %>
                   <img src="holder.js/110x110">
                 <% end %>
               </div>
               <div class="col-md-8 col-sm-8">
-                <%= link_to project_path(project) do %> 
+                <%= link_to project_path(project) do %>
                   <h4><strong> <%= project.title %> </strong></h4>
                 <% end %>
                 <%= markdown(truncate(project.description.lines.first, :length => 100)) %>

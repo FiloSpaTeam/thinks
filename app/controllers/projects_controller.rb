@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
 
-    @project.description = "## Put here your short description, will be used for index your project \n\nDescribe your project, and remember, you can use MARKDOWN!"
+    @project.description = "*Put here your short description, will be used for index your project* \n\nDescribe your project, and remember, you can use MARKDOWN!"
   end
 
   # GET /projects/1/edit
