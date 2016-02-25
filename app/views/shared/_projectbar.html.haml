@@ -2,12 +2,12 @@
   .navbar-header.pull-left
     = link_to project.title, project_path(project), :class => "navbar-brand"
   .navbar-header.pull-right
-    = link_to project_sprints_path(project), :class => "btn navbar-btn" do
+    = link_to project_sprints_path(project, "filterrific[reset_filterrific]" => true), :class => "btn navbar-btn" do
       = icon('flag', :class => "fa-lg dark-grey")
       %span.hidden-xs= t(".sprints")
-    = link_to project_goals_path(project), :class => "btn navbar-btn" do
+    = link_to project_goals_path(project, "filterrific[reset_filterrific]" => true), :class => "btn navbar-btn" do
       = icon('crosshairs', :class => "fa-lg dark-grey")
       %span.hidden-xs= t(".goals")
-    = link_to project_tasks_path(project), :class => "btn navbar-btn" do
+    = link_to project_tasks_path(project, "filterrific[reset_filterrific]" => true), :class => "btn navbar-btn" do
       = icon('tasks', :class => "fa-lg dark-grey")
       %span.hidden-xs= t(".tasks")

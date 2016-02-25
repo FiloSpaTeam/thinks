@@ -20,7 +20,7 @@
           .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
           .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
       %strong
-        = link_to project_tasks_path(project) do
+        = link_to project_tasks_path(project, "filterrific[reset_filterrific]" => true) do
           = pluralize project.tasks.size, 'task'
       .hidden-xs
         - if project.tasks.size.nonzero?
