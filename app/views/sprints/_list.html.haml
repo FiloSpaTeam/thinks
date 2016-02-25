@@ -6,12 +6,12 @@
           %strong
             = t "sprint"
     %td
-      .col-xs-10
+      .col-xs-11
         %h5
           %strong
             = t "created_at"
     %td
-      .col-xs-10
+      .col-xs-11
         %h5
           %strong
             = t "updated_at"
@@ -20,6 +20,11 @@
         %h5
           %strong
             = t "obtained"
+    %td
+      .col-xs-2
+        %h5
+          %strong
+            = t ".survey"
 %tbody
   - unless (@sprints.empty?)
     - @sprints.each do |sprint|
@@ -38,6 +43,9 @@
             = sprint.updated_at.to_s(:short)
         %td.text-center
           = sprint.obtained
+        %td.text-center
+          %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+            = icon('book', :class => "dark-grey")
   - else
     %td.text-center{ :colspan => 4 }
       = t('no_record')

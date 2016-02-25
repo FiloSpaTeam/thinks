@@ -10,6 +10,8 @@ class Sprint < ActiveRecord::Base
 
   belongs_to :project
 
+  has_many :answers
+
   before_create :generate_serial
   before_create :default_values
 

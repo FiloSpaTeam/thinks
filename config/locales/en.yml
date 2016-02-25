@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  send : "Send"
   me                          : "Me"
   show                        : "Show"
   update_failed               : "Update failed. See errors below."
@@ -200,6 +201,18 @@ en:
   sex:
     male: "Male"
     female: "Female"
+
+  survey:
+    new:
+      what_went_well: "What went well?"
+      what_could_be_done_better: "What could be done better?"
+      what_can_be_done_better: "What can be done better?"
+      sprint_workload: "Sprint workload"
+      goals: "Goals"
+      tasks: "Tasks"
+      communication: "Communication"
+      idk: "I don't know"
+      other: "Other"
 
   # Shared section
   shared:

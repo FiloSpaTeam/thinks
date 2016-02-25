@@ -103,3 +103,35 @@ CSV.foreach(File.join(Rails.root, 'db', 'iso_country_list.csv'), headers: false,
     country.numcode        = row[4].to_i
   end
 end
+
+surveys_list = %w(what_went_well what_could_be_done_better what_can_be_done_better)
+
+surveys_list.each do |ttitle|
+  Survey.where(t_title: ttitle).first_or_create
+end
+
+answers_list = [
+  ['sprint_workload',         1],
+  ['goals',                   1],
+  ['tasks',                   1],
+  ['communication',           1],
+  ['other',                   1],
+  ['idk',                     1],
+  ['sprint_workload',         2],
+  ['goals',                   2],
+  ['tasks',                   2],
+  ['communication',           2],
+  ['other',                   2],
+  ['idk',                     2],
+  ['better_goals_definition', 3],
+  ['better_tasks_separation', 3],
+  ['other',                   3],
+  ['idk',                     3]
+]
+
+answers_list.each do |tdescription, survey_id|
+  Answer
+    .where(survey_id: survey_id)
+    .where(t_description: tdescription)
+    .first_or_create
+end

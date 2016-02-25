@@ -1,0 +1,7 @@
+= render partial: 'shared/projectbar', locals: { project: @sprint.project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @sprint.project }
+  .col-md-8
+    .panel.panel-default.hidden-xs
+      .panel-body

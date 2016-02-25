@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217225050) do
+ActiveRecord::Schema.define(version: 20160220112017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "t_description"
+    t.integer  "survey_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "answers_thinkers", id: false, force: :cascade do |t|
+    t.integer "answer_id"
+    t.integer "thinker_id"
+    t.integer "sprint_id"
+  end
+
+  add_index "answers_thinkers", ["answer_id"], name: "index_answers_thinkers_on_answer_id", using: :btree
+  add_index "answers_thinkers", ["sprint_id"], name: "index_answers_thinkers_on_sprint_id", using: :btree
+  add_index "answers_thinkers", ["thinker_id"], name: "index_answers_thinkers_on_thinker_id", using: :btree
 
   create_table "attachinary_files", force: :cascade do |t|
     t.integer  "attachinariable_id"
@@ -208,6 +225,12 @@ ActiveRecord::Schema.define(version: 20160217225050) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "progress_order"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string   "t_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|

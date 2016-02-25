@@ -11,6 +11,7 @@ class Thinker < ActiveRecord::Base
 
   has_and_belongs_to_many :teams, class_name: 'Project'
   has_and_belongs_to_many :notifications
+  has_and_belongs_to_many :answers
 
   has_many :projects
   has_many :working_tasks, class_name: 'Task', foreign_key: :worker_thinker_id

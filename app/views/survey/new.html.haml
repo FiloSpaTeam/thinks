@@ -1,0 +1,18 @@
+= render partial: 'shared/projectbar', locals: { project: @sprint.project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectstatuspanel', locals: { project: @sprint.project }
+  .col-md-8
+    .panel.panel-default.hidden-xs
+      = form_for @survey, url: sprint_survey_index_path do |f|
+        .panel-body
+          - @surveys.each do |survey|
+            %h3=t (".#{survey.t_title}")
+            - survey.answers.each_with_index do |answer, index|
+              .radio
+                = label_tag "survey[#{survey.id}][#{answer.id}]", :class => "control-label" do
+                  = radio_button_tag "survey[#{survey.id}]", answer.id, index == 0
+                  = t ".#{answer.t_description}"
+
+        .panel-footer
+          = f.submit t('send'), :class => "btn btn-primary"

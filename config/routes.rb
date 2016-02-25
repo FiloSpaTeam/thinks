@@ -29,7 +29,9 @@ Rails.application.routes.draw do
       put :partecipate
     end
 
-    resources :sprints, shallow: true
+    resources :sprints, shallow: true do
+      resources :survey, only: [:index, :create, :new]
+    end
 
     resources :tasks, shallow: true do
       member do
