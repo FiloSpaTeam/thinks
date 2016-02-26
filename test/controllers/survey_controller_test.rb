@@ -1,13 +1,22 @@
 require 'test_helper'
 
 class SurveyControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  include Devise::TestHelpers
+
+  setup do
+    @sprint = sprints(:one)
+
+    authenticate
   end
 
-  test "should get create" do
-    get :create
+  test "should get index" do
+    get :index, sprint_id: @sprint.id
+
+    assert_response :redirect
+  end
+
+  test "should get new" do
+    get :new, sprint_id: @sprint.id
     assert_response :success
   end
 
