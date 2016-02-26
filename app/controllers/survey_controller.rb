@@ -4,9 +4,10 @@ class SurveyController < ApplicationController
 
 
   def index
-    @answers = current_thinker.answers.where(sprint: @sprint)
+    redirect_to new_sprint_survey_path(@sprint) if current_thinker.answers.where(sprint: @sprint).empty?
 
-    redirect_to new_sprint_survey_path(@sprint) if @answers.empty?
+    @answers_count = AnswerThinker.where(sprint: @sprint).group(:answer_id).count
+    @surveys       = Survey.all
   end
 
   def create

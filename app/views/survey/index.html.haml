@@ -3,5 +3,17 @@
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @sprint.project }
   .col-md-8
-    .panel.panel-default.hidden-xs
-      .panel-body
+    .panel.panel-default
+      %ul.list-group
+        - @surveys.each do |survey|
+          %li.list-group-item
+            %h3=t ("survey.new.#{survey.t_title}")
+          - survey.answers.each do |answer|
+            %li.list-group-item
+              .row
+                .col-xs-8
+                  = t "survey.new.#{answer.t_description}"
+                .col-xs-4
+                  .progress
+                    - answer_count = @answers_count.has_key?(answer.id) ? @answers_count[answer.id] : 0
+                    %div{"aria-valuemax" => "#{survey.answers.size}", "aria-valuemin" => "0", "aria-valuenow" => "#{answer_count}", :class => "progress-bar", :role => "progressbar", :style => "min-width: 0em; width: #{(answer_count.to_f / survey.answers.size) * 100}%;"}
