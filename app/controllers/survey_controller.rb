@@ -13,7 +13,7 @@ class SurveyController < ApplicationController
     @answers = params[:survey]
 
     @answers.each do |answer|
-      current_thinker.answers << Answer.find(answer.last)
+      AnswerThinker.create(answer_id: answer.last, sprint_id: params[:sprint_id], thinker_id: current_thinker.id)
     end
 
     respond_to do |format|
