@@ -11,13 +11,13 @@ class Thinker < ActiveRecord::Base
 
   has_and_belongs_to_many :teams, class_name: 'Project'
   has_and_belongs_to_many :notifications
-  has_and_belongs_to_many :answers
 
   has_many :projects
   has_many :working_tasks, class_name: 'Task', foreign_key: :worker_thinker_id
   has_many :tasks
   has_many :comments
   has_many :likes
+  has_many :answers, class_name: 'AnswerThinker', foreign_key: :thinker_id
 
   belongs_to :sex
   belongs_to :country, class_name: 'Country', foreign_key: :country_iso

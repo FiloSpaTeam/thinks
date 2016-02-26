@@ -4,7 +4,7 @@ class SurveyController < ApplicationController
 
 
   def index
-    @answers = current_thinker.answers
+    @answers = current_thinker.answers.where(sprint: @sprint)
 
     redirect_to new_sprint_survey_path(@sprint) if @answers.empty?
   end
