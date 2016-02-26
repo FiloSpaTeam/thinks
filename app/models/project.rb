@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
   extend FriendlyId
 
+  acts_as_paranoid
+
   filterrific(
     default_filter_params: { sorted_by: 'title_asc' },
     available_filters: [
@@ -15,10 +17,10 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :thinkers
 
   has_many :dependencies
-  has_many :goals
-  has_many :tasks
-  has_many :workloads, through: :tasks
-  has_many :sprints
+  has_many :goals, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
+  has_many :workloads, through: :tasks, :dependent => :destroy
+  has_many :sprints, :dependent => :destroy
   has_many :workers, -> { distinct.unscoped }, through: :tasks do
     def active
       where('tasks.status_id = ?', Status.in_progress.first.id)

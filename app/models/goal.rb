@@ -2,6 +2,8 @@ class Goal < ActiveRecord::Base
   paginates_per 15
   max_paginates_per 50
 
+  acts_as_paranoid
+
   filterrific(
     available_filters: [
       :sorted_by,

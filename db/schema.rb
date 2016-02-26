@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220112017) do
+ActiveRecord::Schema.define(version: 20160226234959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,10 @@ ActiveRecord::Schema.define(version: 20160220112017) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.float    "progress"
+    t.datetime "deleted_at"
   end
 
+  add_index "goals", ["deleted_at"], name: "index_goals_on_deleted_at", using: :btree
   add_index "goals", ["project_id"], name: "index_goals_on_project_id", using: :btree
   add_index "goals", ["thinker_id"], name: "index_goals_on_thinker_id", using: :btree
 
@@ -183,8 +185,10 @@ ActiveRecord::Schema.define(version: 20160220112017) do
     t.integer  "cycle_id"
     t.integer  "category_id"
     t.string   "slug"
+    t.datetime "deleted_at"
   end
 
+  add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
   add_index "projects", ["license_id"], name: "index_projects_on_license_id", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
 
