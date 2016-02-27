@@ -33,4 +33,19 @@ namespace :admin do
 
     puts 'Notifications clean up done'
   end
+
+  task delete_rows_without_related_project: :environment do
+    puts 'Delete rows without related project'
+
+    Task.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+    Task.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+
+    Goal.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+    Goal.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+
+    Sprint.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+    Sprint.with_deleted.where('project_id NOT IN (SELECT DISTINCT(id) FROM projects)').delete_all
+
+    puts 'Delete rows without related project done'
+  end
 end

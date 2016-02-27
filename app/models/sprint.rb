@@ -1,4 +1,6 @@
 class Sprint < ActiveRecord::Base
+  acts_as_paranoid
+
   paginates_per 15
   max_paginates_per 50
 
