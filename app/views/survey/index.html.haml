@@ -9,7 +9,7 @@
           %li.list-group-item
             %h3=t ("survey.new.#{survey.t_title}")
           - survey.answers.each do |answer|
-            %li.list-group-item
+            %li.list-group-item{ class: !@answers_thinker.find_by(answer_id: answer.id).nil? ? 'list-group-item-success' : '' }
               .row
                 .col-xs-8
                   = t "survey.new.#{answer.t_description}"
