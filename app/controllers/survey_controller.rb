@@ -1,7 +1,7 @@
 class SurveyController < ApplicationController
   before_action :set_sprint
   before_action :authenticate_thinker!
-
+  before_action :not_actual!
 
   def index
     redirect_to new_sprint_survey_path(@sprint) if current_thinker.answers.where(sprint: @sprint).empty?
@@ -31,6 +31,10 @@ class SurveyController < ApplicationController
 
   def set_sprint
     @sprint = Sprint.find(params[:sprint_id])
+  end
+
+  def not_actual!
+    redirect_to project_sprints_path(@sprint.project) if @sprint.serial == @sprint.project.sprint
   end
 
   def survey_params
