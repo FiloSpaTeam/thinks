@@ -224,7 +224,15 @@ en:
       team: "Team"
       tasks: "Tasks"
       project: "Project"
-
+    profilebar:
+      personal: "Personal"
+      design: "Design"
+      password: "Password"
+      double_authentication: "Double authentication"
+      privacy: "Privacy"
+      data: "Data"
+      views: "Views"
+      printing: "Printing"
 
   # ActiveRecord override translation
   activerecord:

@@ -3,21 +3,19 @@ class ThinkersController < ApplicationController
   before_action :check_admin!, only: [:index]
   before_action :check_owner!, except: [:index]
 
+  before_action :set_thinker, only: [:show, :edit, :update]
+
   def index
     @thinkers = Thinker.all
   end
 
   def show
-    @thinker = Thinker.friendly.find(params[:id])
   end
 
   def edit
-    @thinker = Thinker.friendly.find(params[:id])
   end
 
   def update
-    @thinker = Thinker.friendly.find(params[:id])
-
     respond_to do |format|
       if current_thinker == @thinker && @thinker.update(thinker_params)
         format.html { redirect_to @thinker, notice: 'Your data are updated.' }
@@ -31,13 +29,8 @@ class ThinkersController < ApplicationController
 
   private
 
-  # At the moment we need to redirect others, later will be there a public page
-  def check_owner!
-    redirect_to root_url unless current_thinker.slug == params[:id]
-  end
-
-  def check_admin!
-    redirect_to root_url unless current_thinker.try(:admin?)
+  def set_thinker
+    @thinker = Thinker.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

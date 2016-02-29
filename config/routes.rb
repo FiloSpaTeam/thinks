@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   devise_for :thinkers, :controllers => {
     :sessions      => 'thinkers/sessions',
     :registrations => 'thinkers/registrations',
-    :notifications => 'notifications',
-    :otp           => 'otp'
+    :notifications => 'notifications'
   }
+
+  resources :otp, only: [:show]
 
   resources :workloads
   resources :statuses

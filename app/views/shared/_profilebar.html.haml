@@ -10,8 +10,7 @@
   .list-group
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.password')
-    %a{ href: "#", class: "list-group-item disabled" }
-      =t ('.double_authentication')
+    = link_to(t('.double_authentication'), otp_path(@thinker), :class => "list-group-item #{ current_page?(otp_path) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.privacy')
     %a{ href: "#", class: "list-group-item disabled" }
