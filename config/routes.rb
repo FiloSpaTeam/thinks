@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   resources :goals
   resources :cycles
   devise_for :thinkers, :controllers => {
-    :sessions      => "thinkers/sessions",
-    :registrations => "thinkers/registrations",
-    :notifications => "notifications"
+    :sessions      => 'thinkers/sessions',
+    :registrations => 'thinkers/registrations',
+    :notifications => 'notifications',
+    :otp           => 'otp'
   }
 
   resources :workloads
