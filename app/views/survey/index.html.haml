@@ -1,7 +1,7 @@
 = render partial: 'shared/projectbar', locals: { project: @sprint.project }
 .row
   .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @sprint.project }
+    = render partial: 'shared/sprintstatuspanel', locals: { sprint: @sprint }
   .col-md-8
     .panel.panel-default
       %ul.list-group

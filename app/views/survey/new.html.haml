@@ -1,7 +1,7 @@
 = render partial: 'shared/projectbar', locals: { project: @sprint.project }
 .row
   .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @sprint.project }
+    = render partial: 'shared/sprintstatuspanel', locals: { sprint: @sprint }
   .col-md-8
     = form_for @survey, url: sprint_survey_index_path do |f|
       .panel.panel-default
