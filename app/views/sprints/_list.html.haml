@@ -44,7 +44,8 @@
         %td.text-center
           = sprint.obtained
         %td.text-center
-          %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+          - if (@project.sprint != sprint.serial)
+            %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
             = icon('book', :class => "dark-grey")
   - else
     %td.text-center{ :colspan => 4 }
