@@ -5,11 +5,14 @@
       Highest tasks
 
   .list-group.hidden-xs
-    - tasks_sprint.order('workload DESC').each do |task|
-      .list-group-item
-        = badge(task.workload)
-        = link_to task_path(task) do
-          = task.title
+    .list-group-item
+      - if tasks_sprint.empty?
+        Nothing to rate
+      - else
+        - tasks_sprint.order('workload DESC').each do |task|
+          = badge(task.workload)
+          = link_to task_path(task) do
+            = task.title
 
   .panel-body.hidden-xs
     %strong
