@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227000630) do
+ActiveRecord::Schema.define(version: 20160229222321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,26 +259,31 @@ ActiveRecord::Schema.define(version: 20160227000630) do
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
 
   create_table "thinkers", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                     default: "",    null: false
+    t.string   "encrypted_password",        default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",             default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "name"
-    t.boolean  "admin",                  default: false
+    t.boolean  "admin",                     default: false
     t.string   "slug"
     t.date     "born_at"
     t.string   "photo_id"
     t.integer  "sex_id"
     t.string   "avatar"
     t.string   "country_iso"
+    t.string   "encrypted_otp_secret"
+    t.string   "encrypted_otp_secret_iv"
+    t.string   "encrypted_otp_secret_salt"
+    t.integer  "consumed_timestep"
+    t.boolean  "otp_required_for_login"
   end
 
   add_index "thinkers", ["email"], name: "index_thinkers_on_email", unique: true, using: :btree
