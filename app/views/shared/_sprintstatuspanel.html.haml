@@ -1,0 +1,26 @@
+.panel.panel-default
+  - tasks_sprint = @sprint.project.tasks.unscoped.done.where('updated_at >= ?', @sprint.created_at).where('updated_at <= ?', @sprint.updated_at)
+  .panel-body.hidden-xs
+    %strong
+      Highest tasks
+
+  .list-group.hidden-xs
+    - tasks_sprint.order('workload DESC').each do |task|
+      .list-group-item
+        = badge(task.workload)
+        = link_to task_path(task) do
+          = task.title
+
+  .panel-body.hidden-xs
+    %strong
+      Workload
+
+  .list-group.hidden-xs
+    .list-group-item
+      Burn up
+      - total_workload = 0
+      - burn_up_data   = tasks_sprint.group_by_period(:day, :updated_at).order('max(updated_at)').sum(:workload)
+      - if burn_up_data.empty?
+        - burn_up_data = { @sprint.created_at => 0 }
+      - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
+      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '80%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
