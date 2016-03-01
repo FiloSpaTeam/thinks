@@ -1,0 +1,20 @@
+= render partial: 'shared/profileheader', locals: { thinker: @thinker }
+.row
+  .col-md-4
+    = render partial: 'shared/profilebar', locals: { thinker: @thinker }
+  .col-md-8
+    .panel.panel-default
+      .list-group
+        .list-group-item
+          - if @thinker.otp_required_for_login
+            %a.pull-right.btn{ :href => disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :post }
+              = icon('times', :class => "fa-lg")
+              Disable
+            %strong
+              OTP Enabled
+          - else
+            %a.pull-right.btn{ :href => enable_otp_path(@thinker), :title => t('enable') , :role => "button", "data-method" => :post }
+              = icon('check', :class => "fa-lg")
+              Enable
+            %strong
+              OTP Disabled

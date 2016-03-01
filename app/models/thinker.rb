@@ -2,10 +2,14 @@ class Thinker < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :two_factor_authenticatable,
-         :two_factor_backupable,
-         :otp_secret_encryption_key => ENV['THINK_SOFTWARE_OTP']
+         :recoverable, :rememberable, :trackable, :validatable
+
+  devise :two_factor_authenticatable,
+         otp_secret_encryption_key: ENV['THINK_SOFTWARE_OTP']
+
+  devise :two_factor_backupable,
+         otp_backup_code_length: 16,
+         otp_number_of_backup_codes: 5
 
   extend FriendlyId
   friendly_id :name, use: :slugged

@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     :notifications => 'notifications'
   }
 
-  resources :otp, only: [:show]
+  resources :otp, only: [:show] do
+    member do
+      put :enable
+      put :disable
+    end
+  end
 
   resources :workloads
   resources :statuses
