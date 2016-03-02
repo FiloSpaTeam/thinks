@@ -38,7 +38,7 @@
         - else
           .list-group-item
             Codes
-            %a.btn.pull-right{ type: 'button', 'data-toggle': 'modal', href: '#div-password-confirmation' }
+            %a.btn.pull-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
               = icon('eye', :class => 'fa-lg dark-grey')
               = t 'show'
 
@@ -50,6 +50,6 @@
           = f.label :confirm_password, class: 'control-label'
           = f.password_field :password, class: 'form-control', autocomplete: 'off'
         .modal-footer
-          %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
+          %button.btn.btn-default{ type: 'button', 'data-dismiss' => 'modal' }
             = t 'close'
           = f.submit t('confirm'), class: 'btn btn-primary'
