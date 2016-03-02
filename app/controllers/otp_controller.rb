@@ -7,7 +7,11 @@ class OtpController < ApplicationController
   end
 
   def codes
-    flash[:otp_enabled] = true
+    if current_thinker.valid_password?(otp_params[:password])
+      flash[:otp_enabled] = true
+    else
+      flash[:error] = 'Invalid password'
+    end
 
     redirect_to otp_path @thinker
   end
@@ -33,5 +37,11 @@ class OtpController < ApplicationController
 
   def set_thinker
     @thinker = Thinker.friendly.find(params[:id])
+  end
+
+  def otp_params
+    allowed_params = [:password]
+
+    params.require(:otp).permit(allowed_params)
   end
 end

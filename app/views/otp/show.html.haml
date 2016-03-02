@@ -20,21 +20,24 @@
               OTP Disabled
         - if flash[:otp_enabled]
           .list-group-item
-            Secret
+            Codes
+            = link_to(otp_path(@thinker), :title => t('hide') , :role => "button", class: "btn pull-right") do
+              = icon('eye-slash', :class => 'fa-lg dark-grey')
+              = t 'hide'
+          .list-group-item
+            %strong
+              Secrets
+          .list-group-item
+            Code
             %span.pull-right
               = @thinker.otp_secret
-          .list-group-item{ style: "height: 135px;" }
+          .list-group-item{ style: "height: 119px;" }
             QRCode
             .pull-right
-              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email, issuer: "Devise-Two-Factor-Demo"),
+              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email),
                                             :svg,
                                             :level => :l,
                                             :unit => 2)
-          .list-group-item
-            Codes
-            %a.btn.pull-right{ type: 'button', 'data-toggle': 'modal' }
-              = icon('eye-slash', :class => 'fa-lg dark-grey')
-              = t 'hide'
         - else
           .list-group-item
             Codes
@@ -45,14 +48,11 @@
 #div-password-confirmation.modal.fade{ tabindex: -1, role: 'dialog' }
   .modal-dialog
     .modal-content
-      .modal-header
-        %button.close{ type: 'button', 'data-dismiss': 'modal', 'aria-label': t('close') }
-          %span{ 'aria-hidden': true }
-            &times;
-        %h4.modal-title
-          = t '.confirm_password'
-      .modal-body
-
-      .modal-footer
-        %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
-          = t 'close'
+      = form_for @thinker, url: codes_otp_path(@thinker), as: :otp, method: :put do |f|
+        .modal-body
+          = f.label :confirm_password, class: 'control-label'
+          = f.password_field :password, class: 'form-control', autocomplete: 'off'
+        .modal-footer
+          %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
+            = t 'close'
+          = f.submit t('confirm'), class: 'btn btn-primary'

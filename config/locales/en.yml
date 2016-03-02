@@ -59,6 +59,8 @@ en:
   release_date_not_defined_yet: "Release date not defined yet"
   enable: "Enable"
   disable: "Disable"
+  confirm: "Confirm"
+  hide: "Hide"
 
   layouts:
     application:
@@ -215,6 +217,10 @@ en:
       communication: "Communication"
       idk: "I don't know"
       other: "Other"
+
+  otp:
+    show:
+      confirm_password: "Confirm password"
 
   # Shared section
   shared:
