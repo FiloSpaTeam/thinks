@@ -7,14 +7,52 @@
       .list-group
         .list-group-item
           - if @thinker.otp_required_for_login
-            %a.pull-right.btn{ :href => disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :post }
+            = link_to(disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :put, class: "btn pull-right") do
               = icon('times', :class => "fa-lg")
               Disable
             %strong
               OTP Enabled
           - else
-            %a.pull-right.btn{ :href => enable_otp_path(@thinker), :title => t('enable') , :role => "button", "data-method" => :post }
+            = link_to(enable_otp_path(@thinker), :title => t('enable') , :role => "button", "data-method" => :put, class: "btn pull-right") do
               = icon('check', :class => "fa-lg")
               Enable
             %strong
               OTP Disabled
+        - if flash[:otp_enabled]
+          .list-group-item
+            Secret
+            %span.pull-right
+              = @thinker.otp_secret
+          .list-group-item{ style: "height: 135px;" }
+            QRCode
+            .pull-right
+              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email, issuer: "Devise-Two-Factor-Demo"),
+                                            :svg,
+                                            :level => :l,
+                                            :unit => 2)
+          .list-group-item
+            Codes
+            %a.btn.pull-right{ type: 'button', 'data-toggle': 'modal' }
+              = icon('eye-slash', :class => 'fa-lg dark-grey')
+              = t 'hide'
+        - else
+          .list-group-item
+            Codes
+            %a.btn.pull-right{ type: 'button', 'data-toggle': 'modal', href: '#div-password-confirmation' }
+              = icon('eye', :class => 'fa-lg dark-grey')
+              = t 'show'
+
+#div-password-confirmation.modal.fade{ tabindex: -1, role: 'dialog' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', 'data-dismiss': 'modal', 'aria-label': t('close') }
+          %span{ 'aria-hidden': true }
+            &times;
+        %h4.modal-title
+          = t '.confirm_password'
+      .modal-body
+
+      .modal-footer
+        %button.btn.btn-default{ type: 'button', 'data-dismiss': 'modal' }
+          = t 'close'

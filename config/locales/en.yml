@@ -57,6 +57,8 @@ en:
   vote:                         "Vote"
   approve:                      "Approve"
   release_date_not_defined_yet: "Release date not defined yet"
+  enable: "Enable"
+  disable: "Disable"
 
   layouts:
     application:
