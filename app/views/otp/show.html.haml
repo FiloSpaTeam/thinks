@@ -18,29 +18,30 @@
               Enable
             %strong
               OTP Disabled
-        - if flash[:otp_enabled]
-          .list-group-item
-            Codes
-            = link_to(otp_path(@thinker), :title => t('hide') , :role => "button", class: "btn pull-right") do
-              = icon('eye-slash', :class => 'fa-lg dark-grey')
-              = t 'hide'
-          .list-group-item
-            %strong
-              Secrets
-          .list-group-item
-            Code
-            %span.pull-right
-              = @thinker.otp_secret
-          .list-group-item{ style: "height: 119px;" }
-            QRCode
-            .pull-right
-              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email), :svg, :level => :l, :unit => 2)
-        - else
-          .list-group-item
-            Codes
-            %a.btn.pull-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
-              = icon('eye', :class => 'fa-lg dark-grey')
-              = t 'show'
+        - if @thinker.otp_required_for_login
+          - if flash[:otp_enabled]
+            .list-group-item
+              Codes
+              = link_to(otp_path(@thinker), :title => t('hide') , :role => "button", class: "btn pull-right") do
+                = icon('eye-slash', :class => 'fa-lg dark-grey')
+                = t 'hide'
+            .list-group-item
+              %strong
+                Secrets
+            .list-group-item
+              Code
+              %span.pull-right
+                = @thinker.otp_secret
+            .list-group-item{ style: "height: 119px;" }
+              QRCode
+              .pull-right
+                = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email), :svg, :level => :l, :unit => 2)
+          - else
+            .list-group-item
+              Codes
+              %a.btn.pull-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
+                = icon('eye', :class => 'fa-lg dark-grey')
+                = t 'show'
 
 #div-password-confirmation.modal.fade{ tabindex: -1, role: 'dialog' }
   .modal-dialog
