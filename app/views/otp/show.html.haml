@@ -34,10 +34,7 @@
           .list-group-item{ style: "height: 119px;" }
             QRCode
             .pull-right
-              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email),
-                                            :svg,
-                                            :level => :l,
-                                            :unit => 2)
+              = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email), :svg, :level => :l, :unit => 2)
         - else
           .list-group-item
             Codes
