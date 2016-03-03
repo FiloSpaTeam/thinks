@@ -22,7 +22,7 @@ module ApplicationHelper
     'has-error' if resource.errors.include?(name)
   end
 
-  def markdown(text)
+  def markdown(text, comment = false)
     options = {
       filter_html:         true,
       hard_wrap:           true,
@@ -39,6 +39,8 @@ module ApplicationHelper
     }
 
     renderer = Redcarpet::Render::CleanerHTML.new(options)
+    renderer = Redcarpet::Render::HTML.new(options) if comment
+
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe

@@ -136,7 +136,7 @@
               = comment.created_at.to_s(:long)
             .collapse{ :id => "collapseComment#{ comment.id }", :class => index < 3 ? "in" : ""}
               .form-group
-              = comment.text
+              = markdown(comment.text, true)
       .panel-footer
         = render :partial => 'comments/form'
 - if @task.done? && @comment_approved.reason.nil?
