@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Serial:
+  = @operation.serial
+%p
+  %b Text:
+  = @operation.text
+%p
+  %b Done:
+  = @operation.done
+
+= link_to 'Edit', edit_operation_path(@operation)
+\|
+= link_to 'Back', operations_path

@@ -1,0 +1,19 @@
+= form_for @operation do |f|
+  - if @operation.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@operation.errors.count, "error")} prohibited this operation from being saved:"
+      %ul
+        - @operation.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :serial
+    = f.number_field :serial
+  .field
+    = f.label :text
+    = f.text_field :text
+  .field
+    = f.label :done
+    = f.check_box :done
+  .actions
+    = f.submit 'Save'

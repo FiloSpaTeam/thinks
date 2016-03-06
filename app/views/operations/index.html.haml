@@ -1,0 +1,25 @@
+%h1 Listing operations
+
+%table
+  %thead
+    %tr
+      %th Serial
+      %th Text
+      %th Done
+      %th
+      %th
+      %th
+
+  %tbody
+    - @operations.each do |operation|
+      %tr
+        %td= operation.serial
+        %td= operation.text
+        %td= operation.done
+        %td= link_to 'Show', operation
+        %td= link_to 'Edit', edit_operation_path(operation)
+        %td= link_to 'Destroy', operation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Operation', new_operation_path
