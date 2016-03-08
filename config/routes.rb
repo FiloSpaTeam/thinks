@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :operations
   get 'notifications_check' => 'notifications#check'
   resources :notifications do
     put :read
@@ -59,6 +58,8 @@ Rails.application.routes.draw do
           put :approve
         end
       end
+
+      resources :operations, shallow: true
     end
 
     resources :goals, shallow: true do

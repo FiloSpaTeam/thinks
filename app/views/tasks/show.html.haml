@@ -89,7 +89,7 @@
         .list-group-item
           %strong
             Operations
-          %span.pull-right
+          = link_to task_operations_path(@task), :class => "pull-right" do
             6 / 11
   .col-sm-8
     .panel.panel-default
