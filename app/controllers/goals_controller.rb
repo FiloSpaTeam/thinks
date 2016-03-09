@@ -69,8 +69,6 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
-    @project = @goal.project
-
     respond_to do |format|
       if current_thinker == @goal.thinker && @goal.update(goal_params) && create_notification(@goal)
         format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }

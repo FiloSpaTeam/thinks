@@ -1,10 +1,13 @@
 class OperationsController < ApplicationController
   before_action :set_operation, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:index, :new, :create]
 
   # GET /operations
   # GET /operations.json
   def index
     @operations = Operation.all
+
+    @workload_voted = @task.votes.where(thinker: current_thinker).first
   end
 
   # GET /operations/1
@@ -62,6 +65,10 @@ class OperationsController < ApplicationController
   end
 
   private
+    def set_task
+      @task = Task.find(params[:task_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_operation
       @operation = Operation.find(params[:id])
