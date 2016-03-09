@@ -29,6 +29,7 @@ class Task < ActiveRecord::Base
   has_many :votes
   has_many :workloads, through: :votes
   has_many :comments
+  has_many :operations
 
   has_many :likes, through: :comments
 

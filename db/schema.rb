@@ -174,9 +174,12 @@ ActiveRecord::Schema.define(version: 20160306105945) do
     t.integer  "serial"
     t.string   "text"
     t.boolean  "done"
+    t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "operations", ["task_id"], name: "index_operations_on_task_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",               limit: 60

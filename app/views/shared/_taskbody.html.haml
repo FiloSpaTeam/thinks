@@ -2,7 +2,7 @@
   .panel-heading
     %h4
       %strong
-        = task.title
+        = link_to task.title, task_path(task)
     %p.dark-grey
       %strong
         \##{task.serial}

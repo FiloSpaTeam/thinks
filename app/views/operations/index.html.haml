@@ -4,3 +4,13 @@
     = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
   .col-sm-8
     = render partial: 'shared/taskbody', locals: { task: @task }
+    .panel.panel-default
+      .panel-heading
+        %strong
+          Operations
+      %ul.list-group
+        - if @operations.empty?
+          = content_tag(:li, t("no_operations"), :class => "list-group-item")
+        - @operations.each_with_index do |operation, index|
+          = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
+            = operation.text

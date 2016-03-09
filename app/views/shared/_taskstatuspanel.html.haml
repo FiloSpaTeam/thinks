@@ -89,4 +89,4 @@
       %strong
         Operations
       = link_to task_operations_path(task), :class => "pull-right" do
-        6 / 11
+        = task.operations.where("done is true").size.to_s + " / " + task.operations.size.to_s
