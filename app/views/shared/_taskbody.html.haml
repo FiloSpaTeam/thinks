@@ -1,0 +1,18 @@
+.panel.panel-default
+  .panel-heading
+    %h4
+      %strong
+        = task.title
+    %p.dark-grey
+      %strong
+        \##{task.serial}
+      created at #{task.created_at.to_s(:long)} by #{task.thinker.name}
+  .panel-body
+    = markdown(task.description)
+  - if task.thinker == current_thinker
+    .panel-footer
+      = link_to t('edit'), edit_task_path(task), :class => "btn btn-primary"
+      - if task.deleted?
+        = link_to t('reopen'), reopen_task_path(task), :method => 'put', :class => 'btn btn-warning pull-right'
+      - else
+        = link_to t('close'), task_path(task), :method => 'delete', :class => 'btn btn-danger pull-right'
