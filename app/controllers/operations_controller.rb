@@ -3,6 +3,7 @@ class OperationsController < ApplicationController
   before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
   before_action :set_task, only: [:index, :new, :create]
   before_action :check_worker!, except: [:index, :destroy]
+  before_action :set_project, only: [:index]
 
   # GET /operations
   # GET /operations.json
@@ -84,6 +85,10 @@ class OperationsController < ApplicationController
 
   def set_task
     @task = Task.find(params[:task_id])
+  end
+
+  def set_project
+    @project = @task.project
   end
 
   # Use callbacks to share common setup or constraints between actions.
