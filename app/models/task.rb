@@ -237,8 +237,7 @@ class Task < ActiveRecord::Base
   end
 
   def generate_serial
-    tasks_count = Task.where(project_id: project.id).count
-    tasks_count += 1
+    tasks_count = Task.where(project_id: project.id).count + 1
 
     self.serial = tasks_count
   end

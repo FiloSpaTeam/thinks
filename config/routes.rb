@@ -59,7 +59,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :operations, shallow: true
+      resources :operations, shallow: true, except: [:new, :show] do
+        member do
+          put :done
+        end
+      end
     end
 
     resources :goals, shallow: true do

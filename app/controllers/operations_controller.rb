@@ -1,23 +1,15 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_thinker!
+  before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
+  before_action :check_worker!, except: [:index]
   before_action :set_task, only: [:index, :new, :create]
 
   # GET /operations
   # GET /operations.json
   def index
-    @operations = Operation.all
+    @operations = @task.operations.order('serial').all
 
     @workload_voted = @task.votes.where(thinker: current_thinker).first
-  end
-
-  # GET /operations/1
-  # GET /operations/1.json
-  def show
-  end
-
-  # GET /operations/new
-  def new
-    @operation = Operation.new
   end
 
   # GET /operations/1/edit
@@ -28,10 +20,26 @@ class OperationsController < ApplicationController
   # POST /operations.json
   def create
     @operation = Operation.new(operation_params)
+    @operation.task = @task
 
     respond_to do |format|
       if @operation.save
-        format.html { redirect_to @operation, notice: 'Operation was successfully created.' }
+        format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully added.' }
+        format.json { render :show, status: :created, location: @operation }
+      else
+        format.html { render :new }
+        format.json { render json: @operation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def done
+    @operation.done = true
+    @task           = @operation.task
+
+    respond_to do |format|
+      if @operation.save
+        format.html { redirect_to task_operations_path(@task), notice: 'Operation done.' }
         format.json { render :show, status: :created, location: @operation }
       else
         format.html { render :new }
@@ -57,25 +65,31 @@ class OperationsController < ApplicationController
   # DELETE /operations/1
   # DELETE /operations/1.json
   def destroy
+    @task = @operation.task
+
     @operation.destroy
     respond_to do |format|
-      format.html { redirect_to operations_url, notice: 'Operation was successfully destroyed.' }
+      format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    def set_task
-      @task = Task.find(params[:task_id])
-    end
+  def check_worker!
+    redirect_to task_path(@operation.task) unless current_thinker == @operation.task.worker
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_operation
-      @operation = Operation.find(params[:id])
-    end
+  def set_task
+    @task = Task.find(params[:task_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def operation_params
-      params.require(:operation).permit(:serial, :text, :done)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_operation
+    @operation = Operation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def operation_params
+    params.require(:operation).permit(:text)
+  end
 end

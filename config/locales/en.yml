@@ -62,6 +62,8 @@ en:
   confirm: "Confirm"
   hide: "Hide"
   no_operations: "No operations"
+  done: "Done"
+  remove: "Remove"
 
   layouts:
     application:
@@ -222,6 +224,10 @@ en:
   otp:
     show:
       confirm_password: "Confirm password"
+
+  operations:
+    index:
+      add: "Add operation"
 
   # Shared section
   shared:

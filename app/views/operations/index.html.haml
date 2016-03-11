@@ -13,4 +13,16 @@
           = content_tag(:li, t("no_operations"), :class => "list-group-item")
         - @operations.each_with_index do |operation, index|
           = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
+            - if (!operation.done)
+              = destroy_button(operation)
+              = done_button(operation)
+            %strong
+              = operation.serial.to_s + ': '
             = operation.text
+      - if current_thinker == @task.worker
+        .panel-footer
+          = form_for [@task, Operation.new] do |f|
+            .input-group
+              = f.text_field :text, :class => 'form-control'
+              .input-group-btn
+                = f.submit t(".add"), :class => "btn btn-primary"
