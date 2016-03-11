@@ -72,7 +72,7 @@
         = t('tasks.worker')
       - if !task.worker.nil?
         %span.pull-right{ :title => task.worker.name }
-          = task.worker.name.truncate(20)
+          = task.worker.name.try(:truncate, 20)
       - elsif task.status == Status.sprint.first
         - if current_thinker.working_tasks.in_progress.present?
           %h4 No one is working over this but you have yet something to do ;-P

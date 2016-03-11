@@ -2,10 +2,6 @@
 
 one:
   serial: 1
-  text: MyString
-  done: false
-
-two:
-  serial: 1
-  text: MyString
+  task: task_one
+  text: First operation
   done: false

@@ -1,8 +1,8 @@
 class OperationsController < ApplicationController
   before_action :authenticate_thinker!
   before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
-  before_action :check_worker!, except: [:index]
   before_action :set_task, only: [:index, :new, :create]
+  before_action :check_worker!, except: [:index, :destroy]
 
   # GET /operations
   # GET /operations.json
@@ -67,16 +67,19 @@ class OperationsController < ApplicationController
   def destroy
     @task = @operation.task
 
-    @operation.destroy
     respond_to do |format|
-      format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
-      format.json { head :no_content }
+      if @task.worker == current_thinker && @operation.destroy
+        format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
+      else
+        format.html { redirect_to task_operations_path(@task), notice: 'You cannot delete operations.' }
+      end
     end
   end
 
   private
+
   def check_worker!
-    redirect_to task_path(@operation.task) unless current_thinker == @operation.task.worker
+    redirect_to task_path(@task) unless current_thinker == @task.worker
   end
 
   def set_task
