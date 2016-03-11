@@ -2,7 +2,7 @@ class OperationsController < ApplicationController
   before_action :authenticate_thinker!
   before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
   before_action :set_task, only: [:index, :new, :create]
-  before_action :check_worker!, except: [:index, :destroy]
+  before_action :check_worker!, except: [:index, :destroy, :done]
   before_action :set_project, only: [:index]
 
   # GET /operations
@@ -39,7 +39,7 @@ class OperationsController < ApplicationController
     @task           = @operation.task
 
     respond_to do |format|
-      if @operation.save
+      if @task.worker == current_thinker && @operation.save
         format.html { redirect_to task_operations_path(@task), notice: 'Operation done.' }
         format.json { render :show, status: :created, location: @operation }
       else
