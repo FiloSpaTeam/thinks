@@ -11,9 +11,11 @@
       %ul.list-group
         - if @operations.empty?
           = content_tag(:li, t("no_operations"), :class => "list-group-item")
+        - first = false
         - @operations.each_with_index do |operation, index|
           = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
-            - if (!operation.done)
+            - if (!operation.done && !first)
+              - first = true
               = destroy_button(operation)
               = done_button(operation)
             %strong
