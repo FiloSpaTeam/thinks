@@ -50,6 +50,8 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
+  enum contributes: [:nothing, :watching, :partecipate]
+
   scope :search_title, lambda { |query|
     where("title LIKE ?", "%#{query}%")
   }
