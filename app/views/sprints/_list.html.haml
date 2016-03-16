@@ -20,11 +20,12 @@
         %h5
           %strong
             = t "obtained"
-    %td
-      .col-xs-2.hidden-xs
-        %h5
-          %strong
-            = t ".survey"
+    - if (@project.part_of_team?(current_thinker))
+      %td
+        .col-xs-2.hidden-xs
+          %h5
+            %strong
+              = t ".survey"
 %tbody
   - unless (@sprints.empty?)
     - @sprints.each do |sprint|
@@ -43,15 +44,16 @@
             = sprint.updated_at.to_s(:short)
         %td.text-center
           = sprint.obtained
-        %td.text-center
-          - if (@project.sprint != sprint.serial)
-            - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
-            - if answers_thinker.empty?
-              %a.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
-                = icon('circle-o', :class => "dark-grey fa-lg")
-            - else
-              %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
-                = icon('check-circle-o', :class => "dark-grey fa-lg")
+        - if (@project.part_of_team?(current_thinker))
+          %td.text-center
+            - if (@project.sprint != sprint.serial)
+              - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
+              - if answers_thinker.empty?
+                %a.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+                  = icon('circle-o', :class => "dark-grey fa-lg")
+              - else
+                %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+                  = icon('check-circle-o', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 4 }
       = t('no_record')

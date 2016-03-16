@@ -4,6 +4,7 @@ class SurveyController < ApplicationController
   before_action :set_sprint
   before_action :not_actual!
   before_action :set_project
+  before_action :teammate!
 
   def index
     redirect_to new_sprint_survey_path(@sprint) if current_thinker.answers.where(sprint: @sprint).empty?
@@ -42,6 +43,12 @@ class SurveyController < ApplicationController
 
   def not_actual!
     redirect_to project_sprints_path(@sprint.project) if @sprint.serial == @sprint.project.sprint
+  end
+
+  def teammate!
+    flash[:error] = 'You are not partecipating to the project'
+
+    redirect_to project_sprints_path(@sprint.project) if !@sprint.project.part_of_team?(current_thinker)
   end
 
   def survey_params
