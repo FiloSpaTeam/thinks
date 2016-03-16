@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
-  test 'should not save comment with more 240 chars.' do
+  test 'should not save comment with more 2000 chars.' do
     comment = comments(:comment_one)
 
-    comment.text = random_string(241)
+    comment.text = random_string(2001)
 
     assert_not comment.save, 'Saved a comment too long.'
   end
