@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
 
   has_many :likes
 
-  validates :text, length: { maximum: 240 }, presence: true
+  validates :text, length: { maximum: 2000 }, presence: true
   validates :thinker, presence: true
   validates :task, presence: true
 
