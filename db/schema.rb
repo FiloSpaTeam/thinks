@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306105945) do
+ActiveRecord::Schema.define(version: 20160316192325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,15 @@ ActiveRecord::Schema.define(version: 20160306105945) do
 
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["thinker_id"], name: "index_comments_on_thinker_id", using: :btree
+
+  create_table "contributions", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "thinker_id"
+    t.integer "intensity",  default: 0
+  end
+
+  add_index "contributions", ["project_id"], name: "index_contributions_on_project_id", using: :btree
+  add_index "contributions", ["thinker_id"], name: "index_contributions_on_thinker_id", using: :btree
 
   create_table "countries", primary_key: "iso", force: :cascade do |t|
     t.string  "name",           null: false
@@ -202,14 +211,6 @@ ActiveRecord::Schema.define(version: 20160306105945) do
   add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
   add_index "projects", ["license_id"], name: "index_projects_on_license_id", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
-
-  create_table "projects_thinkers", id: false, force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "thinker_id"
-  end
-
-  add_index "projects_thinkers", ["project_id"], name: "index_projects_thinkers_on_project_id", using: :btree
-  add_index "projects_thinkers", ["thinker_id"], name: "index_projects_thinkers_on_thinker_id", using: :btree
 
   create_table "reasons", force: :cascade do |t|
     t.text     "text"

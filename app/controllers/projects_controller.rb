@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   include ProjectsHelper
 
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :partecipate, :team, :tasks]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
 
   before_action :authenticate_thinker!, except: [:index, :show]
 
@@ -34,6 +34,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @contribution = Contribution.where(thinker: current_thinker).where(project: @project).first_or_initialize
   end
 
   # GET /projects/new
@@ -56,8 +57,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.thinker = current_thinker
-
-    @project.thinkers << current_thinker
 
     respond_to do |format|
       if @project.save
@@ -111,16 +110,17 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1/partecipate
-  # PATCH/PUT /projects/1/partecipate.json
-  def partecipate
+  # PATCH/PUT /projects/1/contribute
+  # PATCH/PUT /projects/1/contribute.json
+  def contribute
     respond_to do |format|
-      unless creator?(@project.thinker.id)
-        format.html { redirect_to project_path(@project), warning: t(:wtf_the_creator_partecipate) }
-      end
+      @contribution           = Contribution.where(thinker: current_thinker)
+                                            .where(project: @project)
+                                            .first_or_create
+      @contribution.intensity = params[:contribution][:intensity]
+      @contribution.save
 
-      @project.thinkers << current_thinker
-      format.html { redirect_to project_path(@project), notice: 'Now you are an active member of the team! Congratz ;-)' }
+      format.html { redirect_to project_path(@project), notice: 'Your contribution has been saved!' }
     end
   end
 
@@ -152,15 +152,15 @@ class ProjectsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.friendly.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.friendly.find(params[:id])
 
-      load_project_session
-    end
+    load_project_session
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:title, :description, :minimum_team_number, :release_at, :license_id, :source_code_url, :home_url, :documentation_url, :cycle_id, :category_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:title, :description, :minimum_team_number, :release_at, :license_id, :source_code_url, :home_url, :documentation_url, :cycle_id, :category_id)
+  end
 end

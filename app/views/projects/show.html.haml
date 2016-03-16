@@ -2,15 +2,13 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    = render :partial => 'projectsummary', locals: { project: @project }
+    = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
     .panel.panel-default
       .panel-body
         = markdown(@project.description)
-      - if creator?(@project.thinker.id) || (thinker_signed_in? && !@project.part_of_team?(current_thinker))
+      - if creator?(@project.thinker.id)
         .panel-footer
           - if creator?(@project.thinker.id)
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-primary'
             = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger pull-right'
-          -# - if thinker_signed_in? && !creator?(@project.thinker.id) && !@project.part_of_team?(current_thinker)
-          -#   = link_to t('.partecipate'), partecipate_project_path(@project), :class => 'btn btn-success', :method => :put

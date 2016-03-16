@@ -4,7 +4,11 @@
       Your contribution
   .list-group
     .list-group-item
-      = select_tag 'contributing', options_for_select(Project.contributes.keys.to_a), class: 'form-control'
+      - if current_thinker != project.thinker
+        = form_for contribution, url: { action: :contribute }, html: { id: 'form-contribution' }, method: :put do |f|
+          = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
+      - else
+        You are the Scrum Master
 .panel.panel-default
   .panel-body
     %strong
@@ -60,7 +64,7 @@
       Summary
   .list-group.hidden-xs
     .list-group-item
-      = badge(project.thinkers.distinct.size)
+      = badge(project.contributions.distinct.size)
       thinkers
     .list-group-item
       = badge(project.workers.distinct.size)

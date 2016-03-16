@@ -211,7 +211,7 @@ class TasksController < ApplicationController
 
   def teammate!
     if !@project.part_of_team?(current_thinker)
-      flash[:alert] = 'You are not part of the team!'
+      flash[:alert] = 'You are not partecipating to this project as active member!'
       redirect_to project_tasks_path(@project)
     end
   end

@@ -80,7 +80,8 @@
                 - if !current_page?(project_goals_path)
                   = f.text_field :search_thinker, class: 'form-control filterrific-periodically-observed', placeholder: t("search")
               %ul.list-group.scrollbar
-                - @project.thinkers.unscoped.each do |thinker|
+                - @project.contributions.each do |contribution|
+                  - thinker = contribution.thinker
                   %li.list-group-item
                     = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project, method: :get, remote: true) do
                       = thinker.name

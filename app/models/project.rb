@@ -14,8 +14,8 @@ class Project < ActiveRecord::Base
   friendly_id :title, :use => :slugged
 
   has_and_belongs_to_many :languages
-  has_and_belongs_to_many :thinkers
 
+  has_many :contributions
   has_many :dependencies
   has_many :goals, :dependent => :destroy
   has_many :tasks, :dependent => :destroy
@@ -50,8 +50,6 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  enum contributes: [:nothing, :watching, :partecipate]
-
   scope :search_title, lambda { |query|
     where("title LIKE ?", "%#{query}%")
   }
@@ -77,7 +75,7 @@ class Project < ActiveRecord::Base
   end
 
   def part_of_team?(thinker)
-    return thinkers.exists?(thinker.id) || thinker == self.thinker
+    return !contributions.select{ |contribution| contribution.thinker == thinker && contribution.partecipate? }.empty? || thinker == self.thinker
   end
 
   def progress_percentage

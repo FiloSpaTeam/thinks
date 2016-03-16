@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     member do
       get :team
 
-      put :partecipate
+      put :contribute
     end
 
     resources :sprints, shallow: true do
