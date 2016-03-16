@@ -3,7 +3,7 @@ module ApplicationHelper
 
   def application_version
     version = '0.1.6.126'
-    date    = '2016.03.12'
+    date    = '2016.03.16'
     "Version: #{version} (build: #{date})"
   end
 
