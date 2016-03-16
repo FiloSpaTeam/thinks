@@ -208,6 +208,7 @@ en:
   sex:
     male: "Male"
     female: "Female"
+    other: "Other"
 
   survey:
     new:

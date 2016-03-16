@@ -90,7 +90,7 @@ categories_list.each do |tname, tdescription, color|
   end
 end
 
-sexes_list = %w(male female)
+sexes_list = %w(male female other)
 
 sexes_list.each do |tname|
   Sex.where(t_name: tname).first_or_create
