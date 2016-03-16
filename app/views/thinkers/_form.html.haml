@@ -16,7 +16,8 @@
             = t "sex.#{sex.t_name}"
     .form-group
       = f.label :born_at, :class => "control-label"
-      = f.text_field :born_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "data-date-start-date" => (Date.today - 100.years)
+      - puts Thinker.validators_on(:born_at).inspect
+      = f.text_field :born_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "data-date-start-date" => Thinker.validators_on(:born_at)[0].options[:on_or_after].call.strftime('%F'), "data-date-end-date" => Thinker.validators_on(:born_at)[0].options[:before].call.strftime('%F')
     .form-group
       = f.label :country_iso, :class => "control-label"
       = f.select :country_iso, options_from_collection_for_select(Country.all.order('printable_name'), 'iso', 'printable_name', @thinker.country.try(:iso)), { include_blank: t('not_defined_yet') },{ class: 'form-control' }
