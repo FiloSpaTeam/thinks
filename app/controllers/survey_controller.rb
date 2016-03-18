@@ -46,9 +46,11 @@ class SurveyController < ApplicationController
   end
 
   def teammate!
-    flash[:error] = 'You are not partecipating to the project'
+    unless @sprint.project.part_of_team?(current_thinker)
+      flash[:error] = 'You cannot contribute to survey because you are not partecipating to the project'
 
-    redirect_to project_sprints_path(@sprint.project) if !@sprint.project.part_of_team?(current_thinker)
+      redirect_to project_sprints_path(@sprint.project)
+    end
   end
 
   def survey_params
