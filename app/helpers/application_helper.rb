@@ -49,4 +49,24 @@ module ApplicationHelper
   def percentage_from_value_and_total(value, total)
     (100 * value) / total
   end
+
+  def init_counter_textarea(id_textarea, id_counter)
+    javascript_tag(
+      "$(document).ready(function() {
+          var textarea     = $('#{id_textarea}');
+          var counter      = $('#{id_counter}');
+          var max_length   = counter.data('maximum-length');
+
+          textarea.keyup(function() {
+            var diff = max_length - $(this).val().length;
+            counter.text(diff);
+
+            if (diff < 0) {
+              counter.addClass('text-danger');
+            } else {
+              counter.removeClass('text-danger');
+            }
+          });
+        });", defer: 'defer')
+  end
 end

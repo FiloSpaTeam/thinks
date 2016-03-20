@@ -7,7 +7,10 @@
     .form-group
       = f.label :description, :class => 'control-label'
       = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
-      %span#help-description.help-block= t "char_limit", chars: Project.validators_on(:description)[0].options[:maximum]
+      %span#help-description.help-block
+        = t "remaining_chars"
+        %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
+          = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
     .form-group
       = f.label :category_id, :class => 'control-label'
       = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
@@ -42,3 +45,4 @@
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |
       projects_path, :class => 'btn btn-default'                   |
+= init_counter_textarea('#project_description', '#counter')
