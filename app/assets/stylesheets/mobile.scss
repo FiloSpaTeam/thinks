@@ -3,6 +3,10 @@
         .container { padding: 20px 15px; }
     }
 
+    .copyright {
+        width: 15% !important;
+    }
+
     @media screen and (max-width: 767px) {
         body {
             .container { padding: 0; }

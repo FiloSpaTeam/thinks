@@ -2,14 +2,14 @@
   .container
     %a.btn.pull-right{ :href => "#", :title => 'Back to top', :role => "button", style: 'margin: 11px 0;' }
       = icon('arrow-circle-up', :class => "dark-grey fa-lg")
-    = content_tag :small, application_version, :class => "pull-right text-muted"
-    %p.pull-left.text-muted{ :style => "width: 30%;" }
+    = application_version
+    %p.pull-left.text-muted.copyright{ :style => "width: 30%;", title: "© #{DateTime.now.year} Claudio Maradonna" }
       ©
       = DateTime.now.year
-      Claudio Maradonna ·
-      %a{:href => "#"} Privacy
-      ·
-      %a{:href => "#"} Terms
+      %span.hidden-xs
+        C.M. ·
+      %a.hidden-xs{:href => "#"} Privacy ·
+      %a.hidden-xs{:href => "#"} Terms
     %p.text-center.text-muted
       = link_to "https://github.com/FiloSpaTeam/thinks" do
         %i.fa.fa-github.fa-lg

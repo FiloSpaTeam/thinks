@@ -73,6 +73,7 @@ body.sessions, body.registrations, body.passwords {
   height: 60px;
   background-color: #f5f5f5;
   border-top: 1px solid #DDD;
+  z-index: 9999;
    
   .text-muted {
     margin: 20px 0;

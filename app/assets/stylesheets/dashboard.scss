@@ -82,6 +82,14 @@ body {
   }
 }
 
+.footer {
+    .container {
+        @media (min-width: $min-width-for-sidebar) {
+            padding-left: $width-sidebar;
+        }
+    }
+}
+
 /*
  * Placeholder dashboard ideas
  */

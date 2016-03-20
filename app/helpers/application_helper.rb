@@ -4,7 +4,8 @@ module ApplicationHelper
   def application_version
     version = '0.1.7.138'
     date    = '2016.03.20'
-    "#{version} (build: #{date})"
+    content_tag(:span, "(build: #{date})", class: 'hidden-xs hidden-sm pull-right text-muted') +
+    content_tag(:small, "#{version}", class: 'text-muted pull-right')
   end
 
   def link_to_button(path, text, icon_source)
