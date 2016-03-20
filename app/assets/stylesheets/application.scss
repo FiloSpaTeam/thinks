@@ -59,6 +59,8 @@ body.start {
 }
 
 body.sessions, body.registrations, body.passwords {
+    padding-bottom: 0;
+
     .footer {
         display: none;
     }
