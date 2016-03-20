@@ -118,6 +118,9 @@ class GoalsController < ApplicationController
     def set_validators_for_form_help
       title_validators = Goal.validators_on(:title)[0]
       @chars_max_title = title_validators.options[:maximum]
+
+      title_validators = Goal.validators_on(:description)[0]
+      @chars_min_description = title_validators.options[:minimum]
     end
 
     # Use callbacks to share common setup or constraints between actions.
