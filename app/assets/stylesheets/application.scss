@@ -41,26 +41,46 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  padding-bottom: 60px;
 
   .container { padding: 60px 15px; }
 }
 
+body:not(.start) {
+    .footer {
+        bottom: 0;
+    }    
+}
+
+body.start {
+    .footer {
+        position: absolute !important;
+    }    
+}
+
+body.sessions, body.registrations, body.passwords {
+    .footer {
+        display: none;
+    }
+}
+
 .footer {
   position: fixed;
-  bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-
+  background-color: #f5f5f5;
+  border-top: 1px solid #DDD;
+   
   .text-muted {
     margin: 20px 0;
     font-size: 13px;
   }
 
   .container {
-    padding-right: 15px;
-    padding-left: 15px;
+      padding: 0;
+      padding-right: 15px;
+      padding-left: 15px;
   }
 
   ul {

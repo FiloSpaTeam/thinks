@@ -1,0 +1,21 @@
+%footer.footer
+  .container
+    %a.btn.pull-right{ :href => "#", :title => 'Back to top', :role => "button", style: 'margin: 11px 0;' }
+      = icon('arrow-circle-up', :class => "dark-grey fa-lg")
+    = content_tag :small, application_version, :class => "pull-right text-muted"
+    %p.pull-left.text-muted{ :style => "width: 30%;" }
+      ©
+      = DateTime.now.year
+      Claudio Maradonna ·
+      %a{:href => "#"} Privacy
+      ·
+      %a{:href => "#"} Terms
+    %p.text-center.text-muted
+      = link_to "https://github.com/FiloSpaTeam/thinks" do
+        %i.fa.fa-github.fa-lg
+      ·
+      = link_to "https://twitter.com/CMaradonna" do
+        %i.fa.fa-twitter.fa-lg
+      ·
+      = link_to "https://joindiaspora.com/people/decebafef6625a64" do
+        %i.fa.fa-asterisk.fa-lg
