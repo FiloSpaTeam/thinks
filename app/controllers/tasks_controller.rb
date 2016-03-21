@@ -45,10 +45,15 @@ class TasksController < ApplicationController
   def new
     @task         = Task.new
     @task.project = @project
+
+    @project_form = @project
   end
 
   # GET /tasks/1/edit
   def edit
+    @project_form = nil
+    @project      = @task.project
+
     if current_thinker != @task.thinker
       respond_to do |format|
         format.html { redirect_to @task, alert: "You cannot edit this." }

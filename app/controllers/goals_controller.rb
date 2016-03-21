@@ -31,11 +31,15 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
-    @goal = Goal.new
+    @goal         = Goal.new
+
+    @project_form = @project
   end
 
   # GET /goals/1/edit
   def edit
+    @project_form = nil
+    @project      = @goal.project
     if current_thinker != @goal.thinker
       respond_to do |format|
         format.html { redirect_to @goal, alert: 'You cannot edit this.' }

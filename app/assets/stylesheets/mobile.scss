@@ -19,8 +19,18 @@
             }
 
             .footer {
+                height: 40px;
+
                 .text-center {
                     width: 70%;
+                }
+
+                a.pull-right {
+                    margin: 2px 0 !important;
+                }
+
+                .text-muted {
+                    margin: 11px 0;
                 }
             }
 
