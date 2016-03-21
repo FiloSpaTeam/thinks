@@ -151,6 +151,8 @@ en:
       urls       : "URLs"
       dates      : "Dates"
       release_at_help: "If release date is before today, the project is declared started."
+      main_image: "Main image"
+      square_image: "Square image, 200x200 (jpg, png)"
     tasks:
       scrum_table : "Scrum table"
       tasks       : "tasks"

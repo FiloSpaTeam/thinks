@@ -2,6 +2,12 @@
   .panel-body
     %h3 General informations
     .form-group
+      = f.label :main_image, :class => 'control-label'
+      = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
+      = f.attachinary_file_field :main_image
+      %span#help-main-image.help-block
+        = t ".square_image"
+    .form-group
       = f.label :title, :class => 'control-label'
       = f.text_field :title, :class => 'form-control', :placeholder => "My project"
     .form-group

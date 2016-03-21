@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   extend FriendlyId
+  friendly_id :title, use: :slugged
 
   acts_as_paranoid
 
@@ -11,7 +12,7 @@ class Project < ActiveRecord::Base
     ]
   )
 
-  friendly_id :title, :use => :slugged
+  has_attachment :main_image, accept: [:jpg, :png]
 
   has_and_belongs_to_many :languages
 
@@ -39,6 +40,7 @@ class Project < ActiveRecord::Base
   validates :thinker_id, presence: true, on: create
   validates :slug, presence: true
   validates :cycle, presence: true
+  validates :main_image, presence: true
 
   after_save :check_if_past_project
 
