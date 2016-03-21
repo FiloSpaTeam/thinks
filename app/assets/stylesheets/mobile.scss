@@ -1,10 +1,12 @@
 @media screen and (max-width: 991px) {
     body {
         .container { padding: 20px 15px; }
-    }
 
-    .copyright {
-        width: 15% !important;
+        .footer {
+            .text-center {
+                width: 75%;
+            }
+        }
     }
 
     @media screen and (max-width: 767px) {
@@ -14,6 +16,12 @@
             .alert {
                 border-radius: 0;
                 box-shadow: none;
+            }
+
+            .footer {
+                .text-center {
+                    width: 70%;
+                }
             }
 
             .panel {
