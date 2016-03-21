@@ -64,10 +64,10 @@
       Summary
   .list-group.hidden-xs
     .list-group-item
-      = badge(project.contributions.distinct.size)
+      = badge(project.contributions.distinct.select{ |contribution| !contribution.nothing? }.size)
       thinkers
     .list-group-item
-      = badge(project.workers.distinct.size)
+      = badge(project.contributions.distinct.select{ |contribution| contribution.partecipate? }.size)
       workers
     .list-group-item
       = badge(project.sprints.size)
