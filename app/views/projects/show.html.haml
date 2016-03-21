@@ -6,7 +6,7 @@
   .col-md-8
     .panel.panel-default
       .panel-body
-        = cl_image_tag(@project.main_image.path, { size: '200x200', class: 'pull-left', style: 'margin-right: 10px;' })
+        = cl_image_tag(@project.main_image.path, { size: '200x200', class: 'pull-left', style: 'margin-right: 10px;' }) if @project.main_image
         = markdown(@project.description)
       - if creator?(@project.thinker.id)
         .panel-footer

@@ -40,7 +40,6 @@ class Project < ActiveRecord::Base
   validates :thinker_id, presence: true, on: create
   validates :slug, presence: true
   validates :cycle, presence: true
-  validates :main_image, presence: true
 
   after_save :check_if_past_project
 
