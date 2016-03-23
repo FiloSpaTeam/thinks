@@ -1,5 +1,19 @@
-development: 
-  cloud_name: "demo" 
-
+---
+development:
+  cloud_name: hpujzik4m
+  api_key: '587547894865118'
+  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hpujzik4m
+  api_key: '587547894865118'
+  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
+  enhance_image_tag: true
+  static_image_support: true
 test:
-  cloud_name: "demo"
+  cloud_name: hpujzik4m
+  api_key: '587547894865118'
+  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
+  enhance_image_tag: true
+  static_image_support: false
