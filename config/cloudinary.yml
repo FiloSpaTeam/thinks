@@ -1,2 +1,5 @@
 development: 
   cloud_name: "demo" 
+
+test:
+  cloud_name: "demo"
