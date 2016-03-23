@@ -1,14 +1,15 @@
-.panel.panel-default
-  .panel-body
-    %strong
-      Your contribution
-  .list-group
-    .list-group-item
-      - if current_thinker != project.thinker
-        = form_for contribution, url: { action: :contribute }, html: { id: 'form-contribution' }, method: :put do |f|
-          = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
-      - else
-        You are the Scrum Master
+- if thinker_signed_in?
+  .panel.panel-default
+    .panel-body
+      %strong
+        Your contribution
+    .list-group
+      .list-group-item
+        - if current_thinker != project.thinker
+          = form_for contribution, url: { action: :contribute }, html: { id: 'form-contribution' }, method: :put do |f|
+            = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
+        - else
+          You are the Scrum Master
 .panel.panel-default
   .panel-body
     %strong
