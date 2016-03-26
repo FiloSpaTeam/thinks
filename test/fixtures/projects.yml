@@ -12,6 +12,9 @@ rethink:
   cycle: one_week
   category: games
   slug: 'rethink'
+  home_url: ''
+  source_code_url: ''
+  documentation_url: ''
 
 savage:
   id: 2
@@ -25,3 +28,6 @@ savage:
   cycle: two_week
   category: games
   slug: 'savage'
+  home_url: ''
+  source_code_url: ''
+  documentation_url: ''
