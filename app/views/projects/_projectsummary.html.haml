@@ -49,16 +49,16 @@
       URLs
   .list-group.hidden-xs
     .list-group-item
-      = link_to project.home_url, :class => "pull-right" do
+      = link_to project.home_url, :class => "pull-right no-padding no-border btn #{project.home_url.empty? ? 'disabled' : ''}", role: "button" do
         = icon('home', :class => "dark-grey")
       website
     .list-group-item
       sources
-      = link_to project.source_code_url, :class => "pull-right" do
+      = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{project.source_code_url.empty? ? 'disabled' : ''}", role: "button" do
         = icon('github-alt', :class => "dark-grey")
     .list-group-item
       documentation
-      = link_to project.documentation_url, :class => "pull-right" do
+      = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{project.documentation_url.empty? ? 'disabled' : ''}", role: "button" do
         = icon('book', :class => "dark-grey")
   .panel-body.hidden-xs
     %strong

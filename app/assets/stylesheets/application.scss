@@ -216,6 +216,9 @@ a {
 
 .navbar-toggle { border: none; }
 
+.no-padding {padding: 0;}
+.no-border {border: 0;}
+
 @import "dashboard";
 @import "cover";
 @import "carousel";

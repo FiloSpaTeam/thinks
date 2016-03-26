@@ -26,7 +26,7 @@
                 <% end %>
                 <p>
                     <em>
-                        <%= truncate(project.description.lines.first.tr('#', ''), :length => 100) %>
+                        <%= truncate(markdown(project.description.lines.first.tr('#', ''), true), :length => 100) %>
                     </em>
                 </p>
               </div>
