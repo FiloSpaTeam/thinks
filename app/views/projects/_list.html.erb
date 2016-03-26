@@ -20,11 +20,11 @@
                   <% end %>
                 <% end %>
               </div>
-              <div class="col-md-8 col-sm-8">
+              <div class="col-md-8 col-sm-8 text-justify" style="font-size: 12px;">
                 <%= link_to project_path(project) do %>
                   <h4><strong> <%= project.title %> </strong></h4>
                 <% end %>
-                <%= markdown(truncate(project.description.lines.first.tr('#', ''), length: 100, separator: ' ', omission: '... '), true) %>
+                <%= markdown(truncate(project.description.lines.first.tr('#', ''), length: 150, separator: ' ', omission: '... '), true) %>
               </div>
             </div>
             <div class="progress">
