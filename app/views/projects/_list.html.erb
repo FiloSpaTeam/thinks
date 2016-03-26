@@ -24,7 +24,7 @@
                 <%= link_to project_path(project) do %>
                   <h4><strong> <%= project.title %> </strong></h4>
                 <% end %>
-                <%= truncate(markdown(project.description.lines.first.tr('#', ''), true), :length => 100) %>
+                <%= markdown(project.description.lines.first.tr('#', ''), true) %>
               </div>
             </div>
             <div class="progress">
