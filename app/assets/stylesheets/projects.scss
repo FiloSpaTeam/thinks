@@ -27,4 +27,11 @@
             margin-bottom: 0;
         }
     }
+
+    @media(max-width: 768px) {
+        .project-img {
+            width: 150px;
+            height: 150px;
+        }
+    }
 }
