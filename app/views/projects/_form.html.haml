@@ -1,52 +1,54 @@
 = form_for @project, :html => { :class => '' } do |f|
   .panel-body
-    %h3 General informations
-    .form-group
-      = f.label :main_image, :class => 'control-label'
-      = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
-      = f.attachinary_file_field :main_image
-      %span#help-main-image.help-block
-        = t ".square_image"
-    .form-group
-      = f.label :title, :class => 'control-label'
-      = f.text_field :title, :class => 'form-control', :placeholder => "My project"
-    .form-group
-      = f.label :description, :class => 'control-label'
-      = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
-      %span#help-description.help-block
-        = t "remaining_chars"
-        %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
-          = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
-    .form-group
-      = f.label :category_id, :class => 'control-label'
-      = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
-    .form-group
-      = f.label :license_id, :class => 'control-label'
-      = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name', @project.license_id), {}, :class => 'form-control'
-    .form-group
-      = f.label :minimum_team_number, :class => 'control-label'
-      = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
-    .form-group
-      = f.label :release_at, :class => 'control-label'
-      = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
-      %span#help-release_at.help-block= t ".release_at_help"
-    %h3 Sprint settings
-    .form-group
-      = f.label :cycle_id, :class => "control-label"
-      = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
-    %h3 URLs
-    .form-group.has-feedback
-      = f.label :home_url, :class => 'control-label'
-      = f.text_field :home_url, :class => 'form-control'
-      %i.glyphicon.glyphicon-home.form-control-feedback
-    .form-group.has-feedback
-      = f.label :source_code_url, :class => 'control-label'
-      = f.text_field :source_code_url, :class => 'form-control'
-      %i.glyphicon.glyphicon-cd.form-control-feedback
-    .form-group.has-feedback
-      = f.label :documentation_url, :class => 'control-label'
-      = f.text_field :documentation_url, :class => 'form-control'
-      %i.glyphicon.glyphicon-book.form-control-feedback
+    .tab-content
+      #general-informations.tab-pane.fade.in.active
+        .form-group
+          = f.label :main_image, :class => 'control-label'
+          = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
+          = f.attachinary_file_field :main_image
+          %span#help-main-image.help-block
+            = t ".square_image"
+        .form-group
+          = f.label :title, :class => 'control-label'
+          = f.text_field :title, :class => 'form-control', :placeholder => "My project"
+        .form-group
+          = f.label :description, :class => 'control-label'
+          = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+          %span#help-description.help-block
+            = t "remaining_chars"
+            %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
+              = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
+      #secondary-informations.tab-pane.fade
+        .form-group
+          = f.label :category_id, :class => 'control-label'
+          = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
+        .form-group
+          = f.label :license_id, :class => 'control-label'
+          = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name', @project.license_id), {}, :class => 'form-control'
+        .form-group
+          = f.label :minimum_team_number, :class => 'control-label'
+          = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
+        .form-group
+          = f.label :release_at, :class => 'control-label'
+          = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+          %span#help-release_at.help-block= t ".release_at_help"
+      #sprint-settings.tab-pane.fade
+        .form-group
+          = f.label :cycle_id, :class => "control-label"
+          = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+      #urls.tab-pane.fade
+        .form-group.has-feedback
+          = f.label :home_url, :class => 'control-label'
+          = f.text_field :home_url, :class => 'form-control'
+          %i.glyphicon.glyphicon-home.form-control-feedback
+        .form-group.has-feedback
+          = f.label :source_code_url, :class => 'control-label'
+          = f.text_field :source_code_url, :class => 'form-control'
+          %i.glyphicon.glyphicon-cd.form-control-feedback
+        .form-group.has-feedback
+          = f.label :documentation_url, :class => 'control-label'
+          = f.text_field :documentation_url, :class => 'form-control'
+          %i.glyphicon.glyphicon-book.form-control-feedback
   .panel-footer
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |
