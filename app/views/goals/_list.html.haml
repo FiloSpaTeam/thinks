@@ -18,6 +18,9 @@
               = icon('flag-checkered', :class => "dark-grey")
           %strong
             = link_to goal.title, goal_path(goal)
+            ·
+            %small
+              = goal.updated_at.to_s(:short)
           .dark-grey
             %small
               = goal.description.truncate(140)
