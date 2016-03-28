@@ -8,11 +8,11 @@ class SprintsController < ApplicationController
   # GET /sprints.json
   def index
     @filterrific = initialize_filterrific(
-      Sprint.where(project: @project).order('created_at'),
+      Sprint.order('created_at'),
       params[:filterrific],
       select_options: {}
     ) || return
-    @sprints = @filterrific.find.page params[:page]
+    @sprints = @filterrific.find.where(project: @project).page params[:page]
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{e.message}"
