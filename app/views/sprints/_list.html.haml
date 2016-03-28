@@ -27,8 +27,8 @@
             %strong
               = t ".survey"
 %tbody
-  - unless (@sprints.empty?)
-    - @sprints.each do |sprint|
+  - unless (sprints.empty?)
+    - sprints.each do |sprint|
       %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
         %td
           Sprint #{sprint.serial}

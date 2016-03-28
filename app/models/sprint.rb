@@ -1,7 +1,7 @@
 class Sprint < ActiveRecord::Base
   acts_as_paranoid
 
-  paginates_per 15
+  paginates_per 10
   max_paginates_per 50
 
   filterrific(
@@ -16,6 +16,8 @@ class Sprint < ActiveRecord::Base
 
   before_create :generate_serial
   before_create :default_values
+
+  default_scope { order('created_at') }
 
   scope :sorted_by, lambda { |sort_option|
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'

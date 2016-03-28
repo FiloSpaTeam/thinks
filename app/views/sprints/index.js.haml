@@ -1,2 +1,8 @@
+- js = escape_javascript(
+- render(partial: 'sprints/list', locals: { sprints: @sprints })
+- )
 - new_paginate = escape_javascript(paginate(@sprints, :remote => true))
-$("ul.pagination").html("#{new_paginate}");
+$("#filterrific_results").html("#{js}");
+var $col = $('ul.pagination').parent();
+$col.find('ul.pagination, nav').remove();
+$col.append("#{new_paginate}");

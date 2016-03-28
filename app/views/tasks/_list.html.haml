@@ -20,8 +20,8 @@
             = filterrific_sorting_link(@filterrific, :workload)
     %td.col-lg-2.col-xs-1.col-sm-2.col-xs-1
 %tbody
-  - if (!@tasks.empty?)
-    - @tasks.each do |task|
+  - if (!tasks.empty?)
+    - tasks.each do |task|
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
           %strong
