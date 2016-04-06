@@ -148,6 +148,7 @@ en:
       tasks           : "Tasks"
       release_at      : "Release at"
     form:
+      change_owner_email: "Enter a valid email of an registered user."
       urls       : "URLs"
       dates      : "Dates"
       release_at_help: "If release date is before today, the project is declared started."

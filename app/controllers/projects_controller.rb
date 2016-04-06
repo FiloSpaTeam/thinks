@@ -150,6 +150,27 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def migrate
+    @project   = Project.friendly.find(params[:project_id])
+    @new_owner = Thinker.find_by(email: params[:owner_email])
+
+    respond_to do |format|
+      if current_thinker != @project.thinker
+        format.html { redirect_to edit_project_path(@project), error: 'You are not the owner of the project.' }
+      end
+
+      if @new_owner.nil?
+        format.html { redirect_to edit_project_path(@project), error: 'Email is not valid.' }
+      elsif @new_owner == @project.thinker
+        format.html { redirect_to edit_project_path(@project), error: 'Want you migrate your project to yourself? Strange operation.' }
+      else
+        @project.thinker = @new_owner
+
+        format.html { redirect_to edit_project_path(@project), notice: 'Migration done. You can continue to contribute changing partecipation settings. Do your best!' }
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

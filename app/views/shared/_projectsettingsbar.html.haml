@@ -1,14 +1,7 @@
 .panel.panel-default
-  %ul.nav.nav-pills.nav-stacked
-    %li.active{ role: "presentation" }
-      %a{href: '#general-informations', "data-toggle" => "pill"}
-        Description
-    %li{ role: "presentation" }
-      %a{href: '#secondary-informations', "data-toggle" => "pill"}
-        Release date and other stuff
-    %li{ role: "presentation" }
-      %a{href: '#urls', 'data-toggle' => "pill"}
-        Links
-    %li{ role: "presentation" }
-      %a{href: '#sprint-settings', 'data-toggle' => "pill"}
-        Sprint settings
+  .list-group
+    = link_to(t('.description'), edit_project_path(@project), :class => "list-group-item #{ current_page?(edit_project_path(@project)) ? 'active' : '' }")
+    = link_to(t('.release_date_and_other_stuff'), project_settings_release_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.links'), project_settings_links_path(@project), :class => "list-group-item #{ current_page?(project_settings_links_path(@project)) ? 'active' : '' }")
+    = link_to(t('.sprint_settings'), project_settings_sprint_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_sprint_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.other_settings'), project_settings_other_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
