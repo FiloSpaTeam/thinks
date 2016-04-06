@@ -4,7 +4,7 @@
     = render partial: 'shared/projectsettingsbar'
   .col-md-8
     .panel.panel-default
-      = form_for @project, url: project_settings_link_path, method: :patch, :html => { :class => '' } do |f|
+      = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
         .panel-body
           .form-group
             = f.label :category_id, :class => 'control-label'

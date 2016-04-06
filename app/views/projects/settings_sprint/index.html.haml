@@ -1,1 +1,15 @@
- 
+= render :partial => 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectsettingsbar'
+  .col-md-8
+    .panel.panel-default
+      = form_for @project, url: project_settings_sprint_index_path, method: :post, :html => { :class => '' } do |f|
+        .panel-body
+          .form-group
+            = f.label :cycle_id, :class => "control-label"
+            = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+        .panel-footer
+          = f.submit nil, :class => 'btn btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+            projects_path, :class => 'btn btn-default'                   |

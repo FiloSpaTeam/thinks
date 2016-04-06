@@ -40,9 +40,9 @@ Rails.application.routes.draw do
 
     namespace :settings, :module => :projects do
       resources :links, :controller   => :settings_links, :only   => [:index, :create]
-      resources :other, :controller   => :settings_other, :only   => [:index, :update]
-      resources :release, :controller => :settings_release, :only => [:index, :update]
-      resources :sprint, :controller  => :settings_sprint, :only  => [:index, :update]
+      resources :other, :controller   => :settings_other, :only   => [:index, :create]
+      resources :release, :controller => :settings_release, :only => [:index, :create]
+      resources :sprint, :controller  => :settings_sprint, :only  => [:index, :create]
     end
 
     resources :sprints, shallow: true do

@@ -1,48 +1,21 @@
 = form_for @project, :html => { :class => '' } do |f|
   .panel-body
-    .tab-content
-      #general-informations.tab-pane.fade.in.active
-        .form-group
-          = f.label :main_image, :class => 'control-label'
-          = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
-          = f.attachinary_file_field :main_image
-          %span#help-main-image.help-block
-            = t ".square_image"
-        .form-group
-          = f.label :title, :class => 'control-label'
-          = f.text_field :title, :class => 'form-control', :placeholder => "My project"
-        .form-group
-          = f.label :description, :class => 'control-label'
-          = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
-          %span#help-description.help-block
-            = t "remaining_chars"
-            %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
-              = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
-      #sprint-settings.tab-pane.fade
-        .form-group
-          = f.label :cycle_id, :class => "control-label"
-          = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
-      #urls.tab-pane.fade
-        .form-group.has-feedback
-          = f.label :home_url, :class => 'control-label'
-          = f.text_field :home_url, :class => 'form-control'
-          %i.glyphicon.glyphicon-home.form-control-feedback
-        .form-group.has-feedback
-          = f.label :source_code_url, :class => 'control-label'
-          = f.text_field :source_code_url, :class => 'form-control'
-          %i.glyphicon.glyphicon-cd.form-control-feedback
-        .form-group.has-feedback
-          = f.label :documentation_url, :class => 'control-label'
-          = f.text_field :documentation_url, :class => 'form-control'
-          %i.glyphicon.glyphicon-book.form-control-feedback
-        .form-group.has-feedback
-          = label_tag :owner, nil, :class => 'control-label'
-          .input-group
-            = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
-            .input-group-btn
-              = link_to t('change'), '#', :class => 'btn btn-danger', :id => 'btn-change-owner'
-          %span#help-owner-email.help-block
-            = t ".change_owner_email"
+    .form-group
+      = f.label :main_image, :class => 'control-label'
+      = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
+      = f.attachinary_file_field :main_image
+      %span#help-main-image.help-block
+        = t ".square_image"
+    .form-group
+      = f.label :title, :class => 'control-label'
+      = f.text_field :title, :class => 'form-control', :placeholder => "My project"
+    .form-group
+      = f.label :description, :class => 'control-label'
+      = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+      %span#help-description.help-block
+        = t "remaining_chars"
+        %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
+          = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
   .panel-footer
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

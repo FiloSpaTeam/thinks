@@ -1,1 +1,17 @@
- 
+= render :partial => 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectsettingsbar'
+  .col-md-8
+    .panel.panel-default
+      = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
+        .panel-body
+          .form-group.has-feedback
+            = label_tag :owner, nil, :class => 'control-label'
+            = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
+            %span#help-owner-email.help-block
+              = t ".change_owner_email"
+        .panel-footer
+          = f.submit nil, :class => 'btn btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+            projects_path, :class => 'btn btn-default'                   |
