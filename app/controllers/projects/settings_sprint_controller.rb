@@ -1,2 +1,12 @@
-class Projects::SettingsSprintController < ActionController::Base
+class Projects::SettingsSprintController < ApplicationController
+  include ProjectsHelper
+
+  before_action :authenticate_thinker!
+  before_action :set_project
+
+  def index
+  end
+
+  def update
+  end
 end

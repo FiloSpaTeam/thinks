@@ -1,0 +1,25 @@
+= render :partial => 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render partial: 'shared/projectsettingsbar'
+  .col-md-8
+    .panel.panel-default
+      = form_for @project, url: project_settings_link_path, method: :patch, :html => { :class => '' } do |f|
+        .panel-body
+          .form-group
+            = f.label :category_id, :class => 'control-label'
+            = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
+          .form-group
+            = f.label :license_id, :class => 'control-label'
+            = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name', @project.license_id), {}, :class => 'form-control'
+          .form-group
+            = f.label :minimum_team_number, :class => 'control-label'
+            = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
+          .form-group
+            = f.label :release_at, :class => 'control-label'
+            = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+            %span#help-release_at.help-block= t ".release_at_help"
+        .panel-footer
+          = f.submit nil, :class => 'btn btn-primary'
+          = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+            projects_path, :class => 'btn btn-default'                   |

@@ -1,5 +1,5 @@
 module ProjectsHelper
-  def creator?(id) 
+  def creator?(id)
     thinker_signed_in? && id == current_thinker.id 
   end
 
@@ -12,5 +12,9 @@ module ProjectsHelper
     when 100
       "progress-bar-success"
     end
+  end
+
+  def set_project
+    @project = Project.friendly.find(params[:project_id] || params[:id]) 
   end
 end

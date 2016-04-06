@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
 
     namespace :settings, :module => :projects do
-      resources :links, :controller   => :settings_links, :only   => [:index, :update]
+      resources :links, :controller   => :settings_links, :only   => [:index, :create]
       resources :other, :controller   => :settings_other, :only   => [:index, :update]
       resources :release, :controller => :settings_release, :only => [:index, :update]
       resources :sprint, :controller  => :settings_sprint, :only  => [:index, :update]

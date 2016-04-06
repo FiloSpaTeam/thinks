@@ -18,20 +18,6 @@
             = t "remaining_chars"
             %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
               = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
-      #secondary-informations.tab-pane.fade
-        .form-group
-          = f.label :category_id, :class => 'control-label'
-          = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
-        .form-group
-          = f.label :license_id, :class => 'control-label'
-          = f.select :license_id, options_from_collection_for_select(License.all, 'id', 'name', @project.license_id), {}, :class => 'form-control'
-        .form-group
-          = f.label :minimum_team_number, :class => 'control-label'
-          = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
-        .form-group
-          = f.label :release_at, :class => 'control-label'
-          = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
-          %span#help-release_at.help-block= t ".release_at_help"
       #sprint-settings.tab-pane.fade
         .form-group
           = f.label :cycle_id, :class => "control-label"

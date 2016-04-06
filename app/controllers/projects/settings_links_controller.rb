@@ -1,2 +1,12 @@
-class Projects::SettingsLinksController < ActionController::Base
+class Projects::SettingsLinksController < ApplicationController
+  include ProjectsHelper
+
+  before_action :authenticate_thinker!
+  before_action :set_project
+
+  def index
+  end
+
+  def update
+  end
 end
