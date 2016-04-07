@@ -27,15 +27,15 @@
     .list-group-item.hidden-xs
       category
       %strong
-        = content_tag :span, t("category.#{project.category.t_name}"), :class => "pull-right"
+        = content_tag :span, project.category.try(:t_name) ? t("category.#{project.category.t_name}") : t('not_defined_yet'), :class => "pull-right"
     .list-group-item.hidden-xs
       license
       %strong
-        = content_tag :span, project.license.description, :class => "pull-right"
+        = content_tag :span, project.license.try(:description) ? project.license.description : t('not_defined_yet'), :class => "pull-right"
     .list-group-item.hidden-xs
       sprint every
       %strong
-        = content_tag :span, project.cycle.description, :class => "pull-right"
+        = content_tag :span, project.cycle.try(:description) ? project.cycle.description : t('not_defined_yet'), :class => "pull-right"
     .list-group-item.hidden-xs
       minimum team number
       %strong
@@ -49,16 +49,16 @@
       URLs
   .list-group.hidden-xs
     .list-group-item
-      = link_to project.home_url, :class => "pull-right no-padding no-border btn #{project.home_url.empty? ? 'disabled' : ''}", role: "button" do
+      = link_to project.home_url, :class => "pull-right no-padding no-border btn #{!project.home_url.present? ? 'disabled' : ''}", role: "button" do
         = icon('home', :class => "dark-grey")
       website
     .list-group-item
       sources
-      = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{project.source_code_url.empty? ? 'disabled' : ''}", role: "button" do
+      = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{!project.source_code_url.present? ? 'disabled' : ''}", role: "button" do
         = icon('github-alt', :class => "dark-grey")
     .list-group-item
       documentation
-      = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{project.documentation_url.empty? ? 'disabled' : ''}", role: "button" do
+      = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{!project.documentation_url.present? ? 'disabled' : ''}", role: "button" do
         = icon('book', :class => "dark-grey")
   .panel-body.hidden-xs
     %strong

@@ -1,7 +1,8 @@
 .panel.panel-default
   .panel-body
-    .progress
-      %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
+    - if project.cycle.try(:days)
+      .progress
+        %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
     - if project.started?
       Sprint
       = project.sprint

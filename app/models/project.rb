@@ -36,10 +36,9 @@ class Project < ActiveRecord::Base
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
   validates :description, length: { in: 2..1600 }
-  validates :license_id, presence: true
-  validates :thinker_id, presence: true, on: create
+  validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
-  validates :cycle, presence: true
+  validates :cycle, presence: true, on: :update
 
   after_save :check_if_past_project
 
