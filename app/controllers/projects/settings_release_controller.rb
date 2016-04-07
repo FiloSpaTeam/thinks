@@ -3,17 +3,13 @@ class Projects::SettingsReleaseController < ApplicationController
 
   before_action :authenticate_thinker!
   before_action :set_project
+  before_action :thinker!
 
   def index
   end
 
   def create
     respond_to do |format|
-      unless creator?(@project.thinker.id)
-        format.html { redirect_to project_path(@project), error: t(:cant_update) }
-        format.json { render json: @project.errors, status: :cant_update }
-      end
-
       if @project.started?
         if @project.release_at != release_params[:release_at]
           format.html { redirect_to project_settings_release_index_path(@project), error: t(:cant_update_release_at) }

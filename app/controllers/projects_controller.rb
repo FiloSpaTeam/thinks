@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
   include ProjectsHelper
 
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
 
   before_action :authenticate_thinker!, except: [:index, :show]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
+  before_action :thinker!, only: [:edit, :update]
 
   # GET /projects
   # GET /projects.json
@@ -46,10 +47,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    unless creator?(@project.thinker.id)
-      flash[:warning] = t(:cant_edit)
-      redirect_to project_path(@project)
-    end
   end
 
   # POST /projects
@@ -74,11 +71,6 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
-      unless creator?(@project.thinker.id)
-        format.html { redirect_to project_path(@project), error: t(:cant_update) }
-        format.json { render json: @project.errors, status: :cant_update }
-      end
-
       if @project.started?
         if @project.release_at != project_params[:release_at]
           format.html { redirect_to project_path(@project), error: t(:cant_update_release_at) }

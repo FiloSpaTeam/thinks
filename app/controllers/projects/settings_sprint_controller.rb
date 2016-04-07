@@ -3,17 +3,13 @@ class Projects::SettingsSprintController < ApplicationController
 
   before_action :authenticate_thinker!
   before_action :set_project
+  before_action :thinker!
 
   def index
   end
 
   def create
     respond_to do |format|
-      unless creator?(@project.thinker.id)
-        format.html { redirect_to project_path(@project), error: t(:cant_update) }
-        format.json { render json: @project.errors, status: :cant_update }
-      end
-
       if @project.update(sprint_params)
         format.html { redirect_to project_settings_sprint_index_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
