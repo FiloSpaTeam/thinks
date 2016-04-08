@@ -25,7 +25,8 @@ class Notification < ActiveRecord::Base
 
   def self.user(thinker)
     where.not(thinker: thinker)
-         .where(project: thinker.contributions.where('intensity > ?', Contribution.intensities[:nothing]).collect(&:id))
+         .where(project: thinker.contributions
+              .where('intensity > ?', Contribution.intensities[:nothing]))
          .where.not(id: thinker.notifications.pluck(:id))
   end
 end
