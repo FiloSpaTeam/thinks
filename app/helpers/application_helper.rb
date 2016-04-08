@@ -5,7 +5,7 @@ module ApplicationHelper
     version  = '0.1.9.170'
     date     = '2016.04.07'
     thinkers = Thinker.all.size
-    content_tag(:span, "(Online: #{thinkers})", class: 'hidden-xs hidden-sm pull-right text-muted') +
+    content_tag(:span, "(Subscribers: #{thinkers})", class: 'hidden-xs hidden-sm pull-right text-muted') +
     content_tag(:small, "Version #{version}", class: 'text-muted pull-right', title: date)
   end
 

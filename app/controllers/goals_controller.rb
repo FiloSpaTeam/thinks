@@ -119,21 +119,22 @@ class GoalsController < ApplicationController
   end
 
   private
-    def set_validators_for_form_help
-      title_validators = Goal.validators_on(:title)[0]
-      @chars_max_title = title_validators.options[:maximum]
 
-      title_validators = Goal.validators_on(:description)[0]
-      @chars_min_description = title_validators.options[:minimum]
-    end
+  def set_validators_for_form_help
+    title_validators = Goal.validators_on(:title)[0]
+    @chars_max_title = title_validators.options[:maximum]
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_goal
-      @goal = Goal.find(params[:id])
-    end
+    title_validators = Goal.validators_on(:description)[0]
+    @chars_min_description = title_validators.options[:minimum]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def goal_params
-      params[:goal].permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_goal
+    @goal = Goal.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def goal_params
+    params[:goal].permit(:title, :description)
+  end
 end

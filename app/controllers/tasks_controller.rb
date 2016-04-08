@@ -71,7 +71,6 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save && create_notification(@task)
-
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
@@ -106,6 +105,9 @@ class TasksController < ApplicationController
     respond_to do |format|
       if current_thinker == @task.thinker
         @task.destroy
+
+        @project = @task.project
+        create_notification(@task)
 
         format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
         format.json { head :no_content }

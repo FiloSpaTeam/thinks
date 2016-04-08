@@ -200,6 +200,7 @@ en:
       tasks:
         create: "%{thinker} created a new task."
         update: "%{thinker} updated a task."
+        destroy: "%{thinker} deleted a task."
       goals:
         create: "%{thinker} created a new goal."
         update: "%{thinker} updated a goal."
@@ -208,6 +209,9 @@ en:
         update: "The Sprint %{serial}, was updated (%{total} points)."
       comments:
         create: "%{thinker} comment the task."
+      projects:
+        update: "%{thinker} updated the project's description."
+        destroy: "%{thinker} destroyed the project."
 
   sex:
     male: "Male"

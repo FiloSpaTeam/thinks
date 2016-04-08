@@ -8,7 +8,7 @@ class Notification < ActiveRecord::Base
 
   belongs_to :thinker
   belongs_to :sprint
-  belongs_to :project
+  belongs_to :project, -> { with_deleted }
   belongs_to :goal
   belongs_to :task, -> { with_deleted }
 

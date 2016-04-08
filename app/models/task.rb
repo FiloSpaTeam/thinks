@@ -93,7 +93,7 @@ class Task < ActiveRecord::Base
     where(project: Project.friendly.find(project))
   }
 
-  scope :with_deleted_at, lambda { |value| 
+  scope :with_deleted_at, lambda { |value|
     only_deleted
   }
 

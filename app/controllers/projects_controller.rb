@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   include ProjectsHelper
 
-
   before_action :authenticate_thinker!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
   before_action :thinker!, only: [:edit, :update]
@@ -78,7 +77,7 @@ class ProjectsController < ApplicationController
         end
       end
 
-      if @project.update(project_params)
+      if @project.update(project_params) && create_notification(@project)
         format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -95,6 +94,8 @@ class ProjectsController < ApplicationController
       unless creator?(@project.thinker.id)
         format.html { redirect_to project_path(@project), error: t(:wtf_are_you_destroying) }
       end
+
+      create_notification(@project)
 
       @project.destroy
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }

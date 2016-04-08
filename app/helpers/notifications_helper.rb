@@ -15,12 +15,14 @@ module NotificationsHelper
       icon('plus-circle', :class => "fa-lg fa-fw")
     elsif notification.action == 'update'
       icon('refresh', :class => "fa-lg fa-fw")
+    elsif notification.action == 'destroy'
+      icon('remove', :class => "fa-lg fa-fw")
     end
   end
 
   def title_for(notification)
     model = Object.const_get(notification.model)
-    model = model.find_by_id notification.model_id
+    model = model.try(:with_deleted).find_by_id notification.model_id
 
     if notification.controller == 'tasks'
       t ".#{ notification.controller }.#{ notification.action }",
@@ -35,6 +37,9 @@ module NotificationsHelper
         serial: model.serial,
         total: model.obtained
     elsif notification.controller == 'comments'
+      t ".#{ notification.controller }.#{ notification.action }",
+        thinker: notification.thinker.name
+    elsif notification.controller == 'projects'
       t ".#{ notification.controller }.#{ notification.action }",
         thinker: notification.thinker.name
     end
