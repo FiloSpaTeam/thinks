@@ -70,12 +70,15 @@ class TasksController < ApplicationController
     @task.thinker = current_thinker
 
     respond_to do |format|
-      if @task.save && create_notification(@task)
+      if @task.save
+        create_notification(@task, @project)
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@task)
         set_validators_for_form_help
+
+        @project_form = @project
 
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -86,10 +89,9 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    @project = @task.project
-
     respond_to do |format|
-      if current_thinker == @task.thinker && @task.update(task_params) && create_notification(@task)
+      if current_thinker == @task.thinker && @task.update(task_params)
+        create_notification(@task, @task.project)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -105,9 +107,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if current_thinker == @task.thinker
         @task.destroy
-
-        @project = @task.project
-        create_notification(@task)
+        create_notification(@task, @task.project)
 
         format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
         format.json { head :no_content }
@@ -125,7 +125,8 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
+        create_notification(@task, @task.project)
+        format.html { redirect_to @task, notice: 'Task ready for this sprint! Good job!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -141,7 +142,8 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Your thinks is ready for next Sprint!' }
+        create_notification(@task, @task.project)
+        format.html { redirect_to @task, notice: 'Task is ready for next Sprint!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -179,6 +181,7 @@ class TasksController < ApplicationController
     @task.status = Status.in_progress.first
     respond_to do |format|
       if @task.save
+        create_notification(@task, @task.project)
         format.html { redirect_to @task, notice: 'You have a new task to do! Good job!' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -190,6 +193,7 @@ class TasksController < ApplicationController
 
   def reopen
     @task.restore
+    create_notification(@task, @task.project)
     respond_to do |format|
       format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
       format.json { render :show, status: :ok, location: @task }

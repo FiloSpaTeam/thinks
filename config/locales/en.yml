@@ -199,16 +199,25 @@ en:
       no_notifications_found: "No notifications found"
       tasks:
         create: "%{thinker} created a new task."
-        update: "%{thinker} updated a task."
-        destroy: "%{thinker} deleted a task."
+        update: "%{thinker} updated task '%{task}'"
+        destroy: "%{thinker} deleted task '%{task}'"
+        release: "Task '%{task}' moved in release."
+        sprint: "Task '%{task}' ready for the sprint."
+        reopen: "%{thinker} reopened task '%{task}'"
+        assign: "%{thinker} is working on '%{task}'"
+      operations:
+        create: "%{thinker} added an operation for '%{task}'"
+        done: "%{thinker} ended an operation for '%{task}'"
       goals:
         create: "%{thinker} created a new goal."
-        update: "%{thinker} updated a goal."
+        update: "%{thinker} updated goal '%{goal}'"
+        destroy: "%{thinker} deleted goal '%{goal}'"
       sprints:
         create: "Sprint %{serial}, started."
         update: "The Sprint %{serial}, was updated (%{total} points)."
       comments:
         create: "%{thinker} comment the task."
+        approve: "%{thinker} approved a comment. Task '%{task}' done."
       projects:
         update: "%{thinker} updated the project's description."
         destroy: "%{thinker} destroyed the project."

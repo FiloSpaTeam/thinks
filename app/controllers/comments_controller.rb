@@ -8,10 +8,9 @@ class CommentsController < ApplicationController
     @comment.task    = @task
     @comment.thinker = current_thinker
 
-    @project = @task.project
-
     respond_to do |format|
-      if @comment.save && create_notification(@comment)
+      if @comment.save
+        create_notification(@comment, @task.project)
         flash[:notice] = 'Comment was successfully created.'
 
         format.json { render :show, status: :created, location: @task }
@@ -39,6 +38,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
+      destroy_notification(@comment, task.project)
       format.html { redirect_to task, notice: 'Comment was successfully deleted.' }
       format.json { render :show, status: :ok, location: task }
     end
@@ -48,7 +48,8 @@ class CommentsController < ApplicationController
     @task = @comment.task
 
     respond_to do |format|
-      if current_thinker == @comment.thinker && @comment.update(comment_params) && create_notification(@comment)
+      if current_thinker == @comment.thinker && @comment.update(comment_params)
+        create_notification(@comment, @task.project)
         format.html { redirect_to @task, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -61,10 +62,9 @@ class CommentsController < ApplicationController
   def approve
     @comment.approved = true
     @task             = @comment.task
-
-    @task.status = Status.done.first
     respond_to do |format|
-      if @task.worker == current_thinker && @task.save && @comment.save
+      if @task.worker == current_thinker && @comment.approve
+        create_notification(@comment, @task.project)
         format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
         format.json { render :show, status: :created, location: @task }
       else

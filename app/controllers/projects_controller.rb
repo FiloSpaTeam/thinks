@@ -34,7 +34,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @contribution = Contribution.where(thinker: current_thinker).where(project: @project).first_or_initialize
+    @contribution = Contribution
+                    .where(thinker: current_thinker)
+                    .where(project: @project)
+                    .first_or_initialize
   end
 
   # GET /projects/new
@@ -77,10 +80,13 @@ class ProjectsController < ApplicationController
         end
       end
 
-      if @project.update(project_params) && create_notification(@project)
+      if @project.update(project_params)
+        create_notification(@project, @project)
         format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
+        set_form_errors(@project)
+
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
@@ -95,9 +101,8 @@ class ProjectsController < ApplicationController
         format.html { redirect_to project_path(@project), error: t(:wtf_are_you_destroying) }
       end
 
-      create_notification(@project)
-
       @project.destroy
+      create_notification(@project, @project)
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -113,6 +118,7 @@ class ProjectsController < ApplicationController
       @contribution.intensity = params[:contribution][:intensity]
       @contribution.save
 
+      create_notification(@project, @project)
       format.html { redirect_to project_path(@project), notice: 'Your contribution has been saved!' }
     end
   end

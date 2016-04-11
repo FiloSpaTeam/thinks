@@ -26,4 +26,15 @@ class Comment < ActiveRecord::Base
   def current_thinker?(current_thinker)
     thinker == current_thinker
   end
+
+  def approve
+    ActiveRecord::Base.transaction do
+      task = self.task
+
+      task.status = Status.done.first
+      task.save
+
+      save
+    end
+  end
 end

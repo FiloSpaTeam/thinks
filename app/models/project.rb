@@ -38,9 +38,9 @@ class Project < ActiveRecord::Base
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
-  validates :cycle, presence: true, on: :update
 
   after_save :check_if_past_project
+  after_save :update_contribution_thinker
 
   # validate :expiration_date_cannot_be_in_the_past
 
@@ -129,6 +129,14 @@ class Project < ActiveRecord::Base
   def check_if_past_project
     if started?
       Sprint.update_sprint_system
+    end
+  end
+
+  def update_contribution_thinker
+    Contribution.find_or_create_by(project_id: id, thinker_id: thinker.id) do |contribution|
+      contribution.intensity = Contribution.intensities[:partecipate]
+
+      puts 'Hi'
     end
   end
 end

@@ -25,6 +25,7 @@ class OperationsController < ApplicationController
 
     respond_to do |format|
       if @operation.save
+        create_notification(@operation, @operation.task.project)
         format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully added.' }
         format.json { render :show, status: :created, location: @operation }
       else
@@ -40,6 +41,7 @@ class OperationsController < ApplicationController
 
     respond_to do |format|
       if @task.worker == current_thinker && @operation.save
+        create_notification(@operation, @operation.task.project)
         format.html { redirect_to task_operations_path(@task), notice: 'Operation done.' }
         format.json { render :show, status: :created, location: @operation }
       else
@@ -54,6 +56,7 @@ class OperationsController < ApplicationController
   def update
     respond_to do |format|
       if @operation.update(operation_params)
+        create_notification(@operation, @operation.task.project)
         format.html { redirect_to @operation, notice: 'Operation was successfully updated.' }
         format.json { render :show, status: :ok, location: @operation }
       else
@@ -70,9 +73,10 @@ class OperationsController < ApplicationController
 
     respond_to do |format|
       if @task.worker == current_thinker && @operation.destroy
+        destroy_notification(@operation, @operation.task.project)
         format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
       else
-        format.html { redirect_to task_operations_path(@task), notice: 'You cannot delete operations.' }
+        format.html { redirect_to task_operations_path(@task), alert: 'You cannot delete operations.' }
       end
     end
   end

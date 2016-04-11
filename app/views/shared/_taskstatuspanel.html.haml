@@ -34,14 +34,14 @@
   - if task.project.thinker == current_thinker && task.status == Status.release.first
     .panel-footer
       - if task.ready?
-        = link_to "Get in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-primary btn-block"
+        = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
       - else
         %strong
-          = link_to "Force in Sprint!", sprint_task_path, :method => :put, :class => "btn btn-warning btn-block"
+          = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
           = t(".standard_deviation_too_high")
   - elsif task.project.thinker == current_thinker && task.status == Status.backlog.first && task.workloads.count > 0
     .panel-footer
-      = link_to "Force in Release", release_task_path, :method => :put, :class => "btn btn-warning btn-block"
+      = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
 
 .panel.panel-default.hidden-xs
   .list-group

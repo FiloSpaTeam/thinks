@@ -47,11 +47,11 @@ class ApplicationController < ActionController::Base
     load_project_session
   end
 
-  def create_notification(model)
+  def create_notification(model, project)
     @notification = Notification.new
 
     @notification.thinker = current_thinker
-    @notification.project = @project
+    @notification.project = project
 
     @notification.model    = model.class.name
     @notification.model_id = model.id
@@ -60,6 +60,16 @@ class ApplicationController < ActionController::Base
     @notification.action     = params[:action]
 
     @notification.save
+  end
+
+  def destroy_notification(model, project)
+    Notification
+      .where(
+        project: project,
+        model: model.class.name,
+        model_id: model.id,
+        controller: params[:controller])
+      .delete_all
   end
 
   private

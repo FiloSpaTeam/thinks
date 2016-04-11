@@ -16,8 +16,9 @@
           = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
             - if (!operation.done && !first)
               - first = true
-              = destroy_button(operation)
-              = done_button(operation)
+              - if current_thinker == @task.worker
+                = destroy_button(operation)
+                = done_button(operation)
             %strong
               = operation.serial.to_s + ': '
             = operation.text

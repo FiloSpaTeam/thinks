@@ -8,7 +8,8 @@ class NotificationsController < ApplicationController
     @filterrific = initialize_filterrific(
       Notification
         .user(current_thinker)
-        .order('project_id DESC'),
+        .order('project_id DESC')
+        .order('created_at DESC'),
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),

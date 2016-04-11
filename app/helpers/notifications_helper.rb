@@ -5,6 +5,11 @@ module NotificationsHelper
       comment = comment_klass.find(notification.model_id)
 
       return url_for(:controller => 'tasks', :action => 'show', :id => comment.task.id)
+    elsif notification.controller == 'operations'
+      operation_klass = notification.model.constantize
+      operation = operation_klass.find(notification.model_id)
+
+      return url_for(:controller => 'operations', :action => 'index', :task_id => operation.task.id)
     end
 
     url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id)
@@ -17,17 +22,27 @@ module NotificationsHelper
       icon('refresh', :class => "fa-lg fa-fw")
     elsif notification.action == 'destroy'
       icon('remove', :class => "fa-lg fa-fw")
+    else
+      icon('bolt', :class => "fa-lg fa-fw")
     end
   end
 
   def title_for(notification)
     model = Object.const_get(notification.model)
-    model = model.try(:with_deleted).find_by_id notification.model_id
+    if model.try(:with_deleted)
+      model = model.try(:with_deleted).find_by_id notification.model_id
+    else
+      model = model.find_by_id notification.model_id
+    end
 
     if notification.controller == 'tasks'
       t ".#{ notification.controller }.#{ notification.action }",
         thinker: notification.thinker.name,
         task: model.title
+    elsif notification.controller == 'operations'
+      t ".#{ notification.controller }.#{ notification.action }",
+        thinker: notification.thinker.name,
+        task: model.task.title
     elsif notification.controller == 'goals'
       t ".#{ notification.controller }.#{ notification.action }",
         thinker: notification.thinker.name,
@@ -38,7 +53,8 @@ module NotificationsHelper
         total: model.obtained
     elsif notification.controller == 'comments'
       t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name
+        thinker: notification.thinker.name,
+        task: model.task.title
     elsif notification.controller == 'projects'
       t ".#{ notification.controller }.#{ notification.action }",
         thinker: notification.thinker.name

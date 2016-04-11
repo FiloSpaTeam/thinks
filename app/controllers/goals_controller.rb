@@ -57,7 +57,8 @@ class GoalsController < ApplicationController
     @goal.progress = 0.0
 
     respond_to do |format|
-      if @goal.save && create_notification(@goal)
+      if @goal.save
+        create_notification(@goal, @goal.project)
         format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
         format.json { render :show, status: :created, location: @goal }
       else
@@ -74,7 +75,8 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1.json
   def update
     respond_to do |format|
-      if current_thinker == @goal.thinker && @goal.update(goal_params) && create_notification(@goal)
+      if current_thinker == @goal.thinker && @goal.update(goal_params)
+        create_notification(@goal, @goal.project)
         format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
         format.json { render :show, status: :ok, location: @goal }
       else
@@ -93,6 +95,8 @@ class GoalsController < ApplicationController
     respond_to do |format|
       if current_thinker == @goal.thinker
         @goal.destroy
+
+        create_notification(@goal, @goal.project)
         format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
         format.json { head :no_content }
       else
@@ -112,6 +116,8 @@ class GoalsController < ApplicationController
       end
 
       tasks_ready.update_all(status_id: Status.sprint.first)
+
+      create_notification(@goal, @goal.project)
 
       format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
       format.json { head :no_content }
