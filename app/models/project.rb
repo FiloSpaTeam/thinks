@@ -135,8 +135,6 @@ class Project < ActiveRecord::Base
   def update_contribution_thinker
     Contribution.find_or_create_by(project_id: id, thinker_id: thinker.id) do |contribution|
       contribution.intensity = Contribution.intensities[:partecipate]
-
-      puts 'Hi'
     end
   end
 end
