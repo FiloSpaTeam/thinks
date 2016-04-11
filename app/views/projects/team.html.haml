@@ -1,8 +1,15 @@
-%table.table.table-condensed
-  %thead
-    %tr
-      %th Membro
-  %tbody
-    - @team.each do |member|
-      %tr
-        %td= member.name
+- model_class = Project
+= render :partial => 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
+  .col-md-8
+    .panel.panel-default
+      .list-group
+        - @team.each do |thinker|
+          .list-group-item
+            = thinker.name
+            - if thinker.avatar
+              = cl_image_tag(thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
+            - else
+              %img.team-member-img.pull-left{ src: "holder.js/30x30" }

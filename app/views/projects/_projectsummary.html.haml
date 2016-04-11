@@ -68,8 +68,8 @@
       = badge(project.contributions.distinct.select{ |contribution| !contribution.nothing? }.size)
       thinkers
     .list-group-item
-      = badge(project.contributions.distinct.select{ |contribution| contribution.partecipate? }.size)
-      workers
+      = badge(project.team.size)
+      = link_to_if project.team.size.nonzero?, 'workers', team_project_path(project)
     .list-group-item
       = badge(project.sprints.size)
       sprints

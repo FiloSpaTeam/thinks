@@ -126,7 +126,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1/team
   # GET /projects/1/team.json
   def team
-    @team = @project.thinkers
+    @team = @project.team
+    @team.map!(&:thinker)
   end
 
   # GET /projects/1/tasks

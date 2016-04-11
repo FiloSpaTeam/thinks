@@ -74,6 +74,10 @@ class Project < ActiveRecord::Base
     ]
   end
 
+  def team
+    contributions.distinct.select{ |contribution| !contribution.nothing? }
+  end
+
   def part_of_team?(thinker)
     thinker == self.thinker || !contributions.select{ |contribution| contribution.thinker == thinker && contribution.partecipate? }.empty?
   end
