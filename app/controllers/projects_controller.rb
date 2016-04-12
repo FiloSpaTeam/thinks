@@ -128,6 +128,8 @@ class ProjectsController < ApplicationController
   def team
     @team = @project.team
     @team.map!(&:thinker)
+
+    @tasks_done = @project.tasks.done
   end
 
   # GET /projects/1/tasks
