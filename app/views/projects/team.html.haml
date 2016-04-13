@@ -14,7 +14,7 @@
             - if thinker.avatar
               = cl_image_tag(thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
             - else
-              %img.team-member-img.pull-left{ src: "holder.js/30x30" }
+              %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
             .pull-right
               Total workload:
               = thinker.working_tasks.where(project: @project).where(status: Status.done.first).sum(:workload)

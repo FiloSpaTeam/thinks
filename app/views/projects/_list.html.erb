@@ -16,7 +16,7 @@
                   <% if project.main_image %>
                     <%= cl_image_tag(project.main_image.path, { size: '110x110', crop: :thumb, gravity: :face }) %>
                   <% else %>
-                    <img src="holder.js/110x110">
+                    <img data-src="holder.js/110x110">
                   <% end %>
                 <% end %>
               </div>
