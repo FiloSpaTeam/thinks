@@ -128,6 +128,7 @@ class ProjectsController < ApplicationController
                 .select('thinkers.id, thinkers.name, thinkers.avatar, sum(tasks.workload) as total_workload')
                 .where('thinkers.id IN (?)', team.map(&:thinker_id))
                 .joins("LEFT JOIN tasks ON tasks.worker_thinker_id = thinkers.id")
+                .where('project_id is null or project_id = ?', @project.id)
                 .order('total_workload')
                 .group('thinkers.id')
     # .where('tasks.status_id = ?', Status.done.first)
