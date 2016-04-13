@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   before_action :authenticate_thinker!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
+  before_action :set_contribution, only: [:show, :team]
   before_action :thinker!, only: [:edit, :update]
 
   # GET /projects
@@ -34,10 +35,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @contribution = Contribution
-                    .where(thinker: current_thinker)
-                    .where(project: @project)
-                    .first_or_initialize
   end
 
   # GET /projects/new
@@ -126,8 +123,14 @@ class ProjectsController < ApplicationController
   # GET /projects/1/team
   # GET /projects/1/team.json
   def team
-    @team = @project.team
-    @team.map!(&:thinker)
+    team      = @project.team
+    @thinkers = Thinker
+                .select('thinkers.id, thinkers.name, thinkers.avatar, sum(tasks.workload) as total_workload')
+                .where('thinkers.id IN (?)', team.map(&:thinker_id))
+                .joins("LEFT JOIN tasks ON tasks.worker_thinker_id = thinkers.id")
+                .order('total_workload')
+                .group('thinkers.id')
+    # .where('tasks.status_id = ?', Status.done.first)
 
     @tasks_done = @project.tasks.done
   end
@@ -159,6 +162,13 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
 
     load_project_session
+  end
+
+  def set_contribution
+    @contribution = Contribution
+                    .where(thinker: current_thinker)
+                    .where(project: @project)
+                    .first_or_initialize
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

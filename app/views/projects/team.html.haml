@@ -5,14 +5,28 @@
     = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
     .panel.panel-default
-      .list-group
-        - @team.each do |thinker|
-          .list-group-item
-            = thinker.name
+      %ul.list-group
+        - @thinkers.each do |thinker|
+          %li.list-group-item
+            %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseThinker#{ thinker.id }", :href => "#collapseThinker#{ thinker.id }" }
+              %strong
+                = thinker.name
             - if thinker.avatar
               = cl_image_tag(thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
             - else
               %img.team-member-img.pull-left{ src: "holder.js/30x30" }
             .pull-right
-              Total workload: 
+              Total workload:
               = thinker.working_tasks.where(project: @project).where(status: Status.done.first).sum(:workload)
+            .collapse{ id: "collapseThinker#{ thinker.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
+              - if thinker.working_tasks.size.nonzero?
+                %ul.list-group
+                  - working_tasks = thinker.working_tasks.unscoped.where(status: Status.done.first).where(project: @project).order('workload desc').limit(5)
+                  - working_tasks.each do |task|
+                    %li.list-group-item
+                      = "##{ task.serial }"
+                      = link_to task.title, task
+                      = badge(task.workload)
+              - else
+                %strong
+                  No tasks done

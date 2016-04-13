@@ -75,11 +75,11 @@ class Project < ActiveRecord::Base
   end
 
   def team
-    contributions.distinct.select{ |contribution| contribution.partecipate? }
+    contributions.distinct.select(&:partecipate?)
   end
 
   def part_of_team?(thinker)
-    thinker == self.thinker || !contributions.select{ |contribution| contribution.thinker == thinker && contribution.partecipate? }.empty?
+    !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
   end
 
   def progress_percentage
