@@ -79,7 +79,7 @@ class Project < ActiveRecord::Base
   end
 
   def part_of_team?(thinker)
-    !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
+    thinker == self.thinker || !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
   end
 
   def progress_percentage
