@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'notifications_check' => 'notifications#check'
   resources :notifications do
     put :read
   end
+  get 'notifications_check' => 'notifications#check'
 
   mount Attachinary::Engine => "/attachinary"
 
