@@ -36,6 +36,6 @@
     :plain
       $(document).ready(function() {
         setInterval(function() {
-          $.get({ url: 'notifications_check.js', dataType: "script" })
+          $.get({ url: '/notifications_check.js', dataType: "script" })
         }, 1000 * 60 * 5)
       });
