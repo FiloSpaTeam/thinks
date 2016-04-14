@@ -2,7 +2,7 @@
 .row
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @project }
-  .col-md-8
+  #div-container-list.col-md-8
     .panel.panel-default
       .panel-heading
         = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|

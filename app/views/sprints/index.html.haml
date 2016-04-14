@@ -2,7 +2,7 @@
 .row
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @project }
-  .col-md-8
+  #div-container-list.col-md-8
     - if @sprints.size >= 2
       .panel.panel-default.hidden-xs
         .panel-body
