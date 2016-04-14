@@ -17,12 +17,12 @@
               %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
             .pull-right
               Total workload:
-              = thinker.working_tasks.where(project: @project).where(status: Status.done.first).sum(:workload)
+              - working_tasks = thinker.working_tasks.where(project: @project).where(status: Status.done.first)
+              = working_tasks.sum(:workload)
             .collapse{ id: "collapseThinker#{ thinker.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
-              - if thinker.working_tasks.size.nonzero?
+              - if working_tasks.size.nonzero?
                 %ul.list-group
-                  - working_tasks = thinker.working_tasks.unscoped.where(status: Status.done.first).where(project: @project).order('workload desc').limit(5)
-                  - working_tasks.each do |task|
+                  - working_tasks.order('workload desc').limit(5).each do |task|
                     %li.list-group-item
                       = "##{ task.serial }"
                       = link_to task.title, task

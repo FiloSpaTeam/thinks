@@ -52,8 +52,7 @@ class Task < ActiveRecord::Base
   validates :status_id, presence: true, on: :create
   validates :thinker_id, presence: true, on: :create
 
-  default_scope { order('serial DESC') }
-
+  scope :default_order, -> { order('serial DESC') }
   scope :status_progress, ->(status) { where status: status }
   scope :in_progress, -> { where status: Status.in_progress }
   scope :done, -> { where status: Status.done }

@@ -12,7 +12,7 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks.json
   def index
     @filterrific = initialize_filterrific(
-      Task,
+      Task.default_order,
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
