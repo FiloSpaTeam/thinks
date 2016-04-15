@@ -31,6 +31,9 @@
               = task.updated_at.to_s(:short)
           .dark-grey
             %small
+              = task.description.squish.truncate(50)
+          .dark-grey
+            %small
               %strong
                 \##{task.serial}
               %span.hidden-xs
