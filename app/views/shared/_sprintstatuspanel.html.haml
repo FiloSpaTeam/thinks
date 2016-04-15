@@ -1,5 +1,5 @@
 .panel.panel-default
-  - tasks_sprint = @sprint.project.tasks.unscoped.done.where('updated_at >= ?', @sprint.created_at).where('updated_at <= ?', @sprint.updated_at)
+  - tasks_sprint = Task.unscoped.done.where('updated_at >= ?', @sprint.created_at).where('updated_at <= ?', @sprint.updated_at).where(project: @sprint.project)
   .panel-body.hidden-xs
     %strong
       Highest tasks
