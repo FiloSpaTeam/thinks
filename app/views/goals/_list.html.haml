@@ -17,7 +17,7 @@
             %a.pull-right.btn{ :class => tasks_ready.empty? ? "disabled" : "", :href => tasks_ready.empty? ? "javascript:;" : tasks_in_sprint_goal_path(goal), :title => release_btn_title(tasks_ready) , :role => "button", "data-method" => :put }
               = icon('flag-checkered', :class => "dark-grey")
           %strong
-            = link_to goal.title, goal_path(goal)
+            = link_to goal.title, goal_path(goal), :title => t("created_at_date", date: goal.created_at.to_s(:short))
             ·
             %small
               = goal.updated_at.to_s(:short)

@@ -25,7 +25,7 @@
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
           %strong
-            = link_to task.title, task_path(task)
+            = link_to task.title, task_path(task), :title => t("created_at", date: task.created_at.to_s(:short))
           .dark-grey
             %small
               %strong

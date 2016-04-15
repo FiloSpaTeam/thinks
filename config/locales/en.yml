@@ -65,6 +65,8 @@ en:
   no_operations: "No operations"
   done: "Done"
   remove: "Remove"
+  created_at_date: "Created at %{date}"
+  updated_at_date: "Updated at %{date}"
 
   layouts:
     application:
