@@ -26,11 +26,13 @@
         %td
           %strong
             = link_to task.title, task_path(task), :title => t("created_at_date", date: task.created_at.to_s(:short))
+            ·
+            %small
+              = task.updated_at.to_s(:short)
           .dark-grey
             %small
               %strong
                 \##{task.serial}
-              at #{task.updated_at.to_s(:long)}
               %span.hidden-xs
                 by #{task.thinker.name}
         %td.text-center
