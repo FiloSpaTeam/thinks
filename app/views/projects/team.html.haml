@@ -25,7 +25,7 @@
                   - working_tasks.order('workload desc').order('updated_at desc').limit(5).each do |task|
                     %li.list-group-item
                       = "##{ task.serial }"
-                      = link_to task.title, task
+                      = link_to task.title, task, :title => task.updated_at.to_s(:short)
                       = badge(task.workload)
               - else
                 %strong
