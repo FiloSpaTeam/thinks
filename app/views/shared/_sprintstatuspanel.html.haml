@@ -12,7 +12,7 @@
       - tasks_sprint.order('workload DESC').each do |task|
         .list-group-item
           = badge(task.workload)
-          = link_to task_path(task) do
+          = link_to task_path(task), :title => task.updated_at.to_s(:short) do
             = task.title
 
   .panel-body.hidden-xs
