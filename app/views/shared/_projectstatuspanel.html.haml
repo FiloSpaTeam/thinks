@@ -45,7 +45,7 @@
 
       .list-group-item
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
-        current
+        in sprint
       .list-group-item
         = badge(project.tasks.done.sum(:workload))
         done
