@@ -42,9 +42,9 @@
             = workload_description(task)
         %td.text-right
           %a.btn.pull-right.hidden-xs{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
-            = icon('bullseye', :class => "dark-grey")
+            = icon('bullseye', :class => "dark-grey fa-lg")
           %a.btn.pull-right{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
-            = icon('crosshairs', :class => "dark-grey")
+            = icon('crosshairs', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 3 }
       = t('no_record')
