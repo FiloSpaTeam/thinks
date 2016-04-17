@@ -1,6 +1,6 @@
 %thead
   %tr
-    %td.col-lg-7.col-md-7.col-sm-7.col-xs-7
+    %td.col-lg-8.col-md-8.col-sm-8.col-xs-8
       .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
         %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
           %h5
@@ -18,20 +18,20 @@
         %h5
           %strong
             = filterrific_sorting_link(@filterrific, :workload)
-    %td.col-lg-2.col-xs-1.col-sm-2.col-xs-1
+    %td.col-lg-1.col-xs-1.col-sm-1.col-xs-1
 %tbody
   - if (!tasks.empty?)
     - tasks.each do |task|
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
           %strong
-            = link_to task.title, task_path(task), :title => t("created_at_date", date: task.created_at.to_s(:short))
-            ·
-            %small
+            %small.dark-grey
               = task.updated_at.to_s(:short)
+            ·
+            = link_to task.title.truncate(30), task_path(task), :title => t("created_at_date", date: task.created_at.to_s(:short))
           .dark-grey
             %small
-              = task.description.squish.truncate(50)
+              = task.description.squish.truncate(100)
           .dark-grey
             %small
               %strong
@@ -41,10 +41,12 @@
           .col-xs-12.workload-table
             = workload_description(task)
         %td.text-right
-          %a.btn.pull-right.hidden-xs{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
-            = icon('bullseye', :class => "dark-grey fa-lg")
-          %a.btn.pull-right{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
-            = icon('crosshairs', :class => "dark-grey fa-lg")
+          .form-group{ :style => "margin-bottom: 0;" }
+            %a.btn.hidden-xs{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
+              = icon('bullseye', :class => "dark-grey fa-lg")
+          .form-group{ :style => "margin-bottom: 0;" }
+            %a.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
+              = icon('crosshairs', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 3 }
       = t('no_record')
