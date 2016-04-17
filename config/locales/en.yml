@@ -223,6 +223,7 @@ en:
       projects:
         update: "%{thinker} updated the project's description."
         destroy: "%{thinker} destroyed the project."
+        contribute: "%{thinker} changed partecipation preferences."
 
   sex:
     male: "Male"

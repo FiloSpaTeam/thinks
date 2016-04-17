@@ -33,14 +33,10 @@
         %td
           Sprint #{sprint.serial}
         %td
-          %span.hidden-xs
-            = sprint.created_at.to_s(:long)
-          %span.visible-xs
+          %span{ title: sprint.created_at.to_s(:long) }
             = sprint.created_at.to_s(:short)
         %td
-          %span.hidden-xs
-            = sprint.updated_at.to_s(:long)
-          %span.visible-xs
+          %span{ title: sprint.updated_at.to_s(:long) }
             = sprint.updated_at.to_s(:short)
         %td.text-center
           = sprint.obtained
