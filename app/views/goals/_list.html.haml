@@ -20,7 +20,7 @@
             %small
               = goal.updated_at.to_s(:short)
             ·
-            = link_to goal.title.truncate(40), goal_path(goal), :title => t("created_at_date", date: goal.created_at.to_s(:short))
+            = link_to goal.title.truncate(40), goal_path(goal), :title => goal.title
           .dark-grey
             %small
               = goal.description.truncate(160)

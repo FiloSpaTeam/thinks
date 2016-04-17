@@ -28,7 +28,7 @@
             %small.dark-grey
               = task.updated_at.to_s(:short)
             ·
-            = link_to task.title.truncate(30), task_path(task), :title => t("created_at_date", date: task.created_at.to_s(:short))
+            = link_to task.title.truncate(30), task_path(task), :title => task.title
           .dark-grey
             %small
               = task.description.squish.truncate(100)
