@@ -1,4 +1,6 @@
 module ApplicationHelper
+  require 'redcarpet'
+  require 'redcarpet/render_strip'
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
@@ -46,6 +48,12 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe
+  end
+
+  def plain_text(markdown_text)
+    md = Redcarpet::Markdown.new(Redcarpet::Render::StripDown, :space_after_headers => true)
+
+    md.render(markdown_text)
   end
 
   def percentage_from_value_and_total(value, total)

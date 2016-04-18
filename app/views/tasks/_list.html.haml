@@ -32,7 +32,7 @@
           .dark-grey
             %small
               %em
-                = task.description.squish.truncate(100)
+                = plain_text(task.description.squish).truncate(120)
           .dark-grey
             %small
               %strong

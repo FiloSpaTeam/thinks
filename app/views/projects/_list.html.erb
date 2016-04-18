@@ -24,7 +24,10 @@
                 <%= link_to project_path(project) do %>
                   <h4><strong> <%= project.title %> </strong></h4>
                 <% end %>
-                <%= markdown(truncate(project.description.lines.first.tr('#', ''), length: 150, separator: ' ', omission: '... '), true) %>
+                <%#= markdown(truncate(project.description.lines.first.tr('#', ''), length: 150, separator: ' ', omission: '... '), true) %>
+                <em>
+                    <%= plain_text(project.description.lines.first).truncate(150) %>
+                </em>
               </div>
             </div>
             <div class="progress">
