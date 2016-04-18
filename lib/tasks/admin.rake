@@ -48,4 +48,19 @@ namespace :admin do
 
     puts 'Delete rows without related project done'
   end
+
+  task update_task_serial: :environment do
+    puts 'Update task serial'
+
+    projects = Project.with_deleted.eager_load(:tasks).all
+    projects.each do |project|
+      tasks = project.tasks.with_deleted.order('created_at')
+
+      tasks.each_with_index do |task, index|
+        task.update_attribute(:serial, index + 1)
+      end
+    end
+
+    puts 'Update task serial done'
+  end
 end
