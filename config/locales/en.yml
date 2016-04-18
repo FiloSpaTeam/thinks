@@ -218,7 +218,8 @@ en:
         create: "Sprint %{serial}, started."
         update: "The Sprint %{serial}, was updated (%{total} points)."
       comments:
-        create: "%{thinker} comment the task."
+        create: "%{thinker} comment the task '%{task}'."
+        update: "%{thinker} update a comment for task '%{task}'."
         approve: "%{thinker} approved a comment. Task '%{task}' done."
       projects:
         update: "%{thinker} updated the project's description."
