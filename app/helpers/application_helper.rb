@@ -8,7 +8,7 @@ module ApplicationHelper
     date     = '2016.04.18'
     thinkers = Thinker.all.size
     content_tag(:span, "(Subscribers: #{thinkers})", class: 'hidden-xs hidden-sm pull-right text-muted') +
-    content_tag(:small, "Version #{version}", class: 'text-muted pull-right', title: date)
+    content_tag(:small, "Version #{version}", class: 'text-muted pull-right hidden-xs ', title: date)
   end
 
   def link_to_button(path, text, icon_source)

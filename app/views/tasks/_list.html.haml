@@ -24,11 +24,15 @@
     - tasks.each do |task|
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
-          %strong
+          %strong.hidden-xs.hidden-sm
             %small.dark-grey
               = task.updated_at.to_s(:short)
-            ·
+              ·
             = link_to task.title.truncate(30), task_path(task), :title => task.title
+          %strong.visible-xs
+            = link_to task.title.truncate(40), task_path(task), :title => task.title
+          %strong.visible-sm
+            = link_to task.title, task_path(task)
           .dark-grey
             %small
               %em
