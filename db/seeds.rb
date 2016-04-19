@@ -135,3 +135,11 @@ answers_list.each do |tdescription, survey_id|
     .where(t_description: tdescription)
     .first_or_create
 end
+
+team_roles = %w(product_owner scrum_master team_member)
+
+team_roles.each do |tname|
+  TeamRole
+    .where(t_name: tname)
+    .first_or_create
+end

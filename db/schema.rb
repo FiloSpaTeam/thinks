@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321224701) do
+ActiveRecord::Schema.define(version: 20160419173247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 20160321224701) do
   add_index "answers_thinkers", ["answer_id"], name: "index_answers_thinkers_on_answer_id", using: :btree
   add_index "answers_thinkers", ["sprint_id"], name: "index_answers_thinkers_on_sprint_id", using: :btree
   add_index "answers_thinkers", ["thinker_id"], name: "index_answers_thinkers_on_thinker_id", using: :btree
+
+  create_table "assigned_roles", id: false, force: :cascade do |t|
+    t.integer "thinker_id"
+    t.integer "team_role_id"
+    t.integer "project_id"
+  end
+
+  add_index "assigned_roles", ["project_id"], name: "index_assigned_roles_on_project_id", using: :btree
+  add_index "assigned_roles", ["team_role_id"], name: "index_assigned_roles_on_team_role_id", using: :btree
+  add_index "assigned_roles", ["thinker_id"], name: "index_assigned_roles_on_thinker_id", using: :btree
 
   create_table "attachinary_files", force: :cascade do |t|
     t.integer  "attachinariable_id"
@@ -270,6 +280,12 @@ ActiveRecord::Schema.define(version: 20160321224701) do
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
+
+  create_table "team_roles", force: :cascade do |t|
+    t.string   "t_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "thinkers", force: :cascade do |t|
     t.string   "email",                     default: "",    null: false

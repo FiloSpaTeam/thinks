@@ -63,4 +63,22 @@ namespace :admin do
 
     puts 'Update task serial done'
   end
+
+  task update_team_roles: :environment do
+    puts 'Update team roles'
+
+    projects = Project.with_deleted.eager_load(:contributions).all
+    projects.each do |project|
+      project.contributions.each do |contribution|
+        if contribution.thinker == project.thinker
+          AssignedRole.create(thinker: contribution.thinker, team_role: TeamRole.product_owner.first, project: project)
+          AssignedRole.create(thinker: contribution.thinker, team_role: TeamRole.scrum_master.first, project: project)
+        else
+          AssignedRole.create(thinker: contribution.thinker, team_role: TeamRole.team_member.first, project: project)
+        end
+      end
+    end
+
+    puts 'Update team roles done'
+  end
 end
