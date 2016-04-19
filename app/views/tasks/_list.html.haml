@@ -1,6 +1,6 @@
 %thead
   %tr
-    %td.col-lg-8.col-md-8.col-sm-8.col-xs-8
+    %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
       .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
         %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
           %h5
@@ -18,7 +18,7 @@
         %h5
           %strong
             = filterrific_sorting_link(@filterrific, :workload)
-    %td.col-lg-1.col-xs-1.col-sm-1.col-xs-1
+    %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
 %tbody
   - if (!tasks.empty?)
     - tasks.each do |task|
@@ -30,7 +30,7 @@
               ·
             = link_to task.title.truncate(30), task_path(task), :title => task.title
           %strong.visible-xs
-            = link_to task.title.truncate(40), task_path(task), :title => task.title
+            = link_to task.title.truncate(45), task_path(task), :title => task.title
           %strong.visible-sm
             = link_to task.title, task_path(task)
           .dark-grey
@@ -45,9 +45,9 @@
         %td.text-center
           .col-xs-12.workload-table
             = workload_description(task)
-        %td.text-right
+        %td.text-right.hidden-xs
           .form-group{ :style => "margin-bottom: 0;" }
-            %a.btn.hidden-xs{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
+            %a.btn{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
               = icon('bullseye', :class => "dark-grey fa-lg")
           .form-group{ :style => "margin-bottom: 0;" }
             %a.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
