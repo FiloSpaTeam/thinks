@@ -73,7 +73,7 @@
     .list-group-item
       - team_number = project.assigned_roles.select(:thinker_id).distinct.count
       = badge(team_number)
-      = link_to_if team_number.nonzero?, 'workers', project_teams_path(project)
+      = link_to_if (team_number.nonzero? && project.part_of_team?(current_thinker)), 'workers', project_teams_path(project)
     .list-group-item
       = badge(project.sprints.size)
       sprints
