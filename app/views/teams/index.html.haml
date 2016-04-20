@@ -7,14 +7,17 @@
     .panel.panel-default
       .panel-heading
         Product Owner
+        %i.pull-right.fa.fa-money.fa-lg{ style: 'margin-top: 2px;' }
       %ul.list-group
         = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.product_owner.first).first }
       .panel-heading
         Scrum Master
+        %i.pull-right.fa.fa-sitemap.fa-lg{ style: 'margin-top: 2px;' }
       %ul.list-group
         = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.scrum_master.first).first }
       .panel-heading
         Members
+        %i.pull-right.fa.fa-users.fa-lg{ style: 'margin-top: 2px;' }
       %ul.list-group
         - @members.where('team_role_id > ?', TeamRole.scrum_master.first).each do |member|
           = render :partial => 'li', locals: { member: member }

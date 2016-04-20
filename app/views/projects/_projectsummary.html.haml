@@ -4,12 +4,15 @@
       %strong
         Your contribution
     .list-group
-      .list-group-item
-        - if current_thinker != project.thinker
-          = form_for contribution, url: { action: :contribute }, html: { id: 'form-contribution' }, method: :put do |f|
+      - if current_thinker != project.thinker
+        .list-group-item
+          = form_for contribution, url: { controller: :projects, action: :contribute, id: project.id }, html: { id: 'form-contribution' }, method: :put do |f|
             = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
-        - else
-          You are the Scrum Master
+      - else
+        - my_roles = project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
+        - my_roles.each do |role|
+          .list-group-item
+            = t "team_roles.#{role.team_role.t_name}"
 .panel.panel-default
   .panel-body
     %strong
@@ -68,8 +71,9 @@
       = badge(project.contributions.distinct.select{ |contribution| !contribution.nothing? }.size)
       thinkers
     .list-group-item
-      = badge(project.team.size)
-      = link_to_if project.team.size.nonzero?, 'workers', project_teams_path(project)
+      - team_number = project.assigned_roles.select(:thinker_id).distinct.count
+      = badge(team_number)
+      = link_to_if team_number.nonzero?, 'workers', project_teams_path(project)
     .list-group-item
       = badge(project.sprints.size)
       sprints

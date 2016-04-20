@@ -231,6 +231,11 @@ en:
     female: "Female"
     other: "Other"
 
+  team_roles:
+    product_owner: "Product owner"
+    scrum_master: "Scrum Master"
+    team_member: "Member"
+
   survey:
     new:
       what_went_well: "What went well?"

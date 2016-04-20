@@ -12,7 +12,6 @@ class TeamsController < ApplicationController
       select_options: {}
     ) || return
     @members      = @filterrific.find.page params[:page]
-    @contribution = current_thinker
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"
