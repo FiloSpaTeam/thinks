@@ -1,0 +1,24 @@
+%li.list-group-item
+  %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseThinker#{ member.thinker.id }_#{ member.team_role.id }", :href => "#collapseThinker#{ member.thinker.id }_#{ member.team_role.id }" }
+    %strong
+      = member.thinker.name
+  - if member.thinker.avatar
+    = cl_image_tag(member.thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
+  - else
+    %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
+  .pull-right
+    Total workload:
+    - working_tasks = member.thinker.working_tasks.where(project: @project).where(status: Status.done.first)
+    = working_tasks.sum(:workload)
+  .collapse{ id: "collapseThinker#{ member.thinker.id }_#{ member.team_role.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
+    - if working_tasks.size.nonzero?
+      %ul.list-group
+        - working_tasks.order('workload desc').order('updated_at desc').limit(5).each do |task|
+          %li.list-group-item
+            = "##{ task.serial }"
+            = link_to task.title, task, :title => task.updated_at.to_s(:short)
+            = badge(task.workload)
+    - else
+      %strong
+        No tasks done
+

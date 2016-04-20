@@ -14,11 +14,15 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test 'should get new' do
+    become_member
+
     get :new, project_id: @task.project_id
     assert_response :success
   end
 
   test 'should create task' do
+    become_member
+
     assert_difference('Task.count') do
       post :create, project_id: @task.project_id, task: { title: @task.title, description: @task.description, project_id: @task.project_id, thinker_id: @task.thinker_id, status_id: @task.status_id }
     end

@@ -14,6 +14,8 @@ class SurveyControllerTest < ActionController::TestCase
   end
 
   test 'should get new' do
+    become_member
+
     get :new, sprint_id: @sprint.id
     assert_response :success
   end

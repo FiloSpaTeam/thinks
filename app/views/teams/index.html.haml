@@ -1,0 +1,20 @@
+- model_class = Project
+= render :partial => 'shared/projectbar', locals: { project: @project }
+.row
+  .col-md-4
+    = render :partial => 'projects/projectsummary', locals: { project: @project, contribution: @contribution }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        Product Owner
+      %ul.list-group
+        = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.product_owner.first).first }
+      .panel-heading
+        Scrum Master
+      %ul.list-group
+        = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.scrum_master.first).first }
+      .panel-heading
+        Members
+      %ul.list-group
+        - @members.where('team_role_id > ?', TeamRole.scrum_master.first).each do |member|
+          = render :partial => 'li', locals: { member: member }

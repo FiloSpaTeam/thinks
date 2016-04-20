@@ -2,8 +2,8 @@ class ProjectsController < ApplicationController
   include ProjectsHelper
 
   before_action :authenticate_thinker!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :team, :tasks]
-  before_action :set_contribution, only: [:show, :team]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks]
+  before_action :set_contribution, only: [:show]
   before_action :thinker!, only: [:edit, :update]
 
   # GET /projects
@@ -118,21 +118,6 @@ class ProjectsController < ApplicationController
       create_notification(@project, @project)
       format.html { redirect_to project_path(@project), notice: 'Your contribution has been saved!' }
     end
-  end
-
-  # GET /projects/1/team
-  # GET /projects/1/team.json
-  def team
-    team      = @project.team
-    @thinkers = Thinker
-                .select('thinkers.id, thinkers.name, thinkers.avatar, sum(tasks.workload) as total_workload')
-                .where('thinkers.id IN (?)', team.map(&:thinker_id))
-                .joins("LEFT JOIN tasks ON tasks.worker_thinker_id = thinkers.id and (project_id is null or project_id = #{Project.sanitize(@project.id)})")
-                .order('total_workload')
-                .group('thinkers.id')
-    # .where('tasks.status_id = ?', Status.done.first)
-
-    @tasks_done = @project.tasks.done
   end
 
   # GET /projects/1/tasks

@@ -69,7 +69,7 @@
       thinkers
     .list-group-item
       = badge(project.team.size)
-      = link_to_if project.team.size.nonzero?, 'workers', team_project_path(project)
+      = link_to_if project.team.size.nonzero?, 'workers', project_teams_path(project)
     .list-group-item
       = badge(project.sprints.size)
       sprints

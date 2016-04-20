@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :languages
 
   has_many :contributions
+  has_many :assigned_roles
   has_many :dependencies
   has_many :goals, :dependent => :destroy
   has_many :tasks, :dependent => :destroy
@@ -79,14 +80,15 @@ class Project < ActiveRecord::Base
   end
 
   def part_of_team?(thinker)
-    thinker == self.thinker || !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
+    # thinker == self.thinker || !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
+    assigned_roles.where(thinker: thinker).present?
   end
 
   def progress_percentage
-    tasks      = self.tasks
+    tasks = self.tasks
     0 if tasks.empty? || tasks.nil?
 
-    tasks_done = tasks.where({ status_id: Status.done })
+    tasks_done = tasks.where(status_id: Status.done)
 
     total_tasks_number      = tasks.length
     total_tasks_done_number = tasks_done.length
