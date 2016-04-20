@@ -8,7 +8,7 @@ class Contribution < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       save
 
-      if intensity == Contribution.intensities[:nothing]
+      if self.nothing?
         AssignedRole.where(project: project).where(thinker: thinker).delete_all
       else
         AssignedRole.where(project: project).where(thinker: thinker).first_or_create do |team_role|

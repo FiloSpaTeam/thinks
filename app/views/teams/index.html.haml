@@ -19,5 +19,10 @@
         Members
         %i.pull-right.fa.fa-users.fa-lg{ style: 'margin-top: 2px;' }
       %ul.list-group
-        - @members.where('team_role_id > ?', TeamRole.scrum_master.first).each do |member|
-          = render :partial => 'li', locals: { member: member }
+        - simple_members = @members.where('team_role_id > ?', TeamRole.scrum_master.first)
+        - if simple_members.count.nonzero?
+          - simple_members.each do |member|
+            = render :partial => 'li', locals: { member: member }
+        - else
+          %li.list-group-item
+            No members
