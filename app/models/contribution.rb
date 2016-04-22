@@ -8,10 +8,12 @@ class Contribution < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       save
 
-      if self.nothing?
+      if nothing?
         AssignedRole.where(project: project).where(thinker: thinker).delete_all
       else
-        AssignedRole.where(project: project).where(thinker: thinker).first_or_create do |team_role|
+        AssignedRole
+          .where(project: project)
+          .where(thinker: thinker).first_or_create do |team_role|
           team_role.team_role = TeamRole.team_member.first
         end
       end
