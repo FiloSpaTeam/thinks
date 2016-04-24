@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
   include ActionView::Helpers::TextHelper
+  include ProjectsHelper
 
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :tasks_in_sprint]
   before_action :set_project, only: [:new, :index, :create]
@@ -32,25 +33,24 @@ class GoalsController < ApplicationController
   # GET /goals/new
   def new
     @goal         = Goal.new
-
     @project_form = @project
+
+    scrum_master!(@project)
   end
 
   # GET /goals/1/edit
   def edit
+    scrum_master!(@goal.project)
+
     @project_form = nil
     @project      = @goal.project
-    if current_thinker != @goal.thinker
-      respond_to do |format|
-        format.html { redirect_to @goal, alert: 'You cannot edit this.' }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # POST /goals
   # POST /goals.json
   def create
+    scrum_master!(@project)
+
     @goal          = Goal.new(goal_params)
     @goal.project  = @project
     @goal.thinker  = current_thinker
@@ -74,6 +74,8 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
+    scrum_master!(@goal.project)
+
     respond_to do |format|
       if current_thinker == @goal.thinker && @goal.update(goal_params)
         create_notification(@goal, @goal.project)
@@ -92,6 +94,8 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
+    scrum_master!(@goal.project)
+
     respond_to do |format|
       if current_thinker == @goal.thinker
         @goal.destroy
@@ -107,6 +111,8 @@ class GoalsController < ApplicationController
   end
 
   def tasks_in_sprint
+    scrum_master!(@goal.project)
+
     tasks_ready      = @goal.tasks.ready_to_sprint
     n_of_tasks_ready = tasks_ready.count
 

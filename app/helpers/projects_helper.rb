@@ -15,13 +15,29 @@ module ProjectsHelper
   end
 
   def set_project
-    @project = Project.friendly.find(params[:project_id] || params[:id]) 
+    @project = Project.friendly.find(params[:project_id] || params[:id])
   end
 
   def thinker!
     if @project.thinker != current_thinker
-      flash[:alert] = 'You are not the Scrum Master!'
+      flash[:alert] = 'You are not the founder!'
       redirect_to project_path(@project)
+    end
+  end
+
+  def scrum_master!(project)
+    if project
+       .assigned_roles
+       .where(thinker: current_thinker)
+       .where('team_role_id IN (?,?)',
+              TeamRole.scrum_master.first,
+              TeamRole.product_owner.first)
+       .first
+       .nil?
+      respond_to do |format|
+        format.html { redirect_to project_path(project), alert: 'You are not the Scrum Master!' }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
     end
   end
 end

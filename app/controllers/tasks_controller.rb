@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
+  include ProjectsHelper
+
+  before_action :authenticate_thinker!
+
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
 
-  before_action :authenticate_thinker!
   before_action :teammate!, only: [:new, :create]
   before_action :check_assign!, only: [:assign]
 
@@ -121,6 +124,8 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1/judge
   # PATCH/PUT /tasks/1/judge.json
   def sprint
+    scrum_master!(@task.project)
+
     @task.status = Status.sprint.first
 
     respond_to do |format|
@@ -138,6 +143,8 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1/judge
   # PATCH/PUT /tasks/1/judge.json
   def release
+    scrum_master!(@task.project)
+
     @task.status = Status.release.first
 
     respond_to do |format|

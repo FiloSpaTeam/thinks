@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_thinker!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks]
   before_action :set_contribution, only: [:show]
-  before_action :thinker!, only: [:edit, :update]
+  before_action :thinker!, only: [:edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
@@ -96,13 +96,9 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     respond_to do |format|
-      unless creator?(@project.thinker.id)
-        format.html { redirect_to project_path(@project), error: t(:wtf_are_you_destroying) }
-      end
-
       @project.destroy
       create_notification(@project, @project)
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'Project was successfully closed.' }
       format.json { head :no_content }
     end
   end
