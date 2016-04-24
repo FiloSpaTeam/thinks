@@ -143,4 +143,13 @@ class Project < ActiveRecord::Base
       contribution.intensity = Contribution.intensities[:partecipate]
     end
   end
+
+  def save_first_team_roles
+    AssignedRole.find_or_create_by(project_id: id, team_role: TeamRole.product_owner.first) do |role|
+      role.thinker = thinker
+    end
+    AssignedRole.find_or_create_by(project_id: id, team_role: TeamRole.scrum_master.first) do |role|
+      role.thinker = thinker
+    end
+  end
 end
