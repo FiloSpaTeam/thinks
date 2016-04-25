@@ -32,15 +32,25 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
+    if !scrum_master?(@project)
+      respond_to do |format|
+        format.html { redirect_to project_path(@project), alert: t('you_are_not_the_scrum_master') }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
+    end
+
     @goal         = Goal.new
     @project_form = @project
-
-    scrum_master!(@project)
   end
 
   # GET /goals/1/edit
   def edit
-    scrum_master!(@goal.project)
+    if !scrum_master?(@goal.project)
+      respond_to do |format|
+        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
+    end
 
     @project_form = nil
     @project      = @goal.project
@@ -49,24 +59,27 @@ class GoalsController < ApplicationController
   # POST /goals
   # POST /goals.json
   def create
-    scrum_master!(@project)
-
-    @goal          = Goal.new(goal_params)
-    @goal.project  = @project
-    @goal.thinker  = current_thinker
-    @goal.progress = 0.0
-
     respond_to do |format|
-      if @goal.save
-        create_notification(@goal, @goal.project)
-        format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
-        format.json { render :show, status: :created, location: @goal }
-      else
-        set_form_errors(@goal)
-        set_validators_for_form_help
+      if scrum_master?(@project)
+        @goal          = Goal.new(goal_params)
+        @goal.project  = @project
+        @goal.thinker  = current_thinker
+        @goal.progress = 0.0
 
-        format.html { render :new }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
+        if @goal.save
+          create_notification(@goal, @goal.project)
+          format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
+          format.json { render :show, status: :created, location: @goal }
+        else
+          set_form_errors(@goal)
+          set_validators_for_form_help
+
+          format.html { render :new }
+          format.json { render json: @goal.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to project_path(@project), alert: t('you_are_not_the_scrum_master') }
+        format.json { render json: {}, status: :unprocessable_entity }
       end
     end
   end
@@ -74,19 +87,22 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
-    scrum_master!(@goal.project)
-
     respond_to do |format|
-      if current_thinker == @goal.thinker && @goal.update(goal_params)
-        create_notification(@goal, @goal.project)
-        format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
-        format.json { render :show, status: :ok, location: @goal }
-      else
-        set_form_errors(@goal)
-        set_validators_for_form_help
+      if scrum_master?(@goal.project)
+        if @goal.update(goal_params)
+          create_notification(@goal, @goal.project)
+          format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
+          format.json { render :show, status: :ok, location: @goal }
+        else
+          set_form_errors(@goal)
+          set_validators_for_form_help
 
-        format.html { render :edit }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
+          format.html { render :edit }
+          format.json { render json: @goal.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
+        format.json { render json: {}, status: :unprocessable_entity }
       end
     end
   end
@@ -94,10 +110,8 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
-    scrum_master!(@goal.project)
-
     respond_to do |format|
-      if current_thinker == @goal.thinker
+      if scrum_master?(@goal.project)
         @goal.destroy
 
         create_notification(@goal, @goal.project)
@@ -111,8 +125,6 @@ class GoalsController < ApplicationController
   end
 
   def tasks_in_sprint
-    scrum_master!(@goal.project)
-
     tasks_ready      = @goal.tasks.ready_to_sprint
     n_of_tasks_ready = tasks_ready.count
 
@@ -121,12 +133,17 @@ class GoalsController < ApplicationController
         format.html { redirect_to goal_path(@goal), alert: "No task can be put in Sprint! Check out some and analize with your team!" }
       end
 
-      tasks_ready.update_all(status_id: Status.sprint.first)
+      if scrum_master?(@goal.project)
+        tasks_ready.update_all(status_id: Status.sprint.first)
 
-      create_notification(@goal, @goal.project)
+        create_notification(@goal, @goal.project)
 
-      format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
-      format.json { head :no_content }
+        format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
     end
   end
 

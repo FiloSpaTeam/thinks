@@ -12,5 +12,6 @@ class AssignedRole < ActiveRecord::Base
   belongs_to :thinker
   belongs_to :project
 
-  scope :with_role, ->(role) { where(role: role) }
+  scope :with_role, ->(role) { where(team_role: role) }
+  scope :with_project, ->(project) { where(project: project) }
 end

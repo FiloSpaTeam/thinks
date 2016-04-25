@@ -20,8 +20,4 @@ class ActionController::TestCase
     @request.env["devise.mapping"] = Devise.mappings[:admin]
     sign_in thinkers(:admin)
   end
-
-  def become_member
-    AssignedRole.where(project: 1).where(team_role: TeamRole.scrum_master).where(thinker: thinkers(:admin)).first_or_create
-  end
 end

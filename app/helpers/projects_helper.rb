@@ -25,19 +25,15 @@ module ProjectsHelper
     end
   end
 
-  def scrum_master!(project)
-    if project
-       .assigned_roles
-       .where(thinker: current_thinker)
-       .where('team_role_id IN (?,?)',
-              TeamRole.scrum_master.first,
-              TeamRole.product_owner.first)
-       .first
-       .nil?
-      respond_to do |format|
-        format.html { redirect_to project_path(project), alert: 'You are not the Scrum Master!' }
-        format.json { render json: {}, status: :unprocessable_entity }
-      end
-    end
+  def scrum_master?(project)
+    return false if project
+                    .assigned_roles
+                    .where(thinker: current_thinker)
+                    .where('team_role_id IN (?,?)',
+                            TeamRole.scrum_master.first,
+                            TeamRole.product_owner.first)
+                    .first
+                    .nil?
+    true
   end
 end
