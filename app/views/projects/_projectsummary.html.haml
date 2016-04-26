@@ -1,5 +1,5 @@
 - if thinker_signed_in?
-  .panel.panel-default
+  .panel.panel-default.hidden-xs
     .panel-body
       %strong
         Your contribution
@@ -66,20 +66,17 @@
   .panel-body.hidden-xs
     %strong
       Summary
-  .list-group.hidden-xs
-    .list-group-item
-      = badge(project.contributions.distinct.select{ |contribution| !contribution.nothing? }.size)
-      thinkers
+  .list-group
     .list-group-item
       - team_number = project.assigned_roles.select(:thinker_id).distinct.count
       = badge(team_number)
       = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
-    .list-group-item
+    .list-group-item.hidden-xs
       = badge(project.sprints.size)
       sprints
-    .list-group-item
+    .list-group-item.hidden-xs
       = badge(project.goals.size)
       goals
-    .list-group-item
+    .list-group-item.hidden-xs
       = badge(project.tasks.size)
       tasks
