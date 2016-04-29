@@ -6,18 +6,29 @@
     = cl_image_tag(member.thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
   - else
     %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
-  .pull-right
-    Total workload:
-    - working_tasks = member.thinker.working_tasks.where(project: @project).where(status: Status.done.first)
-    = working_tasks.sum(:workload)
+
+  - if member.thinker == current_thinker
+    .pull-right
+      = link_to project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('leave_the_team'), method: :delete, data: { confirm: t('are_you_sure_want_leave_team') } do
+        = icon('remove', :class => "text-danger")
   .collapse{ id: "collapseThinker#{ member.thinker.id }_#{ member.team_role.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
+    - working_tasks = member.thinker.working_tasks.where(project: @project).where(status: Status.done.first)
     - if working_tasks.size.nonzero?
+      - more_than_five = (working_tasks.size > 5)
       %ul.list-group
         - working_tasks.order('workload desc').order('updated_at desc').limit(5).each do |task|
           %li.list-group-item
             = "##{ task.serial }"
             = link_to task.title, task, :title => task.updated_at.to_s(:short)
             = badge(task.workload)
+        - if more_than_five
+          %li.list-group-item.text-right
+            %strong
+              = '...'
+        %li.list-group-item
+          %strong
+            Total workload
+          = badge(working_tasks.sum(:workload))
     - else
       %strong
         No tasks done

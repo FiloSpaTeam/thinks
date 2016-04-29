@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
 
     resources :teams
+    resources :election_polls, shallow: true
 
     namespace :settings, :module => :projects do
       resources :links, :controller   => :settings_links, :only   => [:index, :create]

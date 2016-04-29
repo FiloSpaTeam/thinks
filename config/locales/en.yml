@@ -67,6 +67,8 @@ en:
   remove: "Remove"
   created_at_date: "Created at %{date}"
   updated_at_date: "Updated at %{date}"
+  leave_the_team: "Leave the team"
+  are_you_sure_want_leave_team: "Are you sure you want leave the team?"
 
   layouts:
     application:
@@ -164,6 +166,7 @@ en:
       sprint      : "Sprint"
       in_progress : "Progress"
       done        : "Done"
+
   category:
     web_applications:       "Web applications"
     libraries:              "Libraries"
@@ -192,9 +195,14 @@ en:
       you_voted: "You voted %{vote}"
       you_cannot_vote: "You cannot vote, the task is already assigned!"
       standard_deviation_too_high: "The standard deviation is too high, need to allineate your team!"
+
   goals:
     index:
       title: "Title"
+
+  teams:
+    destroy:
+      election_poll_created: "Elections held! Seven days, your position may change!"
 
   notifications:
     list:

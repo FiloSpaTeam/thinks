@@ -1,0 +1,19 @@
+%h1 Listing election_polls
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @election_polls.each do |election_poll|
+      %tr
+        %td= link_to 'Show', election_poll
+        %td= link_to 'Edit', edit_election_poll_path(election_poll)
+        %td= link_to 'Destroy', election_poll, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Election poll', new_election_poll_path

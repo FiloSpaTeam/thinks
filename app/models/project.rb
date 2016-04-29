@@ -28,6 +28,7 @@ class Project < ActiveRecord::Base
       where('tasks.status_id = ?', Status.in_progress.first.id)
     end
   end
+  has_many :election_polls
 
   belongs_to :license
   belongs_to :thinker

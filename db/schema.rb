@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420200952) do
+ActiveRecord::Schema.define(version: 20160429200933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,17 @@ ActiveRecord::Schema.define(version: 20160420200952) do
   end
 
   add_index "dependences", ["project_id"], name: "index_dependences_on_project_id", using: :btree
+
+  create_table "election_polls", force: :cascade do |t|
+    t.integer  "status",       default: 0
+    t.integer  "project_id"
+    t.integer  "team_role_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "election_polls", ["project_id"], name: "index_election_polls_on_project_id", using: :btree
+  add_index "election_polls", ["team_role_id"], name: "index_election_polls_on_team_role_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -322,6 +333,17 @@ ActiveRecord::Schema.define(version: 20160420200952) do
   add_index "thinkers", ["reset_password_token"], name: "index_thinkers_on_reset_password_token", unique: true, using: :btree
   add_index "thinkers", ["sex_id"], name: "index_thinkers_on_sex_id", using: :btree
   add_index "thinkers", ["slug"], name: "index_thinkers_on_slug", unique: true, using: :btree
+
+  create_table "voters", force: :cascade do |t|
+    t.integer  "election_poll_id"
+    t.integer  "thinker_id"
+    t.integer  "elect_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "voters", ["election_poll_id"], name: "index_voters_on_election_poll_id", using: :btree
+  add_index "voters", ["thinker_id"], name: "index_voters_on_thinker_id", using: :btree
 
   create_table "votes", id: false, force: :cascade do |t|
     t.integer "task_id"
