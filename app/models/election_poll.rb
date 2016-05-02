@@ -4,5 +4,5 @@ class ElectionPoll < ActiveRecord::Base
 
   has_many :voters
 
-  enum status: [ :active, :done, :closed]
+  enum status: [:active, :done, :closed]
 end

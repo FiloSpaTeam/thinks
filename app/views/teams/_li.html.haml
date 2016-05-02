@@ -6,11 +6,27 @@
     = cl_image_tag(member.thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
   - else
     %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
-
-  - if member.thinker == current_thinker
-    .pull-right
+  .pull-right
+    - election_poll = election_polls.where(team_role: member.team_role).where(status: ElectionPoll.statuses[:active])
+    - if election_poll.exists?
+      - if member.thinker == current_thinker
+        = icon('warning', :class => "text-warning", :title => t('elections_in_progress'))
+      - else
+        %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseElectionPoll#{ election_poll.first.id }", :href => "#collapseElectionPoll#{ election_poll.first.id }" }
+          = icon('edit', :class => "dark-grey")
+    - elsif member.thinker == current_thinker
       = link_to project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('leave_the_team'), method: :delete, data: { confirm: t('are_you_sure_want_leave_team') } do
         = icon('remove', :class => "text-danger")
+  - if election_poll.exists?
+    .collapse{ id: "collapseElectionPoll#{ election_poll.first.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
+      = form_for member, url: project_elect_path(project_id: @project.id), method: :put do |f|
+        = f.hidden_field :team_role_id, value: member.team_role.id
+        .form-group
+          = f.label :thinker_id, t('.select_new_candidate')
+          .input-group
+            = f.select :thinker_id, options_from_collection_for_select(team.where('thinker_id not in (?)', member.thinker.id).map(&:thinker), 'id', 'name'), {}, class: 'form-control'
+            %span.input-group-btn
+              = f.submit t('.candidate'), class: 'btn btn-primary', data: { confirm: 'Confirm your vote!' }
   .collapse{ id: "collapseThinker#{ member.thinker.id }_#{ member.team_role.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
     - working_tasks = member.thinker.working_tasks.where(project: @project).where(status: Status.done.first)
     - if working_tasks.size.nonzero?

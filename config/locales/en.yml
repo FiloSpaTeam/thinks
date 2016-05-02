@@ -69,6 +69,7 @@ en:
   updated_at_date: "Updated at %{date}"
   leave_the_team: "Leave the team"
   are_you_sure_want_leave_team: "Are you sure you want leave the team?"
+  elections_in_progress: "Elections in progress"
 
   layouts:
     application:
@@ -203,6 +204,9 @@ en:
   teams:
     destroy:
       election_poll_created: "Elections held! Seven days, your position may change!"
+    li:
+      select_new_candidate: "Select a new candidate for elections"
+      candidate: "Candidate"
 
   notifications:
     list:

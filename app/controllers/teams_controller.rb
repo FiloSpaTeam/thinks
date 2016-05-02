@@ -15,7 +15,8 @@ class TeamsController < ApplicationController
       params[:filterrific],
       select_options: {}
     ) || return
-    @members = @filterrific.find.page params[:page]
+    @members        = @filterrific.find.page params[:page]
+    @election_polls = @project.election_polls
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{ e.message }"

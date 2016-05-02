@@ -36,9 +36,10 @@ Rails.application.routes.draw do
       put :contribute
     end
 
+    put :elect
     resources :teams
-    resources :election_polls, shallow: true
 
+    resources :election_polls, shallow: true
     namespace :settings, :module => :projects do
       resources :links, :controller   => :settings_links, :only   => [:index, :create]
       resources :other, :controller   => :settings_other, :only   => [:index, :create]

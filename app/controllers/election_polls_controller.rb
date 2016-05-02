@@ -1,4 +1,5 @@
 class ElectionPollsController < ApplicationController
+  before_action :authenticate_thinker!
   before_action :set_election_poll, only: [:show, :edit, :update, :destroy]
 
   # GET /election_polls
@@ -10,6 +11,7 @@ class ElectionPollsController < ApplicationController
   # GET /election_polls/1
   # GET /election_polls/1.json
   def show
+    redirect_to edit_election_poll_path unless @election_poll.voters.where(thinker: current_thinker).exists?
   end
 
   # GET /election_polls/new
@@ -19,6 +21,9 @@ class ElectionPollsController < ApplicationController
 
   # GET /election_polls/1/edit
   def edit
+    @project = @election_poll.project
+
+    set_contribution
   end
 
   # POST /election_polls
@@ -62,13 +67,21 @@ class ElectionPollsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_election_poll
-      @election_poll = ElectionPoll.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def election_poll_params
-      params.fetch(:election_poll, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_election_poll
+    @election_poll = ElectionPoll.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def election_poll_params
+    params.fetch(:election_poll, {})
+  end
+
+  def set_contribution
+    @contribution = Contribution
+                    .where(thinker: current_thinker)
+                    .where(project: @project)
+                    .first_or_initialize
+  end
 end
