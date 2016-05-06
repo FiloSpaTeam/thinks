@@ -5,6 +5,9 @@
   .col-md-8
     = form_for @survey, url: sprint_survey_index_path do |f|
       .panel.panel-default
+        .panel-heading
+          Sprint
+          = @sprint.serial
         %ul.list-group
           - @surveys.each do |survey|
             %li.list-group-item
