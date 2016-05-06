@@ -14,4 +14,15 @@ class AssignedRole < ActiveRecord::Base
 
   scope :with_role, ->(role) { where(team_role: role) }
   scope :with_project, ->(project) { where(project: project) }
+
+  def delete_with_contribution
+    ActiveRecord::Base.transaction do
+      destroy
+
+      Contribution
+        .where(project: project)
+        .where(thinker: thinker)
+        .update_all(intensity: Contribution.intensities[:nothing])
+    end
+  end
 end

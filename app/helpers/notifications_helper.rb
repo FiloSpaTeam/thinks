@@ -10,6 +10,11 @@ module NotificationsHelper
       operation = operation_klass.find(notification.model_id)
 
       return url_for(:controller => 'operations', :action => 'index', :task_id => operation.task.id)
+    elsif notification.controller == 'assigned_roles'
+      assigned_role_klass = notification.model.constantize
+      assigned_role = assigned_role_klass.find(notification.model_id)
+
+      return url_for(:controller => 'teams', :action => 'index', :project_id => assigned_role.project.id)
     end
 
     url_for(:controller => notification.controller, :action => 'show', :id => notification.model_id)
@@ -58,6 +63,13 @@ module NotificationsHelper
     elsif notification.controller == 'projects'
       t ".#{ notification.controller }.#{ notification.action }",
         thinker: notification.thinker.name
+    elsif notification.controller == 'assigned_roles'
+      assigned_role_klass = notification.model.constantize
+      assigned_role = assigned_role_klass.find(notification.model_id)
+
+      t ".#{ notification.controller }.#{ notification.action }",
+        thinker: assigned_role.thinker.name,
+        team_role: t("team_roles.#{assigned_role.team_role.t_name}")
     end
   end
 

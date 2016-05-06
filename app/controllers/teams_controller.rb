@@ -38,15 +38,31 @@ class TeamsController < ApplicationController
         # it's time to create and election poll
         # if election poll is closed or suspended the position will not be removed
 
-        ElectionPoll.first_or_create(project: @project, team_role_id: thinker_role)
+        ElectionPoll
+          .where(project: @project)
+          .where(team_role_id: thinker_role)
+          .where(status: ElectionPoll.statuses[:active])
+          .first_or_create
 
         format.html { redirect_to project_teams_path(@project), notice: t('.election_poll_created') }
         format.json { head :no_content }
       elsif thinker_roles.where(team_role: TeamRole.team_member.first)
                          .size
                          .nonzero?
-        puts 'MEMBER WANT LEAVE'
+
+        assigned_role = AssignedRole
+                        .where(thinker: current_thinker)
+                        .where(project: @project)
+                        .where(team_role: TeamRole.team_member.first)
+                        .first
+        assigned_role.delete_with_contribution
+
+        format.html { redirect_to project_teams_path(@project), notice: t('.you_are_no_longer_part_of_the_team') }
+        format.json { head :no_content }
       else
+        format.html { redirect_to project_teams_path(@project), alert: t('.you_are_not_part_of_the_team') }
+        format.json { head :no_content }
+
         puts '??? YOU ARE NOT A TEAM MEMBER'
       end
     end

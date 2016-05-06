@@ -81,4 +81,51 @@ namespace :admin do
 
     puts 'Update team roles done'
   end
+
+  task close_election_poll_overtime: :environment do
+    puts 'Start check for election polls that need to be closed'
+
+    election_polls = ElectionPoll
+                     .where("created_at <= ?", (DateTime.now - 21).to_date)
+                     .where(status: ElectionPoll.statuses[:active])
+    election_polls.each do |election_poll|
+      notification = Notification.new
+
+      if election_poll.voters.size < (election_poll.project.team.size / 2) + 1
+        election_poll.status = ElectionPoll.statuses[:closed]
+        election_poll.save
+
+        notification.model      = election_poll.class.name
+        notification.model_id   = election_poll.id
+        notification.controller = 'elections'
+      else
+        winner = election_poll
+                 .voters
+                 .group(:elect_id, :id)
+                 .order('count(elect_id) DESC')
+                 .first
+
+        assigned_role = AssignedRole
+                        .where(project: election_poll.project)
+                        .where(team_role: election_poll.team_role)
+                        .first
+
+        assigned_role.update(thinker_id: winner.elect_id)
+
+        election_poll.status = ElectionPoll.statuses[:done]
+        election_poll.save
+
+        notification.model      = assigned_role.class.name
+        notification.model_id   = assigned_role.id
+        notification.controller = 'assigned_roles'
+      end
+
+      notification.project    = election_poll.project
+      notification.thinker_id = 0
+      notification.action     = 'update'
+      notification.save
+    end
+
+    puts 'Finished check for election polls that need to be closed'
+  end
 end

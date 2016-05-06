@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429200933) do
+ActiveRecord::Schema.define(version: 20160504203801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160429200933) do
   add_index "answers_thinkers", ["sprint_id"], name: "index_answers_thinkers_on_sprint_id", using: :btree
   add_index "answers_thinkers", ["thinker_id"], name: "index_answers_thinkers_on_thinker_id", using: :btree
 
-  create_table "assigned_roles", id: false, force: :cascade do |t|
+  create_table "assigned_roles", force: :cascade do |t|
     t.integer  "thinker_id"
     t.integer  "team_role_id"
     t.integer  "project_id"

@@ -19,14 +19,24 @@
         = icon('remove', :class => "text-danger")
   - if election_poll.exists?
     .collapse{ id: "collapseElectionPoll#{ election_poll.first.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
-      = form_for member, url: project_elect_path(project_id: @project.id), method: :put do |f|
-        = f.hidden_field :team_role_id, value: member.team_role.id
+      - if !election_poll.first.voters.where(thinker: current_thinker).exists?
+        = form_for Voter.new, url: project_elect_path(project_id: @project.id), method: :put do |f|
+          = f.hidden_field :election_poll_id, value: election_poll.first.id
+          .form-group
+            = f.label :thinker_id, t('.select_new_candidate')
+            .input-group
+              = f.select :elect_id, options_from_collection_for_select(team.where('thinker_id not in (?)', member.thinker.id).map(&:thinker), 'id', 'name'), {}, class: 'form-control'
+              %span.input-group-btn
+                = f.submit t('.candidate'), class: 'btn btn-primary', data: { confirm: 'Confirm your vote!' }
+      - else
         .form-group
-          = f.label :thinker_id, t('.select_new_candidate')
-          .input-group
-            = f.select :thinker_id, options_from_collection_for_select(team.where('thinker_id not in (?)', member.thinker.id).map(&:thinker), 'id', 'name'), {}, class: 'form-control'
-            %span.input-group-btn
-              = f.submit t('.candidate'), class: 'btn btn-primary', data: { confirm: 'Confirm your vote!' }
+          %label.form-control
+            = t('.you_voted_for')
+            - elected = election_poll.first.voters.where(thinker: current_thinker).first.elect
+            - if elected == current_thinker
+              = t('yourself')
+            - else
+              = elected.name
   .collapse{ id: "collapseThinker#{ member.thinker.id }_#{ member.team_role.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
     - working_tasks = member.thinker.working_tasks.where(project: @project).where(status: Status.done.first)
     - if working_tasks.size.nonzero?

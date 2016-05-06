@@ -70,6 +70,7 @@ en:
   leave_the_team: "Leave the team"
   are_you_sure_want_leave_team: "Are you sure you want leave the team?"
   elections_in_progress: "Elections in progress"
+  yourself: "yourself"
 
   layouts:
     application:
@@ -203,10 +204,13 @@ en:
 
   teams:
     destroy:
-      election_poll_created: "Elections held! Seven days, your position may change!"
+      election_poll_created: "Elections held! 21 days and your position may change!"
+      you_are_not_part_of_the_team: "You are not part of team!"
+      you_are_no_longer_part_of_the_team: "You are no longer part of the team."
     li:
       select_new_candidate: "Select a new candidate for elections"
       candidate: "Candidate"
+      you_voted_for: "You voted for"
 
   notifications:
     list:
@@ -237,6 +241,8 @@ en:
         update: "%{thinker} updated the project's description."
         destroy: "%{thinker} destroyed the project."
         contribute: "%{thinker} changed partecipation preferences."
+      assigned_roles:
+        update: "%{thinker} was elected to the position of %{team_role}"
 
   sex:
     male: "Male"

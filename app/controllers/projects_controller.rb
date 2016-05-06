@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   include ProjectsHelper
 
   before_action :authenticate_thinker!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect]
   before_action :set_contribution, only: [:show]
   before_action :thinker!, only: [:edit, :update, :destroy]
 
@@ -139,17 +139,25 @@ class ProjectsController < ApplicationController
   end
 
   def elect
+    respond_to do |format|
+      @voter = Voter.new(params.require(:voter).permit(:election_poll_id, :elect_id))
+
+      if Voter.where(thinker: current_thinker).where(election_poll: @voter.election_poll).exists?
+        format.html { redirect_to project_teams_path(@project), alert: 'You cannot vote twice!' }
+        format.json { render json: {}, status: :unprocessable_entity }
+      else
+        @voter.thinker = current_thinker
+        @voter.save
+
+        format.html { redirect_to project_teams_path(@project), notice: 'Thanks for your vote!' }
+        format.json { head :no_content }
+      end
+    end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_project
-    @project = Project.friendly.find(params[:id])
-
-    load_project_session
-  end
-
   def set_contribution
     @contribution = Contribution
                     .where(thinker: current_thinker)
