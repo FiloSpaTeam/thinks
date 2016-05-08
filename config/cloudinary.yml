@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: hpujzik4m
-  api_key: '587547894865118'
-  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
+  cloud_name: <%= ENV["CLOUD_NAME_CLOUDINARY"] %>
+  api_key: <%= ENV["API_KEY_CLOUDINARY"] %>
+  api_secret: <%= ENV["API_SECRET_CLOUDINARY"] %>
+  enhance_image_tag: true
+  static_image_support: false
+test:
+  cloud_name: <%= ENV["CLOUD_NAME_CLOUDINARY"] %>
+  api_key: <%= ENV["API_KEY_CLOUDINARY"] %>
+  api_secret: <%= ENV["API_SECRET_CLOUDINARY"] %>
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: hpujzik4m
-  api_key: '587547894865118'
-  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
+  cloud_name: <%= ENV["CLOUD_NAME_CLOUDINARY"] %>
+  api_key: <%= ENV["API_KEY_CLOUDINARY"] %>
+  api_secret: <%= ENV["API_SECRET_CLOUDINARY"] %>
   enhance_image_tag: true
   static_image_support: true
-test:
-  cloud_name: hpujzik4m
-  api_key: '587547894865118'
-  api_secret: 8gCbNaaCuG3OE17a5BE37NQnCFk
-  enhance_image_tag: true
-  static_image_support: false
