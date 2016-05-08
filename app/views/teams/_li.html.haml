@@ -25,7 +25,7 @@
           .form-group
             = f.label :thinker_id, t('.select_new_candidate')
             .input-group
-              = f.select :elect_id, options_from_collection_for_select(team.where('thinker_id not in (?)', member.thinker.id).map(&:thinker), 'id', 'name'), {}, class: 'form-control'
+              = f.select :elect_id, options_from_collection_for_select(team.where('thinker_id not in (?)', member.thinker.id).distinct.map(&:thinker), 'id', 'name'), {}, class: 'form-control'
               %span.input-group-btn
                 = f.submit t('.candidate'), class: 'btn btn-primary', data: { confirm: 'Confirm your vote!' }
       - else

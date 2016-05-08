@@ -115,6 +115,10 @@ namespace :admin do
         election_poll.status = ElectionPoll.statuses[:done]
         election_poll.save
 
+        unless (election_poll.project.part_of_team?(assigned_role.thinker_was))
+          assigned_role.create(project: election_poll.project, team_role: TeamRole.team_member.first, thinker: assigned_role.thinker_was)
+        end
+
         notification.model      = assigned_role.class.name
         notification.model_id   = assigned_role.id
         notification.controller = 'assigned_roles'

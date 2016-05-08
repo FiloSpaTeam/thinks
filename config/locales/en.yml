@@ -243,6 +243,8 @@ en:
         contribute: "%{thinker} changed partecipation preferences."
       assigned_roles:
         update: "%{thinker} was elected to the position of %{team_role}"
+      elections:
+        update: "The election poll was %{status}"
 
   sex:
     male: "Male"
