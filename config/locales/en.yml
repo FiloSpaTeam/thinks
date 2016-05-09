@@ -223,6 +223,7 @@ en:
         sprint: "Task '%{task}' ready for the sprint."
         reopen: "%{thinker} reopened task '%{task}'"
         assign: "%{thinker} is working on '%{task}'"
+        give_up: "%{thinker} gives up task '%{task}'"
       operations:
         create: "%{thinker} added an operation for '%{task}'"
         done: "%{thinker} ended an operation for '%{task}'"
