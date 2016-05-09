@@ -1,54 +1,64 @@
-== Think Software
-==== A new way to organize your and your team's workflow.
----
-=== How does it works?
-Basically you need a simple account, and your brain lighted up.
+# Think Software
 
-<b>We think that everyone can be useful</b> and we created a platform where them can <b>share their thinking and works</b>.
+A new way to organize your and your team's workflow.
 
-People can share their projects, thinking and other stuff, like a simple shopping list and understand:
-* who is working over
-* who thinked that
-* how hard is the work
-* if people are in feeling each other 
+## Getting Started
 
-<b>Each task(work)</b> need to be weighted so who complete them, <b>accumulate points.</b>
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Points will be converted in <b>donations</b>, calculated from the base of project's donations. For example:
-* Your project receive 100.00 $.
-* There are 5 workers and 1 thinker.
-* Each worker complete 1 task.
-* Each task weights 100 points.
-* Each worker gains 20.00 $
+### Prerequisities
 
----
-=== How to contribute?
+What things you need to install the software and how to install them
 
-I repeat: "we think that everyone can be useful", so you can contribute in many different ways:
-[one] You can talk about this project to your friends
-[two] You can contribute in software production, you will be rewarded for *accumulated points* 
-[three] You can search bugs, share new functions/functionalities
-[four] You can donate something, 1$ each day is good enough to help me (coffee is a good diesel)
----
+* Cloudinary account for images upload and ENV vars setup, for example you can copy those lines in your ```.bash_profile``` and substitute values. 
+```
+export CLOUD_NAME_CLOUDINARY=<XXX>
+export API_KEY_CLOUDINARY=<YYY>
+export API_SECRET_CLOUDINARY=<ZZZ>
+```
 
-=== Software dependecies
+* ENV var for OTP setup.
+```
+export THINK_SOFTWARE_OTP="0001100011"
+```
 
-The software is based upon Ruby on Rails and require a PostgreSQL server.
+### Installing
 
-The testing application is connected to Heroku (https://thinksoftware.herokuapp.com) from master branch.
-
-Any pull request will update the testing platform.
+A step by step series of examples that tell you have to get a development env running:
+* Fork project or clone repository
+* Enter in project root folder and install gem dependecies with ```bundle install```
+* Later you can start your own server with ```rails server```
+* You can access your copy to ```localhost:3000```
 
 
-Before Heroku server there is a Travis CI check.
+## Running the tests
 
----
+Like any Rails app: ```rake test``
 
-==== Pull instruction
+Controllers and major function are tested, more deep function are skipped.
 
-Rules are simple:
-* Follow ruby design patterns (and help me to follow them...)
-* Cleanest and shortest syntax, code need to be quickly readable
-* Describe what have you done in pull request
-* Short commit but more stable
-* Use software itself (in the testing platform) for each task, so everyone can understand your work
+
+## Deployment
+
+The live system is deployed with master branch of https://github.com/FiloSpaTeam/thinks, so any merged branch is automatically deployed to Heroku testing platform: https://thinksoftware.herokuapp.com
+
+## Built With
+
+* Ruby on Rails, main framework
+* Lot of plugins that you can find in the Gemfile
+
+* Emacs and [Spacemacs](https://github.com/syl20bnr/spacemacs)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+
+## Authors
+
+* **Claudio Maradonna** - *Initial work* - [FiloSpaTeam](https://github.com/FiloSpaTeam)
+
+
+## License
+
+This project is licensed under the GPLv3 License - see the [COPYING](COPYING) file for details
