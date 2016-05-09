@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   before_action :authenticate_thinker!
 
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -208,6 +208,18 @@ class TasksController < ApplicationController
     create_notification(@task, @task.project)
     respond_to do |format|
       format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
+      format.json { render :show, status: :ok, location: @task }
+    end
+  end
+
+  def give_up
+    @task.worker = nil
+    @task.status = Status.sprint.first
+    @task.save
+
+    create_notification(@task, @task.project)
+    respond_to do |format|
+      format.html { redirect_to @task, notice: 'You give up work. Good job!' }
       format.json { render :show, status: :ok, location: @task }
     end
   end

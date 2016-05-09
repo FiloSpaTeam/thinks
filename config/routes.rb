@@ -58,6 +58,7 @@ Rails.application.routes.draw do
         put :assign
         put :judge
         put :reopen
+        put :give_up
       end
 
       resources :comments, only: [:create, :edit, :update, :destroy], shallow: true do

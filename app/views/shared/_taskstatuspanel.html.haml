@@ -73,6 +73,8 @@
       - if !task.worker.nil?
         %span.pull-right{ :title => task.worker.name }
           = task.worker.name.try(:truncate, 20)
+        %strong
+          = link_to "Give up work", give_up_task_path(task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
       - elsif task.status == Status.sprint.first
         - if current_thinker.working_tasks.in_progress.present?
           %h4 No one is working over this but you have yet something to do ;-P
