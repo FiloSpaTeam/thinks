@@ -1,0 +1,15 @@
+%thead
+  %tr
+    %td
+      .col-xs-11
+        %h5
+          %strong
+            = t "release"
+%tbody
+  - unless (releases.empty?)
+    - releases.each do |release|
+      %tr
+        %td
+  - else
+    %td.text-center{ :colspan => 1 }
+      = t('no_record')

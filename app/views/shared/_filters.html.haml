@@ -37,7 +37,7 @@
             %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
               .panel-heading
                 = f.text_field :progress_lower_than, class: 'form-control filterrific-periodically-observed', placeholder: t("lower_than")
-        - if !current_page?(projects_path) && params.key?(:project_id) && !current_page?(project_goals_path) && !current_page?(project_sprints_path)
+        - if !current_page?(projects_path) && params.key?(:project_id) && !current_page?(project_goals_path) && !current_page?(project_sprints_path) && !current_page?(project_releases_path)
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
               = t(".goal")

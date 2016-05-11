@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504203801) do
+ActiveRecord::Schema.define(version: 20160511221742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,18 @@ ActiveRecord::Schema.define(version: 20160504203801) do
   add_index "reasons", ["comment_id"], name: "index_reasons_on_comment_id", using: :btree
   add_index "reasons", ["thinker_id"], name: "index_reasons_on_thinker_id", using: :btree
 
+  create_table "releases", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "title",       limit: 60
+    t.string   "description", limit: 1600
+    t.date     "end_at"
+    t.float    "progress"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "releases", ["project_id"], name: "index_releases_on_project_id", using: :btree
+
   create_table "sexes", force: :cascade do |t|
     t.string "t_name"
   end
@@ -290,6 +302,7 @@ ActiveRecord::Schema.define(version: 20160504203801) do
     t.float    "workload"
     t.float    "standard_deviation"
     t.datetime "deleted_at"
+    t.integer  "release_id"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

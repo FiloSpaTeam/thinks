@@ -9,7 +9,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :source_code_url
       t.string :documentation_url
 
-      t.belongs_to :license, index:true 
+      t.belongs_to :license, index: true
 
       t.timestamps null: false
     end

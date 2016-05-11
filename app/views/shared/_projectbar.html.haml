@@ -2,6 +2,9 @@
   .navbar-header.pull-left
     = link_to project.title, project_path(project), :class => "navbar-brand"
   .navbar-header.pull-right
+    = link_to project_releases_path(project, "filterrific[reset_filterrific]" => true), :class => "btn navbar-btn" do
+      = icon('flag-checkered', :class => "fa-lg dark-grey")
+      %span.hidden-xs= t(".releases")
     = link_to project_sprints_path(project, "filterrific[reset_filterrific]" => true), :class => "btn navbar-btn" do
       = icon('flag', :class => "fa-lg dark-grey")
       %span.hidden-xs= t(".sprints")
