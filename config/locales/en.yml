@@ -71,6 +71,7 @@ en:
   are_you_sure_want_leave_team: "Are you sure you want leave the team?"
   elections_in_progress: "Elections in progress"
   yourself: "yourself"
+  remaining_days: "%{days} remaining days"
 
   layouts:
     application:
