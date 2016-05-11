@@ -145,6 +145,9 @@ class ProjectsController < ApplicationController
       if Voter.where(thinker: current_thinker).where(election_poll: @voter.election_poll).exists?
         format.html { redirect_to project_teams_path(@project), alert: 'You cannot vote twice!' }
         format.json { render json: {}, status: :unprocessable_entity }
+      elsif !@project.part_of_team?(current_thinker)
+        format.html { redirect_to project_teams_path(@project), alert: 'You cannot vote!' }
+        format.json { render json: {}, status: :unprocessable_entity }
       else
         @voter.thinker = current_thinker
         @voter.save
