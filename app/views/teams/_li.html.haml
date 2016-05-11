@@ -9,7 +9,7 @@
   .pull-right
     - election_poll = election_polls.where(team_role: member.team_role).where(status: ElectionPoll.statuses[:active])
     - if election_poll.exists?
-      - if member.thinker == current_thinker
+      - if member.thinker == current_thinker or !@project.part_of_team?(current_thinker)
         = icon('warning', :class => "text-warning", :title => t('elections_in_progress'))
       - else
         %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseElectionPoll#{ election_poll.first.id }", :href => "#collapseElectionPoll#{ election_poll.first.id }" }
@@ -19,7 +19,7 @@
         = icon('remove', :class => "text-danger")
   - if election_poll.exists?
     .collapse{ id: "collapseElectionPoll#{ election_poll.first.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
-      - if !election_poll.first.voters.where(thinker: current_thinker).exists?
+      - if @project.part_of_team?(current_thinker) and !election_poll.first.voters.where(thinker: current_thinker).exists?
         = form_for Voter.new, url: project_elect_path(project_id: @project.id), method: :put do |f|
           = f.hidden_field :election_poll_id, value: election_poll.first.id
           .form-group
