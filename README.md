@@ -61,4 +61,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## License
 
-This project is licensed under the GPLv3 License - see the [COPYING](COPYING) file for details
+This project is licensed under the AGPLv3 License - see the [COPYING](COPYING) file for details
