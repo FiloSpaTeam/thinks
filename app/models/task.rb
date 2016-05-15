@@ -62,7 +62,7 @@ class Task < ActiveRecord::Base
 
   before_save :set_release
 
-  after_save :update_goal
+  after_save :update_goal_and_release
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
@@ -237,19 +237,33 @@ class Task < ActiveRecord::Base
 
   private
 
-  def update_goal
-    if goal.blank?
-      return if goal_id_was.blank?
+  def update_goal_and_release
+    ActiveRecord::Base.transaction do
+      if goal.blank?
+        unless goal_id_was.blank?
+          goal_was = Goal.find(goal_id_was)
+          unless goal_was.blank?
+            goal_was.progress = goal_was.progress_percentage
+            goal_was.save
+          end
+        end
+      else
+        goal.progress = goal.progress_percentage
+        goal.save
+      end
 
-      goal_was = Goal.find(goal_id_was)
-
-      return if goal_was.blank?
-
-      goal_was.progress = goal_was.progress_percentage
-      goal_was.save
-    else
-      goal.progress = goal.progress_percentage
-      goal.save
+      if release.blank?
+        unless release_id_was.blank?
+          release_was = Release.find(release_id_was)
+          unless release_was.blank?
+            release_was.progress = release_was.progress_percentage
+            release_was.save
+          end
+        end
+      else
+        release.progress = release.progress_percentage
+        release.save
+      end
     end
   end
 

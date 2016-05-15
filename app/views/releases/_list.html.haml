@@ -27,6 +27,25 @@
     - releases.each do |release|
       %tr
         %td
+          %a.pull-right.btn.hidden-xs{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
+            = icon('tasks', :class => "dark-grey")
+          %strong.hidden-xs.hidden-sm
+            %small.dark-grey
+              = release.end_at.to_s(:short)
+              ·
+            = link_to release.title.truncate(40), release_path(release), :title => release.title
+          %strong.visible-xs
+            = link_to release.title.truncate(50), release_path(release), :title => release.title
+          %strong.visible-sm
+            = link_to release.title, release_path(release)
+          .dark-grey
+            %small
+              %em
+                = plain_text(release.description).truncate(150)
+              .progress
+                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
+                  = release.progress
+                  \%
   - else
     %td.text-center{ :colspan => 1 }
       = t('no_record')

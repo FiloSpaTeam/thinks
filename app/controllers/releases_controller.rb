@@ -19,6 +19,7 @@ class ReleasesController < ApplicationController
   before_action :authenticate_thinker!
 
   before_action :set_project, only: [:new, :index, :create]
+  before_action :set_validators_for_form_help, only: [:new, :edit]
 
   def index
     @filterrific = initialize_filterrific(
@@ -61,5 +62,44 @@ class ReleasesController < ApplicationController
 
     @project_form = nil
     @project      = @release.project
+  end
+
+  def create
+    @release          = Release.new(release_params)
+    @release.project  = @project
+    @release.progress = 0.0
+
+    respond_to do |format|
+      if @release.save
+        create_notification(@release, @project)
+        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.json { render :show, status: :created, location: @task }
+      else
+        set_form_errors(@release)
+        set_validators_for_form_help
+
+        @project_form = @project
+
+        format.html { render :new }
+        format.json { render json: @release.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  private
+
+  def set_validators_for_form_help
+    description_validators = Release.validators_on(:description)[0]
+    @chars_min_description = description_validators.options[:minimum]
+
+    title_validators = Release.validators_on(:title)[0]
+    @chars_max_title = title_validators.options[:maximum]
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def release_params
+    allowed_params = [:description, :title, :end_at]
+
+    params.require(:release).permit(allowed_params)
   end
 end

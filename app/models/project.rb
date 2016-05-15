@@ -46,6 +46,7 @@ class Project < ActiveRecord::Base
     end
   end
   has_many :election_polls
+  has_many :releases
 
   belongs_to :license
   belongs_to :thinker

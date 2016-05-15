@@ -32,6 +32,12 @@ class Release < ActiveRecord::Base
 
   belongs_to :project
 
+  has_many :tasks
+
+  validates :title, length: { maximum: 60 }, presence: true
+  validates :description, length: { minimum: 30 }
+  validates :project_id, presence: true, on: :create
+  validates_date :end_at
   validates_uniqueness_of :end_at, scope: :project_id
 
   scope :sorted_by, lambda { |sort_option|
@@ -55,4 +61,15 @@ class Release < ActiveRecord::Base
   scope :progress_lower_than, lambda { |value|
     where('progress < ?', value)
   }
+
+  def progress_percentage
+    0 if tasks.empty? || tasks.nil?
+
+    tasks_done = tasks.where(status_id: Status.done)
+
+    total_tasks_number      = tasks.length
+    total_tasks_done_number = tasks_done.length
+
+    @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
+  end
 end

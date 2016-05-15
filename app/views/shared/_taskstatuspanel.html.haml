@@ -33,6 +33,14 @@
   .list-group
     .list-group-item
       %strong
+        Release
+      %span.pull-right
+        - if task.release.present?
+          = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
+        - else
+          = t("not_defined_yet")
+    .list-group-item
+      %strong
         Goal
       %span.pull-right
         - if task.goal.present?
