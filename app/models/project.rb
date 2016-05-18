@@ -59,7 +59,7 @@ class Project < ActiveRecord::Base
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
 
-  after_save :check_if_past_project
+  # after_save :check_if_past_project
   after_save :update_contribution_thinker
 
   # validate :expiration_date_cannot_be_in_the_past

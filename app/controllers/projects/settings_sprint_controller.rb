@@ -23,6 +23,6 @@ class Projects::SettingsSprintController < ApplicationController
   private
 
   def sprint_params
-    params.require[:project].permit(:cycle_id)
+    params.require(:project).permit(:cycle_id)
   end
 end
