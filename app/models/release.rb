@@ -37,6 +37,7 @@ class Release < ActiveRecord::Base
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
   validates :project_id, presence: true, on: :create
+  validates :version, presence: true
   validates_date :end_at
   validates_uniqueness_of :end_at, scope: :project_id
 

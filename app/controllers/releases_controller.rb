@@ -71,7 +71,7 @@ class ReleasesController < ApplicationController
     @release.progress = 0.0
 
     respond_to do |format|
-      if @release.save
+      if @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists? && @release.save
         create_notification(@release, @project)
         format.html { redirect_to @release, notice: 'Release was successfully created.' }
         format.json { render :show, status: :created, location: @task }
@@ -82,6 +82,22 @@ class ReleasesController < ApplicationController
         @project_form = @project
 
         format.html { render :new }
+        format.json { render json: @release.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @release.project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists? && @release.update(release_params)
+        create_notification(@release, @release.project)
+        format.html { redirect_to @release, notice: 'Release was successfully updated.' }
+        format.json { render :show, status: :ok, location: @release }
+      else
+        set_form_errors(@release)
+        set_validators_for_form_help
+
+        format.html { render :edit }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end
@@ -106,7 +122,7 @@ class ReleasesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def release_params
-    allowed_params = [:description, :title, :end_at]
+    allowed_params = [:description, :title, :end_at, :version]
 
     params.require(:release).permit(allowed_params)
   end

@@ -42,6 +42,7 @@
               = release.end_at.to_s(:short)
               ·
             = link_to release.title.truncate(40), release_path(release), :title => release.title
+            \- v#{release.version}
           %strong.visible-xs
             = link_to release.title.truncate(50), release_path(release), :title => release.title
           %strong.visible-sm
