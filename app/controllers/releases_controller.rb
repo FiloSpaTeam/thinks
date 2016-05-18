@@ -20,6 +20,7 @@ class ReleasesController < ApplicationController
 
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
+  before_action :set_release, only: [:show, :edit, :update, :destroy]
 
   def index
     @filterrific = initialize_filterrific(
@@ -53,7 +54,7 @@ class ReleasesController < ApplicationController
   end
 
   def edit
-    if !@project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
+    if !@release.project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
       respond_to do |format|
         format.html { redirect_to project_releases_path(@project), alert: "You are not the Scrum Master." }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -86,7 +87,14 @@ class ReleasesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
+
+  def set_release
+    @release = Release.find(params[:id])
+  end
 
   def set_validators_for_form_help
     description_validators = Release.validators_on(:description)[0]

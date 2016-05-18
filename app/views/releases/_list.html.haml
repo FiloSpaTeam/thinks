@@ -31,6 +31,14 @@
             = icon('tasks', :class => "dark-grey")
           %strong.hidden-xs.hidden-sm
             %small.dark-grey
+              - remaining_days = (DateTime.now.to_date - release.end_at).to_i
+              - if (remaining_days > 0)
+                %span.text-danger
+                  +
+                  = remaining_days
+              - else
+                = remaining_days
+              ·
               = release.end_at.to_s(:short)
               ·
             = link_to release.title.truncate(40), release_path(release), :title => release.title
