@@ -44,6 +44,10 @@
       founder
       %strong
         = content_tag :span, project.thinker.name, :class => "pull-right"
+      - if project.donate_button.present?
+        %hr
+        .text-center
+          = project.donate_button.html_safe
     .list-group-item.hidden-xs
       category
       %strong

@@ -72,6 +72,7 @@ en:
   elections_in_progress: "Elections in progress"
   yourself: "yourself"
   remaining_days: "%{days} remaining days"
+  get_donate_button_from_paypal: "You can get a valid HTML tag from PayPal donation system."
 
   layouts:
     application:

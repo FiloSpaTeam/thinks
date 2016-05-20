@@ -35,6 +35,11 @@
             = f.label :documentation_url, :class => 'control-label'
             = f.text_field :documentation_url, :class => 'form-control'
             %i.glyphicon.glyphicon-book.form-control-feedback
+          .form-group.has-feedback
+            = f.label :donate_button, :class => 'control-label'
+            = f.text_area :donate_button, :class => 'form-control', :rows => 4
+            %span#help-donate-button.help-block
+              = t "get_donate_button_from_paypal"
         .panel-footer
           = f.submit nil, :class => 'btn btn-primary'
           = link_to t('.cancel', :default => t("helpers.links.cancel")), |
