@@ -36,6 +36,7 @@ class Task < ActiveRecord::Base
       :with_worker,
       :with_thinker,
       :with_project,
+      :with_release,
 
       :workload_lower_than,
 
@@ -108,6 +109,10 @@ class Task < ActiveRecord::Base
 
   scope :with_project, lambda { |project|
     where(project: Project.friendly.find(project))
+  }
+
+  scope :with_release, lambda { |release|
+    where(release: Release.find(release))
   }
 
   scope :with_deleted_at, lambda { |value|

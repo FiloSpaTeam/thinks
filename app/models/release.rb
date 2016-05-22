@@ -63,6 +63,10 @@ class Release < ActiveRecord::Base
     where('progress < ?', value)
   }
 
+  def complete_title
+    "#{self.title} (v#{version})"
+  end
+
   def progress_percentage
     0 if tasks.empty? || tasks.nil?
 
