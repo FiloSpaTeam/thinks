@@ -8,6 +8,7 @@ gem 'validates_timeliness', '~> 4.0'
 
 # PostgreSQL support
 gem 'pg', '0.18.4'
+gem 'delayed_job_active_record', '4.1.1'
 
 # Soft deletion
 gem 'paranoia', '~> 2.0'

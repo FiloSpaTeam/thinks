@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Rethink
   class Application < Rails::Application
+    config.exceptions_app = self.routes
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,6 +24,21 @@ module Rethink
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.active_job.queue_adapter = :delayed_job
+
+    config.action_mailer.delivery_method = :smtp
+    # config.action_mailer.smtp_settings = {
+    #   :address              => 'smtp.gmail.com',
+    #   :port                 => 587,
+    #   :domain               => 'gmail.com',
+    #   :authentication       => 'plain',
+    #   :enable_starttls_auto => true,
+    #   :user_name            => 'youremail@gmail.com',
+    #   :password             => 'yourpassword'
+    # }
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    # config.action_mailer.default_charset = 'utf-8'
 
     config.generators do |g|
       g.template_engine :haml
