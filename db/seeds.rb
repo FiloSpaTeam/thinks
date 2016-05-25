@@ -112,6 +112,15 @@ licenses_list = [
   ['xfree86',        'XFree86',           'http://directory.fsf.org/wiki/License:XFree86_1.1'],
   ['zlib',           'ZLib',              'http://directory.fsf.org/wiki/License:Zlib'],
   ['zope2',          'Zope2',             'http://directory.fsf.org/wiki?title=License:ZopePLv2.1'],
+  ['fdlo',           'FDLOther',          'https://www.gnu.org/licenses/fdl.html'],
+  ['ccby4',          'CCBY4',             'http://creativecommons.org/licenses/by/4.0/legalcode'],
+  ['ccbysa4',        'CCBYSA4',           'http://creativecommons.org/licenses/by-sa/4.0/legalcode'],
+  ['dsl',            'DSL',               'https://www.gnu.org/licenses/dsl.html'],
+  ['freeart',        'FreeArt',           'https://directory.fsf.org/wiki/License:Free-Art-L-v1.3'],
+  ['odbl',           'ODbl',              'http://directory.fsf.org/wiki/License:ODbl'],
+  ['silofl',         'SILOFL',            'http://scripts.sil.org/OFL_web'],
+  ['gnuv',           'GNUVerbatim',       'https://www.gnu.org/licenses/licenses.html#VerbatimCopying'],
+  ['ccbynd',         'CCBYND3',           'http://creativecommons.org/licenses/by-nd/3.0/legalcode'],
   ['hpnd',           'HPND',              'http://directory.fsf.org/wiki/License:Historical_Permission_Notice_and_Disclaimer']
 ]
 
