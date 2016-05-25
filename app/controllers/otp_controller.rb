@@ -35,7 +35,7 @@ class OtpController < ApplicationController
 
   def enable
     current_thinker.otp_required_for_login = true
-    current_thinker.otp_secret = Thinker.generate_otp_secret(24)
+    current_thinker.otp_secret = Thinker.generate_otp_secret
     current_thinker.save!
 
     flash[:otp_enabled] = true
