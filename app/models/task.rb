@@ -26,6 +26,7 @@ class Task < ActiveRecord::Base
       :sorted_by,
 
       :search_title,
+      :search_release,
       :search_goal,
       :search_thinker,
       :search_worker,
@@ -135,6 +136,10 @@ class Task < ActiveRecord::Base
     joins(:goal).where('goals.title LIKE ?', "%#{title}%")
   }
 
+  scope :search_release, lambda { |title|
+    joins(:release).where('releases.title LIKE ?', "%#{title}%")
+  }
+  
   scope :search_thinker, lambda { |name|
     joins(:thinker).where('thinkers.name LIKE ?', "%#{name}%")
   }

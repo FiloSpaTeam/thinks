@@ -57,6 +57,18 @@
         - if !current_page?(projects_path) && params.key?(:project_id) && !current_page?(project_goals_path) && !current_page?(project_sprints_path) && !current_page?(project_releases_path)
           %li{ :role => "presentation" }
             %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+              = t(".release")
+              %span.caret
+            %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+              .panel-heading
+                = f.text_field :search_release, class: "form-control filterrific-periodically-observed", placeholder: t("search")
+              %ul.list-group.scrollbar
+                - @project.releases.each do |release|
+                  %li.list-group-item
+                    = link_to("filterrific[with_release]" => release, method: :get, remote: true) do
+                      = release.title
+          %li{ :role => "presentation" }
+            %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
               = t(".goal")
               %span.caret
             %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
