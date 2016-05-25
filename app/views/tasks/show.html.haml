@@ -28,7 +28,7 @@
       %ul.list-group
         - if @comments.empty?
           = content_tag(:li, t("no_comments"), :class => "list-group-item")
-        - if @task.done? && @comment_approved.reason.present?
+        - if !@comment_approved.nil? && @comment_approved.reason.present?
           = content_tag(:li, :class => "list-group-item active") do
             %div
               %strong

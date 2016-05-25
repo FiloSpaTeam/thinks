@@ -50,12 +50,10 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @comments = @task.comments(:include => :likes)
-    if @task.status == Status.done.first
-      @comment_approved = @comments.approved.first
-      @reason           = @comment_approved.reason || Reason.new
-    end
-    @workload_voted = @task.votes.where(thinker: current_thinker).first
+    @comments         = @task.comments(:include => :likes)
+    @comment_approved = @comments.approved.first
+    @reason           = @comment_approved.try(:reason) || Reason.new
+    @workload_voted   = @task.votes.where(thinker: current_thinker).first
 
     @project = @task.project
     @comment = Comment.new
@@ -166,6 +164,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if scrum_master?(@task.project)
         @task.status = Status.release.first
+        @task.worker = nil
+
         if @task.save
           create_notification(@task, @task.project)
           format.html { redirect_to @task, notice: 'Task is ready for next Sprint!' }

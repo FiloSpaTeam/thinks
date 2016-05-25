@@ -51,6 +51,8 @@ class Comment < ActiveRecord::Base
       task.status = Status.done.first
       task.save
 
+      task.comments.approved.update_all(approved: false)
+
       save
     end
   end

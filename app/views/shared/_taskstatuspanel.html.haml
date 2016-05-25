@@ -56,17 +56,21 @@
         - else
           .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
           = t("projects.tasks.#{task.status.translation_code}")
-  - if task.project.thinker == current_thinker && task.status == Status.release.first
-    .panel-footer
-      - if task.ready?
-        = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
-      - else
-        %strong
-          = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
-          = t(".standard_deviation_too_high")
-  - elsif task.project.thinker == current_thinker && task.status == Status.backlog.first && task.workloads.count > 0
-    .panel-footer
-      = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+  - if (scrum_master?(task.project))
+    - if task.status == Status.release.first
+      .panel-footer
+        - if task.ready?
+          = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
+        - else
+          %strong
+            = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+            = t(".standard_deviation_too_high")
+    - elsif task.status == Status.backlog.first && task.workloads.count > 0
+      .panel-footer
+        = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+    - elsif task.status == Status.done.first
+      .panel-footer
+        = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
 
 .panel.panel-default.hidden-xs
   .list-group
