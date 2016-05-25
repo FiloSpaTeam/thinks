@@ -59,7 +59,7 @@ class Project < ActiveRecord::Base
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
 
-  # after_save :check_if_past_project
+  after_save :check_if_past_project
   after_save :update_contribution_thinker
 
   # validate :expiration_date_cannot_be_in_the_past
@@ -153,7 +153,25 @@ class Project < ActiveRecord::Base
 
   def check_if_past_project
     if started?
-      Sprint.update_sprint_system
+      if sprints.count.zero?
+        ActiveRecord::Base.transaction do
+          sprint = Sprint.new
+
+          sprint.project = self
+          sprint.save
+
+          notification = Notification.new
+
+          notification.project    = self
+          notification.thinker_id = 0
+          notification.model      = sprint.class.name
+          notification.model_id   = sprint.id
+          notification.controller = 'sprints'
+          notification.action     = 'create'
+
+          notification.save
+        end
+      end
     end
   end
 
