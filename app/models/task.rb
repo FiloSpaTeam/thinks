@@ -139,7 +139,7 @@ class Task < ActiveRecord::Base
   scope :search_release, lambda { |title|
     joins(:release).where('releases.title LIKE ?', "%#{title}%")
   }
-  
+
   scope :search_thinker, lambda { |name|
     joins(:thinker).where('thinkers.name LIKE ?', "%#{name}%")
   }
