@@ -33,7 +33,7 @@ A step by step series of examples that tell you have to get a development env ru
 
 ## Running the tests
 
-Like any Rails app: ```rake test``
+Like any Rails app: ``rake test``
 
 Controllers and major function are tested, more deep function are skipped.
 
