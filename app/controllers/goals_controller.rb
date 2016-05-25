@@ -91,6 +91,8 @@ class GoalsController < ApplicationController
           set_form_errors(@goal)
           set_validators_for_form_help
 
+          @project_form = @project
+
           format.html { render :new }
           format.json { render json: @goal.errors, status: :unprocessable_entity }
         end
