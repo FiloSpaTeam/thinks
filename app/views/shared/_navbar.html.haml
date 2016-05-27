@@ -27,7 +27,8 @@
       - if thinker_signed_in?
         = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px;" do
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
-      = link_to truncate(@project.title, length: 16), project_path(@project), :class => 'visible-xs text-left navbar-brand'
+      - if @project.present? && @project.id.present?
+        = link_to truncate(@project.title, length: 16), project_path(@project), :class => 'visible-xs text-left navbar-brand'
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
         - if @project.present? && @project.id.present?
