@@ -47,6 +47,7 @@ class Project < ActiveRecord::Base
   end
   has_many :election_polls
   has_many :releases
+  has_many :notifications
 
   belongs_to :license
   belongs_to :thinker
@@ -79,7 +80,9 @@ class Project < ActiveRecord::Base
     case sort_option.to_s
     when /^title_/
       # Simple sort on the name colums
-      order("LOWER(projects.title) #{ direction }")
+      order("LOWER(projects.title) #{direction}")
+    when /^notifications_/
+      includes(:notifications).order("notifications.created_at #{direction}")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
