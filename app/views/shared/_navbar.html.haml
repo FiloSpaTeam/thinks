@@ -24,20 +24,29 @@
         %span.icon-bar
         %span.icon-bar
       = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg"
-      - if @project.present? && @project.id.present?
-        .navbar-header.pull-left.visible-xs{:style => "width: 118px;"}
-          = link_to project_sprints_path(@project), :class => "btn navbar-btn" do
-            = icon('flag', :class => "fa-lg fa-inverse")
-            %span.hidden-xs= t(".sprints")
-          = link_to project_goals_path(@project), :class => "btn navbar-btn" do
-            = icon('crosshairs', :class => "fa-lg fa-inverse")
-            %span.hidden-xs= t(".goals")
-          = link_to project_tasks_path(@project), :class => "btn navbar-btn" do
-            = icon('tasks', :class => "fa-lg fa-inverse")
-            %span.hidden-xs= t(".tasks")
-        = link_to truncate(@project.title, length: 16), project_path(@project), :class => 'visible-xs text-center navbar-brand'
-    .navbar-collapse.collapse.navbar-responsive-collapse
+      - if thinker_signed_in?
+        = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px;" do
+          = notification_icon(Notification.user(current_thinker), 'fa-2x')
+      = link_to truncate(@project.title, length: 16), project_path(@project), :class => 'visible-xs text-left navbar-brand'
+    .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
+        - if @project.present? && @project.id.present?
+          %li.visible-xs
+            %a{ href: "#" }
+              = @project.title
+          %li.visible-xs{ current_page?(project_sprints_path(@project)) ? { :class => :active } : {} }
+            = link_to project_sprints_path(@project) do
+              = icon('flag', :class => "fa-lg fa-inverse")
+              = t(".sprints")
+          %li.visible-xs{ current_page?(project_goals_path(@project)) ? { :class => :active } : {} }
+            = link_to project_goals_path(@project) do
+              = icon('crosshairs', :class => "fa-lg fa-inverse")
+              = t(".goals")
+          %li.visible-xs{ current_page?(project_tasks_path(@project)) ? { :class => :active } : {} }
+            = link_to project_tasks_path(@project) do
+              = icon('tasks', :class => "fa-lg fa-inverse")
+              = t(".tasks")
+          %li.nav-divider.visible-xs
         %li{:class => active_link_if_current(projects_path)}
           = link_to projects_path do
             = icon('globe', :class => "fa-lg")
@@ -61,12 +70,10 @@
       %ul.nav.navbar-nav.navbar-right
         %li
           - if thinker_signed_in?
-            = link_to notifications_path do
+            = link_to notifications_path, :class => "hidden-xs" do
               = notification_icon(Notification.user(current_thinker))
               = t(".notifications")
         - if thinker_signed_in?
-          -# %li
-          -#   = link_to t(".donate"), projects_path
           %li.dropdown
             = link_to "javascript:;", :class => "dropdown-toggle", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
               = icon('user', :class => "fa-lg")
