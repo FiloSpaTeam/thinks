@@ -72,7 +72,7 @@ class Project < ActiveRecord::Base
   # end
 
   scope :search_title, lambda { |query|
-    where("title LIKE ?", "%#{query}%")
+    where('title LIKE ?', "%#{query}%")
   }
 
   scope :sorted_by, lambda { |sort_option|
@@ -81,12 +81,14 @@ class Project < ActiveRecord::Base
     when /^title_/
       # Simple sort on the name colums
       order("LOWER(projects.title) #{direction}")
-    when /^notifications_/
-      includes(:notifications).order("notifications.created_at #{direction}")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
   }
+
+  def last_notification_update
+    notifications.last
+  end
 
   # This method provides select options for the `sorted_by` filter select input.
   # It is called in the controller as part of `initialize_filterrific`.
