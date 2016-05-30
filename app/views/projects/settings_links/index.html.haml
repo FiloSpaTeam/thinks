@@ -36,6 +36,10 @@
             = f.text_field :documentation_url, :class => 'form-control'
             %i.glyphicon.glyphicon-book.form-control-feedback
           .form-group.has-feedback
+            = f.label :mailing_list_url, :class => 'control-label'
+            = f.text_field :mailing_list_url, :class => 'form-control'
+            %i.glyphicon.glyphicon-envelope.form-control-feedback
+          .form-group.has-feedback
             = f.label :donate_button, :class => 'control-label'
             = f.text_area :donate_button, :class => 'form-control', :rows => 4
             %span#help-donate-button.help-block

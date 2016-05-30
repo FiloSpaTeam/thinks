@@ -73,9 +73,9 @@
       URLs
   .list-group.hidden-xs
     .list-group-item
+      website
       = link_to project.home_url, :class => "pull-right no-padding no-border btn #{!project.home_url.present? ? 'disabled' : ''}", role: "button" do
         = icon('home', :class => "dark-grey")
-      website
     .list-group-item
       sources
       = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{!project.source_code_url.present? ? 'disabled' : ''}", role: "button" do
@@ -84,6 +84,10 @@
       documentation
       = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{!project.documentation_url.present? ? 'disabled' : ''}", role: "button" do
         = icon('book', :class => "dark-grey")
+    .list-group-item
+      mailing list
+      = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
+        = icon('envelope-o', :class => "dark-grey")
   .panel-body.hidden-xs
     %strong
       Summary

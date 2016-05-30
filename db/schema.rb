@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522091424) do
+ActiveRecord::Schema.define(version: 20160530200501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20160522091424) do
     t.datetime "deleted_at"
     t.string   "main_image"
     t.string   "donate_button"
+    t.string   "mailing_list_url"
   end
 
   add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
