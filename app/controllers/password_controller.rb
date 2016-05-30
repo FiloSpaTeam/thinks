@@ -26,7 +26,7 @@ class PasswordController < ApplicationController
 
   def update
     @thinker = Thinker.find(current_thinker.id)
-    
+
     respond_to do |format|
       if @thinker.update_with_password(thinker_params)
         # Sign in the user by passing validation in case their password changed
