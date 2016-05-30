@@ -28,6 +28,7 @@
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
       - if @project.present? && @project.id.present?
         = link_to truncate(@project.title, length: 36), project_path(@project), :class => 'visible-xs text-left navbar-brand'
+        = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg"
       - else
         = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs"
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
