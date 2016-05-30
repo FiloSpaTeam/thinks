@@ -1,0 +1,33 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015, Claudio Maradonna
+
+= form_for @thinker, :url => url_for(:controller => 'password', :action => 'update') do |f|
+  .panel-body
+    .form-group
+      = f.label :current_password, :class => "control-label"
+      = f.password_field :current_password, :class => "form-control"
+    .form-group
+      = f.label :password, :class => "control-label"
+      = f.password_field :password, :class => "form-control", :autocomplete => "off", "aria-describedby" => "help-password"
+      %span#help-password.help-block
+        = t ".password_requirements"
+    .form-group
+      = f.label :password_confirmation, :class => "control-label"
+      = f.password_field :password_confirmation, :class => "form-control"
+  .panel-footer
+    = f.submit nil, :class => "btn btn-primary"
+    = link_to t('back'), :back, :class => "btn btn-default"
