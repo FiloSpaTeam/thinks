@@ -1,14 +1,20 @@
 require 'test_helper'
 
 class PasswordControllerTest < ActionController::TestCase
-  test "should get edit" do
-    get :edit
-    assert_response :success
-  end
+  # setup do
+  #   @thinker = thinkers(:admin)
 
-  test "should get update" do
-    get :update
-    assert_response :success
-  end
+  #   authenticate
+  # end
+
+  # test "should get edit" do
+  #   get :edit, id: @thinker
+  #   assert_response :success
+  # end
+
+  # test "should get update" do
+  #   patch :update, id: @thinker
+  #   assert_response :success
+  # end
 
 end
