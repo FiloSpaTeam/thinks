@@ -35,6 +35,10 @@
       %ul.nav.navbar-nav
         - if @project.present? && @project.id.present?
           %li.visible-xs{ current_page?(project_sprints_path(@project)) ? { :class => :active } : {} }
+            = link_to project_releases_path(@project) do
+              = icon('flag-checkered', :class => "fa-lg")
+              = t(".releases")
+          %li.visible-xs{ current_page?(project_sprints_path(@project)) ? { :class => :active } : {} }
             = link_to project_sprints_path(@project) do
               = icon('flag', :class => "fa-lg")
               = t(".sprints")
