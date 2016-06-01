@@ -24,7 +24,7 @@
         %span.icon-bar
         %span.icon-bar
       - if thinker_signed_in?
-        = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px;" do
+        = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px;" do
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
       - if @project.present? && @project.id.present?
         = link_to truncate(@project.title, length: 36), project_path(@project), :class => 'visible-xs text-left navbar-brand'
@@ -84,13 +84,24 @@
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %ul.dropdown-menu
-              %li= link_to current_thinker.name, thinker_path(current_thinker)
-              -# %li= link_to t(".show"), current_thinker
-              -# %li
-              -#   %a{:href => "#"} My projects
-              -# %li
-              -#   %a{:href => "#"} Settings
-              -# = menu_divider
+              - if @thinker.present? && @thinker.id.present?
+                %li.visible-xs.visible-sm
+                  %a{ href: '#' }
+                    %strong
+                      =t 'shared.profilebar.general'
+                %li.visible-xs.visible-sm{current_page?(thinker_path) ? { :class => :active } : {} }
+                  = link_to(t('.personal'), thinker_path(@thinker))
+                %li.visible-xs.visible-sm
+                  %a{ href: '#' }
+                    %strong
+                      =t 'shared.profilebar.security_and_privacy'
+                %li.visible-xs.visible-sm{current_page?(edit_password_path) ? { :class => :active } : {} }
+                  = link_to(t('.password'), edit_password_path(@thinker))
+                %li.visible-xs.visible-sm{current_page?(otp_path) ? { :class => :active } : {} }
+                  = link_to(t('.double_authentication'), otp_path(@thinker))
+                = menu_divider
+              - else
+                %li= link_to current_thinker.name, thinker_path(current_thinker)
               %li= link_to t(".logout"), destroy_thinker_session_path, :method => :delete
         - else
           %li{current_page?(new_thinker_registration_path) ? { :class => :active } : {} }
