@@ -72,9 +72,9 @@
       .panel-footer
         = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
 
-.panel.panel-default.hidden-xs
+.panel.panel-default
   .list-group
-    .list-group-item
+    .list-group-item.hidden-xs
       %strong
         = t('tasks.workload')
       %span.pull-right
@@ -95,7 +95,7 @@
         .text-right
           %strong
             = t "tasks.show.you_voted", vote: workload_voted.workload.value
-  .list-group
+  .list-group.hidden-xs
     .list-group-item
       %strong
         = t('tasks.worker')
