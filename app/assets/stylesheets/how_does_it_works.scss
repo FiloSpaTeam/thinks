@@ -4,4 +4,10 @@
 
 .how_does_it_works {
     text-align: justify;
+
+    @media(max-width: 768px) {
+        .main {
+            padding: 15px;
+        }
+    }
 }

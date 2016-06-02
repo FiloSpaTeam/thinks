@@ -219,6 +219,12 @@ a {
 .no-padding {padding: 0;}
 .no-border {border: 0;}
 
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+}
+
 @import "dashboard";
 @import "cover";
 @import "carousel";

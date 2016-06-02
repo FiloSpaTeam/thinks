@@ -6,6 +6,12 @@ body.start {
   padding-bottom: 40px;
   color: #5a5a5a;
 
+  @media(max-width: 768px) {
+      .row {
+          padding: 15px;
+      }  
+  }
+
     /* CUSTOMIZE THE NAVBAR
     -------------------------------------------------- */
 
