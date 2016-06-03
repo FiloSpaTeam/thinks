@@ -30,6 +30,8 @@
         - my_roles.each do |role|
           .list-group-item
             = t "team_roles.#{role.team_role.t_name}"
+    .panel-footer
+      My stats
 .panel.panel-default
   .panel-body
     %strong
@@ -98,10 +100,10 @@
       = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
     .list-group-item.hidden-xs
       = badge(project.sprints.size)
-      sprints
+      = link_to 'sprints', project_sprints_path(project)
     .list-group-item.hidden-xs
       = badge(project.goals.size)
-      goals
+      = link_to 'goals', project_goals_path(project)
     .list-group-item.hidden-xs
       = badge(project.tasks.size)
-      tasks
+      = link_to 'tasks', project_tasks_path(project)
