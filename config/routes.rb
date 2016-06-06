@@ -33,15 +33,15 @@ Rails.application.routes.draw do
   resources :licenses
   resources :languages
   resources :projects do
-    put :read_all
-    put :migrate
-
     member do
       put :contribute
+      put :elect
+      put :read_all
+      put :migrate
     end
 
-    put :elect
     resources :teams
+    resources :statistics, only: [:show]
 
     resources :releases, shallow: true
     resources :election_polls, shallow: true
