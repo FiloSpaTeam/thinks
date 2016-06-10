@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     end
 
     resources :teams
-    resources :statistics, only: [:show]
+
+    resources :statistics, only: [:show], controller: 'projects/statistics'
 
     resources :releases, shallow: true
     resources :election_polls, shallow: true
