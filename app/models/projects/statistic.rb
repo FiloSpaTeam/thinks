@@ -9,9 +9,9 @@ class Projects::Statistic < ActiveRecord::Base
 
   self.table_name = 'projects'
 
-  column :with_first_section, :integer
-  column :with_second_section, :integer
-  column :with_third_section, :integer
+  # column :with_first_section, :integer
+  # column :with_second_section, :integer
+  # column :with_third_section, :integer
 
   filterrific(
     available_filters: [
@@ -21,8 +21,7 @@ class Projects::Statistic < ActiveRecord::Base
     ]
   )
 
-  scope :with_first_section, -> {}
-  scope :with_second_section, -> {}
-  scope :with_third_section, -> {}
-
+  scope :with_first_section, -> (value) { }
+  scope :with_second_section, -> (value) { }
+  scope :with_third_section, -> (value) { }
 end

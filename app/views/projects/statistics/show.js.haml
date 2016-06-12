@@ -15,21 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.well.no-print
-  %h3
-    General filters
-  %h4
-    Page filters
-  - if current_page?(project_statistic_path)
-    .checkbox
-      = f.label t('.print_first_section') do
-        = f.check_box(:with_first_section, {}, true, false)
-        = t ".print_first_section"
-    .checkbox
-      = f.label t('.print_second_section') do
-        = f.check_box(:with_second_section, {}, true, false)
-        = t ".print_second_section"
-    .checkbox
-      = f.label t('.print_third_section') do
-        = f.check_box(:with_third_section, {}, true, false)
-        = t ".print_third_section"
+- js = escape_javascript(
+- render(partial: 'body', locals: { statistic: @statistic })
+- )
+$("#filterrific_results").html("#{js}");

@@ -1,7 +1,7 @@
 @media print {
-    a[href]:after {
-        content: none !important;
-    }
+    a[href]:after { content: none !important; }
+
+    .no-print, .no-print * { display: none !important; }
 
     footer { display: none !important; }
 }

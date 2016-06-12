@@ -1,0 +1,34 @@
+#filterrific_results
+  .row
+    .col-xs-4
+      %h4
+        = @local_thinker.name
+    .col-xs-4.text-center
+      %h4
+        = @project.title
+    .col-xs-4.text-right
+      %h4
+        = DateTime.now.to_s(:long)
+  %hr
+  - if @first_section
+    %h3
+      Section 1:
+      %span.pull-right
+        Summary sprint
+    .row
+      .col-xs-3
+        - if @local_thinker.avatar
+          = cl_image_tag(@local_thinker.avatar.path, { size: '200x200', class: 'team-member-img pull-left' })
+      .col-xs-9
+        .row
+          %label.control-label
+            Name:
+            = @local_thinker.name
+        .row
+          %label.control-label
+            Registered at:
+            = @local_thinker.created_at.to_s(:long)
+  - if @second_section
+    Second section
+  - if @third_section
+    Third section

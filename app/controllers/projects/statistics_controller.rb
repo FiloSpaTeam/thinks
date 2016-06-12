@@ -10,7 +10,13 @@ class Projects::StatisticsController < ApplicationController
       select_options: {}
     ) || return
 
-    @thinker   = Thinker.friendly.find(params[:id])
+    @local_thinker = Thinker.friendly.find(params[:id])
     @statistic = @filterrific.find
+
+    if !params[:filterrific].nil?
+      @first_section = params[:filterrific][:with_first_section]
+      @second_section = params[:filterrific][:with_second_section]
+      @third_section = params[:filterrific][:with_third_section]
+    end
   end
 end
