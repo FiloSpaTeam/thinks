@@ -1,4 +1,4 @@
-class Projects::Statistic < ActiveRecord::Base
+class Projects::Statistic < Project
   def self.columns
     @columns ||= []
   end
@@ -7,11 +7,9 @@ class Projects::Statistic < ActiveRecord::Base
     columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
   end
 
-  self.table_name = 'projects'
-
-  # column :with_first_section, :integer
-  # column :with_second_section, :integer
-  # column :with_third_section, :integer
+  attr_accessor :with_first_section
+  attr_accessor :with_second_section
+  attr_accessor :with_third_section
 
   filterrific(
     available_filters: [

@@ -1,3 +1,20 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015, Claudio Maradonna
+
 #filterrific_results
   .row
     .col-xs-4
@@ -12,22 +29,90 @@
   %hr
   - if @first_section
     %h3
-      Section 1:
-      %span.pull-right
-        Summary sprint
+      Section 1: Summary sprint
     .row
       .col-xs-3
         - if @local_thinker.avatar
-          = cl_image_tag(@local_thinker.avatar.path, { size: '200x200', class: 'team-member-img pull-left' })
+          = cl_image_tag(@local_thinker.avatar.path, { size: '150x150', class: 'team-member-img pull-left' })
       .col-xs-9
         .row
-          %label.control-label
+          %label.control-label.text-right.col-xs-2
             Name:
+          %label.control-label.col-xs-10.label-normal
             = @local_thinker.name
+        - if @local_thinker.sex.present?
+          .row
+            %label.control-label.text-right.col-xs-2
+              Age:
+            %label.control-label.col-xs-10.label-normal
+              = @local_thinker.born_at.to_s(:long)
+        - if @local_thinker.sex.present?
+          .row
+            %label.control-label.text-right.col-xs-2
+              Gender:
+            %label.control-label.col-xs-10.label-normal
+              = t "sex.#{@local_thinker.sex.t_name}"
         .row
-          %label.control-label
-            Registered at:
+          %label.control-label.text-right.col-xs-2
+            Joined at:
+          %label.control-label.col-xs-10.label-normal
             = @local_thinker.created_at.to_s(:long)
+    %hr
+    .row
+      - last_sprint     = @statistic.sprints.last
+      - previous_sprint = last_sprint.previous
+      - tasks_done      = @statistic.tasks.done
+      .col-xs-4.text-center
+        %h4 Last sprint
+        .row
+          %label.control-label.col-xs-6
+            Tasks done:
+          %label.control-label.col-xs-6.label-normal
+            = "#{tasks_done.where(thinker: @thinker).count} / #{tasks_done.count}"
+        .row
+          %label.control-label.col-xs-6
+            Tasks in progress:
+          %label.control-label.col-xs-6.label-normal
+            10 / 20
+        .row
+          %label.control-label.col-xs-6
+            Total workload:
+          %label.control-label.col-xs-6.label-normal
+            100
+      .col-xs-4.text-center
+        %h4 Previous sprint
+        .row
+          %label.control-label.col-xs-6
+            Tasks done:
+          %label.control-label.col-xs-6.label-normal
+            10 / 20
+        .row
+          %label.control-label.col-xs-6
+            Tasks in progress:
+          %label.control-label.col-xs-6.label-normal
+            10 / 20
+        .row
+          %label.control-label.col-xs-6
+            Total workload:
+          %label.control-label.col-xs-6.label-normal
+            100
+      .col-xs-4.text-center
+        %h4 Average
+        .row
+          %label.control-label.col-xs-6
+            Tasks done:
+          %label.control-label.col-xs-6.label-normal
+            10 / 20
+        .row
+          %label.control-label.col-xs-6
+            Tasks in progress:
+          %label.control-label.col-xs-6.label-normal
+            10 / 20
+        .row
+          %label.control-label.col-xs-6
+            Total workload:
+          %label.control-label.col-xs-6.label-normal
+            100
   - if @second_section
     Second section
   - if @third_section

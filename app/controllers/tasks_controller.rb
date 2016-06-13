@@ -165,6 +165,7 @@ class TasksController < ApplicationController
       if scrum_master?(@task.project)
         @task.status = Status.release.first
         @task.worker = nil
+        @task.end_at = nil
 
         if @task.save
           create_notification(@task, @task.project)

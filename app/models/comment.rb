@@ -49,6 +49,7 @@ class Comment < ActiveRecord::Base
       task = self.task
 
       task.status = Status.done.first
+      task.end_at = DateTime.now
       task.save
 
       task.comments.approved.update_all(approved: false)

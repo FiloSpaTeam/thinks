@@ -15,6 +15,6 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= form_for_filterrific @filterrific, url: project_statistic_path(@project, @local_thinker), :html => { :class => 'form-horizontal' } do |f|
+= form_for_filterrific @statistic, url: project_statistic_path(@project, @local_thinker), :html => { :class => 'form-horizontal' } do |f|
   = render partial: 'shared/printbar', :locals => { :f => f }
   = render partial: 'body', :locals => { :statistic => @statistic }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530200501) do
+ActiveRecord::Schema.define(version: 20160613221413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,9 +322,11 @@ ActiveRecord::Schema.define(version: 20160530200501) do
     t.float    "standard_deviation"
     t.datetime "deleted_at"
     t.integer  "release_id"
+    t.datetime "end_at"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
+  add_index "tasks", ["end_at"], name: "index_tasks_on_end_at", using: :btree
 
   create_table "team_roles", force: :cascade do |t|
     t.string   "t_name"

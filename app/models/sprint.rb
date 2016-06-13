@@ -112,6 +112,10 @@ class Sprint < ActiveRecord::Base
     Sprint.where('id > ?', id).first
   end
 
+  def previous
+    Sprint.where('id < ?', id).where(project: project).first
+  end
+
   private
 
   def generate_serial

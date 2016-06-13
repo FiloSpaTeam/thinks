@@ -219,6 +219,11 @@ a {
 .no-padding {padding: 0;}
 .no-border {border: 0;}
 
+.label-normal {
+    font-weight: normal !important;
+    text-align: left !important;
+}
+
 @import "dashboard";
 @import "cover";
 @import "carousel";
