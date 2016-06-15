@@ -61,58 +61,41 @@
     .row
       - last_sprint     = @statistic.sprints.last
       - previous_sprint = last_sprint.previous
+      - if previous_sprint.present?
+        - previous_previous_sprint = previous_sprint.previous
       - tasks_done      = @statistic.tasks.done
+
+      - tasks_done_last_sprint = tasks_done.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
+
+      - tasks_in_progress = @statistic.tasks.in_progress
+      - tasks_in_progress_last_sprint = tasks_in_progress.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
+
       .col-xs-4.text-center
         %h4 Last sprint
-        .row
-          %label.control-label.col-xs-6
-            Tasks done:
-          %label.control-label.col-xs-6.label-normal
-            = "#{tasks_done.where(thinker: @thinker).count} / #{tasks_done.count}"
-        .row
-          %label.control-label.col-xs-6
-            Tasks in progress:
-          %label.control-label.col-xs-6.label-normal
-            10 / 20
-        .row
-          %label.control-label.col-xs-6
-            Total workload:
-          %label.control-label.col-xs-6.label-normal
-            100
+        = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint }
       .col-xs-4.text-center
         %h4 Previous sprint
-        .row
-          %label.control-label.col-xs-6
-            Tasks done:
-          %label.control-label.col-xs-6.label-normal
-            10 / 20
-        .row
-          %label.control-label.col-xs-6
-            Tasks in progress:
-          %label.control-label.col-xs-6.label-normal
-            10 / 20
-        .row
-          %label.control-label.col-xs-6
-            Total workload:
-          %label.control-label.col-xs-6.label-normal
-            100
+        - if previous_previous_sprint.present?
+          - tasks_done_previous_sprint = tasks_done.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
+          - tasks_in_progress_previous_sprint = tasks_in_progress.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
+          = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_previous_sprint, tasks_in_progress: tasks_in_progress_previous_sprint }
+        - else
+          .alert.alert-warning{ role: 'alert' }
+            Related information is limited
       .col-xs-4.text-center
         %h4 Average
         .row
           %label.control-label.col-xs-6
             Tasks done:
           %label.control-label.col-xs-6.label-normal
-            10 / 20
-        .row
-          %label.control-label.col-xs-6
-            Tasks in progress:
-          %label.control-label.col-xs-6.label-normal
-            10 / 20
+            - numbers_of_tasks = @statistic.sprints.collect { |sprint| sprint.project.tasks.where('end_at < ?', sprint.created_at).where('end_at >= ?', sprint.previous.try(:created_at)).count }
+            = numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size
         .row
           %label.control-label.col-xs-6
             Total workload:
           %label.control-label.col-xs-6.label-normal
-            100
+            = @statistic.sprints.average(:obtained)
+    %hr
   - if @second_section
     Second section
   - if @third_section
