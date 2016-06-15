@@ -19,3 +19,4 @@
 - render(partial: 'body', locals: { statistic: @statistic })
 - )
 $("#filterrific_results").html("#{js}");
+$("body").append('#{escape_javascript(yield :charts_js)}');

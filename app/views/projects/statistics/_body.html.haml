@@ -96,6 +96,14 @@
           %label.control-label.col-xs-6.label-normal
             = @statistic.sprints.average(:obtained)
     %hr
+    %h4
+      Last sprint 'Burn up'
+    - total_workload = 0
+    - burn_up_data   = tasks_done_last_sprint.group_by_period(:day, :end_at).where('end_at >= ?', last_sprint.created_at).order('max(end_at)').sum(:workload)
+    - if burn_up_data.empty?
+      - burn_up_data = { last_sprint.created_at => 0 }
+    - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
+    = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '90%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
   - if @second_section
     Second section
   - if @third_section
