@@ -39,10 +39,10 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if Project.all.empty?
         format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }
-      else 
-        format.html
-        format.js
       end
+
+      format.html
+      format.js
     end
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
