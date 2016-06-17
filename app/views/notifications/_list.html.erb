@@ -28,6 +28,8 @@
         </div>
     <% end %>
     <% @notifications.each do |notification| %>
+        <% puts 'Here' %>
+        <% puts notification.project.inspect %>
         <% if notification.project.id != project_id %>
             <% if !project_id.nil? %>
                 </div>
@@ -37,7 +39,7 @@
                 <strong>
                     <%= notification.project.title %>
                 </strong>
-                <%= link_to project_read_all_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
+                <%= link_to read_all_project_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
                     <%= icon('check') %>
                 <% end %>
             </div>
