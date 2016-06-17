@@ -34,7 +34,12 @@ class ProjectsController < ApplicationController
       }
     ) || return
 
+    puts params
+    puts @filterrific.inspect
+
     @projects = @filterrific.find.page params[:page]
+
+    puts @projects.inspect
 
     respond_to do |format|
       if Project.all.empty?
