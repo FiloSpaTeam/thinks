@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
     puts params
     puts @filterrific.inspect
 
-    @projects = @filterrific.find.page params[:page]
+    @projects = Project.filterrific_find(@filterrific).page params[:page]
 
     puts @projects.inspect
 
