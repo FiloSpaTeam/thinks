@@ -18,7 +18,7 @@
 <div id="filterrific_results">
 
   <div class="row">
-    <% @projects.each_with_index do |project, index| %>
+    <% projects.each_with_index do |project, index| %>
       <% if index % 2 == 0 %>
         </div>
         <div class="row">
@@ -58,4 +58,4 @@
   </div>
 </div>
 
-<%= paginate @projects %>
+<%= paginate projects %>
