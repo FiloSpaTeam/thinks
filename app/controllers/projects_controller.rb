@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @filterrific = initialize_filterrific(
-      Project,
+      Project.default_order,
       params[:filterrific],
       select_options: {
         sorted_by: Project.options_for_sorted_by

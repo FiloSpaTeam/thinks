@@ -22,7 +22,6 @@ class Project < ActiveRecord::Base
   acts_as_paranoid
 
   filterrific(
-    default_filter_params: { sorted_by: 'title_asc' },
     available_filters: [
       :sorted_by,
       :search_title
@@ -70,6 +69,7 @@ class Project < ActiveRecord::Base
   #     errors.add(:release_at, "can't be in the past")
   #   end
   # end
+  scope :default_order, -> { order('title') }
 
   scope :search_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
