@@ -122,7 +122,7 @@
           = t ".related_info_limited"
   - if @second_section
     %h3
-      Section 2: Tasks
+      Section 2: Tasks done
     %ul.list-group
       - if tasks_done_last_sprint.empty?
         %li.list-group-item.list-group-item-warning
@@ -130,7 +130,19 @@
       - else
         - tasks_done_last_sprint.each do |task|
           %li.list-group-item
-            = task.title
+            .text-center.pull-right
+              .col-xs-12.workload-table
+                = workload_description(task)
+            = link_to task.title, task_path(task)
+            .dark-grey
+              %small
+                %em
+                  = plain_text(task.description.squish).truncate(120)
+            .dark-grey
+              %small
+                %strong
+                  \##{task.serial}
+                  by #{task.thinker.name}
   - if @third_section
     %h3
       Section 3: Goals and releases
