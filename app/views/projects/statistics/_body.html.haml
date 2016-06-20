@@ -128,12 +128,16 @@
         %li.list-group-item.list-group-item-warning
           = t ".related_info_limited"
       - else
+        - tasks_done_last_sprint.order('end_at DESC')
         - tasks_done_last_sprint.each do |task|
           %li.list-group-item
             .text-center.pull-right
               .col-xs-12.workload-table
                 = workload_description(task)
-            = link_to task.title, task_path(task)
+            %small.dark-grey
+              = task.end_at.to_s(:short)
+              ·
+              = link_to task.title, task_path(task)
             .dark-grey
               %small
                 %em
