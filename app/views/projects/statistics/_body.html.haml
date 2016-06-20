@@ -91,12 +91,12 @@
             Tasks done:
           %label.control-label.col-xs-6.label-normal
             - numbers_of_tasks = @statistic.sprints.collect { |sprint| sprint.project.tasks.where('end_at < ?', sprint.created_at).where('end_at >= ?', sprint.previous.try(:created_at)).count }
-            = numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size
+            = (numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size).round(1)
         .row
           %label.control-label.col-xs-6
             Workload:
           %label.control-label.col-xs-6.label-normal
-            = @statistic.sprints.average(:obtained)
+            = @statistic.sprints.average(:obtained).round(2)
     %hr
     %h4
       Last sprint 'Burn up'
