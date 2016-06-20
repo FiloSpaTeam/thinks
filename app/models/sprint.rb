@@ -71,7 +71,7 @@ class Sprint < ActiveRecord::Base
       else
         last_sprint = project.sprints.last
 
-        if (DateTime.now.to_date - last_sprint.created_at.to_date) == project.cycle.days
+        if (DateTime.now.to_date - last_sprint.created_at.to_date) >= project.cycle.days
           sprint = Sprint.new
 
           sprint.project = project
@@ -113,7 +113,7 @@ class Sprint < ActiveRecord::Base
   end
 
   def previous
-    Sprint.where('id < ?', id).where(project: project).first
+    Sprint.where('id < ?', id).where(project: project).order('id DESC').first
   end
 
   private

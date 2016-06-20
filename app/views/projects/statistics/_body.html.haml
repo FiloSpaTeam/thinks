@@ -61,6 +61,7 @@
     .row
       - last_sprint     = @statistic.sprints.last
       - previous_sprint = last_sprint.previous
+      - previous_previous_sprint = nil
       - if previous_sprint.present?
         - previous_previous_sprint = previous_sprint.previous
       - tasks_done      = @statistic.tasks.done
