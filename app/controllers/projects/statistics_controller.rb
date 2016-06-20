@@ -28,9 +28,7 @@ class Projects::StatisticsController < ApplicationController
     ) || return
 
     unless params[:filterrific].nil?
-      @first_section = params[:filterrific][:with_first_section]
-      @second_section = params[:filterrific][:with_second_section]
-      @third_section = params[:filterrific][:with_third_section]
+      @section = params[:filterrific][:with_section].to_i
     end
 
     @local_thinker = Thinker.friendly.find(params[:id])

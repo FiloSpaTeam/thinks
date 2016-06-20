@@ -21,15 +21,15 @@
   %h4
     Page filters
   - if current_page?(project_statistic_path)
-    .checkbox
+    .radio
       = f.label t('.print_first_section') do
-        = f.check_box(:with_first_section, {}, true, false)
+        = f.radio_button(:with_section, Projects::Statistic.sections[:s_first])
         = t ".print_first_section"
-    .checkbox
+    .radio
       = f.label t('.print_second_section') do
-        = f.check_box(:with_second_section, {}, true, false)
+        = f.radio_button(:with_section, Projects::Statistic.sections[:s_second])
         = t ".print_second_section"
-    .checkbox
+    .radio
       = f.label t('.print_third_section') do
-        = f.check_box(:with_third_section, {}, true, false)
+        = f.radio_button(:with_section, Projects::Statistic.sections[:s_third])
         = t ".print_third_section"

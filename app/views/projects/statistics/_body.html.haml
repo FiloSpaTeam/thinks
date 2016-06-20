@@ -27,7 +27,7 @@
       %h4
         = DateTime.now.to_s(:long)
   %hr
-  - if @first_section
+  - if @section && @section >= Projects::Statistic.sections[:s_first]
     %h3
       Section 1: Summary sprint
     .row
@@ -120,7 +120,7 @@
       %ul.list-group
         %li.list-group-item.list-group-item-warning
           = t ".related_info_limited"
-  - if @second_section
+  - if @section && @section >= Projects::Statistic.sections[:s_second]
     %h3
       Section 2: Tasks done
     %ul.list-group
@@ -147,6 +147,6 @@
                 %strong
                   \##{task.serial}
                   by #{task.thinker.name}
-  - if @third_section
+  - if @section && @section >= Projects::Statistic.sections[:s_third]
     %h3
       Section 3: Goals and releases

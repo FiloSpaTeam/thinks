@@ -311,6 +311,10 @@ en:
       data: "Data"
       views: "Views"
       printing: "Printing"
+    printbar:
+      s_first: "First section"
+      s_second: "Second section"
+      s_third: "Third section"
 
   # ActiveRecord override translation
   activerecord:
