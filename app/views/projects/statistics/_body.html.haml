@@ -80,8 +80,9 @@
           - tasks_in_progress_previous_sprint = tasks_in_progress.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
           = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_previous_sprint, tasks_in_progress: tasks_in_progress_previous_sprint }
         - else
-          .alert.alert-warning{ role: 'alert' }
-            Related information is limited
+          %ul.list-group
+            %li.list-group-item.list-group-item-warning
+              = t ".related_info_limited"
       .col-xs-4.text-center
         %h4 Average
         .row
@@ -92,7 +93,7 @@
             = numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size
         .row
           %label.control-label.col-xs-6
-            Total workload:
+            Workload:
           %label.control-label.col-xs-6.label-normal
             = @statistic.sprints.average(:obtained)
     %hr
@@ -104,7 +105,31 @@
       - burn_up_data = { last_sprint.created_at => 0 }
     - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
     = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '90%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
+    %hr
+    %h4
+      Previous sprint 'Burn up'
+    - if previous_previous_sprint.present?
+      - total_workload = 0
+      - burn_up_data   = tasks_done_previous_sprint.group_by_period(:day, :end_at).where('end_at >= ?', previous_sprint.created_at).order('max(end_at)').sum(:workload)
+      - if burn_up_data.empty?
+        - burn_up_data = { previous_sprint.created_at => 0 }
+      - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
+      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, discrete: true, library: { chartArea: { width: '90%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
+    - else
+      %ul.list-group
+        %li.list-group-item.list-group-item-warning
+          = t ".related_info_limited"
   - if @second_section
-    Second section
+    %h3
+      Section 2: Tasks
+    %ul.list-group
+      - if tasks_done_last_sprint.empty?
+        %li.list-group-item.list-group-item-warning
+          = t ".related_info_limited"
+      - else
+        - tasks_done_last_sprint.each do |task|
+          %li.list-group-item
+            = task.title
   - if @third_section
-    Third section
+    %h3
+      Section 3: Goals and releases

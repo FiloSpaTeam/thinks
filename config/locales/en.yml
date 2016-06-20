@@ -176,6 +176,9 @@ en:
       done        : "Done"
     projectsummary:
       my_stats : "My statistics" 
+    statistics:
+      body:
+        related_info_limited: "Related information is limited"
 
   category:
     web_applications:       "Web applications"
