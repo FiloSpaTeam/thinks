@@ -19,14 +19,16 @@
   %label.control-label.col-xs-6
     Tasks done:
   %label.control-label.col-xs-6.label-normal
-    = "#{tasks_done.where(worker: @local_thinker).count} / #{tasks_done.count}"
+    - thinker_tasks_done = tasks_done.where(worker: @local_thinker)
+    = "#{thinker_tasks_done.count} / #{tasks_done.count} "
 .row
   %label.control-label.col-xs-6
     Tasks in progress:
   %label.control-label.col-xs-6.label-normal
-    = "#{tasks_in_progress.where(worker: @local_thinker).count} / #{tasks_in_progress.count}"
+    - thinker_tasks_in_progress = tasks_in_progress.where(worker: @local_thinker)
+    = "#{thinker_tasks_in_progress.count} / #{tasks_in_progress.count}"
 .row
   %label.control-label.col-xs-6
     Total workload:
   %label.control-label.col-xs-6.label-normal
-    = tasks_done.where(worker: @local_thinker).sum(:workload)
+    = thinker_tasks_done.sum(:workload)

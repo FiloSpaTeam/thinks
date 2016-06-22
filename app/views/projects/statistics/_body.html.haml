@@ -72,8 +72,24 @@
       - tasks_in_progress_last_sprint = tasks_in_progress.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
 
       .col-xs-4.text-center
+        %h4 Average
+        .row
+          %label.control-label.col-xs-6
+            Tasks done:
+          %label.control-label.col-xs-6.label-normal
+            - numbers_of_tasks = @statistic.sprints.collect { |sprint| sprint.project.tasks.where('end_at < ?', sprint.created_at).where('end_at >= ?', sprint.previous.try(:created_at)).count }
+            - average_tasks_done = (numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size).round(1)
+            - thinker_tasks_done = tasks_done.where(worker: @local_thinker)
+            = "#{average_tasks_done} (#{((thinker_tasks_done.count * 100 / average_tasks_done) - 100).round(1)}%)"
+        .row
+          %label.control-label.col-xs-6
+            Workload:
+          %label.control-label.col-xs-6.label-normal
+            - average_workload = @statistic.sprints.average(:obtained).round(2)
+            = "#{average_workload} (#{((thinker_tasks_done.sum(:workload) * 100 / average_workload) - 100).round(1)}%)"
+      .col-xs-4.text-center
         %h4 Last sprint
-        = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint }
+        = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
       .col-xs-4.text-center
         %h4 Previous sprint
         - if previous_previous_sprint.present?
@@ -84,19 +100,6 @@
           %ul.list-group
             %li.list-group-item.list-group-item-warning
               = t ".related_info_limited"
-      .col-xs-4.text-center
-        %h4 Average
-        .row
-          %label.control-label.col-xs-6
-            Tasks done:
-          %label.control-label.col-xs-6.label-normal
-            - numbers_of_tasks = @statistic.sprints.collect { |sprint| sprint.project.tasks.where('end_at < ?', sprint.created_at).where('end_at >= ?', sprint.previous.try(:created_at)).count }
-            = (numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size).round(1)
-        .row
-          %label.control-label.col-xs-6
-            Workload:
-          %label.control-label.col-xs-6.label-normal
-            = @statistic.sprints.average(:obtained).round(2)
     %hr
     %h4
       Last sprint 'Burn up'
@@ -141,18 +144,19 @@
             .dark-grey
               %small
                 %em
-                  = plain_text(task.description.squish).truncate(120)
+                  = plain_text(task.description.squish)
+                  -# = markdown(task.description)
             .dark-grey
               %small
                 %strong
                   \##{task.serial}
                   by #{task.thinker.name}
           %li.list-group-item.list-group-item-success
-            = icon('check-square-o', :class => 'dark-grey fa-lg pull-left', :style => "margin-top: 3px;")
+            = icon('check-square-o', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
             - comment_approved = task.comments.approved.first
             = comment_approved.text
           %li.list-group-item.active
-            = icon('quote-left', :class => 'dark-grey fa-lg pull-left', :style => "margin-top: 3px;")
+            = icon('quote-left', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
             = comment_approved.reason.text
   - if @section && @section >= Projects::Statistic.sections[:s_third]
     %h3
