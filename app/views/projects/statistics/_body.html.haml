@@ -123,13 +123,13 @@
   - if @section && @section >= Projects::Statistic.sections[:s_second]
     %h3
       Section 2: Tasks done
-    %ul.list-group
-      - if tasks_done_last_sprint.empty?
-        %li.list-group-item.list-group-item-warning
-          = t ".related_info_limited"
-      - else
-        - tasks_done_last_sprint.order('end_at DESC')
-        - tasks_done_last_sprint.each do |task|
+    - if tasks_done_last_sprint.empty?
+      %li.list-group-item.list-group-item-warning
+        = t ".related_info_limited"
+    - else
+      - tasks_done_last_sprint.order('end_at DESC')
+      - tasks_done_last_sprint.each do |task|
+        %ul.list-group
           %li.list-group-item
             .text-center.pull-right
               .col-xs-12.workload-table
@@ -147,6 +147,13 @@
                 %strong
                   \##{task.serial}
                   by #{task.thinker.name}
+          %li.list-group-item.list-group-item-success
+            = icon('check-square-o', :class => 'dark-grey fa-lg pull-left', :style => "margin-top: 3px;")
+            - comment_approved = task.comments.approved.first
+            = comment_approved.text
+          %li.list-group-item.active
+            = icon('quote-left', :class => 'dark-grey fa-lg pull-left', :style => "margin-top: 3px;")
+            = comment_approved.reason.text
   - if @section && @section >= Projects::Statistic.sections[:s_third]
     %h3
       Section 3: Goals and releases
