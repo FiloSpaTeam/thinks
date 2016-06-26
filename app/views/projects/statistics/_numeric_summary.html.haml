@@ -17,6 +17,10 @@
 
 .row
   %label.control-label.col-xs-6
+    Sprint number:
+  %label.control-label.col-xs-6.label-normal
+    = sprint.serial
+  %label.control-label.col-xs-6
     Tasks done:
   %label.control-label.col-xs-6.label-normal
     - thinker_tasks_done = tasks_done.where(worker: @local_thinker)

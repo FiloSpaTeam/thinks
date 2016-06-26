@@ -17,46 +17,62 @@
 
 #filterrific_results
   .row
-    .col-xs-4
-      %h4
-        = @local_thinker.name
-    .col-xs-4.text-center
+    .col-xs-offset-8.col-xs-4.text-right
       %h4
         = @project.title
-    .col-xs-4.text-right
-      %h4
+      %h5
         = DateTime.now.to_s(:long)
+  .row
+    .col-xs-3
+      - if @local_thinker.avatar
+        = cl_image_tag(@local_thinker.avatar.path, { size: '150x150', class: 'team-member-img pull-left' })
+    .col-xs-5
+      .row
+        %label.control-label.text-right.col-xs-2
+          Name:
+        %label.control-label.col-xs-10.label-normal
+          = @local_thinker.name
+      - if @local_thinker.sex.present?
+        .row
+          %label.control-label.text-right.col-xs-2
+            Age:
+          %label.control-label.col-xs-10.label-normal
+            = @local_thinker.born_at.to_s(:long)
+      - if @local_thinker.sex.present?
+        .row
+          %label.control-label.text-right.col-xs-2
+            Gender:
+          %label.control-label.col-xs-10.label-normal
+            = t "sex.#{@local_thinker.sex.t_name}"
+      .row
+        %label.control-label.text-right.col-xs-2
+          Joined at:
+        %label.control-label.col-xs-10.label-normal
+          = @local_thinker.created_at.to_s(:long)
+    .col-xs-4
+      .row
+        %label.control-label.col-xs-12.label-normal
+          .progress{ style: 'margin-bottom: 0;' }
+            %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@project.progress_percentage}", :class => "progress-bar #{progress_bar_color(@project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{@project.progress_percentage}%;"}
+              = @project.progress_percentage
+              \%
+          = t('projects.list.progress')
+        %label.control-label.col-xs-5{ style: 'text-align: left;' }
+          Sprint every
+        %label.control-label.col-xs-7.label-normal
+          = @project.cycle.try(:description) ? @project.cycle.description : t('not_defined_yet')
+        %label.control-label.col-xs-5{ style: 'text-align: left;' }
+          Release date
+        %label.control-label.col-xs-7.label-normal
+          = @project.release_at.try(:to_s) ? @project.release_at.to_s(:long) : t('not_defined_yet')
+        %label.control-label.col-xs-5{ style: 'text-align: left;' }
+          Team number
+        %label.control-label.col-xs-7.label-normal
+          = @project.assigned_roles.select(:thinker_id).distinct.count
   %hr
   - if @section && @section >= Projects::Statistic.sections[:s_first]
     %h3
       Section 1: Summary sprint
-    .row
-      .col-xs-3
-        - if @local_thinker.avatar
-          = cl_image_tag(@local_thinker.avatar.path, { size: '150x150', class: 'team-member-img pull-left' })
-      .col-xs-9
-        .row
-          %label.control-label.text-right.col-xs-2
-            Name:
-          %label.control-label.col-xs-10.label-normal
-            = @local_thinker.name
-        - if @local_thinker.sex.present?
-          .row
-            %label.control-label.text-right.col-xs-2
-              Age:
-            %label.control-label.col-xs-10.label-normal
-              = @local_thinker.born_at.to_s(:long)
-        - if @local_thinker.sex.present?
-          .row
-            %label.control-label.text-right.col-xs-2
-              Gender:
-            %label.control-label.col-xs-10.label-normal
-              = t "sex.#{@local_thinker.sex.t_name}"
-        .row
-          %label.control-label.text-right.col-xs-2
-            Joined at:
-          %label.control-label.col-xs-10.label-normal
-            = @local_thinker.created_at.to_s(:long)
     %hr
     .row
       - last_sprint     = @statistic.sprints.last
@@ -89,13 +105,13 @@
             = "#{average_workload} (#{((thinker_tasks_done.sum(:workload) * 100 / average_workload) - 100).round(1)}%)"
       .col-xs-4.text-center
         %h4 Last sprint
-        = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
+        = render partial: 'numeric_summary', locals: { sprint: last_sprint, tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
       .col-xs-4.text-center
         %h4 Previous sprint
         - if previous_previous_sprint.present?
           - tasks_done_previous_sprint = tasks_done.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
           - tasks_in_progress_previous_sprint = tasks_in_progress.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
-          = render partial: 'numeric_summary', locals: { tasks_done: tasks_done_previous_sprint, tasks_in_progress: tasks_in_progress_previous_sprint }
+          = render partial: 'numeric_summary', locals: { sprint: previous_sprint, tasks_done: tasks_done_previous_sprint, tasks_in_progress: tasks_in_progress_previous_sprint }
         - else
           %ul.list-group
             %li.list-group-item.list-group-item-warning
