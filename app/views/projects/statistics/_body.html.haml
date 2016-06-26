@@ -57,14 +57,17 @@
               = @project.progress_percentage
               \%
           = t('projects.list.progress')
+      .row
         %label.control-label.col-xs-5{ style: 'text-align: left;' }
           Sprint every
         %label.control-label.col-xs-7.label-normal
           = @project.cycle.try(:description) ? @project.cycle.description : t('not_defined_yet')
+      .row
         %label.control-label.col-xs-5{ style: 'text-align: left;' }
           Release date
         %label.control-label.col-xs-7.label-normal
           = @project.release_at.try(:to_s) ? @project.release_at.to_s(:long) : t('not_defined_yet')
+      .row
         %label.control-label.col-xs-5{ style: 'text-align: left;' }
           Team number
         %label.control-label.col-xs-7.label-normal
