@@ -113,7 +113,7 @@ class Sprint < ActiveRecord::Base
   end
 
   def previous
-    Sprint.where('id < ?', id).where(project: project).order('id DESC').first
+    Sprint.where('id < ?', id).where(project: project).order('id ASC').first
   end
 
   private
