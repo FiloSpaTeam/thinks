@@ -27,6 +27,7 @@ class Projects::Statistic < Project
   enum section: [:s_first, :s_second, :s_third]
 
   attr_accessor :with_section
+  attr_accessor :last_sprint
 
   filterrific(
     available_filters: [

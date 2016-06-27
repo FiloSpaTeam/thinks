@@ -16,8 +16,6 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 .well.no-print
-  %h3
-    General filters
   %h4
     Page filters
   - if current_page?(project_statistic_path)
@@ -33,3 +31,6 @@
       = f.label t('.print_third_section') do
         = f.radio_button(:with_section, Projects::Statistic.sections[:s_third])
         = t ".print_third_section"
+    %label.control-label
+      Select last sprint
+    = f.collection_select(:last_sprint, Sprint.unscoped.where(project_id: @statistic.id).order('serial DESC').offset(1), :id, :serial, {}, :class => 'form-control')

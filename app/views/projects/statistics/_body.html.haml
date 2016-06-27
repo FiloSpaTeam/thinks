@@ -78,7 +78,7 @@
       Section 1: Summary sprint
     %hr
     .row
-      - last_sprint     = @statistic.sprints.last.previous
+      - last_sprint     = @selected_sprint or @statistic.sprints.last.previous
       - previous_sprint = last_sprint.previous
       - previous_previous_sprint = nil
       - if previous_sprint.present?

@@ -28,7 +28,8 @@ class Projects::StatisticsController < ApplicationController
     ) || return
 
     unless params[:filterrific].nil?
-      @section = params[:filterrific][:with_section].to_i
+      @section         = params[:filterrific][:with_section].to_i
+      @selected_sprint = Sprint.find(params[:filterrific][:last_sprint].to_i)
     end
 
     @local_thinker = Thinker.friendly.find(params[:id])

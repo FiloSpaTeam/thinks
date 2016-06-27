@@ -16,6 +16,10 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 namespace :admin do
+  # task create_password: :environment do
+  #   puts ::BCrypt::Password.create("123123", :cost => 10).to_s
+  # end
+
   desc 'Allow admin to reset counters of database'
   task reset_counters: :environment do
     puts "Likes counter reset"
