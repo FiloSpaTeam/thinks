@@ -16,23 +16,24 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 .row
-  %label.control-label.col-xs-6
+  %label.col-xs-7
     Sprint number:
-  %label.control-label.col-xs-6.label-normal
+  %label.col-xs-5.label-normal
     = sprint.serial
-  %label.control-label.col-xs-6
+.row
+  %label.col-xs-7
     Tasks done:
-  %label.control-label.col-xs-6.label-normal
+  %label.col-xs-5.label-normal
     - thinker_tasks_done = tasks_done.where(worker: @local_thinker)
     = "#{thinker_tasks_done.count} / #{tasks_done.count} "
 .row
-  %label.control-label.col-xs-6
+  %label.col-xs-7
     Tasks in progress:
-  %label.control-label.col-xs-6.label-normal
+  %label.col-xs-5.label-normal
     - thinker_tasks_in_progress = tasks_in_progress.where(worker: @local_thinker)
     = "#{thinker_tasks_in_progress.count} / #{tasks_in_progress.count}"
 .row
-  %label.control-label.col-xs-6
+  %label.col-xs-7
     Total workload:
-  %label.control-label.col-xs-6.label-normal
+  %label.col-xs-5.label-normal
     = thinker_tasks_done.sum(:workload)

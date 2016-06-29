@@ -90,27 +90,33 @@
       - tasks_in_progress = @statistic.tasks.in_progress
       - tasks_in_progress_last_sprint = tasks_in_progress.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
 
-      .col-xs-4.text-center
-        %h4 Average
+      .col-xs-4
+        %h4.dark-grey
+          %strong
+            Average
         .row
-          %label.control-label.col-xs-6
+          %label.col-xs-7
             Tasks done:
-          %label.control-label.col-xs-6.label-normal
+          %label.col-xs-5.label-normal
             - numbers_of_tasks = @statistic.sprints.collect { |sprint| sprint.project.tasks.where('end_at < ?', sprint.created_at).where('end_at >= ?', sprint.previous.try(:created_at)).count }
             - average_tasks_done = (numbers_of_tasks.inject{ |sum, el| sum + el }.to_f / numbers_of_tasks.size).round(1)
             - thinker_tasks_done = tasks_done.where(worker: @local_thinker)
             = "#{average_tasks_done} (#{((thinker_tasks_done.count * 100 / average_tasks_done) - 100).round(1)}%)"
         .row
-          %label.control-label.col-xs-6
+          %label.col-xs-7
             Workload:
-          %label.control-label.col-xs-6.label-normal
+          %label.col-xs-5.label-normal
             - average_workload = @statistic.sprints.average(:obtained).round(2)
             = "#{average_workload} (#{((thinker_tasks_done.sum(:workload) * 100 / average_workload) - 100).round(1)}%)"
-      .col-xs-4.text-center
-        %h4 Last sprint
+      .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
+        %h4.dark-grey
+          %strong
+            Last sprint
         = render partial: 'numeric_summary', locals: { sprint: last_sprint, tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
-      .col-xs-4.text-center
-        %h4 Previous sprint
+      .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
+        %h4.dark-grey
+          %strong
+            Previous sprint
         - if previous_previous_sprint.present?
           - tasks_done_previous_sprint = tasks_done.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
           - tasks_in_progress_previous_sprint = tasks_in_progress.where('end_at < ?', previous_sprint.created_at).where('end_at >= ?', previous_previous_sprint.try(:created_at))
