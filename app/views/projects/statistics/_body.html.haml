@@ -89,7 +89,6 @@
 
       - tasks_in_progress = @statistic.tasks.in_progress
       - tasks_in_progress_last_sprint = tasks_in_progress.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
-
       .col-xs-4
         %h4.dark-grey
           %strong
@@ -108,11 +107,13 @@
           %label.col-xs-5.label-normal
             - average_workload = @statistic.sprints.average(:obtained).round(2)
             = "#{average_workload} (#{((thinker_tasks_done.sum(:workload) * 100 / average_workload) - 100).round(1)}%)"
+
       .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
         %h4.dark-grey
           %strong
             Last sprint
         = render partial: 'numeric_summary', locals: { sprint: last_sprint, tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
+
       .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
         %h4.dark-grey
           %strong
@@ -129,7 +130,7 @@
     %h4
       Last sprint 'Burn up'
     - total_workload = 0
-    - burn_up_data   = tasks_done_last_sprint.group_by_period(:day, :end_at).where('end_at >= ?', last_sprint.created_at).order('max(end_at)').sum(:workload)
+    - burn_up_data   = tasks_done_last_sprint.group_by_period(:day, :end_at).where('end_at >= ?', previous_sprint.created_at).order('max(end_at)').sum(:workload)
     - if burn_up_data.empty?
       - burn_up_data = { last_sprint.created_at => 0 }
     - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
@@ -139,7 +140,7 @@
       Previous sprint 'Burn up'
     - if previous_previous_sprint.present?
       - total_workload = 0
-      - burn_up_data   = tasks_done_previous_sprint.group_by_period(:day, :end_at).where('end_at >= ?', previous_sprint.created_at).order('max(end_at)').sum(:workload)
+      - burn_up_data   = tasks_done_previous_sprint.group_by_period(:day, :end_at).where('end_at >= ?', previous_previous_sprint.created_at).order('max(end_at)').sum(:workload)
       - if burn_up_data.empty?
         - burn_up_data = { previous_sprint.created_at => 0 }
       - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }

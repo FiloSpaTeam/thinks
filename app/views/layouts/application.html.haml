@@ -26,7 +26,7 @@
       = render 'shared/navbar'
       .container
         - if thinker_signed_in?
-          .sidebar
+          .sidebar.no-print
             = render 'layouts/sidebar'
         %div{ thinker_signed_in? ? {:class => :main} : {} }
           = bootstrap_flash
