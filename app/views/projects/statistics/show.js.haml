@@ -20,3 +20,5 @@
 - )
 $("#filterrific_results").html("#{js}");
 $("body").append('#{escape_javascript(yield :charts_js)}');
+
+window.onbeforeprint = function() {var charts = ['#chart-1', '#chart-2']; for (var i = 0; i < charts.length; ++i) {var chart = $(charts[i]).highcharts(); console.log(chart); chart.print();}};

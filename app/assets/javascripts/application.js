@@ -22,4 +22,7 @@
 //= require jquery.fileupload
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require highcharts
+//= require exporting.src
+//= require chartkick
 //= require_tree .

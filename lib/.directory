@@ -1,0 +1,10 @@
+[Dolphin]
+GroupedSorting=true
+PreviewsShown=true
+Timestamp=2016,7,1,23,50,55
+Version=3
+ViewMode=1
+VisibleRoles=Details_text,Details_size,Details_date,Details_type,Details_rating,Details_tags,Details_comment,Details_imageSize,Details_permissions,Details_owner,CustomizedDetails
+
+[Settings]
+HiddenFilesShown=true

@@ -2,13 +2,15 @@
     body {
         padding-top: 0;
 
+        -webkit-print-color-adjust: exact;
+
         .container { padding-top: 0 !important; }
     }
-
     a[href]:after { content: none !important; }
 
     .no-print, .no-print * { display: none !important; }
 
-    footer { display: none !important; }
+    .only-print, .only-print * { display: block !important; }
 
+    footer { display: none !important; }
 }
