@@ -13,4 +13,11 @@
     .only-print, .only-print * { display: block !important; }
 
     footer { display: none !important; }
+
+    canvas { width: 700px !important; }
+
+    .chart {
+        page-break-after: auto; 
+        page-break-inside: avoid;
+    }
 }

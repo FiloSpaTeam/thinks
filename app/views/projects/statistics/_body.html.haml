@@ -131,16 +131,17 @@
             %li.list-group-item.list-group-item-warning
               = t ".related_info_limited"
     %hr
-    %h4
+    %h4.chart
       Last sprint 'Burn up'
     - total_workload = 0
     - burn_up_data   = tasks_done_last_sprint.group_by_period(:day, :end_at).where('end_at >= ?', previous_sprint.created_at).where('end_at < ?', last_sprint.created_at).order('max(end_at)').sum(:workload)
     - if burn_up_data.empty?
       - burn_up_data = { last_sprint.created_at => 0 }
     - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
-    = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '77%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
+    .chart
+      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '77%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
     %hr
-    %h4
+    %h4.chart
       Previous sprint 'Burn up'
     - if previous_previous_sprint.present?
       - total_workload = 0
@@ -154,7 +155,7 @@
         %li.list-group-item.list-group-item-warning
           = t ".related_info_limited"
   - if @section && @section >= Projects::Statistic.sections[:s_second]
-    %h3
+    %h3{ style: 'page-break-before: always;' }
       Section 2: Tasks done
     - if tasks_done_last_sprint.empty?
       %li.list-group-item.list-group-item-warning
@@ -189,5 +190,5 @@
             = icon('quote-left', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
             = comment_approved.reason.text
   - if @section && @section >= Projects::Statistic.sections[:s_third]
-    %h3
+    %h3{ style: 'page-break-before: always;' }
       Section 3: Goals and releases
