@@ -34,7 +34,7 @@
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
         - if @project.present? && @project.id.present?
-          %li.visible-xs{ current_page?(project_sprints_path(@project)) ? { :class => :active } : {} }
+          %li.visible-xs{ current_page?(project_releases_path(@project)) ? { :class => :active } : {} }
             = link_to project_releases_path(@project) do
               = icon('flag-checkered', :class => "fa-lg")
               = t(".releases")
