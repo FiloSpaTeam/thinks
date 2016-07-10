@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resources :notifications do
     put :read
   end
+  put 'notifications/:project_id/read_all', to: 'notifications#read_all', as: 'notifications_read_all'
   get 'notifications_check' => 'notifications#check'
 
-  mount Attachinary::Engine => "/attachinary"
+  mount Attachinary::Engine => '/attachinary'
 
   resources :goals
   resources :cycles
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
     member do
       put :contribute
       put :elect
-      put :read_all
       put :migrate
     end
 

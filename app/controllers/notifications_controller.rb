@@ -106,6 +106,19 @@ class NotificationsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /notifications/1/read_all
+  # PATCH/PUT /notifications/1/read_all.json
+  def read_all
+    project = Project.with_deleted.friendly.find(params[:project_id])
+    @notifications = Notification.where(project: project)
+
+    current_thinker.notifications << @notifications
+    respond_to do |format|
+      format.html { redirect_to notifications_url, notice: 'All notifications read.' }
+      format.json { head :no_content }
+    end
+  end
+
   def check
     respond_to do |format|
       format.js { render layout: false }

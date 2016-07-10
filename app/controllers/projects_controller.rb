@@ -143,19 +143,6 @@ class ProjectsController < ApplicationController
   #   @tasks    = @project.tasks
   # end
 
-  # PATCH/PUT /notifications/1/read_all
-  # PATCH/PUT /notifications/1/read_all.json
-  def read_all
-    @project       = Project.friendly.find(params[:id])
-    @notifications = Notification.where(project: @project)
-
-    current_thinker.notifications << @notifications
-    respond_to do |format|
-      format.html { redirect_to notifications_url, notice: 'All notifications read.' }
-      format.json { head :no_content }
-    end
-  end
-
   def elect
     respond_to do |format|
       @voter = Voter.new(params.require(:voter).permit(:election_poll_id, :elect_id))

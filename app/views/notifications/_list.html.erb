@@ -39,7 +39,7 @@
                 <strong>
                     <%= notification.project.title %>
                 </strong>
-                <%= link_to read_all_project_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
+                <%= link_to notifications_read_all_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
                     <%= icon('check') %>
                 <% end %>
             </div>
