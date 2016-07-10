@@ -80,7 +80,7 @@
   %hr
   - if @section && @section >= Projects::Statistic.sections[:s_first]
     %h3
-      Section 1: Summary sprint
+      Section 1: Summary sprint about me
     .row
       - last_sprint     = @selected_sprint or @statistic.sprints.last.previous
       - previous_sprint = last_sprint.previous
@@ -131,6 +131,12 @@
             %li.list-group-item.list-group-item-warning
               = t ".related_info_limited"
     %hr
+    %h3
+      Section 1: Summary sprint compared to the other
+    %hr
+    %h3{ style: 'page-break-before: always;' }
+      Section 1: Charts
+    %hr
     %h4.chart
       Last sprint 'Burn up'
     - total_workload = 0
@@ -139,7 +145,7 @@
       - burn_up_data = { last_sprint.created_at => 0 }
     - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
     .chart
-      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '77%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
+      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '96%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
     %hr
     %h4.chart
       Previous sprint 'Burn up'
@@ -149,7 +155,7 @@
       - if burn_up_data.empty?
         - burn_up_data = { previous_sprint.created_at => 0 }
       - burn_up_data = burn_up_data.transform_keys { |key| key.strftime('%B %d') }
-      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '77%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
+      = area_chart burn_up_data.each { |key, value| burn_up_data[key] = total_workload += value }, library: { chartArea: { left: 25, width: '96%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8, navigation: { buttonOptions: { enabled: false }}}
     - else
       %ul.list-group
         %li.list-group-item.list-group-item-warning

@@ -42,7 +42,7 @@
           = pluralize project.tasks.size, 'task'
       .hidden-xs
         - if project.tasks.size.nonzero?
-          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "180px", library: { chartArea: { height: '100%', width: '92%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "180px", library: { chartArea: { height: '100%', width: '92%' }, series: { 0 => { lineWidth: 1 } }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
     .panel-body.hidden-xs
       %strong

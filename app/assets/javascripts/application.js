@@ -22,6 +22,5 @@
 //= require jquery.fileupload
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
-//= require Chart.bundle
 //= require chartkick
 //= require_tree .
