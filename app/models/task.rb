@@ -57,6 +57,7 @@ class Task < ActiveRecord::Base
   belongs_to :release
   belongs_to :thinker
   belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
+  belongs_to :updater, class_name: 'Thinker', foreign_key: 'who_updated_id'
   belongs_to :status
 
   before_create :generate_serial
@@ -249,30 +250,34 @@ class Task < ActiveRecord::Base
 
   def update_goal_and_release
     ActiveRecord::Base.transaction do
-      if goal.blank?
-        unless goal_id_was.blank?
-          goal_was = Goal.find(goal_id_was)
-          unless goal_was.blank?
-            goal_was.progress = goal_was.progress_percentage
-            goal_was.save
+      begin
+        if release.blank?
+          unless release_id_was.blank?
+            release_was = Release.find(release_id_was)
+            unless release_was.blank?
+              release_was.progress = release_was.progress_percentage
+              release_was.save
+            end
           end
+        else
+          release.progress = release.progress_percentage
+          release.save
         end
-      else
-        goal.progress = goal.progress_percentage
-        goal.save
-      end
 
-      if release.blank?
-        unless release_id_was.blank?
-          release_was = Release.find(release_id_was)
-          unless release_was.blank?
-            release_was.progress = release_was.progress_percentage
-            release_was.save
+        if goal.blank?
+          unless goal_id_was.blank?
+            goal_was = Goal.find(goal_id_was)
+            unless goal_was.blank?
+              goal_was.progress = goal_was.progress_percentage
+              goal_was.save
+            end
           end
+        else
+          goal.progress = goal.progress_percentage
+          goal.save
         end
-      else
-        release.progress = release.progress_percentage
-        release.save
+      rescue => ex
+        puts ex.message
       end
     end
   end

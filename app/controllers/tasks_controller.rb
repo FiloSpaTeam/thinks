@@ -72,7 +72,7 @@ class TasksController < ApplicationController
     @project_form = nil
     @project      = @task.project
 
-    if current_thinker != @task.thinker
+    if current_thinker != @task.thinker && !scrum_master?(@task.project)
       respond_to do |format|
         format.html { redirect_to @task, alert: "You cannot edit this." }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -83,7 +83,12 @@ class TasksController < ApplicationController
   # POST /projects/1/tasks
   # POST /projects/1/tasks.json
   def create
-    @task         = Task.new(task_params)
+    @task = Task.new(task_params)
+
+    if !scrum_master?(@project)
+      @task.release = nil
+    end
+
     @task.project = @project
     @task.thinker = current_thinker
 
@@ -107,12 +112,18 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @task.updater = current_thinker
+
     respond_to do |format|
-      if current_thinker == @task.thinker && @task.update(task_params)
+      if (current_thinker == @task.thinker || scrum_master?(@task.project)) && @task.update(task_params)
         create_notification(@task, @task.project)
+
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
+        @project = @task.project
+        set_validators_for_form_help
+
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end

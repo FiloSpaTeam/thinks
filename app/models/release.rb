@@ -64,7 +64,7 @@ class Release < ActiveRecord::Base
   }
 
   def complete_title
-    "#{self.title} (v#{version})"
+    "#{title} (v#{version})"
   end
 
   def progress_percentage
@@ -72,8 +72,8 @@ class Release < ActiveRecord::Base
 
     tasks_done = tasks.where(status_id: Status.done)
 
-    total_tasks_number      = tasks.length
-    total_tasks_done_number = tasks_done.length
+    total_tasks_number      = tasks.count
+    total_tasks_done_number = tasks_done.count
 
     @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
   end

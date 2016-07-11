@@ -17,9 +17,10 @@
 
 = form_for [@project_form, @task] do |f|
   .panel-body
-    .form-group
-      = f.label :release_id, t('.release'), :class => "control-label"
-      = f.select :release_id, options_from_collection_for_select(@task.project.releases, 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
+    - if scrum_master?(@project)
+      .form-group
+        = f.label :release_id, t('.release'), :class => "control-label"
+        = f.select :release_id, options_from_collection_for_select(@task.project.releases, 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
     .form-group
       = f.label :goal_id, t('.goal'), :class => "control-label"
       = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('no_goal')}, :class => "form-control"
