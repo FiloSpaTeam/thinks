@@ -43,7 +43,7 @@
         %td
           %strong.hidden-xs.hidden-sm
             %small.dark-grey
-              = task.updated_at.to_s(:short)
+              \##{task.serial}
               ·
             = link_to task.title.truncate(30), task_path(task), :title => task.title
           %strong.visible-xs
@@ -56,9 +56,16 @@
                 = plain_text(task.description.squish).truncate(120)
           .dark-grey
             %small
+              created at
               %strong
-                \##{task.serial}
-                by #{task.thinker.name}
+                = task.created_at.to_s(:short)
+              by #{task.thinker.name}
+          .dark-grey
+            %small
+              updated at
+              %strong
+                = task.updated_at.to_s(:short)
+              by #{task.updater.name}
         %td.text-center
           .col-xs-12.workload-table
             = workload_description(task)

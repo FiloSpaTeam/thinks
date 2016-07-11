@@ -91,6 +91,7 @@ class TasksController < ApplicationController
 
     @task.project = @project
     @task.thinker = current_thinker
+    @task.updater = current_thinker
 
     respond_to do |format|
       if @task.save
