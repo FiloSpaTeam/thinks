@@ -50,7 +50,7 @@
             <% if notification.project.deleted? %>
                 <%= title_for(notification) %>
             <% else %>
-                <%= link_to (url_for_notifications(notification)) do %>
+                <%= link_to (notification_follow_path(notification)) do %>
                     <%= title_for(notification) %>
                 <% end %>
             <% end %>

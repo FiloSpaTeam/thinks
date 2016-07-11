@@ -40,7 +40,7 @@
               = approve_button(comment)
             - if !@task.done?
               = like_button(comment)
-            - if comment.thinker == current_thinker
+            - if comment.thinker == current_thinker && !@task.done?
               = edit_button(comment)
               - if !@task.done? && !@task.in_progress?
                 = delete_button(comment)

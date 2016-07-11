@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :notifications do
     put :read
+    get :follow
   end
   put 'notifications/:project_id/read_all', to: 'notifications#read_all', as: 'notifications_read_all'
   get 'notifications_check' => 'notifications#check'

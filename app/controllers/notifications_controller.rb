@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class NotificationsController < ApplicationController
+  include NotificationsHelper
+
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_thinker!
 
@@ -122,6 +124,17 @@ class NotificationsController < ApplicationController
   def check
     respond_to do |format|
       format.js { render layout: false }
+    end
+  end
+
+  def follow
+    notification = Notification.find(params[:notification_id])
+
+    current_thinker.notifications << notification
+
+    respond_to do |format|
+      format.html { redirect_to url_for_notifications(notification), notice: 'Notification mark as read.' }
+      format.json { head :no_content }
     end
   end
 
