@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711202520) do
+ActiveRecord::Schema.define(version: 20160715200047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,14 @@ ActiveRecord::Schema.define(version: 20160711202520) do
   add_index "projects", ["license_id"], name: "index_projects_on_license_id", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
 
+  create_table "projects_skills", id: false, force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "skill_id",   null: false
+  end
+
+  add_index "projects_skills", ["project_id", "skill_id"], name: "index_projects_skills_on_project_id_and_skill_id", using: :btree
+  add_index "projects_skills", ["skill_id", "project_id"], name: "index_projects_skills_on_skill_id_and_project_id", using: :btree
+
   create_table "reasons", force: :cascade do |t|
     t.text     "text"
     t.integer  "comment_id"
@@ -281,6 +289,21 @@ ActiveRecord::Schema.define(version: 20160711202520) do
   create_table "sexes", force: :cascade do |t|
     t.string "t_name"
   end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "t_name"
+    t.string   "t_description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "skills_thinkers", id: false, force: :cascade do |t|
+    t.integer "skill_id",   null: false
+    t.integer "thinker_id", null: false
+  end
+
+  add_index "skills_thinkers", ["skill_id", "thinker_id"], name: "index_skills_thinkers_on_skill_id_and_thinker_id", using: :btree
+  add_index "skills_thinkers", ["thinker_id", "skill_id"], name: "index_skills_thinkers_on_thinker_id_and_skill_id", using: :btree
 
   create_table "sprints", force: :cascade do |t|
     t.integer  "obtained"

@@ -31,6 +31,7 @@ class Project < ActiveRecord::Base
   has_attachment :main_image, accept: [:jpg, :png]
 
   has_and_belongs_to_many :languages
+  has_and_belongs_to_many :skills
 
   has_many :contributions
   has_many :assigned_roles

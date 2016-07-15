@@ -89,15 +89,15 @@
                   %a{ href: '#' }
                     %strong
                       =t 'shared.profilebar.general'
-                %li.visible-xs.visible-sm{current_page?(thinker_path) ? { :class => :active } : {} }
+                %li.visible-xs.visible-sm{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.personal'), thinker_path(@thinker))
                 %li.visible-xs.visible-sm
                   %a{ href: '#' }
                     %strong
                       =t 'shared.profilebar.security_and_privacy'
-                %li.visible-xs.visible-sm{current_page?(edit_password_path) ? { :class => :active } : {} }
+                %li.visible-xs.visible-sm{current_page?(edit_password_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.password'), edit_password_path(@thinker))
-                %li.visible-xs.visible-sm{current_page?(otp_path) ? { :class => :active } : {} }
+                %li.visible-xs.visible-sm{current_page?(otp_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.double_authentication'), otp_path(@thinker))
                 = menu_divider
               - else

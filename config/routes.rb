@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   resources :workloads
   resources :statuses
   resources :dependences
-  resources :thinkers, except: [:index]
+  resources :thinkers, except: [:index] do
+    resources :skills, except: [:show], controller: 'thinkers/skills'
+  end
   resources :licenses
   resources :languages
   resources :projects do

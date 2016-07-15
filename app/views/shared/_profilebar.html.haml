@@ -19,14 +19,15 @@
   .panel-heading
     %strong=t '.general'
   .list-group
-    = link_to(t('.personal'), thinker_path(@thinker), :class => "list-group-item #{ current_page?(thinker_path) ? 'active' : '' }")
+    = link_to(t('.personal'), thinker_path(@thinker), :class => "list-group-item #{ current_page?(thinker_path(@thinker)) ? 'active' : '' }")
+    = link_to(t('.skills'), thinker_skills_path(@thinker), :class => "list-group-item #{ current_page?(thinker_skills_path(@thinker)) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.design')
   .panel-heading
     %strong=t '.security_and_privacy'
   .list-group
-    = link_to(t('.password'), edit_password_path(@thinker), :class => "list-group-item #{ current_page?(edit_password_path) ? 'active' : '' }")
-    = link_to(t('.double_authentication'), otp_path(@thinker), :class => "list-group-item #{ current_page?(otp_path) ? 'active' : '' }")
+    = link_to(t('.password'), edit_password_path(@thinker), :class => "list-group-item #{ current_page?(edit_password_path(@thinker)) ? 'active' : '' }")
+    = link_to(t('.double_authentication'), otp_path(@thinker), :class => "list-group-item #{ current_page?(otp_path(@thinker)) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.privacy')
     %a{ href: "#", class: "list-group-item disabled" }

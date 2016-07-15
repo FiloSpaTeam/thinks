@@ -216,3 +216,40 @@ team_roles.each do |tname|
     .where(t_name: tname)
     .first_or_create
 end
+
+skills_list = [
+  ['computer_scientist',     'computer_scientist_description'],
+  ['passion',                'passion_description'],
+  ['fearless_refactor',      'fearless_refactor_description'],
+  ['quality_code',           'quality_code_description'],
+  ['dont_invent_new_wheel',  'dont_invent_new_wheel_description'],
+  ['maintainability',        'maintainability_description'],
+  ['multiple_languages',     'multiple_languages_description'],
+  ['vision',                 'vision_description'],
+  ['attention_to_details',   'attention_to_details_description'],
+  ['business_vision',        'business_vision_description'],
+  ['curiosity',              'curiosity_description'],
+  ['experience',             'experience_description'],
+  ['discipline',             'discipline_description'],
+  ['patience',               'patience_description'],
+  ['teamwork',               'teamwork_description'],
+  ['guide_for_others',       'guide_for_others_description'],
+  ['problem_solver',         'problem_solver_description'],
+  ['quickly_learning',       'quickly_learning_description'],
+  ['analytical_thinking',    'analytical_thinking_description'],
+  ['critical_thinking',      'critical_thinking_description'],
+  ['license_expert',         'license_expert_description'],
+  ['user_experience_expert', 'user_experience_expert_description'],
+  ['mathematician',          'mathematician_description'],
+  ['query_expert',           'query_expert_description'],
+  ['designer',               'designer_description'],
+  ['mobile_expert',          'mobile_expert_description'],
+]
+
+skills_list.each do |tname, tdescription|
+  Skill
+    .where(t_name: tname)
+    .first_or_create do |skill|
+      skill.t_description = tdescription
+    end
+end
