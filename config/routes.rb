@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :statuses
   resources :dependences
   resources :thinkers, except: [:index] do
-    resources :skills, except: [:show], controller: 'thinkers/skills'
+    resources :skills, except: [:show, :update, :edit], controller: 'thinkers/skills'
   end
   resources :licenses
   resources :languages

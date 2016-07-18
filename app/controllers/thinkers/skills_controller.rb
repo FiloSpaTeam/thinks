@@ -40,6 +40,16 @@ class Thinkers::SkillsController < ApplicationController
     end
   end
 
+  def destroy
+    @skill = Skill.find(params[:id])
+    respond_to do |format|
+      @thinker.skills.delete(@skill)
+
+      format.html { redirect_to thinker_skills_path(@thinker), notice: 'Skill was successfully removed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_thinker
