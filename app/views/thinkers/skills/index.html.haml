@@ -25,8 +25,19 @@
         %h4
           %strong
             = t ".your_skills"
-      .panel-body
+      %ul.list-group
+        - if @thinker.skills.empty?
+          %li.list-group-item
+            No skills added
+        - else
+          - @thinker.skills.each do |skill|
+            %li.list-group-item
+              = t "skill.#{skill.t_name}"
+      .panel-footer
         - if @thinker.skills.count < 5
-          = form_for @thinker, url: thinker_skills_path(@thinker), action: :create do |f|
-            = f.collection_select :skill_ids, Skill.all, 'id', 't_name', {}, class: 'form-control'
-            = f.submit
+          = form_for @thinker, url: thinker_skills_path(@thinker), method: :post do |f|
+            .form-group
+              = f.select :skill_ids, options_for_select(Skill.order('t_name').all.map{ |s| [t("skill.#{s.t_name}"), s.id] }, disabled: @thinker.skills.map(&:id)), class: 'form-control'
+            = f.submit 'Add skill', :class => 'btn btn-primary'
+        - else
+          Max number of skills is 5

@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   # At the moment we need to redirect others, later will be there a public page
   def check_owner!
-    redirect_to root_url unless current_thinker.slug == params[:id]
+    redirect_to root_url unless current_thinker.slug == params[:id] || current_thinker.slug == params[:thinker_id]
   end
 
   def check_admin!

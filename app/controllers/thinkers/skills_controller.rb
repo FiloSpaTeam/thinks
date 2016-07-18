@@ -17,16 +17,38 @@
 
 class Thinkers::SkillsController < ApplicationController
   before_action :authenticate_thinker!
-  before_action :check_owner!, except: [:index]
+  before_action :check_owner!
   before_action :set_thinker
 
   def index
 
   end
 
+  def create
+    @skill = Skill.find(skill_params[:skill_ids])
+
+    respond_to do |format|
+      if @skill.nil?
+        format.html { redirect_to thinker_skills_path(@thinker), alert: 'Skill does not exists.' }
+        format.json { render json: {}, status: :unprocessable_entity }
+      else
+        @thinker.skills << @skill
+
+        format.html { redirect_to thinker_skills_path(@thinker), notice: 'Skill added to list.' }
+        format.json { render :index, status: :created }
+      end
+    end
+  end
+
   private
 
   def set_thinker
     @thinker = Thinker.friendly.find(params[:thinker_id])
+  end
+
+  def skill_params
+    allowed_params = [:skill_ids]
+
+    params.require(:thinker).permit(allowed_params)
   end
 end
