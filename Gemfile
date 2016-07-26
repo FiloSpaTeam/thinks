@@ -70,6 +70,9 @@ gem 'devise', '3.5.5'
 gem 'devise-two-factor'
 gem 'rqrcode-rails3'
 
+# API Token authentication
+gem 'simple_token_authentication', '~> 1.0'
+
 # Friendly urls
 gem 'friendly_id', '~> 5.1.0'
 

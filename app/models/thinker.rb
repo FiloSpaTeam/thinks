@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Thinker < ActiveRecord::Base
+  acts_as_token_authenticatable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable,
