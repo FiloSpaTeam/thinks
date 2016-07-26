@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
       end
 
       format.html
-      format.json { render json: @projects }
+      format.json { render :json => { :projects => @projects } }
     end
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
