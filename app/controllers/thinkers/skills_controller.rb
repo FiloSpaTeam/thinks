@@ -21,7 +21,6 @@ class Thinkers::SkillsController < ApplicationController
   before_action :set_thinker
 
   def index
-
   end
 
   def create

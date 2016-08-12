@@ -103,6 +103,16 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root "start#index"
 
+  # namespace :api do
+  #   namespace :v1 do
+  #     devise_for :thinkers, :controllers => {
+  #       :sessions      => 'api/v1/thinkers/sessions',
+  #       :registrations => 'api/v1/thinkers/registrations',
+  #       # :notifications => 'notifications'
+  #     }
+  #   end
+  # end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

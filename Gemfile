@@ -85,6 +85,10 @@ gem 'groupdate', '~> 2.5.1'
 gem 'active_median', '~> 0.1.2'
 gem 'chartkick', '~> 2.0.0'
 
+# API
+gem 'rabl'
+gem 'oj'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
