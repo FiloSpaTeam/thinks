@@ -34,7 +34,7 @@
             %li.list-group-item
               = link_to thinker_skill_path(@thinker, skill), data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'pull-right' do
                 = icon('remove', :class => "text-danger fa-lg")
-              = t "skill.#{skill.t_name}"
+              = t "skills.#{skill.t_name}"
       .panel-footer
         - if @thinker.skills.count < 5
           = form_for @thinker, url: thinker_skills_path(@thinker), method: :post do |f|

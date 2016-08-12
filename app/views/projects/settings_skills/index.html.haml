@@ -34,7 +34,7 @@
             %li.list-group-item
               = link_to project_settings_skill_path(@project, skill), data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'pull-right' do
                 = icon('remove', :class => "text-danger fa-lg")
-              = t "skill.#{skill.t_name}"
+              = t "skills.#{skill.t_name}"
       .panel-footer
         - if @project.skills.count < 8
           = form_for @project, url: project_settings_skills_path(@project), method: :post do |f|

@@ -292,6 +292,34 @@ en:
     index:
       add: "Add operation"
 
+  skills:
+    computer_scientist: "Computer scientist"
+    passion: "Passion"
+    fearless_refactor: "Fearless refactor"
+    quality_code: "Quality code"
+    dont_invent_new_wheel: "Don't invent new wheel"
+    maintainability: "Maintainability"
+    multiple_languages: "Multiple languages"
+    vision: "Vision"
+    attention_to_details: "Attention to details"
+    business_vision: "Business vision"
+    curiosity: "Curiosity"
+    experience: "Experience"
+    discipline: "Discipline"
+    patience: "Patience"
+    teamwork: "Teamwork"
+    guide_for_others: "Guide for others"
+    problem_solver: "Problem solver"
+    quickly_learning: "Quickly learning"
+    analytical_thinking: "Analytical thinking"
+    critical_thinking: "Critical thinking"
+    license_expert: "License expert"
+    user_experience_expert: "User experience expert"
+    mathematician: "Mathematician"
+    query_expert: "Query expert"
+    designer: "Designer"
+    mobile_expert: "Mobile expert"
+
   # Shared section
   shared:
     navbar:
