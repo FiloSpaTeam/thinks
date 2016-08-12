@@ -72,6 +72,18 @@
         = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
   .panel-body.hidden-xs
     %strong
+      Skill requirements
+  .list-group.hidden-xs
+    .list-group-item
+      - if project.skills.empty?
+        No skill required
+      - else
+        %ul{ style: 'margin-bottom: 0; padding-left: 15px;' }
+          - project.skills.each do |skill|
+            %li
+              = t("skill.#{skill.t_name}")
+  .panel-body.hidden-xs
+    %strong
       URLs
   .list-group.hidden-xs
     .list-group-item

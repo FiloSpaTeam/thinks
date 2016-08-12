@@ -86,8 +86,8 @@ gem 'active_median', '~> 0.1.2'
 gem 'chartkick', '~> 2.0.0'
 
 # API
-gem 'rabl'
-gem 'oj'
+gem 'rabl', '0.13.0'
+gem 'oj', '2.17.1'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
