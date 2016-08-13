@@ -99,6 +99,7 @@ module ApplicationHelper
 
   def highlights_searched_text(text, search)
     text
+      .strip
       .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</u></span>")
       .html_safe
   end

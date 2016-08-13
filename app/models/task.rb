@@ -130,7 +130,7 @@ class Task < ActiveRecord::Base
   }
 
   scope :search_title_and_description, lambda { |query|
-    where("lower(title) LIKE '%#{query.downcase}%' or lower(description) LIKE '%#{query.downcase}%'")
+    where("lower(title) LIKE '%#{query.downcase.strip}%' or lower(description) LIKE '%#{query.downcase.strip}%'")
   }
 
   scope :search_goal, lambda { |title|
