@@ -96,4 +96,10 @@ module ApplicationHelper
           });
         });", defer: 'defer')
   end
+
+  def highlights_searched_text(text, search)
+    text
+      .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</u></span>")
+      .html_safe
+  end
 end

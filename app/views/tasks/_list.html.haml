@@ -53,7 +53,7 @@
           .dark-grey
             %small
               %em
-                = plain_text(task.description.squish).truncate(120)
+                = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
           .dark-grey.hidden-xs
             %small
               created at

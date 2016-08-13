@@ -41,6 +41,11 @@ class TasksController < ApplicationController
     ) || return
     @tasks    = @filterrific.find.where(project: @project).page params[:page]
     @statuses = Status.all
+
+    @search = ''
+    if params.has_key?(:filterrific) && params[:filterrific].has_key?(:search_title_and_description)
+      @search = params[:filterrific][:search_title_and_description]
+    end
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{e.message}"
