@@ -25,7 +25,7 @@ class Task < ActiveRecord::Base
     available_filters: [
       :sorted_by,
 
-      :search_title,
+      :search_title_and_description,
       :search_release,
       :search_goal,
       :search_thinker,
@@ -129,8 +129,8 @@ class Task < ActiveRecord::Base
     result.where('updated_at < ?', sprint.next.created_at)
   }
 
-  scope :search_title, lambda { |query|
-    where('title LIKE ?', "%#{query}%")
+  scope :search_title_and_description, lambda { |query|
+    where("lower(title) LIKE '%#{query.downcase}%' or lower(description) LIKE '%#{query.downcase}%'")
   }
 
   scope :search_goal, lambda { |title|
