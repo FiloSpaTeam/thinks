@@ -37,7 +37,10 @@
             = filterrific_sorting_link(@filterrific, :workload)
     %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
 %tbody
-  - if (!tasks.empty?)
+  - if !tasks.empty?
+    - if !@search.empty?
+      - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); puts task.count_occurrences(@search); }.reverse
+
     - tasks.each do |task|
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td

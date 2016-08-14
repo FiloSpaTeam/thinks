@@ -246,6 +246,10 @@ class Task < ActiveRecord::Base
     return true if status == Status.in_progress.first
   end
 
+  def count_occurrences(search)
+    (title.scan(/#{search}/).count * 2) + description.scan(/#{search}/).count
+  end
+
   private
 
   def update_goal_and_release
