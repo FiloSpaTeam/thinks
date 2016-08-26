@@ -21,10 +21,6 @@
       %strong
         \##{task.serial}
         = link_to task.title, task_path(task)
-    %small.dark-grey
-      created at <strong>#{task.created_at.to_s(:long)}</strong> by #{task.thinker.name}
-      %br
-      updated at <strong>#{task.updated_at.to_s(:long)}</strong> by #{task.updater.name}
   .panel-body
     = markdown(task.description)
   - if task.thinker == current_thinker || scrum_master?(task.project)
