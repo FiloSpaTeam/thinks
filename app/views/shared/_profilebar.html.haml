@@ -35,6 +35,7 @@
   .panel-heading
     %strong=t '.preferences'
   .list-group
+    = link_to(t('.notifications'), thinker_notifications_path(@thinker), :class => "list-group-item #{ current_page?(thinker_notifications_path(@thinker)) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.views')
     %a{ href: "#", class: "list-group-item disabled" }

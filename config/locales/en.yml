@@ -127,6 +127,28 @@ en:
       photo: "Photo"
     form:
       photo: "Photo"
+    notifications:
+      index:
+        sending_type_0: "Only via web UI"
+        sending_type_1: "Only via emails"
+        sending_type_2: "Web UI and emails"
+
+        sending_type: "Sending type"
+
+        minimum_consideration_for_sending: "Minimum consideration for sending"
+        minimum_consideration_for_sending_description: "Consideration levels:"
+
+        minimum_consideration_for_sending_description_0: "one: all notifications are sent"
+        minimum_consideration_for_sending_description_1: "two: no notifications about something where i've not contributed (example, voted tasks)"
+        minimum_consideration_for_sending_description_2: "three: only notifications about my personal work (tasks created..)"
+        minimum_consideration_for_sending_description_3: "four: only notifications about project progress"
+        minimum_consideration_for_sending_description_4: "five: no consideration"
+
+        minimum_consideration_for_sending_0: "One"
+        minimum_consideration_for_sending_1: "Two"
+        minimum_consideration_for_sending_2: "Three"
+        minimum_consideration_for_sending_3: "Four"
+        minimum_consideration_for_sending_4: "Five"
 
   password:
     form:

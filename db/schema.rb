@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725201943) do
+ActiveRecord::Schema.define(version: 20160827070700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,16 @@ ActiveRecord::Schema.define(version: 20160725201943) do
     t.string   "model"
     t.integer  "model_id"
   end
+
+  create_table "notifications_preferences", force: :cascade do |t|
+    t.integer  "thinker_id"
+    t.integer  "sending_type",                      default: 0
+    t.integer  "minimum_consideration_for_sending", default: 0
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "notifications_preferences", ["thinker_id"], name: "index_notifications_preferences_on_thinker_id", using: :btree
 
   create_table "notifications_thinkers", id: false, force: :cascade do |t|
     t.integer "notification_id"

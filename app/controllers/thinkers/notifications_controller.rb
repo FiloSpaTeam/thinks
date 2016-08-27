@@ -15,28 +15,23 @@
 
 # Copyright (c) 2015, Claudio Maradonna
 
-class Thinkers::SessionsController < Devise::SessionsController
-  # before_filter :configure_sign_in_params, only: [:create]
+class Thinkers::NotificationsController < ApplicationController
+  before_action :set_thinker
+  before_action :authenticate_thinker!
+  before_action :check_owner!
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def index
+    if @thinker.notifications_preference.nil?
+      @notifications_preference = NotificationsPreference.new
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+      @notifications_preference.thinker = @thinker
+      @notifications_preference.save
+    end
+  end
 
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  private
 
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.for(:sign_in) << :attribute
-  # end
+  def set_thinker
+    @thinker = Thinker.friendly.find(params[:thinker_id])
+  end
 end

@@ -1,0 +1,42 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015, Claudio Maradonna
+
+= render partial: 'shared/profileheader', locals: { thinker: @thinker }
+.row
+  .col-md-4
+    = render partial: 'shared/profilebar', locals: { thinker: @thinker }
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %strong
+            = t ".notifications_preferences"
+      .panel-body
+        .form-group
+          %label.control-label
+            = t('.sending_type')
+          %input.form-control{ type:"text", readonly: true, value: t(".sending_type_#{@thinker.notifications_preference.sending_type}") }
+        .form-group
+          %label.control-label
+            = t('.minimum_consideration_for_sending')
+          %input.form-control{ type:"text", readonly: true, value: t(".minimum_consideration_for_sending_#{@thinker.notifications_preference.sending_type}") }
+          %span.help-block
+            = t('.minimum_consideration_for_sending_description')
+            %ul
+              - NotificationsPreference.minimum_considerations_for_sendings.each do |i|
+                %li
+                  = t(".minimum_consideration_for_sending_description_#{i[1]}")
