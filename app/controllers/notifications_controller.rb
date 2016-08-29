@@ -101,7 +101,8 @@ class NotificationsController < ApplicationController
   def read
     @notification = Notification.find(params[:notification_id])
 
-    current_thinker.notifications << @notification
+    mark_as_read_similar_notifications(@notification)
+
     respond_to do |format|
       format.html { redirect_to notifications_url, notice: 'Notification read.' }
       format.json { head :no_content }
@@ -130,7 +131,7 @@ class NotificationsController < ApplicationController
   def follow
     notification = Notification.find(params[:notification_id])
 
-    current_thinker.notifications << notification
+    mark_as_read_similar_notifications(notification)
 
     respond_to do |format|
       format.html { redirect_to url_for_notifications(notification), notice: 'Notification mark as read.' }
@@ -143,6 +144,21 @@ class NotificationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_notification
     @notification = Notification.find(params[:id])
+  end
+
+  def mark_as_read_similar_notifications(notification)
+    similar_notifications = Notification
+                            .user(current_thinker)
+                            .where(project: notification.project)
+                            .where(controller: notification.controller)
+                            .where(action: notification.action)
+                            .where(model: notification.model)
+                            .where(model_id: notification.model_id)
+
+    current_thinker.notifications << notification
+    similar_notifications.each do |notification_m|
+      current_thinker.notifications << notification_m
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

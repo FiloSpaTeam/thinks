@@ -21,12 +21,6 @@ class Thinkers::NotificationsController < ApplicationController
   before_action :check_owner!
 
   def index
-    if @thinker.notifications_preference.nil?
-      @notifications_preference = NotificationsPreference.new
-
-      @notifications_preference.thinker = @thinker
-      @notifications_preference.save
-    end
   end
 
   private
