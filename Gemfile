@@ -27,6 +27,9 @@ gem 'bootstrap-sass-extras', '0.0.6'
 # Datepicker Bootstrap (maybe we can do without that?)
 gem 'bootstrap-datepicker-rails', '1.5.0'
 
+# Time in words
+gem 'time_ago_in_words'
+
 # Holder.js for placeholder images
 gem 'holder_rails', '~> 2.9.0'
 

@@ -135,7 +135,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
-    haml_lint (0.18.1)
+    haml_lint (0.18.2)
       haml (~> 4.0)
       rake (>= 10, < 12)
       rubocop (>= 0.36.0)
@@ -284,6 +284,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    time_ago_in_words (0.1.1)
     timeliness (0.3.8)
     turbolinks (2.5.3)
       coffee-rails
@@ -356,6 +357,7 @@ DEPENDENCIES
   spring
   sprockets-rails (= 2.3.3)
   therubyracer (~> 0.12.2)
+  time_ago_in_words
   turbolinks (~> 2.5)
   uglifier (= 2.7.2)
   validates_timeliness (~> 4.0)
