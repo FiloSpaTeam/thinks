@@ -48,6 +48,7 @@ class Project < ActiveRecord::Base
   has_many :election_polls
   has_many :releases
   has_many :notifications
+  has_many :banned_thinkers
 
   belongs_to :license
   belongs_to :thinker

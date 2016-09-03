@@ -73,6 +73,8 @@ en:
   yourself: "yourself"
   remaining_days: "%{days} remaining days"
   get_donate_button_from_paypal: "You can get a valid HTML tag from PayPal donation system."
+  ban_from_project: "Ban from project"
+  if_are_you_sure_want_ban_this_member: "If you really want to ban this thinker, provide a valid reason. (160 chars max)."
 
   layouts:
     application:
@@ -248,6 +250,9 @@ en:
       select_new_candidate: "Select a new candidate for elections"
       candidate: "Candidate"
       you_voted_for: "You voted for"
+    ban:
+      thinker_banned: "This thinker is banned. Now he cannot contribute. Maybe one day will be better."
+      reason_empty: "You need to specify a reason to ban a thinker."
 
   notifications:
     list:
@@ -283,6 +288,9 @@ en:
         update: "%{thinker} was elected to the position of %{team_role}"
       elections:
         update: "The election poll was %{status}"
+      releases:
+        create: "%{thinker} created release %{release}."
+        update: "%{thinker} updated release %{release}."
 
   sex:
     male: "Male"

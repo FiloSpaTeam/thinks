@@ -44,7 +44,11 @@ Rails.application.routes.draw do
       put :migrate
     end
 
-    resources :teams
+    resources :teams do
+      member do
+        get 'ban'
+      end
+    end
 
     resources :statistics, only: [:show], controller: 'projects/statistics'
 

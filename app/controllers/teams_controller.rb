@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
 
   before_action :authenticate_thinker!
   before_action :set_project
-  before_action :set_thinker, only: [:destroy]
+  before_action :set_thinker, only: [:destroy, :ban]
   before_action :set_contribution, only: [:index]
 
   def index
@@ -85,6 +85,25 @@ class TeamsController < ApplicationController
     end
   end
 
+  def ban
+    @banned_thinker = BannedThinker.new(ban_params)
+
+    respond_to do |format|
+      if @banned_thinker.reason.empty?
+        format.html { redirect_to project_teams_path(@project), alert: t('.reason_empty') }
+        format.json { head :no_content }
+      else
+        @banned_thinker.thinker = @thinker
+        @banned_thinker.project = @project
+
+        @banned_thinker.save
+
+        format.html { redirect_to project_teams_path(@project), notice: t('.thinker_banned') }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   private
 
   def set_thinker
@@ -96,5 +115,11 @@ class TeamsController < ApplicationController
                     .where(thinker: current_thinker)
                     .where(project: @project)
                     .first_or_initialize
+  end
+
+  def ban_params
+    allowed_params = [:reason]
+
+    params.require(:banned_thinker).permit(allowed_params)
   end
 end

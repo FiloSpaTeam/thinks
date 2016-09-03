@@ -44,6 +44,8 @@ module Rethink
       g.template_engine :haml
     end
 
+    config.middleware.use I18n::JS::Middleware
+
     require 'attachinary/orm/active_record' # active_record or mongoid
   end
 end

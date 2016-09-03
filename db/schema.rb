@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829105002) do
+ActiveRecord::Schema.define(version: 20160902105407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,12 @@ ActiveRecord::Schema.define(version: 20160829105002) do
   end
 
   add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
+
+  create_table "banned_thinkers", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "thinker_id"
+    t.string  "reason",     limit: 160
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "t_name"

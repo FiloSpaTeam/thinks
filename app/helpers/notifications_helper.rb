@@ -38,14 +38,15 @@ module NotificationsHelper
   end
 
   def icon_for(notification)
-    if notification.action == 'create'
-      icon('plus-circle', :class => "fa-lg fa-fw")
-    elsif notification.action == 'update'
-      icon('refresh', :class => "fa-lg fa-fw")
-    elsif notification.action == 'destroy'
-      icon('remove', :class => "fa-lg fa-fw")
+    case notification.action
+    when 'create'
+      icon('plus-circle', class: 'fa-lg fa-fw')
+    when 'update'
+      icon('refresh', class: 'fa-lg fa-fw')
+    when 'destroy'
+      icon('remove', class: 'fa-lg fa-fw')
     else
-      icon('bolt', :class => "fa-lg fa-fw")
+      icon('bolt', class: 'fa-lg fa-fw')
     end
   end
 
@@ -57,43 +58,48 @@ module NotificationsHelper
       model = model.find_by_id notification.model_id
     end
 
-    if notification.controller == 'tasks'
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name,
-        task: model.title
-    elsif notification.controller == 'operations'
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name,
-        task: model.task.title
-    elsif notification.controller == 'goals'
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name,
-        goal: model.title
-    elsif notification.controller == 'sprints'
-      t ".#{ notification.controller }.#{ notification.action }",
-        serial: model.serial,
-        total: model.obtained
-    elsif notification.controller == 'comments'
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name,
-        task: model.task.title
-    elsif notification.controller == 'projects'
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: notification.thinker.name
-    elsif notification.controller == 'assigned_roles'
-      assigned_role_klass = notification.model.constantize
-      assigned_role = assigned_role_klass.find(notification.model_id)
+    t ".#{notification.controller}.#{notification.action}",
+      case notification.controller
+      when 'tasks', 'goals'
+        {
+          thinker: notification.thinker.name,
+          task: model.title
+        }
+      when 'operations', 'comments'
+        {
+          thinker: notification.thinker.name,
+          task: model.task.title
+        }
+      when 'sprints'
+        {
+          serial: model.serial,
+          total: model.obtained
+        }
+      when 'projects'
+        {
+          thinker: notification.thinker.name
+        }
+      when 'releases'
+        {
+          thinker: notification.thinker.name,
+          release: model.version
+        }
+      when 'assigned_roles'
+        assigned_role_klass = notification.model.constantize
+        assigned_role = assigned_role_klass.find(notification.model_id)
 
-      t ".#{ notification.controller }.#{ notification.action }",
-        thinker: assigned_role.thinker.name,
-        team_role: t("team_roles.#{assigned_role.team_role.t_name}")
-    elsif notification.controller == 'elections'
-      election_poll_klass = notification.model.constantize
-      election_poll = election_poll_klass.find(notification.model_id)
+        {
+          thinker: assigned_role.thinker.name,
+          team_role: t("team_roles.#{assigned_role.team_role.t_name}")
+        }
+      when 'elections'
+        election_poll_klass = notification.model.constantize
+        election_poll = election_poll_klass.find(notification.model_id)
 
-      t ".#{ notification.controller }.#{ notification.action }",
-        status: election_poll.status
-    end
+        {
+          status: election_poll.status
+        }
+      end
   end
 
   def notification_icon(notifications, dimension = 'fa-lg')

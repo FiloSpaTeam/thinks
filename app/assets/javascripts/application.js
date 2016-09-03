@@ -23,4 +23,6 @@
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
 //= require chartkick
+//= require i18n.js
+//= require i18n/translations
 //= require_tree .

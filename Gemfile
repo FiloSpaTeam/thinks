@@ -30,6 +30,9 @@ gem 'bootstrap-datepicker-rails', '1.5.0'
 # Time in words
 gem 'time_ago_in_words'
 
+# Javascript I18n
+gem 'i18n-js', '>= 3.0.0.rc11'
+
 # Holder.js for placeholder images
 gem 'holder_rails', '~> 2.9.0'
 
