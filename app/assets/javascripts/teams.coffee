@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('.btn-ban').on "click", (event) ->
+  $('.btn-lock').on "click", (event) ->
     event.preventDefault();
     r = prompt(I18n.t('if_are_you_sure_want_ban_this_member'));
 

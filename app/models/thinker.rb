@@ -49,9 +49,14 @@ class Thinker < ActiveRecord::Base
   has_many :likes
   has_many :answers, class_name: 'AnswerThinker', foreign_key: :thinker_id
   has_many :assigned_roles
+  has_many :banned_thinkers
 
   has_one :notifications_preference, class_name: 'NotificationsPreference', foreign_key: :thinker_id
 
   belongs_to :sex
   belongs_to :country, class_name: 'Country', foreign_key: :country_iso
+
+  def ban?(project)
+    banned_thinkers.where(project: project).exists?
+  end
 end
