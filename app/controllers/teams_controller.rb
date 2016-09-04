@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
 
   before_action :authenticate_thinker!
   before_action :set_project
-  before_action :set_thinker, only: [:destroy, :ban]
+  before_action :set_thinker, only: [:destroy, :ban, :unban]
   before_action :set_contribution, only: [:index]
 
   def index
@@ -86,19 +86,37 @@ class TeamsController < ApplicationController
   end
 
   def ban
-    @banned_thinker = BannedThinker.new(ban_params)
+    banned_thinker = BannedThinker.new(ban_params)
 
     respond_to do |format|
-      if @banned_thinker.reason.empty?
+      if banned_thinker.reason.empty?
         format.html { redirect_to project_teams_path(@project), alert: t('.reason_empty') }
         format.json { head :no_content }
       else
-        @banned_thinker.thinker = @thinker
-        @banned_thinker.project = @project
+        banned_thinker.thinker = @thinker
+        banned_thinker.project = @project
 
-        @banned_thinker.save
+        banned_thinker.save
 
         format.html { redirect_to project_teams_path(@project), notice: t('.thinker_banned') }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def unban
+    banned_thinker = BannedThinker
+                     .where(project: @project)
+                     .where(thinker: @thinker)
+
+    respond_to do |format|
+      if banned_thinker.empty?
+        format.html { redirect_to project_teams_path(@project), alert: t('.thinker_already_unbanned') }
+        format.json { head :no_content }
+      else
+        banned_thinker.destroy_all
+
+        format.html { redirect_to project_teams_path(@project), notice: t('.thinker_unbanned') }
         format.json { head :no_content }
       end
     end

@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     resources :teams do
       member do
         get 'ban'
+        get 'unban'
       end
     end
 

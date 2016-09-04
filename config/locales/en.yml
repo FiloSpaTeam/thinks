@@ -254,6 +254,9 @@ en:
     ban:
       thinker_banned: "This thinker is banned. Now he cannot contribute. Maybe one day will be better."
       reason_empty: "You need to specify a reason to ban a thinker."
+    unban:
+      thinker_unbanned: "Thinker is unbanned."
+      thinker_already_unbanned: "Thinker already unbanned."
 
   notifications:
     list:
