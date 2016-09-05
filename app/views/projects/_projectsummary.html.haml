@@ -23,8 +23,16 @@
     .list-group
       - if current_thinker != project.thinker
         .list-group-item
-          = form_for contribution, url: { controller: :projects, action: :contribute, id: project.id }, html: { id: 'form-contribution' }, method: :put do |f|
-            = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
+          - ban = current_thinker.ban(project)
+          - if ban.present?
+            .text-danger
+              %strong
+                Banned
+            %i
+              = ban.reason
+          - else
+            = form_for contribution, url: { controller: :projects, action: :contribute, id: project.id }, html: { id: 'form-contribution' }, method: :put do |f|
+              = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
       - else
         - my_roles = project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
         - my_roles.each do |role|

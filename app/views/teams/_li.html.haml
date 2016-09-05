@@ -39,8 +39,9 @@
       = link_to project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('leave_the_team'), method: :delete, data: { confirm: t('are_you_sure_want_leave_team') } do
         = icon('remove', :class => "text-danger")
     - if scrum_master?(@project) && current_thinker != member.thinker
-      - if member.thinker.ban?(@project)
-        = link_to unban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('unban_from_project'), class: "btn-unlock" do
+      - ban = member.thinker.ban(@project)
+      - if ban.present?
+        = link_to unban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => ban.reason, class: "btn-unlock" do
           = icon('unlock-alt', :class => "text-warning", :style => "margin-left: 10px;")
       - else
         = link_to ban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('ban_from_project'), class: "btn-lock" do

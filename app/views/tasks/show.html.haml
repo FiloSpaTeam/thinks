@@ -40,7 +40,7 @@
               = approve_button(comment)
             - if !@task.done?
               = like_button(comment)
-            - if comment.thinker == current_thinker && !@task.done?
+            - if comment.thinker == current_thinker && !@task.done? && current_thinker.ban(@task.project).nil?
               = edit_button(comment)
               - if !@task.done? && !@task.in_progress?
                 = delete_button(comment)
@@ -54,7 +54,7 @@
             .collapse{ :id => "collapseComment#{ comment.id }", :class => index < 3 ? "in" : ""}
               .form-group
               = markdown(comment.text, true)
-      - if @task.project.part_of_team?(current_thinker)
+      - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil?
         .panel-footer
           = render :partial => 'comments/form'
 - if @task.done? && @comment_approved.reason.nil?

@@ -60,10 +60,15 @@ module NotificationsHelper
 
     t ".#{notification.controller}.#{notification.action}",
       case notification.controller
-      when 'tasks', 'goals'
+      when 'tasks'
         {
           thinker: notification.thinker.name,
           task: model.title
+        }
+      when 'goals'
+        {
+          thinker: notification.thinker.name,
+          goal: model.title
         }
       when 'operations', 'comments'
         {

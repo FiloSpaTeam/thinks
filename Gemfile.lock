@@ -288,8 +288,6 @@ GEM
     tilt (2.0.5)
     time_ago_in_words (0.1.1)
     timeliness (0.3.8)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -361,7 +359,6 @@ DEPENDENCIES
   sprockets-rails (= 2.3.3)
   therubyracer (~> 0.12.2)
   time_ago_in_words
-  turbolinks (~> 2.5)
   uglifier (= 2.7.2)
   validates_timeliness (~> 4.0)
   web-console (= 2.2.1)

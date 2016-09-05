@@ -23,9 +23,9 @@
     .panel.panel-default
       .panel-heading
         = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
-          .input-group
+          .input-group{ style: !thinker_signed_in? || current_thinker.ban(@project).present? ? 'display: block;' : '' }
             = f.text_field :search_title_and_description, :class => 'form-control filterrific-periodically-observed'
-            - if thinker_signed_in?
+            - if thinker_signed_in? && current_thinker.ban(@project).nil?
               .input-group-btn
                 = link_to_button(new_project_task_path, "new", "plus")
           = render partial: 'shared/filters', :locals => { :f => f }

@@ -56,7 +56,7 @@ class Thinker < ActiveRecord::Base
   belongs_to :sex
   belongs_to :country, class_name: 'Country', foreign_key: :country_iso
 
-  def ban?(project)
-    banned_thinkers.where(project: project).exists?
+  def ban(project)
+    banned_thinkers.where(project: project).first
   end
 end

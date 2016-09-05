@@ -14,7 +14,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require jquery_ujs
-//= require turbolinks
 //= require filterrific/filterrific-jquery
 //= require holder
 //= require jquery.ui.widget

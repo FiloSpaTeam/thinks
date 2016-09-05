@@ -38,6 +38,7 @@ class NotificationsController < ApplicationController
     @notifications = @filterrific.find.page params[:page]
 
     @notifications = @notifications.group_by { |n| [n.controller, n.action, n.model, n.model_id] }
+
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{e.message}"
