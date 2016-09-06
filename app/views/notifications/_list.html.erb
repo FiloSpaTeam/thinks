@@ -38,7 +38,7 @@
                     <% project_id = notification.project.id %>
                     <div class="panel-heading">
                         <strong>
-                            <%= notification.project.title %>
+                            <%= link_to notification.project.title, project_path(notification.project) %>
                         </strong>
                         <%= link_to notifications_read_all_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
                             <%= icon('check') %>
