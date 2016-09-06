@@ -28,64 +28,59 @@
         </ul>
     <% else %>
         <% counter = 0 %>
-        <% @notifications.each do |project_index, notifications| %>
-            <% groupped_notifications = notifications.group_by { |n| [n.controller, n.action, n.model, n.model_id] } %>
-            <% groupped_notifications.each do |index_group, notification_group| %>
-                <% if notification_group.size > 1 %>
-                    <% counter += 1 %>
-                <% end %>
-                <% notification_group.each_with_index do |notification, index| %>
-                    <% if notification.project.id != project_id %>
-                        <% if !project_id.nil? %>
-                            </ul>
-                        <% end %>
-                        <% project_id = notification.project.id %>
-                        <div class="panel-heading">
-                            <strong>
-                                <%= notification.project.title %>
-                            </strong>
-                            <%= link_to notifications_read_all_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
-                                <%= icon('check') %>
-                            <% end %>
-                        </div>
-                        <ul class="list-group">
+        <% @notifications.each do |index_group, notification_group| %>
+            <% counter += 1 %>
+            <% notification_group.each_with_index do |notification, index| %>
+                <% if notification.project.id != project_id %>
+                    <% if !project_id.nil? %>
+                        </ul>
                     <% end %>
-
-                    <% if notification_group.count > 1 && index == 1 %>
-                        <div class="collapse" id="collapseNotificationGroup<%= counter %>">
-                    <% end %>
-
-                    <li class="list-group-item" style="<%= index > 0 ? 'border-top: 0; border-bottom: 0;' : '' %>">
-                        <%= icon_for(notification) %>
-                        <% if notification.project.deleted? %>
-                            <%= title_for(notification) %>
-                        <% else %>
-                            <%= link_to (notification_follow_path(notification)) do %>
-                                <%= title_for(notification) %>
-                            <% end %>
-                        <% end %>
-                        <%= link_to notification_read_path(notification), :class => "pull-right fa-fw", :method => :put do %>
+                    <% project_id = notification.project.id %>
+                    <div class="panel-heading">
+                        <strong>
+                            <%= notification.project.title %>
+                        </strong>
+                        <%= link_to notifications_read_all_path(notification.project), :class => "pull-right fa-fw", :method => :put do %>
                             <%= icon('check') %>
                         <% end %>
-                        <small class="help-block" style="margin-left: 28px; margin-bottom: 0; margin-top: 0;">
-                            <%= notification.created_at.ago_in_words %>
-                        </small>
-                        <% if notification_group.count > 1 && index == 0 %>
-                            <small class="help-block" style="margin-left: 28px; margin-bottom: 0;">
-                                <%= notification_group.count - 1 %> other notifications for the same action
-
-                                <a role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseNotificationGroup<%= counter %>" href="#collapseNotificationGroup<%= counter %>">
-                                    <strong>...</strong>
-                                </a>
-                            </small>
-                        <% end %>
-                    </li>
-
-                    <% if notification_group.count > 1 && (index + 1) == notification_group.count %>
-                        </div>
-                    <% end %>
-
+                    </div>
+                    <ul class="list-group">
                 <% end %>
+
+                <% if notification_group.count > 1 && index == 1 %>
+                    <div class="collapse" id="collapseNotificationGroup<%= counter %>">
+                <% end %>
+
+                <li class="list-group-item">
+                    <%= icon_for(notification) %>
+                    <% if notification.project.deleted? %>
+                        <%= title_for(notification) %>
+                    <% else %>
+                        <%= link_to (notification_follow_path(notification)) do %>
+                            <%= title_for(notification) %>
+                        <% end %>
+                    <% end %>
+                    <%= link_to notification_read_path(notification), :class => "pull-right fa-fw", :method => :put do %>
+                        <%= icon('check') %>
+                    <% end %>
+                    <small class="help-block" style="margin-left: 28px; margin-bottom: 0; margin-top: 0;">
+                        <%= notification.created_at.ago_in_words %>
+                    </small>
+                    <% if notification_group.count > 1 && index == 0 %>
+                        <small class="help-block" style="margin-left: 28px; margin-bottom: 0;">
+                            <%= notification_group.count - 1 %> other notifications for the same action
+
+                            <a role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseNotificationGroup<%= counter %>" href="#collapseNotificationGroup<%= counter %>">
+                                <strong>...</strong>
+                            </a>
+                        </small>
+                    <% end %>
+                </li>
+
+                <% if notification_group.count > 1 && (index + 1) == notification_group.count %>
+                    </div>
+                <% end %>
+
             <% end %>
         <% end %>
     <% end %>
