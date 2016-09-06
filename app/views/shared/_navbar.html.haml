@@ -99,6 +99,11 @@
                   = link_to(t('.password'), edit_password_path(@thinker))
                 %li.visible-xs.visible-sm{current_page?(otp_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.double_authentication'), otp_path(@thinker))
+                %li.visible-xs.visible-sm
+                  %a{ href: '#' }
+                    %strong=t '.preferences'
+                %li.visible-xs.visible-sm{current_page?(thinker_notifications_path(@thinker)) ? { :class => :active } : {} }
+                  = link_to(t('.notifications'), thinker_notifications_path(@thinker))
                 = menu_divider
               - else
                 %li= link_to current_thinker.name, thinker_path(current_thinker)
