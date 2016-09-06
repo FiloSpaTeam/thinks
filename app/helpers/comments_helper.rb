@@ -27,4 +27,31 @@ module CommentsHelper
       content_tag(:span, '', :class => 'glyphicon glyphicon-remove dark-grey', 'aria-hidden' => 'true')
     end
   end
+
+  def like_button(comment)
+    likes = comment.likes
+    likes.length
+    if comment.current_thinker?(current_thinker)
+      link_to 'javascript:;', :class => "pull-right btn", :role => "button", :title => t("you_cannot_vote_yourself") do
+        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up dark-grey", "aria-hidden" => "true") +
+        like_count(likes.length)
+      end
+    elsif likes.current_thinker(current_thinker).present?
+      link_to 'javascript:;', :class => "pull-right btn", :role => "button", :title => t("you_voted_yet") do
+        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up dark-grey", "aria-hidden" => "true") +
+        like_count(likes.length)
+      end
+    else
+      link_to comment_likes_path(comment), :class => "pull-right btn", :role => "button", :title => t("vote"), method: :post do
+        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up", "aria-hidden" => "true") +
+        like_count(likes.length)
+      end
+    end
+  end
+
+  def approve_button(comment)
+    link_to comment.approved ? 'javascript:;' : approve_comment_path(comment), :class => "pull-right btn btn-approve", :role => "button", :title => t('approve') do
+      content_tag(:span, "", :class => "glyphicon glyphicon-ok #{ comment.approved ? 'dark-grey' : '' }", "aria-hidden" => "true")
+    end
+  end
 end

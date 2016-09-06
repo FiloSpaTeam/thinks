@@ -19,5 +19,5 @@ class Reason < ActiveRecord::Base
   belongs_to :thinker
   belongs_to :comment
 
-  validates :text, presence: true
+  validates :text, presence: true, length: { minimum: 2 }
 end

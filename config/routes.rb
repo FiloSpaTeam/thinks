@@ -82,7 +82,7 @@ Rails.application.routes.draw do
         resources :reasons, shallow: true
 
         member do
-          put :approve
+          get :approve
         end
       end
 

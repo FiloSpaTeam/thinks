@@ -77,18 +77,27 @@ class CommentsController < ApplicationController
   end
 
   def approve
-    @comment.approved = true
-    @task             = @comment.task
-    respond_to do |format|
-      if @task.worker == current_thinker && @comment.approve
-        create_notification(@comment, @task.project)
-        format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        set_form_errors(@comment)
+    reason = Reason.new(reason_params)
 
-        format.html { render :new }
-        format.json { render json: @task.comment, status: :unprocessable_entity }
+    @task = @comment.task
+    respond_to do |format|
+      if reason.text.empty?
+        set_form_errors(reason)
+
+        format.html { redirect_to @task, alert: 'You need to specify a reason!' }
+      else
+        @comment.approved = true
+
+        if @task.worker == current_thinker && @comment.approve(reason)
+          create_notification(@comment, @task.project)
+          format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
+          format.json { render :show, status: :created, location: @task }
+        else
+          set_form_errors(@comment)
+
+          format.html { render :new }
+          format.json { render json: @task.comment, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -118,5 +127,11 @@ class CommentsController < ApplicationController
     allowed_params = [:text]
 
     params.require(:comment).permit(allowed_params)
+  end
+
+  def reason_params
+    allowed_params = [:text]
+
+    params.require(:reason).permit(allowed_params)
   end
 end

@@ -44,7 +44,7 @@ class Comment < ActiveRecord::Base
     thinker == current_thinker
   end
 
-  def approve
+  def approve(p_reason)
     ActiveRecord::Base.transaction do
       task = self.task
 
@@ -55,6 +55,9 @@ class Comment < ActiveRecord::Base
       task.comments.approved.update_all(approved: false)
 
       save
+
+      p_reason.comment = self
+      p_reason.save
     end
   end
 end

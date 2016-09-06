@@ -57,5 +57,3 @@
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil?
         .panel-footer
           = render :partial => 'comments/form'
-- if @task.done? && @comment_approved.reason.nil?
-  = render "tasks/approve"
