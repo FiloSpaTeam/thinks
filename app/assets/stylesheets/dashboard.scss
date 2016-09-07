@@ -41,12 +41,16 @@ body {
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    padding: 10px 0;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid #DDD;
     background-color: #FFF;
     width: $width-sidebar;
+
+    h3 {
+        padding: 0 20px;
+    }
   }
 }
 
@@ -55,6 +59,9 @@ body {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
+}
+.nav-sidebar > li {
+    padding: 0 20px;
 }
 .nav-sidebar > li > a {
   padding-right: 20px;

@@ -17,6 +17,7 @@
 
 class ApplicationController < ActionController::Base
   before_action :set_locale
+
   before_action :set_thinker_projects, :if => :thinker_signed_in?
   before_action :set_thinker_tasks, :if => :thinker_signed_in?
 
