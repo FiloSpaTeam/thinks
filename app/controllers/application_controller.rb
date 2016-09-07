@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_thinker_following_projects
-    @thinker_follow_projects = current_thinker.contributions
+    @thinker_follow_projects = current_thinker.contributions.where('intensity > ?', Contribution.intensities[:nothing])
   end
 
   def set_thinker_tasks
