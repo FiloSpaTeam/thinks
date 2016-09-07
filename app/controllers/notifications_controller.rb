@@ -153,7 +153,6 @@ class NotificationsController < ApplicationController
                             .user(current_thinker)
                             .where(project: notification.project)
                             .where(controller: notification.controller)
-                            .where(action: notification.action)
                             .where(model: notification.model)
                             .where(model_id: notification.model_id)
 
