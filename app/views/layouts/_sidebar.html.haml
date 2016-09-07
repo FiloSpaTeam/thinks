@@ -26,21 +26,21 @@
     %a{:href =>'#my_projects', 'aria-controls'=>'my_projects', :role =>'tab', 'data-toggle'=>"tab"}
       = icon('globe', :class => 'fa-lg')
 .tab-content
-  #working_tasks.tab-pane{ :role => 'tabpanel' }
+  .tab-pane#working_tasks{ :role => 'tabpanel' }
     %h3
       Working tasks
     %ul.nav.nav-sidebar
       - @thinker_tasks.each do |task|
         %li{ :class => current_page?(task_path(task)) ? "active" : '' }
           = link_to("<strong>##{task.serial}</strong> #{task.title}".html_safe, task_path(task), :title => task.title, :class => "clip-text")
-  #following_projects.active.tab-pane{ :role => 'tabpanel' }
+  .active.tab-pane#following_projects{ :role => 'tabpanel' }
     %h3
       Following projects
     %ul.nav.nav-sidebar
       - @thinker_follow_projects.each do |contribution|
         %li{ :class => session[:project_id] === contribution.project.id ? "active" : '' }
           = link_to(contribution.project.title, project_path(contribution.project), :title => contribution.project.title, :class => "clip-text")
-  #my_projects.tab-pane{ :role => 'tabpanel'}
+  .tab-pane#my_projects{ :role => 'tabpanel'}
     %h3
       My projects
     %ul.nav.nav-sidebar
