@@ -20,11 +20,12 @@
     %a{ :href => '#working_tasks', 'aria-controls' => 'working_tasks', :role => 'tab', 'data-toggle' => 'tab'}
       = icon('tasks', :class => 'fa-lg')
   %li.active.text-center{:role => 'presentation', :style => 'width: 33.33%'}
-    %a{ :href => '#following_projects', 'aria-controls'=>'following_projects', 'role'=>'tab', 'data-toggle'=>'tab'}
+    %a{ :href => '#following_projects', 'aria-controls'=>'following_projects', :role =>'tab', 'data-toggle'=>'tab'}
       = icon('star', :class => 'fa-lg')
   %li.text-center{:role => 'presentation', :style => 'width: 33.33%'}
     %a{:href =>'#my_projects', 'aria-controls'=>'my_projects', :role =>'tab', 'data-toggle'=>"tab"}
       = icon('globe', :class => 'fa-lg')
+
 .tab-content
   .tab-pane#working_tasks{ :role => 'tabpanel' }
     %h3
