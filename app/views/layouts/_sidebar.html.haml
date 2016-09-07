@@ -39,7 +39,7 @@
       Following projects
     %ul.nav.nav-sidebar
       - @thinker_follow_projects.each do |contribution|
-        - if contribution.project.present?
+        - if contribution.project.present? && !contribution.project.deleted?
           %li{ :class => session[:project_id] === contribution.project.id ? "active" : '' }
             = link_to(contribution.project.title, project_path(contribution.project), :title => contribution.project.title, :class => "clip-text")
   .tab-pane#my_projects{ :role => 'tabpanel'}
