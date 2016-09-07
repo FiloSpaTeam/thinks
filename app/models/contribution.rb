@@ -16,7 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Contribution < ActiveRecord::Base
-  belongs_to :project
+  belongs_to :project, -> { with_deleted }
   belongs_to :thinker
 
   enum intensity: [:nothing, :watching, :partecipate]
