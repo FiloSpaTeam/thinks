@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_thinker_projects, :if => :thinker_signed_in?
   before_action :set_thinker_tasks, :if => :thinker_signed_in?
+  before_action :set_thinker_following_projects, :if => :thinker_signed_in?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Prevent CSRF attacks by raising an exception.
@@ -99,6 +100,10 @@ class ApplicationController < ActionController::Base
 
   def set_thinker_projects
     @thinker_projects = current_thinker.projects.order("created_at DESC").first(5)
+  end
+
+  def set_thinker_following_projects
+    @thinker_follow_projects = current_thinker.contributions
   end
 
   def set_thinker_tasks

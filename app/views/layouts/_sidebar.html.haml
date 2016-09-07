@@ -19,26 +19,25 @@
   %li.text-center{ :role => 'presentation', :style => 'width: 33.33%'}
     %a{ :href => '#working_tasks', 'aria-controls' => 'working_tasks', :role => 'tab', 'data-toggle' => 'tab'}
       = icon('tasks', class: 'fa-lg')
-  %li.text-center{:role => 'presentation', :style => 'width: 33.33%'}
+  %li.active.text-center{:role => 'presentation', :style => 'width: 33.33%'}
     %a{ :href => '#following_projects', 'aria-controls'=>'following_projects', 'role'=>'tab', 'data-toggle'=>'tab'}
       = icon('star', class: 'fa-lg')
-  %li.active.text-center{:role => 'presentation', :style => 'width: 33.33%'}
+  %li.text-center{:role => 'presentation', :style => 'width: 33.33%'}
     %a{:href =>'#my_projects', 'aria-controls'=>'my_projects', :role =>'tab', 'data-toggle'=>"tab"}
       = icon('globe', class: 'fa-lg')
-
 .tab-content
-  #working_tasks.tab-pane{:role => 'tabpanel'}
+  #working_tasks.tab-pane{ :role => 'tabpanel' }
     %h3
       Working tasks
     %ul.nav.nav-sidebar
       - @thinker_tasks.each do |task|
         %li{ :class => current_page?(task_path(task)) ? "active" : '' }
           = link_to("<strong>##{task.serial}</strong> #{task.title}".html_safe, task_path(task), :title => task.title, :class => "clip-text")
-  #following_projects.active.tab-pane{:role => 'tabpanel'}
+  #following_projects.active.tab-pane{ :role => 'tabpanel' }
     %h3
       Following projects
     %ul.nav.nav-sidebar
-      - current_thinker.contributions.each do |contribution|
+      - @thinker_follow_projects.each do |contribution|
         %li{ :class => session[:project_id] === contribution.project.id ? "active" : '' }
           = link_to(contribution.project.title, project_path(contribution.project), :title => contribution.project.title, :class => "clip-text")
   #my_projects.tab-pane{ :role => 'tabpanel'}
