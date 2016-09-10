@@ -52,12 +52,15 @@ class Comment < ActiveRecord::Base
       task.end_at = DateTime.now
       task.save
 
-      task.comments.approved.update_all(approved: false)
+      unless approved
+        task.comments.approved.update_all(approved: false)
 
-      save
+        self.approved = true
+        save
 
-      p_reason.comment = self
-      p_reason.save
+        p_reason.comment = self
+        p_reason.save
+      end
     end
   end
 end

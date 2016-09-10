@@ -86,8 +86,6 @@ class CommentsController < ApplicationController
 
         format.html { redirect_to @task, alert: 'You need to specify a reason!' }
       else
-        @comment.approved = true
-
         if @task.worker == current_thinker && @comment.approve(reason)
           create_notification(@comment, @task.project)
           format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
@@ -95,7 +93,7 @@ class CommentsController < ApplicationController
         else
           set_form_errors(@comment)
 
-          format.html { render :new }
+          format.html { redirect_to @task }
           format.json { render json: @task.comment, status: :unprocessable_entity }
         end
       end

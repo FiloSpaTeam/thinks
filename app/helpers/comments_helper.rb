@@ -50,7 +50,7 @@ module CommentsHelper
   end
 
   def approve_button(comment)
-    link_to comment.approved ? 'javascript:;' : approve_comment_path(comment), :class => "pull-right btn btn-approve", :role => "button", :title => t('approve') do
+    link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), :class => 'pull-right btn btn-approve', :role => 'button', 'data-approved' => comment.approved.to_s, :title => t('approve') do
       content_tag(:span, "", :class => "glyphicon glyphicon-ok #{ comment.approved ? 'dark-grey' : '' }", "aria-hidden" => "true")
     end
   end
