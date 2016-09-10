@@ -5,9 +5,13 @@
 $ ->
   $('.btn-approve').on "click", (event) ->
     event.preventDefault();
+
+    $btn  = $(this);
+
+    return if $btn.attr('href') == 'javascript:;';
+    
     r = prompt(I18n.t('specify_reason'));
 
-    $btn  = $(this)
     _href = $btn.attr("href");
-    $btn.attr('href', _href + "&reason[text]=" + r)
-    window.location = $(this).attr('href') if r != null
+    $btn.attr('href', _href + "&reason[text]=" + r);
+    window.location = $btn.attr('href') if r != null;
