@@ -79,7 +79,9 @@
       .list-group-item
         %strong
           Created at
-        %span.pull-right
+        %span.pull-right.visible-sm
+          = task.created_at.to_s(:short)
+        %span.pull-right.visible-md.visible-lg
           = task.created_at.to_s(:long)
         %br
           %span.pull-right
@@ -89,7 +91,9 @@
       .list-group-item
         %strong
           Updated at
-        %span.pull-right
+        %span.pull-right.visible-sm
+          = task.created_at.to_s(:short)
+        %span.pull-right.visible-md.visible-lg
           = task.updated_at.to_s(:long)
         %br
           %span.pull-right
