@@ -33,6 +33,7 @@
           = @chars_max_title - f.object.title.try('length').to_i
     .form-group
       = f.label :description, :class => "control-label"
+      = render partial: 'shared/markdown_syntax'
       = f.text_area :description, :class => 'form-control', :rows => 8, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
       %span#help-description.help-block= t "char_minimum", chars: @chars_min_description
   .panel-footer
