@@ -58,7 +58,9 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @comments         = @task.comments(:include => :likes)
+    @comments         = @task
+                        .comments(include: :likes)
+                        .order(likes_count: :desc, created_at: :desc)
     @comment_approved = @comments.approved.first
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first

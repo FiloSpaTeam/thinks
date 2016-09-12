@@ -125,6 +125,10 @@ class NotificationsController < ApplicationController
   end
 
   def check
+    if params[:small]
+      @icon = 'fa-2x'
+    end
+
     respond_to do |format|
       format.js { render layout: false }
     end

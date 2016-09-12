@@ -53,6 +53,11 @@
     :plain
       $(document).ready(function() {
         setInterval(function() {
-          $.get({ url: '/notifications_check.js', dataType: "script" })
-        }, 1000 * 60 * 5)
+          var winWidth = $(window).width();
+          var small = false;
+          if (winWidth < 768) {
+            small = true;
+          }
+          $.get({ url: '/notifications_check.js', data: {small: small}, dataType: "script" })
+        }, 1000 * 60 * 3)
       });
