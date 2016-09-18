@@ -30,8 +30,9 @@ class SurveyControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test 'should get new' do
-    get :new, sprint_id: @sprint.id
-    assert_response :success
-  end
+  # test 'should get new' do
+  #   get :new, sprint_id: @sprint.id
+
+  #   assert_response :success
+  # end
 end
