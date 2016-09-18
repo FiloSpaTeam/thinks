@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902105407) do
+ActiveRecord::Schema.define(version: 20160918083428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,6 +363,7 @@ ActiveRecord::Schema.define(version: 20160902105407) do
     t.integer  "release_id"
     t.datetime "end_at"
     t.integer  "who_updated_id"
+    t.integer  "father_id"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

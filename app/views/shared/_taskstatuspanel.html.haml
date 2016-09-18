@@ -51,6 +51,14 @@
           = t("not_defined_yet")
     .list-group-item
       %strong
+        Father
+      %span.pull-right
+        - if task.father.present?
+          = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
+        - else
+          = t("not_defined_yet")
+    .list-group-item
+      %strong
         = t('tasks.status')
       %span.pull-right
         - if task.deleted?
@@ -139,8 +147,11 @@
           %h4 No one is working over this but you have yet something to do ;-P
         - elsif !task.project.started?
           %h4 The project is not started yet, wait. Your moment will come soon.
-        - elsif task.workloads.size.nonzero?
-          = link_to "Assigns me", assign_task_path(task), :method => :put, :class => "btn btn-success btn-block"
+        - elsif task.workloads.size.nonzero? 
+          - if task.children.done.count == task.children.count
+            = link_to "Assigns me", assign_task_path(task), :method => :put, :class => "btn btn-success btn-block"
+          - else
+            %h4 Complete all of the child jobs to work on this task.
         - else
           %h4 There are no opinions about this task. Share with a comment and vote!
       - else

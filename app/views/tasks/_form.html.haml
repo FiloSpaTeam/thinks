@@ -20,10 +20,13 @@
     - if scrum_master?(@project)
       .form-group
         = f.label :release_id, t('.release'), :class => "control-label"
-        = f.select :release_id, options_from_collection_for_select(@task.project.releases, 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
+        = f.select :release_id, options_from_collection_for_select(@task.project.releases.order('version'), 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
     .form-group
       = f.label :goal_id, t('.goal'), :class => "control-label"
-      = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('no_goal')}, :class => "form-control"
+      = f.select :goal_id, options_from_collection_for_select(@task.project.goals.order('title'), 'id', 'title', @task.goal_id), {include_blank: t('no_goal')}, :class => "form-control"
+    .form-group
+      = f.label :father_id, t('.father'), :class => "control-label"
+      = f.select :father_id, options_from_collection_for_select(@task.project.tasks.order('title'), 'id', 'title', @task.father_id), {include_blank: t('no_father')}, :class => "form-control"
     .form-group
       = f.label :title, :class => "control-label"
       = f.text_field :title, :class => "form-control", :placeholder => "My simple title", "aria-describedby" => "help-title"

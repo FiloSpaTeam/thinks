@@ -49,8 +49,8 @@ class Task < ActiveRecord::Base
   has_many :workloads, through: :votes
   has_many :comments
   has_many :operations
-
   has_many :likes, through: :comments
+  has_many :children, class_name: 'Task', foreign_key: 'father_id'
 
   belongs_to :project
   belongs_to :goal
@@ -58,6 +58,7 @@ class Task < ActiveRecord::Base
   belongs_to :thinker
   belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
   belongs_to :updater, class_name: 'Thinker', foreign_key: 'who_updated_id'
+  belongs_to :father, class_name: 'Task', foreign_key: 'father_id'
   belongs_to :status
 
   before_create :generate_serial

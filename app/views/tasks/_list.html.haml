@@ -79,6 +79,10 @@
           .form-group{ :style => "margin-bottom: 0;" }
             %a.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
               = icon('crosshairs', :class => "dark-grey fa-lg")
+          - if task.children.present?
+            .form-group{ :style => "margin-bottom: 0;" }
+              %a.btn{ :href => "javascript:;", 'data-toggle'=>"popover", 'data-placement' => 'left', 'data-content' => "This task has children."}
+                = icon('sitemap', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 3 }
       = t('no_record')
