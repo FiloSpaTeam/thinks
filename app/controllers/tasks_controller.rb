@@ -146,7 +146,12 @@ class TasksController < ApplicationController
   def destroy
     respond_to do |format|
       if current_thinker == @task.thinker
-        @task.destroy
+
+        if @task.deleted?
+          @task.really_destroy!
+        else
+          @task.destroy
+        end
         create_notification(@task, @task.project)
 
         format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
