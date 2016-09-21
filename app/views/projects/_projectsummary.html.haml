@@ -115,7 +115,7 @@
       Summary
   .list-group
     .list-group-item
-      - team_number = project.assigned_roles.select(:thinker_id).distinct.count
+      - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count
       = badge(team_number)
       = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
     .list-group-item.hidden-xs

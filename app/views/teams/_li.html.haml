@@ -46,6 +46,13 @@
       - else
         = link_to ban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('ban_from_project'), class: "btn-lock" do
           = icon('lock', :class => "text-danger", :style => "margin-left: 10px;")
+
+    - if current_thinker != member.thinker
+      - contribution = member.thinker.contributions.where(project: @project).first
+      - if Contribution.intensities[contribution.intensity] == Contribution.intensities[:watching]
+        = icon('eye', :class => "text-primary", :style => "margin-left: 10px;", :title => "Watching")
+      - elsif Contribution.intensities[contribution.intensity] == Contribution.intensities[:partecipate]
+        = icon('group', :class => "text-primary", :style => "margin-left: 10px;", :title => "Partecipating")
   - if election_poll.exists?
     .collapse{ id: "collapseElectionPoll#{ election_poll.first.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
       - if @project.part_of_team?(current_thinker) and !election_poll.first.voters.where(thinker: current_thinker).exists?
