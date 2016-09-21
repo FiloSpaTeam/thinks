@@ -57,6 +57,16 @@
           = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
         - else
           = t("not_defined_yet")
+    - if task.children.count.nonzero?
+      .list-group-item
+        %strong
+          Children
+        %ul{style: "max-height: 100px; overflow-y: scroll;padding-left: 13px;"}
+          - task.children.each do |child|
+            %li
+              = link_to task_path(child) do
+                %small
+                  = child.title
     .list-group-item
       %strong
         = t('tasks.status')

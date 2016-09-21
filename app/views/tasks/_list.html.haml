@@ -81,7 +81,7 @@
               = icon('crosshairs', :class => "dark-grey fa-lg")
           - if task.children.present?
             .form-group{ :style => "margin-bottom: 0;" }
-              %a.btn{ :href => "javascript:;", 'data-toggle'=>"popover", 'data-placement' => 'left', 'data-content' => "This task has children."}
+              %a.btn{ :href => "javascript:;", :title => "This task has children."}
                 = icon('sitemap', :class => "dark-grey fa-lg")
   - else
     %td.text-center{ :colspan => 3 }
