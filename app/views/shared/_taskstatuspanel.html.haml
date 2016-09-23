@@ -95,30 +95,6 @@
 
     .list-group
       .list-group-item{ style: 'border-top: none;' }
-      .list-group-item
-        %strong
-          Created at
-        %span.pull-right.visible-sm
-          = task.created_at.to_s(:short)
-        %span.pull-right.visible-md.visible-lg
-          = task.created_at.to_s(:long)
-        %br
-          %span.pull-right
-            %small
-              %i
-                = task.thinker.name
-      .list-group-item
-        %strong
-          Updated at
-        %span.pull-right.visible-sm
-          = task.updated_at.to_s(:short)
-        %span.pull-right.visible-md.visible-lg
-          = task.updated_at.to_s(:long)
-        %br
-          %span.pull-right
-            %small
-              %i
-                = task.updater.name
       - if task.deleted?
         .list-group-item
           %strong
@@ -127,6 +103,31 @@
             = task.deleted_at.to_s(:short)
           %span.pull-right.visible-md.visible-lg
             = task.deleted_at.to_s(:long)
+      - else
+        .list-group-item
+          %strong
+            Created at
+          %span.pull-right.visible-sm
+            = task.created_at.to_s(:short)
+          %span.pull-right.visible-md.visible-lg
+            = task.created_at.to_s(:long)
+          %br
+            %span.pull-right
+              %small
+                %i
+                  = task.thinker.name
+        .list-group-item
+          %strong
+            Updated at
+          %span.pull-right.visible-sm
+            = task.updated_at.to_s(:short)
+          %span.pull-right.visible-md.visible-lg
+            = task.updated_at.to_s(:long)
+          %br
+            %span.pull-right
+              %small
+                %i
+                  = task.updater.name
 
 .panel.panel-default
   .list-group
