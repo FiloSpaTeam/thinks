@@ -25,9 +25,9 @@ class OperationsController < ApplicationController
   # GET /operations
   # GET /operations.json
   def index
-    @operations = @task.operations.order('serial').all
+    @operations = @task.operations.with_deleted.order('serial').all
 
-    @workload_voted = @task.votes.where(thinker: current_thinker).first
+    @workload_voted = @task.votes.with_deleted.where(thinker: current_thinker).first
   end
 
   # GET /operations/1/edit
@@ -105,7 +105,7 @@ class OperationsController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:task_id])
+    @task = Task.with_deleted.find(params[:task_id])
   end
 
   def set_project

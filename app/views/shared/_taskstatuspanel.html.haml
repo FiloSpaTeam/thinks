@@ -76,7 +76,7 @@
         - else
           .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
           = t("projects.tasks.#{task.status.translation_code}")
-  - if (scrum_master?(task.project))
+  - if (scrum_master?(task.project)) && !task.deleted?
     - if task.status == Status.release.first
       .panel-footer
         - if task.ready?
@@ -170,4 +170,4 @@
       %strong
         Operations
       = link_to task_operations_path(task), :class => "pull-right" do
-        = task.operations.where("done is true").size.to_s + " / " + task.operations.size.to_s
+        = task.operations.with_deleted.where("done is true").size.to_s + " / " + task.operations.with_deleted.size.to_s
