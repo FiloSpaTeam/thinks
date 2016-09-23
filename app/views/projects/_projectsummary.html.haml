@@ -65,7 +65,7 @@
     .list-group-item.hidden-xs
       license
       %strong
-        = content_tag :span, project.license.try(:description) ? project.license.description : t('not_defined_yet'), :class => "pull-right"
+        = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
     .list-group-item.hidden-xs
       sprint every
       %strong
