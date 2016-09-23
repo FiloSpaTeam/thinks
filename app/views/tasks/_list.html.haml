@@ -57,18 +57,25 @@
             %small
               %em
                 = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
-          .dark-grey.hidden-xs
-            %small
-              created at
-              %strong
-                = task.created_at.to_s(:short)
-              by #{task.thinker.name}
-          .dark-grey
-            %small
-              updated at
-              %strong
-                = task.updated_at.to_s(:short)
-              by #{task.updater.name}
+          - if task.deleted?
+            .dark-grey.hidden-xs
+              %small
+                closed at
+                %strong
+                  = task.deleted_at.to_s(:long)
+          - else
+            .dark-grey.hidden-xs
+              %small
+                created at
+                %strong
+                  = task.created_at.to_s(:short)
+                by #{task.thinker.name}
+            .dark-grey
+              %small
+                updated at
+                %strong
+                  = task.updated_at.to_s(:short)
+                by #{task.updater.name}
         %td.text-center
           .col-xs-12.workload-table
             = workload_description(task)

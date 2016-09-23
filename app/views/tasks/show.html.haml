@@ -42,7 +42,7 @@
               = like_button(comment)
             - if comment.thinker == current_thinker && !@task.done? && current_thinker.ban(@task.project).nil? && comment.reason.nil?
               = edit_button(comment)
-              - if !@task.in_progress? 
+              - if !@task.in_progress?
                 = delete_button(comment)
             .dark-grey
               = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
