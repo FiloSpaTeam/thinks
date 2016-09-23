@@ -76,21 +76,22 @@
         - else
           .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
           = t("projects.tasks.#{task.status.translation_code}")
-  - if (scrum_master?(task.project)) && !task.deleted?
-    - if task.status == Status.release.first
-      .panel-footer
-        - if task.ready?
-          = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
-        - else
-          %strong
-            = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
-            = t(".standard_deviation_too_high")
-    - elsif task.status == Status.backlog.first && task.workloads.count > 0
-      .panel-footer
-        = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
-    - elsif task.status == Status.done.first
-      .panel-footer
-        = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
+  - if (scrum_master?(task.project))
+    - if !task.deleted?
+      - if task.status == Status.release.first
+        .panel-footer
+          - if task.ready?
+            = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
+          - else
+            %strong
+              = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+              = t(".standard_deviation_too_high")
+      - elsif task.status == Status.backlog.first && task.workloads.count > 0
+        .panel-footer
+          = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+      - elsif task.status == Status.done.first
+        .panel-footer
+          = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
 
     .list-group
       .list-group-item{ style: 'border-top: none;' }
@@ -110,7 +111,7 @@
         %strong
           Updated at
         %span.pull-right.visible-sm
-          = task.created_at.to_s(:short)
+          = task.updated_at.to_s(:short)
         %span.pull-right.visible-md.visible-lg
           = task.updated_at.to_s(:long)
         %br
@@ -118,6 +119,14 @@
             %small
               %i
                 = task.updater.name
+      - if task.deleted?
+        .list-group-item
+          %strong
+            Closed at
+          %span.pull-right.visible-sm
+            = task.deleted_at.to_s(:short)
+          %span.pull-right.visible-md.visible-lg
+            = task.deleted_at.to_s(:long)
 
 .panel.panel-default
   .list-group
