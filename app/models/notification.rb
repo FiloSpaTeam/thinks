@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Notification < ActiveRecord::Base
+  acts_as_paranoid
+
   filterrific(
     default_filter_params: { },
     available_filters: [

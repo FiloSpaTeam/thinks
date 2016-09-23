@@ -16,12 +16,14 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Comment < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :task, -> { with_deleted }
   belongs_to :thinker
 
   has_one :reason
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
   validates :text, length: { maximum: 2000 }, presence: true
   validates :thinker, presence: true

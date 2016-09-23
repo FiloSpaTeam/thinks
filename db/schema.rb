@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918083428) do
+ActiveRecord::Schema.define(version: 20160923193313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,8 +83,10 @@ ActiveRecord::Schema.define(version: 20160918083428) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "likes_count", default: 0
+    t.datetime "deleted_at"
   end
 
+  add_index "comments", ["deleted_at"], name: "index_comments_on_deleted_at", using: :btree
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["thinker_id"], name: "index_comments_on_thinker_id", using: :btree
 
@@ -201,9 +203,12 @@ ActiveRecord::Schema.define(version: 20160918083428) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "comment_id"
-    t.integer "thinker_id"
+    t.integer  "comment_id"
+    t.integer  "thinker_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "likes", ["deleted_at"], name: "index_likes_on_deleted_at", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "project_id"
@@ -214,7 +219,10 @@ ActiveRecord::Schema.define(version: 20160918083428) do
     t.datetime "updated_at", null: false
     t.string   "model"
     t.integer  "model_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "notifications", ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
 
   create_table "notifications_preferences", force: :cascade do |t|
     t.integer  "thinker_id"
@@ -241,8 +249,10 @@ ActiveRecord::Schema.define(version: 20160918083428) do
     t.integer  "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
+  add_index "operations", ["deleted_at"], name: "index_operations_on_deleted_at", using: :btree
   add_index "operations", ["task_id"], name: "index_operations_on_task_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
@@ -422,12 +432,14 @@ ActiveRecord::Schema.define(version: 20160918083428) do
   add_index "voters", ["election_poll_id"], name: "index_voters_on_election_poll_id", using: :btree
   add_index "voters", ["thinker_id"], name: "index_voters_on_thinker_id", using: :btree
 
-  create_table "votes", id: false, force: :cascade do |t|
-    t.integer "task_id"
-    t.integer "thinker_id"
-    t.integer "workload_id"
+  create_table "votes", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "thinker_id"
+    t.integer  "workload_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "votes", ["deleted_at"], name: "index_votes_on_deleted_at", using: :btree
   add_index "votes", ["task_id"], name: "index_votes_on_task_id", using: :btree
   add_index "votes", ["thinker_id"], name: "index_votes_on_thinker_id", using: :btree
   add_index "votes", ["workload_id"], name: "index_votes_on_workload_id", using: :btree

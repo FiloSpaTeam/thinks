@@ -54,6 +54,6 @@
             .collapse{ :id => "collapseComment#{ comment.id }", :class => index < 3 ? "in" : ""}
               .form-group
               = markdown(comment.text, true)
-      - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil?
+      - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
         .panel-footer
           = render :partial => 'comments/form'

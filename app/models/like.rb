@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Like < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :comment, counter_cache: true
   belongs_to :thinker
 

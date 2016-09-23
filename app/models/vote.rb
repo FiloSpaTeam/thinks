@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Vote < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :thinker
   belongs_to :task
   belongs_to :workload

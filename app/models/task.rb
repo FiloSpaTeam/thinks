@@ -47,10 +47,12 @@ class Task < ActiveRecord::Base
 
   has_many :votes
   has_many :workloads, through: :votes
-  has_many :comments
-  has_many :operations
+  has_many :comments, dependent: :destroy
+  has_many :operations, dependent: :destroy
   has_many :likes, through: :comments
   has_many :children, class_name: 'Task', foreign_key: 'father_id'
+
+  has_many :notifications, -> { where(model: :Task) }, foreign_key: :model_id, dependent: :destroy
 
   belongs_to :project
   belongs_to :goal

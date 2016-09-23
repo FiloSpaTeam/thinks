@@ -36,10 +36,10 @@ class Project < ActiveRecord::Base
   has_many :contributions
   has_many :assigned_roles
   has_many :dependencies
-  has_many :goals, :dependent => :destroy
-  has_many :tasks, :dependent => :destroy
-  has_many :workloads, through: :tasks, :dependent => :destroy
-  has_many :sprints, :dependent => :destroy
+  has_many :goals, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+  has_many :workloads, through: :tasks, dependent: :destroy
+  has_many :sprints, dependent: :destroy
   has_many :workers, -> { distinct.unscoped }, through: :tasks do
     def active
       where('tasks.status_id = ?', Status.in_progress.first.id)

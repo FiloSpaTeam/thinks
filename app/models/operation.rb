@@ -16,6 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Operation < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :task
 
   before_create :generate_serial

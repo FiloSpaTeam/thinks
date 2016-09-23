@@ -60,6 +60,7 @@ class TasksController < ApplicationController
   def show
     @comments         = @task
                         .comments(include: :likes)
+                        .with_deleted
                         .order(likes_count: :desc, created_at: :desc)
     @comment_approved = @comments.approved.first
     @reason           = @comment_approved.try(:reason) || Reason.new
@@ -149,12 +150,15 @@ class TasksController < ApplicationController
 
         if @task.deleted?
           @task.really_destroy!
+
+          format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully deleted.' }
         else
           @task.destroy
-        end
-        create_notification(@task, @task.project)
+          create_notification(@task, @task.project)
 
-        format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
+          format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
+        end
+
         format.json { head :no_content }
       else
         format.html { redirect_to @task, alert: 'You cannot destroy this task!' }
