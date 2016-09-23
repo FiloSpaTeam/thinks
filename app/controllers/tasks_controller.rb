@@ -253,7 +253,7 @@ class TasksController < ApplicationController
   end
 
   def reopen
-    @task.restore
+    @task.restore(:recursive => true)
     create_notification(@task, @task.project)
     respond_to do |format|
       format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
