@@ -25,18 +25,13 @@ class Comment < ActiveRecord::Base
 
   has_many :likes, dependent: :destroy
 
+  has_many :notifications, -> { where(model: :Notification) }, foreign_key: :model_id, dependent: :destroy
+
   validates :text, length: { maximum: 2000 }, presence: true
   validates :thinker, presence: true
   validates :task, presence: true
 
   default_scope { order('approved').order('likes_count DESC').order('updated_at DESC') }
-
-  after_destroy lambda { |comment|
-    Notification
-      .where('model LIKE ?', comment.class.name)
-      .where(model_id: comment.id)
-      .destroy_all
-  }
 
   scope :approved, lambda {
     where(approved: true)

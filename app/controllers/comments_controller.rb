@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
     task_votes = task.votes.all
     task_votes.delete_all(thinker_id: current_thinker)
 
-    @comment.destroy
+    @comment.really_destroy!
 
     respond_to do |format|
       destroy_notification(@comment, task.project)

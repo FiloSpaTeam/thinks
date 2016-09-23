@@ -60,7 +60,6 @@ class TasksController < ApplicationController
   def show
     @comments         = @task
                         .comments(include: :likes)
-                        .with_deleted
                         .order(likes_count: :desc, created_at: :desc)
     @comment_approved = @comments.approved.first
     @reason           = @comment_approved.try(:reason) || Reason.new
