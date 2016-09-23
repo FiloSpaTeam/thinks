@@ -60,6 +60,7 @@ class TasksController < ApplicationController
   def show
     @comments         = @task
                         .comments(include: :likes)
+                        .with_deleted
                         .order(likes_count: :desc, created_at: :desc)
     @comment_approved = @comments.approved.first
     @reason           = @comment_approved.try(:reason) || Reason.new
@@ -145,13 +146,16 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     respond_to do |format|
-      if current_thinker == @task.thinker
-
+      if current_thinker == @task.thinker || scrum_master?(@task.project)
         if @task.deleted?
           @task.really_destroy!
 
           format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully deleted.' }
         else
+          @task.worker = nil
+          @task.status = Status.backlog.first
+          @task.save
+
           @task.destroy
           create_notification(@task, @task.project)
 
