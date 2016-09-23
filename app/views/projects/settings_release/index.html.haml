@@ -28,7 +28,7 @@
             = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
           .form-group
             = f.label :license_id, :class => 'control-label'
-            = f.select :license_id, options_from_collection_for_select(License.all.order(:name), 'id', 'name', @project.license_id), {}, :class => 'form-control'
+            = f.select :license_id, options_from_collection_for_select(License.all.order(:name), 'id', 'description', @project.license_id), {}, :class => 'form-control'
           .form-group
             = f.label :minimum_team_number, :class => 'control-label'
             = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
