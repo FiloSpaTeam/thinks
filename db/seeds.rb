@@ -116,6 +116,7 @@ licenses_list = [
   ['ccby4',          'CCBY4',             'http://creativecommons.org/licenses/by/4.0/legalcode'],
   ['ccbysa4',        'CCBYSA4',           'http://creativecommons.org/licenses/by-sa/4.0/legalcode'],
   ['ccbync4',        'CCBYNC4',           'https://creativecommons.org/licenses/by-nc/4.0/legalcode'],
+  ['ccbyncsa4',      'CCBYNCSA4',         'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode'],
   ['dsl',            'DSL',               'https://www.gnu.org/licenses/dsl.html'],
   ['freeart',        'FreeArt',           'https://directory.fsf.org/wiki/License:Free-Art-L-v1.3'],
   ['odbl',           'ODbl',              'http://directory.fsf.org/wiki/License:ODbl'],
