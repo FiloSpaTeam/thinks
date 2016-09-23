@@ -119,6 +119,9 @@
       = badge(team_number)
       = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
     .list-group-item.hidden-xs
+      = badge(project.releases.size)
+      = link_to 'releases', project_releases_path(project)
+    .list-group-item.hidden-xs
       = badge(project.sprints.size)
       = link_to 'sprints', project_sprints_path(project)
     .list-group-item.hidden-xs
