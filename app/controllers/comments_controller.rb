@@ -118,7 +118,7 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.with_deleted.find(params[:id])
   end
 
   def comment_params
