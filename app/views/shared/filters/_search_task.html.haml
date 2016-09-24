@@ -1,0 +1,12 @@
+%li{ :role => "presentation" }
+  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+    = t(".task")
+    %span.caret
+  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
+    .panel-heading
+      = f.text_field :search_task, class: "form-control filterrific-periodically-observed", placeholder: t("search")
+    %ul.list-group.scrollbar
+      - @project.tasks.each do |task|
+        %li.list-group-item
+          = link_to("filterrific[with_task]" => task, method: :get, remote: true) do
+            = task.title

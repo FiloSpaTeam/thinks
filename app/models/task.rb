@@ -25,11 +25,11 @@ class Task < ActiveRecord::Base
     available_filters: [
       :sorted_by,
 
-      :search_title_and_description,
       :search_release,
       :search_goal,
       :search_thinker,
       :search_worker,
+      :search_title_and_description,
 
       :status_progress,
 

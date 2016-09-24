@@ -46,6 +46,8 @@ module Rethink
 
     config.middleware.use I18n::JS::Middleware
 
+    config.autoload_paths += %W(#{config.root}/lib)
+
     require 'attachinary/orm/active_record' # active_record or mongoid
   end
 end

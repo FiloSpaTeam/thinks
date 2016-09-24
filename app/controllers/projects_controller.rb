@@ -41,6 +41,10 @@ class ProjectsController < ApplicationController
         format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }
       end
 
+      @active_filters = [
+        Enums::Filters::SORTED_BY_PROJECTS
+      ]
+
       format.html
       format.json { render :json => { :projects => @projects } }
     end

@@ -45,6 +45,14 @@ class TasksController < ApplicationController
     @tasks    = @filterrific.find.where(project: @project).page params[:page]
     @statuses = Status.all
 
+    @active_filters = [
+      Enums::Filters::SEARCH_RELEASE,
+      Enums::Filters::SEARCH_GOAL,
+      Enums::Filters::SEARCH_WORKER,
+      Enums::Filters::SEARCH_THINKER,
+      Enums::Filters::CLOSED_TASKS
+    ]
+
     @search = ''
     if params.has_key?(:filterrific) && params[:filterrific].has_key?(:search_title_and_description)
       @search = params[:filterrific][:search_title_and_description].strip

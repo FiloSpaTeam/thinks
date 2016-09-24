@@ -30,7 +30,7 @@
                 = link_to_button(new_project_release_path, "new", "plus")
           - else
             = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
-          = render partial: 'shared/filters', :locals => { :f => f }
+          = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
       .panel-body{ :style => 'padding: 0;' }
         = render_filterrific_spinner
         %table.table.table-condensed.table-hover#filterrific_results
