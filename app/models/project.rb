@@ -24,6 +24,7 @@ class Project < ActiveRecord::Base
   filterrific(
     available_filters: [
       :sorted_by,
+
       :search_title
     ]
   )

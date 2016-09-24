@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
       }
     ) || return
 
-    @projects = Project.filterrific_find(@filterrific).page params[:page]
+    @projects = @filterrific.find.page params[:page]
 
     respond_to do |format|
       if Project.all.empty?
