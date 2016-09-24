@@ -31,6 +31,5 @@
     .col-xs-12
       %ul.nav.nav-pills
         - filters.each do |filter|
-          - puts filter
           - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
             = render :partial => "shared/filters/#{filter}", locals: { f: f }
