@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
@@ -21,6 +19,8 @@ gem 'heroku-deflater', group: :production
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'attachinary'
+
+ruby '2.3.1', group: :production
 
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'
