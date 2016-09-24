@@ -74,9 +74,7 @@ class Project < ActiveRecord::Base
   # end
   scope :default_order, -> { order('title') }
 
-  scope :search_title, lambda { |query|
-    where('title LIKE ?', "%#{query}%")
-  }
+  scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
 
   scope :sorted_by, lambda { |sort_option|
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
