@@ -21,6 +21,9 @@ class Project < ActiveRecord::Base
 
   acts_as_paranoid
 
+  paginates_per 24
+  max_paginates_per 48
+
   filterrific(
     available_filters: [
       :sorted_by,
