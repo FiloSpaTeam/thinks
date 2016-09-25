@@ -67,7 +67,7 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @comments         = @task
-                        .comments(include: :likes)
+                        .comments(include: [:likes, :thinker, :reason])
                         .with_deleted
                         .order(likes_count: :desc, created_at: :desc)
     @comment_approved = @comments.approved.first
@@ -288,7 +288,9 @@ class TasksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
-    @task = Task.with_deleted.find(params[:id])
+    @task = Task
+            .includes(:comments, :votes, :worker, :thinker, :project)
+            .with_deleted.find(params[:id])
   end
 
   def set_validators_for_form_help
@@ -305,7 +307,7 @@ class TasksController < ApplicationController
   end
 
   def teammate!
-    if !@project.part_of_team?(current_thinker)
+    unless @project.part_of_team?(current_thinker)
       flash[:alert] = 'You are not partecipating to this project as active member!'
       redirect_to project_tasks_path(@project)
     end
