@@ -64,8 +64,6 @@ class ApplicationController < ActionController::Base
     @project = Project
                .includes(:tasks, :sprints, :cycle, :assigned_roles)
                .friendly.find(params[:project_id])
-
-    load_project_session
   end
 
   def create_notification(model, project)
@@ -94,12 +92,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def load_project_session
-    if session[:project_id] != @project.id
-      session[:project_id] = @project.id
-    end
-  end
 
   def set_thinker_projects
     @thinker_projects = current_thinker.projects.order("created_at DESC").first(5)
