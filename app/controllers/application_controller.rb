@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
 
   def set_project
     @project = Project
-               .includes(:tasks, :sprints, :cycle, :assigned_roles)
+               .includes(:tasks, :sprints, :cycle, :assigned_roles, :contributions, :releases, :goals)
                .friendly.find(params[:project_id])
   end
 
