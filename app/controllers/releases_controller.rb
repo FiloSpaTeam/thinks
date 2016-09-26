@@ -24,7 +24,7 @@ class ReleasesController < ApplicationController
 
   def index
     @filterrific = initialize_filterrific(
-      Release,
+      Release.includes(:tasks),
       params[:filterrific],
       select_options: {}
     ) || return
