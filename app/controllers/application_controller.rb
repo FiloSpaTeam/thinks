@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
 
   def set_project
     @project = Project
-               .includes(:tasks, :sprints, :cycle)
+               .includes(:tasks, :sprints, :cycle, :assigned_roles)
                .friendly.find(params[:project_id])
 
     load_project_session

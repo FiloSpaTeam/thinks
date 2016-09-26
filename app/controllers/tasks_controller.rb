@@ -17,6 +17,7 @@
 
 class TasksController < ApplicationController
   include ProjectsHelper
+  include StatusesHelper
 
   before_action :authenticate_thinker!
 
@@ -31,19 +32,22 @@ class TasksController < ApplicationController
   before_action :teammate!, only: [:new, :create]
   before_action :check_assign!, only: [:assign]
 
+  before_action :share_statuses, only: [:index, :destroy, :sprint, :assign, :give_up, :release]
+
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
     @filterrific = initialize_filterrific(
-      Task.default_order,
+      Task
+      .includes(:status, :thinker, :updater, :goal, :children)
+      .default_order,
       params[:filterrific],
       select_options: {
         sorted_by_title: Task.options_for_sorted_by(:title),
         sorted_by_workload: Task.options_for_sorted_by(:workload)
       }
     ) || return
-    @tasks    = @filterrific.find.where(project: @project).page params[:page]
-    @statuses = Status.all
+    @tasks = @filterrific.find.where(project: @project).page params[:page]
 
     @active_filters = [
       Enums::Filters::SEARCH_RELEASE,
@@ -161,7 +165,7 @@ class TasksController < ApplicationController
           format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully deleted.' }
         else
           @task.worker = nil
-          @task.status = Status.backlog.first
+          @task.status = @statuses.backlog.first
           @task.save
 
           @task.destroy
@@ -183,7 +187,7 @@ class TasksController < ApplicationController
   def sprint
     respond_to do |format|
       if scrum_master?(@task.project)
-        @task.status = Status.sprint.first
+        @task.status = @statuses.sprint.first
 
         if @task.save
           create_notification(@task, @task.project)
@@ -205,7 +209,7 @@ class TasksController < ApplicationController
   def release
     respond_to do |format|
       if scrum_master?(@task.project)
-        @task.status = Status.release.first
+        @task.status = @statuses.release.first
         @task.worker = nil
         @task.end_at = nil
 
@@ -250,7 +254,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1/assign.json
   def assign
     @task.worker = current_thinker
-    @task.status = Status.in_progress.first
+    @task.status = @statuses.in_progress.first
     respond_to do |format|
       if @task.save
         create_notification(@task, @task.project)
@@ -274,7 +278,7 @@ class TasksController < ApplicationController
 
   def give_up
     @task.worker = nil
-    @task.status = Status.sprint.first
+    @task.status = @statuses.sprint.first
     @task.save
 
     create_notification(@task, @task.project)

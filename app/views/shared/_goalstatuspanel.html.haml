@@ -27,7 +27,7 @@
       =pluralize goal.tasks.size, 'task'
 
   - if goal.tasks.size.nonzero?
-    = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), goal.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+    = pie_chart @statuses.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), goal.tasks.where(status: status).count] }, height: "200px", library: { chartArea: { left: 10, width: '100%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
   .panel-body.hidden-xs.hidden-sm
     %strong
@@ -35,7 +35,7 @@
 
   .list-group.hidden-xs.hidden-sm
     .list-group-item
-      = badge(goal.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
+      = badge(goal.tasks.where('status_id = ? or status_id = ?', @statuses.in_progress.first, @statuses.sprint.first).sum(:workload))
       current
     .list-group-item
       = badge(goal.tasks.done.sum(:workload))

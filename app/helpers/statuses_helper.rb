@@ -16,4 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 module StatusesHelper
+  def share_statuses
+    @statuses = Status.all
+  end
 end

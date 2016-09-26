@@ -18,10 +18,13 @@
 class GoalsController < ApplicationController
   include ActionView::Helpers::TextHelper
   include ProjectsHelper
+  include StatusesHelper
 
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :tasks_in_sprint]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
+
+  before_action :share_statuses, only: [:show, :edit, :tasks_in_sprint]
 
   before_action :authenticate_thinker!
 
@@ -29,8 +32,11 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @filterrific = initialize_filterrific(
-      Goal.where(project: @project)
-      .order('progress DESC') .order('created_at DESC'),
+      Goal
+      .includes(:tasks, :project)
+      .where(project: @project)
+      .order('progress DESC')
+      .order('created_at DESC'),
       params[:filterrific],
       select_options: {}
     ) || return
@@ -158,7 +164,7 @@ class GoalsController < ApplicationController
       end
 
       if scrum_master?(@goal.project)
-        tasks_ready.update_all(status_id: Status.sprint.first)
+        tasks_ready.update_all(status_id: @statuses.sprint.first)
 
         create_notification(@goal, @goal.project)
 
@@ -183,7 +189,9 @@ class GoalsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_goal
-    @goal = Goal.find(params[:id])
+    @goal = Goal
+            .includes(:project, :thinker, :tasks)
+            .find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
