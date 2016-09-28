@@ -93,41 +93,41 @@
         .panel-footer
           = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
 
-    .list-group
-      .list-group-item{ style: 'border-top: none;' }
-      - if task.deleted?
-        .list-group-item
-          %strong
-            Closed at
-          %span.pull-right.visible-sm
-            = task.deleted_at.to_s(:short)
-          %span.pull-right.visible-md.visible-lg
-            = task.deleted_at.to_s(:long)
-      - else
-        .list-group-item
-          %strong
-            Created at
-          %span.pull-right.visible-sm
-            = task.created_at.to_s(:short)
-          %span.pull-right.visible-md.visible-lg
-            = task.created_at.to_s(:long)
-          %br
-            %span.pull-right
-              %small
-                %i
-                  = task.thinker.name
-        .list-group-item
-          %strong
-            Updated at
-          %span.pull-right.visible-sm
-            = task.updated_at.to_s(:short)
-          %span.pull-right.visible-md.visible-lg
-            = task.updated_at.to_s(:long)
-          %br
-            %span.pull-right
-              %small
-                %i
-                  = task.updater.name
+  .list-group
+    .list-group-item{ style: 'border-top: none;' }
+    - if task.deleted?
+      .list-group-item
+        %strong
+          Closed at
+        %span.pull-right.visible-sm
+          = task.deleted_at.to_s(:short)
+        %span.pull-right.visible-md.visible-lg
+          = task.deleted_at.to_s(:long)
+    - else
+      .list-group-item
+        %strong
+          Created at
+        %span.pull-right.visible-sm
+          = task.created_at.to_s(:short)
+        %span.pull-right.visible-md.visible-lg
+          = task.created_at.to_s(:long)
+        %br
+          %span.pull-right
+            %small
+              %i
+                = task.thinker.name
+      .list-group-item
+        %strong
+          Updated at
+        %span.pull-right.visible-sm
+          = task.updated_at.to_s(:short)
+        %span.pull-right.visible-md.visible-lg
+          = task.updated_at.to_s(:long)
+        %br
+          %span.pull-right
+            %small
+              %i
+                = task.updater.name
 
 .panel.panel-default
   .list-group
