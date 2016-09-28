@@ -24,6 +24,7 @@
     = link_to(t('.links'), project_settings_links_path(@project), :class => "list-group-item #{ current_page?(project_settings_links_path(@project)) ? 'active' : '' }")
     = link_to(t('.sprint_settings'), project_settings_sprint_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_sprint_index_path(@project)) ? 'active' : '' }")
     = link_to(t('.other_settings'), project_settings_other_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.father_settings'), project_settings_other_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
   .panel-heading
     %strong=t '.team'
   .list-group
