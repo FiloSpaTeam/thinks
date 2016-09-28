@@ -205,6 +205,12 @@ en:
     statistics:
       body:
         related_info_limited: "Related information is limited"
+    settings_father:
+      index:
+        your_master_project: "Your master project"
+        you_have_no_master_project_related: "You have no master project related. Link to a new one below."
+        link_to_master_project: "Link to master project"
+        help_serial: "You need to contact project founder to have valid serial."
 
   category:
     web_applications:       "Web applications"
