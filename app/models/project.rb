@@ -58,6 +58,7 @@ class Project < ActiveRecord::Base
   belongs_to :thinker
   belongs_to :cycle
   belongs_to :category
+  belongs_to :project
 
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
@@ -67,6 +68,8 @@ class Project < ActiveRecord::Base
 
   after_save :check_if_past_project
   after_save :update_contribution_thinker
+
+  before_create :generate_serial
 
   # validate :expiration_date_cannot_be_in_the_past
 
@@ -80,7 +83,7 @@ class Project < ActiveRecord::Base
   scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
 
   scope :sorted_by, lambda { |sort_option|
-    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
     case sort_option.to_s
     when /^title_/
       # Simple sort on the name colums
@@ -92,6 +95,10 @@ class Project < ActiveRecord::Base
 
   def last_notification_update
     notifications.last
+  end
+
+  def generate_serial
+    self.serial = SecureRandom.hex(64)
   end
 
   # This method provides select options for the `sorted_by` filter select input.
@@ -125,7 +132,7 @@ class Project < ActiveRecord::Base
   end
 
   def started?
-    return false if self.release_at.nil? || (self.release_at > DateTime.now.to_date)
+    return false if release_at.nil? || (release_at > DateTime.now.to_date)
 
     true
   end
@@ -137,7 +144,7 @@ class Project < ActiveRecord::Base
   end
 
   def sprint
-    return 0 if !started?
+    return 0 unless started?
 
     sprints.last.serial
   end

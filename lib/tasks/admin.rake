@@ -103,6 +103,19 @@ namespace :admin do
     puts 'Update team roles done'
   end
 
+  task update_projects_serial: :environment do
+    puts 'Start serial update for projects'
+
+    projects = Project.with_deleted.all
+    projects.each do |project|
+      project.generate_serial
+
+      project.save
+    end
+
+    puts 'Done: Start serial update for projects'
+  end
+
   task close_election_poll_overtime: :environment do
     puts 'Start check for election polls that need to be closed'
 

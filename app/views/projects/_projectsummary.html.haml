@@ -58,6 +58,11 @@
         %hr
         .text-center
           = project.donate_button.html_safe
+    - if current_thinker == project.thinker
+      .list-group-item
+        secret
+        = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
+          = icon('eye', :class => "dark-grey")
     .list-group-item.hidden-xs
       category
       %strong
