@@ -18,9 +18,9 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
 
-  before_action :set_thinker_projects, :if => :thinker_signed_in?
-  before_action :set_thinker_tasks, :if => :thinker_signed_in?
-  before_action :set_thinker_following_projects, :if => :thinker_signed_in?
+  before_action :set_thinker_projects, if: :thinker_signed_in?
+  before_action :set_thinker_tasks, if: :thinker_signed_in?
+  before_action :set_thinker_following_projects, if: :thinker_signed_in?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Prevent CSRF attacks by raising an exception.
@@ -38,18 +38,20 @@ class ApplicationController < ActionController::Base
   end
 
   def set_form_errors(object)
-    return "" if object.errors.empty?
+    return '' if object.errors.empty?
 
     messages = object.errors.full_messages.map { |msg| "<li>#{msg}</li>" }.join
+
     flash.now[:error] = "<ul>#{messages}</ul>"
-    flash[:error] = "<ul>#{messages}</ul>"
+    flash[:error]     = "<ul>#{messages}</ul>"
   end
 
   protected
 
   # At the moment we need to redirect others, later will be there a public page
   def check_owner!
-    redirect_to root_url unless current_thinker.slug == params[:id] || current_thinker.slug == params[:thinker_id]
+    redirect_to root_url unless current_thinker.slug == params[:id] ||
+                                current_thinker.slug == params[:thinker_id]
   end
 
   def check_admin!
@@ -62,7 +64,9 @@ class ApplicationController < ActionController::Base
 
   def set_project
     @project = Project
-               .includes(:tasks, :sprints, :cycle, :assigned_roles, :contributions, :releases, :goals)
+               .includes(:tasks, :sprints, :cycle,
+                         :assigned_roles, :contributions,
+                         :releases, :goals)
                .friendly.find(params[:project_id])
   end
 
@@ -87,21 +91,32 @@ class ApplicationController < ActionController::Base
         project: project,
         model: model.class.name,
         model_id: model.id,
-        controller: params[:controller])
+        controller: params[:controller]
+      )
       .delete_all
   end
 
   private
 
   def set_thinker_projects
-    @thinker_projects = current_thinker.projects.order("created_at DESC").first(5)
+    @thinker_projects = current_thinker
+                        .projects
+                        .order('created_at DESC')
+                        .first(5)
   end
 
   def set_thinker_following_projects
-    @thinker_follow_projects = current_thinker.contributions.where('intensity > ?', Contribution.intensities[:nothing])
+    @thinker_follow_projects = current_thinker
+                               .contributions
+                               .where('intensity > ?', Contribution
+                                                       .intensities[:nothing])
   end
 
   def set_thinker_tasks
-    @thinker_tasks = current_thinker.working_tasks.in_progress.order("created_at DESC").first(10)
+    @thinker_tasks = current_thinker
+                     .working_tasks
+                     .in_progress
+                     .order('created_at DESC')
+                     .first(10)
   end
 end
