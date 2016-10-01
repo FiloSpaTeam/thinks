@@ -16,7 +16,6 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class PasswordController < ApplicationController
-
   before_action :authenticate_thinker!
   before_action :check_owner!
 
@@ -47,6 +46,8 @@ class PasswordController < ApplicationController
 
   def thinker_params
     # NOTE: Using `strong_parameters` gem
-    params.require(:thinker).permit(:password, :password_confirmation, :current_password)
+    params
+    .require(:thinker)
+    .permit(:password, :password_confirmation, :current_password)
   end
 end

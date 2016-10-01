@@ -29,7 +29,12 @@ class SprintsController < ApplicationController
       params[:filterrific],
       select_options: {}
     ) || return
-    @sprints = @filterrific.find.unscoped.where(project: @project).order('serial desc').page(params[:page])
+    @sprints = @filterrific
+               .find
+               .unscoped
+               .where(project: @project)
+               .order('serial desc')
+               .page(params[:page])
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.
     puts "Had to reset filterrific params: #{e.message}"
@@ -99,6 +104,8 @@ class SprintsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def sprint_params
-    params.require(:sprint).permit(:title, :description, :goal, :obtained, :project_id)
+    params
+      .require(:sprint)
+      .permit(:title, :description, :goal, :obtained, :project_id)
   end
 end

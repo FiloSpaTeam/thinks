@@ -24,10 +24,20 @@ class SurveyController < ApplicationController
   before_action :teammate!
 
   def index
-    redirect_to new_sprint_survey_path(@sprint) if current_thinker.answers.where(sprint: @sprint).empty?
+    redirect_to new_sprint_survey_path(@sprint) if current_thinker
+                                                   .answers
+                                                   .where(sprint: @sprint)
+                                                   .empty?
 
-    @answers_count   = AnswerThinker.where(sprint: @sprint).group(:answer_id).count
-    @answers_thinker = AnswerThinker.where(sprint: @sprint).where(thinker: current_thinker)
+    @answers_count   = AnswerThinker
+                       .where(sprint: @sprint)
+                       .group(:answer_id)
+                       .count
+
+    @answers_thinker = AnswerThinker
+                       .where(sprint: @sprint)
+                       .where(thinker: current_thinker)
+
     @surveys         = Survey.all
   end
 
@@ -59,7 +69,8 @@ class SurveyController < ApplicationController
   end
 
   def not_actual!
-    redirect_to project_sprints_path(@sprint.project) if @sprint.serial == @sprint.project.sprint
+    redirect_to project_sprints_path(@sprint.project) if @sprint.serial ==
+                                                         @sprint.project.sprint
   end
 
   def teammate!

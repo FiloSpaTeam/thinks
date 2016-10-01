@@ -45,9 +45,13 @@ class ReleasesController < ApplicationController
   end
 
   def new
-    if !@project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
+    unless @project
+           .assigned_roles
+           .where(thinker: current_thinker)
+           .where(team_role: TeamRole.scrum_master.first)
+           .exists?
       respond_to do |format|
-        format.html { redirect_to project_releases_path(@project), alert: "You are not the Scrum Master." }
+        format.html { redirect_to project_releases_path(@project), alert: 'You are not the Scrum Master.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -59,9 +63,14 @@ class ReleasesController < ApplicationController
   end
 
   def edit
-    if !@release.project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
+    unless @release
+           .project
+           .assigned_roles
+           .where(thinker: current_thinker)
+           .where(team_role: TeamRole.scrum_master.first)
+           .exists?
       respond_to do |format|
-        format.html { redirect_to project_releases_path(@project), alert: "You are not the Scrum Master." }
+        format.html { redirect_to project_releases_path(@project), alert: 'You are not the Scrum Master.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -76,7 +85,11 @@ class ReleasesController < ApplicationController
     @release.progress = 0.0
 
     respond_to do |format|
-      if @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists? && @release.save
+      if @project
+         .assigned_roles
+         .where(thinker: current_thinker)
+         .where(team_role: TeamRole.scrum_master.first)
+         .exists? && @release.save
         create_notification(@release, @project)
         format.html { redirect_to @release, notice: 'Release was successfully created.' }
         format.json { render :show, status: :created, location: @task }
@@ -94,7 +107,11 @@ class ReleasesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @release.project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists? && @release.update(release_params)
+      if @release
+         .project.assigned_roles
+         .where(thinker: current_thinker)
+         .where(team_role: TeamRole.scrum_master.first)
+         .exists? && @release.update(release_params)
         create_notification(@release, @release.project)
         format.html { redirect_to @release, notice: 'Release was successfully updated.' }
         format.json { render :show, status: :ok, location: @release }

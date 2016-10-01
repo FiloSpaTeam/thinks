@@ -52,7 +52,7 @@ class TeamsController < ApplicationController
                              TeamRole.product_owner.first)
                       .size
                       .nonzero?
-        # it's time to create and election poll
+        # it's time to create an election poll
         # if election poll is closed or suspended the position will not be removed
 
         ElectionPoll
@@ -89,9 +89,9 @@ class TeamsController < ApplicationController
     banned_thinker = BannedThinker.new(ban_params)
 
     respond_to do |format|
+      format.json { head :no_content }
       if banned_thinker.reason.empty?
         format.html { redirect_to project_teams_path(@project), alert: t('.reason_empty') }
-        format.json { head :no_content }
       else
         banned_thinker.thinker = @thinker
         banned_thinker.project = @project
@@ -99,7 +99,6 @@ class TeamsController < ApplicationController
         banned_thinker.save
 
         format.html { redirect_to project_teams_path(@project), notice: t('.thinker_banned') }
-        format.json { head :no_content }
       end
     end
   end
@@ -110,14 +109,13 @@ class TeamsController < ApplicationController
                      .where(thinker: @thinker)
 
     respond_to do |format|
+      format.json { head :no_content }
       if banned_thinker.empty?
         format.html { redirect_to project_teams_path(@project), alert: t('.thinker_already_unbanned') }
-        format.json { head :no_content }
       else
         banned_thinker.destroy_all
 
         format.html { redirect_to project_teams_path(@project), notice: t('.thinker_unbanned') }
-        format.json { head :no_content }
       end
     end
   end

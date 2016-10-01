@@ -58,7 +58,8 @@ class TasksController < ApplicationController
     ]
 
     @search = ''
-    if params.has_key?(:filterrific) && params[:filterrific].has_key?(:search_title_and_description)
+    if params.key?(:filterrific) &&
+       params[:filterrific].key?(:search_title_and_description)
       @search = params[:filterrific][:search_title_and_description].strip
     end
   rescue ActiveRecord::RecordNotFound => e
@@ -97,7 +98,7 @@ class TasksController < ApplicationController
 
     if current_thinker != @task.thinker && !scrum_master?(@task.project)
       respond_to do |format|
-        format.html { redirect_to @task, alert: "You cannot edit this." }
+        format.html { redirect_to @task, alert: 'You cannot edit this.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -108,9 +109,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    if !scrum_master?(@project)
-      @task.release = nil
-    end
+    @task.release = nil unless scrum_master?(@project)
 
     @task.project = @project
     @task.thinker = current_thinker
@@ -139,7 +138,9 @@ class TasksController < ApplicationController
     @task.updater = current_thinker
 
     respond_to do |format|
-      if (current_thinker == @task.thinker || scrum_master?(@task.project)) && @task.update(task_params)
+      if (current_thinker == @task.thinker ||
+          scrum_master?(@task.project)) &&
+          @task.update(task_params)
         create_notification(@task, @task.project)
 
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
@@ -268,7 +269,7 @@ class TasksController < ApplicationController
   end
 
   def reopen
-    @task.restore(:recursive => true)
+    @task.restore(recursive: true)
     create_notification(@task, @task.project)
     respond_to do |format|
       format.html { redirect_to @task, notice: 'You restored the task. Good job!' }

@@ -60,7 +60,7 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
-    if !scrum_master?(@project)
+    unless scrum_master?(@project)
       respond_to do |format|
         format.html { redirect_to project_path(@project), alert: t('you_are_not_the_scrum_master') }
         format.json { render json: {}, status: :unprocessable_entity }
@@ -73,7 +73,7 @@ class GoalsController < ApplicationController
 
   # GET /goals/1/edit
   def edit
-    if !scrum_master?(@goal.project)
+    unless scrum_master?(@goal.project)
       respond_to do |format|
         format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
         format.json { render json: {}, status: :unprocessable_entity }

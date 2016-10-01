@@ -28,7 +28,10 @@ class ElectionPollsController < ApplicationController
   # GET /election_polls/1
   # GET /election_polls/1.json
   def show
-    redirect_to edit_election_poll_path unless @election_poll.voters.where(thinker: current_thinker).exists?
+    redirect_to edit_election_poll_path unless @election_poll
+                                               .voters
+                                               .where(thinker: current_thinker)
+                                               .exists?
   end
 
   # GET /election_polls/new

@@ -79,13 +79,14 @@ class DependencesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dependence
-      @dependence = Dependence.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dependence_params
-      params[:dependence].permit(:reason, :url, :external, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dependence
+    @dependence = Dependence.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def dependence_params
+    params[:dependence].permit(:reason, :url, :external, :project_id)
+  end
 end

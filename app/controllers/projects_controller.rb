@@ -149,9 +149,17 @@ class ProjectsController < ApplicationController
 
   def elect
     respond_to do |format|
-      @voter = Voter.new(params.require(:voter).permit(:election_poll_id, :elect_id))
+      @voter = Voter
+               .new(
+                 params
+                 .require(:voter)
+                 .permit(:election_poll_id, :elect_id)
+               )
 
-      if Voter.where(thinker: current_thinker).where(election_poll: @voter.election_poll).exists?
+      if Voter
+         .where(thinker: current_thinker)
+         .where(election_poll: @voter.election_poll)
+         .exists?
         format.html { redirect_to project_teams_path(@project), alert: 'You cannot vote twice!' }
         format.json { render json: {}, status: :unprocessable_entity }
       elsif !@project.part_of_team?(current_thinker)
@@ -179,6 +187,13 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:title, :description, :minimum_team_number, :release_at, :license_id, :source_code_url, :home_url, :documentation_url, :cycle_id, :category_id, :main_image)
+    params
+      .require(:project)
+      .permit(
+        :title, :description, :minimum_team_number,
+        :release_at, :license_id, :source_code_url,
+        :home_url, :documentation_url,
+        :cycle_id, :category_id, :main_image
+      )
   end
 end
