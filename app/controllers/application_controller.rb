@@ -122,10 +122,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_thinker_notifications
-    @notifications = Notification
-                     .user(current_thinker)
-                     .order('project_id DESC')
-                     .order('created_at DESC')
-                     .limit(10)
+    @thinker_notifications = Notification
+                             .user(current_thinker)
+                             .order('project_id DESC')
+                             .order('created_at DESC')
+                             .limit(10)
   end
 end
