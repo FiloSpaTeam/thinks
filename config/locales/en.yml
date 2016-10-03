@@ -77,6 +77,7 @@ en:
   unban_from_project: "Unban from project"
   if_are_you_sure_want_ban_this_member: "If you really want to ban this thinker, provide a valid reason. (160 chars max)."
   specify_reason: "Specify a valid reason."
+  view_all: "View all"
 
   layouts:
     application:

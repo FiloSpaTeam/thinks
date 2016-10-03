@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   before_action :set_thinker_projects, if: :thinker_signed_in?
   before_action :set_thinker_tasks, if: :thinker_signed_in?
   before_action :set_thinker_following_projects, if: :thinker_signed_in?
+  before_action :set_thinker_notifications, if: :thinker_signed_in?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Prevent CSRF attacks by raising an exception.
@@ -118,5 +119,13 @@ class ApplicationController < ActionController::Base
                      .in_progress
                      .order('created_at DESC')
                      .first(10)
+  end
+
+  def set_thinker_notifications
+    @notifications = Notification
+                     .user(current_thinker)
+                     .order('project_id DESC')
+                     .order('created_at DESC')
+                     .limit(10)
   end
 end

@@ -1,0 +1,29 @@
+%ul.dropdown-menu{style: 'min-width: 280px;'}
+  - if @notifications.empty?
+    %li
+      %a{href: '#'}= t "notifications.list.no_notifications_found"
+    %li.divider{role: 'separator'}
+  - else
+    - @notifications.each do |notification|
+      %li.row{style: 'padding: 0 15px;'}
+        .col-sm-2.col-md-2.col-lg-2
+          - unless notification.project.deleted?
+            = link_to project_path(notification.project), title: notification.project.title do
+              - if notification.project.main_image
+                = cl_image_tag(notification.project.main_image.path, { size: '40x40', crop: :thumb, gravity: :face })
+              - else
+                %img{'data-src':'holder.js/40x40'}
+          - else
+            %img{'data-src':'holder.js/40x40'}
+        .col-sm-10.col-md-10.col-lg-10
+          %small{title: notification.created_at.ago_in_words}
+            - if notification.project.deleted?
+              = title_for(notification)
+            - else
+              = link_to (notification_follow_path(notification)) do
+                = title_for(notification)
+      %li.divider{role: 'separator'}
+  %li
+    = link_to notifications_path do
+      %strong=t('view_all')
+

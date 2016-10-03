@@ -58,7 +58,7 @@ module NotificationsHelper
       model = model.find_by_id notification.model_id
     end
 
-    t ".#{notification.controller}.#{notification.action}",
+    t "notifications.list.#{notification.controller}.#{notification.action}",
       case notification.controller
       when 'tasks'
         {
