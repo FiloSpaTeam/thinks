@@ -4,7 +4,7 @@
       %a{href: '#'}= t "notifications.list.no_notifications_found"
     %li.divider{role: 'separator'}
   - else
-    - @notifications.each do |notification|
+    - @thinker_notifications.each do |notification|
       %li.row{style: 'padding: 0 15px;'}
         .col-sm-2.col-md-2.col-lg-2
           - unless notification.project.deleted?
