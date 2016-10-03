@@ -34,13 +34,13 @@
                 = link_to t(".already_signed_up"), new_session_path(resource_name)
           .form-group{ :class => set_has_error_form_group(resource, :password) }
             = f.label :password, :class => "control-label"
-            = f.password_field :password, autocomplete: "off", class: "form-control"
+            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password'
             - if @minimum_password_length
               %p.help-block
                 = t "char_minimum", chars: @minimum_password_length
           .form-group{ :class => set_has_error_form_group(resource, :password_confirmation) }
             = f.label :password_confirmation, :class => "control-label"
-            = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+            = f.password_field :password_confirmation, autocomplete: "off", class: "form-control", 'data-toggle': 'password'
           = f.submit t(".sign_up"), class: "btn btn-success btn-block"
 
 = parent_layout :cover
