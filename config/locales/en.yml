@@ -367,6 +367,7 @@ en:
     navbar:
       faqs: "FAQs"
       how_does_it_works: "How does it works"
+      notifications: "Notifications"
     projectbar:
       goals: "Goals"
       team: "Team"
