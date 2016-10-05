@@ -50,6 +50,7 @@ class Thinker < ActiveRecord::Base
   has_many :answers, class_name: 'AnswerThinker', foreign_key: :thinker_id
   has_many :assigned_roles
   has_many :banned_thinkers
+  has_many :ratings, dependent: :destroy
 
   has_one :notifications_preference, class_name: 'NotificationsPreference', foreign_key: :thinker_id
 

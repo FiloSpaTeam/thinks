@@ -92,6 +92,8 @@ Rails.application.routes.draw do
           put :done
         end
       end
+
+      resource :ratings, only: [:create], shallow: true
     end
 
     resources :goals, shallow: true do

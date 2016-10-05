@@ -79,6 +79,7 @@ class TasksController < ApplicationController
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
 
+
     @project = @task.project
     @comment = Comment.new
   end
@@ -294,7 +295,7 @@ class TasksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task
-            .includes(:comments, :votes, :worker, :thinker, :project)
+            .includes(:comments, :votes, :worker, :thinker, :project, :ratings)
             .with_deleted.find(params[:id])
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928200805) do
+ActiveRecord::Schema.define(version: 20161005215438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -289,6 +289,17 @@ ActiveRecord::Schema.define(version: 20160928200805) do
 
   add_index "projects_skills", ["project_id", "skill_id"], name: "index_projects_skills_on_project_id_and_skill_id", using: :btree
   add_index "projects_skills", ["skill_id", "project_id"], name: "index_projects_skills_on_skill_id_and_project_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "thinker_id"
+    t.integer  "task_id"
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "ratings", ["deleted_at"], name: "index_ratings_on_deleted_at", using: :btree
 
   create_table "reasons", force: :cascade do |t|
     t.text     "text"

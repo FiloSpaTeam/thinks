@@ -76,6 +76,12 @@
         - else
           .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
           = t("projects.tasks.#{task.status.translation_code}")
+    - unless task.deleted? && task.done?
+      - if task.ratings.where(thinker: current_thinker).present?
+      - else
+        .list-group-item
+          = render :partial => 'ratings/form', locals: { task: task }
+
   - if (scrum_master?(task.project))
     - if !task.deleted?
       - if task.status == Status.release.first

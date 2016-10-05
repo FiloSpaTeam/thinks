@@ -51,6 +51,7 @@ class Task < ActiveRecord::Base
   has_many :operations, dependent: :destroy
   has_many :likes, through: :comments
   has_many :children, class_name: 'Task', foreign_key: 'father_id'
+  has_many :ratings, dependent: :destroy
 
   has_many :notifications, -> { where(model: :Task) }, foreign_key: :model_id, dependent: :destroy
 
