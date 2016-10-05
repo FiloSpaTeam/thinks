@@ -1,7 +1,7 @@
 %ul.dropdown-menu
   %div{style: 'min-width: 280px; max-height: 500px; overflow-x: hidden; overflow-y: scroll;'}
     - if @thinker_notifications.empty?
-      %li
+      %li.row{style: 'padding: 0 15px;'}
         %a{href: '#'}= t "notifications.list.no_notifications_found"
       %li.divider{role: 'separator'}
     - else
