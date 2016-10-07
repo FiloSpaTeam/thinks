@@ -86,8 +86,9 @@
           %strong=t(:average)
           = text_field_tag :value, task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
       - else
-        %li.list-group-item
-          = render :partial => 'ratings/form', locals: { task: task }
+        - if task.done?
+          %li.list-group-item
+            = render :partial => 'ratings/form', locals: { task: task }
 
   - if (scrum_master?(task.project))
     - if !task.deleted?
