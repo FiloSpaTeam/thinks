@@ -106,10 +106,10 @@
         .panel-footer
           = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
 
-  .list-group
-    .list-group-item{ style: 'border-top: none;' }
+  %ul.list-group
+    %li.list-group-item{ style: 'border-top: none;' }
     - if task.deleted?
-      .list-group-item
+      %li.list-group-item
         %strong
           Closed at
         %span.pull-right.visible-sm
@@ -117,7 +117,7 @@
         %span.pull-right.visible-md.visible-lg
           = task.deleted_at.to_s(:long)
     - else
-      .list-group-item
+      %li.list-group-item
         %strong
           Created at
         %span.pull-right.visible-sm
@@ -129,7 +129,7 @@
             %small
               %i
                 = task.thinker.name
-      .list-group-item
+      %li.list-group-item
         %strong
           Updated at
         %span.pull-right.visible-sm
@@ -143,8 +143,8 @@
                 = task.updater.name
 
 .panel.panel-default
-  .list-group
-    .list-group-item.hidden-xs
+  %ul.list-group
+    %li.list-group-item.hidden-xs
       %strong
         = t('tasks.workload')
       %span.pull-right
@@ -165,8 +165,8 @@
         .text-right{ style: 'padding-right: 15px;' }
           %strong
             = t "tasks.show.you_voted", vote: workload_voted.workload.value
-  .list-group.hidden-xs
-    .list-group-item
+  %ul.list-group.hidden-xs
+    %li.list-group-item
       %strong
         = t('tasks.worker')
       - if !task.worker.nil?
@@ -189,7 +189,7 @@
           %h4 There are no opinions about this task. Share with a comment and vote!
       - else
         %h4 Actually the team didn't decide to work on. Talk about if you are interested
-    .list-group-item
+    %li.list-group-item
       %strong
         Operations
       = link_to task_operations_path(task), :class => "pull-right" do
