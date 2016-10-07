@@ -32,8 +32,8 @@
             Workload
           = workload_description(task)
 .panel.panel-default.hidden-xs
-  .list-group
-    .list-group-item
+  %ul.list-group
+    %li.list-group-item
       %strong
         Release
       %span.pull-right
@@ -41,7 +41,7 @@
           = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
         - else
           = t("not_defined_yet")
-    .list-group-item
+    %li.list-group-item
       %strong
         Goal
       %span.pull-right
@@ -49,7 +49,7 @@
           = link_to task.goal.title.truncate(20), goal_path(task.goal), :title => task.goal.title
         - else
           = t("not_defined_yet")
-    .list-group-item
+    %lu.list-group-item
       %strong
         Father
       %span.pull-right
@@ -58,7 +58,7 @@
         - else
           = t("not_defined_yet")
     - if task.children.count.nonzero?
-      .list-group-item
+      %li.list-group-item
         %strong
           Children
         %ul{style: "max-height: 100px; overflow-y: scroll;padding-left: 13px;"}
@@ -67,7 +67,7 @@
               = link_to task_path(child) do
                 %small
                   = child.title
-    .list-group-item
+    %li.list-group-item
       %strong
         = t('tasks.status')
       %span.pull-right
@@ -78,8 +78,15 @@
           = t("projects.tasks.#{task.status.translation_code}")
     - unless task.deleted? && task.done?
       - if task.ratings.where(thinker: current_thinker).present?
+        %li.list-group-item
+          %span.pull-right
+            = task.ratings.where(thinker: current_thinker).first.value.to_f
+          %strong=t('.your_rating')
+        %li.list-group-item{style: 'border-top: none;'}
+          %strong=t(:average)
+          = text_field_tag :value, task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
       - else
-        .list-group-item
+        %li.list-group-item
           = render :partial => 'ratings/form', locals: { task: task }
 
   - if (scrum_master?(task.project))
