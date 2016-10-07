@@ -3,5 +3,5 @@
     = f.label :value, t(".rate_the_work"), class: 'control-label'
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "How much do you think is valid and consistent the work done?", 'data-html' => 'true' do
       = icon('info-circle')
-    = f.text_field :value, class: 'rating', 'data-size': 'xs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false'
+    = f.text_field :value, class: 'rating', 'data-size': 'xs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-theme': 'krajee-fa'
   = f.submit t('submit'), :class => "btn btn-primary"
