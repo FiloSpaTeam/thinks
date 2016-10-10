@@ -17,7 +17,7 @@
 
 class Reason < ActiveRecord::Base
   belongs_to :thinker
-  belongs_to :comment
+  belongs_to :related, polymorphic: true
 
   validates :text, presence: true, length: { minimum: 2 }
 end

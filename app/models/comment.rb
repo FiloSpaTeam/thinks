@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
   belongs_to :task, -> { with_deleted }
   belongs_to :thinker
 
-  has_one :reason
+  has_one :reason, as: :related
 
   has_many :likes, dependent: :destroy
 
@@ -43,20 +43,24 @@ class Comment < ActiveRecord::Base
 
   def approve(p_reason)
     ActiveRecord::Base.transaction do
-      task = self.task
+      begin
+        task = self.task
 
-      task.status = Status.done.first
-      task.end_at = DateTime.now
-      task.save
+        task.status = Status.done.first
+        task.end_at = DateTime.now
+        task.save
 
-      unless approved
-        task.comments.approved.update_all(approved: false)
+        unless approved
+          task.comments.approved.update_all(approved: false)
 
-        self.approved = true
-        save
+          self.approved = true
+          save
 
-        p_reason.comment = self
-        p_reason.save
+          p_reason.related = self
+          p_reason.save
+        end
+      rescue => ex
+        puts ex.message
       end
     end
   end

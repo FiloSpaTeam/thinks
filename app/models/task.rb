@@ -55,6 +55,8 @@ class Task < ActiveRecord::Base
 
   has_many :notifications, -> { where(model: :Task) }, foreign_key: :model_id, dependent: :destroy
 
+  has_one :reason, as: :related
+
   belongs_to :project
   belongs_to :goal
   belongs_to :release
@@ -185,6 +187,28 @@ class Task < ActiveRecord::Base
     }
 
     options[sort_option]
+  end
+
+  def destroy_and_associate_reason(params, current_thinker)
+    ActiveRecord::Base.transaction do
+      begin
+        self.worker = nil
+        self.status = Status.backlog.first
+        save
+
+        destroy
+
+        reason = Reason
+                 .where(related: self).first_or_create
+
+        reason.text    = params[:text]
+        reason.thinker = current_thinker
+
+        reason.save
+      rescue => ex
+        puts ex.message
+      end
+    end
   end
 
   def average

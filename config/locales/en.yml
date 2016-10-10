@@ -79,6 +79,7 @@ en:
   specify_reason: "Specify a valid reason."
   view_all: "View all"
   average: "Average"
+  close: "Close"
 
   layouts:
     application:

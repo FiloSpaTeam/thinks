@@ -117,6 +117,11 @@
           = task.deleted_at.to_s(:short)
         %span.pull-right.visible-md.visible-lg
           = task.deleted_at.to_s(:long)
+      %li.list-group-item
+        %strong
+          Reason
+        %h4
+          = task.reason.text
     - else
       %li.list-group-item
         %strong

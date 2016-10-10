@@ -23,6 +23,8 @@ class ReasonsController < ApplicationController
     @reason.thinker = current_thinker
     @reason.comment = @comment
 
+    puts @reason.inspect
+
     respond_to do |format|
       if @reason.save
         format.html { redirect_to @comment.task, notice: 'Reason added to documentation!' }

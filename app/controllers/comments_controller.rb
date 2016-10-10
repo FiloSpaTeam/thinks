@@ -80,6 +80,7 @@ class CommentsController < ApplicationController
 
   def approve
     reason = Reason.new(reason_params)
+    reason.thinker = current_thinker
 
     @task = @comment.task
     respond_to do |format|
@@ -87,17 +88,15 @@ class CommentsController < ApplicationController
         set_form_errors(reason)
 
         format.html { redirect_to @task, alert: 'You need to specify a reason!' }
+      elsif @task.worker == current_thinker && @comment.approve(reason)
+        create_notification(@comment, @task.project)
+        format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
+        format.json { render :show, status: :created, location: @task }
       else
-        if @task.worker == current_thinker && @comment.approve(reason)
-          create_notification(@comment, @task.project)
-          format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
-          format.json { render :show, status: :created, location: @task }
-        else
-          set_form_errors(@comment)
+        set_form_errors(@comment)
 
-          format.html { redirect_to @task }
-          format.json { render json: @task.comment, status: :unprocessable_entity }
-        end
+        format.html { redirect_to @task }
+        format.json { render json: @task.comment, status: :unprocessable_entity }
       end
     end
   end

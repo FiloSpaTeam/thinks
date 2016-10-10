@@ -166,14 +166,14 @@ class TasksController < ApplicationController
 
           format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully deleted.' }
         else
-          @task.worker = nil
-          @task.status = @statuses.backlog.first
-          @task.save
+          if params[:reason][:text].nil?
+            format.html { redirect_to @task, alert: 'You need to specify a reason.' }
+          else
+            @task.destroy_and_associate_reason(params.require(:reason), current_thinker)
+            create_notification(@task, @task.project)
 
-          @task.destroy
-          create_notification(@task, @task.project)
-
-          format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully closed.' }
+            format.html { redirect_to @task, notice: 'Task was successfully closed.' }
+          end
         end
 
         format.json { head :no_content }
