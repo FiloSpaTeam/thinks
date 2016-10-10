@@ -315,7 +315,10 @@ class Task < ActiveRecord::Base
   end
 
   def generate_serial
-    tasks_count = Task.with_deleted.where(project_id: project.id).maximum('serial') + 1
+    tasks_count = (Task
+                  .with_deleted
+                  .where(project_id: project.id)
+                  .maximum('serial') || 0) + 1
 
     self.serial = tasks_count
   end
