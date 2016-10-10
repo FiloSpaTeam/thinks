@@ -55,7 +55,7 @@ class Task < ActiveRecord::Base
 
   has_many :notifications, -> { where(model: :Task) }, foreign_key: :model_id, dependent: :destroy
 
-  has_one :reason, as: :related
+  has_one :reason, as: :related, dependent: :destroy
 
   belongs_to :project
   belongs_to :goal
