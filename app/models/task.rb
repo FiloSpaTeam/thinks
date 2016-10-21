@@ -18,6 +18,8 @@
 class Task < ActiveRecord::Base
   acts_as_paranoid
 
+  is_impressionable
+
   paginates_per 10
   max_paginates_per 50
 

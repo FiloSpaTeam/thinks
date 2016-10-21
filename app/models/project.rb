@@ -160,7 +160,7 @@ class Project < ActiveRecord::Base
   end
 
   def days_percentage
-    return 100 * self.actual_day_of_sprint / cycle.days
+    100 * actual_day_of_sprint / cycle.days
   end
 
   def days_from_start

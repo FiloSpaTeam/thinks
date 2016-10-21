@@ -79,9 +79,10 @@ class TasksController < ApplicationController
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
 
-
     @project = @task.project
     @comment = Comment.new
+
+    impressionist(@task)
   end
 
   # GET /projects/1/tasks/new

@@ -18,6 +18,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
 
+  before_action :set_current_user, if: :thinker_signed_in?
   before_action :set_thinker_projects, if: :thinker_signed_in?
   before_action :set_thinker_tasks, if: :thinker_signed_in?
   before_action :set_thinker_following_projects, if: :thinker_signed_in?
@@ -98,6 +99,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_current_user
+    @current_user = current_thinker
+  end
 
   def set_thinker_projects
     @thinker_projects = current_thinker

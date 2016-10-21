@@ -45,6 +45,9 @@ gem 'haml-rails', '~> 0.9.0'
 # Filter for views
 gem 'filterrific', '2.0.5'
 
+# Statistics about views
+gem 'impressionist', '~> 1.5.2'
+
 # Pagination
 gem 'kaminari', '0.16.3'
 
