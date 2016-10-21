@@ -35,6 +35,11 @@
   %ul.list-group
     %li.list-group-item
       %strong
+        Count views
+      %span.pull-right
+        = task.impressionist_count
+    %li.list-group-item
+      %strong
         Release
       %span.pull-right
         - if task.release.present?

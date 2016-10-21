@@ -19,6 +19,9 @@ class TasksController < ApplicationController
   include ProjectsHelper
   include StatusesHelper
 
+  impressionist actions: [:show, :index],
+                unique: [:impressionable_id, :user_id]
+
   before_action :authenticate_thinker!
 
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
@@ -81,8 +84,6 @@ class TasksController < ApplicationController
 
     @project = @task.project
     @comment = Comment.new
-
-    impressionist(@task)
   end
 
   # GET /projects/1/tasks/new
