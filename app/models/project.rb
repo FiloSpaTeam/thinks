@@ -32,6 +32,8 @@ class Project < ActiveRecord::Base
     ]
   )
 
+  is_impressionable counter_cache: true
+
   has_attachment :main_image, accept: [:jpg, :png]
 
   has_and_belongs_to_many :languages
@@ -78,7 +80,6 @@ class Project < ActiveRecord::Base
   #     errors.add(:release_at, "can't be in the past")
   #   end
   # end
-  scope :default_order, -> { order('title') }
 
   scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
 

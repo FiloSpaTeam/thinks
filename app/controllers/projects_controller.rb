@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @filterrific = initialize_filterrific(
-      Project.default_order,
+      Project.order(:impressions_count).order(:title),
       params[:filterrific],
       select_options: {
         sorted_by: Project.options_for_sorted_by
@@ -57,6 +57,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    impressionist(@project, '', unique: [:impressionable_id, :user_id])
   end
 
   # GET /projects/new
