@@ -24,6 +24,8 @@ class GoalsController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
+  before_action :check_ban!, except: [:index]
+
   before_action :share_statuses, only: [:show, :edit, :tasks_in_sprint]
 
   before_action :authenticate_thinker!

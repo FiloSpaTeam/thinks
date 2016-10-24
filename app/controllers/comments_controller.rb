@@ -17,8 +17,11 @@
 
 class CommentsController < ApplicationController
   before_action :set_task, only: [:create]
-  before_action :set_comment, only: [:approve, :edit, :update, :destroy]
+  before_action :set_comment, only: [:approve, :edit, :update, :destroy, :like]
   before_action :set_validators_for_form_help, only: [:edit]
+
+  impressionist actions: [:like],
+                unique: [:impressionable_id, :user_id]
 
   def create
     @comment         = Comment.new(comment_params)
@@ -97,6 +100,19 @@ class CommentsController < ApplicationController
 
         format.html { redirect_to @task }
         format.json { render json: @task.comment, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def like
+    task = @comment.task
+    respond_to do |format|
+      if @comment.impressionist_count(user_id: current_thinker.id).empty?
+        format.html { redirect_to task, notice: 'You like it!' }
+        format.json { render :show, status: :created, location: task }
+      else
+        format.html { redirect_to task, alert: 'You already liked!' }
+        format.json { render json: :error, status: :unprocessable_entity }
       end
     end
   end

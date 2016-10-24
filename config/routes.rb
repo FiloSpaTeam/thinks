@@ -84,6 +84,7 @@ Rails.application.routes.draw do
 
         member do
           get :approve
+          get :like
         end
       end
 

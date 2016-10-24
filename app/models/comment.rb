@@ -18,6 +18,8 @@
 class Comment < ActiveRecord::Base
   acts_as_paranoid
 
+  is_impressionable
+
   belongs_to :task, -> { with_deleted }
   belongs_to :thinker
 

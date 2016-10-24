@@ -19,15 +19,12 @@ class TasksController < ApplicationController
   include ProjectsHelper
   include StatusesHelper
 
-  impressionist actions: [:show, :index],
-                unique: [:impressionable_id, :user_id]
-
   before_action :authenticate_thinker!
 
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
   before_action :set_project, only: [:new, :index, :create]
 
-  # before_action :check_ban!, except: [:index]
+  before_action :check_ban!, except: [:index]
 
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -36,6 +33,9 @@ class TasksController < ApplicationController
   before_action :check_assign!, only: [:assign]
 
   before_action :share_statuses, only: [:index, :destroy, :sprint, :assign, :give_up, :release]
+
+  impressionist actions: [:show],
+                unique: [:impressionable_id, :user_id]
 
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json

@@ -60,6 +60,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url unless current_thinker.try(:admin?)
   end
 
+  def check_ban!
+    flash[:error] = 'You are banned!'
+
+    redirect_to project_path(@project) unless current_thinker.ban(@project).nil?
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_in) << :otp_attempt
   end
