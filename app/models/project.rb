@@ -87,8 +87,9 @@ class Project < ActiveRecord::Base
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
     case sort_option.to_s
     when /^title_/
-      # Simple sort on the name colums
       order("LOWER(projects.title) #{direction}")
+    when /^impressions_count/
+      order("impressions_count #{direction}")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -107,7 +108,9 @@ class Project < ActiveRecord::Base
   def self.options_for_sorted_by
     [
       ['Title (a-z)', 'title_asc'],
-      ['Title (z-a)', 'title_desc']
+      ['Title (z-a)', 'title_desc'],
+      ['Less popular', 'impressions_count_asc'],
+      ['Highest popular', 'impressions_count_desc']
     ]
   end
 
