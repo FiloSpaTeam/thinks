@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-default
+#div-container-list.panel.panel-default
   .panel-heading
     %h2
       = t '.projects'
@@ -32,4 +32,4 @@
     = render_filterrific_spinner
     %table.table.table-condensed.table-hover#filterrific_results{ style: 'margin-bottom: 0;' }
       = render partial: 'list', locals: { projects: @projects }
-= paginate @projects, :remote => true
+  = paginate @projects, :remote => true

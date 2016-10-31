@@ -1,0 +1,61 @@
+<!-- This file is part of Thinks. -->
+
+<!-- Thinks is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU Affero Public License as published by -->
+<!-- the Free Software Foundation, either version 3 of the License, or -->
+<!-- (at your option) any later version. -->
+
+<!-- Thinks is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU Affero Public License for more details. -->
+
+<!-- You should have received a copy of the GNU Affero Public License -->
+<!-- along with Thinks.  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- Copyright (c) 2015, Claudio Maradonna -->
+
+<div id="filterrific_results">
+
+  <div class="row">
+    <% projects.each_with_index do |project, index| %>
+      <% if index % 2 == 0 %>
+        </div>
+        <div class="row">
+      <% end %>
+
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <%= link_to project_path(project), :class => "thumbnail" do %>
+                  <% if project.main_image %>
+                    <%= cl_image_tag(project.main_image.path, { size: '110x110', crop: :thumb, gravity: :face }) %>
+                  <% else %>
+                    <img data-src="holder.js/110x110">
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-md-8 col-sm-8 text-justify" style="font-size: 12px;">
+                <%= link_to project_path(project) do %>
+                  <h4><strong> <%= project.title %> </strong></h4>
+                <% end %>
+                <%#= markdown(truncate(project.description.lines.first.tr('#', ''), length: 150, separator: ' ', omission: '... '), true) %>
+                <em>
+                    <%= plain_text(project.description.lines.first).truncate(150) %>
+                </em>
+              </div>
+            </div>
+            <div class="progress">
+              <div aria-valuemax="100" "aria-valuemin"="0" "aria-valuenow"="<%= project.progress_percentage %>" class="progress-bar <%= progress_bar_color(project.progress_percentage) %>" role="progressbar" style="min-width: 2em; width: <%= project.progress_percentage %>%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate projects %>

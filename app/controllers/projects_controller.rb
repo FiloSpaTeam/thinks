@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @filterrific = initialize_filterrific(
-      Project.order(:impressions_count).order(:title),
+      Project,
       params[:filterrific],
       select_options: {
         sorted_by: Project.options_for_sorted_by
@@ -47,6 +47,7 @@ class ProjectsController < ApplicationController
 
       format.html
       format.json { render :json => { :projects => @projects } }
+      format.js
     end
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.

@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
   max_paginates_per 48
 
   filterrific(
+    default_filter_params: { sorted_by: 'impressions_count_desc' },
     available_filters: [
       :sorted_by,
 
@@ -109,8 +110,8 @@ class Project < ActiveRecord::Base
     [
       ['Title (a-z)', 'title_asc'],
       ['Title (z-a)', 'title_desc'],
-      ['Less popular', 'impressions_count_asc'],
-      ['Highest popular', 'impressions_count_desc']
+      ['Less popular first', 'impressions_count_asc'],
+      ['Highest popular first', 'impressions_count_desc']
     ]
   end
 

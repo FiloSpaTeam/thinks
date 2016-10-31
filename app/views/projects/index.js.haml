@@ -18,4 +18,9 @@
 - js = escape_javascript(
 - render(partial: 'projects/list', locals: { projects: @projects })
 - )
+- new_paginate = escape_javascript(paginate(@projects, :remote => true))
 $("#filterrific_results").html("#{js}");
+Holder.run();
+var $col = $('#div-container-list');
+$col.find('ul.pagination, nav').remove();
+$col.append("#{new_paginate}");
