@@ -41,4 +41,4 @@
       %td.hidden-xs
         = project.category.try(:name)
       %td.hidden-xs.hidden-sm
-        = project.thinker.name
+        = project.thinker.try(:name)
