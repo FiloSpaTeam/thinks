@@ -24,7 +24,7 @@
       .row
         .col-xs-12
           .input-group
-            -# = f.text_field(:search_title, class: 'form-control filterrific-periodically-observed')
+            = f.text_field(:search_title, class: 'form-control filterrific-periodically-observed')
             .input-group-btn
               = link_to_button(new_project_path, "new", "plus")
       = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
