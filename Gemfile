@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1', group: :production
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
@@ -14,13 +16,12 @@ gem 'delayed_job_active_record', '4.1.1'
 gem 'paranoia', '~> 2.0'
 
 # Heroku
+gem 'puma', group: :production
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'attachinary'
-
-ruby '2.3.1', group: :production
 
 # Bootstrap SASS port
 gem 'bootstrap-sass', '~> 3.3.5'
