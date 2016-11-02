@@ -27,14 +27,17 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @filterrific = initialize_filterrific(
-      Project,
+      Project
+        .includes(:thinker, :category),
       params[:filterrific],
       select_options: {
         sorted_by: Project.options_for_sorted_by
-      }
+      },
+      default_filter_params: {},
+      available_filters: []
     ) || return
 
-    @projects = @filterrific.find.page params[:page]
+    @projects = @filterrific.find.page(params[:page])
 
     puts 'HERE'
     puts @filterrific.to_yaml
