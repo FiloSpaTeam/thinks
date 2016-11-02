@@ -28,13 +28,11 @@ class ProjectsController < ApplicationController
   def index
     @filterrific = initialize_filterrific(
       Project
-        .includes(:thinker, :category),
+      .includes(:thinker, :category),
       params[:filterrific],
       select_options: {
         sorted_by: Project.options_for_sorted_by
-      },
-      default_filter_params: {},
-      available_filters: []
+      }
     ) || return
 
     @projects = @filterrific.find.page(params[:page])

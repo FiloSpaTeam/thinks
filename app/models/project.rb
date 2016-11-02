@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
     available_filters: [
       :sorted_by,
 
-      :search_title
+      :search_slug
     ]
   )
 
@@ -82,7 +82,8 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
+  # scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
+  scope :search_slug, ->(query) { where('slug LIKE ?', "%#{query}%") }
 
   scope :sorted_by, lambda { |sort_option|
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
