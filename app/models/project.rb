@@ -25,11 +25,10 @@ class Project < ActiveRecord::Base
   max_paginates_per 48
 
   filterrific(
-    default_filter_params: { sorted_by: 'impressions_count_desc' },
     available_filters: [
       :sorted_by,
 
-      :search_slug
+      :search_title
     ]
   )
 
@@ -82,8 +81,7 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  # scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
-  scope :search_slug, ->(query) { where('slug LIKE ?', "%#{query}%") }
+  scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
 
   scope :sorted_by, lambda { |sort_option|
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
