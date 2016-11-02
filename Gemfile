@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.1', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.7'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
 gem 'sprockets-rails', '2.3.3'
 gem 'validates_timeliness', '~> 4.0'
