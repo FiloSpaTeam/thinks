@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
     @projects = @filterrific.find.page params[:page]
 
     puts 'HERE'
-    puts @filterrific
+    puts @filterrific.to_yaml
     puts 'HERE'
 
     respond_to do |format|

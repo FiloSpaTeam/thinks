@@ -8,6 +8,8 @@ gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
 gem 'sprockets-rails', '2.3.3'
 gem 'validates_timeliness', '~> 4.0'
 
+gem 'quiet_assets', group: :development
+
 # PostgreSQL support
 gem 'pg', '0.18.4'
 gem 'delayed_job_active_record', '4.1.1'
