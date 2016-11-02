@@ -21,6 +21,8 @@ class Project < ActiveRecord::Base
 
   acts_as_paranoid
 
+  is_impressionable counter_cache: true
+
   paginates_per 24
   max_paginates_per 48
 
@@ -31,8 +33,6 @@ class Project < ActiveRecord::Base
       :search_title
     ]
   )
-
-  is_impressionable counter_cache: true
 
   has_attachment :main_image, accept: [:jpg, :png]
 
@@ -81,7 +81,9 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  scope :search_title, ->(query) { where('title LIKE ?', "%#{query}%") }
+  scope :search_title, lambda { |query|
+    where('title LIKE ?', "%#{query}%")
+  }
 
   scope :sorted_by, lambda { |sort_option|
     direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
