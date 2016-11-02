@@ -16,8 +16,8 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Project < ActiveRecord::Base
-  include FriendlyId
-  friendly_id :title, use: :slugged
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
 
   acts_as_paranoid
 
@@ -72,6 +72,12 @@ class Project < ActiveRecord::Base
   after_save :update_contribution_thinker
 
   before_create :generate_serial
+
+  def slug_candidates
+    [
+      :title
+    ]
+  end
 
   # validate :expiration_date_cannot_be_in_the_past
 
