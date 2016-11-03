@@ -16,7 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Project < ActiveRecord::Base
-  include FriendlyId
+  extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
   acts_as_paranoid
