@@ -35,6 +35,8 @@ class ProjectsController < ApplicationController
       }
     ) || return
 
+    puts @filterrific.inspect
+
     @projects = @filterrific.find.page(params[:page])
 
     respond_to do |format|
