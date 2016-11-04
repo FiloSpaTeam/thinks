@@ -17,7 +17,7 @@
 
 class Project < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :title, use: :slugged
 
   acts_as_paranoid
 
@@ -30,7 +30,7 @@ class Project < ActiveRecord::Base
     available_filters: [
       :sorted_by,
 
-      :search_in_title
+      :search_title
     ]
   )
 
@@ -73,12 +73,6 @@ class Project < ActiveRecord::Base
 
   before_create :generate_serial
 
-  def slug_candidates
-    [
-      :title
-    ]
-  end
-
   # validate :expiration_date_cannot_be_in_the_past
 
   # def expiration_date_cannot_be_in_the_past
@@ -87,7 +81,7 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  scope :search_in_title, lambda { |query|
+  scope :search_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
   }
 
