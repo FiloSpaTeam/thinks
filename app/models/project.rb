@@ -30,7 +30,7 @@ class Project < ActiveRecord::Base
     available_filters: [
       :sorted_by,
 
-      :search_title
+      :with_title
     ]
   )
 
@@ -81,7 +81,7 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  scope :search_title, lambda { |query|
+  scope :with_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
   }
 
