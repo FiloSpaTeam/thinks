@@ -17,6 +17,8 @@
 
 class ProjectsController < ApplicationController
   include ProjectsHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   before_action :authenticate_thinker!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect]
@@ -26,36 +28,28 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @filterrific = initialize_filterrific(
-      Project
-      .includes(:thinker, :category),
-      params[:filterrific],
-      select_options: {
-        sorted_by: Project.options_for_sorted_by
-      }
-    ) || return
+    smart_listing_create :projects,
+                         Project.includes(:category, :thinker),
+                         partial: 'projects/list',
+                         sort_attributes: [
+                           [:title, 'title'],
+                           [:category_name, 'categories.t_name']
+                         ],
+                         default_sort: { impressions_count: 'desc' }
 
-    puts @filterrific.inspect
+    @active_filters = [
+      Enums::Filters::SORTED_BY_PROJECTS
+    ]
+    # respond_to do |format|
+    #   if Project.all.empty?
+    #     format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }
+    #   end
 
-    @projects = @filterrific.find.page(params[:page])
 
-    respond_to do |format|
-      if Project.all.empty?
-        format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }
-      end
-
-      @active_filters = [
-        Enums::Filters::SORTED_BY_PROJECTS
-      ]
-
-      format.html
-      format.json { render :json => { :projects => @projects } }
-      format.js
-    end
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
+    #   format.html
+    #   format.json { render :json => { :projects => @projects } }
+    #   format.js
+    # end
   end
 
   # GET /projects/1

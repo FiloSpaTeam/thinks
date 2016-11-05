@@ -14,7 +14,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require jquery_ujs
-//= require filterrific/filterrific-jquery
+//= require smart_listing
 //= require holder
 //= require jquery.ui.widget
 //= require jquery.iframe-transport

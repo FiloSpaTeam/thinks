@@ -20,32 +20,32 @@ class Task < ActiveRecord::Base
 
   is_impressionable
 
-  paginates_per 10
-  max_paginates_per 50
+  # paginates_per 10
+  # max_paginates_per 50
 
-  filterrific(
-    available_filters: [
-      :sorted_by,
+  # filterrific(
+  #   available_filters: [
+  #     :sorted_by,
 
-      :search_release,
-      :search_goal,
-      :search_thinker,
-      :search_worker,
-      :search_title_and_description,
+  #     :search_release,
+  #     :search_goal,
+  #     :search_thinker,
+  #     :search_worker,
+  #     :search_title_and_description,
 
-      :status_progress,
+  #     :status_progress,
 
-      :with_goal,
-      :with_worker,
-      :with_thinker,
-      :with_project,
-      :with_release,
+  #     :with_goal,
+  #     :with_worker,
+  #     :with_thinker,
+  #     :with_project,
+  #     :with_release,
 
-      :workload_lower_than,
+  #     :workload_lower_than,
 
-      :with_deleted_at
-    ]
-  )
+  #     :with_deleted_at
+  #   ]
+  # )
 
   has_many :votes
   has_many :workloads, through: :votes

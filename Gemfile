@@ -45,13 +45,14 @@ gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
-gem 'filterrific', '2.0.5'
+# gem 'filterrific', '2.0.5'
+gem 'smart_listing', '1.2.0'
 
 # Statistics about views
 gem 'impressionist', '~> 1.5.2'
 
 # Pagination
-gem 'kaminari', '0.16.3'
+gem 'kaminari', '0.17'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.0'

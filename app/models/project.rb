@@ -23,17 +23,6 @@ class Project < ActiveRecord::Base
 
   is_impressionable counter_cache: true
 
-  paginates_per 24
-  max_paginates_per 48
-
-  filterrific(
-    available_filters: [
-      :sorted_by,
-
-      :with_title
-    ]
-  )
-
   has_attachment :main_image, accept: [:jpg, :png]
 
   has_and_belongs_to_many :languages
@@ -72,14 +61,6 @@ class Project < ActiveRecord::Base
   after_save :update_contribution_thinker
 
   before_create :generate_serial
-
-  # validate :expiration_date_cannot_be_in_the_past
-
-  # def expiration_date_cannot_be_in_the_past
-  #   if release_at.present? && release_at < Date.today
-  #     errors.add(:release_at, "can't be in the past")
-  #   end
-  # end
 
   scope :with_title, lambda { |query|
     where('title LIKE ?', "%#{query}%")
