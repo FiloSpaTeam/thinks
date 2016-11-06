@@ -45,7 +45,7 @@ gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
-# gem 'filterrific', '2.0.5'
+gem 'filterrific', '2.0.5'
 gem 'smart_listing', '1.2.0'
 
 # Statistics about views
@@ -64,7 +64,7 @@ gem 'coffee-rails', '~> 4.1.1'
 gem 'therubyracer', '~> 0.12.2'
 
 # Fontawesome
-gem 'font-awesome-sass', '~> 4.5.0'
+gem 'font-awesome-sass', '~> 4.7.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.1.0'

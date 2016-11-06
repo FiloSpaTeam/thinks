@@ -53,4 +53,11 @@ module ProjectsHelper
                     .nil?
     true
   end
+
+  def apply_filters(scope, params)
+    scope = scope.with_title(params[:title]) if params.key?(:title) && params[:title].present?
+
+    scope
+  end
+
 end

@@ -63,19 +63,7 @@ class Project < ActiveRecord::Base
   before_create :generate_serial
 
   scope :with_title, lambda { |query|
-    where('title LIKE ?', "%#{query}%")
-  }
-
-  scope :sorted_by, lambda { |sort_option|
-    direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
-    case sort_option.to_s
-    when /^title_/
-      order("LOWER(projects.title) #{direction}")
-    when /^impressions_count/
-      order("impressions_count #{direction}")
-    else
-      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
-    end
+    where('to_tsvector(title) @@ to_tsquery(?)', "'#{query.downcase}':*")
   }
 
   def last_notification_update
@@ -84,17 +72,6 @@ class Project < ActiveRecord::Base
 
   def generate_serial
     self.serial = SecureRandom.hex(64)
-  end
-
-  # This method provides select options for the `sorted_by` filter select input.
-  # It is called in the controller as part of `initialize_filterrific`.
-  def self.options_for_sorted_by
-    [
-      ['Title (a-z)', 'title_asc'],
-      ['Title (z-a)', 'title_desc'],
-      ['Less popular first', 'impressions_count_asc'],
-      ['Highest popular first', 'impressions_count_desc']
-    ]
   end
 
   def team

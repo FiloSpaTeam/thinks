@@ -20,13 +20,13 @@
     %h2
       = t '.projects'
       %small= t ".small_title"
-    -# = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+    = smart_listing_controls_for :projects do
       .row
         .col-xs-12
           .input-group
-            = f.text_field(:with_title, class: 'form-control filterrific-periodically-observed')
+            = text_field_tag("filters[title]", '', class: 'form-control', autocomplete: 'off')
             .input-group-btn
               = link_to_button(new_project_path, "new", "plus")
-      = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
+      -# = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
   .panel-body{ :style => "padding: 0;" }
     = smart_listing_render :projects

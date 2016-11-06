@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/svenfuchs/rails-i18n.git
-  revision: 705798b51a6a94d415a8670da3f84ee91496aa62
+  revision: dc6e3ec7e59e0a1ea2933bf6b4f107a9df419e26
   branch: rails-4-x
   specs:
     rails-i18n (4.0.9)
@@ -117,7 +117,9 @@ GEM
     encryptor (3.0.0)
     erubis (2.7.0)
     execjs (2.7.0)
-    font-awesome-sass (4.5.0)
+    filterrific (2.0.5)
+      rails (>= 3.1.0)
+    font-awesome-sass (4.7.0)
       sass (>= 3.2)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
@@ -334,7 +336,8 @@ DEPENDENCIES
   devise (= 3.5.5)
   devise-two-factor
   dotenv-rails (= 2.1.0)
-  font-awesome-sass (~> 4.5.0)
+  filterrific (= 2.0.5)
+  font-awesome-sass (~> 4.7.0)
   friendly_id (~> 5.1.0)
   groupdate (~> 2.5.1)
   haml (~> 4.0.7)

@@ -18,14 +18,14 @@
 module TasksHelper
   def color_list_round_div(status)
     color_list = {
-      "backlog"     => "backlog",
-      "release"     => "info",
-      "sprint"      => "danger",
-      "in_progress" => "warning",
-      "done"        => "success"
+      'backlog'     => 'backlog',
+      'release'     => 'info',
+      'sprint'      => 'danger',
+      'in_progress' => 'warning',
+      'done'        => 'success'
     }
 
-    return color_list[status]
+    color_list[status]
   end
 
   def color_list_group_item(status_task)

@@ -28,18 +28,23 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    projects_scope = Project.includes(:category, :thinker)
+    projects_scope = apply_filters(projects_scope, params[:filters]) if params[:filters].present?
+
     smart_listing_create :projects,
-                         Project.includes(:category, :thinker),
+                         projects_scope,
                          partial: 'projects/list',
+                         default_sort: { impressions_count: 'desc' },
                          sort_attributes: [
                            [:title, 'title'],
-                           [:category_name, 'categories.t_name']
-                         ],
-                         default_sort: { impressions_count: 'desc' }
+                           [:category_name, 'categories.t_name'],
+                           [:thinker_name, 'thinkers.name']
+                         ]
 
     @active_filters = [
       Enums::Filters::SORTED_BY_PROJECTS
     ]
+
     # respond_to do |format|
     #   if Project.all.empty?
     #     format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }

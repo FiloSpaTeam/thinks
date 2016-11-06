@@ -23,7 +23,7 @@
       %th.hidden-xs
         = smart_listing.sortable "Category", :category_name
       %th.hidden-xs.hidden-sm
-        Founder
+        = smart_listing.sortable "Founder", :thinker_name
   %tbody
     - smart_listing.collection.each do |project|
       %tr
