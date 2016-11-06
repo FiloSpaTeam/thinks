@@ -40,21 +40,6 @@ class ProjectsController < ApplicationController
                            [:category_name, 'categories.t_name'],
                            [:thinker_name, 'thinkers.name']
                          ]
-
-    @active_filters = [
-      Enums::Filters::SORTED_BY_PROJECTS
-    ]
-
-    # respond_to do |format|
-    #   if Project.all.empty?
-    #     format.html { redirect_to new_project_path, notice: 'You are the first one! Create the first project and share what you think!' }
-    #   end
-
-
-    #   format.html
-    #   format.json { render :json => { :projects => @projects } }
-    #   format.js
-    # end
   end
 
   # GET /projects/1
