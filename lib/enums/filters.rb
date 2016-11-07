@@ -1,7 +1,5 @@
 module Enums
   class Filters
-    SORTED_BY_PROJECTS  = :sorted_by_projects
-
     PROGRESS_LOWER_THAN = :progress_lower_than
 
     SEARCH_TASK         = :search_task

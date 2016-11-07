@@ -4,11 +4,16 @@
     %span.caret
   %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
     .panel-heading
-      - if !current_page?(project_goals_path)
-        = f.text_field :search_thinker, class: 'form-control filterrific-periodically-observed', placeholder: t("search")
+      = text_field_tag 'filters[thinker_name]', '', class: 'form-control', placeholder: t("search"), autocomplete: 'off'
     %ul.list-group.scrollbar
-      - @project.contributions.each do |contribution|
-        - thinker = contribution.thinker
-        %li.list-group-item
-          = link_to("filterrific[with_thinker]" => thinker, "filterrific[with_project]" => @project, method: :get, remote: true) do
-            = thinker.name
+      - if @project_thinkers.present?
+        - @project_thinkers.each do |thinker|
+          %li.list-group-item
+            = link_to("filters[thinker_id]" => thinker, method: :get, remote: true) do
+              = thinker.name
+      - else
+        - @project.contributions.each do |contribution|
+          - thinker = contribution.thinker
+          %li.list-group-item
+            = link_to("filters[thinker_id]" => thinker, "filters[project_id]" => @project, method: :get, remote: true) do
+              = thinker.name

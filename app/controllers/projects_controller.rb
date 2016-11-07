@@ -40,6 +40,12 @@ class ProjectsController < ApplicationController
                            [:category_name, 'categories.t_name'],
                            [:thinker_name, 'thinkers.name']
                          ]
+
+    @active_filters = [
+      Enums::Filters::SEARCH_THINKER
+    ]
+
+    @project_thinkers = Thinker.all
   end
 
   # GET /projects/1

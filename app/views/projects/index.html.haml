@@ -27,6 +27,6 @@
             = text_field_tag("filters[title]", '', class: 'form-control', autocomplete: 'off')
             .input-group-btn
               = link_to_button(new_project_path, "new", "plus")
-      -# = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
+      = render partial: 'shared/filters', :locals => { :filters => @active_filters }
   .panel-body{ :style => "padding: 0;" }
     = smart_listing_render :projects

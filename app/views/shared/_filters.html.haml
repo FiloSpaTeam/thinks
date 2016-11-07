@@ -17,19 +17,21 @@
 
 .row
   .col-xs-5.col-sm-3
-    = link_to reset_filterrific_url do
+    = link_to '' do
       %h5
         %strong
           = t("reset_filters")
-  .col-xs-7.col-sm-4.col-sm-offset-5
-    %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
-      %h5.text-right
-        %strong
-          = t("advanced_filters")
-#collapseFilters.collapse.well
-  .row
-    .col-xs-12
-      %ul.nav.nav-pills
-        - filters.each do |filter|
-          - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
-            = render :partial => "shared/filters/#{filter}", locals: { f: f }
+  - if filters.present?
+    .col-xs-7.col-sm-4.col-sm-offset-5
+      %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
+        %h5.text-right
+          %strong
+            = t("advanced_filters")
+- if filters.present?
+  #collapseFilters.collapse.well
+    .row
+      .col-xs-12
+        %ul.nav.nav-pills
+          - filters.each do |filter|
+            - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
+              = render :partial => "shared/filters/#{filter}"

@@ -61,9 +61,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_ban!
-    flash[:error] = 'You are banned!'
+    unless current_thinker.ban(@project).nil?
+      flash[:error] = 'You are banned!'
 
-    redirect_to project_path(@project) unless current_thinker.ban(@project).nil?
+      redirect_to project_path(@project)
+    end
   end
 
   def configure_permitted_parameters

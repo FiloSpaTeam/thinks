@@ -55,9 +55,15 @@ module ProjectsHelper
   end
 
   def apply_filters(scope, params)
-    scope = scope.with_title(params[:title]) if params.key?(:title) && params[:title].present?
+    scope = scope.with_title(params[:title]) if params.key?(:title) &&
+                                                params[:title].present?
+    scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
+                                                       params[:thinker_id].present? &&
+                                                       params[:thinker_name].blank?
+
+    scope = scope.with_thinker_name(params[:thinker_name]) if params.key?(:thinker_name) &&
+                                                              params[:thinker_name].present?
 
     scope
   end
-
 end

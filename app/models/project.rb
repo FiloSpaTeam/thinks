@@ -66,6 +66,14 @@ class Project < ActiveRecord::Base
     where('to_tsvector(title) @@ to_tsquery(?)', "'#{query.downcase}':*")
   }
 
+  scope :with_thinker_name, lambda { |query|
+    joins(:thinker).where('to_tsvector(thinkers.name) @@ to_tsquery(?)', "'#{query.downcase}':*")
+  }
+
+  scope :with_thinker, lambda { |thinker|
+    where(thinker: Thinker.friendly.find(thinker))
+  }
+
   def last_notification_update
     notifications.last
   end
