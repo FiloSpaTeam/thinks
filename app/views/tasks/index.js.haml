@@ -15,11 +15,4 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-- js = escape_javascript(
-- render(partial: 'tasks/list', locals: { tasks: @tasks })
-- )
-- new_paginate = escape_javascript(paginate(@tasks, :remote => true))
-$("#filterrific_results").html("#{js}");
-var $col = $('#div-container-list');
-$col.find('ul.pagination, nav').remove();
-$col.append("#{new_paginate}");
+= smart_listing_update :tasks

@@ -15,33 +15,32 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%thead
-  %tr
-    %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
-      .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
-        %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
+%table.table.table-condensed.table-hover#filterrific_results
+  %thead
+    %tr
+      %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
+        .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
+          %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
+            %h5
+              %strong
+                = t "task"
+                %span.caret
+          = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
+            - @statuses.each do |status|
+              = content_tag(:li) do
+                = link_to("filterrific[status_progress]" => status, "filterrific[with_project]" => @project, method: :get, remote: true) do
+                  .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
+                  = t("projects.tasks.#{status.translation_code}")
+      %td.text-center
+        .col-xs-12
           %h5
             %strong
-              = t "task"
-              %span.caret
-        = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
-          - @statuses.each do |status|
-            = content_tag(:li) do
-              = link_to("filterrific[status_progress]" => status, "filterrific[with_project]" => @project, method: :get, remote: true) do
-                .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
-                = t("projects.tasks.#{status.translation_code}")
-    %td.text-center
-      .col-xs-12
-        %h5
-          %strong
-            = filterrific_sorting_link(@filterrific, :workload)
-    %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
-%tbody
-  - if !tasks.empty?
-    - if !@search.empty?
-      - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); puts task.count_occurrences(@search); }.reverse
-
-    - tasks.each do |task|
+              = smart_listing.sortable 'Workload', :workload
+      %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
+  %tbody
+    - smart_listing.collection.each do |task|
+      -# - if !@search.empty?
+      -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
       %tr{ :class => color_list_round_div(task.status.translation_code) }
         %td
           %strong.hidden-xs.hidden-sm
@@ -90,6 +89,5 @@
             .form-group{ :style => "margin-bottom: 0;" }
               %a.btn{ :href => "javascript:;", :title => "This task has children."}
                 = icon('sitemap', :class => "dark-grey fa-lg")
-  - else
-    %td.text-center{ :colspan => 3 }
-      = t('no_record')
+= smart_listing.paginate
+= smart_listing.pagination_per_page_links

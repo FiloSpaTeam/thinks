@@ -5,9 +5,9 @@
   %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
     .panel-heading
       - if !current_page?(project_goals_path)
-        = f.text_field :search_worker, class: 'form-control filterrific-periodically-observed', placeholder: t("search")
+        = text_field_tag 'filters[worker_name]', '', class: 'form-control filterrific-periodically-observed', placeholder: t("search"), autocomplete: 'off'
     %ul.list-group.scrollbar
       - @project.workers.unscoped.each do |worker|
         %li.list-group-item
-          = link_to("filterrific[with_worker]" => worker, "filterrific[with_project]" => @project, method: :get, remote: true) do
+          = link_to("filters[worker_id]" => worker, "filters[project_id]" => @project, method: :get, remote: true) do
             = worker.name

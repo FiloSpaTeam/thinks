@@ -18,6 +18,9 @@
 class TasksController < ApplicationController
   include ProjectsHelper
   include StatusesHelper
+  include TasksHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   before_action :authenticate_thinker!
 
@@ -40,17 +43,15 @@ class TasksController < ApplicationController
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
-    @filterrific = initialize_filterrific(
-      Task
-      .includes(:status, :thinker, :updater, :goal, :children)
-      .default_order,
-      params[:filterrific],
-      select_options: {
-        sorted_by_title: Task.options_for_sorted_by(:title),
-        sorted_by_workload: Task.options_for_sorted_by(:workload)
-      }
-    ) || return
-    @tasks = @filterrific.find.where(project: @project).page params[:page]
+    tasks_scope = Task
+                  .includes(:status, :thinker, :updater, :goal, :children)
+                  .where(project: @project)
+    tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
+
+    smart_listing_create :tasks,
+                         tasks_scope,
+                         partial: 'tasks/list',
+                         default_sort: { serial: 'desc' }
 
     @active_filters = [
       Enums::Filters::SEARCH_RELEASE,
@@ -61,14 +62,10 @@ class TasksController < ApplicationController
     ]
 
     @search = ''
-    if params.key?(:filterrific) &&
-       params[:filterrific].key?(:search_title_and_description)
-      @search = params[:filterrific][:search_title_and_description].strip
+    if params.key?(:filters) &&
+       params[:filters].key?(:search_title_and_description)
+      @search = params[:filters][:search_title_and_description].strip
     end
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{e.message}"
-    redirect_to(reset_filterrific_url(format: :html)) && return
   end
 
   # GET /tasks/1

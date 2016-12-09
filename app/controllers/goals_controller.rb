@@ -19,6 +19,8 @@ class GoalsController < ApplicationController
   include ActionView::Helpers::TextHelper
   include ProjectsHelper
   include StatusesHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   before_action :set_goal, only: [:show, :edit, :update, :destroy, :tasks_in_sprint]
   before_action :set_project, only: [:new, :index, :create]
@@ -33,16 +35,18 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    @filterrific = initialize_filterrific(
-      Goal
-      .includes(:tasks, :project)
-      .where(project: @project)
-      .order('progress DESC')
-      .order('created_at DESC'),
-      params[:filterrific],
-      select_options: {}
-    ) || return
-    @goals = @filterrific.find.page(params[:page])
+    goals_scope = Goal
+                  .includes(:tasks, :project)
+                  .where(project: @project)
+                  .order('progress DESC')
+                  .order('created_at DESC')
+
+    goals_scope = apply_filters(goals_scope, params[:filters]) if params[:filters].present?
+
+    smart_listing_create :goals,
+                         goals_scope,
+                         partial: 'goals/list',
+                         default_sort: { id: 'desc' }
 
     @active_filters = [
       Enums::Filters::SEARCH_TASK,

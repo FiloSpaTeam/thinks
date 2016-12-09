@@ -80,6 +80,7 @@ class ApplicationController < ActionController::Base
                .friendly.find(params[:project_id])
   end
 
+  # TODO move from here, something related to notification is better
   def create_notification(model, project)
     @notification = Notification.new
 

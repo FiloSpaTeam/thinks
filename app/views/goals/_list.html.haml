@@ -15,16 +15,16 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%thead
-  %tr
-    %td.col-lg-10.col-md-10.col-sm-9.col-xs-9
-      .col-xs-3
-        %h5
-          %strong
-            = t "goal"
-%tbody
-  - unless (@goals.empty?)
-    - @goals.each do |goal|
+%table.table.table-condensed.table-hover#filterrific_results
+  %thead
+    %tr
+      %td.col-lg-10.col-md-10.col-sm-9.col-xs-9
+        .col-xs-3
+          %h5
+            %strong
+              = t "goal"
+  %tbody
+    - smart_listing.collection.each do |goal|
       %tr
         %td
           %a.pull-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
@@ -50,6 +50,5 @@
                 .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
                   = goal.progress
                   \%
-  - else
-    %td.text-center
-      = t('no_record')
+= smart_listing.paginate
+= smart_listing.pagination_per_page_links

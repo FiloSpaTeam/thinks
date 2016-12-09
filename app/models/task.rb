@@ -20,33 +20,6 @@ class Task < ActiveRecord::Base
 
   is_impressionable
 
-  paginates_per 10
-  max_paginates_per 50
-
-  filterrific(
-    available_filters: [
-      :sorted_by,
-
-      :search_release,
-      :search_goal,
-      :search_thinker,
-      :search_worker,
-      :search_title_and_description,
-
-      :status_progress,
-
-      :with_goal,
-      :with_worker,
-      :with_thinker,
-      :with_project,
-      :with_release,
-
-      :workload_lower_than,
-
-      :with_deleted_at
-    ]
-  )
-
   has_many :votes
   has_many :workloads, through: :votes
   has_many :comments, dependent: :destroy
@@ -81,7 +54,6 @@ class Task < ActiveRecord::Base
   validates :status_id, presence: true, on: :create
   validates :thinker_id, presence: true, on: :create
 
-  scope :default_order, -> { order('serial DESC') }
   scope :status_progress, ->(status) { where status: status }
   scope :in_progress, -> { where status: Status.in_progress }
   scope :done, -> { where status: Status.done }
@@ -156,40 +128,6 @@ class Task < ActiveRecord::Base
   scope :search_worker, lambda { |name|
     joins(:thinker, :worker).where('thinkers.name LIKE ?', "%#{name}%")
   }
-
-  scope :sorted_by, lambda { |sort_option|
-    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-    case sort_option.to_s
-    when /^title_/
-      # Simple sort on the name colums
-      order("LOWER(tasks.title) #{direction}")
-    when /^workload_/
-      # Simple sort over workload
-      unscoped
-        .joins(:workloads)
-        .group('tasks.id')
-        .order("AVG(workloads.value) #{direction}")
-    else
-      fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
-    end
-  }
-
-  # This method provides select options for the `sorted_by` filter select input.
-  # It is called in the controller as part of `initialize_filterrific`.
-  def self.options_for_sorted_by(sort_option)
-    options = {
-      title: [
-        ['Title (a-z)', 'title_asc'],
-        ['Title (z-a)', 'title_desc']
-      ],
-      workload: [
-        ['Low -> High', 'workload_asc'],
-        ['High -> Low', 'workload_desc']
-      ]
-    }
-
-    options[sort_option]
-  end
 
   def destroy_and_associate_reason(params, current_thinker)
     ActiveRecord::Base.transaction do

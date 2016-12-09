@@ -15,33 +15,33 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%thead
-  %tr
-    %td
-    %td
-      .col-xs-11
-        %h5
-          %strong
-            = t "created_at"
-    %td
-      .col-xs-11
-        %h5
-          %strong
-            = t "updated_at"
-    %td
-      .col-xs-3
-        %h5
-          %strong
-            = t "obtained"
-    - if (@project.part_of_team?(current_thinker))
+%table.table.table-condensed.table-hover#filterrific_results
+  %thead
+    %tr
       %td
-        .col-xs-2.hidden-xs
+      %td
+        .col-xs-11
           %h5
             %strong
-              = t ".survey"
-%tbody
-  - unless (sprints.empty?)
-    - sprints.each do |sprint|
+              = t "created_at"
+      %td
+        .col-xs-11
+          %h5
+            %strong
+              = t "updated_at"
+      %td
+        .col-xs-3
+          %h5
+            %strong
+              = t "obtained"
+      - if (@project.part_of_team?(current_thinker))
+        %td
+          .col-xs-2.hidden-xs
+            %h5
+              %strong
+                = t ".survey"
+  %tbody
+    - smart_listing.collection.each do |sprint|
       %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
         %td
           Sprint #{sprint.serial}
@@ -63,6 +63,3 @@
               - else
                 %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
                   = icon('check-circle-o', :class => "dark-grey fa-lg")
-  - else
-    %td.text-center{ :colspan => 5 }
-      = t('no_record')

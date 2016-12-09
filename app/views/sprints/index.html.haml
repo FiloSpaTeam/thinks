@@ -28,7 +28,4 @@
           = line_chart sprints_chart_data.transform_keys { |key| key.strftime('%B %d') }, height: '180px', discrete: true, library: { hAxis: { textPosition: 'none', format: 'dd/MM' }, chartArea: { width: '90%', height: '80%' }, vAxis: { gridlines: { color: '#EEE' } } }
     .panel.panel-default
       .panel-body{ :style => 'padding: 0;' }
-        = render_filterrific_spinner
-        %table.table.table-condensed.table-hover#filterrific_results
-          = render partial: 'list', locals: { sprints: @sprints }
-    = paginate @sprints, :remote => true
+        = smart_listing_render :sprints

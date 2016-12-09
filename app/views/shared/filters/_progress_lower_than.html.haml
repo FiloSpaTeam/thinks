@@ -4,4 +4,4 @@
     %span.caret
   %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
     .panel-heading
-      = f.text_field :progress_lower_than, class: 'form-control filterrific-periodically-observed', placeholder: t("lower_than")
+      = text_field_tag 'filters[progress_lower_than]', '', class: 'form-control filterrific-periodically-observed', placeholder: t("lower_than"), autocomplete: 'off'

@@ -4,9 +4,9 @@
     %span.caret
   %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
     .panel-heading
-      = f.text_field :search_release, class: "form-control filterrific-periodically-observed", placeholder: t("search")
+      = text_field_tag 'filters[release_title]', '', class: "form-control filterrific-periodically-observed", placeholder: t("search"), autocomplete: 'off'
     %ul.list-group.scrollbar
       - @project.releases.each do |release|
         %li.list-group-item
-          = link_to("filterrific[with_release]" => release, method: :get, remote: true) do
+          = link_to("filters[release_id]" => release, method: :get, remote: true) do
             = release.title

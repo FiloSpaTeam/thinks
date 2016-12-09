@@ -53,4 +53,11 @@ module TasksHelper
   def goal_button(task)
     content_tag(:a, icon('crosshairs', :class => 'dark-grey fa-lg'), :class => task.goal.nil? ? "disabled btn" : "btn", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button")
   end
+
+  def apply_filters(scope, params)
+    scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
+                                                       params[:release_id].present?
+
+    scope
+  end
 end

@@ -22,17 +22,14 @@
   #div-container-list.col-md-8
     .panel.panel-default
       .panel-heading
-        = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+        = smart_listing_controls_for :tasks do
           - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
             .input-group
-              = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
+              = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
               .input-group-btn
                 = link_to_button(new_project_goal_path, "new", "plus")
           - else
-            = f.text_field :search_title, :class => 'form-control filterrific-periodically-observed'
-          = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
+            = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
+          = render partial: 'shared/filters', :locals => { :filters => @active_filters }
       .panel-body{ :style => 'padding: 0;' }
-        = render_filterrific_spinner
-        %table.table.table-condensed.table-hover#filterrific_results
-          = render partial: 'list', locals: { goals: @goals }
-    = paginate @goals, :remote => true
+        = smart_listing_render :goals

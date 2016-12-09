@@ -22,15 +22,12 @@
   #div-container-list.col-md-8
     .panel.panel-default
       .panel-heading
-        = form_for_filterrific @filterrific, :html => { :class => 'form-horizontal' } do |f|
+        = smart_listing_controls_for :tasks do
           .input-group{ style: !thinker_signed_in? || current_thinker.ban(@project).present? ? 'display: block;' : '' }
-            = f.text_field :search_title_and_description, :class => 'form-control filterrific-periodically-observed'
+            = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
             - if thinker_signed_in? && current_thinker.ban(@project).nil?
               .input-group-btn
                 = link_to_button(new_project_task_path, "new", "plus")
-          = render partial: 'shared/filters', :locals => { :f => f, :filters => @active_filters }
+          = render partial: 'shared/filters', :locals => { :filters => @active_filters }
       .panel-body{ :style => "padding: 0;" }
-        = render_filterrific_spinner
-        %table.table.table-condensed.table-hover#filterrific_results
-          = render partial: 'list', locals: { tasks: @tasks }
-    = paginate @tasks, :remote => true
+        = smart_listing_render :tasks

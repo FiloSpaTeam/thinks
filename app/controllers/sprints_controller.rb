@@ -16,6 +16,9 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class SprintsController < ApplicationController
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   before_action :set_sprint, only: [:show, :edit, :update, :destroy]
   before_action :set_project, only: [:new, :index, :create]
 
@@ -24,21 +27,16 @@ class SprintsController < ApplicationController
   # GET /sprints
   # GET /sprints.json
   def index
-    @filterrific = initialize_filterrific(
-      Sprint,
-      params[:filterrific],
-      select_options: {}
-    ) || return
-    @sprints = @filterrific
-               .find
-               .unscoped
-               .where(project: @project)
-               .order('serial desc')
-               .page(params[:page])
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{e.message}"
-    redirect_to(reset_filterrific_url(format: :html)) && return
+    sprints_scope = Sprint
+                    .unscoped
+                    .where(project: @project)
+                    .order('serial desc')
+    sprints_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
+
+    @sprints = smart_listing_create :sprints,
+                                    sprints_scope,
+                                    partial: 'sprints/list',
+                                    default_sort: { serial: 'desc' }
   end
 
   # GET /sprints/1
