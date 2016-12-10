@@ -30,7 +30,6 @@ class SprintsController < ApplicationController
     sprints_scope = Sprint
                     .unscoped
                     .where(project: @project)
-                    .order('serial desc')
     sprints_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
 
     @sprints = smart_listing_create :sprints,

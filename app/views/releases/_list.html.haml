@@ -15,16 +15,16 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%thead
-  %tr
-    %td
-      .col-xs-11
-        %h5
-          %strong
-            = t "release"
-%tbody
-  - unless (releases.empty?)
-    - releases.each do |release|
+%table.table.table-condensed.table-hover#filterrific_results
+  %thead
+    %tr
+      %td
+        .col-xs-11
+          %h5
+            %strong
+              = t "release"
+  %tbody
+    - smart_listing.collection.each do |release|
       %tr
         %td
           %a.pull-right.btn.hidden-xs{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
@@ -55,6 +55,3 @@
                 .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
                   = release.progress
                   \%
-  - else
-    %td.text-center{ :colspan => 1 }
-      = t('no_record')

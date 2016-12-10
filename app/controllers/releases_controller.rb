@@ -16,6 +16,9 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class ReleasesController < ApplicationController
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   before_action :authenticate_thinker!
 
   before_action :set_project, only: [:new, :index, :create]
@@ -23,16 +26,15 @@ class ReleasesController < ApplicationController
   before_action :set_release, only: [:show, :edit, :update, :destroy]
 
   def index
-    @filterrific = initialize_filterrific(
-      Release.includes(:tasks),
-      params[:filterrific],
-      select_options: {}
-    ) || return
-    @releases = @filterrific
-                .find.unscoped
-                .where(project: @project)
-                .order('end_at asc')
-                .page(params[:page])
+    releases_scope = Release
+                     .unscoped
+                     .where(project: @project)
+    releases_scope = apply_filters(releases_scope, params[:filters]) if params[:filters].present?
+
+    @releases = smart_listing_create :releases,
+                                     releases_scope,
+                                     partial: 'releases/list',
+                                     default_sort: { end_at: 'asc' }
 
     @active_filters = [
       Enums::Filters::SEARCH_TASK,
