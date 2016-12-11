@@ -17,6 +17,8 @@
 
 class NotificationsController < ApplicationController
   include NotificationsHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_thinker!
@@ -24,24 +26,18 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @filterrific = initialize_filterrific(
-      Notification
-      .user(current_thinker)
-      .order('project_id DESC')
-      .order('created_at DESC')
-      .limit(nil),
-      params[:filterrific],
-      select_options: {
-        sorted_by_title: Task.options_for_sorted_by(:title),
-        sorted_by_workload: Task.options_for_sorted_by(:workload)
-      }
-    ) || return
-    @notifications = @filterrific.find.page params[:page]
+    notifications_scope = Notification
+                          .user(current_thinker)
+                          .order('project_id DESC')
+                          .order('created_at DESC')
+
+    notifications_scope = apply_filters(notifications_scope, params[:filters]) if params[:filters].present?
+
+    @notifications = smart_listing_create :notifications,
+                                          notifications_scope,
+                                          partial: 'notifications/list'
+
     @notifications = @notifications.group_by { |n| [n.controller, n.model, n.model_id] }
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{e.message}"
-    redirect_to(reset_filterrific_url(format: :html)) && return
   end
 
   # GET /notifications/1

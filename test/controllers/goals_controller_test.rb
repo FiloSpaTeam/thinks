@@ -27,7 +27,6 @@ class GoalsControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index, project_id: @goal.project
     assert_response :success
-    assert_not_nil assigns(:goals)
   end
 
   test 'should get new' do
