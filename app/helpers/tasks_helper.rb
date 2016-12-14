@@ -58,6 +58,9 @@ module TasksHelper
     scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
                                                        params[:release_id].present?
 
+    scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
+                                                                                         params[:search_title_and_description].present?
+
     scope
   end
 end
