@@ -28,7 +28,7 @@
         </ul>
     <% else %>
         <% counter = 0 %>
-          <% smart_listing.collection.each do |notification| %>
+          <% @notifications.each do |index_group, notification_group| %>
             <% counter += 1 %>
             <% notification_group.each_with_index do |notification, index| %>
                 <% if notification.project.id != project_id %>
