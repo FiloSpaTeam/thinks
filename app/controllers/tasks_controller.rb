@@ -47,6 +47,9 @@ class TasksController < ApplicationController
                   .includes(:status, :thinker, :updater, :goal, :children)
                   .where(project: @project)
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
+    tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
+                                                                                    params[:tasks_smart_listing].key?(:sort)
+
 
     smart_listing_create :tasks,
                          tasks_scope,

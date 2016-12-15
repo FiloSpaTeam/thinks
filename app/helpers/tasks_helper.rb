@@ -61,6 +61,27 @@ module TasksHelper
     scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
                                                                                          params[:search_title_and_description].present?
 
+
+
+    scope
+  end
+
+  def apply_sorter(scope, params)
+    key       = params.keys.last
+    # direction = params[:users_smart_listing][:sort].values.last
+
+    # TODO
+    # I have to filter the tasks that i didn't vote
+    case key
+    when 'workload'
+      scope = scope
+              .joins(:votes)
+              .where('votes.thinker_id = ? OR tasks.status_id = ?',
+                     current_thinker.id,
+                     Status.done.first)
+              .preload(:votes)
+    end
+
     scope
   end
 end
