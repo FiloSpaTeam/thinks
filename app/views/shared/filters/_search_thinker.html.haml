@@ -6,13 +6,13 @@
     .panel-heading
       = text_field_tag 'filters[thinker_name]', '', class: 'form-control', placeholder: t("search"), autocomplete: 'off'
     %ul.list-group.scrollbar
-      -# - if @project_thinkers.present?
-      -#   - @project_thinkers.each do |thinker|
-      -#     %li.list-group-item
-      -#       = link_to("filters[thinker_id]" => thinker, method: :get, remote: true) do
-      -#         = thinker.name
-      -# - else
-      - @project.contributions.each do |contribution|
-        - thinker = contribution.thinker
-        = link_to url_for("filters[thinker_id]" => thinker), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'active' : '' }", :remote => true do
-          = thinker.name
+      - if @project_thinkers.present?
+        - @project_thinkers.each do |thinker|
+          %li.list-group-item
+          = link_to("filters[thinker_id]" => thinker, method: :get, remote: true) do
+            = thinker.name
+      - else
+        - @project.contributions.each do |contribution|
+          - thinker = contribution.thinker
+          = link_to url_for("filters[thinker_id]" => thinker), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'active' : '' }", :remote => true do
+            = thinker.name
