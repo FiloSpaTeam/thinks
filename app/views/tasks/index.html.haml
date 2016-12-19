@@ -20,14 +20,4 @@
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @project }
   #div-container-list.col-md-8
-    .panel.panel-default
-      .panel-heading
-        = smart_listing_controls_for :tasks do
-          .input-group{ style: !thinker_signed_in? || current_thinker.ban(@project).present? ? 'display: block;' : '' }
-            = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
-            - if thinker_signed_in? && current_thinker.ban(@project).nil?
-              .input-group-btn
-                = link_to_button(new_project_task_path, "new", "plus")
-          = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-      .panel-body{ :style => "padding: 0;" }
-        = smart_listing_render :tasks
+    = smart_listing_render :tasks

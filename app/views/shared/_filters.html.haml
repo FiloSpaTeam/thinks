@@ -17,18 +17,18 @@
 
 .row
   .col-xs-5.col-sm-3
-    = link_to '' do
+    = link_to url_for(params.except(:filters)), remote: true do
       %h5
         %strong
           = t("reset_filters")
   - if filters.present?
     .col-xs-7.col-sm-4.col-sm-offset-5
-      %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
+      %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => params[:filters].try(:any?) ? 'true' : 'false', "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
         %h5.text-right
           %strong
             = t("advanced_filters")
 - if filters.present?
-  #collapseFilters.collapse.well
+  #collapseFilters.collapse.well{ :class => params[:filters].try(:any?) ? 'in' : '' }
     .row
       .col-xs-12
         %ul.nav.nav-pills

@@ -103,4 +103,24 @@ module ApplicationHelper
       .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</u></span>")
       .html_safe
   end
+
+  def active_filter?(filter, value = nil)
+    active = false
+    if params.key?(:filters) &&
+       params[:filters].key?(filter) &&
+       params[:filters][filter].present? && (
+         value.nil? ||
+         params[:filters][filter] == value
+       )
+      active = true
+    end
+
+    active
+  end
+
+  def filter_value(filter)
+    params[:filters][filter] if params.key?(:filters) &&
+                                params[:filters].key?(filter) &&
+                                params[:filters][filter].present?
+  end
 end

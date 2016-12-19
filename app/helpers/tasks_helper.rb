@@ -57,10 +57,17 @@ module TasksHelper
   def apply_filters(scope, params)
     scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
                                                        params[:release_id].present?
+    scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
+                                                       params[:thinker_id].present?
+    scope = scope.with_worker(params[:worker_id]) if params.key?(:worker_id) &&
+                                                       params[:worker_id].present?
 
     scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
                                                                                          params[:search_title_and_description].present?
 
+
+    scope = scope.status_progress(params[:status_id]) if params.key?(:status_id) &&
+                                                         params[:status_id].present?
 
 
     scope
