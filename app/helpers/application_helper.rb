@@ -98,10 +98,12 @@ module ApplicationHelper
   end
 
   def highlights_searched_text(text, search)
-    text
-      .strip
-      .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</span></u>")
-      .html_safe
+    if text.present?
+      text
+        .strip
+        .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</span></u>")
+        .html_safe
+    end
   end
 
   def active_filter?(filter, value = nil)
