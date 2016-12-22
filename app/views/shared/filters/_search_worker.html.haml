@@ -16,7 +16,7 @@
       - if active_filter?(:worker_name)
         - workers_filter = workers_filter.where("lower(name) LIKE '%#{params[:filters][:worker_name].downcase.strip}%'")
       - workers_filter.each do |worker|
-        = link_to url_for(params.merge("filters[worker_id]" => worker)), :class => "list-group-item #{ active_filter?(:worker_id, worker.slug) ? 'list-group-item-info' : '' }", :remote => true do
+        = link_to url_for(url_for_filter(:worker_id, worker.slug)), :class => "list-group-item #{ active_filter?(:worker_id, worker.slug) ? 'list-group-item-info' : '' }", :remote => true do
           = highlights_searched_text(worker.name, filter_value(:worker_name))
       - if workers_filter.empty?
         %li.list-group-item.list-group-item-danger

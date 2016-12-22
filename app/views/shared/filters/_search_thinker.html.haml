@@ -15,7 +15,7 @@
           - @project_thinkers = @project_thinkers.where("lower(name) LIKE '%#{params[:filters][:thinker_name].downcase.strip}%'")
         - @project_thinkers.each do |thinker|
           %li.list-group-item
-          = link_to url_for(params.except("filters[thinker_id]").merge("filters[thinker_id]" => thinker)), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
+          = link_to url_for(url_for_filter(:thinker_id, thinker.slug)), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
             = highlights_searched_text(thinker.name, filter_value(:thinker_name))
         - if @project_thinkers.empty?
           %li.list-group-item.list-group-item-danger
