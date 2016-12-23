@@ -10,9 +10,8 @@
       - if active_filter?(:release_title)
         - releases_filter = releases_filter.where("lower(title) LIKE '%#{params[:filters][:release_title].downcase.strip}%'")
       - releases_filter.each do |release|
-        %li.list-group-item
-          = link_to url_for(url_for_filter(:release_id, release.id)), :class => "list-group-item #{ active_filter?(:release_id, release.id) ? 'list-group-item-info' : '' }", :remote => true do
-            = highlights_searched_text(release.title, filter_value(:release_title))
+        = link_to url_for(url_for_filter(:release_id, release.id)), :class => "list-group-item #{ active_filter?(:release_id, release.id) ? 'list-group-item-info' : '' }", :remote => true do
+          = highlights_searched_text(release.title, filter_value(:release_title))
       - if releases_filter.empty?
         %li.list-group-item.list-group-item-danger
           %strong
