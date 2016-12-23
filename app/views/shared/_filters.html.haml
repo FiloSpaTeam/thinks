@@ -17,7 +17,7 @@
 
 .row
   .col-xs-5.col-sm-3
-    = link_to url_for(params.except(:filters)), remote: true do
+    = link_to url_for, remote: true do
       %h5
         %strong
           = t("reset_filters")

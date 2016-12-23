@@ -50,7 +50,12 @@
       $('.attachinary-input').attachinary();
       $(function () {
         $('[data-toggle="popover"]').popover()
-      })
+
+        $('body').on('change', '.smart-listing-controls input', function(e) {
+          e.preventDefault();
+          $(this).closest('form').submit();
+        });
+      });
     });
   - if thinker_signed_in?
     :plain

@@ -15,33 +15,47 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%table.table.table-condensed.table-hover{ style: 'margin-bottom: 0;' }
-  %thead
-    %tr
-      %th{ colspan: 2 }
-        = smart_listing.sortable "Project", :title
-      %th.hidden-xs
-        = smart_listing.sortable "Category", :category_name
-      %th.hidden-xs.hidden-sm
-        = smart_listing.sortable "Founder", :thinker_name
-  %tbody
-    - smart_listing.collection.each do |project|
-      %tr
-        %td{ width: 80 }
-          = link_to project_path(project) do
-            - if project.main_image
-              = cl_image_tag(project.main_image.path, { size: '80x80', class: 'pull-left' })
-            - else
-              %img.pull-left{"data-src" => "holder.js/80x80"}
-        %td{ style: 'vertical-align: top;' }
-          = link_to project_path(project) do
-            %strong= project.title
-          %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
-            %small
-              = plain_text(project.description.lines.first).truncate(150)
-        %td.hidden-xs
-          = project.category.try(:name)
-        %td.hidden-xs.hidden-sm
-          = project.thinker.try(:name)
-= smart_listing.paginate
-= smart_listing.pagination_per_page_links
+#div-container-list.panel.panel-default
+  .panel-heading
+    %h2
+      = t '.projects'
+      %small= t ".small_title"
+    = smart_listing_controls_for :projects do
+      .row
+        .col-xs-12
+          .input-group
+            = text_field_tag("filters[title]", filter_value(:title), class: 'form-control', autocomplete: 'off')
+            .input-group-btn
+              = link_to_button(new_project_path, "new", "plus")
+      = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+  .panel-body{ :style => "padding: 0;" }
+    %table.table.table-condensed.table-hover{ style: 'margin-bottom: 0;' }
+      %thead
+        %tr
+          %th{ colspan: 2 }
+            = smart_listing.sortable "Project", :title
+          %th.hidden-xs
+            = smart_listing.sortable "Category", :category_name
+          %th.hidden-xs.hidden-sm
+            = smart_listing.sortable "Founder", :thinker_name
+      %tbody
+        - smart_listing.collection.each do |project|
+          %tr
+            %td{ width: 80 }
+              = link_to project_path(project) do
+                - if project.main_image
+                  = cl_image_tag(project.main_image.path, { size: '80x80', class: 'pull-left' })
+                - else
+                  %img.pull-left{"data-src" => "holder.js/80x80"}
+            %td{ style: 'vertical-align: top;' }
+              = link_to project_path(project) do
+                %strong= project.title
+              %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
+                %small
+                  = plain_text(project.description.lines.first).truncate(150)
+            %td.hidden-xs
+              = project.category.try(:name)
+            %td.hidden-xs.hidden-sm
+              = project.thinker.try(:name)
+    = smart_listing.paginate
+    = smart_listing.pagination_per_page_links

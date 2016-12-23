@@ -97,7 +97,7 @@ class Task < ActiveRecord::Base
     where(release: Release.find(release))
   }
 
-  scope :with_deleted_at, lambda { |value|
+  scope :with_deleted_at, lambda {
     only_deleted
   }
 

@@ -107,14 +107,11 @@ module ApplicationHelper
   end
 
   def active_filter?(filter, value = nil)
-    active = false
-    if params.key?(:filters) &&
-       params[:filters].key?(filter) &&
-       params[:filters][filter].present? && (
-         value.nil? ||
-         params[:filters][filter] == value
-       )
-      active = true
+    active  = false
+    f_value = filter_value(filter)
+
+    unless f_value.nil?
+      active = true if value.nil? || f_value == value.to_s
     end
 
     active

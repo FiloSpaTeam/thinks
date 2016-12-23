@@ -15,18 +15,4 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-#div-container-list.panel.panel-default
-  .panel-heading
-    %h2
-      = t '.projects'
-      %small= t ".small_title"
-    = smart_listing_controls_for :projects do
-      .row
-        .col-xs-12
-          .input-group
-            = text_field_tag("filters[title]", '', class: 'form-control', autocomplete: 'off')
-            .input-group-btn
-              = link_to_button(new_project_path, "new", "plus")
-      = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-  .panel-body{ :style => "padding: 0;" }
-    = smart_listing_render :projects
+= smart_listing_render :projects

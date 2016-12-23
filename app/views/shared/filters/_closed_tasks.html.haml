@@ -1,3 +1,3 @@
 = label_tag :closed, :class => "control-label pull-right" do
-  = check_box_tag('filters[with_deleted_at]', true, false)
+  = check_box_tag('filters[with_deleted_at]', true, filter_value(:with_deleted_at))
   = t "closed"
