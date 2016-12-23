@@ -19,7 +19,7 @@ class ReleasesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
-  before_action :authenticate_thinker!
+  before_action :authenticate_thinker!, except: [:index]
 
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_form_help, only: [:new, :edit]

@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
-  before_action :authenticate_thinker!, except: [:index]
+  before_action :authenticate_thinker!
 
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
   before_action :set_project, only: [:new, :index, :create]
