@@ -1,4 +1,4 @@
-%li{ :role => "presentation" }
+%li{ :role => "presentation", :class => active_filter?(:last, "filters[goal_title]") ? 'open' : '' }
   %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
     = t(".goal")
     %span.caret
@@ -14,7 +14,7 @@
       - if active_filter?(:goal_title)
         - goals_filter = goals_filter.where("lower(title) LIKE '%#{params[:filters][:goal_title].downcase.strip}%'")
       - goals_filter.each do |goal|
-        = link_to url_for(url_for_filter(:goal_id, goal.id)), :class => "list-group-item #{ active_filter?(:goal_id, goal.id) ? 'list-group-item-info' : '' }", :remote => true do
+        = link_to url_for(url_for_filter(:goal_id, goal.id, [:goal_title, :last])), :class => "list-group-item #{ active_filter?(:goal_id, goal.id) ? 'list-group-item-info' : '' }", :remote => true do
           = highlights_searched_text(goal.title, filter_value(:goal_title))
       - if goals_filter.empty?
         %li.list-group-item.list-group-item-danger

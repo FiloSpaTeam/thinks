@@ -123,11 +123,14 @@ module ApplicationHelper
                                 params[:filters][filter].present?
   end
 
-  def url_for_filter(key, value)
+  def url_for_filter(key, value, conflicting_filters = [])
     new_params = params.dup
 
     new_params[:filters] = {} unless new_params.key?(:filters)
     new_params[:filters] = new_params[:filters].except(key)
+    conflicting_filters.each do |filter|
+      new_params[:filters] = new_params[:filters].except(filter)
+    end
     new_params[:filters] = new_params[:filters].reject { |_, v| v.blank? }
     new_params[:filters] = new_params[:filters].merge(key => value)
 

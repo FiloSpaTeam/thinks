@@ -29,6 +29,7 @@
             = t("advanced_filters")
 - if filters.present?
   #collapseFilters.collapse.well{ :class => params[:filters].try(:any?) ? 'in' : '' }
+    = hidden_field_tag 'filters[last]', filter_value(:last)
     .row
       .col-xs-12
         %ul.nav.nav-pills
