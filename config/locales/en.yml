@@ -225,6 +225,7 @@ en:
     media_applications:     "Media applications"
     graphics_applications:  "Graphics applications"
     tools_applications:     "Tools applications"
+    other:                  "Other"
 
   tasks:
     description: "Description"
