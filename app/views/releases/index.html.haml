@@ -20,16 +20,4 @@
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @project }
   #div-container-list.col-md-8
-    .panel.panel-default
-      .panel-heading
-        = smart_listing_controls_for :releases do
-          - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
-            .input-group
-              = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
-              .input-group-btn
-                = link_to_button(new_project_release_path, "new", "plus")
-          - else
-            = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
-          = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-      .panel-body{ :style => 'padding: 0;' }
-        = smart_listing_render :releases
+    = smart_listing_render :releases
