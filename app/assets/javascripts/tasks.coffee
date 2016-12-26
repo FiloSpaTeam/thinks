@@ -13,4 +13,4 @@ $ ->
     _href = $btn.attr("href");
     $btn.attr('href', _href + "&reason[text]=" + r);
 
-    return false if r == null || r == '';
+    return false if r == null || r.trim() == '';

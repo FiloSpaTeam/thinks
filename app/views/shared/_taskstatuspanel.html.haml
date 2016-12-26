@@ -126,7 +126,7 @@
         %strong
           Reason
         %h4
-          = task.reason.text
+          = task.reason.try(:text)
     - else
       %li.list-group-item
         %strong
