@@ -1,2 +1,4 @@
-= link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "You can find informations here: #{ link_to 'https://en.m.wikipedia.org/wiki/Markdown#Example', 'https://en.m.wikipedia.org/wiki/Markdown#Example'}", 'data-html' => 'true' do
+= link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "You can find informations here: #{ link_to 'https://en.m.wikipedia.org/wiki/Markdown#Example', 'https://en.m.wikipedia.org/wiki/Markdown#Example'}", 'data-html' => 'true', 'class' => 'visible-xs visible-sm pull-right' do
+  = icon('info-circle')
+= link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "You can find informations here: #{ link_to 'https://en.wikipedia.org/wiki/Markdown#Example', 'https://en.wikipedia.org/wiki/Markdown#Example'}", 'data-html' => 'true', 'class' => 'hidden-xs hidden-sm' do
   = icon('info-circle')

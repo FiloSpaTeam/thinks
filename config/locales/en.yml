@@ -243,6 +243,8 @@ en:
       you_voted: "You voted %{vote}"
       you_cannot_vote: "You cannot vote, the task is already assigned!"
       standard_deviation_too_high: "The standard deviation is too high, need to allineate your team!"
+    form:
+      description: "Description"
 
   goals:
     index:
