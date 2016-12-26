@@ -18,14 +18,14 @@
 class Comment < ActiveRecord::Base
   acts_as_paranoid
 
-  is_impressionable
+  is_impressionable counter_cache: true
 
   belongs_to :task, -> { with_deleted }
   belongs_to :thinker
 
   has_one :reason, as: :related
 
-  has_many :likes, dependent: :destroy
+  # has_many :likes, dependent: :destroy
 
   has_many :notifications, -> { where(model: :Notification) }, foreign_key: :model_id, dependent: :destroy
 

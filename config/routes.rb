@@ -79,7 +79,6 @@ Rails.application.routes.draw do
       end
 
       resources :comments, only: [:create, :edit, :update, :destroy], shallow: true do
-        resources :likes, shallow: true
         resources :reasons, shallow: true
 
         member do

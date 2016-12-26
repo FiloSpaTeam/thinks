@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024213033) do
+ActiveRecord::Schema.define(version: 20161226202337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,10 +80,11 @@ ActiveRecord::Schema.define(version: 20161024213033) do
     t.boolean  "approved"
     t.integer  "task_id"
     t.integer  "thinker_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "likes_count", default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "likes_count",       default: 0
     t.datetime "deleted_at"
+    t.integer  "impressions_count"
   end
 
   add_index "comments", ["deleted_at"], name: "index_comments_on_deleted_at", using: :btree

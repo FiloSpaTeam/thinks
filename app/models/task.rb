@@ -194,7 +194,14 @@ class Task < ActiveRecord::Base
   end
 
   def liked?(thinker)
-    likes.where(thinker: thinker).present?
+    has_liked = false
+
+    comments.each do |comment| 
+      next has_liked = true unless has_liked &&
+                                   !comment.impressionist_count(user_id: thinker).zero?
+    end
+
+    has_liked
   end
 
   def ready?

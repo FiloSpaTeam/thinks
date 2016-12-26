@@ -29,22 +29,20 @@ module CommentsHelper
   end
 
   def like_button(comment)
-    likes = comment.likes
-    likes.length
     if comment.current_thinker?(current_thinker)
-      link_to 'javascript:;', :class => "pull-right btn", :role => "button", :title => t("you_cannot_vote_yourself") do
-        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up dark-grey", "aria-hidden" => "true") +
-        like_count(comment.impressionist_count)
+      link_to 'javascript:;', :class => 'pull-right btn', :role => 'button', :title => t('you_cannot_vote_yourself') do
+        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up dark-grey', 'aria-hidden' => 'true') +
+          like_count(comment.impressionist_count)
       end
-    elsif likes.current_thinker(current_thinker).present?
-      link_to 'javascript:;', :class => "pull-right btn", :role => "button", :title => t("you_voted_yet") do
-        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up dark-grey", "aria-hidden" => "true") +
-        like_count(comment.impressionist_count)
+    elsif comment.impressionist_count(user_id: current_thinker.id).zero?
+      link_to like_comment_path(comment), :class => 'pull-right btn', :role => 'button', :title => t('vote') do
+        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up', 'aria-hidden' => 'true') +
+          like_count(comment.impressionist_count)
       end
     else
-      link_to comment_likes_path(comment), :class => "pull-right btn", :role => "button", :title => t("vote"), method: :post do
-        content_tag(:span, "", :class => "glyphicon glyphicon-arrow-up", "aria-hidden" => "true") +
-        like_count(comment.impressionist_count)
+      link_to 'javascript:;', :class => 'pull-right btn', :role => 'button', :title => t('you_voted_yet') do
+        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up dark-grey', 'aria-hidden' => 'true') +
+          like_count(comment.impressionist_count)
       end
     end
   end

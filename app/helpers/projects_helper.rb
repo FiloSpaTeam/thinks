@@ -47,8 +47,8 @@ module ProjectsHelper
                     .assigned_roles
                     .where(thinker: current_thinker)
                     .where('team_role_id IN (?,?)',
-                            TeamRole.scrum_master.first,
-                            TeamRole.product_owner.first)
+                           TeamRole.scrum_master.first,
+                           TeamRole.product_owner.first)
                     .first
                     .nil?
     true
