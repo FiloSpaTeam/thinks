@@ -26,13 +26,23 @@ class Contribution < ActiveRecord::Base
       save
 
       if nothing?
-        AssignedRole.where(project: project).where(thinker: thinker).delete_all
+        AssignedRole
+          .where(project: project)
+          .where(thinker: thinker)
+          .delete_all
       else
         AssignedRole
           .where(project: project)
-          .where(thinker: thinker).first_or_create do |team_role|
+          .where(thinker: thinker)
+          .first_or_create do |team_role|
           team_role.team_role = TeamRole.team_member.first
         end
+
+        notifications = Notification
+                        .where(project: project)
+                        .where('created_at < ?', 1.day.ago)
+
+        thinker.notifications << notifications
       end
     end
   end
