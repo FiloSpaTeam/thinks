@@ -122,10 +122,8 @@
       %li.list-group-item
         %strong
           Closed at
-        %span.pull-right.visible-sm.visible-md
+        %span.pull-right
           = task.deleted_at.to_s(:short)
-        %span.pull-right.visible-lg
-          = task.deleted_at.to_s(:long)
       %li.list-group-item
         %strong
           Reason
@@ -135,10 +133,8 @@
       %li.list-group-item
         %strong
           Created at
-        %span.pull-right.visible-sm.visible-md
+        %span.pull-right
           = task.created_at.to_s(:short)
-        %span.pull-right.visible-lg
-          = task.created_at.to_s(:long)
         %br
           %span.pull-right
             %small
@@ -147,10 +143,8 @@
       %li.list-group-item
         %strong
           Updated at
-        %span.pull-right.visible-sm.visible-md
+        %span.pull-right
           = task.updated_at.to_s(:short)
-        %span.pull-right.visible-lg
-          = task.updated_at.to_s(:long)
         %br
           %span.pull-right
             %small
