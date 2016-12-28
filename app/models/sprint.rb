@@ -109,7 +109,7 @@ class Sprint < ActiveRecord::Base
   end
 
   def next
-    Sprint.unscoped.where('id > ?', id).first
+    Sprint.unscoped.where('id > ?', id).where(project: project).first
   end
 
   def previous
