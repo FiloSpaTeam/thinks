@@ -11,6 +11,7 @@
             %i.fa.fa-search
     %ul.list-group.scrollbar
       - goals_filter = @project.goals
+      - goals_filter = goals_filter.select { |goal| goal.tasks.size > 0 }
       - if active_filter?(:goal_title)
         - goals_filter = goals_filter.where("lower(title) LIKE '%#{params[:filters][:goal_title].downcase.strip}%'")
       - goals_filter.each do |goal|
