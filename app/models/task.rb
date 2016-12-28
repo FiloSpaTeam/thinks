@@ -97,6 +97,16 @@ class Task < ActiveRecord::Base
     where(release: Release.find(release))
   }
 
+  scope :with_sprint, lambda { |sprint_id|
+    sprint = Sprint.find(sprint_id)
+
+    if sprint.next.nil?
+      where('updated_at >= ?', sprint.created_at)
+    else
+      where('updated_at >= ? and updated_at < ?', sprint.created_at, sprint.next.created_at)
+    end
+  }
+
   scope :with_deleted_at, lambda {
     only_deleted
   }

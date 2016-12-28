@@ -58,6 +58,7 @@ class TasksController < ApplicationController
 
     @active_filters = [
       Enums::Filters::SEARCH_RELEASE,
+      Enums::Filters::SEARCH_SPRINT,
       Enums::Filters::SEARCH_GOAL,
       Enums::Filters::SEARCH_WORKER,
       Enums::Filters::SEARCH_THINKER,

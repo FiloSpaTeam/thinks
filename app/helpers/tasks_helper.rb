@@ -59,6 +59,8 @@ module TasksHelper
                                                  params[:goal_id].present?
     scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
                                                        params[:release_id].present?
+    scope = scope.with_sprint(params[:sprint_id]) if params.key?(:sprint_id) &&
+                                                       params[:sprint_id].present?
     scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
                                                        params[:thinker_id].present?
     scope = scope.with_worker(params[:worker_id]) if params.key?(:worker_id) &&

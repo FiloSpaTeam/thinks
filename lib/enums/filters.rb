@@ -4,6 +4,7 @@ module Enums
 
     SEARCH_TASK         = :search_task
     SEARCH_RELEASE      = :search_release
+    SEARCH_SPRINT       = :search_sprint
     SEARCH_GOAL         = :search_goal
     SEARCH_WORKER       = :search_worker
     SEARCH_THINKER      = :search_thinker
