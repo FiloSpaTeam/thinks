@@ -35,7 +35,7 @@ class Release < ActiveRecord::Base
   has_many :tasks
 
   validates :title, length: { maximum: 60 }, presence: true
-  validates :description, length: { minimum: 30 }
+  validates :description, length: { minimum: 30, maximum: 1600 }
   validates :project_id, presence: true, on: :create
   validates :version, presence: true
   validates_date :end_at

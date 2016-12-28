@@ -139,6 +139,7 @@ class ReleasesController < ApplicationController
   def set_validators_for_form_help
     description_validators = Release.validators_on(:description)[0]
     @chars_min_description = description_validators.options[:minimum]
+    @chars_max_description = description_validators.options[:maximum]
 
     title_validators = Release.validators_on(:title)[0]
     @chars_max_title = title_validators.options[:maximum]
