@@ -177,4 +177,10 @@ class Project < ActiveRecord::Base
       role.thinker = thinker
     end
   end
+
+  def suspend(state)
+    self.suspended = state
+
+    save
+  end
 end

@@ -21,8 +21,8 @@
 = form_for [@task, @comment], remote: remote do |f|
   .form-group
     - if @comment.text.nil?
-      = f.label :text, t(".your_small_thought_about"), :class => "control-label"
       = render partial: 'shared/markdown_syntax'
+      = f.label :text, t(".your_small_thought_about"), :class => "control-label"
     - else
       .form-group
     = f.text_area(:text, :class => "form-control")

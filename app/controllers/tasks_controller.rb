@@ -191,15 +191,20 @@ class TasksController < ApplicationController
   def sprint
     respond_to do |format|
       if scrum_master?(@task.project)
-        @task.status = @statuses.sprint.first
-
-        if @task.save
-          create_notification(@task, @task.project)
-          format.html { redirect_to @task, notice: 'Task ready for this sprint! Good job!' }
-          format.json { render :show, status: :ok, location: @task }
+        if @task.project.suspended
+          format.html { redirect_to task_path(@task), alert: 'Currently the development is suspended.' }
+          format.json { render json: {}, status: :unprocessable_entity }
         else
-          format.html { render :edit }
-          format.json { render json: @task.errors, status: :unprocessable_entity }
+          @task.status = @statuses.sprint.first
+
+          if @task.save
+            create_notification(@task, @task.project)
+            format.html { redirect_to @task, notice: 'Task ready for this sprint! Good job!' }
+            format.json { render :show, status: :ok, location: @task }
+          else
+            format.html { render :edit }
+            format.json { render json: @task.errors, status: :unprocessable_entity }
+          end
         end
       else
         format.html { redirect_to task_path(@task), alert: t('you_are_not_the_scrum_master') }
@@ -213,17 +218,22 @@ class TasksController < ApplicationController
   def release
     respond_to do |format|
       if scrum_master?(@task.project)
-        @task.status = @statuses.release.first
-        @task.worker = nil
-        @task.end_at = nil
-
-        if @task.save
-          create_notification(@task, @task.project)
-          format.html { redirect_to @task, notice: 'Task is ready for next Sprint!' }
-          format.json { render :show, status: :ok, location: @task }
+        if @task.project.suspended
+          format.html { redirect_to task_path(@task), alert: 'Currently the development is suspended.' }
+          format.json { render json: {}, status: :unprocessable_entity }
         else
-          format.html { render :edit }
-          format.json { render json: @task.errors, status: :unprocessable_entity }
+          @task.status = @statuses.release.first
+          @task.worker = nil
+          @task.end_at = nil
+
+          if @task.save
+            create_notification(@task, @task.project)
+            format.html { redirect_to @task, notice: 'Task is ready for next Sprint!' }
+            format.json { render :show, status: :ok, location: @task }
+          else
+            format.html { render :edit }
+            format.json { render json: @task.errors, status: :unprocessable_entity }
+          end
         end
       else
         format.html { redirect_to task_path(@task), alert: t('you_are_not_the_scrum_master') }

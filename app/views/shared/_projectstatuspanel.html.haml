@@ -17,12 +17,15 @@
 
 .panel.panel-default
   .panel-body
-    - if project.cycle.try(:days)
-      .progress
-        %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
-    - if project.started?
+    - if project.started? && !project.suspended
+      - if project.cycle.try(:days)
+        .progress
+          %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
       Sprint
       = project.sprint
+    - elsif project.suspended
+      %strong.text-danger
+        Development suspended
     - elsif project.countdown < 0
       = t("release_date_not_defined_yet")
     - else

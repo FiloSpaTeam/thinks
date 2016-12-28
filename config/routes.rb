@@ -42,6 +42,8 @@ Rails.application.routes.draw do
       put :contribute
       put :elect
       put :migrate
+      put :suspend
+      put :resume
     end
 
     resources :teams do

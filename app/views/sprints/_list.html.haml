@@ -17,7 +17,7 @@
 
 .panel.panel-default
   .panel-body{ :style => 'padding: 0;' }
-    %table.table.table-condensed.table-hover#filterrific_results
+    %table.table.table-condensed.table-hover
       %thead
         %tr
           %td
@@ -71,3 +71,11 @@
             %td.text-center{ colspan: 5 }
               %strong
                 No records found
+    = smart_listing.paginate
+    = smart_listing.pagination_per_page_links
+    .panel-footer
+      - if scrum_master?(current_thinker)
+        - if @project.suspended
+          = link_to t(".resume"), resume_project_path(@project), class: "btn btn-success", method: :put
+        - else
+          = link_to t(".suspend"), suspend_project_path(@project), class: "btn btn-danger", method: :put, data: { confirm: t('.do_you_want_suspend') }

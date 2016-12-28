@@ -255,6 +255,10 @@ en:
     form:
       date_for_release: "The date for release"
 
+  sprints:
+    list:
+      do_you_want_suspend: "Do you want to suspend the development? If you want, you can resume it later."
+
   teams:
     destroy:
       election_poll_created: "Elections held! 21 days and your position may change!"

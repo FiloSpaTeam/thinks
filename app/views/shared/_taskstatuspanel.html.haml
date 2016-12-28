@@ -96,7 +96,7 @@
             = render :partial => 'ratings/form', locals: { task: task }
 
   - if (scrum_master?(task.project))
-    - if !task.deleted?
+    - if !task.deleted? && !task.project.suspended
       - if task.status == Status.release.first
         .panel-footer
           - if task.ready?
@@ -111,6 +111,10 @@
       - elsif task.status == Status.done.first
         .panel-footer
           = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
+    - elsif task.project.suspended
+      %ul.list-group
+        %li.list-group-item.text-danger{ style: 'border-top: none;' }
+          Development suspended
 
   %ul.list-group
     %li.list-group-item{ style: 'border-top: none;' }

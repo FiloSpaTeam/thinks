@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   helper  SmartListing::Helper
 
   before_action :authenticate_thinker!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect, :suspend, :resume]
   before_action :set_contribution, only: [:show]
   before_action :thinker!, only: [:edit, :update, :destroy]
 
@@ -70,6 +70,8 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.thinker = current_thinker
+
+    @project.cycle = Cycle.where(id: 1).first
 
     respond_to do |format|
       if @project.save
@@ -165,6 +167,34 @@ class ProjectsController < ApplicationController
         @voter.save
 
         format.html { redirect_to project_teams_path(@project), notice: 'Thanks for your vote!' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def suspend
+    respond_to do |format|
+      if !scrum_master?(@project)
+        format.html { redirect_to @project, alert: 'You cannot suspend the project.' }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      else
+        @project.suspend(true)
+
+        format.html { redirect_to @project, notice: "The project was suspended. You can resume the development at any time." }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def resume
+    respond_to do |format|
+      if !scrum_master?(@project)
+        format.html { redirect_to @project, alert: 'You cannot resume the project.' }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      else
+        @project.suspend(false)
+
+        format.html { redirect_to @project, notice: 'The development is resumed. Good job!' }
         format.json { head :no_content }
       end
     end
