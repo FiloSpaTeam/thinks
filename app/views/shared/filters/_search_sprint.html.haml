@@ -6,7 +6,7 @@
     .panel-heading
       = text_field_tag 'filters[sprint_serial]', filter_value(:sprint_title), class: "form-control", placeholder: t("search"), autocomplete: 'off'
     %ul.list-group.scrollbar
-      - sprints_filter = @project.sprints.where('obtained > 0').push(@project.sprints.last)
+      - sprints_filter = @project.sprints
       - if active_filter?(:sprint_serial)
         - sprints_filter = sprints_filter.where("lower(serial) LIKE '%#{params[:filters][:sprint_title].downcase.strip}%'")
       - sprints_filter.each do |sprint|
