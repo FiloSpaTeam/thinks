@@ -29,11 +29,5 @@ class Projects::Statistic < Project
   attr_accessor :with_section
   attr_accessor :last_sprint
 
-  filterrific(
-    available_filters: [
-      :with_section
-    ]
-  )
-
   scope :with_section, -> (value) { }
 end

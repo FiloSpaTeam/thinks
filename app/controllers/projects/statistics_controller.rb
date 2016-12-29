@@ -21,18 +21,18 @@ class Projects::StatisticsController < ApplicationController
   before_action :set_project
 
   def show
-    @filterrific = initialize_filterrific(
-      Projects::Statistic,
-      params[:filterrific],
-      select_options: {}
-    ) || return
+    # @filterrific = initialize_filterrific(
+    #   Projects::Statistic,
+    #   params[:filterrific],
+    #   select_options: {}
+    # ) || return
 
-    unless params[:filterrific].nil?
-      @section         = params[:filterrific][:with_section].to_i
-      @selected_sprint = Sprint.find(params[:filterrific][:last_sprint].to_i)
-    end
+    # unless params[:filterrific].nil?
+    #   @section         = params[:filterrific][:with_section].to_i
+    #   @selected_sprint = Sprint.find(params[:filterrific][:last_sprint].to_i)
+    # end
 
-    @local_thinker = Thinker.friendly.find(params[:id])
-    @statistic     = @filterrific.find.where(slug: params[:project_id]).first
+    # @local_thinker = Thinker.friendly.find(params[:id])
+    # @statistic     = @filterrific.find.where(slug: params[:project_id]).first
   end
 end

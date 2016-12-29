@@ -38,8 +38,8 @@
         - my_roles.each do |role|
           .list-group-item
             = t "team_roles.#{role.team_role.t_name}"
-    .panel-footer
-      = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
+    -# .panel-footer
+    -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
 .panel.panel-default
   .panel-body
     %strong
