@@ -132,6 +132,7 @@ class ReleasesController < ApplicationController
       project = @release.project
       if scrum_master?(project)
         if @release.tasks.empty?
+          destroy_notification(@release, project)
           @release.destroy
 
           format.html { redirect_to project_releases_path(project), notice: 'Release is deleted.' }
