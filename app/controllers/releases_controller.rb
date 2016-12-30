@@ -16,6 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class ReleasesController < ApplicationController
+  include ProjectsHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
@@ -124,6 +125,26 @@ class ReleasesController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    respond_to do |format|
+      project = @release.project
+      if scrum_master?(project)
+        if @release.tasks.empty?
+          create_notification(@release, project)
+          @release.destroy
+
+          format.html { redirect_to project_releases_path(project), notice: 'Task was successfully closed.' }
+        else
+          format.html { redirect_to @release, alert: 'This release has tasks associated.' }
+          format.json { render json: @release.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to @release, alert: 'You cannot destroy this release!' }
+        format.json { render json: @release.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

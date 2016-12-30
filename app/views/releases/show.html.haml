@@ -27,6 +27,7 @@
             = @release.title
       .panel-body
         = markdown(@release.description)
-      - if @release.project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
+      - if scrum_master?(@release.project)
         .panel-footer
           = link_to t('edit'), edit_release_path(@release), :class => "btn btn-primary"
+          = link_to t('delete'), release_path(@release), :method => 'delete', :class => "btn btn-danger pull-right", :role => 'button'
