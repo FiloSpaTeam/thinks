@@ -132,10 +132,9 @@ class ReleasesController < ApplicationController
       project = @release.project
       if scrum_master?(project)
         if @release.tasks.empty?
-          create_notification(@release, project)
           @release.destroy
 
-          format.html { redirect_to project_releases_path(project), notice: 'Task was successfully closed.' }
+          format.html { redirect_to project_releases_path(project), notice: 'Release is deleted.' }
         else
           format.html { redirect_to @release, alert: 'This release has tasks associated.' }
           format.json { render json: @release.errors, status: :unprocessable_entity }
