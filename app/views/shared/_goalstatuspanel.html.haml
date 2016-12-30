@@ -23,7 +23,7 @@
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_sprint.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_progress.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.done.size, goal.tasks.size)}%;" }
-    = link_to project_tasks_path(@goal.project, "filterrific[with_goal]" => @goal) do
+    = link_to project_tasks_path(@goal.project, "filters[goal_id]" => @goal) do
       =pluralize goal.tasks.size, 'task'
 
   - if goal.tasks.size.nonzero?
