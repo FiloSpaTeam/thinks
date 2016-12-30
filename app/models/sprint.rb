@@ -41,7 +41,7 @@ class Sprint < ActiveRecord::Base
     projects = Project.all
 
     projects.each do |project|
-      next unless project.started? || project.suspended
+      next unless project.started? && !project.suspended
 
       if project.sprints.count.zero?
         sprint = Sprint.new
