@@ -16,23 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Goal < ActiveRecord::Base
-  paginates_per 15
-  max_paginates_per 50
-
   acts_as_paranoid
-
-  filterrific(
-    available_filters: [
-      :sorted_by,
-
-      :search_title,
-      :search_task,
-
-      :with_task,
-
-      :progress_lower_than
-    ]
-  )
 
   belongs_to :project
   belongs_to :thinker

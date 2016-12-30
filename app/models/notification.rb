@@ -18,13 +18,6 @@
 class Notification < ActiveRecord::Base
   acts_as_paranoid
 
-  filterrific(
-    default_filter_params: { },
-    available_filters: [
-      :sorted_by
-    ]
-  )
-
   belongs_to :thinker
   belongs_to :sprint
   belongs_to :project, -> { with_deleted }

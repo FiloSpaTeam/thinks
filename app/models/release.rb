@@ -16,20 +16,6 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Release < ActiveRecord::Base
-  paginates_per 10
-  max_paginates_per 50
-
-  filterrific(
-    available_filters: [
-      :sorted_by,
-
-      :search_title,
-      :search_task,
-
-      :progress_lower_than
-    ]
-  )
-
   belongs_to :project
 
   has_many :tasks

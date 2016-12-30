@@ -15,7 +15,6 @@
 //= require bootstrap-datepicker
 //= require jquery_ujs
 //= require smart_listing
-//= require filterrific/filterrific-jquery
 //= require holder
 //= require jquery.ui.widget
 //= require jquery.iframe-transport

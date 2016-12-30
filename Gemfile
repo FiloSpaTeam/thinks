@@ -45,7 +45,7 @@ gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
-gem 'filterrific', '2.0.5'
+# gem 'filterrific', '2.0.5'
 gem 'smart_listing', '1.2.0'
 
 # Statistics about views

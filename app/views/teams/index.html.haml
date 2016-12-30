@@ -20,25 +20,4 @@
   .col-md-4
     = render :partial => 'projects/projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
-    .panel.panel-default
-      .panel-heading
-        Product Owner
-        %i.pull-right.fa.fa-money.fa-lg{ style: 'margin-top: 2px;' }
-      %ul.list-group
-        = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.product_owner.first).first, election_polls: @election_polls, team: @members }
-      .panel-heading
-        Scrum Master
-        %i.pull-right.fa.fa-sitemap.fa-lg{ style: 'margin-top: 2px;' }
-      %ul.list-group
-        = render :partial => 'li', locals: { member: @members.where(team_role: TeamRole.scrum_master.first).first, election_polls: @election_polls, team: @members }
-      .panel-heading
-        Members
-        %i.pull-right.fa.fa-users.fa-lg{ style: 'margin-top: 2px;' }
-      %ul.list-group
-        - simple_members = @members.reorder('').where('team_role_id > ?', TeamRole.scrum_master.first).includes(thinker: [:contributions]).order('contributions.intensity')
-        - if simple_members.count.nonzero?
-          - simple_members.each do |member|
-            = render :partial => 'li', locals: { member: member, election_polls: @election_polls, team: @members }
-        - else
-          %li.list-group-item
-            No members
+    = smart_listing_render :teams

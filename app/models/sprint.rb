@@ -18,15 +18,6 @@
 class Sprint < ActiveRecord::Base
   acts_as_paranoid
 
-  paginates_per 10
-  max_paginates_per 50
-
-  filterrific(
-    available_filters: [
-      :sorted_by
-    ]
-  )
-
   belongs_to :project
 
   has_many :answers

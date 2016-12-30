@@ -17,6 +17,8 @@
 
 class TeamsController < ApplicationController
   include ProjectsHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   before_action :authenticate_thinker!
   before_action :set_project
@@ -24,20 +26,14 @@ class TeamsController < ApplicationController
   before_action :set_contribution, only: [:index]
 
   def index
-    @filterrific = initialize_filterrific(
-      AssignedRole
-      .where(project: @project)
-      .order(:team_role_id)
-      .order(:created_at),
-      params[:filterrific],
-      select_options: {}
-    ) || return
-    @members        = @filterrific.find.page params[:page]
+    assigned_roles_scope = @project.assigned_roles
+
+    smart_listing_create :teams,
+                         assigned_roles_scope,
+                         partial: 'teams/list',
+                         default_sort: { team_role_id: :asc, created_at: :asc}
+
     @election_polls = @project.election_polls
-  rescue ActiveRecord::RecordNotFound => e
-    # There is an issue with the persisted param_set. Reset it.
-    puts "Had to reset filterrific params: #{ e.message }"
-    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def destroy
