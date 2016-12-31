@@ -18,7 +18,7 @@
 class Task < ActiveRecord::Base
   acts_as_paranoid
 
-  is_impressionable
+  is_impressionable counter_cache: true
 
   has_many :votes
   has_many :workloads, through: :votes

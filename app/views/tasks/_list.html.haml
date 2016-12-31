@@ -47,6 +47,9 @@
                 %strong
                   = smart_listing.sortable 'Workload', :workload
           %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
+            %h5
+              %strong
+                = smart_listing.sortable 'View', :impressions_count
       %tbody
         - unless smart_listing.empty?
           - smart_listing.collection.each do |task|

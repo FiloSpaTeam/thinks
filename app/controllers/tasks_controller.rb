@@ -37,9 +37,6 @@ class TasksController < ApplicationController
 
   before_action :share_statuses, only: [:index, :destroy, :sprint, :assign, :give_up, :release]
 
-  impressionist actions: [:show],
-                unique: [:impressionable_id, :user_id]
-
   # GET /projects/1/tasks
   # GET /projects/1/tasks.json
   def index
@@ -85,6 +82,8 @@ class TasksController < ApplicationController
 
     @project = @task.project
     @comment = Comment.new
+
+    impressionist(@project, '', unique: [:impressionable_id, :user_id])
   end
 
   # GET /projects/1/tasks/new
@@ -309,7 +308,8 @@ class TasksController < ApplicationController
   def set_task
     @task = Task
             .includes(:comments, :votes, :worker, :thinker, :project, :ratings)
-            .with_deleted.find(params[:id])
+            .with_deleted
+            .find(params[:id])
   end
 
   def set_validators_for_form_help
