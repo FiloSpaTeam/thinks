@@ -83,7 +83,7 @@ class TasksController < ApplicationController
     @project = @task.project
     @comment = Comment.new
 
-    impressionist(@project, '', unique: [:impressionable_id, :user_id])
+    impressionist(@task, '', unique: [:impressionable_id, :user_id])
   end
 
   # GET /projects/1/tasks/new
