@@ -66,7 +66,7 @@
                   = link_to task.title.truncate(45), task_path(task), :title => task.title
                 %strong.visible-sm
                   = link_to task.title, task_path(task)
-                .dark-grey
+                .dark-grey.break-word
                   %small
                     %em
                       = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)

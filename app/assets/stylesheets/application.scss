@@ -224,6 +224,8 @@ a {
     text-align: left !important;
 }
 
+.break-word { word-wrap: break-word; }
+
 @import "dashboard";
 @import "cover";
 @import "carousel";
