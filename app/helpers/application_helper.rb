@@ -21,11 +21,11 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version  = '0.1.55.1267'
-    date     = '2016.12.28'
+    version  = '0.1.56.1268'
+    date     = '2017.01.01'
     thinkers = Thinker.all.size
     content_tag(:span, "(Subscribers: #{thinkers})", class: 'hidden-xs hidden-sm pull-right text-muted') +
-    content_tag(:small, "Version #{version}", class: 'text-muted pull-right hidden-xs ', title: date)
+      content_tag(:small, "Version #{version}", class: 'text-muted pull-right hidden-xs ', title: date)
   end
 
   def link_to_button(path, text, icon_source)
