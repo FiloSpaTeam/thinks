@@ -14,48 +14,82 @@
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
 -# Copyright (c) 2015, Claudio Maradonna
+#div-container-list
+  %h3
+    = t '.projects'
+  .row
+    .margin-bottom-10.col-md-8
+      .row.margin-bottom-15
+        .col-xs-12
+          = smart_listing_controls_for :projects do
+            .row
+              .col-xs-12
+                .input-group
+                  = text_field_tag("filters[title]", filter_value(:title), class: 'form-control', autocomplete: 'off', placeholder: 'Search title')
+                  .input-group-btn
+                    %button.btn.btn-default
+                      %i.fa.fa-search
 
-#div-container-list.panel.panel-default
-  .panel-heading
-    %h2
-      = t '.projects'
-      %small= t ".small_title"
-    = smart_listing_controls_for :projects do
+            = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+      %table.table-condensed
+        %tbody
+          - smart_listing.collection.each do |project|
+            %tr
+              %td{ width: 80 }
+                = link_to project_path(project) do
+                  - if project.main_image
+                    = cl_image_tag(project.main_image.path, { size: '80x80', class: 'pull-left' })
+                  - else
+                    %img.pull-left{"data-src" => "holder.js/80x80"}
+              %td{ style: 'vertical-align: top;' }
+                = link_to project_path(project) do
+                  %strong= project.title
+                %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
+                  %small
+                    = plain_text(project.description.lines.first).truncate(150)
+          - if smart_listing.collection.empty?
+            %tr.warning
+              %td
+                = t('sorry_no_project_found_with', result: filter_value(:title)).html_safe
+      = smart_listing.paginate
+    .col-md-4.border-left
+      = link_to "Start new project", new_project_path, class: 'btn btn-success'
+      .row.margin-bottom-15
+        .col-xs-12
+          %h4 Most active
+          %table.table-condensed
+            %tbody
+              - @most_active_projects.each do |project|
+                %tr
+                  %td{ width: 40 }
+                    = link_to project_path(project) do
+                      - if project.main_image
+                        = cl_image_tag(project.main_image.path, { size: '40x40', class: 'pull-left' })
+                      - else
+                        %img.pull-left{"data-src" => "holder.js/40x40"}
+                  %td{ style: 'vertical-align: top;' }
+                    = link_to project_path(project) do
+                      %strong{ title: plain_text(project.description.lines.first).truncate(150) }= project.title
+                    %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
+                      %small
+                        Views: 
+                        = project.impressions_count
       .row
         .col-xs-12
-          .input-group
-            = text_field_tag("filters[title]", filter_value(:title), class: 'form-control', autocomplete: 'off')
-            .input-group-btn
-              = link_to_button(new_project_path, "new", "plus")
-      = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-  .panel-body{ :style => "padding: 0;" }
-    %table.table.table-condensed.table-hover{ style: 'margin-bottom: 0;' }
-      %thead
-        %tr
-          %th{ colspan: 2 }
-            = smart_listing.sortable "Project", :title
-          %th.hidden-xs
-            = smart_listing.sortable "Category", :category_name
-          %th.hidden-xs.hidden-sm
-            = smart_listing.sortable "Founder", :thinker_name
-      %tbody
-        - smart_listing.collection.each do |project|
-          %tr
-            %td{ width: 80 }
-              = link_to project_path(project) do
-                - if project.main_image
-                  = cl_image_tag(project.main_image.path, { size: '80x80', class: 'pull-left' })
-                - else
-                  %img.pull-left{"data-src" => "holder.js/80x80"}
-            %td{ style: 'vertical-align: top;' }
-              = link_to project_path(project) do
-                %strong= project.title
-              %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
-                %small
-                  = plain_text(project.description.lines.first).truncate(150)
-            %td.hidden-xs
-              = project.category.try(:name)
-            %td.hidden-xs.hidden-sm
-              = project.thinker.try(:name)
-    = smart_listing.paginate
-    = smart_listing.pagination_per_page_links
+          %h4 Recent
+          %table.table-condensed
+            %tbody
+              - @recent_projects.each do |project|
+                %tr
+                  %td{ width: 40 }
+                    = link_to project_path(project) do
+                      - if project.main_image
+                        = cl_image_tag(project.main_image.path, { size: '40x40', class: 'pull-left' })
+                      - else
+                        %img.pull-left{"data-src" => "holder.js/40x40"}
+                  %td{ style: 'vertical-align: top;' }
+                    = link_to project_path(project) do
+                      %strong{ title: plain_text(project.description.lines.first).truncate(150) }= project.title
+                    %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
+                      %small
+                        = project.created_at.ago_in_words

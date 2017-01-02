@@ -41,9 +41,15 @@ class ProjectsController < ApplicationController
                            [:thinker_name, 'thinkers.name']
                          ]
 
-    @active_filters = [
-      Enums::Filters::SEARCH_THINKER
-    ]
+    @most_active_projects = Project
+                            .includes(:category, :thinker)
+                            .order(impressions_count: :desc)
+                            .limit(5)
+
+    @recent_projects = Project
+                       .includes(:category, :thinker)
+                       .order(created_at: :desc)
+                       .limit(5)
 
     @project_thinkers = Thinker.all
   end

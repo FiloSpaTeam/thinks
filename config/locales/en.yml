@@ -80,6 +80,7 @@ en:
   view_all: "View all"
   average: "Average"
   close: "Close"
+  sorry_no_project_found_with: "Sorry but we didn't find any project with <b>\"%{result}\"</b>"
 
   layouts:
     application:
