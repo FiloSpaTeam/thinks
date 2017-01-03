@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Rethink
   class Application < Rails::Application
+    config.assets.paths << Rails.root.join('node_modules')
+
     config.exceptions_app = self.routes
 
     # Settings in config/environments/* take precedence over those specified here.

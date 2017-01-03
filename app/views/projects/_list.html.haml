@@ -53,7 +53,7 @@
                 = t('sorry_no_project_found_with', result: filter_value(:title)).html_safe
       = smart_listing.paginate
     .col-md-4.border-left
-      = link_to "Start new project", new_project_path, class: 'btn btn-success'
+      = link_to "Start new project", new_project_path, class: 'btn btn-success margin-bottom-15'
       .row.margin-bottom-15
         .col-xs-12
           %h4 Most active
@@ -69,7 +69,7 @@
                         %img.pull-left{"data-src" => "holder.js/40x40"}
                   %td{ style: 'vertical-align: top;' }
                     = link_to project_path(project) do
-                      %strong{ title: plain_text(project.description.lines.first).truncate(150) }= project.title
+                      %span{ title: plain_text(project.description.lines.first).truncate(150) }= project.title
                     %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
                       %small
                         Views: 
