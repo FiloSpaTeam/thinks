@@ -19,6 +19,10 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+@import "bootstrap-star-rating/star-rating.min";
+@import "bootstrap-material-design/dist/sassc/bootstrap-material-design";
+@import "bootstrap-material-design/dist/sassc/ripples";
+
 /* CUSTOM VARIABLES
  ---------------------------------------------------*/
 $success: #43a047;
@@ -42,8 +46,12 @@ html {
 body {
   /* Margin bottom by footer height */
   padding-bottom: 70px;
+  /* Move down content because we have a fixed navbar that is 50px tall */
+  padding-top: 50px;
 
   .container { padding: 60px 15px; }
+
+  background-color: #FAFAFA;
 }
 
 body:not(.start) {
@@ -237,7 +245,7 @@ a {
 .margin-bottom-10 { margin-bottom: 10px !important; }
 .margin-bottom-15 { margin-bottom: 15px !important; }
 
-@import "dashboard";
+// @import "dashboard";
 @import "cover";
 @import "carousel";
 @import "mobile";
@@ -253,5 +261,3 @@ a {
 @import "notifications";
 @import "otp";
 @import "operations";
-
-@import "bootstrap-star-rating/star-rating.min"

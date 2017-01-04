@@ -80,7 +80,7 @@ en:
   view_all: "View all"
   average: "Average"
   close: "Close"
-  sorry_no_project_found_with: "Sorry but we didn't find any project with <b>\"%{result}\"</b>"
+  sorry_no_project_found_with: "Sorry but we didn't find any project with <b>\"<ins>%{result}</ins>\"</b>"
 
   layouts:
     application:
@@ -164,7 +164,7 @@ en:
 
   projects:
     index:
-      projects    : "All projects"
+      projects    : "Projects"
       small_title : "created by community for community"
       title       : "Title"
     show:

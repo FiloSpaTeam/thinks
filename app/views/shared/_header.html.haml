@@ -28,8 +28,6 @@
 = stylesheet_link_tag "//fonts.googleapis.com/css?family=Roboto:300,400,500,700", :media => "all"
 = stylesheet_link_tag "//fonts.googleapis.com/icon?family=Material+Icons", :media => "all"
 = stylesheet_link_tag "application", :media => "all"
-= stylesheet_link_tag "dist/css/bootstrap-material-design.css", :media => "all"
-= stylesheet_link_tag "dist/css/ripples.min.css", :media => "all"
 / For third-generation iPad with high-resolution Retina display:
 / Size should be 144 x 144 pixels
 = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
@@ -52,17 +50,17 @@
   :plain
     $(document).ready(function() {
       $('.attachinary-input').attachinary();
-      $(function () {
-        $('[data-toggle="popover"]').popover()
+      $('[data-toggle="popover"]').popover();
 
-        $('body').on('change', '.smart-listing-controls input', function(e) {
-          e.preventDefault();
+      $.material.init();
 
-          var $this = $(this);
+      $('body').on('change', '.smart-listing-controls input', function(e) {
+        e.preventDefault();
 
-          $('#filters_last').val($this.attr('name'));
-          $this.closest('form').submit();
-        });
+        var $this = $(this);
+
+        $('#filters_last').val($this.attr('name'));
+        $this.closest('form').submit();
       });
     });
   - if thinker_signed_in?

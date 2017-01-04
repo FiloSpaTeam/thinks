@@ -31,6 +31,9 @@ module ProjectsHelper
     end
   end
 
+  def random_color
+  end
+
   def set_project
     @project = Project.friendly.find(params[:project_id] || params[:id])
   end

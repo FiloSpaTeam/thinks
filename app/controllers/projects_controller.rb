@@ -29,7 +29,12 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     projects_scope = Project.includes(:category, :thinker)
-    projects_scope = apply_filters(projects_scope, params[:filters]) if params[:filters].present?
+
+    if params[:filters].present?
+      projects_scope = apply_filters(projects_scope, params[:filters])
+
+      @five_random_projects = Project.order('RANDOM()').limit(6) if projects_scope.empty?
+    end
 
     smart_listing_create :projects,
                          projects_scope,
@@ -41,15 +46,19 @@ class ProjectsController < ApplicationController
                            [:thinker_name, 'thinkers.name']
                          ]
 
-    @most_active_projects = Project
-                            .includes(:category, :thinker)
-                            .order(impressions_count: :desc)
-                            .limit(5)
+    # @most_active_projects = Project
+    #                         .order(impressions_count: :desc)
+    #                         .limit(5)
 
-    @recent_projects = Project
-                       .includes(:category, :thinker)
-                       .order(created_at: :desc)
-                       .limit(5)
+    # @most_followed_projects = Project
+    #                           .joins(:contributions)
+    #                           .group('projects.id')
+    #                           .order('COUNT(contributions) desc')
+    #                           .limit(5)
+
+    # @recent_projects = Project
+    #                    .order(created_at: :desc)
+    #                    .limit(5)
 
     @project_thinkers = Thinker.all
   end
