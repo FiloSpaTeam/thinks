@@ -1,8 +1,0 @@
-{
-  "name": "thinks",
-  "version": "0.1.56.1268",
-  "license": "AGPL-3.0",
-  "dependencies": {
-      "bootstrap-material-design": "0.5.10"
-  }
-}
