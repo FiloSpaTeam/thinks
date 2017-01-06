@@ -29,9 +29,9 @@
             .panel-heading
               = link_to project_path(project) do
                 - if project.main_image
-                  = cl_image_tag(project.main_image.path, { width: '100%', height: '140' })
+                  = cl_image_tag(project.main_image.path, { width: '100%', height: '180' })
                 - else
-                  %div.bg-info{ style: 'height: 140px; width: 100%;' }
+                  %div.bg-info{ style: 'height: 180px; width: 100%;' }
             .panel-body
               = link_to project_path(project) do
                 %strong= project.title
@@ -58,9 +58,9 @@
               .panel-heading
                 = link_to project_path(project) do
                   - if project.main_image
-                    = cl_image_tag(project.main_image.path, { width: '100%', height: '140' })
+                    = cl_image_tag(project.main_image.path, { width: '100%', height: '180' })
                   - else
-                    .bg-info{ style: 'height: 140px; width: 100%;' }
+                    .bg-info{ style: 'height: 180px; width: 100%;' }
               .panel-body
                 = link_to project_path(project) do
                   %strong= project.title
