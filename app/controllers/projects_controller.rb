@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     if params[:filters].present?
       projects_scope = apply_filters(projects_scope, params[:filters])
 
-      @five_random_projects = Project.order('RANDOM()').limit(6) if projects_scope.empty?
+      @five_random_projects = Project.order('RANDOM()').limit(5) if projects_scope.empty?
     end
 
     smart_listing_create :projects,
@@ -61,6 +61,7 @@ class ProjectsController < ApplicationController
     #                    .limit(5)
 
     @project_thinkers = Thinker.all
+    @categories       = Category.all
   end
 
   # GET /projects/1

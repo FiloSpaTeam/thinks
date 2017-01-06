@@ -73,6 +73,7 @@
           %img{alt: "", border: "0", src: "https://www.paypalobjects.com/it_IT/i/scr/pixel.gif", width: "1", height: "1"}
       %ul.nav.navbar-nav.navbar-right
         - if thinker_signed_in?
+          = link_to "Start new project", new_project_path, class: 'btn btn-success navbar-btn pull-left'
           %li.dropdown
             = link_to notifications_path, :class => "dropdown-toggle hidden-xs", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
               = notification_icon(Notification.user(current_thinker))

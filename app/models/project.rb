@@ -76,6 +76,10 @@ class Project < ActiveRecord::Base
     where(thinker: Thinker.friendly.find(thinker))
   }
 
+  scope :with_category, lambda { |category|
+    where(category: Category.find(category))
+  }
+
   def last_notification_update
     notifications.last
   end

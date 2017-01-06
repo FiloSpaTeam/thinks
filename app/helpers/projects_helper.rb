@@ -67,6 +67,9 @@ module ProjectsHelper
     scope = scope.with_thinker_name(params[:thinker_name]) if params.key?(:thinker_name) &&
                                                               params[:thinker_name].present?
 
+    scope = scope.with_category(params[:category_id]) if params.key?(:category_id) &&
+                                                         params[:category_id].present?
+
     scope
   end
 end

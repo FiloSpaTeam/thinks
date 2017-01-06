@@ -27,6 +27,4 @@
 //= require bootstrap-star-rating/star-rating.min.js
 //= require bootstrap-star-rating/theme.min.js
 //= require bootstrap-star-rating/locales/LANG.js
-//= require bootstrap-material-design/scripts/material
-//= require bootstrap-material-design/scripts/ripples
 //= require_tree .
