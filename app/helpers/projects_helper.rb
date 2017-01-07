@@ -72,8 +72,13 @@ module ProjectsHelper
 
     scope = scope.order(created_at: :desc) if params.key?(:recent) &&
                                               params[:recent].present?
-    scope = scope.order(impressions_count: :desc) if params.key?(:most_followed) &&
-                                                     params[:most_followed].present?
+
+    if params.key?(:most_active) &&
+       params[:most_active].present?
+      scope = scope
+              .order(impressions_count: :desc)
+              .where('impressions_count > 0')
+    end
 
     if params.key?(:most_followed) &&
        params[:most_followed].present?
