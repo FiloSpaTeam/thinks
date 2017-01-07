@@ -72,8 +72,8 @@
           %input{ type: "image", src: "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif", border: "0", name: "submit", alt: "PayPal - The safer, easier way to pay online!"}
           %img{alt: "", border: "0", src: "https://www.paypalobjects.com/it_IT/i/scr/pixel.gif", width: "1", height: "1"}
       %ul.nav.navbar-nav.navbar-right
+        = link_to "Start new project", new_project_path, class: 'btn btn-success navbar-btn pull-left'
         - if thinker_signed_in?
-          = link_to "Start new project", new_project_path, class: 'btn btn-success navbar-btn pull-left'
           %li.dropdown
             = link_to notifications_path, :class => "dropdown-toggle hidden-xs", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
               = notification_icon(Notification.user(current_thinker))

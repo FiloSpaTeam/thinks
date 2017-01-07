@@ -60,15 +60,28 @@ module ProjectsHelper
   def apply_filters(scope, params)
     scope = scope.with_title(params[:title]) if params.key?(:title) &&
                                                 params[:title].present?
-    scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
-                                                       params[:thinker_id].present? &&
-                                                       params[:thinker_name].blank?
+    # scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
+    #                                                    params[:thinker_id].present? &&
+    #                                                    params[:thinker_name].blank?
 
-    scope = scope.with_thinker_name(params[:thinker_name]) if params.key?(:thinker_name) &&
-                                                              params[:thinker_name].present?
+    # scope = scope.with_thinker_name(params[:thinker_name]) if params.key?(:thinker_name) &&
+    #                                                           params[:thinker_name].present?
 
     scope = scope.with_category(params[:category_id]) if params.key?(:category_id) &&
                                                          params[:category_id].present?
+
+    scope = scope.order(created_at: :desc) if params.key?(:recent) &&
+                                              params[:recent].present?
+    scope = scope.order(impressions_count: :desc) if params.key?(:most_followed) &&
+                                                     params[:most_followed].present?
+
+    if params.key?(:most_followed) &&
+       params[:most_followed].present?
+      scope = scope
+              .joins(:contributions)
+              .group('projects.id')
+              .order('count(contributions.id) desc')
+    end
 
     scope
   end

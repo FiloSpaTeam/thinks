@@ -47,7 +47,7 @@
       - if filter_value(:title).present?
         = t('.sorry_no_project_found_with', result: filter_value(:title)).html_safe
       - elsif filter_value(:category_id).present?
-        = t('.sorry_no_project_under_category', result: Category.find(filter_value(:category_id)).try(:t_name)).html_safe
+        = t('.sorry_no_project_under_category', result: t("category.#{Category.find(filter_value(:category_id)).try(:t_name)}")).html_safe
       = "...but you might be interested in"
       %br
       %br
@@ -70,6 +70,18 @@
   .col-md-2.hidden-xs
     %h4
       Categories
-    - @categories.each do |category|
-      %div.bold
-        = link_to t("category.#{category.t_name}"), projects_path('filters[category_id]' => category.id)
+    %ul.list-unstyled
+      - @categories.each do |category|
+        %li{ class: filter_value(:category_id).to_i == category.id ? 'font-italic font-bold' : '' }
+          = link_to t("category.#{category.t_name}"), projects_path('filters[category_id]' => category.id)
+
+    %br
+    %h4 Sort by
+    %ul.list-unstyled
+      %li{ class: filter_value(:most_active).present? ? 'font-italic font-bold' : '' }
+        = link_to "Most active", projects_path('filters[most_active]' => true)
+      %li{ class: filter_value(:most_followed).present? ? 'font-italic font-bold' : '' }
+        = link_to "Most followed", projects_path('filters[most_followed]' => true)
+      %li{ class: filter_value(:recent).present? ? 'font-italic font-bold' : '' }
+        = link_to "Recent", projects_path('filters[recent]' => true)
+

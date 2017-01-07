@@ -243,6 +243,10 @@ a {
 .margin-bottom-10 { margin-bottom: 10px !important; }
 .margin-bottom-15 { margin-bottom: 15px !important; }
 
+.font-normal  { font-weight: normal; }
+.font-bold    { font-weight: bold; }
+.font-italic  { font-style: italic; }
+
 // @import "dashboard";
 @import "cover";
 @import "carousel";
