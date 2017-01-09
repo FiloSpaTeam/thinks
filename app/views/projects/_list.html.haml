@@ -21,7 +21,7 @@
       .input-group.input-group-lg.margin-bottom-15
         .input-group-addon
           %i.fa.fa-search
-        = text_field_tag("filters[title]", filter_value(:title), class: 'form-control', autocomplete: 'off', placeholder: 'Search title')
+        = text_field_tag("filters[title_or_description]", filter_value(:title_or_description), class: 'form-control', autocomplete: 'off', placeholder: 'Search title or description')
     .row
       - smart_listing.collection.each_with_index do |project, index|
         .col-lg-3.col-md-4.col-sm-6.col-xs-12
@@ -36,7 +36,7 @@
               = link_to project_path(project) do
                 %strong= project.title
                 %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
-                  = plain_text(project.description.lines.first).truncate(150)
+                  = highlights_searched_text(plain_text(project.description.lines.first).truncate(150), filter_value(:title_or_description))
                 - if project.category.present?
                   %small
                     %i= t("category.#{project.category.t_name}")
@@ -44,8 +44,8 @@
     = smart_listing.paginate
 
     - if smart_listing.collection.empty?
-      - if filter_value(:title).present?
-        = t('.sorry_no_project_found_with', result: filter_value(:title)).html_safe
+      - if filter_value(:title_or_description).present?
+        = t('.sorry_no_project_found_with', result: filter_value(:title_or_description)).html_safe
       - elsif filter_value(:category_id).present?
         = t('.sorry_no_project_under_category', result: t("category.#{Category.find(filter_value(:category_id)).try(:t_name)}")).html_safe
       = "...but you might be interested in"

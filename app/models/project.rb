@@ -64,8 +64,8 @@ class Project < ActiveRecord::Base
 
   before_create :generate_serial
 
-  scope :with_title, lambda { |query|
-    where('to_tsvector(title) @@ to_tsquery(?)', "'#{query.downcase}':*")
+  scope :with_title_or_description, lambda { |query|
+    where('to_tsvector(title) @@ to_tsquery(?) or lower(description) LIKE ?', "'#{query.downcase}':*", "%#{query.downcase.strip}%")
   }
 
   scope :with_thinker_name, lambda { |query|
