@@ -32,7 +32,7 @@
                   = cl_image_tag(project.main_image.path, { width: '100%', height: '180' })
                 - else
                   %div.bg-info{ style: 'height: 180px; width: 100%;' }
-            .panel-body
+            .panel-body.min-height-200
               = link_to project_path(project) do
                 %strong= project.title
                 %span.help-block{ style: 'margin-bottom: 0; margin-top: 0;' }
