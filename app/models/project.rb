@@ -19,8 +19,6 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  paginates_per 12
-
   acts_as_paranoid
 
   is_impressionable counter_cache: true

@@ -44,7 +44,8 @@ class ProjectsController < ApplicationController
                            [:title, 'title'],
                            [:category_name, 'categories.t_name'],
                            [:thinker_name, 'thinkers.name']
-                         ]
+                         ],
+                         page_sizes: [9]
 
     # @most_active_projects = Project
     #                         .order(impressions_count: :desc)
