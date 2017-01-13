@@ -1,6 +1,6 @@
 .col-md-4.col-sm-6.col-xs-12
   .panel.panel-default
-    .panel-heading.no-padding
+    .panel-heading.no-padding.text-center
       = link_to project_path(project) do
         - if project.main_image
           = cl_image_tag(project.main_image.path, { style: 'max-width: 100%; width: auto; height: 180px;' })
