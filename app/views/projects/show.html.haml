@@ -23,7 +23,7 @@
   .col-md-8
     .panel.panel-default
       .panel-body.text-justify
-        = cl_image_tag(@project.main_image.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.main_image
+        = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
         = markdown(@project.description)
       - if creator?(@project.thinker.id)
         .panel-footer

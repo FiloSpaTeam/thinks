@@ -3,7 +3,7 @@
     .panel-heading.no-padding.text-center
       = link_to project_path(project) do
         - if project.main_image
-          = cl_image_tag(project.main_image.path, { style: 'max-width: 100%; width: auto; height: 180px;' })
+          = cl_image_tag(project.main_image.path, { style: 'width: 100%; height: 180px;' })
         - else
           %div.bg-info{ style: 'height: 180px; width: 100%;' }
     .panel-body.min-height-160

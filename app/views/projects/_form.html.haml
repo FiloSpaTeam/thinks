@@ -17,22 +17,37 @@
 
 = form_for @project do |f|
   .panel-body
-    .form-group
-      = f.label :main_image, :class => 'control-label'
-      = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
-      = f.attachinary_file_field :main_image
-      %span#help-main-image.help-block
-        = t ".square_image"
-    .form-group
-      = f.label :title, :class => 'control-label'
-      = f.text_field :title, :class => 'form-control', :placeholder => "My project"
-    .form-group
-      = f.label :description, :class => 'control-label'
-      = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
-      %span#help-description.help-block
-        = t "remaining_chars"
-        %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
-          = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
+    %h2
+      %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'aria-controls' => 'section-1', href: '#section-1' }
+        1. Title and description
+    #section-1.collapse
+      .form-group
+        = f.label :title, :class => 'control-label'
+        = f.text_field :title, :class => 'form-control', :placeholder => "My project"
+      .form-group
+        = f.label :description, :class => 'control-label'
+        = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+        %span#help-description.help-block
+          = t "remaining_chars"
+          %span#counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
+            = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
+
+    %h2
+      %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'aria-controls' => 'section-4', href: '#section-4' }
+        4. Logo and main image
+    #section-4.collapse
+      .form-group
+        = f.label :logo, :class => 'control-label'
+        = cl_image_tag(@project.logo.path, alt: t('.logo'), size: '150x150', crop: :fit) if @project.logo?
+        = f.attachinary_file_field :logo
+        %span#help-main-image.help-block
+          = t ".landscape_image"
+      .form-group
+        = f.label :main_image, :class => 'control-label'
+        = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
+        = f.attachinary_file_field :main_image
+        %span#help-main-image.help-block
+          = t ".square_image"
   .panel-footer
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

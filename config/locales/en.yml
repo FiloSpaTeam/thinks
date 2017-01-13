@@ -197,6 +197,7 @@ en:
       release_at_help: "If release date is before today, the project is declared started."
       main_image: "Main image"
       square_image: "Square image, 200x200 (jpg, png)"
+      landscape_image: "Landscape image, 280x180 (jpg, png)"
     tasks:
       scrum_table : "Scrum table"
       tasks       : "tasks"
