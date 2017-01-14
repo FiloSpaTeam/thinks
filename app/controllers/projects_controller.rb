@@ -233,7 +233,7 @@ class ProjectsController < ApplicationController
         :title, :description, :minimum_team_number,
         :release_at, :license_id, :source_code_url,
         :home_url, :documentation_url,
-        :cycle_id, :category_id, :main_image
+        :cycle_id, :category_id, :main_image, :logo
       )
   end
 end
