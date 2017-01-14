@@ -88,8 +88,6 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.thinker = current_thinker
 
-    @project.cycle = Cycle.where(id: 1).first
-
     respond_to do |format|
       if @project.save
         @project.save_first_team_roles

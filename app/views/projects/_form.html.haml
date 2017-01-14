@@ -33,6 +33,48 @@
             = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
 
     %h2
+      %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'aria-controls' => 'section-2', href: '#section-2' }
+        2. Sprint and release date
+    #section-2.collapse
+      %p
+        If you want you can set your <strong>release date</strong>. The release date describes the moment in which <strong>starts development</strong> of the project.
+        %br
+        <strong>Before that moment, the project is under <i>"backlogging"</i></strong> where you and your team should design (create goals, tasks and organize them).
+
+      %p
+        When the project starts, you and your team can start work over tasks, complete goals and so on.
+        %br
+        The working period is usefull to divide the entire development process into subperiods (1 week, 2 weeks..., called <strong><i>"Sprint"</i></strong>) so you can study your development's "speed", take surveys about work and get charts.
+
+      .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "<strong>There are no bad choices.</strong><br>Depends on your changing speed (you need to change details usually?).", 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :cycle_id, :class => "control-label"
+        = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+      .form-group
+        = f.label :release_at, :class => 'control-label'
+        = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+        %span#help-release_at.help-block= t ".release_at_help"
+      .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><strong>How does it works? - Automatic task handling (add URL)</strong>", 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :minimum_team_number, :class => 'control-label'
+        = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
+
+    %h2
+      %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'aria-controls' => 'section-3', href: '#section-3' }
+        3. Category, license and links
+    #section-3.collapse
+      .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "Choose the right category and everyone can see your project under that.", 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :category_id, :class => 'control-label'
+        = f.select :category_id, content_tag(:option,'Select one...',:value => "") + options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
+      .form-group
+        = f.label :license_id, :class => 'control-label'
+        = f.select :license_id, options_from_collection_for_select(License.all.order(:name), 'id', 'description', @project.license_id), {}, :class => 'form-control'
+        %hr
+    %h2
       %a{ 'data-toggle' => 'collapse', 'aria-expanded' => 'true', 'aria-controls' => 'section-4', href: '#section-4' }
         4. Logo and main image
     #section-4.collapse
@@ -41,13 +83,15 @@
         = cl_image_tag(@project.logo.path, alt: t('.logo'), size: '150x150', crop: :fit) if @project.logo?
         = f.attachinary_file_field :logo
         %span#help-main-image.help-block
-          = t ".landscape_image"
+          = t ".square_image"
       .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "Used to represent the project on the main page", 'data-html' => 'true' do
+          = icon('info-circle')
         = f.label :main_image, :class => 'control-label'
         = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
         = f.attachinary_file_field :main_image
         %span#help-main-image.help-block
-          = t ".square_image"
+          = t ".landscape_image"
   .panel-footer
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

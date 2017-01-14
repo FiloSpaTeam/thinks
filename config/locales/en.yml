@@ -408,8 +408,10 @@ en:
         home_url          : "Home"
         source_code_url   : "Source Code"
         documentation_url : "Documentation"
+        cycle_id: "Working period" 
+        release_at: "Release date"
 
-  #Devise section
+  # Devise section
   devise:
     sessions:
       new:
