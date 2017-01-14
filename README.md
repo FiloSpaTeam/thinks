@@ -1,4 +1,5 @@
-# Think Software
+# Thinks
+## Designs, share, develops
 
 A new way to organize your and your team's workflow.
 
