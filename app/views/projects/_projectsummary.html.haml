@@ -16,10 +16,9 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - if thinker_signed_in?
-  .panel.panel-default.hidden-xs
-    .panel-body
-      %strong
-        Your contribution
+  .hidden-xs
+    %h3
+      Your contribution
     .list-group
       - if current_thinker != project.thinker
         .list-group-item
@@ -40,98 +39,98 @@
             = t "team_roles.#{role.team_role.t_name}"
     -# .panel-footer
     -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
-.panel.panel-default
-  .panel-body
+
+%hr
+%h3
+  General details
+.progress
+  %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
+    = project.progress_percentage
+    \%
+= t('projects.list.progress')
+.list-group
+  .list-group-item
+    founder
     %strong
-      Project
-    .progress
-      %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
-        = project.progress_percentage
-        \%
-    = t('projects.list.progress')
-  .list-group
-    .list-group-item
-      founder
-      %strong
-        = content_tag :span, project.thinker.name, :class => "pull-right"
-      - if project.donate_button.present?
-        %hr
-        .text-center
-          = project.donate_button.html_safe
-    - if current_thinker == project.thinker
-      .list-group-item.hidden-xs
-        secret
-        = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
-          = icon('eye', :class => "dark-grey")
-    .list-group-item.hidden-xs
-      category
-      %strong
-        = content_tag :span, project.category.try(:t_name) ? t("category.#{project.category.t_name}") : t('not_defined_yet'), :class => "pull-right"
-    .list-group-item.hidden-xs
-      license
-      %strong
-        = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
-    .list-group-item.hidden-xs
-      sprint every
-      %strong
-        = content_tag :span, project.cycle.try(:description) ? project.cycle.description : t('not_defined_yet'), :class => "pull-right"
-    .list-group-item.hidden-xs
-      minimum team number
-      %strong
-        = content_tag :span, project.minimum_team_number, :class => "pull-right"
-    .list-group-item.hidden-xs
-      release date
-      %strong
-        = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
-  .panel-body.hidden-xs
+      = content_tag :span, project.thinker.name, :class => "pull-right"
+    - if project.donate_button.present?
+      %hr
+      .text-center
+        = project.donate_button.html_safe
+  .list-group-item.hidden-xs
+    category
     %strong
-      Skill requirements
-  .list-group.hidden-xs
-    .list-group-item
-      - if project.skills.empty?
-        No skill required
-      - else
-        %ul{ style: 'margin-bottom: 0; padding-left: 15px;' }
-          - project.skills.each do |skill|
-            %li
-              = t("skills.#{skill.t_name}")
-  .panel-body.hidden-xs
+      = content_tag :span, project.category.try(:t_name) ? t("category.#{project.category.t_name}") : t('not_defined_yet'), :class => "pull-right"
+  .list-group-item.hidden-xs
+    license
     %strong
-      URLs
-  .list-group.hidden-xs
-    .list-group-item
-      website
-      = link_to project.home_url, :class => "pull-right no-padding no-border btn #{!project.home_url.present? ? 'disabled' : ''}", role: "button" do
-        = icon('home', :class => "dark-grey")
-    .list-group-item
-      sources
-      = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{!project.source_code_url.present? ? 'disabled' : ''}", role: "button" do
-        = icon('github-alt', :class => "dark-grey")
-    .list-group-item
-      documentation
-      = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{!project.documentation_url.present? ? 'disabled' : ''}", role: "button" do
-        = icon('book', :class => "dark-grey")
-    .list-group-item
-      mailing list
-      = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
-        = icon('envelope-o', :class => "dark-grey")
-  .panel-body.hidden-xs
+      = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
+  - if current_thinker == project.thinker
+    .list-group-item.hidden-xs
+      secret
+      = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
+        = icon('eye', :class => "dark-grey")
+%h3
+  Sprint details
+.list-group
+  .list-group-item.hidden-xs
+    Working period
     %strong
-      Summary
-  .list-group
-    .list-group-item
-      - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count
-      = badge(team_number)
-      = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
-    .list-group-item.hidden-xs
-      = badge(project.releases.size)
-      = link_to 'releases', project_releases_path(project)
-    .list-group-item.hidden-xs
-      = badge(project.sprints.size)
-      = link_to 'sprints', project_sprints_path(project)
-    .list-group-item.hidden-xs
-      = badge(project.goals.size)
-      = link_to 'goals', project_goals_path(project)
-    .list-group-item.hidden-xs
-      = badge(project.tasks.size)
-      = link_to 'tasks', project_tasks_path(project)
+      = content_tag :span, project.cycle.try(:description) ? project.cycle.description : t('not_defined_yet'), :class => "pull-right"
+  .list-group-item.hidden-xs
+    minimum team number
+    %strong
+      = content_tag :span, project.minimum_team_number, :class => "pull-right"
+  .list-group-item.hidden-xs
+    release date
+    %strong
+      = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
+%h3.hidden-xs
+  Skill requirements
+.list-group.hidden-xs
+  .list-group-item
+    - if project.skills.empty?
+      No skill required
+    - else
+      %ul{ style: 'margin-bottom: 0; padding-left: 15px;' }
+        - project.skills.each do |skill|
+          %li
+            = t("skills.#{skill.t_name}")
+%h3.hidden-xs
+  Links
+.list-group.hidden-xs
+  .list-group-item
+    website
+    = link_to project.home_url, :class => "pull-right no-padding no-border btn #{!project.home_url.present? ? 'disabled' : ''}", role: "button" do
+      = icon('home', :class => "dark-grey")
+  .list-group-item
+    sources
+    = link_to project.source_code_url, :class => "pull-right no-padding no-border btn #{!project.source_code_url.present? ? 'disabled' : ''}", role: "button" do
+      = icon('github-alt', :class => "dark-grey")
+  .list-group-item
+    documentation
+    = link_to project.documentation_url, :class => "pull-right no-padding no-border btn #{!project.documentation_url.present? ? 'disabled' : ''}", role: "button" do
+      = icon('book', :class => "dark-grey")
+  .list-group-item
+    mailing list
+    = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
+      = icon('envelope-o', :class => "dark-grey")
+%h3.hidden-xs
+  Summary
+.list-group
+  .list-group-item
+    - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count
+    = badge(team_number)
+    = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
+  .list-group-item.hidden-xs
+    = badge(project.releases.size)
+    = link_to 'releases', project_releases_path(project)
+  .list-group-item.hidden-xs
+    = badge(project.sprints.size)
+    = link_to 'sprints', project_sprints_path(project)
+  .list-group-item.hidden-xs
+    = badge(project.goals.size)
+    = link_to 'goals', project_goals_path(project)
+  .list-group-item.hidden-xs
+    = badge(project.tasks.size)
+    = link_to 'tasks', project_tasks_path(project)

@@ -18,15 +18,14 @@
 - model_class = Project
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
-  .col-md-4
+  .col-md-4.border-right
     = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
-    .panel.panel-default
-      .panel-body.text-justify
-        = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
-        = markdown(@project.description)
-      - if creator?(@project.thinker.id)
-        .panel-footer
-          - if creator?(@project.thinker.id)
-            = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-primary'
-            = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger pull-right'
+    .text-justify
+      = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
+      = markdown(@project.description)
+    - if creator?(@project.thinker.id)
+      .panel-footer
+        - if creator?(@project.thinker.id)
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-primary'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger pull-right'

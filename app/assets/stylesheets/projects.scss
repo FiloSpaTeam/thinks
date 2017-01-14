@@ -3,14 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .projects, .teams, .election_polls {
+    .progress {
+        min-width: 2em;
+
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
     .panel > .panel-body {
-        .progress {
-            min-width: 2em;
-
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-
         min-height: 0;
     }
 
