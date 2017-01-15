@@ -28,9 +28,13 @@
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
       - if @project.present? && @project.id.present?
         = link_to truncate(@project.title, length: 36), project_path(@project), :class => 'visible-xs text-left navbar-brand'
-        = link_to content_for?(:title) ? yield(:title) : "Thinks", root_url, :class => "navbar-brand visible-sm visible-md visible-lg"
+        = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg" do
+          - if content_for?(:title)
+            = yield(:title)
+          - else
+            = image_tag("logo_scritta", :style => "width: auto; height: 20px;", :class => "hidden-xs")
       - else
-        = link_to  root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs" do
+        = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs" do
           - if content_for?(:title)
             = yield(:title)
           - else
