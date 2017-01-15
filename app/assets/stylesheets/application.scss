@@ -117,27 +117,9 @@ body.sessions, body.registrations, body.passwords {
 
 div .alert {
   position: relative;
-  box-shadow: $box-shadow;
 }
 
-.panel {
-    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5); */
-    .panel-body {min-height: 140px;}
-
-    // .panel-footer {
-    //     padding: 5px 5px;
-    // }
-}
-
-.panel-cream {border-top: 2px solid #F3E5F5 !important;}
-.panel-green {border-top: 2px solid #4caf50 !important;}
-.panel-red {border-top: 2px solid #ff5722 !important;}
-.panel-black {border-top: 2px solid black !important;}
-.panel-yellow {border-top: 2px solid #ffeb3b !important;}
-.panel-orange {border-top: 2px solid #ff9800 !important;}
-.panel-violet {border-top: 2px solid #673ab7 !important;}
-.panel-lightblue {border-top: 2px solid #03a9f4 !important;}
-.panel-gray {border-top: 2px solid #9e9e9e !important;}
+.panel-body {min-height: 140px;}
 
 .list-group-header-danger {
   background: white;

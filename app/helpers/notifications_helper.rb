@@ -111,7 +111,7 @@ module NotificationsHelper
     if notifications.empty?
       icon('comments', class: "#{dimension} notification-icon")
     else
-      icon('commenting', class: "#{dimension} fa-inverse notification-icon")
+      icon('commenting', class: "#{dimension} notification-icon")
     end
   end
 end

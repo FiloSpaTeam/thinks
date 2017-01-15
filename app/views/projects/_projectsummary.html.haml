@@ -19,9 +19,9 @@
   .hidden-xs
     %h3
       Your contribution
-    .list-group
+    %ul.list-group
       - if current_thinker != project.thinker
-        .list-group-item
+        %li.list-group-item
           - ban = current_thinker.ban(project)
           - if ban.present?
             .text-danger
@@ -35,12 +35,10 @@
       - else
         - my_roles = project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
         - my_roles.each do |role|
-          .list-group-item
+          %li.list-group-item
             = t "team_roles.#{role.team_role.t_name}"
     -# .panel-footer
     -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
-
-%hr.hidden-xs
 %h3
   General details
 .progress
@@ -96,8 +94,9 @@
         - project.skills.each do |skill|
           %li
             = t("skills.#{skill.t_name}")
-%h3.hidden-xs
-  Links
+.hidden-xs
+  %h3
+    Links
 .list-group.hidden-xs
   .list-group-item
     website
@@ -115,8 +114,9 @@
     mailing list
     = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
       = icon('envelope-o', :class => "dark-grey")
-%h3.hidden-xs
-  Summary
+.hidden-xs
+  %h3
+    Summary
 .list-group
   .list-group-item
     - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count

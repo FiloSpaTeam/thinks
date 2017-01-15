@@ -45,6 +45,8 @@
                 .navbar-btn {
                     padding: 6px 8px;
                 }
+
+                a:not(.btn) { color: #777; }
             }
         }
     }
