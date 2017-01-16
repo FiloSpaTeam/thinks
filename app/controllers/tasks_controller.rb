@@ -62,6 +62,10 @@ class TasksController < ApplicationController
       Enums::Filters::CLOSED_TASKS
     ]
 
+    @breadcrumbs = [
+      "project_tasks_path(#{@project})"
+    ]
+
     @search = ''
     if params.key?(:filters) &&
        params[:filters].key?(:search_title_and_description)

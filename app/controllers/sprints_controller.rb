@@ -36,6 +36,10 @@ class SprintsController < ApplicationController
                                     sprints_scope,
                                     partial: 'sprints/list',
                                     default_sort: { serial: 'desc' }
+
+    @breadcrumbs = [
+      "project_sprints_path(#{@project})"
+    ]
   end
 
   # GET /sprints/1

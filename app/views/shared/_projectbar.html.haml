@@ -16,18 +16,32 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 .navbar.navbar-default.hidden-xs
-  .navbar-header.pull-left
-    = link_to project.title, project_path(project), :class => "navbar-brand"
-  .navbar-header.pull-right
-    = link_to project_releases_path(project), :class => "btn navbar-btn" do
-      = icon('flag-checkered', :class => "fa-lg dark-grey")
-      %span.hidden-xs= t(".releases")
-    = link_to project_sprints_path(project), :class => "btn navbar-btn" do
-      = icon('flag', :class => "fa-lg dark-grey")
-      %span.hidden-xs= t(".sprints")
-    = link_to project_goals_path(project), :class => "btn navbar-btn" do
-      = icon('crosshairs', :class => "fa-lg dark-grey")
-      %span.hidden-xs= t(".goals")
-    = link_to project_tasks_path(project), :class => "btn navbar-btn" do
-      = icon('tasks', :class => "fa-lg dark-grey")
-      %span.hidden-xs= t(".tasks")
+  %ol.breadcrumb.margin-bottom-0.no-background.pull-left{ style: 'height: 50px;' }
+    %li{ style: 'margin-top: 6px;' }
+      = link_to project_path(project) do
+        = cl_image_tag(project.logo.path, { size: '20x20' }) if project.logo
+        %strong
+          = project.title
+    = render :partial => "shared/breadcrumbs"
+  %ul.nav.navbar-nav.navbar-right{ style: 'margin-right: 0;' }
+    %li.dropdown
+      %a#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
+        = icon('folder', :class => "dark-grey fa-lg")
+        %span.caret
+      %ul.dropdown-menu{ "aria-labelledby" => "dropdown-btns-project" }
+        %li
+          = link_to project_releases_path(project) do
+            = icon('flag-checkered', :class => "dark-grey")
+            %span.hidden-xs= t(".releases")
+        %li
+          = link_to project_sprints_path(project) do
+            = icon('flag', :class => "dark-grey")
+            %span.hidden-xs= t(".sprints")
+        %li
+          = link_to project_goals_path(project) do
+            = icon('crosshairs', :class => "dark-grey")
+            %span.hidden-xs= t(".goals")
+        %li
+          = link_to project_tasks_path(project) do
+            = icon('tasks', :class => "dark-grey")
+            %span.hidden-xs= t(".tasks")

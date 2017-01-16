@@ -374,6 +374,12 @@ en:
     designer: "Designer"
     mobile_expert: "Mobile expert"
 
+  breadcrumb:
+    project_tasks_path: "Tasks"
+    project_releases_path: "Releases"
+    project_goals_path: "Goals"
+    project_sprints_path: "Sprints"
+
   # Shared section
   shared:
     navbar:

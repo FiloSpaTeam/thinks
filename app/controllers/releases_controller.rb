@@ -41,6 +41,10 @@ class ReleasesController < ApplicationController
       Enums::Filters::SEARCH_TASK,
       Enums::Filters::PROGRESS_LOWER_THAN
     ]
+
+    @breadcrumbs = [
+      "project_releases_path(#{@project})"
+    ]
   end
 
   def new
