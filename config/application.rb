@@ -50,6 +50,11 @@ module Rethink
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    # Fix with has-error on inputs
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      "#{html_tag}<input type='hidden' class='has-error'>".html_safe
+    end
+
     require 'attachinary/orm/active_record' # active_record or mongoid
   end
 end

@@ -52,7 +52,7 @@
     = f.label :release_at, :class => 'control-label'
     = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
     %span#help-release_at.help-block= t ".release_at_help"
-  .form-group
+  .form-group.required
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>", 'data-html' => 'true' do
       = icon('info-circle')
     = f.label :minimum_team_number, :class => 'control-label'

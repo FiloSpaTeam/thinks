@@ -51,6 +51,10 @@
       $('.attachinary-input').attachinary();
       $('[data-toggle="popover"]').popover();
 
+      $('input.has-error').each(function() {
+        $(this).closest('div').addClass('has-error');
+      });
+
       $('body').on('change', '.smart-listing-controls input', function(e) {
         e.preventDefault();
 
