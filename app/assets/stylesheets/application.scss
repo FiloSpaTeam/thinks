@@ -195,7 +195,7 @@ a {
 .scrollbar { overflow-y: auto; }
 
 .bg-success {background-color: $success;}
-.bg-warning {background-color: $warning;}
+// .bg-warning {background-color: $warning;}
 .bg-info {background-color: $info;}
 .bg-danger {background-color: $danger;}
 .bg-backlog {background-color: $backlog;}
@@ -227,11 +227,19 @@ a {
 
 .min-height-160 { min-height: 160px !important; }
 
+.padding-15 { padding: 15px !important; }
+
 .font-normal  { font-weight: normal; }
 .font-bold    { font-weight: bold; }
 .font-italic  { font-style: italic; }
 
 .scroller { overflow-y: scroll; }
+
+.required .control-label:after {
+    content:"*";
+    color:red;
+    margin-left: 2px;
+}
 
 // @import "dashboard";
 @import "cover";
