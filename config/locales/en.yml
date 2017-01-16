@@ -374,7 +374,7 @@ en:
     designer: "Designer"
     mobile_expert: "Mobile expert"
 
-  breadcrumb:
+  breadcrumbs:
     project_tasks_path: "Tasks"
     project_releases_path: "Releases"
     project_goals_path: "Goals"

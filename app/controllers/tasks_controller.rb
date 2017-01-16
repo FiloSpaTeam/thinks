@@ -63,7 +63,7 @@ class TasksController < ApplicationController
     ]
 
     @breadcrumbs = [
-      "project_tasks_path(#{@project})"
+      "project_tasks_path('#{@project.slug}')"
     ]
 
     @search = ''

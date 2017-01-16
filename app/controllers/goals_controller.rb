@@ -54,7 +54,7 @@ class GoalsController < ApplicationController
     ]
 
     @breadcrumbs = [
-      "project_goals_path(#{@project})"
+      "project_goals_path('#{@project.slug}')"
     ]
   end
 

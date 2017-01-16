@@ -38,7 +38,7 @@ class SprintsController < ApplicationController
                                     default_sort: { serial: 'desc' }
 
     @breadcrumbs = [
-      "project_sprints_path(#{@project})"
+      "project_sprints_path('#{@project.slug}')"
     ]
   end
 

@@ -43,7 +43,7 @@ class ReleasesController < ApplicationController
     ]
 
     @breadcrumbs = [
-      "project_releases_path(#{@project})"
+      "project_releases_path('#{@project.slug}')"
     ]
   end
 
