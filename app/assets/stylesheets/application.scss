@@ -241,6 +241,15 @@ a {
     margin-left: 2px;
 }
 
+.attachinary_container {
+    margin-top: 10px;
+
+    ul {
+        list-style: none;
+        margin-left: -40px;
+    }
+}
+
 // @import "dashboard";
 @import "cover";
 @import "carousel";

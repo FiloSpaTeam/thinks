@@ -16,8 +16,6 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 = form_for @project do |f|
-  %p.bg-warning.padding-15
-    You need to be the founder or a managing member of the real project. If there will be problems later registering this we will check and eventually will take actions.
   %h2
     Title and description
   .form-group.required
@@ -73,7 +71,6 @@
     Logo and main image
   .form-group
     = f.label :logo, :class => 'control-label'
-    = cl_image_tag(@project.logo.path, alt: t('.logo'), size: '150x150', crop: :fit) if @project.logo?
     = f.attachinary_file_field :logo
     %span#help-main-image.help-block
       = t ".square_image"
@@ -81,7 +78,6 @@
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "Used to represent the project on the main page", 'data-html' => 'true' do
       = icon('info-circle')
     = f.label :main_image, :class => 'control-label'
-    = cl_image_tag(@project.main_image.path, alt: t('.main_image'), size: '150x150', crop: :fit) if @project.main_image?
     = f.attachinary_file_field :main_image
     %span#help-main-image.help-block
       = t ".landscape_image"
