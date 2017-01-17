@@ -75,7 +75,7 @@
     %span#help-main-image.help-block
       = t ".square_image"
   .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "Used to represent the project on the main page", 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template (SVG, CC-BY-SA)</a>", 'data-html' => 'true' do
       = icon('info-circle')
     = f.label :main_image, :class => 'control-label'
     = f.attachinary_file_field :main_image
