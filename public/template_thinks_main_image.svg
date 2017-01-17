@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="435.38665"
+     inkscape:cx="439.42726"
      inkscape:cy="285.0726"
      inkscape:document-units="px"
-     inkscape:current-layer="g1162"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1678"
      inkscape:window-height="1030"
@@ -74,14 +74,14 @@
        position="390,20"
        orientation="1,0"
        id="guide310"
-       inkscape:locked="true"
+       inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
        position="390,285"
        orientation="0,1"
        id="guide314"
-       inkscape:locked="true"
+       inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
@@ -142,7 +142,7 @@ https://github.com/FiloSpaTeam/thinks</dc:description>
          x="40.399193"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:113.81951904px;line-height:71.1371994px;font-family:'Anonymous Pro for Powerline';-inkscape-font-specification:'Anonymous Pro for Powerline';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.84548807"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans';fill:#ffffff;fill-opacity:1;stroke-width:2.84548807"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';fill:#ffffff;fill-opacity:1;stroke-width:2.84548807"
            y="375.86121"
            x="40.399193"
            id="tspan1139"
@@ -172,7 +172,7 @@ https://github.com/FiloSpaTeam/thinks</dc:description>
            y="177.14285"
            style="line-height:25.40602493px" /></flowRegion><flowPara
          id="flowPara1157"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans'">TITLE</flowPara></flowRoot>    <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans'">TITLE</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot1164"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:22.13271713px;font-family:'Anonymous Pro for Powerline';-inkscape-font-specification:'Anonymous Pro for Powerline';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
@@ -186,5 +186,5 @@ https://github.com/FiloSpaTeam/thinks</dc:description>
            y="422.85715"
            style="line-height:22.13271713px" /></flowRegion><flowPara
          id="flowPara1170"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.31440735px;line-height:22.13271713px;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans'">SUBTITLE</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.31440735px;line-height:22.13271713px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans'">SUBTITLE</flowPara></flowRoot>  </g>
 </svg>
