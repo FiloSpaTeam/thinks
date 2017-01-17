@@ -21,8 +21,8 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version  = '0.1.56.1268'
-    date     = '2017.01.01'
+    version  = '0.1.58.1270'
+    date     = '2017.01.18'
     thinkers = Thinker.all.size
     content_tag(:span, "(Subscribers: #{thinkers})", class: 'hidden-xs hidden-sm pull-right text-muted') +
       content_tag(:small, "Version #{version}", class: 'text-muted pull-right hidden-xs ', title: date)
