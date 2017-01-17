@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1080px"
+   height="670px"
+   viewBox="0 0 1080 670"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="template_thinks_main_image.svg"
+   inkscape:version="0.92.0 r">
+  <title
+     id="title73">Thinks MI</title>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="435.38665"
+     inkscape:cy="285.0726"
+     inkscape:document-units="px"
+     inkscape:current-layer="g1162"
+     showgrid="false"
+     inkscape:window-width="1678"
+     inkscape:window-height="1030"
+     inkscape:window-x="0"
+     inkscape:window-y="18"
+     inkscape:window-maximized="0"
+     units="in"
+     inkscape:pagecheckerboard="false"
+     borderlayer="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-path-clip="true">
+    <sodipodi:guide
+       position="0,650"
+       orientation="0,1"
+       id="guide60"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="0,20"
+       orientation="0,1"
+       id="guide62"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="20,0"
+       orientation="1,0"
+       id="guide64"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="1060,0"
+       orientation="1,0"
+       id="guide66"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="390,20"
+       orientation="1,0"
+       id="guide310"
+       inkscape:locked="true"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="390,285"
+       orientation="0,1"
+       id="guide314"
+       inkscape:locked="true"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <defs
+     id="defs34" />
+  <metadata
+     id="metadata37">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:title>Thinks MI</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Claudio Maradonna</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:description>Template for the main image for Thinks software.
+https://github.com/FiloSpaTeam/thinks</dc:description>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Livello 1">
+    <g
+       id="g1162">
+      <rect
+         y="150"
+         x="20"
+         height="370"
+         width="370"
+         id="rect316"
+         style="opacity:0.52300002;fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
+      <text
+         id="text1141"
+         y="375.86121"
+         x="40.399193"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:113.81951904px;line-height:71.1371994px;font-family:'Anonymous Pro for Powerline';-inkscape-font-specification:'Anonymous Pro for Powerline';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.84548807"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans';fill:#ffffff;fill-opacity:1;stroke-width:2.84548807"
+           y="375.86121"
+           x="40.399193"
+           id="tspan1139"
+           sodipodi:role="line">LOGO</tspan></text>
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1143"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:'Anonymous Pro for Powerline';font-style:normal;font-weight:normal;font-size:40px;line-height:25px;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'Anonymous Pro for Powerline';font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion1145"><rect
+           id="rect1147"
+           width="670"
+           height="183.57143"
+           x="390"
+           y="201.42857" /></flowRegion><flowPara
+         id="flowPara1149" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1151"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:25.40602493px;font-family:'Anonymous Pro for Powerline';-inkscape-font-specification:'Anonymous Pro for Powerline';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(4.7232892,0,0,4.7232892,-1591.5183,-612.4041)"><flowRegion
+         id="flowRegion1153"
+         style="line-height:25.40602493px"><rect
+           id="rect1155"
+           width="600"
+           height="170"
+           x="427.14285"
+           y="177.14285"
+           style="line-height:25.40602493px" /></flowRegion><flowPara
+         id="flowPara1157"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans'">TITLE</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1164"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:22.13271713px;font-family:'Anonymous Pro for Powerline';-inkscape-font-specification:'Anonymous Pro for Powerline';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(1.8072792,0,0,1.8072792,-362.92152,-326.9392)"><flowRegion
+         id="flowRegion1166"
+         style="line-height:22.13271713px"><rect
+           id="rect1168"
+           width="504.28571"
+           height="91.428574"
+           x="437.14285"
+           y="422.85715"
+           style="line-height:22.13271713px" /></flowRegion><flowPara
+         id="flowPara1170"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.31440735px;line-height:22.13271713px;font-family:'Nimbus Sans';-inkscape-font-specification:'Nimbus Sans'">SUBTITLE</flowPara></flowRoot>  </g>
+</svg>
