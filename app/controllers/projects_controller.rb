@@ -41,6 +41,7 @@ class ProjectsController < ApplicationController
                          partial: 'projects/list',
                          default_sort: { impressions_count: 'desc' },
                          sort_attributes: [
+                           [:impressions_count, 'impressions_count'],
                            [:title, 'title'],
                            [:category_name, 'categories.t_name'],
                            [:thinker_name, 'thinkers.name']
