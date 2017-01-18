@@ -22,7 +22,7 @@
     .panel.panel-default
       = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
-    .text-justify.lead
+    .text-justify
       = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
       = markdown(@project.description)
     - if creator?(@project.thinker.id)
