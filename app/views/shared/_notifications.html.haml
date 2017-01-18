@@ -1,9 +1,8 @@
 %ul.dropdown-menu.no-padding
   %div{style: 'min-width: 280px; max-height: 500px; overflow-x: hidden; overflow-y: scroll;'}
     - if @thinker_notifications.empty?
-      %li.margin-left-0.row{style: 'padding: 0 15px;'}
-        %a{href: '#'}= t "notifications.list.no_notifications_found"
-      %li.divider{role: 'separator'}
+      %li.margin-left-0.row{style: 'padding: 10px 15px;'}
+        = t "notifications.list.no_notifications_found"
     - else
       - @thinker_notifications.each_with_index do |notification, index|
         %li.margin-left-0.row{style: 'padding: 0 15px;', class: index > 7 ? 'borderline-notify' : ''}
