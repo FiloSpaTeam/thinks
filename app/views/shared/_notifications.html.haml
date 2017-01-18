@@ -1,21 +1,21 @@
 %ul.dropdown-menu
   %div{style: 'min-width: 280px; max-height: 500px; overflow-x: hidden; overflow-y: scroll;'}
     - if @thinker_notifications.empty?
-      %li.row{style: 'padding: 0 15px;'}
+      %li.margin-left-0.row{style: 'padding: 0 15px;'}
         %a{href: '#'}= t "notifications.list.no_notifications_found"
       %li.divider{role: 'separator'}
     - else
       - @thinker_notifications.each_with_index do |notification, index|
-        %li.row{style: 'padding: 0 15px;', class: index > 7 ? 'borderline-notify' : ''}
-          .col-sm-2.col-md-2.col-lg-2
+        %li.margin-left-0.row{style: 'padding: 0 15px;', class: index > 7 ? 'borderline-notify' : ''}
+          .col-sm-2.col-md-2.col-lg-2.no-padding
             - unless notification.project.deleted?
               = link_to project_path(notification.project), title: notification.project.title do
-                - if notification.project.main_image
-                  = cl_image_tag(notification.project.main_image.path, { size: '40x40', crop: :thumb, gravity: :face })
+                - if notification.project.logo
+                  = cl_image_tag(notification.project.logo.path, { size: '40x40', crop: :thumb, gravity: :face })
                 - else
-                  %img{'data-src':'holder.js/40x40'}
+                  %div.bg-info{ style: 'width: 40px; height: 40px;' }
             - else
-              %img{'data-src':'holder.js/40x40'}
+              %div.bg-info{ style: 'width: 40px; height: 40px;' }
           .col-sm-10.col-md-10.col-lg-10
             %small{title: notification.created_at.ago_in_words}
               - if notification.project.deleted?
@@ -25,6 +25,6 @@
                   = title_for(notification)
         %li.divider{role: 'separator'}
   %li{style: 'border-top: 1px solid #e5e5e5;'}
-    = link_to notifications_path do
+    = link_to notifications_path, class: 'text-center', style: 'padding: 5px 15px;' do
       %strong=t('view_all')
 

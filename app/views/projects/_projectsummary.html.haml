@@ -16,12 +16,12 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - if thinker_signed_in?
-  .hidden-xs
-    %h3
+  .hidden-xs.panel-body.border-bottom
+    %h4.font-bold
       Your contribution
-    %ul.list-group
+    %ul
       - if current_thinker != project.thinker
-        %li.list-group-item
+        %li
           - ban = current_thinker.ban(project)
           - if ban.present?
             .text-danger
@@ -35,17 +35,18 @@
       - else
         - my_roles = project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
         - my_roles.each do |role|
-          %li.list-group-item
+          %li
             = t "team_roles.#{role.team_role.t_name}"
     -# .panel-footer
     -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
-%h3
-  General details
-.progress
-  %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
-    = project.progress_percentage
-    \%
-= t('projects.list.progress')
+.panel-body
+  %h4.font-bold
+    General details
+  .progress
+    %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
+      = project.progress_percentage
+      \%
+  = t('projects.list.progress')
 .list-group
   .list-group-item
     founder
@@ -68,34 +69,34 @@
       secret
       = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
         = icon('eye', :class => "dark-grey")
-%h3
-  Sprint details
-.list-group
-  .list-group-item.hidden-xs
+.panel-body.hidden-xs
+  %h4.font-bold
+    Sprint details
+.list-group.hidden-xs
+  .list-group-item
     Working period
     %strong
       = content_tag :span, project.cycle.try(:description) ? project.cycle.description : t('not_defined_yet'), :class => "pull-right"
-  .list-group-item.hidden-xs
+  .list-group-item
     minimum team number
     %strong
       = content_tag :span, project.minimum_team_number, :class => "pull-right"
-  .list-group-item.hidden-xs
+  .list-group-item
     release date
     %strong
       = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
-%h3.hidden-xs
-  Skill requirements
-.list-group.hidden-xs
-  .list-group-item
-    - if project.skills.empty?
-      No skill required
-    - else
-      %ul{ style: 'margin-bottom: 0; padding-left: 15px;' }
-        - project.skills.each do |skill|
-          %li
-            = t("skills.#{skill.t_name}")
-.hidden-xs
-  %h3
+.panel-body.hidden-xs.border-bottom
+  %h4.font-bold
+    Skill requirements
+  - if project.skills.empty?
+    No skill required
+  - else
+    %ul
+      - project.skills.each do |skill|
+        %li
+          = t("skills.#{skill.t_name}")
+.panel-body.hidden-xs
+  %h4.font-bold
     Links
 .list-group.hidden-xs
   .list-group-item
@@ -114,8 +115,8 @@
     mailing list
     = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
       = icon('envelope-o', :class => "dark-grey")
-.hidden-xs
-  %h3
+.panel-body.hidden-xs
+  %h4.font-bold
     Summary
 .list-group
   .list-group-item

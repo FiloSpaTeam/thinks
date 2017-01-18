@@ -88,6 +88,11 @@ class TasksController < ApplicationController
     @comment = Comment.new
 
     impressionist(@task, '', unique: [:impressionable_id, :user_id])
+
+    @breadcrumbs = [
+      "project_tasks_path('#{@project.slug}')",
+      "task_path(#{@task.id})"
+    ]
   end
 
   # GET /projects/1/tasks/new
