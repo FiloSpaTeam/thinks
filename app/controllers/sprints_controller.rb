@@ -37,9 +37,9 @@ class SprintsController < ApplicationController
                                     partial: 'sprints/list',
                                     default_sort: { serial: 'desc' }
 
-    @breadcrumbs = [
-      "project_sprints_path('#{@project.slug}')"
-    ]
+    @breadcrumbs = {
+      "project_sprints_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_sprints_path')
+    }
   end
 
   # GET /sprints/1

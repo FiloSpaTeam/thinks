@@ -62,9 +62,9 @@ class TasksController < ApplicationController
       Enums::Filters::CLOSED_TASKS
     ]
 
-    @breadcrumbs = [
-      "project_tasks_path('#{@project.slug}')"
-    ]
+    @breadcrumbs = {
+      "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path')
+    }
 
     @search = ''
     if params.key?(:filters) &&
@@ -89,10 +89,10 @@ class TasksController < ApplicationController
 
     impressionist(@task, '', unique: [:impressionable_id, :user_id])
 
-    @breadcrumbs = [
-      "project_tasks_path('#{@project.slug}')",
-      "task_path(#{@task.id})"
-    ]
+    @breadcrumbs = {
+      "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
+      "task_path(#{@task.id})"                 => "\##{@task.serial} #{@task.title}"
+    }
   end
 
   # GET /projects/1/tasks/new

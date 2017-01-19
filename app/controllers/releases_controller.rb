@@ -42,9 +42,9 @@ class ReleasesController < ApplicationController
       Enums::Filters::PROGRESS_LOWER_THAN
     ]
 
-    @breadcrumbs = [
-      "project_releases_path('#{@project.slug}')"
-    ]
+    @breadcrumbs = {
+      "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path')
+    }
   end
 
   def new

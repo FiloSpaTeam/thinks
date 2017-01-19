@@ -1,4 +1,4 @@
 - if @breadcrumbs.present?
-  - @breadcrumbs.each do |breadcrumb|
+  - @breadcrumbs.each do |breadcrumb, text|
     %li
-      = link_to t("breadcrumbs.#{breadcrumb.partition('(').first}"), eval(breadcrumb)
+      = link_to text, eval(breadcrumb)

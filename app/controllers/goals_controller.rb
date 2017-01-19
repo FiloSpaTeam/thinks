@@ -53,9 +53,9 @@ class GoalsController < ApplicationController
       Enums::Filters::PROGRESS_LOWER_THAN
     ]
 
-    @breadcrumbs = [
-      "project_goals_path('#{@project.slug}')"
-    ]
+    @breadcrumbs = {
+      "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path')
+    }
   end
 
   # GET /goals/1
