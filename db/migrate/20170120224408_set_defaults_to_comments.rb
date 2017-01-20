@@ -1,6 +1,6 @@
-class SetDefaultsImpressionsCountToProjects < ActiveRecord::Migration
+class SetDefaultsToComments < ActiveRecord::Migration
   def self.up
-    change_column :projects, :impressions_count, :integer, default: 0, null: false
+    change_column :comments, :approved, :boolean, default: false, null: false
   end
 
   def self.down

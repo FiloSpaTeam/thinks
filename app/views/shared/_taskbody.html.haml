@@ -15,20 +15,13 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-warning
-  .panel-heading
-    %h4
-      %strong
-        \##{task.serial}
-        = link_to task.title, task_path(task)
-  .panel-body
-    = markdown(task.description)
+= markdown(task.description)
+.margin-top-20
   - if (task.thinker == current_thinker || scrum_master?(task.project)) && current_thinker.ban(task.project).nil?
-    .panel-footer
-      - if task.deleted?
-        = link_to t('reopen'), reopen_task_path(task), :method => 'put', :class => 'btn btn-warning'
-        = link_to t('delete'), task_path(task), :method => 'delete', :class => 'btn btn-danger pull-right'
-      - else
-        = link_to t('edit'), edit_task_path(task), :class => "btn btn-primary"
-        = link_to t('close'), task_path(task), :method => 'delete', :class => "btn btn-danger pull-right #{ task.deleted? ? '' : 'btn-task-delete' }", :role => 'button'
-
+    - if task.deleted?
+      = link_to 'Reopen', reopen_task_path(task), :method => 'put', :class => 'btn btn-primary'
+      = link_to 'Delete', task_path(task), :method => 'delete', :class => 'btn btn-danger'
+    - else
+      = link_to 'Edit', edit_task_path(task), :class => 'btn btn-primary'
+      = link_to 'Close', task_path(task), :method => 'delete', :class => 'btn btn-danger'
+%hr

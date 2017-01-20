@@ -1,4 +1,4 @@
 - if @breadcrumbs.present?
   - @breadcrumbs.each do |breadcrumb, text|
     %li
-      = link_to text, eval(breadcrumb)
+      = link_to text.html_safe, eval(breadcrumb)

@@ -78,8 +78,9 @@ class TasksController < ApplicationController
   def show
     @comments         = @task
                         .comments(include: [:likes, :thinker, :reason])
+                        .unscoped
                         .with_deleted
-                        .order(likes_count: :desc, created_at: :desc)
+                        .order(approved: :desc, created_at: :asc)
     @comment_approved = @comments.approved.first
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first

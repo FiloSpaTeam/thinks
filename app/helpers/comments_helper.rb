@@ -17,39 +17,54 @@
 
 module CommentsHelper
   def edit_button(comment)
-    link_to edit_comment_path(comment), remote: true, :class => "pull-right btn", :role => "button", :title => t("edit"), method: :get do
-      content_tag(:span, '', :class => 'glyphicon glyphicon-pencil dark-grey', 'aria-hidden' => 'true')
+    content_tag(:li) do
+      link_to edit_comment_path(comment), remote: true, method: :get do
+        icon('pencil', class: 'dark-grey') +
+          content_tag(:span, t('edit'), class: 'hidden-xs')
+      end
     end
   end
 
   def delete_button(comment)
-    link_to comment_path(comment), :class => "pull-right btn", :role => "button", :title => t("delete"), method: :delete, data: { confirm: 'Are you sure? Your idea will be deleted permanently with your vote.' } do
-      content_tag(:span, '', :class => 'glyphicon glyphicon-remove dark-grey', 'aria-hidden' => 'true')
+    content_tag(:li) do
+      link_to comment_path(comment), remote: true, method: :delete, data: { confirm: 'Are you sure? Your comment will be deleted permanently with your vote.' } do
+        icon('trash', class: 'dark-grey') +
+          content_tag(:span, t('delete'), class: 'hidden-xs')
+      end
     end
   end
 
   def like_button(comment)
     if comment.current_thinker?(current_thinker)
-      link_to 'javascript:;', :class => 'pull-right btn', :role => 'button', :title => t('you_cannot_vote_yourself') do
-        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up dark-grey', 'aria-hidden' => 'true') +
-          like_count(comment.impressionist_count)
+      content_tag(:li) do
+        link_to 'javascript:;', :title => t('you_cannot_vote_yourself'), class: 'padding-5' do
+          icon('thumbs-up', class: 'dark-grey fa-lg') +
+            like_count(comment.impressionist_count)
+        end
       end
     elsif comment.impressionist_count(user_id: current_thinker.id).zero?
-      link_to like_comment_path(comment), :class => 'pull-right btn', :role => 'button', :title => t('vote') do
-        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up', 'aria-hidden' => 'true') +
-          like_count(comment.impressionist_count)
+      content_tag(:li) do
+        link_to like_comment_path(comment), :title => t('vote'), class: 'padding-5' do
+          icon('thumbs-up', class: 'dark-grey fa-lg') +
+            like_count(comment.impressionist_count)
+        end
       end
     else
-      link_to 'javascript:;', :class => 'pull-right btn', :role => 'button', :title => t('you_voted_yet') do
-        content_tag(:span, '', :class => 'glyphicon glyphicon-arrow-up dark-grey', 'aria-hidden' => 'true') +
-          like_count(comment.impressionist_count)
+      content_tag(:li) do
+        link_to 'javascript:;', :title => t('you_voted_yet'), class: 'padding-5' do
+          icon('thumbs-up', class: 'dark-grey fa-lg') +
+            like_count(comment.impressionist_count)
+        end
       end
     end
   end
 
   def approve_button(comment)
-    link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), :class => 'pull-right btn btn-approve', :role => 'button', 'data-approved' => comment.approved.to_s, :title => t('approve') do
-      content_tag(:span, "", :class => "glyphicon glyphicon-ok #{ comment.approved ? 'dark-grey' : '' }", "aria-hidden" => "true")
+    content_tag(:li) do
+      link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
+        icon('check', class: "#{comment.approved ? 'dark-grey' : ''}") +
+          'Approve'
+      end
     end
   end
 end
