@@ -76,9 +76,10 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @comments         = @task
-                        .comments(include: [:likes, :thinker, :reason])
+    @comments         = Comment
                         .unscoped
+                        .includes(:thinker, :reason)
+                        .where(task: @task)
                         .with_deleted
                         .order(approved: :desc, created_at: :asc)
     @comment_approved = @comments.approved.first
