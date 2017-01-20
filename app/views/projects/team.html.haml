@@ -19,7 +19,8 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
+    .panel.panel-default
+      = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
     .panel.panel-default
       %ul.list-group

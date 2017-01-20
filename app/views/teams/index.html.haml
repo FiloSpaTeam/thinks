@@ -18,6 +18,7 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    = render :partial => 'projects/projectsummary', locals: { project: @project, contribution: @contribution }
+    .panel.panel-default
+      = render :partial => 'projects/projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
     = smart_listing_render :teams
