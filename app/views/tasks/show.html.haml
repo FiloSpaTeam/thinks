@@ -58,7 +58,7 @@
                 = comment.thinker.name
             %small
               = comment.created_at.to_s(:long)
-            .collapse{ :id => "collapseComment#{ comment.id }", :class => index < 3 ? "in" : ""}
+            .collapse.in
               .form-group
               = markdown(comment.text, true)
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
