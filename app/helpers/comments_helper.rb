@@ -38,21 +38,21 @@ module CommentsHelper
     if comment.current_thinker?(current_thinker)
       content_tag(:li) do
         link_to 'javascript:;', :title => t('you_cannot_vote_yourself'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey fa-lg') +
+          icon('thumbs-up', class: 'dark-grey') +
             like_count(comment.impressionist_count)
         end
       end
     elsif comment.impressionist_count(user_id: current_thinker.id).zero?
       content_tag(:li) do
         link_to like_comment_path(comment), :title => t('vote'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey fa-lg') +
+          icon('thumbs-up', class: 'dark-grey') +
             like_count(comment.impressionist_count)
         end
       end
     else
       content_tag(:li) do
         link_to 'javascript:;', :title => t('you_voted_yet'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey fa-lg') +
+          icon('thumbs-up', class: 'dark-grey') +
             like_count(comment.impressionist_count)
         end
       end

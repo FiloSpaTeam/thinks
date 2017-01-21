@@ -62,7 +62,7 @@
                 = like_button(comment)
                 %li.dropdown
                   %a.padding-5{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :false, "aria-expanded" => :false, href: "javascript:;", id: "dropdown-btns-comment-#{comment.id}" }
-                    = icon('gears', :class => "dark-grey fa-lg")
+                    = icon('cog', :class => "dark-grey")
                     %span.caret
                   %ul.dropdown-menu{ "aria-labelledby" => "dropdown-btns-comment-#{comment.id}" }
                     - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil?
@@ -73,12 +73,12 @@
                       = menu_divider
                       = approve_button(comment)
             .dark-grey
-              = link_to("Comment", "#collapseComment#{ comment.id }", "data-toggle" => "collapse")
-              by
               %strong
                 = comment.thinker.name
-            %small
-              = comment.created_at.to_s(:long)
+              %small
+                commented 
+                = time_ago_in_words(comment.created_at)
+                ago
             .collapse.in{ id: "collapseComment#{ comment.id }" }
               .form-group
               = markdown(comment.text, true)
