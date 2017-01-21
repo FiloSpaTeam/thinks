@@ -21,16 +21,20 @@
       %li
         = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen' do
           = icon('history', class: 'dark-grey fa-lg')
+          Reopen
       %li
         = link_to task_path(@task), :method => 'delete', title: 'Delete' do
           = icon('trash-o', class: 'dark-grey fa-lg')
+          Delete
     - elsif !@task.done?
       %li
         = link_to edit_task_path(@task), title: 'Edit' do
-          = icon('pencil', class: 'dark-grey fa-lg')
+          = icon('edit', class: 'dark-grey fa-lg')
+          Edit
       %li
         = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete' do
           = icon('trash-o', class: 'dark-grey fa-lg')
+          Close
 
 = render partial: 'shared/projectbar', locals: { project: @task.project }
 
