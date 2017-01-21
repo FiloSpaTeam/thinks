@@ -24,7 +24,8 @@
           = project.title
     = render :partial => "shared/breadcrumbs"
   %ul.nav.navbar-nav.navbar-right.margin-right-0
-    %li.dropdown
+    = yield :page_actions
+    %li.dropdown.border-left
       %a#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
         = icon('folder', :class => "dark-grey fa-lg")
         %span.caret

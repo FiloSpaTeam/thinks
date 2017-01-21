@@ -15,13 +15,30 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
+    - if @task.deleted?
+      %li
+        = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen' do
+          = icon('history', class: 'dark-grey fa-lg')
+      %li
+        = link_to task_path(@task), :method => 'delete', title: 'Delete' do
+          = icon('trash-o', class: 'dark-grey fa-lg')
+    - elsif !@task.done?
+      %li
+        = link_to edit_task_path(@task), title: 'Edit' do
+          = icon('pencil', class: 'dark-grey fa-lg')
+      %li
+        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete' do
+          = icon('trash-o', class: 'dark-grey fa-lg')
+
 = render partial: 'shared/projectbar', locals: { project: @task.project }
 
 .row
   .col-sm-4
     = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
   .col-sm-8
-    = render partial: 'shared/taskbody', locals: { task: @task }
+    = markdown(@task.description)
     .margin-top-20
       %h4
         Comments
@@ -58,7 +75,7 @@
                 = comment.thinker.name
             %small
               = comment.created_at.to_s(:long)
-            .collapse.in
+            .collapse.in{ id: "collapseComment#{ comment.id }" }
               .form-group
               = markdown(comment.text, true)
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?

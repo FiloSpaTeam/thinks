@@ -107,15 +107,21 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @project_form = nil
-    @project      = @task.project
-
     if current_thinker != @task.thinker && !scrum_master?(@task.project)
       respond_to do |format|
         format.html { redirect_to @task, alert: 'You cannot edit this.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+
+    @project_form = nil
+    @project      = @task.project
+
+    @breadcrumbs = {
+      "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
+      "task_path(#{@task.id})"                 => "\##{@task.serial} #{@task.title}",
+      'nil' => I18n.t('edit')
+    }
   end
 
   # POST /projects/1/tasks
