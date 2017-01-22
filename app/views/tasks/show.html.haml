@@ -56,28 +56,19 @@
         %tbody
           - @comments.each_with_index do |comment, index|
             %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'tr-success' : ''}" }
-              %td{ width: 40 }
+              %td{ style: 'max-width: 40px;' }
                 - if comment.thinker.avatar
-                  = cl_image_tag(comment.thinker.avatar.path, { size: '40x40', crop: :thumb, gravity: :face })
+                  = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face })
                 - else
-                  .text-center.bg-gray.border-radius{ style: 'width: 40px; height: 40px;' }
+                  .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
                     %i.fa.fa-question.fa-2x.margin-top-5
+
+                %ul.no-padding.margin-top-5{ style: 'list-style: none;' }
+                  - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil?
+                    = edit_button(comment)
+                    - if !@task.in_progress? && !@task.done? && comment.reason.nil?
+                      = delete_button(comment)
               %td
-                - if !@task.done?
-                  %ul.nav.navbar-nav.navbar-right.margin-right-0
-                    = like_button(comment)
-                    %li.dropdown
-                      %a.padding-5{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :false, "aria-expanded" => :false, href: "javascript:;", id: "dropdown-btns-comment-#{comment.id}" }
-                        = icon('cog', :class => "dark-grey")
-                        %span.caret
-                      %ul.dropdown-menu{ "aria-labelledby" => "dropdown-btns-comment-#{comment.id}" }
-                        - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil?
-                          = edit_button(comment)
-                          - if !@task.in_progress? && comment.reason.nil?
-                            = delete_button(comment)
-                        - if @task.worker == current_thinker && !@task.deleted?
-                          = menu_divider
-                          = approve_button(comment)
                 .dark-grey
                   %strong
                     = comment.thinker.name
@@ -87,3 +78,7 @@
                     ago
                 .form-group{ id: "comment-#{comment.id}" }
                   = markdown(comment.text, true)
+              %td.text-center{ width: 50, style: 'vertical-align: middle;' }
+                = like_button(comment)
+                - if !@task.done? && @task.worker == current_thinker && !@task.deleted?
+                  = approve_button(comment)

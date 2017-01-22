@@ -20,7 +20,7 @@ module CommentsHelper
     content_tag(:li) do
       link_to edit_comment_path(comment), remote: true, method: :get do
         icon('pencil', class: 'dark-grey') +
-          content_tag(:span, t('edit'), class: 'hidden-xs')
+          content_tag(:span, t('edit'), class: 'padding-left-5')
       end
     end
   end
@@ -29,30 +29,26 @@ module CommentsHelper
     content_tag(:li) do
       link_to comment_path(comment), remote: true, method: :delete, data: { confirm: 'Are you sure? Your comment will be deleted permanently with your vote.' } do
         icon('trash', class: 'dark-grey') +
-          content_tag(:span, t('delete'), class: 'hidden-xs')
+          content_tag(:span, t('delete'), class: 'padding-left-5')
       end
     end
   end
 
   def like_button(comment)
-    if comment.current_thinker?(current_thinker)
-      content_tag(:li) do
-        link_to 'javascript:;', :title => t('you_cannot_vote_yourself'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey') +
+    content_tag(:div, class: 'form-group') do
+      if comment.current_thinker?(current_thinker)
+        link_to 'javascript:;', :title => t('you_cannot_vote_yourself') do
+          icon('thumbs-up', class: 'fa-lg dark-grey') +
             like_count(comment.impressionist_count)
         end
-      end
-    elsif comment.impressionist_count(user_id: current_thinker.id).zero?
-      content_tag(:li) do
-        link_to like_comment_path(comment), :title => t('vote'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey') +
+      elsif comment.impressionist_count(user_id: current_thinker.id).zero?
+        link_to like_comment_path(comment), :title => t('vote') do
+          icon('thumbs-up', class: 'fa-lg dark-grey') +
             like_count(comment.impressionist_count)
         end
-      end
-    else
-      content_tag(:li) do
-        link_to 'javascript:;', :title => t('you_voted_yet'), class: 'padding-5' do
-          icon('thumbs-up', class: 'dark-grey') +
+      else
+        link_to 'javascript:;', :title => t('you_voted_yet') do
+          icon('thumbs-up', class: 'fa-lg dark-grey') +
             like_count(comment.impressionist_count)
         end
       end
@@ -60,10 +56,9 @@ module CommentsHelper
   end
 
   def approve_button(comment)
-    content_tag(:li) do
+    content_tag(:div, class: 'form-group') do
       link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
-        icon('check', class: "#{comment.approved ? 'dark-grey' : ''}") +
-          'Approve'
+        icon('check', class: "fa-lg #{comment.approved ? 'dark-grey' : ''}")
       end
     end
   end
