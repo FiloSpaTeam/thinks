@@ -19,7 +19,7 @@
   - if thinker_signed_in? && current_thinker.ban(@project).nil?
     %li
       = link_to new_project_task_path, title: 'New task' do
-        = icon('plus-square', class: 'dark-grey fa-lg')
+        = icon('plus-square-o', class: 'dark-grey fa-lg')
         New
 
 = render partial: 'shared/projectbar', locals: { project: @project }

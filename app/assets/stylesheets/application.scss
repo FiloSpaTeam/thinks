@@ -199,6 +199,7 @@ a {
 .bg-info {background-color: $info;}
 .bg-danger {background-color: $danger;}
 .bg-backlog {background-color: $backlog;}
+.bg-gray {background-color: #DDD;}
 
 .navbar-toggle { border: none; }
 
@@ -219,6 +220,7 @@ a {
 }
 .border-bottom { border-bottom: 1px solid #DDD; }
 .border-top { border-top: 1px solid #DDD; }
+.border-radius { border-radius: 4px; }
 
 .margin-left-0 { margin-left: 0 !important; }
 .margin-right-0 { margin-right: 0 !important; }

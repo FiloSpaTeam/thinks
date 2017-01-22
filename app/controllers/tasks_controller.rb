@@ -81,8 +81,7 @@ class TasksController < ApplicationController
                         .includes(:thinker, :reason)
                         .where(task: @task)
                         .with_deleted
-                        .order(approved: :desc, created_at: :asc)
-    @comment_approved = @comments.approved.first
+                        .order(approved: :desc, created_at: :desc)
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
 
