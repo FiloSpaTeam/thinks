@@ -42,6 +42,8 @@
   .col-sm-4
     = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
   .col-sm-8
+    %h2
+      Description
     = markdown(@task.description)
     %hr
     %h3
