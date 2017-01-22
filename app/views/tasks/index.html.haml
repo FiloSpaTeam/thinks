@@ -15,6 +15,13 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if thinker_signed_in? && current_thinker.ban(@project).nil?
+    %li
+      = link_to new_project_task_path, title: 'New task' do
+        = icon('plus-square', class: 'dark-grey fa-lg')
+        New
+
 = render partial: 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4

@@ -16,11 +16,7 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 = smart_listing_controls_for :tasks do
-  .input-group{ style: !thinker_signed_in? || current_thinker.ban(@project).present? ? 'display: block;' : '' }
-    = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
-    - if thinker_signed_in? && current_thinker.ban(@project).nil?
-      .input-group-btn
-        = link_to_button(new_project_task_path, "new", "plus")
+  = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
   = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 .panel.panel-default
   %table.table.table-condensed.table-hover

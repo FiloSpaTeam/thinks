@@ -103,6 +103,11 @@ class TasksController < ApplicationController
     @task.project = @project
 
     @project_form = @project
+
+    @breadcrumbs = {
+      "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
+      'nil' => I18n.t('new')
+    }
   end
 
   # GET /tasks/1/edit
