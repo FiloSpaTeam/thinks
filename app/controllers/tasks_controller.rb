@@ -92,7 +92,7 @@ class TasksController < ApplicationController
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
-      "task_path(#{@task.id})"                 => "\##{@task.serial} #{@task.title}"
+      "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
     }
   end
 

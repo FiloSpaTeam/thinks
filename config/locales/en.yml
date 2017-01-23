@@ -375,10 +375,10 @@ en:
     mobile_expert: "Mobile expert"
 
   breadcrumbs:
-    project_tasks_path: "<i class='fa fa-tasks'></i> Tasks"
-    project_releases_path: "<i class='fa fa-flag-checkered'></i> Releases"
-    project_goals_path: "<i class='fa fa-crosshairs'></i> Goals"
-    project_sprints_path: "<i class='fa fa-flag'></i> Sprints"
+    project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs'>Tasks</span>"
+    project_releases_path: "<i class='fa fa-flag-checkered'></i> <span class='hidden-xs'>Releases</span>"
+    project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs'>Goals</span>"
+    project_sprints_path: "<i class='fa fa-flag'></i> <span class='hidden-xs'>Sprints</span>"
 
   # Shared section
   shared:

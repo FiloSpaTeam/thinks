@@ -18,23 +18,27 @@
 - content_for :page_actions do
   - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
-      %li
+      %li.pull-left
         = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen' do
           = icon('history', class: 'dark-grey fa-lg')
-          Reopen
-      %li
+          %span.hidden-xs
+            Reopen
+      %li.pull-left
         = link_to task_path(@task), :method => 'delete', title: 'Delete' do
           = icon('trash-o', class: 'dark-grey fa-lg')
-          Delete
+          %span.hidden-xs
+            Delete
     - elsif !@task.done?
-      %li
+      %li.pull-left
         = link_to edit_task_path(@task), title: 'Edit' do
           = icon('edit', class: 'dark-grey fa-lg')
-          Edit
-      %li
+          %span.hidden-xs
+            Edit
+      %li.pull-left
         = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete' do
           = icon('trash-o', class: 'dark-grey fa-lg')
-          Close
+          %span.hidden-xs
+            Close
 
 = render partial: 'shared/projectbar', locals: { project: @task.project }
 
