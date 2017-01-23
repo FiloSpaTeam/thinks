@@ -56,9 +56,9 @@
         %tbody
           - @comments.each_with_index do |comment, index|
             %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'tr-success' : ''}" }
-              %td{ style: 'max-width: 40px;' }
+              %td{ style: 'width: 40px;' }
                 - if comment.thinker.avatar
-                  = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face })
+                  = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
                 - else
                   .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
                     %i.fa.fa-question.fa-2x.margin-top-5
