@@ -19,23 +19,23 @@
   - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
       %li.pull-left
-        = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen' do
+        = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
           = icon('history', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Reopen
       %li.pull-left
-        = link_to task_path(@task), :method => 'delete', title: 'Delete' do
+        = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35' do
           = icon('trash-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Delete
     - elsif !@task.done?
       %li.pull-left
-        = link_to edit_task_path(@task), title: 'Edit' do
+        = link_to edit_task_path(@task), title: 'Edit', class: 'line-height-25 line-height-35' do
           = icon('edit', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Edit
       %li.pull-left
-        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete' do
+        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete', class: 'line-height-25 line-height-35' do
           = icon('trash-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Close

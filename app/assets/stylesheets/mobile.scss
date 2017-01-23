@@ -9,17 +9,20 @@
         }
     }
 
+
     .dropdown-mobile {
         position: absolute !important;
 
-        top: 40px;
-        left: -97px;
+        top: 55px;
+        left: -97px !important;
 
         background-color: #e7e7e7 !important;
         border: 1px solid #ccc !important;
         border: 1px solid rgba(0, 0, 0, 0.15) !important;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175) !important;
     }
+
+    .line-height-25 { line-height: 25px !important; }
 
     @media screen and (max-width: 767px) {
         body {
@@ -61,5 +64,8 @@
                 a:not(.btn) { color: #777; }
             }
         }
+
+        .line-height-35 { line-height: 35px !important; }
+        .navbar-right-margin-0 { margin: 0 !important; }
     }
 }

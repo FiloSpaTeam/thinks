@@ -215,10 +215,8 @@ a {
 
 .break-word { word-wrap: break-word; }
 
-@media (min-width: 992px) {
-    .border-left { border-left: 1px solid #DDD; }
-    .border-right { border-right: 1px solid #DDD; }
-}
+.border-left { border-left: 1px solid #DDD; }
+.border-right { border-right: 1px solid #DDD; }
 .border-bottom { border-bottom: 1px solid #DDD; }
 .border-top { border-top: 1px solid #DDD; }
 .border-radius { border-radius: 4px; }
@@ -244,6 +242,11 @@ a {
 .font-italic  { font-style: italic; }
 
 .scroller { overflow-y: scroll; }
+
+.breadcrumb-status {
+    margin-left: 5px;
+    margin-top: 1px;
+}
 
 .required .control-label:after {
     content:"*";

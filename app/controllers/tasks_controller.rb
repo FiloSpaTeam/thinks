@@ -92,7 +92,7 @@ class TasksController < ApplicationController
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
-      "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
+      "task_path(#{@task.id})"                 => "<div class='round-sm pull-right breadcrumb-status bg-#{color_list_round_div(@task.status.translation_code)}'></div>\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
     }
   end
 
@@ -123,7 +123,7 @@ class TasksController < ApplicationController
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
-      "task_path(#{@task.id})"                 => "\##{@task.serial} #{@task.title}",
+      "task_path(#{@task.id})"                 => "<div class='round-sm pull-right breadcrumb-status bg-#{color_list_round_div(@task.status.translation_code)}'></div>\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
       'nil' => I18n.t('edit')
     }
   end

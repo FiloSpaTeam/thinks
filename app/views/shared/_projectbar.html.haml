@@ -16,17 +16,17 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 .navbar.navbar-default
-  %ol.breadcrumb.margin-bottom-0.no-background.pull-left{ style: 'height: 55px;' }
+  %ol.breadcrumb.margin-bottom-0.no-background.pull-left{ style: 'height: 50px;' }
     %li{ style: 'margin-top: 9px;' }
       = link_to project_path(project) do
         = cl_image_tag(project.logo.path, { size: '20x20' }) if project.logo
         %strong.hidden-xs
           = project.title
     = render :partial => "shared/breadcrumbs"
-  %ul.nav.navbar-nav.navbar-right.margin-right-0.pull-right
+  %ul.nav.navbar-nav.navbar-right.margin-right-0.navbar-right-margin-0.pull-right
     = yield :page_actions
     %li.dropdown.border-left.pull-left
-      %a#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
+      %a.line-height-25.line-height-35#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
         = icon('folder', :class => "dark-grey fa-lg")
         %span.caret
       %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }

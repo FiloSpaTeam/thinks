@@ -22,6 +22,9 @@
         .input-group-addon
           %i.fa.fa-search
         = text_field_tag("filters[title_or_description]", filter_value(:title_or_description), class: 'form-control', autocomplete: 'off', placeholder: 'Search title or description')
+        .input-group-btn
+          = link_to new_project_path, class: 'btn btn-success' do
+            = icon('plus')
     .row
       - smart_listing.collection.each_with_index do |project, index|
         = render partial: 'projects/card', locals: { project: project }
