@@ -62,6 +62,11 @@ class GoalsController < ApplicationController
   # GET /goals/1.json
   def show
     @project = @goal.project
+
+    @breadcrumbs = {
+      "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
+      "goal_path(#{@goal.id})"                 => @goal.title
+    }
   end
 
   # GET /goals/new
@@ -75,6 +80,11 @@ class GoalsController < ApplicationController
 
     @goal         = Goal.new
     @project_form = @project
+
+    @breadcrumbs = {
+      "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
+      'nil' => I18n.t('new')
+    }
   end
 
   # GET /goals/1/edit
@@ -88,6 +98,12 @@ class GoalsController < ApplicationController
 
     @project_form = nil
     @project      = @goal.project
+
+    @breadcrumbs = {
+      "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
+      "goal_path(#{@goal.id})"                 => @goal.title,
+      "nil" => I18n.t('edit')
+    }
   end
 
   # POST /goals

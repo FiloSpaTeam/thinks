@@ -15,20 +15,21 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if @goal.thinker == current_thinker
+    %li.pull-left
+      = link_to edit_goal_path(@goal), :class => "line-height-25 line-height-35" do
+        = icon('edit', class: 'dark-grey fa-lg')
+        %span.hidden-xs
+          = t('edit')
+    - if @goal.tasks.ready_to_sprint.present?
+      %li.pull-left
+        = link_to "Get tasks in sprint!", tasks_in_sprint_goal_path(@goal), :class => "", :method => :put
 = render partial: 'shared/projectbar', locals: { project: @goal.project }
 .row
   .col-md-4
     = render partial: 'shared/goalstatuspanel', locals: { goal: @goal }
   .col-md-8
-    .panel.panel-default
-      .panel-heading
-        %h4
-          %strong
-            = @goal.title
-      .panel-body
-        = markdown(@goal.description)
-      - if @goal.thinker == current_thinker
-        .panel-footer
-          = link_to t('edit'), edit_goal_path(@goal), :class => "btn btn-primary"
-          - if @goal.tasks.ready_to_sprint.present?
-            = link_to "Get tasks in sprint!", tasks_in_sprint_goal_path(@goal), :class => "btn btn-success", :method => :put
+    %h2
+      Description
+    = markdown(@goal.description)

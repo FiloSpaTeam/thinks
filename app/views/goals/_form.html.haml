@@ -16,20 +16,19 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 = form_for [@project_form, @goal] do |f|
-  .panel-body
-    .form-group
-      = f.label :title, :class => "control-label"
-      = f.text_field :title, :class => "form-control", :placeholder => "My simple title", "aria-describedby" => "help-title"
-      %span#help-title.help-block
-        = t "remaining_chars"
-        %span#counter{ 'data-maximum-length' => @chars_max_title }
-          = @chars_max_title - f.object.title.try('length').to_i
-    .form-group
-      = render partial: 'shared/markdown_syntax'
-      = f.label :description, :class => "control-label"
-      = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
-      %span#help-description.help-block= t "char_minimum", chars: @chars_min_description
-  .panel-footer
-    = f.submit nil, :class => "btn btn-primary"
-    = link_to t('back'), :back, :class => "btn btn-default"
+  .form-group
+    = f.label :title, :class => "control-label"
+    = f.text_field :title, :class => "form-control", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    %span#help-title.help-block
+      = t "remaining_chars"
+      %span#counter{ 'data-maximum-length' => @chars_max_title }
+        = @chars_max_title - f.object.title.try('length').to_i
+  .form-group
+    = render partial: 'shared/markdown_syntax'
+    = f.label :description, :class => "control-label"
+    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description"
+    %span#help-description.help-block= t "char_minimum", chars: @chars_min_description
+  %hr
+  = f.submit nil, :class => "btn btn-primary"
+  = link_to t('back'), :back, :class => "btn btn-default"
 = init_counter_textarea('#goal_title', '#counter')

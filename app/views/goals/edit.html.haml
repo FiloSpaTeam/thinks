@@ -20,9 +20,4 @@
   .col-md-4
     = render partial: 'shared/goalstatuspanel', locals: { goal: @goal }
   .col-md-8
-    .panel.panel-default
-      .panel-heading
-        %h4
-          %strong
-            = t ".edit_task"
-      = render :partial => 'form'
+    = render :partial => 'form'

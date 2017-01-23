@@ -20,9 +20,4 @@
   .col-md-4
     = render partial: 'shared/projectstatuspanel', locals: { project: @release.project }
   .col-md-8
-    .panel.panel-default
-      .panel-heading
-        %h4
-          %strong
-            = t ".new_release"
-      = render :partial => 'form'
+    = render :partial => 'form'

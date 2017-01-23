@@ -15,6 +15,14 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
+    %li.pull-left
+      = link_to new_project_goal_path, :class => "line-height-25 line-height-35" do
+        = icon('plus-square-o', class: 'fa-lg dark-grey')
+        %span.hidden-xs
+          = t('new')
+
 = render partial: 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
@@ -23,13 +31,7 @@
     .panel.panel-default
       .panel-heading
         = smart_listing_controls_for :tasks do
-          - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
-            .input-group
-              = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
-              .input-group-btn
-                = link_to_button(new_project_goal_path, "new", "plus")
-          - else
-            = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
+          = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
           = render partial: 'shared/filters', :locals => { :filters => @active_filters }
       .panel-body{ :style => 'padding: 0;' }
         = smart_listing_render :goals

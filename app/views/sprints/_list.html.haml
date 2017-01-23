@@ -73,9 +73,3 @@
                 No records found
     = smart_listing.paginate
     = smart_listing.pagination_per_page_links
-    - if scrum_master?(current_thinker)
-      .panel-footer
-        - if @project.suspended
-          = link_to t(".resume"), resume_project_path(@project), class: "btn btn-success", method: :put
-        - else
-          = link_to t(".suspend"), suspend_project_path(@project), class: "btn btn-danger", method: :put, data: { confirm: t('.do_you_want_suspend') }

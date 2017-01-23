@@ -15,19 +15,25 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if scrum_master?(@release.project)
+    %li.pull-left
+      = link_to edit_release_path(@release), :class => "line-height-25 line-height-35" do
+        = icon('edit', class: 'fa-lg dark-grey')
+        %span.hidden-xs
+          = t('edit')
+
+    %li.pull-left
+      = link_to release_path(@release), :method => 'delete', :class => "line-height-25 line-height-35", :role => 'button' do
+        = icon('trash-o', class: 'fa-lg dark-grey')
+        %span.hidden-xs
+          = t('delete')
+
 = render partial: 'shared/projectbar', locals: { project: @release.project }
 .row
   .col-sm-4
     = render partial: 'shared/releasestatuspanel', locals: { release: @release }
   #div-container-list.col-sm-8
-    .panel.panel-default
-      .panel-heading
-        %h4
-          %strong
-            = @release.title
-      .panel-body
-        = markdown(@release.description)
-      - if scrum_master?(@release.project)
-        .panel-footer
-          = link_to t('edit'), edit_release_path(@release), :class => "btn btn-primary"
-          = link_to t('delete'), release_path(@release), :method => 'delete', :class => "btn btn-danger pull-right", :role => 'button'
+    %h2
+      Description
+    = markdown(@release.description)

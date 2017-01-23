@@ -63,6 +63,11 @@ class ReleasesController < ApplicationController
     @release.project = @project
 
     @project_form = @project
+
+    @breadcrumbs = {
+      "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
+      'nil' => I18n.t('new')
+    }
   end
 
   def edit
@@ -80,6 +85,12 @@ class ReleasesController < ApplicationController
 
     @project_form = nil
     @project      = @release.project
+
+    @breadcrumbs = {
+      "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
+      "release_path(#{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>",
+      'nil' => I18n.t('edit')
+    }
   end
 
   def create
@@ -129,6 +140,12 @@ class ReleasesController < ApplicationController
   end
 
   def show
+    @project = @release.project
+
+    @breadcrumbs = {
+      "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
+      "release_path(#{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>"
+    }
   end
 
   def destroy
