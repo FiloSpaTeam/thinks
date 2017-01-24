@@ -102,7 +102,7 @@ class GoalsController < ApplicationController
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
       "goal_path(#{@goal.id})"                 => @goal.title,
-      "nil" => I18n.t('edit')
+      'nil' => I18n.t('edit')
     }
   end
 

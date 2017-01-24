@@ -18,6 +18,16 @@
 = smart_listing_controls_for :tasks do
   = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
   = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+
+-# TODO create breadcrumb filters
+-#
+-# .row
+-#   .col-xs-5.col-sm-3.col-xs-offset-7.col-sm-offset-9.text-right
+-#     = link_to url_for, remote: true do
+-#       %h5
+-#         %strong
+-#           = t("reset_filters")
+
 .panel.panel-default
   %table.table.table-condensed.table-hover
     %thead
@@ -28,7 +38,7 @@
               %h5
                 %strong
                   = t "task"
-                  %span.caret
+                  = icon('filter')
             = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
               - @statuses.each do |status|
                 = content_tag(:li) do

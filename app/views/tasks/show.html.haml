@@ -35,8 +35,8 @@
           %span.hidden-xs
             Edit
       %li.pull-left
-        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete', class: 'line-height-25 line-height-35' do
-          = icon('trash-o', class: 'dark-grey fa-lg')
+        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
+          = icon('times-circle-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Close
 
@@ -58,8 +58,13 @@
           = render :partial => 'comments/form'
       %table.table.table-condensed
         %tbody
+          - if @comments.empty?
+            %tr.warning
+              %td.text-center
+                %strong
+                  No comments yet
           - @comments.each_with_index do |comment, index|
-            %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'tr-success' : ''}" }
+            %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
               %td{ style: 'width: 40px;' }
                 - if comment.thinker.avatar
                   = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })

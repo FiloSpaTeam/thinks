@@ -247,6 +247,7 @@ a {
     margin-left: 5px;
     margin-top: 1px;
 }
+.breadcrumb-li { max-width: 350px; }
 
 .required .control-label:after {
     content:"*";
