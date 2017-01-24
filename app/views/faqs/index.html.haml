@@ -15,3 +15,13 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+#faq-group.panel-group{ role: "tablist", 'aria-multiselectable': "true"}
+  - @faqs.each do |faq|
+    .panel.panel-default
+      .panel-heading{ role: "tab", id: "faq-head-#{ faq }" }
+        %h4.panel-title
+          %a.font-bold{ role: "button", 'data-toggle': "collapse", 'data-parent': "#faq-group", href: "#faq-#{ faq }", 'aria-expanded': "true", 'aria-controls': "collapseOne"}
+            = t(".head_#{ faq }")
+      .panel-collapse.collapse{ role: "tabpanel", 'aria-labelledby': "#faq-head-#{ faq }", id: "faq-#{ faq }" }
+        .panel-body
+          = t(".body_#{ faq }").html_safe

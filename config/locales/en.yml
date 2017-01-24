@@ -380,6 +380,27 @@ en:
     project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs hidden-sm'>Goals</span>"
     project_sprints_path: "<i class='fa fa-flag'></i> <span class='hidden-xs hidden-sm'>Sprints</span>"
 
+  faqs:
+    index:
+      head_1: "How does it works the automatic progress system for tasks?"
+      body_1: "
+      <p>
+      Five are the conditions in which a task is situated:
+        <ol>
+          <li><strong>Backlog</strong>, your task is stored but not in planning</li>
+          <li><strong>Release</strong>, your task is planned as next work</li>
+          <li><strong>Sprint</strong>, is part of team planning workload - maximum priority</li>
+          <li><strong>In progress</strong>, someone is working over</li>
+          <li><strong>Done</strong>, task done</li>
+        </ol>
+      </p>
+      <p>
+      When you want automatically switch from <strong>Backlog</strong> to <strong>Release</strong> state, you need to have a number of votes (workload assigned) more than your team minimum number.
+      <br>
+      Later you can automatically take you task from <strong>Release</strong> to <strong>Sprint</strong> if your team \"<i>Deviation Standard</i>\" is good (it's means your team is aligned and this works is very well designed).
+      </p>
+      "
+
   # Shared section
   shared:
     navbar:

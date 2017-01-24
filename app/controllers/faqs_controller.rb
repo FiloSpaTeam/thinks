@@ -17,5 +17,8 @@
 
 class FaqsController < ApplicationController
   def index
+    @faqs = [
+      1 # How does it works automatic tasks progress
+    ]
   end
 end
