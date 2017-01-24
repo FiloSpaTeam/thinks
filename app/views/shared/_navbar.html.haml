@@ -32,11 +32,11 @@
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}
           = link_to projects_path do
-            = icon('globe', :class => "fa-lg")
+            = icon('globe', :class => "fa-lg dark-grey")
             = t(".projects")
         %li.dropdown
           %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
-            = icon('question-circle', :class => "fa-lg")
+            = icon('question-circle', :class => "fa-lg dark-grey")
             =t (".about")
             %span.caret
           %ul.dropdown-menu
@@ -61,7 +61,7 @@
             = render 'shared/notifications'
           %li.dropdown
             = link_to "javascript:;", :class => "dropdown-toggle", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
-              = icon('user', :class => "fa-lg")
+              = icon('user', :class => "fa-lg dark-grey")
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %ul.dropdown-menu
