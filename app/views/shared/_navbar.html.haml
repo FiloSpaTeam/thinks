@@ -26,8 +26,8 @@
       - if thinker_signed_in?
         = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px;" do
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
-        = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs", :style => "padding-top: 10px; padding-bottom: 10px;" do
-          = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
+      = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs", :style => "padding-top: 10px; padding-bottom: 10px;" do
+        = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
         %li{:class => active_link_if_current(projects_path)}
