@@ -19,44 +19,44 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  send : "Send"
-  me                          : "Me"
-  show                        : "Show"
-  update_failed               : "Update failed. See errors below."
-  actions                     : "Actions"
-  search                      : "Search"
-  sorted_by                   : "Sorted by"
-  cant_edit                   : "You can't edit this."
-  cant_update                 : "You can't update this."
-  wtf_are_you_destroying      : "Do you want really destroy something that is not your??"
-  wtf_the_creator_partecipate : "You are or you are not the creator ??"
-  reset_filters               : "Reset filters"
-  char_minimum                : "Minimum character length: %{chars}"
-  char_limit                  : "Character limit: %{chars}"
-  char_in                     : "Character length between %{chars_min} and %{chars_max}"
-  remaining_chars             : "Remaining chars: "
-  previous                    : "Previous"
-  next                        : "Next"
-  view_details                : "View details"
-  task  :                       "Task"
-  no_record:                    "No records found."
-  new:                          "New"
+ru:
+  send : "Отправить"
+  me                          : "Мне"
+  show                        : "Показать"
+  update_failed               : "Неуспешное обновление. Смотри ошибки ниже."
+  actions                     : "Действия"
+  search                      : "Поиск"
+  sorted_by                   : "Отсортировано"
+  cant_edit                   : "Вы не можете это редактировать."
+  cant_update                 : "Вы не можете обновить это."
+  wtf_are_you_destroying      : "Вы действительно хотите удалить то что вам не принадлежит??"
+  wtf_the_creator_partecipate : "Вы или не вы являетесь автором??"
+  reset_filters               : "Сбросить фильтры"
+  char_minimum                : "Минимальная длина: %{chars}"
+  char_limit                  : "Ограничение на количество символов: %{chars}"
+  char_in                     : "Количество символов между %{chars_min} и %{chars_max}"
+  remaining_chars             : "Количество оставшихся символов: "
+  previous                    : "Предыдущее"
+  next                        : "Далее"
+  view_details                : "Посмотреть детали"
+  task  :                       "Задача"
+  no_record:                    "Записей не найдено."
+  new:                          "Новое"
   advanced_filters:             "Advanced filters"
   value:                        "Value"
   lower_than:                   "Lower than"
   no_goal:                      "No goal related"
-  back:                         "Back"
-  edit:                         "Edit"
-  update:                       "Update"
-  delete:                       'Delete'
+  back:                         "Назад"
+  edit:                         "Редактировать"
+  update:                       "Обновить"
+  delete:                       'Удалить'
   no_comments:                  "No comments"
   submit:                       "Submit"
   you_voted_yet:                "You voted yet"
   not_defined_yet:              "Not defined yet"
   you_cannot_vote_yourself:     "You cannot vote yourself"
   vote:                         "Vote"
-  approve:                      "Approve"
+  approve:                      "Утвердить"
   release_date_not_defined_yet: "Release date not defined yet"
   enable: "Enable"
   disable: "Disable"
@@ -83,7 +83,7 @@ en:
 
   layouts:
     application:
-      projects          : "Projects"
+      projects          : "Проекты"
       current           : "current"
       profile           : "Profile"
       donate            : "Donate"
@@ -151,11 +151,11 @@ en:
         minimum_consideration_for_sending_description_3: "four: only notifications about project progress"
         minimum_consideration_for_sending_description_4: "five: no consideration"
 
-        minimum_consideration_for_sending_0: "One"
-        minimum_consideration_for_sending_1: "Two"
-        minimum_consideration_for_sending_2: "Three"
-        minimum_consideration_for_sending_3: "Four"
-        minimum_consideration_for_sending_4: "Five"
+        minimum_consideration_for_sending_0: "Один"
+        minimum_consideration_for_sending_1: "Два"
+        minimum_consideration_for_sending_2: "Три"
+        minimum_consideration_for_sending_3: "Четыре"
+        minimum_consideration_for_sending_4: "Пять"
 
   password:
     form:
@@ -163,48 +163,48 @@ en:
 
   projects:
     index:
-      projects    : "Projects"
+      projects    : "Проекты"
       small_title : "created by community for community"
       title       : "Title"
     show:
       partecipate: "Partecipate"
     new:
-      new        : "New project"
+      new        : "Новый проект"
       created_by : "created by"
     edit:
-      edit       : "Edit project"
+      edit       : "Редактировать проект"
       created_by : "created by"
     list:
       title           : "Title"
-      description     : "Description"
+      description     : "Описание"
       team_number     : "Team"
       home_url        : "Website"
       source_code_url : "Source's repository"
-      documentation   : "Documentation"
-      license         : "License"
+      documentation   : "Документация"
+      license         : "Лицензия"
       thinker         : "Thinker"
       created_at      : "Created at"
-      progress        : "Progress"
-      team            : "Team"
-      tasks           : "Tasks"
+      progress        : "Прогресс"
+      team            : "Команда"
+      tasks           : "Задачи"
       release_at      : "Release at"
       sorry_no_project_found_with: "Sorry but we didn't find any project with <b>\"<ins>%{result}</ins>\"</b>"
       sorry_no_project_under_category: "Sorry but we didn't find any project under category <b>\"<ins>%{result}</ins>\"</b>"
     form:
       change_owner_email: "Enter a valid email of an registered user."
       urls       : "URLs"
-      dates      : "Dates"
+      dates      : "Даты"
       release_at_help: "If release date is before today, the project is declared started."
       main_image: "Main image"
       square_image: "Square image, 256x256 (jpg, png)"
       landscape_image: "Landscape image, 1080x670 (jpg, png)"
     tasks:
       scrum_table : "Scrum table"
-      tasks       : "tasks"
+      tasks       : "задачи"
       backlog     : "Backlog"
       release     : "Release"
       sprint      : "Sprint"
-      in_progress : "Progress"
+      in_progress : "Прогресс"
       done        : "Done"
     projectsummary:
       my_stats : "My statistics" 
@@ -220,27 +220,27 @@ en:
 
   category:
     web_applications:       "Web applications"
-    libraries:              "Libraries"
-    games:                  "Games"
+    libraries:              "Библиотека"
+    games:                  "Игры"
     sysadmin_applications:  "Sysadmin applications"
     didactics_applications: "Didactics applications"
     system_applications:    "System applications"
-    media_applications:     "Media applications"
+    media_applications:     "Медиа приложение"
     graphics_applications:  "Graphics applications"
     tools_applications:     "Tools applications"
     other:                  "Other"
 
   tasks:
-    description: "Description"
-    status: "Status"
+    description: "Описание"
+    status: "Статус"
     workload: "Workload"
     worker: "Worker"
     new:
-      new_task: "New task"
+      new_task: "Новая задача"
       task_parent: "Task parent"
     index:
       scrum_table: "Scrum table"
-      title: "Title"
+      title: "Описание"
     show:
       your_small_thought_about: "Your small 'thought' about"
       define_workload: "Define workload"
@@ -248,7 +248,7 @@ en:
       you_cannot_vote: "You cannot vote, the task is already assigned!"
       standard_deviation_too_high: "The standard deviation is too high, need to allineate your team!"
     form:
-      description: "Description"
+      description: "Описание"
 
   goals:
     index:
@@ -317,14 +317,14 @@ en:
         update: "%{thinker} updated release %{release}."
 
   sex:
-    male: "Male"
-    female: "Female"
-    other: "Other"
+    male: "Мужчина"
+    female: "Женщина"
+    other: "Иное"
 
   team_roles:
     product_owner: "Product owner"
     scrum_master: "Scrum Master"
-    team_member: "Member"
+    team_member: "Участник"
 
   survey:
     new:
@@ -332,19 +332,19 @@ en:
       what_could_be_done_better: "What could be done better?"
       what_can_be_done_better: "What can be done better?"
       sprint_workload: "Sprint workload"
-      goals: "Goals"
-      tasks: "Tasks"
+      goals: "Цели"
+      tasks: "Задачи"
       communication: "Communication"
-      idk: "I don't know"
+      idk: "Я не знаю"
       other: "Other"
 
   otp:
     show:
-      confirm_password: "Confirm password"
+      confirm_password: "Подтвердить пароль"
 
   operations:
     index:
-      add: "Add operation"
+      add: "Добавить операцию"
 
   skills:
     computer_scientist: "Computer scientist"
@@ -358,20 +358,20 @@ en:
     attention_to_details: "Attention to details"
     business_vision: "Business vision"
     curiosity: "Curiosity"
-    experience: "Experience"
+    experience: "Опыт"
     discipline: "Discipline"
     patience: "Patience"
-    teamwork: "Teamwork"
+    teamwork: "Командная работа"
     guide_for_others: "Guide for others"
     problem_solver: "Problem solver"
     quickly_learning: "Quickly learning"
-    analytical_thinking: "Analytical thinking"
-    critical_thinking: "Critical thinking"
+    analytical_thinking: "Аналитическое мышление"
+    critical_thinking: "Критическое мышление"
     license_expert: "License expert"
     user_experience_expert: "User experience expert"
-    mathematician: "Mathematician"
+    mathematician: "Математик"
     query_expert: "Query expert"
-    designer: "Designer"
+    designer: "Дизайнер"
     mobile_expert: "Mobile expert"
 
   breadcrumbs:
@@ -405,26 +405,26 @@ en:
   shared:
     navbar:
       faqs: "FAQs"
-      how_does_it_works: "How does it works"
-      notifications: "Notifications"
+      how_does_it_works: "Как это работает"
+      notifications: "Уведомления"
     projectbar:
-      goals: "Goals"
-      team: "Team"
-      tasks: "Tasks"
-      project: "Project"
+      goals: "Цели"
+      team: "Команда"
+      tasks: "Задачи"
+      project: "Проект"
     profilebar:
       personal: "Personal"
       design: "Design"
-      password: "Password"
+      password: "Пароль"
       double_authentication: "Double authentication"
       privacy: "Privacy"
       data: "Data"
       views: "Views"
       printing: "Printing"
     printbar:
-      s_first: "First section"
-      s_second: "Second section"
-      s_third: "Third section"
+      s_first: "Первая секция"
+      s_second: "Вторая секция"
+      s_third: "Третья секция"
     taskstatuspanel:
       your_rating: "Your rating"
 
@@ -434,7 +434,7 @@ en:
       project:
         home_url          : "Home"
         source_code_url   : "Source Code"
-        documentation_url : "Documentation"
+        documentation_url : "Документация"
         cycle_id: "Working period" 
         release_at: "Release date"
 
@@ -443,13 +443,13 @@ en:
     sessions:
       new:
         log_in      : "Log in"
-        remember_me : "Remember me"
+        remember_me : "Запомнить меня"
     registrations:
       new:
         sign_up           : "Sign up"
         already_signed_up : "Already signed up?"
     passwords:
       new:
-        forgot_password     : "Forgot your password?"
+        forgot_password     : "Забяли пароль?"
         send_reset_password : "Send me reset password instructions"
         need_account        : "Need an account?"
