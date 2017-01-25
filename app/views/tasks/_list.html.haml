@@ -72,6 +72,7 @@
                   - if task.children.present?
                     ·
                     = children_button
+                ·
                 = link_to task.title.truncate(30), task_path(task), :title => task.title
               %strong.visible-xs
                 = link_to task.title.truncate(45), task_path(task), :title => task.title
