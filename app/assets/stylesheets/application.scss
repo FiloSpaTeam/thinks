@@ -221,6 +221,10 @@ a {
 .border-top { border-top: 1px solid #DDD; }
 .border-radius { border-radius: 4px; }
 
+@media screen and (min-width: 768px) {
+    .border-left-no-mobile { border-left: 1px solid #DDD; }
+}
+
 .margin-left-0 { margin-left: 0 !important; }
 .margin-right-0 { margin-right: 0 !important; }
 .margin-top-5 { margin-top: 5px !important; }

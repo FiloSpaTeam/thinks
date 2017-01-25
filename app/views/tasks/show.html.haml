@@ -45,14 +45,14 @@
 .row
   .col-sm-4
     = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
-  .col-sm-8
+  .col-sm-8.border-left-no-mobile
     %h2
       Description
     = markdown(@task.description)
     %hr
     %h3
       Comments
-    .panel.panel-default
+    .panel-default
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
         .panel-heading
           = render :partial => 'comments/form'
