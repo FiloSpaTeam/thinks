@@ -1,0 +1,455 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ru:
+  send : "Отправить"
+  me                          : "Мне"
+  show                        : "Показать"
+  update_failed               : "Неудачное обновление. Смотри ошибки ниже."
+  actions                     : "Действия"
+  search                      : "Поиск"
+  sorted_by                   : "Отсортировано"
+  cant_edit                   : "Вы не можете это редактировать."
+  cant_update                 : "Вы не можете обновить это."
+  wtf_are_you_destroying      : "Вы действительно хотите удалить то что вам не принадлежит??"
+  wtf_the_creator_partecipate : "Вы или не вы являетесь автором??"
+  reset_filters               : "Сбросить фильтры"
+  char_minimum                : "Минимальная длина: %{chars}"
+  char_limit                  : "Ограничение на количество символов: %{chars}"
+  char_in                     : "Количество символов между %{chars_min} и %{chars_max}"
+  remaining_chars             : "Количество оставшихся символов: "
+  previous                    : "Предыдущее"
+  next                        : "Далее"
+  view_details                : "Посмотреть детали"
+  task  :                       "Задача"
+  no_record:                    "Записей не найдено."
+  new:                          "Новое"
+  advanced_filters:             "Дополнительные фильтры"
+  value:                        "Значение"
+  lower_than:                   "Ниже чем"
+  no_goal:                      "Не связан с целью"
+  back:                         "Назад"
+  edit:                         "Редактировать"
+  update:                       "Обновить"
+  delete:                       'Удалить'
+  no_comments:                  "Нет комментариев"
+  submit:                       "Отправить"
+  you_voted_yet:                "Вы проголосовали"
+  not_defined_yet:              "Не определено"
+  you_cannot_vote_yourself:     "Вы не можете проголосовать за себя"
+  vote:                         "Проголосовать"
+  approve:                      "Утвердить"
+  release_date_not_defined_yet: "Дата релиза не определена"
+  enable: "Включить"
+  disable: "Отключить"
+  confirm: "Подтвердить"
+  hide: "Скрыть"
+  no_operations: "Нет действий"
+  done: "Выполнено"
+  remove: "Удалить"
+  created_at_date: "Создан %{date}"
+  updated_at_date: "Обновлен %{date}"
+  leave_the_team: "Покинуть команду"
+  are_you_sure_want_leave_team: "Вы уверены что хотите покинуть команду?"
+  elections_in_progress: "Выборы в процессе"
+  yourself: "сам"
+  remaining_days: "%{days} количество оставшихся дней"
+  get_donate_button_from_paypal: "Вы можете получить правильный HTML тег из системы для пожертвований PayPal."
+  ban_from_project: "Запретить участие в проекте"
+  unban_from_project: "Снять запрет на участие в проекте"
+  if_are_you_sure_want_ban_this_member: "Если вы действительно хотите запретить этого thinker-а, предоставьте убедительную причину. (макс. 160 символов)."
+  specify_reason: "Указать причину."
+  view_all: "Посмотреть все"
+  average: "Среднее"
+  close: "Закрыть"
+
+  layouts:
+    application:
+      projects          : "Проекты"
+      current           : "текущие"
+      profile           : "Профиль"
+      donate            : "Пожертвовать"
+      logout            : "Выйти"
+      sign_in           : "Войти в систему"
+      sign_up           : "Зарегистрироваться"
+      thinkers          : "Thinkers"
+      privacy           : "Конфиденциальность"
+      about             : "Про нас"
+      contact           : "Связатся с нами"
+      sources           : "Исходный код"
+      toggle_navigation : "Тумблер"
+
+    carousel:
+      community_handled : "Управляется сообеством"
+      community_text    : "Этот проект и все зарегистрированные проекты только бесплатные программные проекты. Скрывать нечего . Поделитесь, чтобы получить лучше от сообщества!"
+      sign_up_today     : "Зарегистрироваться сегодня"
+      scrum_based       : "На основе методологии Скрам"
+      scrum_text        : "Методология Agile для лучшего опыта. Организуйте свой спринт, рассчитайте примерное время, оцените вашу личную долю и за работу!"
+      learn_more        : "Узнать больше"
+      fair_donations    : "Справедливые пожертвования"
+      fair_text         : "Кто-то может работать долго много часов, кто-то не может. Кто-то работает над многими проектами, кто-то только над одним. Дающий да получит."
+      thinks_a_project  : "Мысли (проект)"
+
+      community: "Сообщество"
+      scrum: "Скрам"
+      donations: "Пожертвования"
+
+      community_heading_text: "Позвольте сообществу принять участие в вашем проекте. Свободное программное обеспечение является ключом для свободных знаний, и мы являются основной частью этой системы."
+      scrum_heading_text: "Скрам является одним из лучших в Agile методологии. Цель данного приложения позволить Скрам-мастерам управление больших команд."
+      donations_heading_text: "Никто и никогда не разрешал нечто подобное. Получите то, что вы заслуживаете, участвуйте и накапливайте баллы, решая задачу!"
+
+      first_title: "Поделитесь своим проектом."
+      first_title_span: "Что вы думаете?"
+      first_title_text: "Как можно проще опишите свой проект. Детали могут быть изучены позже. Сообществу необходимо понять, главные цели. Большего и не надо. Поделитесь всей информацией, которая может помочь другим принять участие! И не забудьте определить правила вашей совместной работы."
+
+      second_title: "Планируйте спринты."
+      second_title_span: "Планирование!"
+      second_title_text: "Одна неделя? Две недели? Один месяц? Выбирайте вместе с вашей командой дату следующего Спринта! Программное обеспечение автоматически  обрабатывает спринты и генерирует уникальный идентификатор. Позже, запланируйте первый выпуск! Создаите задачи, задайте им значение и управляйте диаграммами, чтобы понять вашу вертикальную скорость! Каждый может помочь вам увеличить эту скорость!"
+
+      third_title: "Пожертвования"
+      third_title_span: "Все за одной целью."
+      third_title_text: "Все работали над вашим проектом с задачами. Благодаря им система поняла, сколько работы они сделали. Пожертвования откалиброваны согласно этих пойнтов. Целью является равномерное распределение пожертвований."
+
+  thinkers:
+    show:
+      profile : "Профиль"
+      photo: "Фото"
+    form:
+      photo: "Фото"
+    notifications:
+      index:
+        sending_type_0: "Только через веб-интерфейс"
+        sending_type_1: "Только через электронную почту"
+        sending_type_2: "Веб-интерфейс и электронная почта"
+
+        sending_type: "Типы отправки"
+
+        minimum_consideration_for_sending: "Минимальное рассмотрение для отправки"
+        minimum_consideration_for_sending_description: "Уровни внимания:"
+
+        minimum_consideration_for_sending_description_0: "первый: все уведомления посылаются"
+        minimum_consideration_for_sending_description_1: "второй: не получать уведомления о чем-то, где я не принимал мер (например: проголосованные задачи)"
+        minimum_consideration_for_sending_description_2: "третий: уведомления только о моей личной работе (созданные задачи ..)"
+        minimum_consideration_for_sending_description_3: "четвертый: только уведомления о ходе выполнения проекта"
+        minimum_consideration_for_sending_description_4: "пятый: без рассмотрения"
+
+        minimum_consideration_for_sending_0: "Первый"
+        minimum_consideration_for_sending_1: "Второй"
+        minimum_consideration_for_sending_2: "Третий"
+        minimum_consideration_for_sending_3: "Четвертый"
+        minimum_consideration_for_sending_4: "Пятый"
+
+  password:
+    form:
+      password_requirements: "количество минимальных символов - 8."
+
+  projects:
+    index:
+      projects    : "Проекты"
+      small_title : "созданные сообществом для сообществ"
+      title       : "Название"
+    show:
+      partecipate: "Partecipate"
+    new:
+      new        : "Новый проект"
+      created_by : "создан"
+    edit:
+      edit       : "Редактировать проект"
+      created_by : "создан"
+    list:
+      title           : "Название"
+      description     : "Описание"
+      team_number     : "Команда"
+      home_url        : "Веб-сайт"
+      source_code_url : "Репозитории исходников"
+      documentation   : "Документация"
+      license         : "Лицензия"
+      thinker         : "Thinker"
+      created_at      : "Создан"
+      progress        : "Прогресс"
+      team            : "Команда"
+      tasks           : "Задачи"
+      release_at      : "Релиз"
+      sorry_no_project_found_with: "Извините, но мы не нашли ни одного проекта с <b>\"<ins>%{result}</ins>\"</b>"
+      sorry_no_project_under_category: "Извините, но мы не нашли ни одного проекта по категории <b>\"<ins>%{result}</ins>\"</b>"
+    form:
+      change_owner_email: "Введите действительный адрес электронной почты в качестве зарегистрированного пользователя."
+      urls       : "Ссылки"
+      dates      : "Даты"
+      release_at_help: "Если дата релиза до сегодняшнего дня, проект объявляется начатым."
+      main_image: "Основное изобразение"
+      square_image: "Квадратное изображение, 256x256 (jpg, png)"
+      landscape_image: "Горизонтальное изображение, 1080x670 (jpg, png)"
+    tasks:
+      scrum_table : "Скрам доска"
+      tasks       : "задачи"
+      backlog     : "Бэклог"
+      release     : "Релиз"
+      sprint      : "Спринт"
+      in_progress : "Прогресс"
+      done        : "Выполнено"
+    projectsummary:
+      my_stats : "Моя статистика" 
+    statistics:
+      body:
+        related_info_limited: "Соответствующая информация ограничена"
+    settings_father:
+      index:
+        your_master_project: "Ваш мастер-проект"
+        you_have_no_master_project_related: "У вас нет связанного мастер-проекта. Ссылка на новый ниже."
+        link_to_master_project: "Ссылка на мастер-проект"
+        help_serial: "Вам необходимо связаться с основателем проекта, чтобы иметь действительный серийный номер."
+
+  category:
+    web_applications:       "Веб приложения"
+    libraries:              "Библиотеки"
+    games:                  "Игры"
+    sysadmin_applications:  "Приложения для системного администрирования"
+    didactics_applications: "Дидактические приложения"
+    system_applications:    "Системные приложения"
+    media_applications:     "Медиа приложения"
+    graphics_applications:  "Графические приложения"
+    tools_applications:     "Приложения IT-инструменты"
+    other:                  "Иные"
+
+  tasks:
+    description: "Описание"
+    status: "Статус"
+    workload: "Нагрузка"
+    worker: "Работник"
+    new:
+      new_task: "Новая задача"
+      task_parent: "Родительская задача"
+    index:
+      scrum_table: "Скрам доска"
+      title: "Описание"
+    show:
+      your_small_thought_about: "Ваша небольшая 'мысль' о"
+      define_workload: "Определить нагрузку"
+      you_voted: "Вы проголосовали %{vote}"
+      you_cannot_vote: "Вы не можете голосовать, эта задача уже назначена!"
+      standard_deviation_too_high: "Стандартное отклонение слишком велико, необходимо allineate свою команду!"
+    form:
+      description: "Описание"
+
+  goals:
+    index:
+      title: "Название"
+
+  releases:
+    form:
+      date_for_release: "Дата релиза"
+
+  sprints:
+    index:
+      do_you_want_suspend: "Вы хотите приостановить развитие? Если вы хотите, можете возобновить ее позже."
+
+  teams:
+    destroy:
+      election_poll_created: "Проводятся выборы! Через 21 день ваша позиция может измениться"
+      you_are_not_part_of_the_team: "Вы не часть команды!"
+      you_are_no_longer_part_of_the_team: "Вы больше не являетесь членом команды."
+    li:
+      select_new_candidate: "Выберите нового кандидата для выборов"
+      candidate: "Кандидат"
+      you_voted_for: "Вы проглосовали"
+    ban:
+      thinker_banned: "Этот thinker заблокирован. Теперь он не может учавствовать. Может быть, в один прекрасный день будет лучше."
+      reason_empty: "Вы должны указать причину по которой thinker должен быть заблокирован."
+    unban:
+      thinker_unbanned: "Thinker разблокирован."
+      thinker_already_unbanned: "Thinker уже разблокирован."
+
+  notifications:
+    list:
+      no_notifications_found: "Не найдено уведомлений"
+      tasks:
+        create: "%{thinker} создал новую задачу."
+        update: "%{thinker} обновил задачу '%{task}'"
+        destroy: "%{thinker} удалил задачу '%{task}'"
+        release: "Задача '%{task}' перемещена в релиз."
+        sprint: "Задача '%{task}' готова для спринта."
+        reopen: "%{thinker} возобновил задачу '%{task}'"
+        assign: "%{thinker} работает над '%{task}'"
+        give_up: "%{thinker} передает задачу '%{task}'"
+      operations:
+        create: "%{thinker} добавил операцию для '%{task}'"
+        done: "%{thinker} закончил операцию для '%{task}'"
+      goals:
+        create: "%{thinker} создал новую цель."
+        update: "%{thinker} обновил цель '%{goal}'"
+        destroy: "%{thinker} удалил цель '%{goal}'"
+      sprints:
+        create: "Спринт %{serial}, начат."
+        update: "Спринт %{serial}, был обновлен (%{total} points)."
+      comments:
+        create: "%{thinker} прокомментировал задачу '%{task}'."
+        update: "%{thinker} обновил комментарий для задачи '%{task}'."
+        approve: "%{thinker} утвердил комментарий. Задача '%{task}' выполнена."
+      projects:
+        update: "%{thinker} обновил(а) описание проекта."
+        destroy: "%{thinker} удалил проект."
+        contribute: "%{thinker} changed partecipation preferences."
+      assigned_roles:
+        update: "%{thinker} был избран на позицию %{team_role}"
+      elections:
+        update: "Выборы были %{status}"
+      releases:
+        create: "%{thinker} созданная версия %{release}."
+        update: "%{thinker} обновленная версия %{release}."
+
+  sex:
+    male: "Мужчина"
+    female: "Женщина"
+    other: "Иное"
+
+  team_roles:
+    product_owner: "Владелец продукта"
+    scrum_master: "Скрам мастер"
+    team_member: "Участник"
+
+  survey:
+    new:
+      what_went_well: "Что сделано хорошо?"
+      what_could_be_done_better: "Что можно было бы улучшить?"
+      what_can_be_done_better: "Что можно сделать лучше?"
+      sprint_workload: "Sprint workload"
+      goals: "Цели"
+      tasks: "Задачи"
+      communication: "Коммуникация"
+      idk: "Я не знаю"
+      other: "Иное"
+
+  otp:
+    show:
+      confirm_password: "Подтвердить пароль"
+
+  operations:
+    index:
+      add: "Добавить операцию"
+
+  skills:
+    computer_scientist: "Специалист в области информатики"
+    passion: "Страстность"
+    fearless_refactor: "Бесстрашный рефакторинг"
+    quality_code: "Качественный код"
+    dont_invent_new_wheel: "Не изобретать новое колесо"
+    maintainability: "Сопровождаемость"
+    multiple_languages: "Несколько языков"
+    vision: "Видение"
+    attention_to_details: "Внимание к деталям"
+    business_vision: "Бизнес виденье"
+    curiosity: "Любопытство"
+    experience: "Опыт"
+    discipline: "Дисциплина"
+    patience: "Терпеливость"
+    teamwork: "Командная работа"
+    guide_for_others: "Пример для других"
+    problem_solver: "Способность решать проблемы"
+    quickly_learning: "Быстро обучаемый"
+    analytical_thinking: "Аналитическое мышление"
+    critical_thinking: "Критическое мышление"
+    license_expert: "Эксперт по лицензиям"
+    user_experience_expert: "Cпециалист UX"
+    mathematician: "Математик"
+    query_expert: "Эксперт по запросам"
+    designer: "Дизайнер"
+    mobile_expert: "Эксперт по мобильным технологиям"
+
+  breadcrumbs:
+    project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs hidden-sm'>Задачи</span>"
+    project_releases_path: "<i class='fa fa-flag-checkered'></i> <span class='hidden-xs hidden-sm'>Релизы</span>"
+    project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs hidden-sm'>Цели</span>"
+    project_sprints_path: "<i class='fa fa-flag'></i> <span class='hidden-xs hidden-sm'>Спринты</span>"
+
+  faqs:
+    index:
+      head_1: "Как работает система автоматического выполнения для задач?"
+      body_1: "
+      <p>
+      Five are the conditions in which a task is situated:
+        <ol>
+          <li><strong>Бэклог</strong>, ваша задача сохранена но  не запланирована</li>
+          <li><strong>Релиз</strong>, ваша задача запланирована как следующшая работа</li>
+          <li><strong>Спринт</strong>, является частью рабочей нагрузки группы планирования - максимальный приоритет</li>
+          <li><strong>В процессе</strong>, кто то над ней работает</li>
+          <li><strong>Выполнено</strong>, задача выполнена</li>
+        </ol>
+      </p>
+      <p>
+      Если вы хотите автоматически переключится с <strong>Бэклога</strong> на <strong>Релиз</strong> вы должны иметь количество голосов (назначеных работ) больше, чем минимальное количество голосов вашей команды.
+      <br>
+      Позже вы можете автоматически взять вашу задачу с <strong>Релиза</strong> в <strong>Спринт</strong> если \"<i>Deviation Standard</i>\" вашей команды хорошее (это означает, что ваша команда выравнивается и это работа очень хорошо спланирована).
+      </p>
+      "
+
+  # Shared section
+  shared:
+    navbar:
+      faqs: "Вопросы и ответы"
+      how_does_it_works: "Как это работает"
+      notifications: "Уведомления"
+    projectbar:
+      goals: "Цели"
+      team: "Команда"
+      tasks: "Задачи"
+      project: "Проект"
+    profilebar:
+      personal: "Личная"
+      design: "Дизайн"
+      password: "Пароль"
+      double_authentication: "Двойная аутентификация"
+      privacy: "Конфиденциальность"
+      data: "Данные"
+      views: "Просмотры"
+      printing: "Печать"
+    printbar:
+      s_first: "Первая секция"
+      s_second: "Вторая секция"
+      s_third: "Третья секция"
+    taskstatuspanel:
+      your_rating: "Ваш рейтинг"
+
+  # ActiveRecord override translation
+  activerecord:
+    attributes:
+      project:
+        home_url          : "Главная"
+        source_code_url   : "Исходный код"
+        documentation_url : "Документация"
+        cycle_id: "Период работы" 
+        release_at: "Дата релиза"
+
+  # Devise section
+  devise:
+    sessions:
+      new:
+        log_in      : "Авторизоваться"
+        remember_me : "Запомнить меня"
+    registrations:
+      new:
+        sign_up           : "Зарегистрироваться"
+        already_signed_up : "Уже зарегистрировались?"
+    passwords:
+      new:
+        forgot_password     : "Забыли пароль?"
+        send_reset_password : "Отправить письмо с инструкцией для смены пароля"
+        need_account        : "Нужна учетная запись?"
