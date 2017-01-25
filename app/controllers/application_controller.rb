@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
     @project = Project
                .includes(:tasks, :sprints, :cycle,
                          :assigned_roles, :contributions,
-                         :releases, :goals)
+                         :releases, :goals, :subprojects)
                .friendly.find(params[:project_id])
   end
 
