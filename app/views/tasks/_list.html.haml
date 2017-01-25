@@ -104,7 +104,7 @@
                     by #{task.updater.name}
             %td.text-center.workload-table{ style: 'vertical-align: middle;' }
               = workload_description(task)
-            %td.text-center.hidden-xs{ style: 'vertical-align: middle;' }
+            %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
               = task.impressions_count
       - else
         %tr.warning
