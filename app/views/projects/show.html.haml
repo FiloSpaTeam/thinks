@@ -16,6 +16,23 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - model_class = Project
+
+- if @project.subprojects.exists?
+  - content_for :page_actions do
+    %li.dropdown.pull-left
+      %a.line-height-25.line-height-35#dropdown-subprojects{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
+        = icon('sitemap', :class => "dark-grey fa-lg")
+        Subprojects
+        %span.caret
+      %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-subprojects" }
+        - @project.subprojects.each do |subproject|
+          %li
+            = link_to project_path(subproject) do
+              - if subproject.logo
+                = cl_image_tag(subproject.logo.path, { size: '20x20' }) 
+              - else
+                = icon('folder')
+              %span=subproject.title
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
