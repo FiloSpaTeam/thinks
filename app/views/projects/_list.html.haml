@@ -30,7 +30,7 @@
         = render partial: 'projects/card', locals: { project: project }
     = smart_listing.paginate
 
-    - if smart_listing.collection.empty?
+    - if smart_listing.collection.empty? && (active_filter(:title_or_description) || active_filter(:category_id))
       - if filter_value(:title_or_description).present?
         = t('.sorry_no_project_found_with', result: filter_value(:title_or_description)).html_safe
       - elsif filter_value(:category_id).present?
