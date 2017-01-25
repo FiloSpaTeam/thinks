@@ -28,7 +28,7 @@
 -#         %strong
 -#           = t("reset_filters")
 
-.panel.panel-default
+.panel-default.margin-top-5
   %table.table.table-condensed.table-hover
     %thead
       %tr
@@ -59,8 +59,9 @@
         - smart_listing.collection.each do |task|
           -# - if !@search.empty?
           -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
-          %tr{ :class => color_list_round_div(task.status.translation_code) }
+          %tr
             %td
+              .round-sm.pull-left.margin-top-0{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
                 %small.dark-grey
                   \##{task.serial}
