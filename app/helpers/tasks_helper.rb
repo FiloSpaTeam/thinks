@@ -50,10 +50,6 @@ module TasksHelper
     end
   end
 
-  def goal_button(task)
-    content_tag(:a, icon('crosshairs', :class => 'dark-grey fa-lg'), :class => task.goal.nil? ? "disabled btn" : "btn", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button")
-  end
-
   def apply_filters(scope, params)
     scope = scope.with_goal(params[:goal_id]) if params.key?(:goal_id) &&
                                                  params[:goal_id].present?
@@ -96,5 +92,23 @@ module TasksHelper
     end
 
     scope
+  end
+
+  def std_deviation_button(task)
+    link_to 'javascript:;', title: task.standard_deviation, role: 'button' do
+      icon('bullseye', class: 'dark-grey')
+    end
+  end
+
+  def goal_button(task)
+    link_to goal_path(task.goal), title: task.goal.title, role: 'button' do
+      icon('crosshairs', class: 'dark-grey')
+    end
+  end
+
+  def children_button
+    link_to 'javascript:;', title: 'This task has children.' do
+      icon('sitemap', class: 'dark-grey')
+    end
   end
 end

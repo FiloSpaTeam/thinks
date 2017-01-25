@@ -15,25 +15,11 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-default.visible-xs
-  %table.table.table-condensed
-    %tbody
-      %tr
-        %td.text-center{ style: 'vertical-align: middle;' }
-          %label.control-label
-            Goal
-          = goal_button(task)
-        %td.text-center{ style: 'vertical-align: middle;' }
-          .round-sm.pull-right{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
-          %label.control-label
-            Status
-        %td.text-center{ style: 'vertical-align: middle;' }
-          %label.control-label
-            Workload
-          = workload_description(task)
-.panel.panel-default.hidden-xs
+%a.visible-xs{ href: '#task-statuspanel-collapse', 'data-toggle': 'collapse', 'aria-expanded': 'false', 'aria-controls': 'task-statuspanel-collapse' }
+  Details
+.panel.panel-default.visible-sm.visible-md.visible-lg.collapse#task-statuspanel-collapse
   %ul.list-group
-    %li.list-group-item
+    %li.list-group-item.hidden-xs
       %strong
         Count views
       %span.pull-right
@@ -130,7 +116,7 @@
         %h4
           = task.reason.try(:text)
     - else
-      %li.list-group-item
+      %li.list-group-item.hidden-xs
         %strong
           Created at
         %span.pull-right
@@ -153,7 +139,7 @@
 
 .panel.panel-default
   %ul.list-group
-    %li.list-group-item.hidden-xs
+    %li.list-group-item
       %strong
         = t('tasks.workload')
       %span.pull-right

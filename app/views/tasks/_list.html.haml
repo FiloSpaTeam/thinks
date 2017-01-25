@@ -65,10 +65,20 @@
                 %small.dark-grey
                   \##{task.serial}
                   ·
+                  = std_deviation_button(task)
+                  ·
+                  - unless task.goal.nil?
+                    ·
+                    = goal_button
+                  - if task.children.present?
+                    ·
+                    = children_button
                 = link_to task.title.truncate(30), task_path(task), :title => task.title
               %strong.visible-xs
                 = link_to task.title.truncate(45), task_path(task), :title => task.title
               %strong.visible-sm
+                = std_deviation_button(task)
+                ·
                 = link_to task.title, task_path(task)
               .dark-grey.break-word
                 %small
@@ -93,20 +103,10 @@
                     %strong
                       = task.updated_at.to_s(:short)
                     by #{task.updater.name}
-            %td.text-center
-              .col-xs-12.workload-table
-                = workload_description(task)
-            %td.text-right.hidden-xs
-              .form-group{ :style => "margin-bottom: 0;" }
-                %a.btn{ :href => "javascript:;", :title => task.standard_deviation, :role => "button" }
-                  = icon('bullseye', :class => "dark-grey fa-lg")
-              .form-group{ :style => "margin-bottom: 0;" }
-                %a.btn{ :class => task.goal.nil? ? "disabled" : "", :href => task.goal.nil? ? "javascript:;" : goal_path(task.goal), :title => task.goal.nil? ? t("no_goal") : task.goal.title, :role => "button" }
-                  = icon('crosshairs', :class => "dark-grey fa-lg")
-              - if task.children.present?
-                .form-group{ :style => "margin-bottom: 0;" }
-                  %a.btn{ :href => "javascript:;", :title => "This task has children."}
-                    = icon('sitemap', :class => "dark-grey fa-lg")
+            %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+              = workload_description(task)
+            %td.text-center.hidden-xs{ style: 'vertical-align: middle;' }
+              = task.impressions_count
       - else
         %tr.warning
           %td.text-center{ colspan: 3 }
