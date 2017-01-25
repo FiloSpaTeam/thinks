@@ -28,7 +28,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    projects_scope = Project.includes(:category, :thinker)
+    projects_scope = Project
+                     .includes(:category, :thinker)
+                     .where('project_id is NULL')
 
     if params[:filters].present?
       projects_scope = apply_filters(projects_scope, params[:filters])

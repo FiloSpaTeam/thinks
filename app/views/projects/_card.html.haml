@@ -18,6 +18,8 @@
 .col-md-4.col-sm-6.col-xs-12
   .panel.panel-default
     .panel-heading.no-padding.text-center{ style: 'background-color: #fff;' }
+      - if project.subprojects.exists?
+        %i.fa.fa-sitemap.fa-lg{ 'data-toggle': 'popover', 'data-trigger': 'click', 'data-content': 'This project has subprojects.', 'data-placement': 'top', style: 'position: absolute; right: 20px; top: 5px;' }
       = link_to project_path(project) do
         - if project.main_image
           = cl_image_tag(project.main_image.path, { style: 'width: auto; height: 180px; max-width: 100%' })

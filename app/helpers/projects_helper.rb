@@ -58,6 +58,9 @@ module ProjectsHelper
   end
 
   def apply_filters(scope, params)
+    # TODO
+    # We need to search title of subprojects and return master project
+
     scope = scope.with_title_or_description(params[:title_or_description]) if params.key?(:title_or_description) &&
                                                                               params[:title_or_description].present?
 

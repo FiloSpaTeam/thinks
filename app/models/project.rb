@@ -45,6 +45,7 @@ class Project < ActiveRecord::Base
   has_many :releases
   has_many :notifications
   has_many :banned_thinkers
+  has_many :subprojects, class_name: 'Project'
 
   belongs_to :license
   belongs_to :thinker
