@@ -20,4 +20,12 @@
     .pagination {
         margin: 0;
     }
+
+    .status-div {
+        margin-top: 0 !important;
+
+        @media screen and (max-width: 1199px) {
+            margin-top: 2px !important;
+        }
+    }
 }
