@@ -32,7 +32,7 @@
   %table.table.table-condensed.table-hover
     %thead
       %tr
-        %td{ style: 'max-width: 36px;' }
+        %td.hidden-xs{ style: 'max-width: 36px;' }
         %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
           .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
             %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
@@ -61,9 +61,10 @@
           -# - if !@search.empty?
           -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
           %tr
-            %td.vertical-align-middle{ style: 'max-width: 36px;' }
+            %td.hidden-xs.vertical-align-middle{ style: 'max-width: 36px;' }
               .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
             %td
+              .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
                 %small.dark-grey
                   \##{task.serial}
