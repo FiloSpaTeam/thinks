@@ -94,18 +94,24 @@
                     %strong
                       = task.deleted_at.to_s(:long)
               - else
-                .dark-grey.hidden-xs
-                  %small
-                    created at
-                    %strong
-                      = task.created_at.to_s(:short)
-                    by #{task.thinker.name}
-                .dark-grey
-                  %small
-                    updated at
-                    %strong
-                      = task.updated_at.to_s(:short)
-                    by #{task.updater.name}
+                - if task.created_at == task.updated_at
+                  .dark-grey
+                    %small
+                      created at
+                      %strong
+                        = task.created_at.to_s(:short)
+                      by
+                      %i
+                        #{task.updater.name}
+                - else
+                  .dark-grey
+                    %small
+                      updated at
+                      %strong
+                        = task.updated_at.to_s(:short)
+                      by
+                      %i
+                        #{task.updater.name}
             %td.text-center.workload-table{ style: 'vertical-align: middle;' }
               = workload_description(task)
             %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
