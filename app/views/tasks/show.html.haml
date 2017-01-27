@@ -67,7 +67,7 @@
                   No comments yet
           - @comments.each_with_index do |comment, index|
             %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
-              %td{ style: 'width: 40px;' }
+              %td.hidden-xxs{ style: 'width: 40px;' }
                 - if comment.thinker.avatar
                   = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
                 - else
