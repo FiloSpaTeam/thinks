@@ -1,4 +1,4 @@
 - if @breadcrumbs.present?
   - @breadcrumbs.each_with_index do |value, index|
-    %li.clip-text.breadcrumb-li{ class: index == 0 && @breadcrumbs.size > 1 ? 'hidden-xxs' : '' }
+    %li.clip-text.breadcrumb-li{ class: index == 0 && @breadcrumbs.size > 1 ? 'hidden-xxs hidden-xs' : '' }
       = link_to value[1].html_safe, eval(value[0]), title: strip_tags(value[1])
