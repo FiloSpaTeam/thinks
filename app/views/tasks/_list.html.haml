@@ -15,20 +15,21 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= smart_listing_controls_for :tasks do
-  .input-group.form-group
-    %span.input-group-btn
-      = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
-        = icon('undo', class: 'dark-grey')
-    = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
-    %span.input-group-btn
+.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
+  = smart_listing_controls_for :tasks do
+    .input-group.form-group
+      %span.input-group-btn
+        = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
+          = icon('undo', class: 'dark-grey')
+      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
+      %span.input-group-btn
 
-      - if @active_filters.present?
-        %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-          = icon('filter', class: 'dark-grey')
-      %button.btn.btn-primary{ type: 'submit' }
-        = icon('search', class: 'fa-inverse')
-  = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+        - if @active_filters.present?
+          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+            = icon('filter', class: 'dark-grey')
+        %button.btn.btn-primary{ type: 'submit' }
+          = icon('search', class: 'fa-inverse')
+    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 
 -# TODO create breadcrumb filters
 -#
@@ -56,8 +57,10 @@
         %td.text-center
           .col-xs-12
             %h5
-              %strong
+              %strong.hidden-xs
                 = smart_listing.sortable 'Workload', :workload
+              %strong.visible-xs.hidden-xxs
+                = smart_listing.sortable 'W.load', :workload
         %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
           %h5
             %strong
@@ -103,7 +106,7 @@
                       = task.deleted_at.to_s(:long)
               - else
                 - if task.created_at == task.updated_at
-                  .dark-grey
+                  .dark-grey.hidden-xxs
                     %small
                       created at
                       %strong
@@ -112,7 +115,7 @@
                       %i
                         #{task.updater.name}
                 - else
-                  .dark-grey
+                  .dark-grey.hidden-xxs
                     %small
                       updated at
                       %strong

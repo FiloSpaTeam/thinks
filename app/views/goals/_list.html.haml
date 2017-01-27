@@ -15,6 +15,23 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+
+.collapse#collapseSearch{ class: any_filter?(params[:filters]) ? 'in' : '' }
+  = smart_listing_controls_for :tasks do
+    .input-group.form-group
+      %span.input-group-btn
+        = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
+          = icon('undo', class: 'dark-grey')
+      = text_field_tag 'filters[search_title]', filter_value(:search_title), :class => 'form-control', autocomplete: 'off'
+      %span.input-group-btn
+
+        - if @active_filters.present?
+          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+            = icon('filter', class: 'dark-grey')
+        %button.btn.btn-primary{ type: 'submit' }
+          = icon('search', class: 'fa-inverse')
+    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+
 %table.table.table-condensed.table-hover#filterrific_results
   %thead
     %tr
