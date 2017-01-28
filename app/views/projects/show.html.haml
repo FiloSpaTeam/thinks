@@ -19,7 +19,7 @@
 
 - content_for :page_actions do
   - if @project.donate_button.present?
-    %li.pull-left
+    %li.pull-left.visible-xs
       %div{ style: 'margin-top: 15px;' }
         = @project.donate_button.html_safe
   - if @project.subprojects.exists?
