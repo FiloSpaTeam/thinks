@@ -41,7 +41,7 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    %h2.visible-xs
+    %h3.visible-xs
       = @project.title
     .panel.panel-default.hidden-xs
       = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
