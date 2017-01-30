@@ -107,6 +107,8 @@ class TasksController < ApplicationController
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
       'nil' => I18n.t('new')
     }
+
+    set_form
   end
 
   # GET /tasks/1/edit
@@ -126,6 +128,8 @@ class TasksController < ApplicationController
       "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
       'nil' => I18n.t('edit')
     }
+
+    set_form
   end
 
   # POST /projects/1/tasks
@@ -344,6 +348,21 @@ class TasksController < ApplicationController
   def set_validators_for_show
     comment_validators = Comment.validators_on(:text)[0]
     @chars_max_comment = comment_validators.options[:maximum]
+  end
+
+  def set_form
+    # releases
+    @project_releases = @project.releases.order('version')
+
+    # goals
+    @project_goals = @project.goals.order('title')
+
+    # father tasks
+    @father_tasks = @project
+                    .tasks
+                    .where.not(status: Status.done)
+                    .where.not(status: Status.in_progress)
+                    .order('title')
   end
 
   def teammate!
