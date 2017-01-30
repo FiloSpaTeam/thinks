@@ -15,23 +15,32 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= smart_listing_controls_for :tasks do
-  = text_field_tag 'filters[search_title_and_description]', '', :class => 'form-control', autocomplete: 'off'
-  = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
+  = smart_listing_controls_for :tasks do
+    .input-group.form-group
+      %span.input-group-btn
+        = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
+          = icon('undo', class: 'dark-grey')
+      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
+      %span.input-group-btn
+
+        - if @active_filters.present?
+          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+            = icon('filter', class: 'dark-grey')
+        %button.btn.btn-primary{ type: 'submit' }
+          = icon('search', class: 'fa-inverse')
+    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 
 -# TODO create breadcrumb filters
 -#
 -# .row
 -#   .col-xs-5.col-sm-3.col-xs-offset-7.col-sm-offset-9.text-right
--#     = link_to url_for, remote: true do
--#       %h5
--#         %strong
--#           = t("reset_filters")
 
 .panel-default.margin-top-5
   %table.table.table-condensed.table-hover
     %thead
       %tr
+        %td.hidden-xs{ style: 'max-width: 36px;' }
         %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
           .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
             %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
@@ -48,8 +57,10 @@
         %td.text-center
           .col-xs-12
             %h5
-              %strong
+              %strong.hidden-xs
                 = smart_listing.sortable 'Workload', :workload
+              %strong.visible-xs.hidden-xxs
+                = smart_listing.sortable 'W.load', :workload
         %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
           %h5
             %strong
@@ -60,8 +71,10 @@
           -# - if !@search.empty?
           -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
           %tr
+            %td.hidden-xs.vertical-align-middle{ style: 'max-width: 36px;' }
+              .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
             %td
-              .round-sm.pull-left.margin-top-0{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+              .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
                 %small.dark-grey
                   \##{task.serial}
@@ -92,18 +105,24 @@
                     %strong
                       = task.deleted_at.to_s(:long)
               - else
-                .dark-grey.hidden-xs
-                  %small
-                    created at
-                    %strong
-                      = task.created_at.to_s(:short)
-                    by #{task.thinker.name}
-                .dark-grey
-                  %small
-                    updated at
-                    %strong
-                      = task.updated_at.to_s(:short)
-                    by #{task.updater.name}
+                - if task.created_at == task.updated_at
+                  .dark-grey.hidden-xxs
+                    %small
+                      created at
+                      %strong
+                        = task.created_at.to_s(:short)
+                      by
+                      %i
+                        #{task.updater.name}
+                - else
+                  .dark-grey.hidden-xxs
+                    %small
+                      updated at
+                      %strong
+                        = task.updated_at.to_s(:short)
+                      by
+                      %i
+                        #{task.updater.name}
             %td.text-center.workload-table{ style: 'vertical-align: middle;' }
               = workload_description(task)
             %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }

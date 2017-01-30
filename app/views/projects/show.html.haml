@@ -17,12 +17,17 @@
 
 - model_class = Project
 
-- if @project.subprojects.exists?
-  - content_for :page_actions do
+- content_for :page_actions do
+  - if @project.donate_button.present?
+    %li.pull-left.visible-xs
+      %div{ style: 'margin-top: 15px;' }
+        = @project.donate_button.html_safe
+  - if @project.subprojects.exists?
     %li.dropdown.pull-left
       %a.line-height-25.line-height-35#dropdown-subprojects{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
         = icon('sitemap', :class => "dark-grey fa-lg")
-        Subprojects
+        %span.hidden-xs
+          Subprojects
         %span.caret
       %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-subprojects" }
         - @project.subprojects.each do |subproject|
@@ -36,7 +41,9 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    .panel.panel-default
+    %h3.visible-xs
+      = @project.title
+    .panel.panel-default.hidden-xs
       = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
     .text-justify

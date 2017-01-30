@@ -18,23 +18,23 @@
 - content_for :page_actions do
   - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
-      %li.pull-left
+      %li.pull-left.hidden-xxs
         = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
           = icon('history', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Reopen
-      %li.pull-left
+      %li.pull-left.hidden-xxs
         = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35' do
           = icon('trash-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Delete
     - elsif !@task.done?
-      %li.pull-left
+      %li.pull-left.hidden-xxs
         = link_to edit_task_path(@task), title: 'Edit', class: 'line-height-25 line-height-35' do
           = icon('edit', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Edit
-      %li.pull-left
+      %li.pull-left.hidden-xxs
         = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
           = icon('times-circle-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
@@ -46,8 +46,10 @@
   .col-sm-4
     = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
   .col-sm-8
-    %h2
+    %h2.hidden-xs
       Description
+    %h2.visible-xs
+      = @task.title
     = markdown(@task.description)
     %hr
     %h3
@@ -65,7 +67,7 @@
                   No comments yet
           - @comments.each_with_index do |comment, index|
             %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
-              %td{ style: 'width: 40px;' }
+              %td.hidden-xxs{ style: 'width: 40px;' }
                 - if comment.thinker.avatar
                   = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
                 - else

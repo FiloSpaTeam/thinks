@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ru:
+  helpers:
+    actions: "Действия"
+    links:
+      back: "Назад"
+      cancel: "Отменить"
+      confirm: "Вы уверены?"
+      destroy: "Удалить"
+      new: "Новое"
+      edit: "Редактировать"
+      show: "Показать"
+    titles:
+      edit: "Редактировать"
+      save: "Сохранить"
+      new: "Новое"
+      delete: "Удалить"

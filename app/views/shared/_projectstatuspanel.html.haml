@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-default
+.panel.panel-default.hidden-xs
   .panel-body
     - if project.started? && !project.suspended
       - if project.cycle.try(:days)

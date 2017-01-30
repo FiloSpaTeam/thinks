@@ -16,14 +16,7 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - if filters.present?
-  .row
-    .col-xs-5.col-sm-3
-      %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => params[:filters].try(:any?) ? 'true' : 'false', "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
-        %h5.text-left
-          %strong
-            = t("advanced_filters")
-
-  #collapseFilters.collapse.well{ :class => params[:filters].try(:any?) ? 'in' : '' }
+  #collapseFilters.collapse.well{ :class => any_filter?(params[:filters], [:status_id]) ? 'in' : '' }
     = hidden_field_tag 'filters[last]', filter_value(:last)
     .row
       .col-xs-12

@@ -1,4 +1,20 @@
-- if @breadcrumbs.present?
-  - @breadcrumbs.each do |breadcrumb, text|
-    %li.clip-text.breadcrumb-li
-      = link_to text.html_safe, eval(breadcrumb), title: strip_tags(text)
+%ol.breadcrumb.margin-bottom-0.no-background.pull-left{ style: 'height: 50px;' }
+  - unless project.project.nil?
+    %li.clip-text.breadcrumb-li.hidden-xs{ style: 'margin-top: 9px;' }
+      = link_to project_path(project.project), title: project.project.title do
+        - if project.project.logo
+          = cl_image_tag(project.project.logo.path, { size: '20x20' }) 
+        - else
+          = icon('sitemap')
+  %li.clip-text.breadcrumb-li{ style: 'margin-top: 9px;' }
+    = link_to project_path(project), title: project.title do
+      - if project.logo
+        = cl_image_tag(project.logo.path, { size: '20x20' }) 
+      - else
+        = icon('folder')
+      %strong.hidden-xs{ class: @breadcrumbs.nil? ? '' : 'hidden-sm' }
+        = project.title
+  - if @breadcrumbs.present?
+    - @breadcrumbs.each_with_index do |value, index|
+      %li.clip-text.breadcrumb-li{ class: index == 0 && @breadcrumbs.size > 1 ? 'hidden-xxs hidden-xs' : '' }
+        = link_to value[1].html_safe, eval(value[0]), title: strip_tags(value[1])

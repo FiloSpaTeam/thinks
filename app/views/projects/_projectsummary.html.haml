@@ -16,7 +16,7 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - if thinker_signed_in?
-  .hidden-xs.panel-body.border-bottom
+  .panel-body.border-bottom
     %h4.font-bold
       Your contribution
     - if current_thinker != project.thinker
@@ -55,23 +55,23 @@
       %hr
       .text-center
         = project.donate_button.html_safe
-  .list-group-item.hidden-xs
+  .list-group-item
     category
     %strong
       = content_tag :span, project.category.try(:t_name) ? t("category.#{project.category.t_name}") : t('not_defined_yet'), :class => "pull-right"
-  .list-group-item.hidden-xs
+  .list-group-item
     license
     %strong
       = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
   - if current_thinker == project.thinker
-    .list-group-item.hidden-xs
+    .list-group-item
       secret
       = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
         = icon('eye', :class => "dark-grey")
-.panel-body.hidden-xs
+.panel-body
   %h4.font-bold
     Sprint details
-.list-group.hidden-xs
+.list-group
   .list-group-item
     Working period
     %strong
@@ -84,7 +84,7 @@
     release date
     %strong
       = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
-.panel-body.hidden-xs.border-bottom
+.panel-body.border-bottom
   %h4.font-bold
     Skill requirements
   - if project.skills.empty?
@@ -94,10 +94,10 @@
       - project.skills.each do |skill|
         %li
           = t("skills.#{skill.t_name}")
-.panel-body.hidden-xs
+.panel-body
   %h4.font-bold
     Links
-.list-group.hidden-xs
+.list-group
   .list-group-item
     website
     = link_to project.home_url, :class => "pull-right no-padding no-border btn #{!project.home_url.present? ? 'disabled' : ''}", role: "button" do
@@ -114,7 +114,7 @@
     mailing list
     = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
       = icon('envelope-o', :class => "dark-grey")
-.panel-body.hidden-xs
+.panel-body
   %h4.font-bold
     Summary
 .list-group
@@ -122,15 +122,15 @@
     - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count
     = badge(team_number)
     = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
-  .list-group-item.hidden-xs
+  .list-group-item
     = badge(project.releases.size)
     = link_to 'releases', project_releases_path(project)
-  .list-group-item.hidden-xs
+  .list-group-item
     = badge(project.sprints.size)
     = link_to 'sprints', project_sprints_path(project)
-  .list-group-item.hidden-xs
+  .list-group-item
     = badge(project.goals.size)
     = link_to 'goals', project_goals_path(project)
-  .list-group-item.hidden-xs
+  .list-group-item
     = badge(project.tasks.size)
     = link_to 'tasks', project_tasks_path(project)

@@ -117,6 +117,19 @@ module ApplicationHelper
     active
   end
 
+  def any_filter?(filter, except = [])
+    any = false
+    unless filter.nil?
+      filter_c = filter.dup
+
+      except.each { |k| filter_c.delete k }
+
+      any = filter_c.any?
+    end
+
+    any
+  end
+
   def filter_value(filter)
     params[:filters][filter] if params.key?(:filters) &&
                                 params[:filters].key?(filter) &&
