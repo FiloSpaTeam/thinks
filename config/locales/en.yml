@@ -229,6 +229,8 @@ en:
     graphics_applications:  "Graphics applications"
     tools_applications:     "Tools applications"
     other:                  "Other"
+    health_applications:    "Health applications"
+    applications_fpa:       "Applications for public administrations"
 
   tasks:
     description: "Description"

@@ -157,7 +157,9 @@ categories_list = [
   %w(media_applications     media_applications_description     violet),
   %w(graphics_applications  graphics_applications_description  lightblue),
   %w(tools_applications     tools_applications_description     gray),
-  %w(other                  other_description                  gray)
+  %w(other                  other_description                  gray),
+  %w(health_applications    health_applications_description    lightblue),
+  %w(applications_fpa applications_fpa_description gray)
 ]
 
 categories_list.each do |tname, tdescription, color|
