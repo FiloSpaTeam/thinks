@@ -83,6 +83,5 @@
       = t ".landscape_image"
   %hr
   = f.submit nil, :class => 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-    projects_path, :class => 'btn btn-default'                   |
+  = link_to t('back'), :back, :class => "btn btn-default"
 = init_counter_textarea('#project_description', '#counter')
