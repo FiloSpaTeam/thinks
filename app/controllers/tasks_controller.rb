@@ -150,6 +150,7 @@ class TasksController < ApplicationController
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@task)
+        set_form
         set_validators_for_form_help
 
         @project_form = @project
