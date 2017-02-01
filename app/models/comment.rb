@@ -25,8 +25,6 @@ class Comment < ActiveRecord::Base
 
   has_one :reason, as: :related
 
-  # has_many :likes, dependent: :destroy
-
   has_many :notifications, -> { where(model: :Notification) }, foreign_key: :model_id, dependent: :destroy
 
   validates :text, length: { maximum: 2000 }, presence: true
