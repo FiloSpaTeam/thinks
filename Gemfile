@@ -103,6 +103,9 @@ gem 'chartkick', '~> 2.0.0'
 gem 'rabl', '0.12.0'
 gem 'oj', '2.17.1'
 
+# Database dump
+gem 'seed_dump'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
