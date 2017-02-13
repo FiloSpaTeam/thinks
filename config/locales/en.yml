@@ -80,6 +80,7 @@ en:
   view_all: "View all"
   average: "Average"
   close: "Close"
+  operations_t: "Operations"
 
   layouts:
     application:
