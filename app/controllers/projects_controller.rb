@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def index
     projects_scope = Project
                      .includes(:category, :thinker)
-                     .where('project_id is NULL')
+                     .where('projects.project_id is NULL')
 
     if params[:filters].present?
       projects_scope = apply_filters(projects_scope, params[:filters])
