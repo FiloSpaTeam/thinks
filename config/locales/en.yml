@@ -133,6 +133,9 @@ en:
     show:
       profile : "Profile"
       photo: "Photo"
+      image_not_defined: "Image not defined"
+      sex: "Gender"
+      created_at: "Registered at"
     form:
       photo: "Photo"
     notifications:

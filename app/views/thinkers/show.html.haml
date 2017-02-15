@@ -15,34 +15,43 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
+- content_for :page_actions do
+  - if (@thinker == current_thinker)
+    %li.pull-left
+      = link_to edit_thinker_path(@thinker), title: 'Edit', class: 'line-height-25 line-height-35' do
+        = icon('edit', class: 'dark-grey fa-lg')
+        %span.hidden-xs
+          Edit
+
 = render partial: 'shared/profileheader', locals: { thinker: @thinker }
 .row
   .col-md-4
     = render partial: 'shared/profilebar', locals: { thinker: @thinker }
   .col-md-8
-    .panel.panel-default
-      .panel-body
-        %h4=t '.identity'
-        .form-group
-          = cl_image_tag(@thinker.avatar.path, alt: t('.photo'), size: '50x50', crop: :thumb, gravity: :face) if @thinker.avatar?
-        .form-group
-          %label.control-label=t '.name'
-          %input.form-control{ value: @thinker.name, readonly: true }
-        .form-group
-          %label.control-label=t '.sex'
-          %input.form-control{ value: @thinker.sex.try(:t_name) ? t("sex.#{@thinker.sex.t_name}") : t(:not_defined_yet), readonly: true }
-        .form-group
-          %label.control-label=t '.birthday'
-          %input.form-control{ value: @thinker.born_at.try(:to_s) ? @thinker.born_at.to_s(:long) : t('not_defined_yet'), readonly: true }
-        .form-group
-          %label.control-label=t '.country'
-          %input.form-control{ value: @thinker.country.try(:printable_name) ? @thinker.country.printable_name : t('not_defined_yet'), readonly: true }
-        %h4=t '.profile'
-        .form-group
-          %label.control-label=t '.email'
-          %input.form-control{ value: @thinker.email, readonly: true }
-        .form-group
-          %label.control-label=t '.created_at'
-          %input.form-control{ value: @thinker.created_at.to_s(:long), readonly: true }
-      .panel-footer
-        = link_to t('edit'), edit_thinker_path(@thinker), :class => "btn btn-primary"
+    .form-group
+      .col-md-4
+        - if @thinker.avatar?
+          = cl_image_tag(@thinker.avatar.path, alt: t('.photo'), size: '200x200', crop: :thumb, gravity: :face)
+        - else
+          .square.bg-gray
+          %span.help-block
+            = t('.image_not_defined')
+      .col-md-8
+        .row
+          %label.control-label
+            = @thinker.name
+        - unless @thinker.sex.nil?
+          .row
+            = t("sex.#{@thinker.sex.t_name}")
+        - unless @thinker.born_at.nil?
+          .row
+            = @thinker.born_at.to_s(:long)
+        - unless @thinker.country.nil?
+          .row
+            = @thinker.country.printable_name
+        .row
+          = @thinker.email
+        .row
+          %i
+            = (t '.created_at') + ':'
+          = @thinker.created_at.to_s(:long)
