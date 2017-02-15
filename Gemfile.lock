@@ -54,7 +54,7 @@ GEM
       rails (>= 3.2)
     attr_encrypted (3.0.3)
       encryptor (~> 3.0.0)
-    autoprefixer-rails (6.7.2)
+    autoprefixer-rails (6.7.3)
       execjs
     aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
@@ -131,7 +131,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
-    haml_lint (0.20.0)
+    haml_lint (0.21.0)
       haml (~> 4.0)
       rake (>= 10, < 13)
       rubocop (>= 0.47.0)
@@ -323,7 +323,7 @@ DEPENDENCIES
   attachinary
   bcrypt (~> 3.1.7)
   bootstrap-datepicker-rails (= 1.5.0)
-  bootstrap-sass (~> 3.3.5)
+  bootstrap-sass (~> 3.3.6)
   bootstrap-sass-extras (= 0.0.6)
   byebug
   carrierwave

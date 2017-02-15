@@ -25,7 +25,7 @@ gem 'cloudinary'
 gem 'attachinary'
 
 # Bootstrap SASS port
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-sass-extras', '0.0.6'
 
 # Datepicker Bootstrap (maybe we can do without that?)
