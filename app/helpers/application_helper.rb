@@ -79,15 +79,17 @@ module ApplicationHelper
     (100 * value) / total
   end
 
-  def init_counter_textarea(id_textarea, id_counter)
+  def init_counter_textarea
     javascript_tag(
       "$(document).ready(function() {
-          var textarea     = $('#{id_textarea}');
-          var counter      = $('#{id_counter}');
-          var max_length   = counter.data('maximum-length');
+          var textarea     = $('.has-counter');
 
           textarea.keyup(function() {
-            var diff = max_length - $(this).val().length;
+            var counter      = $(this)
+                                 .parent()
+                                 .find('.counter');
+            var max_length   = counter.data('maximum-length');
+            var diff         = max_length - $(this).val().length;
             counter.text(diff);
 
             if (diff < 0) {
