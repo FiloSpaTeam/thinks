@@ -45,7 +45,6 @@ gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
-# gem 'filterrific', '2.0.5'
 gem 'smart_listing', '1.2.0'
 
 # Statistics about views
@@ -77,7 +76,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 # For rake doc:guides
-gem 'redcarpet', '~> 3.1.2'
+gem 'redcarpet', '~> 3.4.0'
 
 # Devise, authentication framework
 gem 'devise', '3.5.5'

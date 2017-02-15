@@ -56,7 +56,9 @@ module ApplicationHelper
     extensions = {
       autolink:                     true,
       superscript:                  true,
-      disable_indented_code_blocks: true
+      tables:                       true,
+      no_intra_emphasis:            true,
+      strikethrough:                true
     }
 
     renderer = Redcarpet::Render::CleanerHTML.new(options)
