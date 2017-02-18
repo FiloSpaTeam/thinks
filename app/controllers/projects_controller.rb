@@ -151,7 +151,7 @@ class ProjectsController < ApplicationController
       @contribution.save_and_update_team_role
 
       create_notification(@project, @project)
-      format.html { redirect_to :back, notice: 'Your contribution has been saved!' }
+      format.html { redirect_to project_path(@project), notice: 'Your contribution has been saved!' }
     end
   end
 
