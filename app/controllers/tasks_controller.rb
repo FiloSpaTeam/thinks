@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
   before_action :set_project, only: [:new, :index, :create]
 
-  # before_action :check_ban!, except: [:index]
+  before_action :check_ban!, except: [:index]
 
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
