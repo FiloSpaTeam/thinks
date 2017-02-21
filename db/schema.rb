@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201214003) do
+ActiveRecord::Schema.define(version: 20170218112555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,6 +298,7 @@ ActiveRecord::Schema.define(version: 20170201214003) do
     t.integer  "impressions_count",                default: 0
     t.boolean  "suspended",                        default: false
     t.string   "logo"
+    t.integer  "contribution_type",                default: 0
   end
 
   add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
