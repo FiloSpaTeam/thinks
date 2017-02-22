@@ -166,6 +166,9 @@ en:
       password_requirements: "8 minimum chars."
 
   projects:
+    contribution_type:
+      open: "Open"
+      with_recruiting: "With recruiting"
     index:
       projects    : "Projects"
       small_title : "created by community for community"
@@ -433,6 +436,10 @@ en:
       s_third: "Third section"
     taskstatuspanel:
       your_rating: "Your rating"
+    projectsettingsbar:
+      transfer_project: "Transfer project"
+      link_to_master_project: "Link to another project"
+      skill_requirements: "Skill requirements"
 
   # ActiveRecord override translation
   activerecord:
