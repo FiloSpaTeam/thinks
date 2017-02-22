@@ -31,18 +31,10 @@
       %span.counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
         = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
   %h2
-    Sprint and release date
-  %p
-    If you want you can set your <strong>release date</strong>. The release date describes the moment in which <strong>starts development</strong> of the project.
-    %br
-    <strong>Before that moment, the project is under <i>"backlogging"</i></strong>, where you and your team should design (create goals, tasks and organize them).
-
-  %p
-    When the project starts, you and your team can start work over tasks, complete goals and so on.
-    %br
-    The working period is usefull to divide the entire development process into subperiods (1 week, 2 weeks..., called <strong><i>"Sprint"</i></strong>) so you can study your development's "speed", take surveys about work and get charts.
+    = t 'shared.projectsettingsbar.sprint_and_release_date'
+  = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
   .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "<strong>There are no bad choices.</strong><br>Depends on your changing speed (you need to change details usually?).<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>", 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
       = icon('info-circle')
     = f.label :cycle_id, :class => "control-label"
     = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
@@ -51,7 +43,7 @@
     = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
     %span#help-release_at.help-block= t ".release_at_help"
   .form-group.required
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>", 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_2'), 'data-html' => 'true' do
       = icon('info-circle')
     = f.label :minimum_team_number, :class => 'control-label'
     = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2

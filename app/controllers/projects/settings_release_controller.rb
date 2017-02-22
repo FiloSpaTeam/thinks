@@ -22,9 +22,6 @@ class Projects::SettingsReleaseController < ApplicationController
   before_action :set_project
   before_action :thinker!
 
-  def index
-  end
-
   def create
     respond_to do |format|
       if @project.started?
@@ -47,6 +44,10 @@ class Projects::SettingsReleaseController < ApplicationController
   private
 
   def release_params
-    params.require(:project).permit(:minimum_team_number, :release_at, :license_id, :category_id)
+    params.require(:project).permit(
+      :minimum_team_number,
+      :release_at,
+      :cycle_id
+    )
   end
 end
