@@ -452,11 +452,12 @@ en:
           When the project starts, you and your team can start work over tasks, complete goals and so on.
           <br>
           The working period is usefull to divide the entire development process into subperiods (1 week, 2 weeks..., called <strong><i>\"Sprint\"</i></strong>) so you can study your development's \"speed\", take surveys about work and get charts.
-        </p>
-      "
+        </p>"
       sprint_and_release_date_help_1: "<strong>There are no bad choices.</strong><br>Depends on your changing speed (you need to change details usually?).<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>"
       sprint_and_release_date_help_2: "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>"
       links: "Category, license and links"
+      links_introduction: "<p>You can select only <strong>Free Software (as in freedom) compatible licenses</strong>.</p>"
+      links_help_1: "Choose the right category and everyone can see your project under that."
       images: "Logo and main image"
 
   # ActiveRecord override translation
