@@ -61,9 +61,9 @@ Rails.application.routes.draw do
       resources :links, :controller   => :settings_links, :only   => [:index, :create]
       resources :other, :controller   => :settings_other, :only   => [:index, :create]
       resources :release, :controller => :settings_release, :only => [:index, :create]
-      resources :sprint, :controller  => :settings_sprint, :only  => [:index, :create]
       resources :skills, :controller => :settings_skills, except: [:show, :update, :edit]
       resources :father, :controller => :settings_father, :only => [:index, :create, :destroy]
+      resources :images, :controller => :settings_images, :only => [:index, :create]
     end
 
     resources :sprints, shallow: true do

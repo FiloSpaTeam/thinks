@@ -203,8 +203,6 @@ en:
       dates      : "Dates"
       release_at_help: "If release date is before today, the project is declared started."
       main_image: "Main image"
-      square_image: "Square image, 256x256 (jpg, png)"
-      landscape_image: "Landscape image, 1080x670 (jpg, png)"
     tasks:
       scrum_table : "Scrum table"
       tasks       : "tasks"
@@ -437,6 +435,7 @@ en:
     taskstatuspanel:
       your_rating: "Your rating"
     projectsettingsbar:
+      description_help_1: "Medium (or long if you want) text that explain well <strong>what do you expect from</strong> this project and <strong>what do you want to realize</strong>.<br><br>The <strong>first row appears in the main page</strong> as \"<i>Short description</i>\" <strong>under title</strong> in the cards.<br>So, choose right words to get a beautiful card in the main page!"
       transfer_project: "Transfer project"
       link_to_master_project: "Link to another project"
       skill_requirements: "Skill requirements"
@@ -458,7 +457,10 @@ en:
       links: "Category, license and links"
       links_introduction: "<p>You can select only <strong>Free Software (as in freedom) compatible licenses</strong>.</p>"
       links_help_1: "Choose the right category and everyone can see your project under that."
-      images: "Logo and main image"
+      logo_and_main_image: "Logo and main image"
+      logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
+      square_image: "Square image, 256x256 (jpg, png)"
+      landscape_image: "Landscape image, 1080x670 (jpg, png)"
 
   # ActiveRecord override translation
   activerecord:
