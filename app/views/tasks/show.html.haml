@@ -24,7 +24,7 @@
           %span.hidden-xs
             Reopen
       %li.pull-left.hidden-xxs
-        = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35' do
+        = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35', data: { confirm: 'Are you sure?' } do
           = icon('trash-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
             Delete
