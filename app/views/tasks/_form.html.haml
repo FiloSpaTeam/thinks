@@ -32,14 +32,14 @@
       = icon('info-circle')
     = f.label :father_id, t('.father'), :class => "control-label"
     = f.select :father_id, options_from_collection_for_select(@father_tasks, 'id', 'title', @task.father_id), {include_blank: t('no_father')}, :class => "form-control"
-  .form-group
+  .form-group.required
     = f.label :title, :class => "control-label"
     = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
     %span#help-title.help-block
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_title }
         = @chars_max_title - f.object.title.try('length').to_i
-  .form-group
+  .form-group.required
     = f.label :description, :class => "control-label" do
       = render partial: 'shared/markdown_syntax'
       = t ".description"
