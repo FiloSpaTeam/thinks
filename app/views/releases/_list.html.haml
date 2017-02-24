@@ -15,57 +15,57 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-default
-  .panel-heading
-    = smart_listing_controls_for :releases do
+.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
+  = smart_listing_controls_for :releases do
+    .form-group
       = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
-      = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-  .panel-body{ :style => 'padding: 0;' }
-    %table.table.table-condensed.table-hover#filterrific_results
-      %thead
-        %tr
-          %td
-            .col-xs-11
-              %h5
-                %strong
-                  = t "release"
-      %tbody
-        - unless smart_listing.empty?
-          - smart_listing.collection.each do |release|
-            %tr
-              %td
-                %a.pull-right.btn.hidden-xs{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
-                  = icon('tasks', :class => "dark-grey")
-                %strong.hidden-xs.hidden-sm
-                  %small.dark-grey
-                    - remaining_days = (DateTime.now.to_date - release.end_at).to_i
-                    - if (remaining_days > 0)
-                      %span.text-danger
-                        +
-                        = remaining_days
-                    - else
-                      = remaining_days
-                    ·
-                    = release.end_at.to_s(:short)
-                    ·
-                  = link_to release.title.truncate(40), release_path(release), :title => release.title
-                  \- v#{release.version}
-                %strong.visible-xs
-                  = link_to release.title.truncate(50), release_path(release), :title => release.title
-                %strong.visible-sm
-                  = link_to release.title, release_path(release)
-                .dark-grey
-                  %small
-                    %em
-                      = plain_text(release.description).truncate(150)
-                    .progress
-                      .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
-                        = release.progress
-                        \%
-        - else
-          %tr.warning
-            %td.text-center{ colspan: 3 }
+    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+.panel-default.margin-top-5
+  %table.table.table-condensed.table-hover#filterrific_results
+    %thead
+      %tr
+        %td
+          .col-xs-11
+            %h5
               %strong
-                No records found
-    = smart_listing.paginate
-    = smart_listing.pagination_per_page_links
+                = t "release"
+    %tbody
+      - unless smart_listing.empty?
+        - smart_listing.collection.each do |release|
+          %tr
+            %td
+              %a.pull-right.btn.hidden-xs{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
+                = icon('tasks', :class => "dark-grey")
+              %strong.hidden-xs.hidden-sm
+                %small.dark-grey
+                  - remaining_days = (DateTime.now.to_date - release.end_at).to_i
+                  - if (remaining_days > 0)
+                    %span.text-danger
+                      +
+                      = remaining_days
+                  - else
+                    = remaining_days
+                  ·
+                  = release.end_at.to_s(:short)
+                  ·
+                = link_to release.title.truncate(40), release_path(release), :title => release.title
+                \- v#{release.version}
+              %strong.visible-xs
+                = link_to release.title.truncate(50), release_path(release), :title => release.title
+              %strong.visible-sm
+                = link_to release.title, release_path(release)
+              .dark-grey
+                %small
+                  %em
+                    = plain_text(release.description).truncate(150)
+                  .progress
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
+                      = release.progress
+                      \%
+      - else
+        %tr.warning
+          %td.text-center{ colspan: 3 }
+            %strong
+              No records found
+  = smart_listing.paginate
+  = smart_listing.pagination_per_page_links

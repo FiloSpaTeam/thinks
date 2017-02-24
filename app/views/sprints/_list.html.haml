@@ -15,61 +15,60 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel.panel-default
-  .panel-body{ :style => 'padding: 0;' }
-    %table.table.table-condensed.table-hover
-      %thead
-        %tr
-          %td
-          %td
-            .col-xs-11
-              %h5
-                %strong
-                  = t "created_at"
-          %td
-            .col-xs-11
-              %h5
-                %strong
-                  = t "updated_at"
-          %td
-            .col-xs-3
-              %h5
-                %strong
-                  = t "obtained"
-          - if (@project.part_of_team?(current_thinker))
-            %td
-              .col-xs-2.hidden-xs
-                %h5
-                  %strong
-                    = t ".survey"
-      %tbody
-        - unless smart_listing.empty?
-          - smart_listing.collection.each do |sprint|
-            %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
-              %td
-                Sprint #{sprint.serial}
-              %td
-                %span{ title: sprint.created_at.to_s(:long) }
-                  = sprint.created_at.to_s(:short)
-              %td
-                %span{ title: sprint.updated_at.to_s(:long) }
-                  = sprint.updated_at.to_s(:short)
-              %td.text-center
-                = sprint.obtained
-              - if (@project.part_of_team?(current_thinker))
-                %td.text-center
-                  - if (@project.sprint != sprint.serial)
-                    - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
-                    - if answers_thinker.empty?
-                      %a.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
-                        = icon('circle-o', :class => "dark-grey fa-lg")
-                    - else
-                      %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
-                        = icon('check-circle-o', :class => "dark-grey fa-lg")
-        - else
-          %tr.warning
-            %td.text-center{ colspan: 5 }
+.panel-default
+  %table.table.table-condensed.table-hover
+    %thead
+      %tr
+        %td
+        %td
+          .col-xs-11
+            %h5
               %strong
-                No records found
-    = smart_listing.paginate
-    = smart_listing.pagination_per_page_links
+                = t "created_at"
+        %td
+          .col-xs-11
+            %h5
+              %strong
+                = t "updated_at"
+        %td
+          .col-xs-3
+            %h5
+              %strong
+                = t "obtained"
+        - if (@project.part_of_team?(current_thinker))
+          %td
+            .col-xs-2.hidden-xs
+              %h5
+                %strong
+                  = t ".survey"
+    %tbody
+      - unless smart_listing.empty?
+        - smart_listing.collection.each do |sprint|
+          %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
+            %td
+              Sprint #{sprint.serial}
+            %td
+              %span{ title: sprint.created_at.to_s(:long) }
+                = sprint.created_at.to_s(:short)
+            %td
+              %span{ title: sprint.updated_at.to_s(:long) }
+                = sprint.updated_at.to_s(:short)
+            %td.text-center
+              = sprint.obtained
+            - if (@project.part_of_team?(current_thinker))
+              %td.text-center
+                - if (@project.sprint != sprint.serial)
+                  - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
+                  - if answers_thinker.empty?
+                    %a.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+                      = icon('circle-o', :class => "dark-grey fa-lg")
+                  - else
+                    %a.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }
+                      = icon('check-circle-o', :class => "dark-grey fa-lg")
+      - else
+        %tr.warning
+          %td.text-center{ colspan: 5 }
+            %strong
+              No records found
+  = smart_listing.paginate
+  = smart_listing.pagination_per_page_links
