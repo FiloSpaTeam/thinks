@@ -24,7 +24,7 @@ class Projects::SettingsImagesController < ApplicationController
 
   def create
     respond_to do |format|
-      if @project.update(release_params)
+      if @project.update(images_params)
         format.html { redirect_to project_settings_release_index_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
