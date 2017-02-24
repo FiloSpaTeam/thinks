@@ -36,6 +36,12 @@ class OperationsController < ApplicationController
                       .with_deleted
                       .where(thinker: current_thinker)
                       .first
+
+    @breadcrumbs = {
+      "project_tasks_path('#{@task.project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
+      "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
+      'nil' => I18n.t('operations_t')
+    }
   end
 
   # GET /operations/1/edit

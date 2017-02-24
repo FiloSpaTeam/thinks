@@ -13,20 +13,29 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2017, Claudio Maradonna
 
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
     = render partial: 'shared/projectsettingsbar'
   .col-md-8
-    = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
-      .form-group.has-feedback
-        = label_tag :owner, nil, :class => 'control-label'
-        = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
-        %span#help-owner-email.help-block
-          = t ".change_owner_email"
+    %h2
+      = t 'shared.projectsettingsbar.logo_and_main_image'
+    = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
+      .form-group
+        = f.label :logo, :class => 'control-label'
+        = f.attachinary_file_field :logo
+        %span#help-main-image.help-block
+          = t "shared.projectsettingsbar.square_image"
+      .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.logo_and_main_image_help_1'), 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :main_image, :class => 'control-label'
+        = f.attachinary_file_field :main_image
+        %span#help-main-image.help-block
+          = t "shared.projectsettingsbar.landscape_image"
       %hr
-      = f.submit 'Transfer', :class => 'btn btn-primary'
+      = f.submit nil, :class => 'btn btn-primary'
       = link_to t('.cancel', :default => t("helpers.links.cancel")), |
         projects_path, :class => 'btn btn-default'                   |

@@ -21,10 +21,6 @@
     = render partial: 'shared/projectsettingsbar'
   .col-md-8
     .panel.panel-default
-      .panel-heading
-        %h4
-          %strong
-            = t ".skill_requirements"
       %ul.list-group
         - if @project.skills.empty?
           %li.list-group-item
@@ -35,11 +31,11 @@
               = link_to project_settings_skill_path(@project, skill), data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'pull-right' do
                 = icon('remove', :class => "text-danger fa-lg")
               = t "skills.#{skill.t_name}"
-      .panel-footer
-        - if @project.skills.count < 8
-          = form_for @project, url: project_settings_skills_path(@project), method: :post do |f|
-            .form-group
-              = f.select :skill_ids, options_for_select(Skill.order('t_name').all.map{ |s| [t("skill.#{s.t_name}"), s.id] }, disabled: @project.skills.map(&:id)), class: 'form-control'
-            = f.submit 'Add skill', :class => 'btn btn-primary'
-        - else
-          Max number of skills is 8
+    %hr
+    - if @project.skills.count < 8
+      = form_for @project, url: project_settings_skills_path(@project), method: :post do |f|
+        .form-group
+          = f.select :skill_ids, options_for_select(Skill.order('t_name').all.map{ |s| [t("skill.#{s.t_name}"), s.id] }, disabled: @project.skills.map(&:id)), class: 'form-control'
+        = f.submit 'Add skill', :class => 'btn btn-primary'
+    - else
+      Max number of skills is 8

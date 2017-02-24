@@ -17,15 +17,18 @@
 
 .panel.panel-default
   .panel-heading
-    %strong=t '.general'
+    %strong=t '.settings'
   .list-group
     = link_to(t('.description'), edit_project_path(@project), :class => "list-group-item #{ current_page?(edit_project_path(@project)) ? 'active' : '' }")
-    = link_to(t('.release_date_and_other_stuff'), project_settings_release_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.sprint_and_release_date'), project_settings_release_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
     = link_to(t('.links'), project_settings_links_path(@project), :class => "list-group-item #{ current_page?(project_settings_links_path(@project)) ? 'active' : '' }")
-    = link_to(t('.sprint_settings'), project_settings_sprint_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_sprint_index_path(@project)) ? 'active' : '' }")
-    = link_to(t('.other_settings'), project_settings_other_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
-    = link_to(t('.master_project'), project_settings_father_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_father_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.images_settings'), project_settings_images_path(@project), :class => "list-group-item #{ current_page?(project_settings_images_path(@project)) ? 'active' : '' }")
   .panel-heading
     %strong=t '.team'
   .list-group
     = link_to(t('.skill_requirements'), project_settings_skills_path(@project), :class => "list-group-item #{ current_page?(project_settings_skills_path(@project)) ? 'active' : '' }")
+  .panel-heading
+    %strong=t '.actions'
+  .list-group
+    = link_to(t('.transfer_project'), project_settings_other_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.link_to_master_project'), project_settings_father_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_father_index_path(@project)) ? 'active' : '' }")

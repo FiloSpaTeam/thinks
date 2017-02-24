@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def index
     projects_scope = Project
                      .includes(:category, :thinker)
-                     .where('project_id is NULL')
+                     .where('projects.project_id is NULL')
 
     if params[:filters].present?
       projects_scope = apply_filters(projects_scope, params[:filters])
@@ -151,7 +151,7 @@ class ProjectsController < ApplicationController
       @contribution.save_and_update_team_role
 
       create_notification(@project, @project)
-      format.html { redirect_to :back, notice: 'Your contribution has been saved!' }
+      format.html { redirect_to project_path(@project), notice: 'Your contribution has been saved!' }
     end
   end
 

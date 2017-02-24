@@ -25,7 +25,7 @@ gem 'cloudinary'
 gem 'attachinary'
 
 # Bootstrap SASS port
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-sass-extras', '0.0.6'
 
 # Datepicker Bootstrap (maybe we can do without that?)
@@ -45,7 +45,6 @@ gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 
 # Filter for views
-# gem 'filterrific', '2.0.5'
 gem 'smart_listing', '1.2.0'
 
 # Statistics about views
@@ -77,7 +76,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 # For rake doc:guides
-gem 'redcarpet', '~> 3.1.2'
+gem 'redcarpet', '~> 3.4.0'
 
 # Devise, authentication framework
 gem 'devise', '3.5.5'
@@ -102,6 +101,9 @@ gem 'chartkick', '~> 2.0.0'
 # API
 gem 'rabl', '0.12.0'
 gem 'oj', '2.17.1'
+
+# Database dump
+gem 'seed_dump'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

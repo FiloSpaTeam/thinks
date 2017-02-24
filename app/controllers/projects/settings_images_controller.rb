@@ -13,9 +13,9 @@
 # You should have received a copy of the GNU Affero Public License
 # along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
-# Copyright (c) 2015, Claudio Maradonna
+# Copyright (c) 2017, Claudio Maradonna
 
-class Projects::SettingsReleaseController < ApplicationController
+class Projects::SettingsImagesController < ApplicationController
   include ProjectsHelper
 
   before_action :authenticate_thinker!
@@ -24,14 +24,7 @@ class Projects::SettingsReleaseController < ApplicationController
 
   def create
     respond_to do |format|
-      if @project.started?
-        if @project.release_at != release_params[:release_at]
-          format.html { redirect_to project_settings_release_index_path(@project), error: t(:cant_update_release_at) }
-          format.json { render json: @project.errors, status: :cant_update_release_at }
-        end
-      end
-
-      if @project.update(release_params)
+      if @project.update(images_params)
         format.html { redirect_to project_settings_release_index_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -43,11 +36,10 @@ class Projects::SettingsReleaseController < ApplicationController
 
   private
 
-  def release_params
+  def images_params
     params.require(:project).permit(
-      :minimum_team_number,
-      :release_at,
-      :cycle_id
+      :logo,
+      :main_image
     )
   end
 end

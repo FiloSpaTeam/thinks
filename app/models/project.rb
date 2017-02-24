@@ -53,6 +53,8 @@ class Project < ActiveRecord::Base
   belongs_to :category
   belongs_to :project
 
+  enum contribution_type: [:open, :with_recruiting]
+
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
   validates :description, length: { in: 2..1600 }

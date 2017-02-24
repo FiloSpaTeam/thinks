@@ -20,23 +20,26 @@
   .col-md-4
     = render partial: 'shared/projectsettingsbar'
   .col-md-8
-    .panel.panel-default
-      = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
-        .panel-body
-          .form-group
-            = f.label :category_id, :class => 'control-label'
-            = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
-          .form-group
-            = f.label :license_id, :class => 'control-label'
-            = f.select :license_id, options_from_collection_for_select(License.all.order(:name), 'id', 'description', @project.license_id), {}, :class => 'form-control'
-          .form-group
-            = f.label :minimum_team_number, :class => 'control-label'
-            = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
-          .form-group
-            = f.label :release_at, :class => 'control-label'
-            = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
-            %span#help-release_at.help-block= t ".release_at_help"
-        .panel-footer
-          = f.submit nil, :class => 'btn btn-primary'
-          = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-            projects_path, :class => 'btn btn-default'                   |
+    %h2
+      = t 'shared.projectsettingsbar.sprint_and_release_date'
+    = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
+
+    = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
+      .form-group
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :cycle_id, :class => "control-label"
+        = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+      .form-group
+        = f.label :release_at, :class => 'control-label'
+        = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+        %span#help-release_at.help-block= t ".release_at_help"
+      .form-group.required
+        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_2'), 'data-html' => 'true' do
+          = icon('info-circle')
+        = f.label :minimum_team_number, :class => 'control-label'
+        = f.number_field :minimum_team_number, :class => 'form-control ', :min => 2
+      %hr
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+        projects_path, :class => 'btn btn-default'                   |

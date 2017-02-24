@@ -80,6 +80,7 @@ en:
   view_all: "View all"
   average: "Average"
   close: "Close"
+  operations_t: "Operations"
 
   layouts:
     application:
@@ -132,6 +133,9 @@ en:
     show:
       profile : "Profile"
       photo: "Photo"
+      image_not_defined: "Image not defined"
+      sex: "Gender"
+      created_at: "Registered at"
     form:
       photo: "Photo"
     notifications:
@@ -162,6 +166,9 @@ en:
       password_requirements: "8 minimum chars."
 
   projects:
+    contribution_type:
+      open: "Open"
+      with_recruiting: "With recruiting"
     index:
       projects    : "Projects"
       small_title : "created by community for community"
@@ -196,8 +203,6 @@ en:
       dates      : "Dates"
       release_at_help: "If release date is before today, the project is declared started."
       main_image: "Main image"
-      square_image: "Square image, 256x256 (jpg, png)"
-      landscape_image: "Landscape image, 1080x670 (jpg, png)"
     tasks:
       scrum_table : "Scrum table"
       tasks       : "tasks"
@@ -429,6 +434,33 @@ en:
       s_third: "Third section"
     taskstatuspanel:
       your_rating: "Your rating"
+    projectsettingsbar:
+      description_help_1: "Medium (or long if you want) text that explain well <strong>what do you expect from</strong> this project and <strong>what do you want to realize</strong>.<br><br>The <strong>first row appears in the main page</strong> as \"<i>Short description</i>\" <strong>under title</strong> in the cards.<br>So, choose right words to get a beautiful card in the main page!"
+      transfer_project: "Transfer project"
+      link_to_master_project: "Link to another project"
+      skill_requirements: "Skill requirements"
+      description: "Title and description"
+      sprint_and_release_date: "Sprint and release date"
+      sprint_and_release_date_introduction: "
+        <p>
+          If you want you can set your <strong>release date</strong>. The release date describes the moment in which <strong>starts development</strong> of the project.
+          <br>
+          <strong>Before that moment, the project is under <i>\"backlogging\"</i></strong>, where you and your team should design (create goals, tasks and organize them).
+        </p>
+        <p>
+          When the project starts, you and your team can start work over tasks, complete goals and so on.
+          <br>
+          The working period is usefull to divide the entire development process into subperiods (1 week, 2 weeks..., called <strong><i>\"Sprint\"</i></strong>) so you can study your development's \"speed\", take surveys about work and get charts.
+        </p>"
+      sprint_and_release_date_help_1: "<strong>There are no bad choices.</strong><br>Depends on your changing speed (you need to change details usually?).<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>"
+      sprint_and_release_date_help_2: "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>"
+      links: "Category, license and links"
+      links_introduction: "<p>You can select only <strong>Free Software (as in freedom) compatible licenses</strong>.</p>"
+      links_help_1: "Choose the right category and everyone can see your project under that."
+      logo_and_main_image: "Logo and main image"
+      logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
+      square_image: "Square image, 256x256 (jpg, png)"
+      landscape_image: "Landscape image, 1080x670 (jpg, png)"
 
   # ActiveRecord override translation
   activerecord:

@@ -15,8 +15,8 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-- if thinker_signed_in?
-  .panel-body.border-bottom
+.panel-body.border-bottom
+  - if thinker_signed_in?
     %h4.font-bold
       Your contribution
     - if current_thinker != project.thinker
@@ -36,8 +36,14 @@
         - my_roles.each do |role|
           %li
             = t "team_roles.#{role.team_role.t_name}"
-    -# .panel-footer
-    -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
+    %hr
+  %h4.font-bold
+    Project contribution
+  %ul
+    %li
+      = t "projects.contribution_type." + project.contribution_type
+  -# .panel-footer
+  -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
 .panel-body
   %h4.font-bold
     General details

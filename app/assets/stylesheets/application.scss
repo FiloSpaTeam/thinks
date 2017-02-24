@@ -270,6 +270,14 @@ a {
     }
 }
 
+.square { width: 100%; }
+
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
 // @import "dashboard";
 @import "cover";
 @import "carousel";

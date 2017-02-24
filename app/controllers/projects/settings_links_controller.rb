@@ -40,6 +40,14 @@ class Projects::SettingsLinksController < ApplicationController
   private
 
   def links_params
-    params.require(:project).permit(:home_url, :documentation_url, :source_code_url, :donate_button, :mailing_list_url)
+    params.require(:project).permit(
+      :category_id,
+      :license_id,
+      :home_url,
+      :documentation_url,
+      :source_code_url,
+      :donate_button,
+      :mailing_list_url
+    )
   end
 end

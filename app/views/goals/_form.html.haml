@@ -18,10 +18,10 @@
 = form_for [@project_form, @goal] do |f|
   .form-group
     = f.label :title, :class => "control-label"
-    = f.text_field :title, :class => "form-control", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
     %span#help-title.help-block
       = t "remaining_chars"
-      %span#counter{ 'data-maximum-length' => @chars_max_title }
+      %span.counter{ 'data-maximum-length' => @chars_max_title }
         = @chars_max_title - f.object.title.try('length').to_i
   .form-group
     = render partial: 'shared/markdown_syntax'
@@ -31,4 +31,4 @@
   %hr
   = f.submit nil, :class => "btn btn-primary"
   = link_to t('back'), :back, :class => "btn btn-default"
-= init_counter_textarea('#goal_title', '#counter')
+= init_counter_textarea
