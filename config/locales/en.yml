@@ -461,6 +461,7 @@ en:
       logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
       square_image: "Square image, 256x256 (jpg, png)"
       landscape_image: "Landscape image, 1080x670 (jpg, png)"
+      contribution_settings: "Contribution settings"
 
   # ActiveRecord override translation
   activerecord:

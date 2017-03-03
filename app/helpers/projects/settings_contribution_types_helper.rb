@@ -1,0 +1,2 @@
+module Projects::SettingsContributionTypesHelper
+end

@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       resources :skills, :controller => :settings_skills, except: [:show, :update, :edit]
       resources :father, :controller => :settings_father, :only => [:index, :create, :destroy]
       resources :images, :controller => :settings_images, :only => [:index, :create]
+      resources :contribution_types, :controller => :settings_contribution_types, :only => [:index, :create]
     end
 
     resources :sprints, shallow: true do
