@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'recruitments/index'
+
   match '/404', :to => "errors#not_found", :via => :all
   match '/500', :to => "errors#internal_server_error", :via => :all
 
@@ -71,6 +73,7 @@ Rails.application.routes.draw do
       resources :survey, only: [:index, :create, :new]
     end
 
+    resources :recruitments, only: [:index, :new, :edit, :update], shallow: true
     resources :tasks, shallow: true do
       member do
         put :sprint

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218112555) do
+ActiveRecord::Schema.define(version: 20170303212607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -400,8 +400,8 @@ ActiveRecord::Schema.define(version: 20170218112555) do
     t.integer  "thinker_id"
     t.integer  "worker_thinker_id"
     t.integer  "status_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "title"
     t.integer  "goal_id"
     t.float    "workload"
@@ -411,7 +411,8 @@ ActiveRecord::Schema.define(version: 20170218112555) do
     t.datetime "end_at"
     t.integer  "who_updated_id"
     t.integer  "father_id"
-    t.integer  "impressions_count",  default: 0, null: false
+    t.integer  "impressions_count",  default: 0,     null: false
+    t.boolean  "recruitment",        default: false
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

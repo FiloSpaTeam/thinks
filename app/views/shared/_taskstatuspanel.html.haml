@@ -17,54 +17,66 @@
 
 .panel.panel-default.visible-sm.visible-md.visible-lg
   %ul.list-group
-    %li.list-group-item.hidden-xs
-      %strong
-        Count views
-      %span.pull-right
-        = task.impressions_count.to_i
-    %li.list-group-item
-      %strong
-        Release
-      %span.pull-right
-        - if task.release.present?
-          = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
-        - else
-          = t("not_defined_yet")
-    %li.list-group-item
-      %strong
-        Goal
-      %span.pull-right
-        - if task.goal.present?
-          = link_to task.goal.title.truncate(20), goal_path(task.goal), :title => task.goal.title
-        - else
-          = t("not_defined_yet")
-    %lu.list-group-item
-      %strong
-        Father
-      %span.pull-right
-        - if task.father.present?
-          = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
-        - else
-          = t("not_defined_yet")
-    - if task.children.count.nonzero?
+    - unless task.recruitment
+      %li.list-group-item.hidden-xs
+        %strong
+          Count views
+        %span.pull-right
+          = task.impressions_count.to_i
       %li.list-group-item
         %strong
-          Children
-        %ul{style: "max-height: 100px; overflow-y: scroll;padding-left: 13px;"}
-          - task.children.each do |child|
-            %li
-              = link_to task_path(child) do
-                %small
-                  = child.title
+          Release
+        %span.pull-right
+          - if task.release.present?
+            = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
+          - else
+            = t("not_defined_yet")
+      %li.list-group-item
+        %strong
+          Goal
+        %span.pull-right
+          - if task.goal.present?
+            = link_to task.goal.title.truncate(20), goal_path(task.goal), :title => task.goal.title
+          - else
+            = t("not_defined_yet")
+      %lu.list-group-item
+        %strong
+          Father
+        %span.pull-right
+          - if task.father.present?
+            = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
+          - else
+            = t("not_defined_yet")
+      - if task.children.count.nonzero?
+        %li.list-group-item
+          %strong
+            Children
+          %ul{style: "max-height: 100px; overflow-y: scroll;padding-left: 13px;"}
+            - task.children.each do |child|
+              %li
+                = link_to task_path(child) do
+                  %small
+                    = child.title
     %li.list-group-item
       %strong
         = t('tasks.status')
       %span.pull-right
-        - if task.deleted?
-          = t('closed')
+        - unless task.recruitment
+          - if task.deleted?
+            = t('closed')
+          - else
+            .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+            = t("projects.tasks.#{task.status.translation_code}")
         - else
-          .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
-          = t("projects.tasks.#{task.status.translation_code}")
+          - if task.deleted?
+            .round-sm.pull-left{ :class => "bg-danger" }
+            = t('refused')
+          - elsif task.done?
+            .round-sm.pull-left{ :class => "bg-success" }
+            = t('accepted')
+          - else
+            .round-sm.pull-left{ :class => "bg-backlog" }
+            = t('waiting')
     - unless task.deleted? && task.done?
       - if task.ratings.where(thinker: current_thinker).present?
         %li.list-group-item
@@ -135,55 +147,56 @@
               %i
                 = task.updater.name
 
-.panel.panel-default
-  %ul.list-group
-    %li.list-group-item
-      %strong
-        = t('tasks.workload')
-      %span.pull-right
-        = workload_description(task)
-  - if task.contributed?(current_thinker) && !task.deleted?
-    .panel-footer
-      - if workload_voted.nil?
-        - if !task.in_progress? && !task.done?
-          = form_for task, :url => judge_task_path(task), method: :put do |f|
-            .form-group
-              = f.label :workload, t('.define_workload'), class: "control-label"
-              = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
-            = f.submit t("submit"), :class => "btn btn-primary"
-        - else
-          %strong
-            = t ".you_cannot_vote"
-      - else
-        .text-right{ style: 'padding-right: 15px;' }
-          %strong
-            = t "tasks.show.you_voted", vote: workload_voted.workload.value
-  %ul.list-group.hidden-xs
-    %li.list-group-item
-      %strong
-        = t('tasks.worker')
-      - if !task.worker.nil?
-        %span.pull-right{ :title => task.worker.name }
-          = task.worker.name.try(:truncate, 20)
-        - if (task.worker == current_thinker || scrum_master?(task.project)) && task.status != Status.done.first
-          %strong
-            = link_to "Give up work", give_up_task_path(task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
-      - elsif task.status == Status.sprint.first
-        - if current_thinker.working_tasks.in_progress.present?
-          %h4 No one is working over this but you have yet something to do ;-P
-        - elsif !task.project.started?
-          %h4 The project is not started yet, wait. Your moment will come soon.
-        - elsif task.workloads.size.nonzero?
-          - if (task.father.present? && task.father.done?) || task.father.nil?
-            = link_to "Assigns me", assign_task_path(task), :method => :put, :class => "btn btn-success btn-block"
+- unless task.recruitment
+  .panel.panel-default
+    %ul.list-group
+      %li.list-group-item
+        %strong
+          = t('tasks.workload')
+        %span.pull-right
+          = workload_description(task)
+    - if task.contributed?(current_thinker) && !task.deleted?
+      .panel-footer
+        - if workload_voted.nil?
+          - if !task.in_progress? && !task.done?
+            = form_for task, :url => judge_task_path(task), method: :put do |f|
+              .form-group
+                = f.label :workload, t('.define_workload'), class: "control-label"
+                = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
+              = f.submit t("submit"), :class => "btn btn-primary"
           - else
-            %h4 Complete the father task to work on this task.
+            %strong
+              = t ".you_cannot_vote"
         - else
-          %h4 There are no opinions about this task. Share with a comment and vote!
-      - else
-        %h4 Actually the team didn't decide to work on. Talk about if you are interested
-    %li.list-group-item
-      %strong
-        Operations
-      = link_to task_operations_path(task), :class => "pull-right" do
-        = task.operations.with_deleted.where("done is true").size.to_s + " / " + task.operations.with_deleted.size.to_s
+          .text-right{ style: 'padding-right: 15px;' }
+            %strong
+              = t "tasks.show.you_voted", vote: workload_voted.workload.value
+    %ul.list-group.hidden-xs
+      %li.list-group-item
+        %strong
+          = t('tasks.worker')
+        - if !task.worker.nil?
+          %span.pull-right{ :title => task.worker.name }
+            = task.worker.name.try(:truncate, 20)
+          - if (task.worker == current_thinker || scrum_master?(task.project)) && task.status != Status.done.first
+            %strong
+              = link_to "Give up work", give_up_task_path(task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
+        - elsif task.status == Status.sprint.first
+          - if current_thinker.working_tasks.in_progress.present?
+            %h4 No one is working over this but you have yet something to do ;-P
+          - elsif !task.project.started?
+            %h4 The project is not started yet, wait. Your moment will come soon.
+          - elsif task.workloads.size.nonzero?
+            - if (task.father.present? && task.father.done?) || task.father.nil?
+              = link_to "Assigns me", assign_task_path(task), :method => :put, :class => "btn btn-success btn-block"
+            - else
+              %h4 Complete the father task to work on this task.
+          - else
+            %h4 There are no opinions about this task. Share with a comment and vote!
+        - else
+          %h4 Actually the team didn't decide to work on. Talk about if you are interested
+      %li.list-group-item
+        %strong
+          Operations
+        = link_to task_operations_path(task), :class => "pull-right" do
+          = task.operations.with_deleted.where("done is true").size.to_s + " / " + task.operations.with_deleted.size.to_s

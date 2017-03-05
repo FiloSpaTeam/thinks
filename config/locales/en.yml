@@ -211,6 +211,9 @@ en:
       sprint      : "Sprint"
       in_progress : "Progress"
       done        : "Done"
+    recruitments:
+      backlog: "Waiting"
+      done: "Recruited"
     projectsummary:
       my_stats : "My statistics" 
     statistics:
