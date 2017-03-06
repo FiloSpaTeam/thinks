@@ -29,8 +29,8 @@
         %span.hidden-xs
           Subprojects
         %span.caret
-      %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-subprojects" }
-        - @project.subprojects.each do |subproject|
+      %ul.scrollbar.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-subprojects", style: 'max-height: 400px;' }
+        - @project.subprojects.order(:title).each do |subproject|
           %li
             = link_to project_path(subproject) do
               - if subproject.logo
