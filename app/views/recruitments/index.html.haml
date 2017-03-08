@@ -13,7 +13,7 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2017, Claudio Maradonna
 
 - content_for :page_actions do
   %li.pull-left.hidden-xxs
@@ -21,16 +21,12 @@
       = icon('search', class: 'dark-grey')
       %span.hidden-xs
         Search
-  - if thinker_signed_in? && current_thinker.ban(@project).nil? && @project.participant?(current_thinker)
+  - if thinker_signed_in? && current_thinker.ban(@project).nil? && @project.recruit?(current_thinker)
     %li.pull-left.hidden-xxs
-      = link_to new_project_task_path, title: 'New task', class: 'line-height-25 line-height-35' do
+      = link_to new_project_recruitment_path, title: 'New task', class: 'line-height-25 line-height-35' do
         = icon('plus-square-o', class: 'dark-grey fa-lg')
         %span.hidden-xs
           New
 
 = render partial: 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @project }
-  #div-container-list.col-md-8
-    = smart_listing_render :tasks
+= smart_listing_render :recruitments

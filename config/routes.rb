@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'recruitments/index'
+
   match '/404', :to => "errors#not_found", :via => :all
   match '/500', :to => "errors#internal_server_error", :via => :all
 
@@ -64,10 +66,18 @@ Rails.application.routes.draw do
       resources :skills, :controller => :settings_skills, except: [:show, :update, :edit]
       resources :father, :controller => :settings_father, :only => [:index, :create, :destroy]
       resources :images, :controller => :settings_images, :only => [:index, :create]
+      resources :contribution_types, :controller => :settings_contribution_types, :only => [:index, :create]
     end
 
     resources :sprints, shallow: true do
       resources :survey, only: [:index, :create, :new]
+    end
+
+    resources :recruitments, shallow: true do
+      member do
+        put :approve
+        put :reopen
+      end
     end
 
     resources :tasks, shallow: true do
