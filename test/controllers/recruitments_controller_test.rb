@@ -1,9 +1,14 @@
 require 'test_helper'
 
 class RecruitmentsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  setup do
+    @task = tasks(:task_recruitment)
+
+    authenticate
   end
 
+  test 'should get index' do
+    get :index, project_id: @task.project_id
+    assert_response :success
+  end
 end

@@ -2,8 +2,8 @@
 
 one:
   project_id: 1
-  thinker_id: 1
+  thinker: admin
 
 two:
   project_id: 1
-  thinker_id: 1
+  thinker: admin

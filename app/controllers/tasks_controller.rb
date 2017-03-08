@@ -385,8 +385,7 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    allowed_params = [:title, :description]
-    allowed_params += [:status_id, :workload, :goal_id, :release_id, :father_id] unless @project.recruit?(current_thinker)
+    allowed_params = [:title, :description, :status_id, :workload, :goal_id, :release_id, :father_id]
 
     params.require(:task).permit(allowed_params)
   end

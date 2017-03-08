@@ -32,3 +32,13 @@ task_three:
   status: backlog
   workload: eight
   title: So, finally build with..
+
+task_recruitment:
+  serial: 3
+  title: Recruit me now
+  description: Impressive! You\'ve upgraded your armor! I\'ve made some upgrades of my own... 
+  project_id: 1
+  status: backlog
+  thinker: admin
+  who_updated_id: 135138680
+  recruitment: true
