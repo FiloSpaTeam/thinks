@@ -385,6 +385,7 @@ en:
     mobile_expert: "Mobile expert"
 
   breadcrumbs:
+    project_recruitments_path: "<i class='fa fa-user-plus'></i> <span class='hidden-xs hidden-sm'>Recruitments</span>"
     project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs hidden-sm'>Tasks</span>"
     project_releases_path: "<i class='fa fa-flag-checkered'></i> <span class='hidden-xs hidden-sm'>Releases</span>"
     project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs hidden-sm'>Goals</span>"

@@ -1,0 +1,109 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2017, Claudio Maradonna
+
+- content_for :page_actions do
+  - if scrum_master?(@task.project)
+    - if @task.deleted?
+      %li.pull-left.hidden-xxs
+        = link_to reopen_recruitment_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
+          = icon('history', class: 'dark-grey fa-lg')
+          %span.hidden-xs
+            Another chance
+    - elsif !@task.done?
+      %li.pull-left.hidden-xxs
+        = link_to recruitment_path(@task), :method => 'delete', title: 'Reject', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
+          = icon('times-circle-o', class: 'dark-grey fa-lg')
+          %span.hidden-xs
+            Reject
+      %li.pull-left.hidden-xxs
+        = link_to approve_recruitment_path(@task), :method => 'put', title: 'Approve', class: 'line-height-25 line-height-35', role: 'button' do
+          = icon('check-circle-o', class: 'dark-grey fa-lg')
+          %span.hidden-xs
+            Approve
+
+= render partial: 'shared/projectbar', locals: { project: @task.project }
+
+.row
+  .col-sm-4
+    = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
+  .col-sm-8
+    %h2.hidden-xs
+      Description
+    %h2.visible-xs
+      = @task.title
+    = markdown(@task.description)
+    %hr
+    %h3
+      Comments
+    .panel-default
+      - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
+        .panel-heading
+          = render :partial => 'comments/form'
+      %table.table.table-condensed
+        %tbody
+          - if @comments.empty?
+            %tr.warning
+              %td.text-center
+                %strong
+                  No comments yet
+          - @comments.each_with_index do |comment, index|
+            - if comment.approved && !comment.reason.nil?
+              %tr.info
+                %td.hidden-xxs{ style: 'width: 40px;' }
+                  - if comment.reason.thinker.avatar
+                    = cl_image_tag(comment.reason.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
+                  - else
+                    .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
+                      %i.fa.fa-question.fa-2x.margin-top-5
+                %td{ colspan: 2 }
+                  .dark-grey
+                    %strong
+                      = comment.reason.thinker.name
+                    %small
+                      commented
+                      = time_ago_in_words(comment.reason.created_at)
+                      ago
+                  .form-group
+                    = markdown(comment.reason.text, true)
+            %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
+              %td.hidden-xxs{ style: 'width: 40px;' }
+                - if comment.thinker.avatar
+                  = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
+                - else
+                  .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
+                    %i.fa.fa-question.fa-2x.margin-top-5
+
+                - if !comment.approved
+                  %ul.no-padding.margin-top-5{ style: 'list-style: none;' }
+                    - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil? 
+                      = edit_button(comment)
+                      - if !@task.in_progress? && !@task.done? && comment.reason.nil?
+                        = delete_button(comment)
+              %td
+                .dark-grey
+                  %strong
+                    = comment.thinker.name
+                  %small
+                    commented
+                    = time_ago_in_words(comment.created_at)
+                    ago
+                .form-group{ id: "comment-#{comment.id}" }
+                  = markdown(comment.text, true)
+              %td.text-center{ width: 50, style: 'vertical-align: middle;' }
+                = like_button(comment)
+                - if !@task.done? && @task.worker == current_thinker && !@task.deleted?
+                  = approve_button(comment)

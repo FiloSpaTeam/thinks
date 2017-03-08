@@ -74,13 +74,13 @@
                     ·
                     = children_button
                 ·
-                = link_to task.title.truncate(30), task_path(task), :title => task.title
+                = link_to task.title.truncate(30), recruitment_path(task), :title => task.title
               %strong.visible-xs
-                = link_to task.title.truncate(45), task_path(task), :title => task.title
+                = link_to task.title.truncate(45), recruitment_path(task), :title => task.title
               %strong.visible-sm
                 = std_deviation_button(task)
                 ·
-                = link_to task.title, task_path(task)
+                = link_to task.title, recruitment_path(task)
               .dark-grey.break-word
                 %small
                   %em

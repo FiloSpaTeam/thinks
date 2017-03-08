@@ -73,7 +73,13 @@ Rails.application.routes.draw do
       resources :survey, only: [:index, :create, :new]
     end
 
-    resources :recruitments, only: [:index, :new, :edit, :update], shallow: true
+    resources :recruitments, shallow: true do
+      member do
+        put :approve
+        put :reopen
+      end
+    end
+
     resources :tasks, shallow: true do
       member do
         put :sprint
