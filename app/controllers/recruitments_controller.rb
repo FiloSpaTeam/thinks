@@ -16,6 +16,8 @@
 # Copyright (c) 2017, Claudio Maradonna
 
 class RecruitmentsController < ApplicationController
+  include ProjectsHelper
+  include TasksHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
@@ -26,14 +28,16 @@ class RecruitmentsController < ApplicationController
   before_action :set_validators_for_show, only: [:show]
 
   before_action :check_ban!
-  before_action :check_contribution_type!
+  before_action :check_contribution_type!, only: [:new, :index, :create]
   before_action :check_demand!, only: [:new]
 
   def index
     rtasks_scope = Task
+                   .with_deleted
                    .includes(:thinker, :updater, :status)
                    .where(project: @project)
                    .where(recruitment: true)
+    rtasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
 
     @statuses = Status.where(translation_code: [:backlog, :done])
 
@@ -89,6 +93,27 @@ class RecruitmentsController < ApplicationController
   end
 
   def destroy
+    respond_to do |format|
+      if scrum_master?(@task.project)
+        if @task.deleted?
+          format.html { redirect_to project_tasks_url(@task.project), alert: 'Demand already rejected!' }
+        else
+          if params[:reason][:text].nil?
+            format.html { redirect_to @task, alert: 'You need to specify a reason.' }
+          else
+            @task.destroy_and_associate_reason(params.require(:reason), current_thinker)
+            create_notification(@task, @task.project)
+
+            format.html { redirect_to recruitment_path(@task), notice: 'Demand successfully rejected.' }
+          end
+        end
+
+        format.json { head :no_content }
+      else
+        format.html { redirect_to recruitment_path(@task), alert: 'Operation not allowed.' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def approve
