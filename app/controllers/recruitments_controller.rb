@@ -26,6 +26,7 @@ class RecruitmentsController < ApplicationController
   before_action :set_validators_for_show, only: [:show]
 
   before_action :check_ban!
+  before_action :check_contribution_type!
   before_action :check_demand!, only: [:new]
 
   def index
@@ -115,6 +116,14 @@ class RecruitmentsController < ApplicationController
       flash[:error] = 'You already made a recruitment demand!'
 
       redirect_to project_recruitments_path(@project)
+    end
+  end
+
+  def check_contribution_type!
+    if @project.open?
+      flash[:error] = "You don't need recruitment, project is open. Enjoy!"
+
+      redirect_to project_path(@project)
     end
   end
 end
