@@ -9,6 +9,6 @@ class RecruitmentsControllerTest < ActionController::TestCase
 
   test 'should get index' do
     get :index, project_id: @task.project_id
-    assert_response :success
+    assert_response :redirect
   end
 end
