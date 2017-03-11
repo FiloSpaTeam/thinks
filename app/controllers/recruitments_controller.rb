@@ -37,7 +37,7 @@ class RecruitmentsController < ApplicationController
                    .includes(:thinker, :updater, :status)
                    .where(project: @project)
                    .where(recruitment: true)
-    rtasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
+    rtasks_scope = apply_filters(rtasks_scope.without_deleted, params[:filters]) if params[:filters].present?
 
     @statuses = Status.where(translation_code: [:backlog, :done])
 
@@ -120,6 +120,12 @@ class RecruitmentsController < ApplicationController
   end
 
   def reopen
+    @task.restore(recursive: true)
+    create_notification(@task, @task.project)
+    respond_to do |format|
+      format.html { redirect_to @task, notice: 'Now demand has another chance.' }
+      format.json { render :show, status: :ok, location: @task }
+    end
   end
 
   private

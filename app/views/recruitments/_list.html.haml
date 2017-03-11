@@ -54,6 +54,10 @@
                   = link_to("filters[status_id]" => status, remote: true) do
                     .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.recruitments.#{status.translation_code}")
+              = content_tag(:li) do
+                = link_to("filters[with_deleted_at]" => 1, remote: true) do
+                  = icon('trash-o')
+                  = t('projects.recruitments.rejected')
     %tbody
       - unless smart_listing.empty?
         - smart_listing.collection.each do |task|
@@ -61,7 +65,10 @@
           -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
           %tr
             %td.hidden-xs.vertical-align-middle{ style: 'max-width: 36px;' }
-              .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
+              - unless task.deleted?
+                .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
+              - else
+                = icon('trash-o', :class => 'fa-2x')
             %td{ style: 'width: 100%;' }
               .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm

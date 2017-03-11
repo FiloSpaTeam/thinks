@@ -214,6 +214,7 @@ en:
     recruitments:
       backlog: "Waiting"
       done: "Recruited"
+      rejected: "Rejected"
     projectsummary:
       my_stats : "My statistics" 
     statistics:
