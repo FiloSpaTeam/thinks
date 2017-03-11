@@ -301,6 +301,11 @@ en:
         reopen: "%{thinker} reopened task '%{task}'"
         assign: "%{thinker} is working on '%{task}'"
         give_up: "%{thinker} gives up task '%{task}'"
+      recruitments:
+        create: "%{thinker} has made recruitment demand."
+        update: "%{thinker} updated it's own recruitment demand."
+        destroy: "Your demand was rejected."
+        reopen: "Your demand has been reopened."
       operations:
         create: "%{thinker} added an operation for '%{task}'"
         done: "%{thinker} ended an operation for '%{task}'"

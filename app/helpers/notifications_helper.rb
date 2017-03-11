@@ -60,7 +60,7 @@ module NotificationsHelper
 
     t "notifications.list.#{notification.controller}.#{notification.action}",
       case notification.controller
-      when 'tasks'
+      when 'tasks', 'recruitments'
         {
           thinker: notification.thinker.name,
           task: model.title
