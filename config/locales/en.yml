@@ -241,6 +241,11 @@ en:
     health_applications:    "Health applications"
     applications_fpa:       "Applications for public administrations"
 
+  recruitments:
+    form:
+      send: "Send"
+      warning_about: "<strong>Attention</strong>: this demand cannot be modified in the future and cannot be deleted, nor from you, nor from the Scrum master. Check twice your demand before sending."
+
   tasks:
     description: "Description"
     status: "Status"

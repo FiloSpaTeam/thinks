@@ -1,0 +1,37 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015, Claudio Maradonna
+
+= form_for [@project, @task], url: project_recruitments_path(@project) do |f|
+  %p.bg-warning.padding-15
+    = t(".warning_about").html_safe
+  .form-group.required
+    = f.label :title, :class => "control-label"
+    = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    %span#help-title.help-block
+      = t "remaining_chars"
+      %span.counter{ 'data-maximum-length' => @chars_max_title }
+        = @chars_max_title - f.object.title.try('length').to_i
+  .form-group.required
+    = f.label :description, :class => "control-label" do
+      = render partial: 'shared/markdown_syntax'
+      = t ".description"
+    = f.text_area :description, :class => 'form-control', :rows => 8, :placeholder => "Everything that helps team to understand why you want contribute, how and when.", "aria-describedby" => "help-description"
+    %span#help-description.help-block= t "char_minimum", chars: @chars_min_description
+  %hr
+  = f.submit t('.send'), :class => "btn btn-primary", data: { confirm: "Are you sure? (you cannot modify later)" }
+  = link_to t('back'), :back, :class => "btn btn-default"
+= init_counter_textarea

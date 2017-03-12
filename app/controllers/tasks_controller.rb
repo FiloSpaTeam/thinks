@@ -28,6 +28,7 @@ class TasksController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
 
   before_action :check_ban!, except: [:index]
+  before_action :check_task!, only: [:show]
 
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -332,6 +333,10 @@ class TasksController < ApplicationController
 
   private
 
+  def check_task!
+    redirect_to recruitment_path(@task) if @task.recruitment
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task
@@ -373,6 +378,12 @@ class TasksController < ApplicationController
     unless @project.participant?(current_thinker)
       flash[:alert] = 'You are not partecipating to this project as active member!'
       redirect_to project_tasks_path(@project)
+    end
+
+    if @project.recruit?(current_thinker)
+      flash[:alert] = 'To participate you need to have a demand. If you have one already, you need to wait approbation.'
+
+      redirect_to project_recruitments_path(@project)
     end
   end
 

@@ -30,6 +30,10 @@ class RecruitmentsController < ApplicationController
   before_action :check_ban!
   before_action :check_contribution_type!, only: [:new, :index, :create]
   before_action :check_demand!, only: [:new]
+  before_action :check_task!, only: [:show]
+  before_action :readonly_demand!, only: [:edit, :update]
+
+  before_action :set_validators_for_form_help, only: [:new]
 
   def index
     rtasks_scope = Task
@@ -81,9 +85,39 @@ class RecruitmentsController < ApplicationController
   end
 
   def new
+    @task         = Task.new
+    @task.project = @project
+
+    @breadcrumbs = {
+      "project_recruitments_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_recruitments_path'),
+      'nil' => I18n.t('new')
+    }
   end
 
+  # POST /projects/1/recruitments
+  # POST /projects/1/recruitments.json
   def create
+    @task = Task.new(recruitment_params)
+
+    @task.recruitment = true
+
+    @task.project = @project
+    @task.thinker = current_thinker
+    @task.updater = current_thinker
+
+    respond_to do |format|
+      if @task.save
+        create_notification(@task, @project)
+        format.html { redirect_to recruitment_path(@task), notice: 'Your demand was successfully sent.' }
+        format.json { render :show, status: :created, location: @task }
+      else
+        set_form_errors(@task)
+        set_validators_for_form_help
+
+        format.html { render :new }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
@@ -150,11 +184,35 @@ class RecruitmentsController < ApplicationController
     end
   end
 
+  def check_task!
+    redirect_to task_path(@task) unless @task.recruitment
+  end
+
+  def readonly_demand!
+    flash[:error] = 'You cannot edit your demand!'
+
+    redirect_to project_recruitments_path(@task.project)
+  end
+
   def check_contribution_type!
     if @project.open?
       flash[:error] = "You don't need recruitment, project is open. Enjoy!"
 
       redirect_to project_path(@project)
     end
+  end
+
+  def set_validators_for_form_help
+    description_validators = Task.validators_on(:description)[0]
+    @chars_min_description = description_validators.options[:minimum]
+
+    title_validators = Task.validators_on(:title)[0]
+    @chars_max_title = title_validators.options[:maximum]
+  end
+
+  def recruitment_params
+    allowed_params = [:title, :description]
+
+    params.require(:task).permit(allowed_params)
   end
 end

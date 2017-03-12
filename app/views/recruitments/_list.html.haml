@@ -54,6 +54,7 @@
                   = link_to("filters[status_id]" => status, remote: true) do
                     .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.recruitments.#{status.translation_code}")
+              = menu_divider
               = content_tag(:li) do
                 = link_to("filters[with_deleted_at]" => 1, remote: true) do
                   = icon('trash-o')
