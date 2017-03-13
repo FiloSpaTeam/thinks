@@ -29,5 +29,6 @@
           New
 
 = render partial: 'shared/projectbar', locals: { project: @project }
+= render partial: 'recruitments/manifest', locals: { project: @project }
 #div-container-list
   = smart_listing_render :recruitments

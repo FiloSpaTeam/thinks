@@ -21,6 +21,8 @@ class RecruitmentsController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
+  impressionist actions: [:index]
+
   before_action :authenticate_thinker!
 
   before_action :set_task, only: [:show, :edit, :update, :destroy]
@@ -53,6 +55,12 @@ class RecruitmentsController < ApplicationController
     @breadcrumbs = {
       "project_recruitments_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_recruitments_path')
     }
+
+    @recruitment_manifest_seen = Impression
+                                 .where(controller_name: 'recruitments')
+                                 .where(user_id: current_thinker)
+                                 .where(action_name: :index)
+                                 .count
 
     @search = ''
     if params.key?(:filters) &&

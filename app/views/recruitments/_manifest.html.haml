@@ -1,0 +1,17 @@
+#modal-recruitment-manifest.modal.fade{ tabindex: "-1", role: "dialog", 'data-seen': @recruitment_manifest_seen }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header
+        %button{ type: "button", class: "close", 'data-dismiss': "modal", 'aria-label': "Close" }
+        %span{ 'aria-hidden': "true" }
+          &times;
+        %h4.modal-title
+          Modal title
+      .modal-body
+        %p
+          One fine body&hellip;
+      .modal-footer
+        %button{ type: "button", class: "btn btn-default", 'data-dismiss': "modal" }
+          Close
+        %button{ type: "button", class: "btn btn-primary" }
+          Save changes
