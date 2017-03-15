@@ -22,24 +22,25 @@
         = icon('info-circle')
       = f.label :release_id, t('.release'), :class => "control-label"
       = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
-  .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "Specify goal is important to reach the goal itself. The goal is defined in another page, but here you can link specific tasks to that.", 'data-html' => 'true' do
-      = icon('info-circle')
-    = f.label :goal_id, t('.goal'), :class => "control-label"
-    = f.select :goal_id, options_from_collection_for_select(@project_goals, 'id', 'title', @task.goal_id), {include_blank: t('no_goal')}, :class => "form-control"
-  .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "Father specify a task that you need to complete before this, like a dependence.<br><br><i>You cannot change this option when task is in progress or done.</i>", 'data-html' => 'true' do
-      = icon('info-circle')
-    = f.label :father_id, t('.father'), :class => "control-label"
-    = f.select :father_id, options_from_collection_for_select(@father_tasks, 'id', 'title', @task.father_id), {include_blank: t('no_father')}, :class => "form-control"
-  .form-group
+  - unless @project.recruit?(current_thinker)
+    .form-group
+      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "Specify goal is important to reach the goal itself. The goal is defined in another page, but here you can link specific tasks to that.", 'data-html' => 'true' do
+        = icon('info-circle')
+      = f.label :goal_id, t('.goal'), :class => "control-label"
+      = f.select :goal_id, options_from_collection_for_select(@project_goals, 'id', 'title', @task.goal_id), {include_blank: t('no_goal')}, :class => "form-control"
+    .form-group
+      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "Father specify a task that you need to complete before this, like a dependence.<br><br><i>You cannot change this option when task is in progress or done.</i>", 'data-html' => 'true' do
+        = icon('info-circle')
+      = f.label :father_id, t('.father'), :class => "control-label"
+      = f.select :father_id, options_from_collection_for_select(@father_tasks, 'id', 'title', @task.father_id), {include_blank: t('no_father')}, :class => "form-control"
+  .form-group.required
     = f.label :title, :class => "control-label"
     = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
     %span#help-title.help-block
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_title }
         = @chars_max_title - f.object.title.try('length').to_i
-  .form-group
+  .form-group.required
     = f.label :description, :class => "control-label" do
       = render partial: 'shared/markdown_syntax'
       = t ".description"

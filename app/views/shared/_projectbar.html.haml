@@ -40,3 +40,10 @@
           = link_to project_tasks_path(project) do
             = icon('tasks', :class => "dark-grey")
             %span= t(".tasks")
+        - if project.with_recruiting?
+          = menu_divider
+          %li
+            = link_to project_recruitments_path(project) do
+              = icon('user-plus', :class => "dark-grey")
+              %span= t(".recruitment")
+

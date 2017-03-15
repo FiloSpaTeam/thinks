@@ -13,32 +13,27 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2017, Claudio Maradonna
 
 - content_for :page_actions do
-  - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
+  - if scrum_master?(@task.project)
     - if @task.deleted?
       %li.pull-left.hidden-xxs
-        = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
+        = link_to reopen_recruitment_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
           = icon('history', class: 'dark-grey fa-lg')
           %span.hidden-xs
-            Reopen
-      %li.pull-left.hidden-xxs
-        = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35', data: { confirm: 'Are you sure?' } do
-          = icon('trash-o', class: 'dark-grey fa-lg')
-          %span.hidden-xs
-            Delete
+            Another chance
     - elsif !@task.done?
       %li.pull-left.hidden-xxs
-        = link_to edit_task_path(@task), title: 'Edit', class: 'line-height-25 line-height-35' do
-          = icon('edit', class: 'dark-grey fa-lg')
-          %span.hidden-xs
-            Edit
-      %li.pull-left.hidden-xxs
-        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
+        = link_to recruitment_path(@task), :method => 'delete', title: 'Reject', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
           = icon('times-circle-o', class: 'dark-grey fa-lg')
           %span.hidden-xs
-            Close
+            Reject
+      %li.pull-left.hidden-xxs
+        = link_to approve_recruitment_path(@task), :method => 'put', title: 'Approve', class: 'line-height-25 line-height-35', role: 'button' do
+          = icon('check-circle-o', class: 'dark-grey fa-lg')
+          %span.hidden-xs
+            Approve
 
 = render partial: 'shared/projectbar', locals: { project: @task.project }
 

@@ -28,6 +28,7 @@ class TasksController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
 
   before_action :check_ban!, except: [:index]
+  before_action :check_task!, only: [:show]
 
   before_action :set_validators_for_form_help, only: [:new, :edit]
   before_action :set_validators_for_show, only: [:show]
@@ -43,6 +44,7 @@ class TasksController < ApplicationController
     tasks_scope = Task
                   .includes(:status, :thinker, :updater, :goal, :children)
                   .where(project: @project)
+                  .where(recruitment: false)
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
     tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
                                                                                     params[:tasks_smart_listing].key?(:sort)
@@ -138,6 +140,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     @task.release = nil unless scrum_master?(@project)
+    @task.recruitment = true if @project.recruit?(current_thinker)
 
     @task.project = @project
     @task.thinker = current_thinker
@@ -330,6 +333,10 @@ class TasksController < ApplicationController
 
   private
 
+  def check_task!
+    redirect_to recruitment_path(@task) if @task.recruitment
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task
@@ -363,13 +370,20 @@ class TasksController < ApplicationController
                     .tasks
                     .where.not(status: Status.done)
                     .where.not(status: Status.in_progress)
+                    .where(recruitment: false)
                     .order('title')
   end
 
   def teammate!
-    unless @project.part_of_team?(current_thinker)
+    unless @project.participant?(current_thinker)
       flash[:alert] = 'You are not partecipating to this project as active member!'
       redirect_to project_tasks_path(@project)
+    end
+
+    if @project.recruit?(current_thinker)
+      flash[:alert] = 'To participate you need to have a demand. If you have one already, you need to wait approbation.'
+
+      redirect_to project_recruitments_path(@project)
     end
   end
 
@@ -382,7 +396,7 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    allowed_params = [:description, :status_id, :workload, :title, :goal_id, :release_id, :father_id]
+    allowed_params = [:title, :description, :status_id, :workload, :goal_id, :release_id, :father_id]
 
     params.require(:task).permit(allowed_params)
   end

@@ -25,7 +25,7 @@
     = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
 
     = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
-      .form-group
+      .form-group.required
         = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
           = icon('info-circle')
         = f.label :cycle_id, :class => "control-label"

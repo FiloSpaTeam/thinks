@@ -99,6 +99,35 @@ class Project < ActiveRecord::Base
     assigned_roles.where(thinker: thinker).present?
   end
 
+  def participant?(thinker)
+    return false unless part_of_team?(thinker)
+
+    contributions
+      .where(thinker: thinker)
+      .where(intensity: Contribution.intensities[:partecipate])
+      .present?
+  end
+
+  def recruit?(thinker)
+    return false if assigned_roles
+                    .where(thinker: thinker)
+                    .where.not(team_role: TeamRole.team_member.first)
+                    .present?
+
+    tasks
+      .where(recruitment: true)
+      .where(thinker: thinker)
+      .done
+      .blank?
+  end
+
+  def recruitment_demand?(thinker)
+    tasks
+      .where(recruitment: true)
+      .where(thinker: thinker)
+      .present?
+  end
+
   def progress_percentage
     tasks = self.tasks
     0 if tasks.empty? || tasks.nil?

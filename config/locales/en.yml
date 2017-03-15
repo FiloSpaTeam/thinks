@@ -211,6 +211,10 @@ en:
       sprint      : "Sprint"
       in_progress : "Progress"
       done        : "Done"
+    recruitments:
+      backlog: "Waiting"
+      done: "Recruited"
+      rejected: "Rejected"
     projectsummary:
       my_stats : "My statistics" 
     statistics:
@@ -236,6 +240,11 @@ en:
     other:                  "Other"
     health_applications:    "Health applications"
     applications_fpa:       "Applications for public administrations"
+
+  recruitments:
+    form:
+      send: "Send"
+      warning_about: "<strong>Attention</strong>: this demand cannot be modified in the future and cannot be deleted, nor from you, nor from the Scrum master. Check twice your demand before sending."
 
   tasks:
     description: "Description"
@@ -297,6 +306,12 @@ en:
         reopen: "%{thinker} reopened task '%{task}'"
         assign: "%{thinker} is working on '%{task}'"
         give_up: "%{thinker} gives up task '%{task}'"
+      recruitments:
+        create: "%{thinker} has made recruitment demand."
+        update: "%{thinker} updated it's own recruitment demand."
+        destroy: "Your demand was rejected."
+        reopen: "Your demand has been reopened."
+        approve: "Your demand was accepted."
       operations:
         create: "%{thinker} added an operation for '%{task}'"
         done: "%{thinker} ended an operation for '%{task}'"
@@ -382,6 +397,7 @@ en:
     mobile_expert: "Mobile expert"
 
   breadcrumbs:
+    project_recruitments_path: "<i class='fa fa-user-plus'></i> <span class='hidden-xs hidden-sm'>Recruitments</span>"
     project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs hidden-sm'>Tasks</span>"
     project_releases_path: "<i class='fa fa-flag-checkered'></i> <span class='hidden-xs hidden-sm'>Releases</span>"
     project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs hidden-sm'>Goals</span>"
@@ -461,6 +477,7 @@ en:
       logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
       square_image: "Square image, 256x256 (jpg, png)"
       landscape_image: "Landscape image, 1080x670 (jpg, png)"
+      contribution_settings: "Contribution settings"
 
   # ActiveRecord override translation
   activerecord:
