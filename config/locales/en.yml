@@ -311,6 +311,7 @@ en:
         update: "%{thinker} updated it's own recruitment demand."
         destroy: "Your demand was rejected."
         reopen: "Your demand has been reopened."
+        approve: "Your demand was accepted."
       operations:
         create: "%{thinker} added an operation for '%{task}'"
         done: "%{thinker} ended an operation for '%{task}'"
