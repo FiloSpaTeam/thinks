@@ -25,7 +25,7 @@ class RecruitmentsController < ApplicationController
 
   before_action :authenticate_thinker!
 
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :approve]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_show, only: [:show]
 
@@ -159,6 +159,19 @@ class RecruitmentsController < ApplicationController
   end
 
   def approve
+    respond_to do |format|
+      if scrum_master?(@task.project)
+        @task.status = Status.done.first
+        @task.save
+
+        create_notification(@task, @task.project)
+
+        format.html { redirect_to recruitment_path(@task), notice: 'Demand successfully approved.' }
+      else
+        format.html { redirect_to recruitment_path(@task), alert: 'Operation not allowed.' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def reopen

@@ -77,19 +77,20 @@
           - else
             .round-sm.pull-left{ :class => "bg-backlog" }
             = t('waiting')
-    - unless task.deleted? && task.done?
-      - if task.ratings.where(thinker: current_thinker).present?
-        %li.list-group-item
-          %span.pull-right
-            = task.ratings.where(thinker: current_thinker).first.value.to_f
-          %strong=t('.your_rating')
-        %li.list-group-item{style: 'border-top: none;'}
-          %strong=t(:average)
-          = text_field_tag :value, task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
-      - else
-        - if task.done?
+    - unless task.recruitment
+      - unless task.deleted? && task.done?
+        - if task.ratings.where(thinker: current_thinker).present?
           %li.list-group-item
-            = render :partial => 'ratings/form', locals: { task: task }
+            %span.pull-right
+              = task.ratings.where(thinker: current_thinker).first.value.to_f
+            %strong=t('.your_rating')
+          %li.list-group-item{style: 'border-top: none;'}
+            %strong=t(:average)
+            = text_field_tag :value, task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
+        - else
+          - if task.done?
+            %li.list-group-item
+              = render :partial => 'ratings/form', locals: { task: task }
 
   - if (scrum_master?(task.project))
     - if !task.deleted? && !task.project.suspended
@@ -104,7 +105,7 @@
       - elsif task.status == Status.backlog.first && task.workloads.count > 0
         .panel-footer
           = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
-      - elsif task.status == Status.done.first
+      - elsif task.status == Status.done.first && !task.recruitment
         .panel-footer
           = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
     - elsif task.project.suspended
