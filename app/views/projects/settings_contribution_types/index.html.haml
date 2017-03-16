@@ -21,11 +21,16 @@
     = render partial: 'shared/projectsettingsbar'
   .col-md-8
     %h2
-      = t 'shared.projectsettingsbar.contribution_settigs'
+      = t 'shared.projectsettingsbar.contribution_settings'
     = form_for @project, url: project_settings_contribution_types_path, method: :post, :html => { :class => '' } do |f|
       .form-group.required
         = f.label :contribution_type, :class => 'control-label'
-        = f.select :contribution_type, options_for_select(Project.contribution_types.keys.map{ |key| [t("projects.contribution_type.#{key}"), key] }, @project.contribution_type), {}, :class => 'form-control'
+        = f.select :contribution_type, options_for_select(Project.contribution_types.keys.map{ |key| [t("projects.contribution_type.#{key}"), key] }, @project.contribution_type), {}, :class => 'form-control', 'data-reference-value' => :with_recruiting
+      .form-group.required
+        = f.label :contribution_text, :class => "control-label" do
+          = render partial: 'shared/markdown_syntax'
+          = t "activerecord.attributes.project.contribution_text"
+        = f.text_area :contribution_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
       %hr
       = f.submit nil, :class => 'btn btn-primary'
       = link_to t('.cancel', :default => t("helpers.links.cancel")), |

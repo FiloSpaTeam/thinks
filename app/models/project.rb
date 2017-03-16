@@ -60,6 +60,7 @@ class Project < ActiveRecord::Base
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
+  validates :contribution_text, presence: true, if: "self.with_recruiting?"
 
   after_save :check_if_past_project
   after_save :update_contribution_thinker

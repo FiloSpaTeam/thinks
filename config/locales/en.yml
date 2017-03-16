@@ -488,6 +488,7 @@ en:
         documentation_url : "Documentation"
         cycle_id: "Working period" 
         release_at: "Release date"
+        contribution_text: "Text for recruitment"
 
   # Devise section
   devise:

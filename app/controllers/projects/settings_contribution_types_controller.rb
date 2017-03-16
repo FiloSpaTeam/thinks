@@ -28,7 +28,9 @@ class Projects::SettingsContributionTypesController < ApplicationController
         format.html { redirect_to project_settings_contribution_types_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        set_form_errors(@project)
+
+        format.html { render :index }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -37,6 +39,6 @@ class Projects::SettingsContributionTypesController < ApplicationController
   private
 
   def contribution_type_params
-    params.require(:project).permit(:contribution_type)
+    params.require(:project).permit(:contribution_type, :contribution_text)
   end
 end
