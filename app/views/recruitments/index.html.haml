@@ -16,6 +16,11 @@
 -# Copyright (c) 2017, Claudio Maradonna
 
 - content_for :page_actions do
+  %li.pull-left
+    %a.line-height-25.line-height-35{ role: "button", "data-toggle": "modal", "data-target": '#modal-recruitment-manifest' }
+      = icon('file-text-o', class: 'dark-grey')
+      %span.hidden-xs
+        Manifest
   %li.pull-left.hidden-xxs
     %a.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
       = icon('search', class: 'dark-grey')
