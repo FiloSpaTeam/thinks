@@ -26,10 +26,41 @@
       - if thinker_signed_in?
         = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px;" do
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
-      = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs", :style => "padding-top: 10px; padding-bottom: 10px;" do
-        = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
+      - if @project.present? && @project.id.present?
+        = link_to project_path(@project), :class => 'visible-xs text-left navbar-brand' do
+          = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' }) 
+          %span{ style: 'font-size: 14px; margin-left: 2px;' }
+            = truncate(@project.title, length: 36)
+        = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg", :style => "padding-top: 10px; padding-bottom: 10px;" do
+          = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
+      - else
+        = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs", :style => "padding-top: 10px; padding-bottom: 10px;" do
+          = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
+        - if @project.present? && @project.id.present?
+          %li{:class => active_link_if_current(project_releases_path)}
+            = link_to project_releases_path(@project) do
+              = icon('flag-checkered', :class => "dark-grey")
+              %span= t(".releases")
+          %li{:class => active_link_if_current(project_sprints_path)}
+            = link_to project_sprints_path(@project) do
+              = icon('flag', :class => "dark-grey")
+              %span= t(".sprints")
+          %li{:class => active_link_if_current(project_goals_path)}
+            = link_to project_goals_path(@project) do
+              = icon('crosshairs', :class => "dark-grey")
+              %span= t(".goals")
+          %li{:class => active_link_if_current(project_tasks_path)}
+            = link_to project_tasks_path(@project) do
+              = icon('tasks', :class => "dark-grey")
+              %span= t(".tasks")
+          - if @project.with_recruiting?
+            %li{:class => active_link_if_current(project_recruitments_path)}
+              = link_to project_recruitments_path(@project) do
+                = icon('user-plus', :class => "dark-grey")
+                %span= t(".recruitment")
+          = menu_divider
         %li{:class => active_link_if_current(projects_path)}
           = link_to projects_path do
             = icon('globe', :class => "fa-lg dark-grey")
