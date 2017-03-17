@@ -242,6 +242,8 @@ en:
     applications_fpa:       "Applications for public administrations"
 
   recruitments:
+    manifest:
+      manifest_for_recruitment: "Manifest for recruitment"
     form:
       send: "Send"
       warning_about: "<strong>Attention</strong>: this demand cannot be modified in the future and cannot be deleted, nor from you, nor from the Scrum master. Check twice your demand before sending."
