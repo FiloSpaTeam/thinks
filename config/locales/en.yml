@@ -166,6 +166,9 @@ en:
       password_requirements: "8 minimum chars."
 
   projects:
+    settings_contribution_types:
+      index:
+        help_contribution_text: "Optional field: helps your team to understand how they should contribute."
     contribution_type:
       open: "Open"
       with_recruiting: "With recruiting"
@@ -490,7 +493,8 @@ en:
         documentation_url : "Documentation"
         cycle_id: "Working period" 
         release_at: "Release date"
-        contribution_text: "Text for recruitment"
+        contribution_text: "Text for contribution"
+        recruitment_text: "Text for recruitment"
 
   # Devise section
   devise:

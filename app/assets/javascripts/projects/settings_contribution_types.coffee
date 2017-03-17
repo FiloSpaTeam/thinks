@@ -4,6 +4,6 @@
 
 $ ->
   $("#project_contribution_type").on "change", ->
-    $("#project_contribution_text").prop 'disabled', $(this).val() != $(this).attr('data-reference-value')
+    $("#project_recruitment_text").prop 'disabled', $(this).val() != $(this).attr('data-reference-value')
 
 
