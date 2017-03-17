@@ -28,7 +28,8 @@
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
       - if @project.present? && @project.id.present?
         = link_to project_path(@project), :class => 'visible-xs text-left navbar-brand' do
-          = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' }) 
+          - if @project.logo
+            = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' }) 
           %span{ style: 'font-size: 14px; margin-left: 2px;' }
             = truncate(@project.title, length: 36)
         = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg", :style => "padding-top: 10px; padding-bottom: 10px;" do
