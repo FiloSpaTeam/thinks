@@ -40,24 +40,24 @@
     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
       %ul.nav.navbar-nav
         - if @project.present? && @project.id.present?
-          %li{:class => active_link_if_current(project_releases_path)}
+          %li.visible-xs{:class => active_link_if_current(project_releases_path)}
             = link_to project_releases_path(@project) do
               = icon('flag-checkered', :class => "dark-grey")
               %span= t(".releases")
-          %li{:class => active_link_if_current(project_sprints_path)}
+          %li.visible-xs{:class => active_link_if_current(project_sprints_path)}
             = link_to project_sprints_path(@project) do
               = icon('flag', :class => "dark-grey")
               %span= t(".sprints")
-          %li{:class => active_link_if_current(project_goals_path)}
+          %li.visible-xs{:class => active_link_if_current(project_goals_path)}
             = link_to project_goals_path(@project) do
               = icon('crosshairs', :class => "dark-grey")
               %span= t(".goals")
-          %li{:class => active_link_if_current(project_tasks_path)}
+          %li.visible-xs{:class => active_link_if_current(project_tasks_path)}
             = link_to project_tasks_path(@project) do
               = icon('tasks', :class => "dark-grey")
               %span= t(".tasks")
           - if @project.with_recruiting?
-            %li{:class => active_link_if_current(project_recruitments_path)}
+            %li.visible-xs{:class => active_link_if_current(project_recruitments_path)}
               = link_to project_recruitments_path(@project) do
                 = icon('user-plus', :class => "dark-grey")
                 %span= t(".recruitment")
