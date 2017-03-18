@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test 'should create project' do
     assert_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 5, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680 }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 5, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680, motto: 'Always resist.' }
     end
 
     assert_redirected_to project_path(assigns(:project))
