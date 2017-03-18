@@ -41,11 +41,14 @@
 = render :partial => 'shared/projectbar', locals: { project: @project }
 .row
   .col-md-4
-    %h3.visible-xs
-      = @project.title
     .panel.panel-default.hidden-xs
       = render :partial => 'projectsummary', locals: { project: @project, contribution: @contribution }
   .col-md-8
+    %h3.text-center
+      = @project.title
+    %h4.text-center
+      %i
+        = @project.motto
     .text-justify
       = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
       = markdown(@project.description)

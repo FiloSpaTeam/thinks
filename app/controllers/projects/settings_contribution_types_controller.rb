@@ -39,6 +39,8 @@ class Projects::SettingsContributionTypesController < ApplicationController
   private
 
   def contribution_type_params
-    params.require(:project).permit(:contribution_type, :contribution_text, :recruitment_text)
+    params
+      .require(:project)
+      .permit(:contribution_type, :contribution_text, :recruitment_text)
   end
 end
