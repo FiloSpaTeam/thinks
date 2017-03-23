@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
 
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
-  validates :motto, length: { maximum: 240 }, presence: true
+  validates :motto, length: { maximum: 240 }, presence: true, if: 'self.project.nil?'
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
