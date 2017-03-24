@@ -24,12 +24,16 @@
         %span.icon-bar
         %span.icon-bar
       - if thinker_signed_in?
-        = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px;" do
+        = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px; margin-left: 10px;" do
           = notification_icon(Notification.user(current_thinker), 'fa-2x')
+      - if @active_filters.present? && @active_filters.include?(Enums::Filters::SEARCH_INPUT)
+        %a.visible-xs.navbar-btn.pull-right{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch', :style => "padding: 0; margin-right: 10px; margin-top: 9px;" }
+
+          = icon('search', class: 'fa-2x dark-grey')
       - if @project.present? && @project.id.present?
         = link_to project_path(@project), :class => 'visible-xs text-left navbar-brand' do
           - if @project.logo
-            = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' }) 
+            = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' })
           %span{ style: 'font-size: 14px; margin-left: 2px;' }
             = truncate(@project.title, length: 36)
         = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg", :style => "padding-top: 10px; padding-bottom: 10px;" do

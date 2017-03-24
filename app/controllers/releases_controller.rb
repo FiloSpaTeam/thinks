@@ -38,6 +38,7 @@ class ReleasesController < ApplicationController
                                      default_sort: { end_at: 'asc' }
 
     @active_filters = [
+      Enums::Filters::SEARCH_INPUT,
       Enums::Filters::SEARCH_TASK,
       Enums::Filters::PROGRESS_LOWER_THAN
     ]

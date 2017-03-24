@@ -2,6 +2,7 @@ module Enums
   class Filters
     PROGRESS_LOWER_THAN = :progress_lower_than
 
+    SEARCH_INPUT        = :search_input
     SEARCH_TASK         = :search_task
     SEARCH_RELEASE      = :search_release
     SEARCH_SPRINT       = :search_sprint

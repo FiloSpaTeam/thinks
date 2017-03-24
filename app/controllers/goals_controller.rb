@@ -49,6 +49,7 @@ class GoalsController < ApplicationController
                          default_sort: { id: 'desc' }
 
     @active_filters = [
+      Enums::Filters::SEARCH_INPUT,
       Enums::Filters::SEARCH_TASK,
       Enums::Filters::PROGRESS_LOWER_THAN
     ]

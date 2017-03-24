@@ -56,6 +56,7 @@ class TasksController < ApplicationController
                          default_sort: { serial: 'desc' }
 
     @active_filters = [
+      Enums::Filters::SEARCH_INPUT,
       Enums::Filters::SEARCH_RELEASE,
       Enums::Filters::SEARCH_SPRINT,
       Enums::Filters::SEARCH_GOAL,

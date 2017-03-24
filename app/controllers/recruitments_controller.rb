@@ -56,6 +56,8 @@ class RecruitmentsController < ApplicationController
       "project_recruitments_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_recruitments_path')
     }
 
+    @active_filters = [Enums::Filters::SEARCH_INPUT]
+
     @recruitment_manifest_seen = Impression
                                  .where(controller_name: 'recruitments')
                                  .where(user_id: current_thinker)
