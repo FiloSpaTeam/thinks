@@ -23,6 +23,12 @@ module GoalsHelper
   end
 
   def release_btn_title(tasks_ready)
-    "Put " + pluralize(tasks_ready.count, 'task') + " in Sprint automatically"
+    'Put ' + pluralize(tasks_ready.count, 'task') + ' in Sprint automatically'
+  end
+
+  def apply_filters(scope, params)
+    scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
+                                                                                         params[:search_title_and_description].present?
+    scope
   end
 end

@@ -33,6 +33,10 @@ class Goal < ActiveRecord::Base
     where('title LIKE ?', "%#{title}%")
   }
 
+  scope :search_title_and_description, lambda { |query|
+    where("lower(title) LIKE '%#{query.downcase.strip}%' OR lower(description) LIKE '%#{query.downcase.strip}%'")
+  }
+
   scope :search_task, lambda { |title|
     joins(:tasks).where('tasks.title LIKE ?', "%#{title}%").distinct
   }

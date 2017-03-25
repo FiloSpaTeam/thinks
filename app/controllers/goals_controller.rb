@@ -19,6 +19,7 @@ class GoalsController < ApplicationController
   include ActionView::Helpers::TextHelper
   include ProjectsHelper
   include StatusesHelper
+  include GoalsHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 

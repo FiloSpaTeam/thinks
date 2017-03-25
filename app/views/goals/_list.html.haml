@@ -15,14 +15,13 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-
 .collapse#collapseSearch{ class: any_filter?(params[:filters]) ? 'in' : '' }
-  = smart_listing_controls_for :tasks do
+  = smart_listing_controls_for :goals do
     .input-group.form-group
       %span.input-group-btn
         = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
           = icon('undo', class: 'dark-grey')
-      = text_field_tag 'filters[search_title]', filter_value(:search_title), :class => 'form-control', autocomplete: 'off'
+      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
       %span.input-group-btn
 
         - if @active_filters.present?
