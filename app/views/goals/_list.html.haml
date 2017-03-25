@@ -40,31 +40,38 @@
             %strong
               = t "goal"
   %tbody
-    - smart_listing.collection.each do |goal|
-      %tr
-        %td
-          %a.pull-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
-            = icon('tasks', :class => "dark-grey")
-          - if current_thinker == goal.project.thinker
-            - tasks_ready = goal.tasks.ready_to_sprint
-            %a.pull-right.btn.hidden-xs{ :class => tasks_ready.empty? ? "disabled" : "", :href => tasks_ready.empty? ? "javascript:;" : tasks_in_sprint_goal_path(goal), :title => release_btn_title(tasks_ready) , :role => "button", "data-method" => :put }
-              = icon('flag-checkered', :class => "dark-grey")
-          %strong.hidden-xs.hidden-sm
-            %small.dark-grey
-              = goal.updated_at.to_s(:short)
-              ·
-            = link_to goal.title.truncate(40), goal_path(goal), :title => goal.title
-          %strong.visible-xs
-            = link_to goal.title.truncate(50), goal_path(goal), :title => goal.title
-          %strong.visible-sm
-            = link_to goal.title, goal_path(goal)
-          .dark-grey
-            %small
-              %em
-                = plain_text(goal.description).truncate(150)
-              .progress
-                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
-                  = goal.progress
-                  \%
+    - unless smart_listing.empty?
+      - smart_listing.collection.each do |goal|
+        %tr
+          %td
+            %a.pull-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
+              = icon('tasks', :class => "dark-grey")
+            - if current_thinker == goal.project.thinker
+              - tasks_ready = goal.tasks.ready_to_sprint
+              %a.pull-right.btn.hidden-xs{ :class => tasks_ready.empty? ? "disabled" : "", :href => tasks_ready.empty? ? "javascript:;" : tasks_in_sprint_goal_path(goal), :title => release_btn_title(tasks_ready) , :role => "button", "data-method" => :put }
+                = icon('flag-checkered', :class => "dark-grey")
+            %strong.hidden-xs.hidden-sm
+              %small.dark-grey
+                = goal.updated_at.to_s(:short)
+                ·
+              = link_to goal.title.truncate(40), goal_path(goal), :title => goal.title
+            %strong.visible-xs
+              = link_to goal.title.truncate(50), goal_path(goal), :title => goal.title
+            %strong.visible-sm
+              = link_to goal.title, goal_path(goal)
+            .dark-grey
+              %small
+                %em
+                  = plain_text(goal.description).truncate(150)
+                .progress
+                  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
+                    = goal.progress
+                    \%
+    - else
+      %tr.warning
+        %td.text-center
+          %strong
+            No records found
+
 = smart_listing.paginate
 = smart_listing.pagination_per_page_links

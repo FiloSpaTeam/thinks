@@ -43,15 +43,15 @@ class Goal < ActiveRecord::Base
 
   scope :with_task, lambda { |task|
     where([
-        %(
-        EXISTS (
-            SELECT 1
-            FROM tasks
-            WHERE goals.id = tasks.goal_id
-            AND tasks.id = ?)
-        ),
-        task
-    ])
+            %(
+            EXISTS (
+                SELECT 1
+                FROM tasks
+                WHERE goals.id = tasks.goal_id
+                AND tasks.id = ?)
+            ),
+            task
+          ])
   }
 
   scope :sorted_by, lambda { |sort_option|
