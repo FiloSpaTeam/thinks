@@ -5,7 +5,7 @@
   %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
     .panel-heading
       .input-group
-        = text_field_tag 'filters[task_title]', filter_value(:task_title), class: "form-control filterrific-periodically-observed", placeholder: t("search"), autocomplete: 'off'
+        = text_field_tag 'filters[task_title]', filter_value(:task_title), class: "form-control", placeholder: t("search"), autocomplete: 'off'
         %span.input-group-btn
           %button.btn.btn-default{ type: "submit" }
             %i.fa.fa-search
