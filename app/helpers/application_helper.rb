@@ -105,7 +105,7 @@ module ApplicationHelper
     if text.present?
       text
         .strip
-        .gsub(/#{search}/i, "<u><span class='text-danger'>#{search}</span></u>")
+        .gsub(/#{search}/i) { |s| "<u><span class='text-danger'>#{s}</span></u>" }
         .html_safe
     end
   end

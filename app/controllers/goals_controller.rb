@@ -58,6 +58,12 @@ class GoalsController < ApplicationController
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path')
     }
+
+    @search = ''
+    if params.key?(:filters) &&
+       params[:filters].key?(:search_title_and_description)
+      @search = params[:filters][:search_title_and_description].strip
+    end
   end
 
   # GET /goals/1
