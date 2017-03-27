@@ -38,7 +38,13 @@ class SurveyController < ApplicationController
                        .where(sprint: @sprint)
                        .where(thinker: current_thinker)
 
-    @surveys         = Survey.all
+    @surveys = Survey.all
+
+    @breadcrumbs = {
+      "project_sprints_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_sprints_path'),
+      "sprint_path(#{@sprint.id})" => "N. #{@sprint.serial}",
+      '' => I18n.t('breadcrumbs.survey')
+    }
   end
 
   def create
@@ -56,6 +62,12 @@ class SurveyController < ApplicationController
   def new
     @surveys = Survey.all
     @survey  = Survey.new
+
+    @breadcrumbs = {
+      "project_sprints_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_sprints_path'),
+      "sprint_path(#{@sprint.id})" => "N. #{@sprint.serial}",
+      '' => I18n.t('breadcrumbs.new_survey')
+    }
   end
 
   private

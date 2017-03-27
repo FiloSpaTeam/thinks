@@ -37,8 +37,8 @@ class Release < ActiveRecord::Base
     end
   }
 
-  scope :search_title, lambda { |title|
-    where('title LIKE ?', "%#{title}%")
+  scope :search_title_and_description, lambda { |query|
+    where("lower(title) LIKE '%#{query.downcase.strip}%' OR lower(description) LIKE '%#{query.downcase.strip}%'")
   }
 
   scope :search_task, lambda { |title|
@@ -47,6 +47,19 @@ class Release < ActiveRecord::Base
 
   scope :progress_lower_than, lambda { |value|
     where('progress < ?', value)
+  }
+
+  scope :with_task, lambda { |task|
+    where([
+            %(
+            EXISTS (
+                SELECT 1
+                FROM tasks
+                WHERE releases.id = tasks.release_id
+                AND tasks.id = ?)
+            ),
+            task
+          ])
   }
 
   def complete_title

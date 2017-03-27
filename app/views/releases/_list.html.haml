@@ -15,10 +15,19 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
+.collapse#collapseSearch{ class: any_filter?(params[:filters]) ? 'in' : '' }
   = smart_listing_controls_for :releases do
-    .form-group
-      = text_field_tag 'filters[search_title]', '', :class => 'form-control filterrific-periodically-observed', autocomplete: 'off'
+    .input-group.form-group
+      %span.input-group-btn
+        = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
+          = icon('undo', class: 'dark-grey')
+      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
+      %span.input-group-btn
+        - if @active_filters.present?
+          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+            = icon('filter', class: 'dark-grey')
+        %button.btn.btn-primary{ type: 'submit' }
+          = icon('search', class: 'fa-inverse')
     = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 .panel-default.margin-top-5
   %table.table.table-condensed.table-hover#filterrific_results
@@ -57,7 +66,7 @@
               .dark-grey
                 %small
                   %em
-                    = plain_text(release.description).truncate(150)
+                    = highlights_searched_text(plain_text(release.description).truncate(150), @search)
                   .progress
                     .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
                       = release.progress

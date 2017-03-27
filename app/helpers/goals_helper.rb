@@ -36,7 +36,6 @@ module GoalsHelper
     scope = scope.progress_lower_than(params[:progress_lower_than]) if params.key?(:progress_lower_than) &&
                                                                        params[:progress_lower_than].present?
 
-
     scope
   end
 end

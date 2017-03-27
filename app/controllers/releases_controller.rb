@@ -17,6 +17,7 @@
 
 class ReleasesController < ApplicationController
   include ProjectsHelper
+  include ReleasesHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
@@ -46,6 +47,12 @@ class ReleasesController < ApplicationController
     @breadcrumbs = {
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path')
     }
+
+    @search = ''
+    if params.key?(:filters) &&
+       params[:filters].key?(:search_title_and_description)
+      @search = params[:filters][:search_title_and_description].strip
+    end
   end
 
   def new
