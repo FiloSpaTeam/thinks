@@ -27,7 +27,7 @@ module CommentsHelper
 
   def delete_button(comment)
     content_tag(:li) do
-      link_to comment_path(comment), remote: true, method: :delete, data: { confirm: 'Are you sure? Your comment will be deleted permanently with your vote.' } do
+      link_to comment_path(comment), method: :delete, data: { confirm: 'Are you sure? Your comment will be deleted permanently with your vote.' } do
         icon('trash', class: 'dark-grey') +
           content_tag(:span, t('delete'), class: 'padding-left-5')
       end
