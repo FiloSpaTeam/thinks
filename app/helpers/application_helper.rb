@@ -102,6 +102,8 @@ module ApplicationHelper
   end
 
   def highlights_searched_text(text, search)
+    return text if search.nil?
+
     if text.present?
       text
         .strip
