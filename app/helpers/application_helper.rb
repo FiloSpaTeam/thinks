@@ -98,7 +98,7 @@ module ApplicationHelper
               counter.removeClass('text-danger');
             }
           });
-        });", defer: 'defer')
+        });", defer: 'defer');
   end
 
   def highlights_searched_text(text, search)

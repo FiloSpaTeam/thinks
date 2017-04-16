@@ -27,7 +27,8 @@ class SurveyController < ApplicationController
     redirect_to new_sprint_survey_path(@sprint) if current_thinker
                                                    .answers
                                                    .where(sprint: @sprint)
-                                                   .empty?
+                                                   .empty? &&
+                                                   @sprint == @project.sprint.try(:previous)
 
     @answers_count   = AnswerThinker
                        .where(sprint: @sprint)
@@ -60,6 +61,12 @@ class SurveyController < ApplicationController
   end
 
   def new
+    redirect_to sprint_survey_index_path(@sprint) if current_thinker
+                                                     .answers
+                                                     .where(sprint: @sprint)
+                                                     .present? ||
+                                                     @sprint != @project.sprint.try(:previous)
+
     @surveys = Survey.all
     @survey  = Survey.new
 

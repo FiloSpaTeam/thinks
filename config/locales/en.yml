@@ -81,6 +81,8 @@ en:
   average: "Average"
   close: "Close"
   operations_t: "Operations"
+  project_not_started: "Project not started"
+  results: "Results"
 
   layouts:
     application:
@@ -280,6 +282,8 @@ en:
       date_for_release: "The date for release"
 
   sprints:
+    list:
+      start_of_your_sprints: "Start point of your sprints."
     index:
       do_you_want_suspend: "Do you want to suspend the development? If you want, you can resume it later."
 
@@ -331,6 +335,7 @@ en:
         create: "%{thinker} comment the task '%{task}'."
         update: "%{thinker} update a comment for task '%{task}'."
         approve: "%{thinker} approved a comment. Task '%{task}' done."
+        like: "%{thinker} likes a comment for task '%{task}'"
       projects:
         update: "%{thinker} updated the project's description."
         destroy: "%{thinker} destroyed the project."

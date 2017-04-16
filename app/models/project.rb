@@ -155,9 +155,9 @@ class Project < ActiveRecord::Base
   end
 
   def sprint
-    return 0 unless started?
+    return nil unless started?
 
-    sprints.last.serial
+    sprints.last
   end
 
   def actual_day_of_sprint

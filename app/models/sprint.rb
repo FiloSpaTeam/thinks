@@ -60,7 +60,7 @@ class Sprint < ActiveRecord::Base
 
         notification.save
       else
-        last_sprint = project.sprints.last
+        last_sprint = project.sprint
 
         if (DateTime.now.to_date - last_sprint.created_at.to_date) >= project.cycle.days
           sprint = Sprint.new
@@ -100,11 +100,20 @@ class Sprint < ActiveRecord::Base
   end
 
   def next
-    Sprint.unscoped.where('id > ?', id).where(project: project).first
+    Sprint
+      .unscoped
+      .where('id > ?', id)
+      .where(project: project)
+      .first
   end
 
   def previous
-    Sprint.unscoped.where('id < ?', id).where(project: project).order('id DESC').first
+    Sprint
+      .unscoped
+      .where('id < ?', id)
+      .where(project: project)
+      .order('id DESC')
+      .first
   end
 
   private

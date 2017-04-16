@@ -16,7 +16,37 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 .panel-default
-  %table.table.table-condensed.table-hover
+  %ul.list-group
+    - unless smart_listing.empty?
+      - smart_listing.collection.each do |sprint|
+        %li.list-group-item{ :style => @project.sprint.try(:serial) == sprint.serial ? 'height: 250px;' : '' }
+          %strong
+            Sprint
+            = sprint.serial
+          \-
+          = t('workload') + ':'
+          = sprint.obtained
+          \-
+          %i
+            = sprint.created_at.strftime('%Y.%m.%d')
+            at
+            = sprint.updated_at.strftime('%Y.%m.%d')
+          - if (sprint == @project.sprint.try(:previous))
+            - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
+            - if answers_thinker.empty?
+              %a.pull-right.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get, style: 'margin-top: -7px;' }
+                = icon('circle-o', :class => "dark-grey fa-lg")
+          %a.pull-right.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get, style: 'margin-top: -7px;' }
+            = icon('file-text-o', :class => "dark-grey fa-lg", title: t(:results))
+      %li.list-group-item.text-center
+        %i
+          = t('.start_of_your_sprints')
+    - else
+      %li.list-group-item.text-center
+        %i
+          = t('project_not_started')
+
+  %table.table.table-condensed.table-hover.text-center
     %thead
       %tr
         %td
@@ -44,7 +74,7 @@
     %tbody
       - unless smart_listing.empty?
         - smart_listing.collection.each do |sprint|
-          %tr{ :class => @project.sprint == sprint.serial ? "warning" : "success" }
+          %tr{ :class => @project.sprint.try(:serial) == sprint.serial ? "warning" : "success" }
             %td
               Sprint #{sprint.serial}
             %td
@@ -57,7 +87,7 @@
               = sprint.obtained
             - if (@project.part_of_team?(current_thinker))
               %td.text-center
-                - if (@project.sprint != sprint.serial)
+                - if (@project.sprint.try(:serial) != sprint.serial)
                   - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
                   - if answers_thinker.empty?
                     %a.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get }

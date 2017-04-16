@@ -22,7 +22,7 @@
         .progress
           %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
       Sprint
-      = project.sprint
+      = project.sprint.serial
     - elsif project.suspended
       %strong.text-danger
         Development suspended
@@ -32,21 +32,21 @@
       = project.countdown
       days left to start
 
-  - if project.started?
-    .panel-body
+  .panel-body
+    - if project.tasks.size.nonzero?
+      .progress.visible-xs
+        .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
+    %strong
+      = link_to project_tasks_path(project) do
+        = pluralize project.tasks.size, 'task'
+    .hidden-xs
       - if project.tasks.size.nonzero?
-        .progress.visible-xs
-          .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
-          .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
-      %strong
-        = link_to project_tasks_path(project) do
-          = pluralize project.tasks.size, 'task'
-      .hidden-xs
-        - if project.tasks.size.nonzero?
-          = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "180px", library: { chartArea: { height: '100%', width: '92%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
+        = pie_chart Status.all.order(:id).map { |status| [t("projects.tasks.#{status.translation_code}"), project.tasks.where(status: status).count] }, height: "180px", library: { chartArea: { height: '100%', width: '92%' }, legend: { position: 'right', alignment: 'center' }, colors: [ '#607d8b', '#2196f3', '#f44336', '#ffc107', '#43a047' ] }
 
+  - if project.started?
     .panel-body.hidden-xs
       %strong
         Workload
@@ -56,7 +56,7 @@
         .list-group-item
           Burn up
           - total_workload = 0
-          - last_sprint    = project.sprints.last
+          - last_sprint    = project.sprint
           - burn_up_data   = project.tasks.unscoped.done.group_by_period(:day, :end_at).where('end_at >= ?', last_sprint.created_at).order('max(end_at)').sum(:workload)
           - if burn_up_data.empty?
             - burn_up_data = { last_sprint.created_at => 0 }
@@ -67,7 +67,7 @@
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
         in sprint
       .list-group-item
-        = badge(project.tasks.done.with_sprint(project.sprints.last.id).sum(:workload))
+        = badge(project.tasks.done.with_sprint(project.sprint.id).sum(:workload))
         done (sprint)
       .list-group-item
         = badge(project.tasks.done.sum(:workload))

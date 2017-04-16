@@ -107,6 +107,7 @@ class CommentsController < ApplicationController
       if @comment.impressionist_count(user_id: current_thinker.id).zero?
         impressionist(@comment, '', unique: [:impressionable_id, :user_id])
 
+        create_notification(@comment, task.project)
         format.html { redirect_to task, notice: 'You like it!' }
         format.json { render :show, status: :created, location: task }
       else
