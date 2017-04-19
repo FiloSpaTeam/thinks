@@ -121,10 +121,27 @@
                     %strong=t '.preferences'
                 %li.visible-xs.visible-sm{current_page?(thinker_notifications_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.notifications'), thinker_notifications_path(@thinker))
-                = menu_divider
               - else
-                %li= link_to current_thinker.name, thinker_path(current_thinker)
-              %li= link_to t(".logout"), destroy_thinker_session_path, :method => :delete
+                %li{ style: 'padding-bottom: 5px;' }
+                  %a{ href: '#' }
+                    %strong
+                      = current_thinker.name
+                    %br
+                    %small.font-italic
+                      = current_thinker.email
+                %li
+                  = link_to thinker_path(current_thinker) do
+                    = icon('home')
+                    = t(".dashboard")
+                %li
+                  = link_to thinker_path(current_thinker) do
+                    = icon('user')
+                    = t(".my_profile")
+              = menu_divider
+              %li
+                = link_to destroy_thinker_session_path, :method => :delete do
+                  = icon('sign-out')
+                  = t(".logout")
         - else
           %li{current_page?(new_thinker_registration_path) ? { :class => :active } : {} }
             = link_to new_thinker_registration_path do
