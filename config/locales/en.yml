@@ -442,10 +442,13 @@ en:
       faqs: "FAQs"
       how_does_it_works: "How does it works"
       notifications: "Notifications"
+      dashboard: "Dashboard"
     projectbar:
       goals: "Goals"
       team: "Team"
       tasks: "Tasks"
+      releases: "Releases"
+      sprints: "Sprints"
       project: "Project"
     profilebar:
       personal: "Personal"

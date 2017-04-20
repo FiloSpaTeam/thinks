@@ -23,6 +23,7 @@ class SprintsController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
 
   before_action :authenticate_thinker!
+  before_action :check_if_project_started!
 
   # GET /sprints
   # GET /sprints.json
@@ -97,6 +98,13 @@ class SprintsController < ApplicationController
   end
 
   private
+
+  def check_if_project_started!
+    unless @project.started?
+      flash[:warning] = 'The project is not started yet! Come back when something is moving on!'
+      redirect_to project_path(@project) unless @project.started?
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_sprint
