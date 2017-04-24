@@ -44,14 +44,15 @@
 
   .col-md-2.col-sm-3.hidden-xs
     %h4
-      Categories
+      = t ".categories"
     %ul.list-unstyled
       - @categories.each do |category|
         %li{ class: filter_value(:category_id).to_i == category.id ? 'font-italic font-bold' : '' }
           = link_to t("category.#{category.t_name}"), projects_path('filters[category_id]' => category.id)
 
     %br
-    %h4 Sort by
+    %h4
+      =t ".sort_by"
     %ul.list-unstyled
       %li{ class: filter_value(:most_active).present? ? 'font-italic font-bold' : '' }
         = link_to "Most active", projects_path('filters[most_active]' => true)
@@ -59,4 +60,3 @@
         = link_to "Most followed", projects_path('filters[most_followed]' => true)
       %li{ class: filter_value(:recent).present? ? 'font-italic font-bold' : '' }
         = link_to "Recent", projects_path('filters[recent]' => true)
-

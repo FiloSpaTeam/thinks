@@ -38,8 +38,8 @@
           &nbsp;
         %span.pull-right{ style: 'margin-top: 2px;' }
           - if project.started?
-            Started
+            = t "started"
           - elsif project.suspended
-            Suspended
+            = t "suspended"
           - else
-            Backlogging
+            = t "backlogging"

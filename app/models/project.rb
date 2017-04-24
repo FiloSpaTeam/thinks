@@ -26,6 +26,8 @@ class Project < ActiveRecord::Base
   has_attachment :main_image, accept: [:jpg, :png]
   has_attachment :logo, accept: [:jpg, :png]
 
+  attr_accessor :skip_motto_validation
+
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :skills
 
@@ -57,7 +59,7 @@ class Project < ActiveRecord::Base
 
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
-  validates :motto, length: { maximum: 240 }, presence: true, if: 'self.project.nil?'
+  validates :motto, length: { maximum: 240 }, presence: true, if: 'self.project.nil? && self.skip_motto_validation.nil?'
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true

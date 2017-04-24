@@ -24,6 +24,8 @@ class Projects::SettingsContributionTypesController < ApplicationController
 
   def create
     respond_to do |format|
+      @project.skip_motto_validation = true
+
       if @project.update(contribution_type_params)
         format.html { redirect_to project_settings_contribution_types_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }

@@ -33,6 +33,7 @@ class Projects::SettingsFatherController < ApplicationController
         format.html { redirect_to project_settings_father_index_path(@project), alert: 'Serial is not valid.' }
         format.json { render json: {}, status: :unprocessable_entity }
       else
+        @project.skip_motto_validation = true
         @project.project = project_master
 
         @project.save
@@ -45,6 +46,7 @@ class Projects::SettingsFatherController < ApplicationController
 
   def destroy
     respond_to do |format|
+      @project.skip_motto_validation = true
       @project.project = nil
       @project.save
 

@@ -83,6 +83,9 @@ en:
   operations_t: "Operations"
   project_not_started: "Project not started"
   results: "Results"
+  started: "Started"
+  suspended: "Suspended"
+  backlogging: "Backlogging"
 
   layouts:
     application:
@@ -443,6 +446,8 @@ en:
       how_does_it_works: "How does it works"
       notifications: "Notifications"
       dashboard: "Dashboard"
+      my_profile: "My profile"
+      logout: "Logout"
     projectbar:
       goals: "Goals"
       team: "Team"

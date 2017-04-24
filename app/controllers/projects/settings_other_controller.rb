@@ -34,6 +34,8 @@ class Projects::SettingsOtherController < ApplicationController
       elsif @new_owner == @project.thinker
         format.html { redirect_to project_settings_other_index_path(@project), alert: 'Want you migrate your project to yourself? Strange operation.' }
       else
+        @project.skip_motto_validation = true
+
         @project.thinker = @new_owner
         @project.save
 

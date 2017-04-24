@@ -31,11 +31,15 @@ class Projects::SettingsReleaseController < ApplicationController
         end
       end
 
+      @project.skip_motto_validation = true
+
       if @project.update(release_params)
         format.html { redirect_to project_settings_release_index_path(@project), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        set_form_errors(@project)
+
+        format.html { render :index }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
