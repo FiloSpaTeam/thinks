@@ -122,15 +122,14 @@
                 %li.visible-xs.visible-sm{current_page?(thinker_notifications_path(@thinker)) ? { :class => :active } : {} }
                   = link_to(t('.notifications'), thinker_notifications_path(@thinker))
               - else
-                %li{ style: 'padding-bottom: 5px;' }
-                  %a{ href: '#' }
-                    %strong
-                      = current_thinker.name
-                    %br
-                    %small.font-italic
-                      = current_thinker.email
+                %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
+                  %strong{ style: 'font-size: 13px;' }
+                    = current_thinker.name
+                  %br
+                  %small.font-italic
+                    = current_thinker.email
                 %li
-                  = link_to thinker_path(current_thinker) do
+                  = link_to dashboard_thinker_path(current_thinker) do
                     = icon('home')
                     = t(".dashboard")
                 %li

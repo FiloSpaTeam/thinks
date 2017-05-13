@@ -24,7 +24,7 @@
       .list-group
         .list-group-item
           - if @thinker.otp_required_for_login
-            = link_to(disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :put, class: "btn pull-right") do
+            = link_to(disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :put, class: "btn pull-right", data: { confirm: t(".are_you_sure_want_disable_otp") }) do
               = icon('times', :class => "fa-lg")
               Disable
             %strong

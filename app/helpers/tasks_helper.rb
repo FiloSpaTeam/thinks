@@ -100,6 +100,12 @@ module TasksHelper
     end
   end
 
+  def project_button(task)
+    link_to project_path(task.project), title: task.project.title, role: 'button' do
+      icon('folder', class: 'dark-grey')
+    end
+  end
+
   def goal_button(task)
     link_to goal_path(task.goal), title: task.goal.title, role: 'button' do
       icon('crosshairs', class: 'dark-grey')

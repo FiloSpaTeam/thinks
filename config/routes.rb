@@ -36,6 +36,10 @@ Rails.application.routes.draw do
   resources :thinkers, except: [:index] do
     resources :skills, except: [:show, :update, :edit], controller: 'thinkers/skills'
     resources :notifications, except: [:new], controller: 'thinkers/notifications'
+
+    member do
+      get :dashboard
+    end
   end
   resources :licenses
   resources :languages

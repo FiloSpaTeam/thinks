@@ -43,7 +43,7 @@ class Thinker < ActiveRecord::Base
 
   has_many :contributions
   has_many :projects
-  has_many :working_tasks, class_name: 'Task', foreign_key: :worker_thinker_id
+  has_many :working_tasks, -> { where("tasks.status_id = ?", Status.in_progress.first) }, class_name: 'Task', foreign_key: :worker_thinker_id
   has_many :tasks
   has_many :comments
   has_many :likes

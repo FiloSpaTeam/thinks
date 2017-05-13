@@ -20,7 +20,7 @@ class ThinkersController < ApplicationController
   before_action :check_admin!, only: [:index]
   before_action :check_owner!, except: [:index]
 
-  before_action :set_thinker, only: [:show, :edit, :update]
+  before_action :set_thinker, only: [:show, :edit, :update, :dashboard]
 
   def index
     @thinkers = Thinker.all
@@ -42,6 +42,11 @@ class ThinkersController < ApplicationController
         format.json { render json: @thinker.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def dashboard
+    @my_projects = current_thinker.projects.order('title')
+    @tasks_in_progress = current_thinker.working_tasks.order('updated_at DESC')
   end
 
   private

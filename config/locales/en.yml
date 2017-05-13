@@ -376,6 +376,7 @@ en:
   otp:
     show:
       confirm_password: "Confirm password"
+      are_you_sure_want_disable_otp: "Are you sure you want disable OTP?"
 
   operations:
     index:
@@ -455,6 +456,7 @@ en:
       releases: "Releases"
       sprints: "Sprints"
       project: "Project"
+      recruitment: "Recruitment"
     profilebar:
       personal: "Personal"
       design: "Design"

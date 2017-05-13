@@ -1,0 +1,142 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2017, Claudio Maradonna
+
+- content_for :page_actions do
+  - if (@thinker == current_thinker)
+    %li.pull-left
+      = link_to edit_thinker_path(@thinker), title: 'Edit', class: 'line-height-25 line-height-35' do
+        = icon('edit', class: 'dark-grey fa-lg')
+        %span.hidden-xs
+          Edit
+
+= render partial: 'shared/profileheader', locals: { thinker: @thinker }
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        = t ".my_projects"
+      .panel-body.panel-fixed-height.scrollbar
+        %table.table.table-condensed.table-hover
+          %tbody
+            - @my_projects.each do |project|
+              %tr
+                %td
+                  %strong.hidden-xs.hidden-sm
+                    = link_to project.title.truncate(40), project_path(project), :title => project.title
+                  %strong.visible-xs
+                    = link_to project.title.truncate(50), project_path(project), :title => project.title
+                  %strong.visible-sm
+                    = link_to project.title, project_path(project)
+                  .dark-grey.break-word
+                    %small
+                      %em
+                        = highlights_searched_text(plain_text(project.description).truncate(150), @search)
+
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        = t ".what_im_doing"
+      .panel-body.panel-fixed-height.scrollbar
+        %table.table.table-condensed.table-hover
+          %thead
+            %tr
+              %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
+                %h5
+                  %strong
+                    = t "task"
+              %td.text-center
+                .col-xs-12
+                  %h5
+                    %strong.hidden-xs
+                      Workload
+                    %strong.visible-xs.hidden-xxs
+                      W.load
+          %tbody
+          - @tasks_in_progress.each do |task|
+            %tr
+              %td
+                %strong.hidden-xs.hidden-sm
+                  %small.dark-grey
+                    \##{task.serial}
+                    ·
+                    = std_deviation_button(task)
+                    ·
+                    = project_button(task)
+                    - unless task.goal.nil?
+                      ·
+                      = goal_button(task)
+                    - if task.children.present?
+                      ·
+                      = children_button
+                  ·
+                  = link_to task.title.truncate(30), task_path(task), :title => task.title
+                %strong.visible-xs
+                  = link_to task.title.truncate(45), task_path(task), :title => task.title
+                %strong.visible-sm
+                  = std_deviation_button(task)
+                  ·
+                  = link_to task.title, task_path(task)
+                .dark-grey.break-word
+                  %small
+                    %em
+                      = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
+                - if task.deleted?
+                  .dark-grey.hidden-xs
+                    %small
+                      closed at
+                      %strong
+                        = task.deleted_at.to_s(:long)
+                - else
+                  - if task.created_at == task.updated_at
+                    .dark-grey.hidden-xxs
+                      %small
+                        created at
+                        %strong
+                          = task.created_at.to_s(:short)
+                        by
+                        %i
+                          #{task.updater.name}
+                  - else
+                    .dark-grey.hidden-xxs
+                      %small
+                        updated at
+                        %strong
+                          = task.updated_at.to_s(:short)
+                        by
+                        %i
+                          #{task.updater.name}
+              %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                = workload_description(task)
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        = t ".week_stats"
+      .panel-body.panel-fixed-height.scrollbar
+  .col-md-6
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      %li.active{ role: 'presentation' }
+        %a{ href: '#tasks_done', 'aria-controls': 'tasks_done', role: 'tab', 'data-toggle': 'tab' }
+          Tasks done
+      %li{ role: 'presentation' }
+        %a{ href: '#tasks_created', 'aria-controls': 'tasks_created', role: 'tab', 'data-toggle': 'tab' }
+          Tasks created
+    .panel.panel-default{ style: 'border-top: 0; border-radius: 0 0 4px 4px;' }
+      .tab-content.panel-fixed-height.scrollbar
+        #tasks_done.tab-pane.active{ role: 'tabpanel' }
+        #tasks_created.tab-pane{ role: 'tabpanel' }
+

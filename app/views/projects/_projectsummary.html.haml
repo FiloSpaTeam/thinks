@@ -93,12 +93,15 @@
 .panel-body.border-bottom
   %h4.font-bold
     Skill requirements
+  %span.help-block
+    - unless current_thinker.nil?
+      Green text if skill matches your skills
   - if project.skills.empty?
     No skill required
   - else
     %ul
       - project.skills.each do |skill|
-        %li
+        %li{ class: current_thinker.present? && current_thinker.skills.where(id: skill.id).count > 0 ? 'text-success' : '' }
           = t("skills.#{skill.t_name}")
 .panel-body
   %h4.font-bold
