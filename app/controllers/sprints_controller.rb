@@ -23,7 +23,7 @@ class SprintsController < ApplicationController
   before_action :set_project, only: [:new, :index, :create]
 
   before_action :authenticate_thinker!
-  before_action :check_if_project_started!
+  before_action :check_if_project_started!, only: [:index]
 
   # GET /sprints
   # GET /sprints.json

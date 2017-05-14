@@ -165,8 +165,8 @@ class Project < ActiveRecord::Base
   def actual_day_of_sprint
     number_of_day = 1
 
-    if (self.sprint > 0)
-      number_of_day = (DateTime.now.to_date - sprints.last.created_at.to_date).to_i + 1
+    unless sprint.nil?
+      number_of_day = (DateTime.now.to_date - sprint.created_at.to_date).to_i + 1
     end
 
     number_of_day

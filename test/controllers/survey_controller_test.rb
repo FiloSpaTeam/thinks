@@ -27,7 +27,7 @@ class SurveyControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index, sprint_id: @sprint.id
 
-    assert_response :redirect
+    assert_response :success
   end
 
   # test 'should get new' do
