@@ -106,8 +106,14 @@
                   %a{ href: '#' }
                     %strong
                       =t 'shared.profilebar.general'
-                %li.visible-xs.visible-sm{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to(t('.personal'), thinker_path(@thinker))
+                %li{current_page?(dashboard_thinker_path(@thinker)) ? { :class => :active } : {} }
+                  = link_to dashboard_thinker_path(@thinker) do
+                    = icon('home', class: 'hidden-xs')
+                    = t(".dashboard")
+                %li{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
+                  = link_to thinker_path(@thinker) do
+                    = icon('user', class: 'hidden-xs')
+                    = t(".my_profile")
                 %li.visible-xs.visible-sm
                   %a{ href: '#' }
                     %strong
