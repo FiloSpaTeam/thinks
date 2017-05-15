@@ -47,6 +47,8 @@ class ThinkersController < ApplicationController
   def dashboard
     @my_projects = current_thinker.projects.order('title')
     @tasks_in_progress = current_thinker.working_tasks.order('updated_at DESC')
+
+    @tasks_done = current_thinker.tasks.done.order('updated_at DESC')
   end
 
   private
