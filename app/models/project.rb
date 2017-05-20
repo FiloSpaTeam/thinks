@@ -116,7 +116,7 @@ class Project < ActiveRecord::Base
     return false if assigned_roles
                     .where(thinker: thinker)
                     .where.not(team_role: TeamRole.team_member.first)
-                    .present?
+                    .present? || open?
 
     tasks
       .where(recruitment: true)
