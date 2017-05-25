@@ -315,7 +315,11 @@ class TasksController < ApplicationController
     @task.restore(recursive: true)
     create_notification(@task, @task.project)
     respond_to do |format|
-      format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
+      if params[:index].nil?
+        format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
+      else
+        format.html { redirect_to project_tasks_path(@task.project, 'filters[with_deleted_at]' => true), notice: 'You restored the task. Good job!' }
+      end
       format.json { render :show, status: :ok, location: @task }
     end
   end

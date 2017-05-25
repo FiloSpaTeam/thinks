@@ -40,8 +40,8 @@
   %table.table.table-condensed.table-hover
     %thead
       %tr
-        %td.hidden-xs{ style: 'max-width: 36px;' }
-        %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
+        %td.hidden-xs{ style: 'max-width: 38px; width: 38px;' }
+        %td
           .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
             %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
               %h5
@@ -54,24 +54,27 @@
                   = link_to("filters[status_id]" => status, remote: true) do
                     .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.tasks.#{status.translation_code}")
-        %td.text-center
-          .col-xs-12
+        - unless filter_value(:with_deleted_at)
+          %td.text-center
+            .col-xs-12
+              %h5
+                %strong.hidden-xs
+                  = smart_listing.sortable 'Workload', :workload
+                %strong.visible-xs.hidden-xxs
+                  = smart_listing.sortable 'W.load', :workload
+          %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
             %h5
-              %strong.hidden-xs
-                = smart_listing.sortable 'Workload', :workload
-              %strong.visible-xs.hidden-xxs
-                = smart_listing.sortable 'W.load', :workload
-        %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
-          %h5
-            %strong
-              = smart_listing.sortable 'View', :impressions_count
+              %strong
+                = smart_listing.sortable 'View', :impressions_count
+        - else
+          %td.col-lg-2
     %tbody
       - unless smart_listing.empty?
         - smart_listing.collection.each do |task|
           -# - if !@search.empty?
           -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
           %tr
-            %td.hidden-xs.vertical-align-middle{ style: 'max-width: 36px;' }
+            %td.hidden-xs.vertical-align-middle{ style: 'max-width: 38px; width: 38px;' }
               .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
             %td
               .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
@@ -123,10 +126,18 @@
                       by
                       %i
                         #{task.updater.name}
-            %td.text-center.workload-table{ style: 'vertical-align: middle;' }
-              = workload_description(task)
-            %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
-              = task.impressions_count
+            - unless filter_value(:with_deleted_at)
+              %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                = workload_description(task)
+              %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
+                = task.impressions_count
+
+            - else
+              %td.vertical-align-middle.col-lg-2
+                = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
+                  = icon('history', class: 'dark-grey fa-lg')
+                  %span.hidden-xs
+                    Reopen
       - else
         %tr.warning
           %td.text-center{ colspan: 4 }
