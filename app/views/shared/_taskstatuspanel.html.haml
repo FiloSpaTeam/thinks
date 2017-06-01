@@ -171,7 +171,10 @@
         - else
           .text-right{ style: 'padding-right: 15px;' }
             %strong
-              = t "tasks.show.you_voted", vote: workload_voted.workload.value
+              - if workload_voted.workload.value > 100
+                = t "tasks.show.you_voted", vote: '∞'
+              - else 
+                = t "tasks.show.you_voted", vote: workload_voted.workload.value
     %ul.list-group.hidden-xs
       %li.list-group-item
         %strong

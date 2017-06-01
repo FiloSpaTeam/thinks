@@ -17,6 +17,9 @@
 
 = label_tag "" do
   - if task.voted?(current_thinker) || task.status == Status.done.first
-    = task.workload
+    - if task.workload > 100
+      ∞
+    - else
+      = task.workload
   - else
     = icon('ban', :class => "dark-grey")
