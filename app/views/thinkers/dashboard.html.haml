@@ -125,6 +125,10 @@
       .panel-heading
         = t ".week_stats"
       .panel-body.panel-fixed-height.scrollbar
+        - if @week_stats.empty?
+          = t ".empty_stats_this_week"
+        - else
+          = area_chart @week_stats, library: { chartArea: { left: 40, width: '82%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
   .col-md-6
     %ul.nav.nav-tabs{ role: 'tablist' }
       %li.active{ role: 'presentation' }
@@ -205,4 +209,62 @@
                 %td.text-center.workload-table{ style: 'vertical-align: middle;' }
                   = workload_description(task)
         #tasks_created.tab-pane{ role: 'tabpanel' }
+          %table.table.table-condensed.table-hover
+            %thead
+              %tr
+                %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
+                  %h5
+                    %strong
+                      = t "task"
+                %td.text-center
+                  .col-xs-12
+                    %h5
+                      %strong.hidden-xs
+                        Workload
+                      %strong.visible-xs.hidden-xxs
+                        W.load
+            %tbody
+            - @tasks_created.each do |task|
+              %tr
+                %td
+                  %strong.hidden-xs.hidden-sm
+                    %small.dark-grey
+                      = std_deviation_button(task)
+                      ·
+                      = project_button(task)
+                      - unless task.goal.nil?
+                        ·
+                        = goal_button(task)
+                      - if task.children.present?
+                        ·
+                        = children_button
+                    ·
+                    = link_to task.title.truncate(30), task_path(task), :title => task.title
+                  %strong.visible-xs
+                    = link_to task.title.truncate(45), task_path(task), :title => task.title
+                  %strong.visible-sm
+                    = std_deviation_button(task)
+                    ·
+                    = link_to task.title, task_path(task)
+                  .dark-grey.break-word
+                    %small
+                      %em
+                        = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
+                  - if task.deleted?
+                    .dark-grey.hidden-xs
+                      %small
+                        closed at
+                        %strong
+                          = task.deleted_at.to_s(:long)
+                  - else
+                    .dark-grey.hidden-xxs
+                      %small
+                        created at
+                        %strong
+                          = task.created_at.to_s(:short)
+                        by
+                        %i
+                          #{task.updater.name}
+                %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                  = workload_description(task)
 

@@ -49,6 +49,14 @@ class ThinkersController < ApplicationController
     @tasks_in_progress = current_thinker.working_tasks.order('updated_at DESC')
 
     @tasks_done = current_thinker.tasks.done.order('updated_at DESC')
+    @tasks_created = current_thinker.tasks.order('created_at DESC')
+
+    @week_stats = current_thinker
+                  .tasks
+                  .group(:created_at)
+                  .count(:workload)
+
+    @week_stats = @week_stats.transform_keys { |key| key.strftime('%B %d') }
   end
 
   private
