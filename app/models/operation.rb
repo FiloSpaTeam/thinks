@@ -22,6 +22,21 @@ class Operation < ActiveRecord::Base
 
   before_create :generate_serial
 
+  def destroy_and_update_serial
+    ActiveRecord::Base.transaction do
+      begin
+        task
+          .operations
+          .where('serial > ?', serial)
+          .update_all('serial = serial - 1')
+
+        really_destroy!
+      rescue => ex
+        puts ex.message
+      end
+    end
+  end
+
   private
 
   def generate_serial

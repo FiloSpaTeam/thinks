@@ -103,7 +103,7 @@ class OperationsController < ApplicationController
     @task = @operation.task
 
     respond_to do |format|
-      if @task.worker == current_thinker && @operation.really_destroy!
+      if @task.worker == current_thinker && @operation.destroy_and_update_serial
         destroy_notification(@operation, @operation.task.project)
         format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
       else
