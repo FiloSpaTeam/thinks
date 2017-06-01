@@ -107,6 +107,11 @@ class ApplicationController < ActionController::Base
       .delete_all
   end
 
+  # redirect to dashboard after login
+  def after_sign_in_path_for(resource)
+    dashboard_thinker_path(current_thinker)
+  end
+
   private
 
   def set_current_user
