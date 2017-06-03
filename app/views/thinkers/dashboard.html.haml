@@ -128,7 +128,7 @@
         - if @week_stats.empty?
           = t ".empty_stats_this_week"
         - else
-          = area_chart @week_stats, library: { chartArea: { left: 40, width: '82%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
+          -# = area_chart @week_stats, library: { chartArea: { left: 40, width: '82%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
   .col-md-6
     %ul.nav.nav-tabs{ role: 'tablist' }
       %li.active{ role: 'presentation' }
