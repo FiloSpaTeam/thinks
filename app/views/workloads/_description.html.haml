@@ -17,7 +17,7 @@
 
 = label_tag "" do
   - if task.voted?(current_thinker) || task.status == Status.done.first
-    - if task.workload > 100
+    - if task.workload.to_i > 100
       ∞
     - else
       = task.workload
