@@ -25,7 +25,7 @@ class RecruitmentsController < ApplicationController
 
   before_action :authenticate_thinker!
 
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :approve, :reopen]
   before_action :set_project, only: [:new, :index, :create]
   before_action :set_validators_for_show, only: [:show]
 
