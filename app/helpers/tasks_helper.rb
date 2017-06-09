@@ -101,8 +101,10 @@ module TasksHelper
   end
 
   def project_button(task)
-    link_to project_path(task.project), title: task.project.title, role: 'button' do
-      icon('folder', class: 'dark-grey')
+    if task.project.present?
+      link_to project_path(task.project), title: task.project.title, role: 'button' do
+        icon('folder', class: 'dark-grey')
+      end
     end
   end
 
