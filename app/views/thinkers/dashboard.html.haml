@@ -26,26 +26,7 @@
 = render partial: 'shared/profileheader', locals: { thinker: @thinker }
 .row
   .col-md-6
-    .panel.panel-default
-      .panel-heading
-        = t ".my_projects"
-      .panel-body.panel-fixed-height.scrollbar
-        %table.table.table-condensed.table-hover
-          %tbody
-            - @my_projects.each do |project|
-              %tr
-                %td
-                  %strong.hidden-xs.hidden-sm
-                    = link_to project.title.truncate(40), project_path(project), :title => project.title
-                  %strong.visible-xs
-                    = link_to project.title.truncate(50), project_path(project), :title => project.title
-                  %strong.visible-sm
-                    = link_to project.title, project_path(project)
-                  .dark-grey.break-word
-                    %small
-                      %em
-                        = highlights_searched_text(plain_text(project.description).truncate(150), @search)
-
+    = smart_listing_render :my_projects
   .col-md-6
     .panel.panel-default
       .panel-heading
@@ -129,6 +110,12 @@
           = t ".empty_stats_this_week"
         - else
           = area_chart @week_stats, library: { chartArea: { left: 40, width: '82%', height: '90%' }, hAxis: { textPosition: 'none' }, pointSize: 8 }
+      .panel-footer
+        %strong
+          = @d.beginning_of_week.to_formatted_s(:rfc822)
+        to
+        %strong
+          = @d.end_of_week.to_formatted_s(:rfc822)
   .col-md-6
     %ul.nav.nav-tabs{ role: 'tablist' }
       %li.active{ role: 'presentation' }

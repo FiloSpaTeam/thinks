@@ -87,4 +87,6 @@ module ProjectsHelper
 
     scope
   end
+
+  module_function :apply_filters
 end

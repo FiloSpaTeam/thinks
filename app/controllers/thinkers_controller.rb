@@ -16,6 +16,9 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class ThinkersController < ApplicationController
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   before_action :authenticate_thinker!
   before_action :check_admin!, only: [:index]
   before_action :check_owner!, except: [:index]
@@ -45,15 +48,25 @@ class ThinkersController < ApplicationController
   end
 
   def dashboard
-    @my_projects = current_thinker.projects.order('title')
+    my_projects_scope = current_thinker.projects.order('title')
+    my_projects_scope = ProjectsHelper.apply_filters(my_projects_scope, params[:filters_projects]) if params[:filters_projects].present?
+
+    @my_projects = smart_listing_create :my_projects,
+                                        my_projects_scope,
+                                        partial: 'thinkers/dashboard/my_projects',
+                                        default_sort: { created_at: 'desc' }
     @tasks_in_progress = current_thinker.working_tasks.order('updated_at DESC')
 
     @tasks_done = current_thinker.tasks.done.order('updated_at DESC')
     @tasks_created = current_thinker.tasks.order('created_at DESC')
 
+    @d = Date.today
     @week_stats = current_thinker
                   .tasks
+                  .done
                   .group(:created_at)
+                  .where('updated_at >= ?', @d.beginning_of_week)
+                  .where('updated_at <= ?', @d.end_of_week)
                   .count(:workload)
 
     @week_stats = @week_stats.transform_keys { |key| key.strftime('%B %d') }

@@ -1,0 +1,63 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2017, Claudio Maradonna
+
+.panel.panel-default
+  .panel-heading
+    = t ".my_projects"
+    .btn-group.pull-right
+      %a.hidden-xxs.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters_projects].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearchMyProjects' }
+        = icon('search', class: 'dark-grey')
+        %span.hidden-xs
+          Search
+    .collapse.margin-top-10#collapseSearchMyProjects{ class: any_filter?(params[:filters_projects]) ? 'in' : '' }
+      = smart_listing_controls_for :my_projects do
+        .input-group.form-group.margin-bottom-0
+          %span.input-group-btn
+            = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
+              = icon('undo', class: 'dark-grey')
+          = text_field_tag 'filters_projects[title_or_description]', filter_value(:title_or_description, :filters_projects), :class => 'form-control', autocomplete: 'off'
+          %span.input-group-btn
+            - if @active_filters.present?
+              %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters_projects]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+                = icon('filter', class: 'dark-grey')
+            %button.btn.btn-primary{ type: 'submit' }
+              = icon('search', class: 'fa-inverse')
+  .panel-body.panel-fixed-height.scrollbar
+    %table.table.table-condensed.table-hover
+      %tbody
+        - unless smart_listing.empty?
+          - smart_listing.collection.each do |project|
+            %tr
+              %td
+                %strong.hidden-xs.hidden-sm
+                  = link_to project.title.truncate(40), project_path(project), :title => project.title
+                %strong.visible-xs
+                  = link_to project.title.truncate(50), project_path(project), :title => project.title
+                %strong.visible-sm
+                  = link_to project.title, project_path(project)
+                .dark-grey.break-word
+                  %small
+                    %em
+                      = highlights_searched_text(plain_text(project.description).truncate(150), @search)
+        - else
+          %tr.warning
+            %td.text-center
+              %strong
+                No records found
+  .panel-footer
+    = smart_listing.paginate
+    = smart_listing.pagination_per_page_links

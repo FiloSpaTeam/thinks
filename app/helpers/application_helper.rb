@@ -136,10 +136,10 @@ module ApplicationHelper
     any
   end
 
-  def filter_value(filter)
-    params[:filters][filter] if params.key?(:filters) &&
-                                params[:filters].key?(filter) &&
-                                params[:filters][filter].present?
+  def filter_value(filter, key = :filters)
+    params[key][filter] if params.key?(key) &&
+                           params[key].key?(filter) &&
+                           params[key][filter].present?
   end
 
   def url_for_filter(key, value, conflicting_filters = [])
