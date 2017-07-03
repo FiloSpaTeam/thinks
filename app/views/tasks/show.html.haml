@@ -58,7 +58,7 @@
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
         .panel-heading
           = render :partial => 'comments/form'
-      %table.table.table-condensed
+      %table.table.table-condensed#comments-list
         %tbody
           - if @comments.empty?
             %tr.warning
@@ -66,49 +66,4 @@
                 %strong
                   No comments yet
           - @comments.each_with_index do |comment, index|
-            - if comment.approved && !comment.reason.nil?
-              %tr.info
-                %td.hidden-xxs{ style: 'width: 40px;' }
-                  - if comment.reason.thinker.avatar
-                    = cl_image_tag(comment.reason.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
-                  - else
-                    .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-                      %i.fa.fa-question.fa-2x.margin-top-5
-                %td{ colspan: 2 }
-                  .dark-grey
-                    %strong
-                      = comment.reason.thinker.name
-                    %small
-                      commented
-                      = time_ago_in_words(comment.reason.created_at)
-                      ago
-                  .form-group
-                    = markdown(comment.reason.text, true)
-            %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
-              %td.hidden-xxs{ style: 'width: 40px;' }
-                - if comment.thinker.avatar
-                  = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
-                - else
-                  .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-                    %i.fa.fa-question.fa-2x.margin-top-5
-
-                - if !comment.approved
-                  %ul.no-padding.margin-top-5{ style: 'list-style: none;' }
-                    - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil? 
-                      = edit_button(comment)
-                      - if !@task.in_progress? && !@task.done? && comment.reason.nil?
-                        = delete_button(comment)
-              %td
-                .dark-grey
-                  %strong
-                    = comment.thinker.name
-                  %small
-                    commented
-                    = time_ago_in_words(comment.created_at)
-                    ago
-                .form-group{ id: "comment-#{comment.id}" }
-                  = markdown(comment.text, true)
-              %td.text-center{ width: 50, style: 'vertical-align: middle;' }
-                = like_button(comment)
-                - if !@task.done? && @task.worker == current_thinker && !@task.deleted?
-                  = approve_button(comment)
+            = render partial: 'comments/comment', locals: { comment: comment, task: @task }

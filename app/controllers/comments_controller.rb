@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
         flash[:notice] = 'Comment was successfully created.'
 
         format.json { render :show, status: :created, location: @task }
-        format.js { render js: "window.location = '#{task_path @task}'" }
+        format.js {}
       else
         set_form_errors(@comment)
 
@@ -72,7 +72,7 @@ class CommentsController < ApplicationController
       else
         set_form_errors(@comment)
 
-        format.html { redirect_to @task, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @task, alert: 'Error with comment update.' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

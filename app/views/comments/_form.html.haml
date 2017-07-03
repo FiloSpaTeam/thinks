@@ -30,5 +30,5 @@
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_comment }
         = @chars_max_comment - f.object.text.try('length').to_i
-  = f.submit @comment.text.nil? ? t('submit') : t('update'), :class => "btn btn-primary"
+  = f.submit @comment.text.nil? ? t('submit') : t('update'), :class => "btn btn-primary", data: { disable_with: "Sending..." }
 = init_counter_textarea
