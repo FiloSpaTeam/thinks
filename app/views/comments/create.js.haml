@@ -20,3 +20,4 @@ $(document).find('div.container div.main').prepend('#{escape_javascript(bootstra
 $('body,html').animate({scrollTop: 0}, 400);
 $("#comment_text").val('');
 $("#comments-list").prepend("#{escape_javascript(render(partial: 'comments/comment', locals: { comment: @comment, task: @task }))}");
+$("#comments-list").find('tr.warning').remove();
