@@ -22,7 +22,10 @@
         .progress
           %div{"aria-valuemax" => "#{project.cycle.days}", "aria-valuemin" => "1", "aria-valuenow" => "#{project.actual_day_of_sprint}", :class => "progress-bar #{progress_bar_color(project.days_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.days_percentage}%;"}
       Sprint
-      = project.sprint.serial
+      - if project.sprint
+        = project.sprint.serial
+      - else
+        0
     - elsif project.suspended
       %strong.text-danger
         Development suspended
@@ -67,7 +70,10 @@
         = badge(project.tasks.where('status_id = ? or status_id = ?', Status.in_progress.first, Status.sprint.first).sum(:workload))
         in sprint
       .list-group-item
-        = badge(project.tasks.done.with_sprint(project.sprint.id).sum(:workload))
+        - if project.sprint
+          = badge(project.tasks.done.with_sprint(project.sprint.id).sum(:workload))
+        - else
+          = badge(0.0)
         done (sprint)
       .list-group-item
         = badge(project.tasks.done.sum(:workload))

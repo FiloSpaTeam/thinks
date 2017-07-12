@@ -37,9 +37,10 @@ class Thinker < ActiveRecord::Base
   has_and_belongs_to_many :notifications
   has_and_belongs_to_many :skills
 
-  validates_date :born_at, :before => -> { 14.years.ago },
-                 :before_message => 'must be at least 14 years old',
-                 :allow_blank => true
+  validates_date :born_at,
+                    :before => -> { 14.years.ago },
+                    :before_message => 'must be at least 14 years old',
+                    :allow_blank => true
 
   has_many :contributions
   has_many :projects
