@@ -138,6 +138,7 @@ en:
     dashboard:
     list:
       bio_not_specified: "Unspecified biography"
+      photo: "Avatar"
     show:
       profile : "Profile"
       photo: "Photo"
