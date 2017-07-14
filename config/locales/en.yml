@@ -135,7 +135,6 @@ en:
       third_title_text: "Everyone worked over your project with tasks. Thanks to them the system understand how much work they have done. Donations are calibrated over those points. Equal distribution of donations is the goal."
 
   thinkers:
-    dashboard:
     list:
       bio_not_specified: "Unspecified biography"
       photo: "Avatar"
