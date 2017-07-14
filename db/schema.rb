@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318091757) do
+ActiveRecord::Schema.define(version: 20170714204414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -455,6 +455,7 @@ ActiveRecord::Schema.define(version: 20170318091757) do
     t.boolean  "otp_required_for_login"
     t.string   "otp_backup_codes",                                                  array: true
     t.string   "authentication_token",      limit: 30
+    t.string   "bio"
   end
 
   add_index "thinkers", ["authentication_token"], name: "index_thinkers_on_authentication_token", unique: true, using: :btree

@@ -15,45 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-- model_class = Thinker
-.page-header
-  %h1= t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:email)
-      %th= model_class.human_attribute_name(:encrypted_password)
-      %th= model_class.human_attribute_name(:reset_password_token)
-      %th= model_class.human_attribute_name(:reset_password_sent_at)
-      %th= model_class.human_attribute_name(:remember_created_at)
-      %th= model_class.human_attribute_name(:current_sign_in_at)
-      %th= model_class.human_attribute_name(:last_sign_in_at)
-      %th= model_class.human_attribute_name(:current_sign_in_ip)
-      %th= model_class.human_attribute_name(:last_sign_in_ip)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @thinkers.each do |thinker|
-      %tr
-        %td= thinker.id
-        %td= thinker.email
-        %td= thinker.encrypted_password
-        %td= thinker.reset_password_token
-        %td= thinker.reset_password_sent_at
-        %td= thinker.remember_created_at
-        %td= thinker.current_sign_in_at
-        %td= thinker.last_sign_in_at
-        %td= thinker.current_sign_in_ip
-        %td= thinker.last_sign_in_ip
-        %td= l thinker.created_at, format: :long
-        %td
-          = link_to thinker_path(thinker), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do
-            = glyph 'info-sign'
-          = link_to edit_thinker_path(thinker), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do
-            = glyph 'pencil'
-          = link_to thinker_path(thinker), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
-            = glyph 'remove'
-= link_to t('.new', :default => t("helpers.links.new")), |
-  new_thinker_path,                                      |
-  :class => 'btn btn-primary'                            |
+#div-container-list
+  %h1
+    = t '.thinkers'
+  = smart_listing_render :thinkers

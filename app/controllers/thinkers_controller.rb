@@ -20,13 +20,18 @@ class ThinkersController < ApplicationController
   helper  SmartListing::Helper
 
   before_action :authenticate_thinker!
-  before_action :check_admin!, only: [:index]
   before_action :check_owner!, except: [:index]
 
   before_action :set_thinker, only: [:show, :edit, :update, :dashboard]
+  before_action :set_validators_for_form_help, only: [:new, :edit]
 
   def index
-    @thinkers = Thinker.all
+    thinkers_scope = Thinker.all
+
+    smart_listing_create :thinkers,
+                         thinkers_scope,
+                         partial: 'thinkers/list',
+                         page_sizes: [9]
   end
 
   def show
@@ -74,13 +79,18 @@ class ThinkersController < ApplicationController
 
   private
 
+  def set_validators_for_form_help
+    bio_validators = Thinker.validators_on(:bio)[0]
+    @chars_max_bio = bio_validators.options[:maximum]
+  end
+
   def set_thinker
     @thinker = Thinker.friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def thinker_params
-    allowed_params = [:name, :email, :born_at, :sex_id, :avatar, :country_iso]
+    allowed_params = [:name, :email, :born_at, :sex_id, :avatar, :country_iso, :bio]
 
     params.require(:thinker).permit(allowed_params)
   end
