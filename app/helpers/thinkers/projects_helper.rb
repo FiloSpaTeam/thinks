@@ -1,0 +1,2 @@
+module Thinkers::ProjectsHelper
+end
