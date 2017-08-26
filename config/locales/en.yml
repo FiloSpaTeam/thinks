@@ -86,6 +86,7 @@ en:
   started: "Started"
   suspended: "Suspended"
   backlogging: "Backlogging"
+  draft: "Draft"
 
   layouts:
     application:
@@ -451,6 +452,7 @@ en:
       notifications: "Notifications"
       dashboard: "Dashboard"
       my_profile: "My profile"
+      my_projects: "My projects"
       logout: "Logout"
     projectbar:
       goals: "Goals"

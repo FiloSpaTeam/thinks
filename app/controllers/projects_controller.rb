@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
     projects_scope = Project
                      .includes(:category, :thinker)
                      .where('projects.project_id is NULL')
+                     .where('visible IS TRUE')
 
     if params[:filters].present?
       projects_scope = apply_filters(projects_scope, params[:filters])

@@ -138,6 +138,10 @@
                     = icon('home')
                     = t(".dashboard")
                 %li
+                  = link_to thinker_projects_path(current_thinker) do
+                    = icon('folder')
+                    = t(".my_projects")
+                %li
                   = link_to thinker_path(current_thinker) do
                     = icon('user')
                     = t(".my_profile")
