@@ -22,11 +22,13 @@ class ThinkersController < ApplicationController
   before_action :authenticate_thinker!
   before_action :check_owner!, except: [:index]
 
-  before_action :set_thinker, only: [:show, :edit, :update, :dashboard]
+  before_action :set_thinker, only: [:show, :edit, :update, :dashboard, :privacy]
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
   def index
     thinkers_scope = Thinker.all
+
+    thinkers_scope = apply_filters(thinkers_scope, params[:filters]) if params[:filters].present?
 
     smart_listing_create :thinkers,
                          thinkers_scope,

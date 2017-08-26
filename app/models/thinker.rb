@@ -61,6 +61,8 @@ class Thinker < ActiveRecord::Base
   belongs_to :sex
   belongs_to :country, class_name: 'Country', foreign_key: :country_iso
 
+  enum privacy: { base: 0, medium: 1, advanced: 2 }
+
   def ban(project)
     banned_thinkers.where(project: project).first
   end

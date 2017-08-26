@@ -28,8 +28,7 @@
   .list-group
     = link_to(t('.password'), edit_password_path(@thinker), :class => "list-group-item #{ current_page?(edit_password_path(@thinker)) ? 'active' : '' }")
     = link_to(t('.double_authentication'), otp_path(@thinker), :class => "list-group-item #{ current_page?(otp_path(@thinker)) ? 'active' : '' }")
-    %a{ href: "#", class: "list-group-item disabled" }
-      =t ('.privacy')
+    = link_to(t('.privacy'), edit_preference_path(@thinker), :class => "list-group-item #{ current_page?(edit_preference_path(@thinker)) ? 'active' : '' }")
     %a{ href: "#", class: "list-group-item disabled" }
       =t ('.data')
   .panel-heading

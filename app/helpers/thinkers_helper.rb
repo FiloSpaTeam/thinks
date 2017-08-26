@@ -16,4 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 module ThinkersHelper
+  def apply_filters(scope, params)
+    scope
+  end
 end

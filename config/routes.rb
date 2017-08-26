@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :thinkers do
     resources :skills, except: [:show, :update, :edit], controller: 'thinkers/skills'
     resources :notifications, except: [:new], controller: 'thinkers/notifications'
+    resources :preferences, only: [:edit, :update], controller: 'thinkers/preferences', path: 'thinkers/preferences', shallow: true
 
     member do
       get :dashboard
