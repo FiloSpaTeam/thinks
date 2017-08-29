@@ -484,6 +484,7 @@ en:
       skill_requirements: "Skill requirements"
       description: "Title and description"
       sprint_and_release_date: "Sprint and release date"
+      developments_approach: "Development's approach"
       sprint_and_release_date_introduction: "
         <p>
           If you want you can set your <strong>release date</strong>. The release date describes the moment in which <strong>starts development</strong> of the project.

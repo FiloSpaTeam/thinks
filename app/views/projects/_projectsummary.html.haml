@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.panel-body.border-bottom
+.panel-body
   - if thinker_signed_in?
     %h4.font-bold
       Your contribution
@@ -44,14 +44,15 @@
       = t "projects.contribution_type." + project.contribution_type
   -# .panel-footer
   -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
-.panel-body
-  %h4.font-bold
-    General details
-  .progress
-    %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
-      = project.progress_percentage
-      \%
-  = t('projects.list.progress')
+- if project.visible
+  .panel-body.border-top
+    %h4.font-bold
+      General details
+    .progress
+      %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{project.progress_percentage}", :class => "progress-bar #{progress_bar_color(project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{project.progress_percentage}%;"}
+        = project.progress_percentage
+        \%
+    = t('projects.list.progress')
 .list-group
   .list-group-item
     founder
@@ -69,11 +70,6 @@
     license
     %strong
       = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
-  - if current_thinker == project.thinker
-    .list-group-item
-      secret
-      = link_to 'javascript:;', :class => "pull-right no-padding no-border btn", role: "button", 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => project.serial, 'data-template' => '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content" style="word-wrap: break-word;"></div></div>' do
-        = icon('eye', :class => "dark-grey")
 .panel-body
   %h4.font-bold
     Sprint details
@@ -123,23 +119,3 @@
     mailing list
     = link_to project.mailing_list_url, :class => "pull-right no-padding no-border btn #{!project.mailing_list_url.present? ? 'disabled' : ''}", role: "button" do
       = icon('envelope-o', :class => "dark-grey")
-.panel-body
-  %h4.font-bold
-    Summary
-.list-group
-  .list-group-item
-    - team_number = project.contributions.where('intensity > ?', Contribution.intensities[:watching]).distinct.count
-    = badge(team_number)
-    = link_to_if team_number.nonzero?, 'team', project_teams_path(project)
-  .list-group-item
-    = badge(project.releases.size)
-    = link_to 'releases', project_releases_path(project)
-  .list-group-item
-    = badge(project.sprints.size)
-    = link_to 'sprints', project_sprints_path(project)
-  .list-group-item
-    = badge(project.goals.size)
-    = link_to 'goals', project_goals_path(project)
-  .list-group-item
-    = badge(project.tasks.size)
-    = link_to 'tasks', project_tasks_path(project)

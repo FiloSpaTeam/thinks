@@ -26,6 +26,9 @@
 
     = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
       .form-group.required
+        = f.label :approach_type, :class => "control-label"
+        = f.select :approach_type, options_for_select(Project.approach_types.keys.map{ |key| [t("projects.approach_type.#{key}"), key] }, @project.approach_type), {}, :class => "form-control", 'data-reference-value' => :agile
+      .form-group.required
         = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
           = icon('info-circle')
         = f.label :cycle_id, :class => "control-label"

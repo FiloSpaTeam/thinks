@@ -56,6 +56,7 @@ class Project < ActiveRecord::Base
   belongs_to :project
 
   enum contribution_type: [:open, :with_recruiting]
+  enum approach_type: [:agile, :waterfall]
 
   validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true

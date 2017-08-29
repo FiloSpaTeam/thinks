@@ -20,7 +20,7 @@
     %strong=t '.settings'
   .list-group
     = link_to(t('.description'), edit_project_path(@project), :class => "list-group-item #{ current_page?(edit_project_path(@project)) ? 'active' : '' }")
-    = link_to(t('.sprint_and_release_date'), project_settings_release_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
+    = link_to(t('.developments_approach'), project_settings_release_index_path(@project), :class => "list-group-item #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
     = link_to(t('.links'), project_settings_links_path(@project), :class => "list-group-item #{ current_page?(project_settings_links_path(@project)) ? 'active' : '' }")
     = link_to(t('.images_settings'), project_settings_images_path(@project), :class => "list-group-item #{ current_page?(project_settings_images_path(@project)) ? 'active' : '' }")
   .panel-heading
