@@ -4,7 +4,6 @@ rethink:
   id: 1
   title: Rethink
   description: Project online store for free software based upon Savannah, Scrum and Rework methodologies
-  minimum_team_number: 20
   release_at: 2016-09-13
   languages: ruby, yaml
   license: mit
@@ -20,7 +19,6 @@ savage:
   id: 2
   title: Savage
   description: Graphical engine for C++ games
-  minimum_team_number: 250
   release_at: 2015-08-21
   languages: cplusplus
   license: mit

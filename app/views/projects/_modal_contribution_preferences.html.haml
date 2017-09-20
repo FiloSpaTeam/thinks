@@ -1,0 +1,59 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015, Claudio Maradonna
+
+#modal-contribution.modal.fade{tabindex: "-1", role:"dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
+      = form_for @contribution, url: { controller: :projects, action: :contribute, id: @project.id }, html: { id: 'form-contribution' }, method: :put do |f|
+        .modal-header
+          %button{type: "button", class: "close", "data-dismiss": "modal", "aria-label": t('close')}
+            %span{"aria-hidden": "true"}
+              &times;
+          %h4.modal-title
+            = t ".conditions_of_participations"
+        .modal-body
+          .form-group
+            .scrollbar{ style: 'min-height: 50px; max-height: 350px;' }
+              = @project.contribution_text
+          .row
+            .col-md-4
+              %label.control-label
+                = t ".skill_requirements"
+              - if @project.skills.empty?
+                = t ".no_skill_requirements"
+              - else
+                %span.help-block
+                  = t ".help_block_text_skill"
+                %ul
+                  - @project.skills.each do |skill|
+                    %li{ class: current_thinker.present? && current_thinker.skills.where(id: skill.id).count > 0 ? 'text-success' : '' }
+                      = t("skills.#{skill.t_name}")
+            .col-md-8
+              %label.control-label
+                = t '.your_contribution'
+              - if scrum_master?(@project) || product_owner?(@project)
+                - my_roles = @project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
+                %ul
+                  - my_roles.each do |role|
+                    %li
+                      = t "team_roles.#{role.team_role.t_name}"
+              - else
+                = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, @contribution.intensity), {}, class: 'form-control'
+        .modal-footer
+          %button.btn.btn-default{type: "button", "data-dismiss": "modal"}
+            = t 'close'
+          = f.submit t('.update_contribution'), class: 'btn btn-success'

@@ -24,6 +24,10 @@
       = yield(:body)
     - else
       = render 'shared/navbar'
+      - if current_page?(root_path)
+        .img-index
+          .img-index-input.col-md-6.col-md-offset-3.col-xs-12.col-sm-8.col-sm-offset-2
+            %input.input-lg.form-control{ type: 'text', placeholder: "Search for a project" }
       .container
         -# - if thinker_signed_in?
         -#   .sidebar.no-print

@@ -22,7 +22,7 @@ class Contribution < ActiveRecord::Base
   enum intensity: [:nothing, :watching, :partecipate]
 
   def save_and_update_team_role
-    ActiveRecord::Base.transaction do
+    transaction do
       save
 
       if nothing?

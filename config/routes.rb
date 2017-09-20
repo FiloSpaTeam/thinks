@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   resources :languages
   resources :projects do
     member do
+      get 'brief'
+
       put :contribute
       put :elect
       put :migrate
@@ -128,7 +130,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root "start#index"
+  root "projects#index"
 
   # namespace :api do
   #   namespace :v1 do

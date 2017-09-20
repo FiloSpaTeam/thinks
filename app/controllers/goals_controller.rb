@@ -88,6 +88,7 @@ class GoalsController < ApplicationController
 
     @goal         = Goal.new
     @project_form = @project
+    @project_releases = @project.releases.order('version')
 
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),

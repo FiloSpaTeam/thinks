@@ -55,10 +55,10 @@ class Project < ActiveRecord::Base
   belongs_to :category
   belongs_to :project
 
-  enum contribution_type: [:open, :with_recruiting]
-  enum approach_type: [:agile, :waterfall]
+  enum contribution_type: %i[open with_recruiting]
+  enum approach_type: %i[agile waterfall]
+  enum status: %i[draft active suspended]
 
-  validates :minimum_team_number, numericality: { only_integer: true, greater_than: 1 }
   validates :title, length: { in: 2..60 }, uniqueness: true
   validates :motto, length: { maximum: 240 }, presence: true, if: 'self.project.nil? && self.skip_motto_validation.nil?'
   validates :description, length: { in: 2..1600 }
@@ -182,26 +182,24 @@ class Project < ActiveRecord::Base
   end
 
   def check_if_past_project
-    if started?
-      if sprints.count.zero?
-        ActiveRecord::Base.transaction do
-          sprint = Sprint.new
+    return unless started? || sprints.count.zero?
 
-          sprint.project = self
-          sprint.save
+    ActiveRecord::Base.transaction do
+      sprint = Sprint.new
 
-          notification = Notification.new
+      sprint.project = self
+      sprint.save
 
-          notification.project    = self
-          notification.thinker_id = 0
-          notification.model      = sprint.class.name
-          notification.model_id   = sprint.id
-          notification.controller = 'sprints'
-          notification.action     = 'create'
+      notification = Notification.new
 
-          notification.save
-        end
-      end
+      notification.project    = self
+      notification.thinker_id = 0
+      notification.model      = sprint.class.name
+      notification.model_id   = sprint.id
+      notification.controller = 'sprints'
+      notification.action     = 'create'
+
+      notification.save
     end
   end
 

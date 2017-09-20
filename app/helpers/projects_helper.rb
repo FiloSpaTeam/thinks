@@ -49,8 +49,18 @@ module ProjectsHelper
     return false if project
                     .assigned_roles
                     .where(thinker: current_thinker)
-                    .where('team_role_id IN (?,?)',
-                           TeamRole.scrum_master.first,
+                    .where('team_role_id IN (?)',
+                           TeamRole.scrum_master.first)
+                    .first
+                    .nil?
+    true
+  end
+
+  def product_owner?(project)
+    return false if project
+                    .assigned_roles
+                    .where(thinker: current_thinker)
+                    .where('team_role_id IN (?)',
                            TeamRole.product_owner.first)
                     .first
                     .nil?

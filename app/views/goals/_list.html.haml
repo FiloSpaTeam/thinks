@@ -46,10 +46,6 @@
           %td
             %a.pull-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
               = icon('tasks', :class => "dark-grey")
-            - if current_thinker == goal.project.thinker
-              - tasks_ready = goal.tasks.ready_to_sprint
-              %a.pull-right.btn.hidden-xs{ :class => tasks_ready.empty? ? "disabled" : "", :href => tasks_ready.empty? ? "javascript:;" : tasks_in_sprint_goal_path(goal), :title => release_btn_title(tasks_ready) , :role => "button", "data-method" => :put }
-                = icon('flag-checkered', :class => "dark-grey")
             %strong.hidden-xs.hidden-sm
               %small.dark-grey
                 = goal.updated_at.to_s(:short)

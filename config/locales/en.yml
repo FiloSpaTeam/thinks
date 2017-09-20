@@ -72,7 +72,7 @@ en:
   elections_in_progress: "Elections in progress"
   yourself: "yourself"
   remaining_days: "%{days} remaining days"
-  get_donate_button_from_paypal: "You can get a valid HTML tag from PayPal donation system."
+  get_donate_button_from_paypal: "You can get a valid HTML tag from Liberapay (or similar) donation system."
   ban_from_project: "Ban from project"
   unban_from_project: "Unban from project"
   if_are_you_sure_want_ban_this_member: "If you really want to ban this thinker, provide a valid reason. (160 chars max)."
@@ -87,6 +87,7 @@ en:
   suspended: "Suspended"
   backlogging: "Backlogging"
   draft: "Draft"
+  founder: "Founder"
 
   layouts:
     application:
@@ -187,6 +188,17 @@ en:
       title       : "Title"
     show:
       partecipate: "Partecipate"
+      participation_preferences: "Participation preferences"
+      team: "Team"
+      current_goal: "Current goal"
+      workload_in_time: "Workload (timeline)"
+    modal_contribution_preferences:
+      conditions_of_participations: "Conditions of participations"
+      update_contribution: "Update contribution"
+      help_block_text_skill: "Green text if skill matches your skills"
+      skill_requirements: "Skill requirements"
+      your_contribution: "Your contribution"
+      no_skill_requirements: "Any skill is appreciated"
     new:
       new        : "New project"
       created_by : "created by"
@@ -215,6 +227,7 @@ en:
       dates      : "Dates"
       release_at_help: "If release date is before today, the project is declared started."
       main_image: "Main image"
+      placeholder_contribution_text: "Describe what someone need to work with you, conditions or something that helps to understand your way to work."
     tasks:
       scrum_table : "Scrum table"
       tasks       : "tasks"
@@ -283,6 +296,9 @@ en:
   goals:
     index:
       title: "Title"
+    form:
+      popover_content_release: "Associating goals to release allow team to work on tasks related."
+      placeholder_description: "Describe the goal with a good level of details. This is the base to create working tasks."
 
   releases:
     form:
@@ -462,6 +478,7 @@ en:
       sprints: "Sprints"
       project: "Project"
       recruitment: "Recruitment"
+      brief: "Brief"
     profilebar:
       personal: "Personal"
       design: "Design"
@@ -496,13 +513,13 @@ en:
           <br>
           The working period is usefull to divide the entire development process into subperiods (1 week, 2 weeks..., called <strong><i>\"Sprint\"</i></strong>) so you can study your development's \"speed\", take surveys about work and get charts.
         </p>"
-      sprint_and_release_date_help_1: "<strong>There are no bad choices.</strong><br>Depends on your changing speed (you need to change details usually?).<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>"
+      sprint_and_release_date_help_1: "<strong>There are no bad choices.</strong><br>Depends on the period in which you want to focus the workload.<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>"
       sprint_and_release_date_help_2: "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>"
       links: "Category, license and links"
       links_introduction: "<p>You can select only <strong>Free Software (as in freedom) compatible licenses</strong>.</p>"
       links_help_1: "Choose the right category and everyone can see your project under that."
       logo_and_main_image: "Logo and main image"
-      logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='#{image_url('/template_thinks_main_image.svg')}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
+      logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='%{image_url}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
       square_image: "Square image, 256x256 (jpg, png)"
       landscape_image: "Landscape image, 1080x670 (jpg, png)"
       contribution_settings: "Contribution settings"
@@ -516,7 +533,7 @@ en:
         documentation_url : "Documentation"
         cycle_id: "Working period" 
         release_at: "Release date"
-        contribution_text: "Text for contribution"
+        contribution_text: "Conditions of participation"
         recruitment_text: "Text for recruitment"
 
   # Devise section

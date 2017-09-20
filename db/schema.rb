@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826104658) do
+ActiveRecord::Schema.define(version: 20170916084923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,14 +171,18 @@ ActiveRecord::Schema.define(version: 20170826104658) do
     t.text     "description"
     t.integer  "project_id"
     t.integer  "thinker_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.float    "progress"
     t.datetime "deleted_at"
+    t.integer  "main_id",     default: 0
+    t.integer  "revision",    default: 0
+    t.integer  "release_id"
   end
 
   add_index "goals", ["deleted_at"], name: "index_goals_on_deleted_at", using: :btree
   add_index "goals", ["project_id"], name: "index_goals_on_project_id", using: :btree
+  add_index "goals", ["release_id"], name: "index_goals_on_release_id", using: :btree
   add_index "goals", ["thinker_id"], name: "index_goals_on_thinker_id", using: :btree
 
   create_table "impressions", force: :cascade do |t|
@@ -275,16 +279,15 @@ ActiveRecord::Schema.define(version: 20170826104658) do
   add_index "operations", ["task_id"], name: "index_operations_on_task_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",               limit: 60
-    t.string   "description",         limit: 1600
-    t.integer  "minimum_team_number",              default: 2
+    t.string   "title",             limit: 60
+    t.string   "description",       limit: 1600
     t.date     "release_at"
     t.string   "home_url"
     t.string   "source_code_url"
     t.string   "documentation_url"
     t.integer  "license_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.integer  "thinker_id"
     t.integer  "cycle_id"
     t.integer  "category_id"
@@ -295,15 +298,15 @@ ActiveRecord::Schema.define(version: 20170826104658) do
     t.string   "mailing_list_url"
     t.integer  "project_id"
     t.string   "serial"
-    t.integer  "impressions_count",                default: 0
-    t.boolean  "suspended",                        default: false
+    t.integer  "impressions_count",              default: 0
     t.string   "logo"
-    t.integer  "contribution_type",                default: 0
+    t.integer  "contribution_type",              default: 0
     t.text     "contribution_text"
     t.text     "recruitment_text"
     t.string   "motto"
-    t.boolean  "visible",                          default: false
-    t.integer  "approach_type",                    default: 0
+    t.boolean  "visible",                        default: false
+    t.integer  "approach_type",                  default: 0
+    t.integer  "status",                         default: 0
   end
 
   add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
@@ -408,16 +411,17 @@ ActiveRecord::Schema.define(version: 20170826104658) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "title"
-    t.integer  "goal_id"
     t.float    "workload"
     t.float    "standard_deviation"
     t.datetime "deleted_at"
-    t.integer  "release_id"
     t.datetime "end_at"
     t.integer  "who_updated_id"
     t.integer  "father_id"
     t.integer  "impressions_count",  default: 0,     null: false
     t.boolean  "recruitment",        default: false
+    t.integer  "main_id",            default: 0
+    t.integer  "revision",           default: 0
+    t.integer  "goal_id"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
@@ -497,4 +501,5 @@ ActiveRecord::Schema.define(version: 20170826104658) do
     t.string   "description"
   end
 
+  add_foreign_key "goals", "releases"
 end

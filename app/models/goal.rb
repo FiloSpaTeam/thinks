@@ -20,8 +20,10 @@ class Goal < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :thinker
+  belongs_to :main, class_name: 'Goal', foreign_key: 'main_id'
 
   has_many :tasks
+  has_many :revisions, class_name: 'Goal', foreign_key: 'main_id', dependent: :destroy
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }, presence: true

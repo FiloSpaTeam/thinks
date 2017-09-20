@@ -49,7 +49,6 @@ class Projects::SettingsReleaseController < ApplicationController
 
   def release_params
     params.require(:project).permit(
-      :minimum_team_number,
       :release_at,
       :cycle_id
     )

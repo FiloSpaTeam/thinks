@@ -29,8 +29,5 @@
           = t('new')
 
 = render partial: 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @project }
-  #div-container-list.col-md-8
-    = smart_listing_render :goals
+#div-container-list
+  = smart_listing_render :goals

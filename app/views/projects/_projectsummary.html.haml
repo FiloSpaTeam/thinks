@@ -17,8 +17,6 @@
 
 .panel-body
   - if thinker_signed_in?
-    %h4.font-bold
-      Your contribution
     - if current_thinker != project.thinker
       - ban = current_thinker.ban(project)
       - if ban.present?
@@ -28,20 +26,40 @@
         %i
           = ban.reason
       - else
-        = form_for contribution, url: { controller: :projects, action: :contribute, id: project.id }, html: { id: 'form-contribution' }, method: :put do |f|
-          = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
+        %button.btn.btn-primary.btn-block{ type: "button", "data-target": '#modal-contribution', "data-toggle": "modal" }
+          = t ".your_contribution"
+        #modal-contribution.modal.fade{tabindex: "-1", role:"dialog"}
+          .modal-dialog{role: "document"}
+            .modal-content
+              = form_for contribution, url: { controller: :projects, action: :contribute, id: project.id }, html: { id: 'form-contribution' }, method: :put do |f|
+                .modal-header
+                  %button{type: "button", class: "close", "data-dismiss": "modal", "aria-label": t('close')}
+                    %span{"aria-hidden": "true"}
+                      &times;
+                  %h4.modal-title
+                    = t ".contribution_settings"
+                .modal-body
+                  .form-group
+                    %label.control-label
+                      = t '.contribution_text'
+                    .scrollbar{ style: 'min-height: 50px; max-height: 350px;' }
+                      = project.contribution_text
+                  .form-group
+                    %label.control-label
+                      = t '.your_contribution'
+                    = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, contribution.intensity), {}, class: 'form-control', onChange: 'javascript: this.form.submit();'
+                .modal-footer
+                  %button.btn.btn-default{type: "button", "data-dismiss": "modal"}
+                    = t 'close'
+                  = f.submit t('.update_contribution'), class: 'btn btn-success'
     - else
+      %h4.font-bold
+        Your contribution
       - my_roles = project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
       %ul
         - my_roles.each do |role|
           %li
             = t "team_roles.#{role.team_role.t_name}"
-    %hr
-  %h4.font-bold
-    Project contribution
-  %ul
-    %li
-      = t "projects.contribution_type." + project.contribution_type
   -# .panel-footer
   -#   = link_to t('.my_stats'), project_statistic_path(project, current_thinker), class: 'btn'
 - if project.visible
@@ -63,42 +81,9 @@
       .text-center
         = project.donate_button.html_safe
   .list-group-item
-    category
-    %strong
-      = content_tag :span, project.category.try(:t_name) ? t("category.#{project.category.t_name}") : t('not_defined_yet'), :class => "pull-right"
-  .list-group-item
     license
     %strong
       = content_tag :span, project.license.try(:description) ? link_to(project.license.description, project.license.url) : t('not_defined_yet'), :class => "pull-right"
-.panel-body
-  %h4.font-bold
-    Sprint details
-.list-group
-  .list-group-item
-    Working period
-    %strong
-      = content_tag :span, project.cycle.try(:description) ? project.cycle.description : t('not_defined_yet'), :class => "pull-right"
-  .list-group-item
-    minimum team number
-    %strong
-      = content_tag :span, project.minimum_team_number, :class => "pull-right"
-  .list-group-item
-    release date
-    %strong
-      = content_tag :span, project.release_at.try(:to_s) ? project.release_at.to_s(:long) : t('not_defined_yet'), :class => "pull-right"
-.panel-body.border-bottom
-  %h4.font-bold
-    Skill requirements
-  %span.help-block
-    - unless current_thinker.nil?
-      Green text if skill matches your skills
-  - if project.skills.empty?
-    No skill required
-  - else
-    %ul
-      - project.skills.each do |skill|
-        %li{ class: current_thinker.present? && current_thinker.skills.where(id: skill.id).count > 0 ? 'text-success' : '' }
-          = t("skills.#{skill.t_name}")
 .panel-body
   %h4.font-bold
     Links

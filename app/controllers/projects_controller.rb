@@ -21,13 +21,20 @@ class ProjectsController < ApplicationController
   helper  SmartListing::Helper
 
   before_action :authenticate_thinker!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect, :suspend, :resume]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :contribute, :tasks, :elect, :suspend, :resume, :brief]
   before_action :set_contribution, only: [:show]
   before_action :thinker!, only: [:edit, :update, :destroy]
 
+  def index
+    @top_category = Project.find(40)
+    @most_popular = Project.limit(6)
+
+    @categories = Category.order(:t_name).limit(10)
+  end
+
   # GET /projects
   # GET /projects.json
-  def index
+  def index_2
     projects_scope = Project
                      .includes(:category, :thinker)
                      .where('projects.project_id is NULL')
@@ -219,6 +226,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def brief
+    @releases = @project.releases.includes(:goals).where('progress < 100').order(:end_at)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -234,7 +245,7 @@ class ProjectsController < ApplicationController
     params
       .require(:project)
       .permit(
-        :title, :motto, :description, :minimum_team_number,
+        :title, :motto, :description, :contribution_text,
         :release_at, :license_id, :source_code_url,
         :home_url, :documentation_url,
         :cycle_id, :category_id, :main_image, :logo

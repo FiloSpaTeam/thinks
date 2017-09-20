@@ -66,10 +66,6 @@
                 = icon('user-plus', :class => "dark-grey")
                 %span= t(".recruitment")
           = menu_divider
-        %li{:class => active_link_if_current(projects_path)}
-          = link_to projects_path do
-            = icon('globe', :class => "fa-lg dark-grey")
-            = t(".projects")
         %li.dropdown
           %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
             = icon('question-circle', :class => "fa-lg dark-grey")
@@ -101,6 +97,12 @@
               = content_tag(:span, "", :class => :caret)
             %ul.dropdown-menu
               - if @thinker.present? && @thinker.id.present?
+                %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
+                  %strong{ style: 'font-size: 13px;' }
+                    = current_thinker.name
+                  %br
+                  %small.font-italic
+                    = current_thinker.email
                 %li.visible-xs.visible-sm
                   %a{ href: '#' }
                     %strong
@@ -109,6 +111,10 @@
                   = link_to dashboard_thinker_path(@thinker) do
                     = icon('home', class: 'hidden-xs')
                     = t(".dashboard")
+                %li{current_page?(thinker_projects_path(@thinker)) ? { :class => :active } : {} }
+                  = link_to thinker_projects_path(current_thinker) do
+                    = icon('folder')
+                    = t(".my_projects")
                 %li{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
                   = link_to thinker_path(@thinker) do
                     = icon('user', class: 'hidden-xs')

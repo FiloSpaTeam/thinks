@@ -1,19 +1,20 @@
-%ul.list-group
-  - smart_listing.collection.each_with_index do |project, index|
-    %li.list-group-item.row
-      .col-md-3.no-padding-left
+- smart_listing.collection.each_with_index do |project, index|
+  .row
+    .col-lg-3.col-md-4.col-sm-5.col-xs-5.hidden-xs
+      = link_to project_path(project) do
         - if project.main_image
           = cl_image_tag(project.main_image.path, { style: 'width: auto; height: 180px; max-width: 290px' })
         - else
           %div.bg-info{ style: 'width: 290px; height: 180px; max-width: 290px;' }
-      .col-md-9
-        %h3.margin-top-0
-          - if project.logo
-            = cl_image_tag(project.logo.path, { size: '26x26', crop: :thumb, gravity: :face })
-          = link_to project_path(project) do
-            = project.title
-            - unless project.visible
-              %i.font-bold.font-sm
-                = " -- " + t('draft')
-        %p
-          = project.description
+    .col-lg-9.col-md-8.col-sm-7.col-xs-12
+      %h3.margin-top-0
+        - if project.logo
+          = cl_image_tag(project.logo.path, { size: '26x26', crop: :thumb, gravity: :face })
+        = link_to project_path(project) do
+          = project.title
+          - if project.draft?
+            %i.font-bold.font-sm
+              = " -- " + t('draft')
+      %p
+        = project.description
+  %hr

@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test 'should create project' do
     assert_difference('Project.count') do
-      post :create, project: { release_at: Date.today, description: "Fantastic project", minimum_team_number: 5, title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680, motto: 'Always resist.' }
+      post :create, project: { release_at: Date.today, description: "Fantastic project", title: "Eureka", license_id: 471458987, home_url: "http://myurl.org/", source_code_url: "http://myurl.org/src", documentation_url: "http://myurl.org/doc", cycle_id: 788802281, category_id: 298486374, thinker_id: 135138680, motto: 'Always resist.' }
     end
 
     assert_redirected_to project_path(assigns(:project))
@@ -53,7 +53,7 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test 'should update project' do
-    patch :update, id: @project, project: { release_at: @project.release_at, description: @project.description, minimum_team_number: @project.minimum_team_number, title: @project.title, license_id: @project.license_id, home_url: @project.home_url, source_code_url: @project.source_code_url, documentation_url: @project.documentation_url }
+    patch :update, id: @project, project: { release_at: @project.release_at, description: @project.description, title: @project.title, license_id: @project.license_id, home_url: @project.home_url, source_code_url: @project.source_code_url, documentation_url: @project.documentation_url }
     assert_redirected_to project_path(assigns(:project))
   end
 

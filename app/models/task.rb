@@ -26,6 +26,7 @@ class Task < ActiveRecord::Base
   has_many :operations, dependent: :destroy
   has_many :likes, through: :comments
   has_many :children, class_name: 'Task', foreign_key: 'father_id'
+  has_many :revisions, class_name: 'Task', foreign_key: 'main_id', dependent: :destroy
   has_many :ratings, dependent: :destroy
 
   has_many :notifications, -> { where(model: :Task) }, foreign_key: :model_id, dependent: :destroy
@@ -34,11 +35,11 @@ class Task < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :goal
-  belongs_to :release
   belongs_to :thinker
   belongs_to :worker, class_name: 'Thinker', foreign_key: 'worker_thinker_id'
   belongs_to :updater, class_name: 'Thinker', foreign_key: 'who_updated_id'
   belongs_to :father, class_name: 'Task', foreign_key: 'father_id'
+  belongs_to :main, class_name: 'Task', foreign_key: 'main_id'
   belongs_to :status
 
   before_create :generate_serial
@@ -212,15 +213,6 @@ class Task < ActiveRecord::Base
     end
 
     has_liked
-  end
-
-  def ready?
-    if project.minimum_team_number > votes.length ||
-       standard_deviation > 2
-      return false
-    else
-      return true
-    end
   end
 
   def done?
