@@ -19,19 +19,15 @@
 # -*- coding: utf-8 -*-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+
 require 'csv'
 
 statuses_list = [
-  ['backlog',     'ToDo',             1],
-  ['release',     'ToDo next',        2],
-  ['sprint',      'Work planned',     3],
-  ['in_progress', 'Work in progress', 4],
-  ['done',        'Work done',        5]
+  ['backlog', 'backlog_description', 1],
+  ['release', 'release_description', 2],
+  ['sprint', 'sprint_description', 3],
+  ['in_progress', 'in_progress_description', 4],
+  ['done', 'done_description', 5]
 ]
 
 statuses_list.each do |tcode, description, order|
@@ -148,18 +144,11 @@ cycles_list.each do |tcode, description, days|
 end
 
 categories_list = [
-  %w(web_applications       web_applications_description       cream),
-  %w(libraries              libraries_description              green),
-  %w(games                  games_description                  red),
-  %w(sysadmin_applications  sysadmins_applications_description black),
-  %w(didactics_applications didactics_applications_description yellow),
-  %w(system_applications    system_applications_description    orange),
-  %w(media_applications     media_applications_description     violet),
-  %w(graphics_applications  graphics_applications_description  lightblue),
-  %w(tools_applications     tools_applications_description     gray),
-  %w(other                  other_description                  gray),
-  %w(health_applications    health_applications_description    lightblue),
-  %w(applications_fpa applications_fpa_description gray)
+  %w[software software_description cream],
+  %w[web_applications web_applications_description lightblue],
+  %w[robotic robotic_description black],
+  %w[domotic domotic_description yellow],
+  %w[artworks artworks_description]
 ]
 
 categories_list.each do |tname, tdescription, color|
@@ -169,7 +158,7 @@ categories_list.each do |tname, tdescription, color|
   end
 end
 
-sexes_list = %w(male female other)
+sexes_list = %w[male female other]
 
 sexes_list.each do |tname|
   Sex.where(t_name: tname).first_or_create
@@ -249,7 +238,7 @@ skills_list = [
   ['mathematician',          'mathematician_description'],
   ['query_expert',           'query_expert_description'],
   ['designer',               'designer_description'],
-  ['mobile_expert',          'mobile_expert_description'],
+  ['mobile_expert',          'mobile_expert_description']
 ]
 
 skills_list.each do |tname, tdescription|

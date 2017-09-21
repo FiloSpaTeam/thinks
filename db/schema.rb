@@ -411,6 +411,7 @@ ActiveRecord::Schema.define(version: 20170916084923) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "title"
+    t.integer  "goal_id"
     t.float    "workload"
     t.float    "standard_deviation"
     t.datetime "deleted_at"
@@ -421,7 +422,6 @@ ActiveRecord::Schema.define(version: 20170916084923) do
     t.boolean  "recruitment",        default: false
     t.integer  "main_id",            default: 0
     t.integer  "revision",           default: 0
-    t.integer  "goal_id"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

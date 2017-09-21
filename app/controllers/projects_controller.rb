@@ -26,10 +26,20 @@ class ProjectsController < ApplicationController
   before_action :thinker!, only: [:edit, :update, :destroy]
 
   def index
-    @top_category = Project.find(40)
-    @most_popular = Project.limit(6)
+    @minimum_good_number_of_projects = 10
+    @projects_count = Project.count
+    if @projects_count > @minimum_good_number_of_projects
+      @most_popular = Project.limit(6)
 
-    @categories = Category.order(:t_name).limit(10)
+      @categories = Category.order(:t_name).limit(10)
+    else
+      @steps = [
+        { step: 1, title: '.step_1', description: '.step_description_1' },
+        { step: 2, title: '.step_2', description: '.step_description_2' },
+        { step: 3, title: '.step_3', description: '.step_description_3' },
+        { step: 4, title: '.step_4', description: '.step_description_4' }
+      ]
+    end
   end
 
   # GET /projects

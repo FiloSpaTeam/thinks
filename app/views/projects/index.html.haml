@@ -15,34 +15,41 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.row
-  .col-md-8.col-sm-8
-    .row
-      .col-lg-3.col-md-4.col-sm-5.col-xs-12
-        - if @top_category.main_image
-          = cl_image_tag(@top_category.main_image.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) 
-        - else
-          %div.bg-info{ style: 'height: 180px;' }
-      .col-lg-9.col-md-8.col-sm-7.col-xs-12
-        %h3.margin-top-0
-          = @top_category.title
-        %p.text-justify
-          = @top_category.description
-  .col-md-4.col-sm-4.hidden-xs
-    %ul.border-left.padding-left-10
-      - @categories.each do |category|
-        %li{ style: "list-style-type: none;" }
-          %a{ href: "#top-category-#{ category.t_name }" }
-            = t "category.#{ category.t_name }"
-%hr.margin-bottom-50.margin-top-50
-%h2
-  Most popular
-.row
-  - @most_popular.each do |project|
-    = render partial: "projects/card", locals: { project: project }
-%hr.margin-bottom-50.margin-top-50
-%h2
-  Most active
-.row
-  - @most_popular.each do |project|
-    = render partial: "projects/card", locals: { project: project }
+- if @projects_count > @minimum_good_number_of_projects
+  .row
+    .col-md-8.col-sm-8
+      .row
+        .col-lg-3.col-md-4.col-sm-5.col-xs-12
+          - if @top_category.main_image
+            = cl_image_tag(@top_category.main_image.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) 
+          - else
+            %div.bg-info{ style: 'height: 180px;' }
+        .col-lg-9.col-md-8.col-sm-7.col-xs-12
+          %h3.margin-top-0
+            = @top_category.title
+          %p.text-justify
+            = @top_category.description
+    .col-md-4.col-sm-4.hidden-xs
+      %ul.border-left.padding-left-10
+        - @categories.each do |category|
+          %li{ style: "list-style-type: none;" }
+            %a{ href: "#top-category-#{ category.t_name }" }
+              = t "category.#{ category.t_name }"
+  %hr.margin-bottom-50.margin-top-50
+  %h2
+    Most popular
+  .row
+    - @most_popular.each do |project|
+      = render partial: "projects/card", locals: { project: project }
+  %hr.margin-bottom-50.margin-top-50
+  %h2
+    Most active
+  .row
+    - @most_popular.each do |project|
+      = render partial: "projects/card", locals: { project: project }
+- else
+  %h1.text-center
+    How to start
+  %hr
+  - @steps.each do |step|
+    = render partial: "projects/step", locals: { step: step }
