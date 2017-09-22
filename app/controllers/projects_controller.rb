@@ -39,6 +39,8 @@ class ProjectsController < ApplicationController
         { step: 3, title: '.step_3', description: '.step_description_3' },
         { step: 4, title: '.step_4', description: '.step_description_4' }
       ]
+
+      @offers = Offer.order(:price).all
     end
   end
 

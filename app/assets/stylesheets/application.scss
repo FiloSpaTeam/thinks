@@ -43,7 +43,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  padding-bottom: 70px;
+  margin-bottom: 65px;
   /* Move down content because we have a fixed navbar that is 50px tall */
   padding-top: 50px;
 
@@ -61,6 +61,10 @@ body {
       }
   }
 
+  .img-index-2 {
+      background-image: image-url('index_2.jpeg');
+  }
+
   .img-index-input {
       margin-top: 30px;
   }
@@ -75,18 +79,6 @@ body {
   // background-color: #FDFDFD;
 }
 
-body:not(.start) {
-    .footer {
-        bottom: 0;
-    }    
-}
-
-body.start {
-    .footer {
-        position: absolute !important;
-    }    
-}
-
 body.sessions, body.registrations, body.passwords {
     padding-bottom: 0;
 
@@ -96,14 +88,12 @@ body.sessions, body.registrations, body.passwords {
 }
 
 .footer {
-  position: fixed;
+  position: absolute;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #DDD;
+  height: 65px;
   z-index: 9999;
-   
+  background-color: #333;
+
   .text-muted {
     margin: 20px 0;
     font-size: 13px;
@@ -247,6 +237,8 @@ a {
 .border-top { border-top: 1px solid #DDD; }
 .border-radius { border-radius: 4px; }
 
+.border-top-0 { border-top: 0 !important; }
+
 @media screen and (min-width: 768px) {
     .border-left-no-mobile { border-left: 1px solid #DDD; }
 }
@@ -260,12 +252,16 @@ a {
 .margin-top-10 { margin-top: 10px !important; }
 .margin-top-15 { margin-top: 15px !important; }
 .margin-top-20 { margin-top: 20px !important; }
+.margin-top-30 { margin-top: 30px !important; }
+.margin-top-40 { margin-top: 40px !important; }
 .margin-top-50 { margin-top: 50px !important; }
 .margin-bottom-0 { margin-bottom: 0 !important; }
 .margin-bottom-5 { margin-bottom: 5px !important; }
 .margin-bottom-10 { margin-bottom: 10px !important; }
 .margin-bottom-15 { margin-bottom: 15px !important; }
 .margin-bottom-20 { margin-bottom: 20px !important; }
+.margin-bottom-30 { margin-bottom: 30px !important; }
+.margin-bottom-40 { margin-bottom: 40px !important; }
 .margin-bottom-50 { margin-bottom: 50px !important; }
 
 .min-height-160 { min-height: 160px !important; }

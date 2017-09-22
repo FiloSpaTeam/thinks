@@ -1,0 +1,12 @@
+.panel.panel-default{ style: offer.module == 'beginner' ? "box-shadow: 0 2px 4px #3F51B5" : "" }
+  .panel-body
+    %h1.text-center
+      = t('offer.' + offer.module)
+    %div{ style: offer.module == 'beginner' ? "min-height: 200px;" : "min-height: 180px;" }
+      %ul.lead
+        = t('offer.' + offer.description).html_safe
+    %h2.text-center
+      = number_to_currency(offer.price, unit: "€")
+  .panel-footer.border-top-0.text-center
+    .btn.btn-block.btn-lg.btn-default
+      Buy now

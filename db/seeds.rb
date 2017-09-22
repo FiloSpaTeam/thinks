@@ -248,3 +248,18 @@ skills_list.each do |tname, tdescription|
       skill.t_description = tdescription
     end
 end
+
+offers_list = [
+  [0, 'freedom', 'freedom_description'],
+  [10, 'beginner', 'beginner_description'],
+  [25, 'creator', 'creator_description']
+]
+
+offers_list.each do |price, module_name, description|
+  Offer
+    .where(module: module_name)
+    .first_or_create do |offer|
+      offer.price = price
+      offer.description = description
+    end
+end

@@ -89,6 +89,14 @@ en:
   draft: "Draft"
   founder: "Founder"
 
+  offer:
+    freedom: "Freedom"
+    freedom_description: "<li>&infin; free access-type repositories</li><li>1 closed repository</li><li>Free subscription to every repository</li>"
+    beginner: "Beginner"
+    beginner_description: "<li>&infin; free access-type repositories</li><li>10 closed repository</li><li>Technical assistance by e-mail</li>"
+    creator: "Creator"
+    creator_description: "<li>&infin; free access-type repositories</li><li>&infin; closed access repository</li><li>Technical assistance by e-mail</li>"
+
   layouts:
     application:
       projects          : "Projects"
@@ -176,6 +184,15 @@ en:
       password_requirements: "8 minimum chars."
 
   projects:
+    step:
+      step_1: "Create a project"
+      step_description_1: "Register your work, describe it with details."
+      step_2: "Create first goal"
+      step_description_2: "Describe the first feature to complete."
+      step_3: "Create first release"
+      step_description_3: "Group goals into a release and set a date."
+      step_4: "Start and share"
+      step_description_4: "Your work start now. Someone will help you."
     settings_contribution_types:
       index:
         help_contribution_text: "Optional field: helps your team to understand how they should contribute."

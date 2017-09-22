@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916084923) do
+ActiveRecord::Schema.define(version: 20170922121414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,6 +265,14 @@ ActiveRecord::Schema.define(version: 20170916084923) do
   add_index "notifications_thinkers", ["notification_id"], name: "index_notifications_thinkers_on_notification_id", using: :btree
   add_index "notifications_thinkers", ["thinker_id"], name: "index_notifications_thinkers_on_thinker_id", using: :btree
 
+  create_table "offers", force: :cascade do |t|
+    t.decimal  "price",       precision: 8, scale: 2
+    t.string   "module"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "operations", force: :cascade do |t|
     t.integer  "serial"
     t.string   "text"
@@ -411,7 +419,6 @@ ActiveRecord::Schema.define(version: 20170916084923) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "title"
-    t.integer  "goal_id"
     t.float    "workload"
     t.float    "standard_deviation"
     t.datetime "deleted_at"
@@ -422,6 +429,7 @@ ActiveRecord::Schema.define(version: 20170916084923) do
     t.boolean  "recruitment",        default: false
     t.integer  "main_id",            default: 0
     t.integer  "revision",           default: 0
+    t.integer  "goal_id"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

@@ -25,19 +25,15 @@
     - else
       = render 'shared/navbar'
       - if current_page?(root_path)
-        .img-index
-          .img-index-input.col-md-6.col-md-offset-3.col-xs-12.col-sm-8.col-sm-offset-2
-            %input.input-lg.form-control{ type: 'text', placeholder: "Search for a project" }
-        .text-center.heading-text
-          %h4.font-bold
-            The best way to work together, simply.
-      .container
-        -# - if thinker_signed_in?
-        -#   .sidebar.no-print
-        -#     = render 'layouts/sidebar'
-        %div{ thinker_signed_in? ? {:class => :main} : {} }
-          = bootstrap_flash
-          = yield
+        = yield
+      - else
+        .container
+          -# - if thinker_signed_in?
+          -#   .sidebar.no-print
+          -#     = render 'layouts/sidebar'
+          %div{ thinker_signed_in? ? {:class => :main} : {} }
+            = bootstrap_flash
+            = yield
     = yield :charts_js
     = render 'shared/footer'
   = render 'shared/noscript'
