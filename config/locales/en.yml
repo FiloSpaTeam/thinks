@@ -91,7 +91,7 @@ en:
 
   offer:
     freedom: "Freedom"
-    freedom_description: "<li>&infin; free access-type repositories</li><li>1 closed repository</li><li>Free subscription to every repository</li>"
+    freedom_description: "<li>&infin; free access-type repositories</li><li>Free partecipation to every repository</li>"
     beginner: "Beginner"
     beginner_description: "<li>&infin; free access-type repositories</li><li>10 closed repository</li><li>Technical assistance by e-mail</li>"
     creator: "Creator"

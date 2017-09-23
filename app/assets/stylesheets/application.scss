@@ -90,7 +90,8 @@ body.sessions, body.registrations, body.passwords {
 .footer {
   position: absolute;
   width: 100%;
-  height: 65px;
+  // height: 150px;
+  padding-bottom: 20px;
   z-index: 9999;
   background-color: #333;
 
@@ -103,6 +104,23 @@ body.sessions, body.registrations, body.passwords {
       padding: 0;
       padding-right: 15px;
       padding-left: 15px;
+
+      h2 {
+          color: #BCBCBC;
+      }
+
+      hr {
+          border-top: 1px solid #888;
+      }
+
+      .social-icon {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+              color: #DC911B;
+          }
+      }
   }
 
   ul {
@@ -244,6 +262,8 @@ a {
 }
 
 .margin-left-0 { margin-left: 0 !important; }
+.margin-left-5 { margin-left: 5px !important; }
+.margin-left-10 { margin-left: 10px !important; }
 .margin-right-0 { margin-right: 0 !important; }
 .margin-right-5 { margin-right: 5px !important; }
 .margin-right-10 { margin-right: 10px !important; }
@@ -266,8 +286,7 @@ a {
 
 .min-height-160 { min-height: 160px !important; }
 
-.padding-left-5 { padding-left: 5px !important; }
-.padding-left-10 { padding-left: 10px !important; }
+.padding-left-5 { padding-left: 5px !important; } .padding-left-10 { padding-left: 10px !important; }
 .padding-5 { padding: 5px !important; }
 .padding-15 { padding: 15px !important; }
 

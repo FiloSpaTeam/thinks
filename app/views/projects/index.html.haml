@@ -62,10 +62,11 @@
   .img-index.img-index-2
   %h1.text-center.margin-bottom-40.margin-top-40
     Pricing
-  .row.margin-left-0.margin-right-0
-    .col-md-4.col-sm-4.col-xs-12
-      = render partial: 'projects/price', locals: { offer: @offers[0] }
-    .col-md-4.col-sm-4.col-xs-12
-      = render partial: 'projects/price', locals: { offer: @offers[1] }
-    .col-md-4.col-sm-4.col-xs-12
-      = render partial: 'projects/price', locals: { offer: @offers[2] }
+  .container
+    .row.margin-left-0.margin-right-0
+      .col-lg-4.col-md-4.col-sm-4.col-xs-12
+        = render partial: 'projects/price', locals: { offer: @offers[0] }
+      .col-lg-4.col-md-4.col-sm-4.col-xs-12
+        = render partial: 'projects/price', locals: { offer: @offers[1] }
+      .col-lg-4.col-md-4.col-sm-4.col-xs-12
+        = render partial: 'projects/price', locals: { offer: @offers[2] }
