@@ -19,42 +19,41 @@
   .container
     .row
       .col-md-6.col-xs-6.text-muted
-        = image_tag("logo_unitoo_ext", class: "hidden-xs pull-left", height: 24, style: 'margin-top: -3px;')
-        = image_tag("logo_unitoo", class: "visible-xs pull-left", height: 24, style: 'margin-top: -3px;')
+        = link_to "http://www.unitoo.pw" do
+          = image_tag("logo_unitoo_ext", class: "hidden-xs pull-left", height: 24, style: 'margin-top: -3px;')
+          = image_tag("logo_unitoo", class: "visible-xs pull-left", height: 24, style: 'margin-top: -3px;')
         %span.margin-left-10{ style: 'color: white;' }
           ©
           = DateTime.now.year
       .col-md-6.col-xs-6.text-muted.text-right
         = link_to "https://github.com/UnitooTeam", :style => 'text-decoration: none;', class: 'social-icon' do
-          %i.fa.fa-github.fa-lg
-        ·
+          %i.fa.fa-github.fa-lg.fa-2x
         = link_to "https://framasphere.org/people/624807a05dd9013563562a0000053625", :style => 'text-decoration: none;', class: 'social-icon' do
-          %i.fa.fa-asterisk.fa-lg
-        ·
+          %i.fa.fa-asterisk.fa-lg.fa-2x.margin-left-10
         = link_to "https://mastodon.at/@unitoo", class: 'social-icon' do
-          = image_tag "mastodon.png", width: 20
+          = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'margin-left-10'
     %hr.margin-top-0
     .row
       .col-md-6.col-xs-12
         %h2
           About us
-        %div
+        %div.hidden
           = link_to "What is Thinks?"
-        %div
+        %div.hidden
           = link_to "Who we are?"
         = application_version
       .col-md-6.col-xs-12
         %h2
-          Help
+          = t ".help"
         %div
-          = link_to "FAQ"
-        %div
+          = link_to t(".faqs"), faqs_path
+        %div.hidden
           = link_to "Agile Handbook"
-        %div
+        %div.hidden
           = link_to "Support"
-        %div
+        %div.hidden
           = link_to "Terms of use"
-        %div
+        %div.hidden
           = link_to "Privacy policy"
-        %div
+        %div.hidden
           = link_to "Cookie policy"

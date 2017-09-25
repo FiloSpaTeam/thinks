@@ -33,14 +33,7 @@ class ProjectsController < ApplicationController
 
       @categories = Category.order(:t_name).limit(10)
     else
-      @steps = [
-        { step: 1, title: '.step_1', description: '.step_description_1' },
-        { step: 2, title: '.step_2', description: '.step_description_2' },
-        { step: 3, title: '.step_3', description: '.step_description_3' },
-        { step: 4, title: '.step_4', description: '.step_description_4' }
-      ]
-
-      @offers = Offer.order(:price).all
+      redirect_to start_index_url
     end
   end
 

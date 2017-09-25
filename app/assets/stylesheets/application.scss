@@ -50,23 +50,28 @@ body {
   .img-index {
       overflow: hidden;
 
-      background-image: image-url('index.jpeg');
+      background-color: rgb(40, 96, 144);
+      background-image: image-url('index.png');
       background-repeat: no-repeat;
+      background-position: center;
 
-      background-size: 100%;
+      background-size: cover;
 
       height: 400px;
-      @media(max-width: 768px) {
-          height: 190px;
+      @media screen and (max-width: 768px) {
+          background-image: none;
+          height: 110px;
       }
-  }
-
-  .img-index-2 {
-      background-image: image-url('index_2.jpeg');
   }
 
   .img-index-input {
       margin-top: 30px;
+  }
+
+  .feature-text {
+      @media screen and (min-width: 768px) {
+          padding-top: 10px;
+      }
   }
 
   .li-category-selected {
@@ -283,10 +288,13 @@ a {
 .margin-bottom-30 { margin-bottom: 30px !important; }
 .margin-bottom-40 { margin-bottom: 40px !important; }
 .margin-bottom-50 { margin-bottom: 50px !important; }
+.margin-bottom-80 { margin-bottom: 80px !important; }
 
 .min-height-160 { min-height: 160px !important; }
 
 .padding-left-5 { padding-left: 5px !important; } .padding-left-10 { padding-left: 10px !important; }
+.padding-top-40 { padding-top: 40px; }
+.padding-bottom-40 { padding-bottom: 40px; }
 .padding-5 { padding: 5px !important; }
 .padding-15 { padding: 15px !important; }
 
@@ -326,15 +334,11 @@ a {
 }
 
 .heading-text {
-    background-color: #3c505d;
+    background-color: rgba(40, 96, 144, 0.7);
     padding-top: 20px;
     padding-bottom: 20px;
 
-    h4 {
-        margin: 0;
-        padding: 0 15px;
-        color: white;
-    }
+    color: white;
 }
 
 .circle {

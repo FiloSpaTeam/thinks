@@ -89,13 +89,24 @@ en:
   draft: "Draft"
   founder: "Founder"
 
+  start:
+    step:
+      step_1: "Create a project"
+      step_description_1: "Register your work, describe it with details."
+      step_2: "Create first goal"
+      step_description_2: "Describe the first feature to complete."
+      step_3: "Create first release"
+      step_description_3: "Group goals into a release and set a date."
+      step_4: "Start and share"
+      step_description_4: "Your work start now. Someone will help you."
+
   offer:
     freedom: "Freedom"
-    freedom_description: "<li>&infin; free access-type repositories</li><li>Free partecipation to every repository</li>"
+    freedom_description: "<h3>&infin; free access-type repositories</h3><h3>Free partecipation to every repository</h3><h3>Community support</h3>"
     beginner: "Beginner"
-    beginner_description: "<li>&infin; free access-type repositories</li><li>10 closed repository</li><li>Technical assistance by e-mail</li>"
+    beginner_description: "<h3>&infin; free access-type repositories</h3><h3>10 closed repository</h3><h3>Community support</h3>"
     creator: "Creator"
-    creator_description: "<li>&infin; free access-type repositories</li><li>&infin; closed access repository</li><li>Technical assistance by e-mail</li>"
+    creator_description: "<h3>&infin; free access-type repositories</h3><h3>&infin; closed access repository</h3><h3>Customer care support</h3>"
 
   layouts:
     application:
@@ -184,15 +195,6 @@ en:
       password_requirements: "8 minimum chars."
 
   projects:
-    step:
-      step_1: "Create a project"
-      step_description_1: "Register your work, describe it with details."
-      step_2: "Create first goal"
-      step_description_2: "Describe the first feature to complete."
-      step_3: "Create first release"
-      step_description_3: "Group goals into a release and set a date."
-      step_4: "Start and share"
-      step_description_4: "Your work start now. Someone will help you."
     settings_contribution_types:
       index:
         help_contribution_text: "Optional field: helps your team to understand how they should contribute."
@@ -479,8 +481,9 @@ en:
 
   # Shared section
   shared:
-    navbar:
+    footer:
       faqs: "FAQs"
+    navbar:
       how_does_it_works: "How does it works"
       notifications: "Notifications"
       dashboard: "Dashboard"

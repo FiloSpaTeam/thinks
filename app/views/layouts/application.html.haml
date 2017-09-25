@@ -24,7 +24,7 @@
       = yield(:body)
     - else
       = render 'shared/navbar'
-      - if current_page?(root_path)
+      - if current_page?(start_index_path) || current_page?(root_path)
         = yield
       - else
         .container

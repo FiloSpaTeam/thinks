@@ -66,21 +66,6 @@
                 = icon('user-plus', :class => "dark-grey")
                 %span= t(".recruitment")
           = menu_divider
-        %li.dropdown
-          %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false"}
-            = icon('question-circle', :class => "fa-lg dark-grey")
-            =t (".about")
-            %span.caret
-          %ul.dropdown-menu
-            %li{current_page?(how_does_it_works_path) ? { :class => :active } : {} }
-              = link_to t(".how_does_it_works"), how_does_it_works_path
-            %li{current_page?(faqs_path) ? { :class => :active } : {} }
-              = link_to t(".faqs"), faqs_path
-      %ul.nav.navbar-left{ style: "margin: 11px 10px 0;" }
-        %script{src: "https://liberapay.com/penguyman/widgets/button.js"}
-        %noscript
-          %a{href: "https://liberapay.com/penguyman/donate"}
-            %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
       %ul.nav.navbar-right.navbar-nav
         = link_to "Start new project", new_project_path, class: 'btn btn-success navbar-btn pull-left hidden-xs hidden-sm'
         - if thinker_signed_in?
