@@ -1,0 +1,12 @@
+.row.margin-bottom-40
+  .col-md-4.col-sm-5.col-xs-12
+    .circle.circle-step.bg-backlog.text-center
+      %h2.no-margin{ style: "color: white; width: 100%;" }
+        = step[:step]
+  .col-md-8.col-sm-7.col-xs-12.text-center-mobile
+    .col-md-12.col-xs-12
+      %h2.margin-top-10
+        = t(step[:title])
+    .col-md-12.col-xs-12
+      %h4.margin-top-0
+        = t(step[:description])
