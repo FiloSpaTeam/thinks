@@ -20,69 +20,16 @@
     %input.input-lg.form-control{ type: 'text', placeholder: "Search for a project" }
 .text-center.margin-bottom-80.margin-top-50
   %h1
-    The agile way to work together, simply.
+    = t '.heading_title'
   %h3
-    %i
-      Thinks
-    guides teams and "thinkers" to help develop of a project.
-    %br
-    Everyone in his area of expertise.
+    = t('.heading_subtitle').html_safe
   - unless thinker_signed_in?
     = link_to new_thinker_registration_path, class: 'btn btn-success btn-lg' do
       = t(".sign_up")
 
 .container
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile
-      = image_tag "feature_1"
-    .col-md-5.col-sm-7.col-xs-12.text-center-mobile.feature-text
-      .col-md-12.col-xs-12
-        %h2.margin-top-10
-          Non solo per sviluppatori
-      .col-md-12.col-xs-12
-        %h4.margin-top-0
-          I progetti migliori nascono dal contributo di tutti. Noi vogliamo far si che ognuno possa contribuire intuitivamente nei progetti d'interesse.
-
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.visible-xs.text-center-mobile
-      = image_tag "feature_2"
-    .col-md-5.col-md-offset-2.col-sm-7.col-xs-12.text-center-mobile.feature-text
-      .col-md-12.col-xs-12
-        %h2.margin-top-10
-          Focalizza gli obiettivi
-      .col-md-12.col-xs-12
-        %h4.margin-top-0
-          Molte cose sono importanti, alcune pero lo sono ancora di piu in certi momenti. Stabilite voi i vostri momenti e create uno scopo; focalizzate le energie e raggiungetelo.
-    .col-md-4.col-sm-5.col-xs-12.hidden-xs
-      = image_tag "feature_2"
-
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile
-      = image_tag "feature_3"
-    .col-md-5.col-sm-7.col-xs-12.text-center-mobile.feature-text
-      .col-md-12.col-xs-12
-        %h2.margin-top-10
-          Organizza le release
-      .col-md-12.col-xs-12
-        %h4.margin-top-0
-          Gli obiettivi convogliano energia. Per utilizzarla al meglio questa deve essere indirizzata verso una meta. Stabilite le tappe e passo dopo passo il vostro progetto sara realta.
-
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.visible-xs.text-center-mobile
-      = image_tag "feature_4"
-    .col-md-5.col-md-offset-2.col-sm-7.col-xs-12.text-center-mobile.feature-text
-      .col-md-12.col-xs-12
-        %h2.margin-top-10
-          Free software
-      .col-md-12.col-xs-12
-        %h4.margin-top-0
-          Come e per voi importante, lo e per noi. Crediamo nel software libero e siamo i primi a dimostrarlo; contribuite al mantenimento e lo sviluppo libero.
-        %script{src: "https://liberapay.com/penguyman/widgets/button.js"}
-        %noscript
-          %a{href: "https://liberapay.com/penguyman/donate"}
-            %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
-    .col-md-4.col-sm-5.col-xs-12.hidden-xs
-      = image_tag "feature_4"
+  - for i in 1..4 do
+    = render partial: 'start/feature', locals: { direction: i % 2 == 0 ? 'rtl' : 'ltr', number: i }
 %hr
 .row.padding-bottom-40.padding-top-40
   .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile

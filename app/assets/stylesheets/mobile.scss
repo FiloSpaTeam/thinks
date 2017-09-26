@@ -1,3 +1,11 @@
+@media screen and (min-width: 768px) {
+    .feature-text {
+        padding-top: 10px;
+    }
+
+    .border-left-no-mobile { border-left: 1px solid #DDD; }
+}
+
 @media screen and (max-width: 339px) {
     .hidden-xxs { display: none !important; }
 }
@@ -12,7 +20,6 @@
             }
         }
     }
-
 
     .dropdown-mobile {
         position: absolute !important;
@@ -70,5 +77,14 @@
 
         .line-height-35 { line-height: 35px !important; }
         .navbar-right-margin-0 { margin: 0 !important; }
+
+        .img-index {
+            background-image: none;
+            height: 110px;
+        }
+
+        .text-center-mobile {
+            text-align: center;
+        }
     }
 }

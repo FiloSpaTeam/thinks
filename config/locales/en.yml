@@ -90,15 +90,17 @@ en:
   founder: "Founder"
 
   start:
-    step:
-      step_1: "Create a project"
-      step_description_1: "Register your work, describe it with details."
-      step_2: "Create first goal"
-      step_description_2: "Describe the first feature to complete."
-      step_3: "Create first release"
-      step_description_3: "Group goals into a release and set a date."
-      step_4: "Start and share"
-      step_description_4: "Your work start now. Someone will help you."
+    index:
+      heading_title: "The agile way to work together, simply."
+      heading_subtitle: "<i>Thinks</i> guides teams and \"thinkers\" to help develop of a project.<br>Everyone in his area of expertise."
+      feature_1: "Non solo per sviluppatori"
+      feature_description_1: "I progetti migliori nascono dal contributo di tutti. Noi vogliamo far si che ognuno possa contribuire intuitivamente nei progetti d'interesse."
+      feature_2: "Focalizza gli obiettivi"
+      feature_description_2: "Molte cose sono importanti, alcune pero lo sono ancora di piu in certi momenti. Stabilite voi i vostri momenti e create uno scopo; focalizzate le energie e raggiungetelo."
+      feature_3: "Organizza le release"
+      feature_description_3: "Gli obiettivi convogliano energia. Per utilizzarla al meglio questa deve essere indirizzata verso una meta. Stabilite le tappe e passo dopo passo il vostro progetto sara realta."
+      feature_4: "Free software"
+      feature_description_4: "Come e per voi importante, lo e per noi. Crediamo nel software libero e siamo i primi a dimostrarlo; contribuite al mantenimento e lo sviluppo libero."
 
   offer:
     freedom: "Freedom"
