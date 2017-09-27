@@ -1,7 +1,7 @@
 - if direction == 'ltr'
   .row.margin-bottom-80
     .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile
-      = image_tag "feature_" + number.to_s
+      = image_tag "feature_" + number.to_s, height: 170
     .col-md-5.col-sm-7.col-xs-12.text-center-mobile.feature-text
       .col-md-12.col-xs-12
         %h2.margin-top-10
@@ -12,7 +12,7 @@
 - else
   .row.margin-bottom-80
     .col-md-5.col-sm-5.col-xs-12.visible-xs.text-center-mobile
-      = image_tag "feature_" + number.to_s
+      = image_tag "feature_" + number.to_s, height: 170
     .col-md-5.col-md-offset-2.col-sm-7.col-xs-12.text-center-mobile.feature-text
       .col-md-12.col-xs-12
         %h2.margin-top-10
@@ -26,4 +26,4 @@
             %a{href: "https://liberapay.com/penguyman/donate"}
               %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
     .col-md-4.col-sm-5.col-xs-12.hidden-xs
-      = image_tag "feature_" + number.to_s
+      = image_tag "feature_" + number.to_s, height: 170

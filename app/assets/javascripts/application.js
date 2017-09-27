@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require popper
+//= require bootstrap
 //= require bootstrap-datepicker
 //= require jquery_ujs
 //= require smart_listing
