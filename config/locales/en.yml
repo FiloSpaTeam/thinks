@@ -91,7 +91,7 @@ en:
 
   start:
     index:
-      heading_title: "The agile way to work together, simply."
+      heading_title: "The agile way to work together.<br>Simply."
       heading_subtitle: "<i>Thinks</i> guides teams and \"thinkers\" to devel a project."
       feature_1: "Non solo per sviluppatori"
       feature_description_1: "I progetti migliori nascono dal contributo di tutti. Noi vogliamo far si che ognuno possa contribuire intuitivamente nei progetti d'interesse."
@@ -104,11 +104,11 @@ en:
 
   offer:
     freedom: "Freedom"
-    freedom_description: "<h3>&infin; free access-type repositories</h3><h3>Free partecipation to every repository</h3><h3>Community support</h3>"
+    freedom_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">Free partecipation to every repository</h4><h4 class=\"mb-2\">Community support</h4>"
     beginner: "Beginner"
-    beginner_description: "<h3>&infin; free access-type repositories</h3><h3>10 closed repository</h3><h3>Community support</h3>"
+    beginner_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">10 closed repository</h4><h4 class=\"mb-2\">Community support</h4>"
     creator: "Creator"
-    creator_description: "<h3>&infin; free access-type repositories</h3><h3>&infin; closed access repository</h3><h3>Customer care support</h3>"
+    creator_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">&infin; closed access repository</h4><h4 class=\"mb-2\">Customer care support</h4>"
 
   layouts:
     application:

@@ -1,8 +1,8 @@
-.panel.panel-default{ style: offer.module == 'beginner' ? "box-shadow: 0 2px 4px #3F51B5" : "" }
-  .panel-body
-    %h1.text-center.margin-bottom-20
+.card{ style: offer.module == 'beginner' ? "box-shadow: 0 2px 4px #3F51B5" : "" }
+  .card-body
+    %h3.card-title.text-center
       = t('offer.' + offer.module)
-    %div{ style: offer.module == 'beginner' ? "min-height: 200px;" : "min-height: 180px;" }
+    .card-text{ style: offer.module == 'beginner' ? "min-height: 200px;" : "min-height: 180px;" }
       %ul{ style: 'margin-left: -20px;' }
         = t('offer.' + offer.description).html_safe
     %h2.text-center

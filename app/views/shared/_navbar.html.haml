@@ -15,137 +15,151 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top{:role => "navigation"}
-  .container
-    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
-      %span.sr-only= t '.toggle_navigation'
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    - if thinker_signed_in?
-      = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px; margin-left: 10px;" do
-        = notification_icon(Notification.user(current_thinker), 'fa-2x')
-    - if @active_filters.present? && @active_filters.include?(Enums::Filters::SEARCH_INPUT)
-      %a.visible-xs.navbar-btn.pull-right{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch', :style => "padding: 0; margin-right: 10px; margin-top: 9px;" }
+-# %nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+-#   .container
+-#     %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+-#       %span.sr-only= t '.toggle_navigation'
+-#       %span.icon-bar
+-#       %span.icon-bar
+-#       %span.icon-bar
+-#     - if thinker_signed_in?
+-#       = link_to notifications_path, :class => "visible-xs navbar-btn pull-right", :style => "padding: 0; margin-right: 10px; margin-top: 9px; margin-left: 10px;" do
+-#         = notification_icon(Notification.user(current_thinker), 'fa-2x')
+-#     - if @active_filters.present? && @active_filters.include?(Enums::Filters::SEARCH_INPUT)
+-#       %a.visible-xs.navbar-btn.pull-right{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch', :style => "padding: 0; margin-right: 10px; margin-top: 9px;" }
 
-        = icon('search', class: 'fa-2x dark-grey')
-    - if @project.present? && @project.id.present?
-      = link_to project_path(@project), :class => 'visible-xs text-left navbar-brand' do
-        - if @project.logo
-          = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' })
-        %span{ style: 'font-size: 14px; margin-left: 2px;' }
-          = truncate(@project.title, length: 36)
-      = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg", :style => "padding-top: 10px; padding-bottom: 10px;" do
-        = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
-    - else
-      = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs", :style => "padding-top: 10px; padding-bottom: 10px;" do
-        = image_tag("logo_scritta", :style => "width: auto; height: 30px;")
-    .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
-      %ul.nav.navbar-nav
-        - if @project.present? && @project.id.present?
-          %li.visible-xs{:class => active_link_if_current(project_releases_path(@project))}
-            = link_to project_releases_path(@project) do
-              = icon('flag-checkered', :class => "dark-grey")
-              %span= t(".releases")
-          %li.visible-xs{:class => active_link_if_current(project_sprints_path(@project))}
-            = link_to project_sprints_path(@project) do
-              = icon('flag', :class => "dark-grey")
-              %span= t(".sprints")
-          %li.visible-xs{:class => active_link_if_current(project_goals_path(@project))}
-            = link_to project_goals_path(@project) do
-              = icon('crosshairs', :class => "dark-grey")
-              %span= t(".goals")
-          %li.visible-xs{:class => active_link_if_current(project_tasks_path(@project))}
-            = link_to project_tasks_path(@project) do
-              = icon('tasks', :class => "dark-grey")
-              %span= t(".tasks")
-          - if @project.with_recruiting?
-            %li.visible-xs{:class => active_link_if_current(project_recruitments_path(@project))}
-              = link_to project_recruitments_path(@project) do
-                = icon('user-plus', :class => "dark-grey")
-                %span= t(".recruitment")
-          = menu_divider
-      %ul.nav.navbar-right.navbar-nav
-        = link_to "Start new project", new_project_path, class: 'btn btn-success navbar-btn pull-left hidden-xs hidden-sm'
-        - if thinker_signed_in?
-          %li.dropdown
-            = link_to notifications_path, :class => "dropdown-toggle hidden-xs", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
-              = notification_icon(Notification.user(current_thinker))
-              = t(".notifications")
-              = content_tag(:span, "", :class => :caret)
-            = render 'shared/notifications'
-          %li.dropdown
-            = link_to "javascript:;", :class => "dropdown-toggle", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
-              = icon('user', :class => "fa-lg dark-grey")
-              = t(".profile")
-              = content_tag(:span, "", :class => :caret)
-            %ul.dropdown-menu
-              - if @thinker.present? && @thinker.id.present?
-                %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
-                  %strong{ style: 'font-size: 13px;' }
-                    = current_thinker.name
-                  %br
-                  %small.font-italic
-                    = current_thinker.email
-                %li.visible-xs.visible-sm
-                  %a{ href: '#' }
-                    %strong
-                      =t 'shared.profilebar.general'
-                %li{current_page?(dashboard_thinker_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to dashboard_thinker_path(@thinker) do
-                    = icon('home', class: 'hidden-xs')
-                    = t(".dashboard")
-                %li{current_page?(thinker_projects_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to thinker_projects_path(current_thinker) do
-                    = icon('folder')
-                    = t(".my_projects")
-                %li{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to thinker_path(@thinker) do
-                    = icon('user', class: 'hidden-xs')
-                    = t(".my_profile")
-                %li.visible-xs.visible-sm
-                  %a{ href: '#' }
-                    %strong
-                      =t 'shared.profilebar.security_and_privacy'
-                %li.visible-xs.visible-sm{current_page?(edit_password_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to(t('.password'), edit_password_path(@thinker))
-                %li.visible-xs.visible-sm{current_page?(otp_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to(t('.double_authentication'), otp_path(@thinker))
-                %li.visible-xs.visible-sm
-                  %a{ href: '#' }
-                    %strong=t '.preferences'
-                %li.visible-xs.visible-sm{current_page?(thinker_notifications_path(@thinker)) ? { :class => :active } : {} }
-                  = link_to(t('.notifications'), thinker_notifications_path(@thinker))
-              - else
-                %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
-                  %strong{ style: 'font-size: 13px;' }
-                    = current_thinker.name
-                  %br
-                  %small.font-italic
-                    = current_thinker.email
-                %li
-                  = link_to dashboard_thinker_path(current_thinker) do
-                    = icon('home')
-                    = t(".dashboard")
-                %li
-                  = link_to thinker_projects_path(current_thinker) do
-                    = icon('folder')
-                    = t(".my_projects")
-                %li
-                  = link_to thinker_path(current_thinker) do
-                    = icon('user')
-                    = t(".my_profile")
-              = menu_divider
-              %li
-                = link_to destroy_thinker_session_path, :method => :delete do
-                  = icon('sign-out')
-                  = t(".logout")
-        - else
-          %li{current_page?(new_thinker_registration_path) ? { :class => :active } : {} }
-            = link_to new_thinker_registration_path do
-              = icon('user-plus', :class => "fa-lg")
-              = t(".sign_up")
-          %li{current_page?(new_thinker_session_path) ? { :class => :active } : {} }
-            = link_to new_thinker_session_path do
-              = icon('sign-in', :class => "fa-lg")
-              = t(".sign_in")
+-#         = icon('search', class: 'fa-2x dark-grey')
+-#     - if @project.present? && @project.id.present?
+-#       = link_to project_path(@project), :class => 'visible-xs text-left navbar-brand' do
+-#         - if @project.logo
+-#           = cl_image_tag(@project.logo.path, { size: '20x20', class: 'pull-left' })
+-#         %span{ style: 'font-size: 14px; margin-left: 2px;' }
+-#           = truncate(@project.title, length: 36)
+-#       = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg" do
+-#         = image_tag("logo_scritta_bianca", :style => "width: auto; height: 30px;")
+-#     - else
+-#       = link_to root_url, :class => "navbar-brand visible-sm visible-md visible-lg visible-xs" do
+-#         = image_tag("logo_scritta_bianca", :style => "width: auto; height: 30px;")
+-#     .navbar-collapse.collapse.navbar-responsive-collapse{ style: 'max-height: 365px;' }
+-#       %ul.nav.navbar-nav
+-#         - if @project.present? && @project.id.present?
+-#           %li.visible-xs{:class => active_link_if_current(project_releases_path(@project))}
+-#             = link_to project_releases_path(@project) do
+-#               = icon('flag-checkered', :class => "dark-grey")
+-#               %span= t(".releases")
+-#           %li.visible-xs{:class => active_link_if_current(project_sprints_path(@project))}
+-#             = link_to project_sprints_path(@project) do
+-#               = icon('flag', :class => "dark-grey")
+-#               %span= t(".sprints")
+-#           %li.visible-xs{:class => active_link_if_current(project_goals_path(@project))}
+-#             = link_to project_goals_path(@project) do
+-#               = icon('crosshairs', :class => "dark-grey")
+-#               %span= t(".goals")
+-#           %li.visible-xs{:class => active_link_if_current(project_tasks_path(@project))}
+-#             = link_to project_tasks_path(@project) do
+-#               = icon('tasks', :class => "dark-grey")
+-#               %span= t(".tasks")
+-#           - if @project.with_recruiting?
+-#             %li.visible-xs{:class => active_link_if_current(project_recruitments_path(@project))}
+-#               = link_to project_recruitments_path(@project) do
+-#                 = icon('user-plus', :class => "dark-grey")
+-#                 %span= t(".recruitment")
+-#           = menu_divider
+-#       %ul.nav.navbar-right.navbar-nav
+-#         - if thinker_signed_in?
+-#           %li.dropdown
+-#             = link_to notifications_path, :class => "dropdown-toggle hidden-xs", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
+-#               = notification_icon(Notification.user(current_thinker))
+-#               = t(".notifications")
+-#               = content_tag(:span, "", :class => :caret)
+-#             = render 'shared/notifications'
+-#           %li.dropdown
+-#             = link_to "javascript:;", :class => "dropdown-toggle", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
+-#               = icon('user', :class => "fa-lg dark-grey")
+-#               = t(".profile")
+-#               = content_tag(:span, "", :class => :caret)
+-#             %ul.dropdown-menu
+-#               - if @thinker.present? && @thinker.id.present?
+-#                 %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
+-#                   %strong{ style: 'font-size: 13px;' }
+-#                     = current_thinker.name
+-#                   %br
+-#                   %small.font-italic
+-#                     = current_thinker.email
+-#                 %li.visible-xs.visible-sm
+-#                   %a{ href: '#' }
+-#                     %strong
+-#                       =t 'shared.profilebar.general'
+-#                 %li{current_page?(dashboard_thinker_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to dashboard_thinker_path(@thinker) do
+-#                     = icon('home', class: 'hidden-xs')
+-#                     = t(".dashboard")
+-#                 %li{current_page?(thinker_projects_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to thinker_projects_path(current_thinker) do
+-#                     = icon('folder')
+-#                     = t(".my_projects")
+-#                 %li{current_page?(thinker_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to thinker_path(@thinker) do
+-#                     = icon('user', class: 'hidden-xs')
+-#                     = t(".my_profile")
+-#                 %li.visible-xs.visible-sm
+-#                   %a{ href: '#' }
+-#                     %strong
+-#                       =t 'shared.profilebar.security_and_privacy'
+-#                 %li.visible-xs.visible-sm{current_page?(edit_password_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to(t('.password'), edit_password_path(@thinker))
+-#                 %li.visible-xs.visible-sm{current_page?(otp_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to(t('.double_authentication'), otp_path(@thinker))
+-#                 %li.visible-xs.visible-sm
+-#                   %a{ href: '#' }
+-#                     %strong=t '.preferences'
+-#                 %li.visible-xs.visible-sm{current_page?(thinker_notifications_path(@thinker)) ? { :class => :active } : {} }
+-#                   = link_to(t('.notifications'), thinker_notifications_path(@thinker))
+-#               - else
+-#                 %li{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
+-#                   %strong{ style: 'font-size: 13px;' }
+-#                     = current_thinker.name
+-#                   %br
+-#                   %small.font-italic
+-#                     = current_thinker.email
+-#                 %li
+-#                   = link_to dashboard_thinker_path(current_thinker) do
+-#                     = icon('home')
+-#                     = t(".dashboard")
+-#                 %li
+-#                   = link_to thinker_projects_path(current_thinker) do
+-#                     = icon('folder')
+-#                     = t(".my_projects")
+-#                 %li
+-#                   = link_to thinker_path(current_thinker) do
+-#                     = icon('user')
+-#                     = t(".my_profile")
+-#               = menu_divider
+-#               %li
+-#                 = link_to destroy_thinker_session_path, :method => :delete do
+-#                   = icon('sign-out')
+-#                   = t(".logout")
+-#         - else
+-#           %li{current_page?(new_thinker_registration_path) ? { :class => :active } : {} }
+-#             = link_to new_thinker_registration_path do
+-#               = icon('user-plus', :class => "fa-lg")
+-#               = t(".sign_up")
+-#           %li{current_page?(new_thinker_session_path) ? { :class => :active } : {} }
+-#             = link_to new_thinker_session_path do
+-#               = icon('sign-in', :class => "fa-lg")
+-#               = t(".sign_in")
+
+%nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+  .container
+    %a.navbar-brand{ href: "#" }
+      = image_tag "logo_scritta", height: 30
+    %button.navbar-toggler.navbar-toggler-right{type: "button", "data-toggle": "collapse", "data-target": "#menuResponsive", "aria-controls": "menuResponsive", "aria-expanded": "false", "aria-label": "Toggle navigation"}
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse#menuResponsive
+      %ul.navbar-nav.ml-auto
+        %li.nav-item
+          %a.nav-link
+            Log in
+        %li.nav-item
+          %a.nav-link
+            Sign up

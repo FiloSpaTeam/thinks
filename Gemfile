@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.10'
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
 gem 'sprockets-rails', '2.3.3'
 gem 'validates_timeliness', '~> 4.0'
@@ -65,7 +65,7 @@ gem 'therubyracer', '~> 0.12.2'
 gem 'font-awesome-sass', '~> 4.7.0'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1.0'
+gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks', '~> 2.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

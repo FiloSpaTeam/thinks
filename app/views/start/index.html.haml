@@ -19,7 +19,7 @@
   .header-content
     .header-content-inner
       %h1
-        = t '.heading_title'
+        = t('.heading_title').html_safe
       %hr
       %p
         = t('.heading_subtitle').html_safe
@@ -27,21 +27,23 @@
         = link_to new_thinker_registration_path, class: 'btn btn-primary btn-lg' do
           = t(".sign_up")
 
+%section.bg-primary
+  .container
+
 %section
   .container
     - for i in 1..4 do
       = render partial: 'start/feature', locals: { direction: i % 2 == 0 ? 'rtl' : 'ltr', number: i }
 %hr
 %section
-  .row
-    .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile
-      = image_tag "coins"
-    .col-md-2.col-sm-2.col-xs-12.text-center-mobile.feature-text
-      %h1.text-center
-        Pricing
-%section
   .container
-    .row.margin-left-0.margin-right-0
+    .row.mb-3
+      .col-md-5.col-sm-5.col-xs-12.text-center.text-sm-right
+        = image_tag "coins"
+      .col-md-2.col-sm-2.col-xs-12.mt-auto.mb-auto.text-center
+        %h1.text-center
+          Pricing
+    .row
       .col-lg-4.col-md-4.col-sm-4.col-xs-12
         = render partial: 'start/price', locals: { offer: @offers[0] }
       .col-lg-4.col-md-4.col-sm-4.col-xs-12

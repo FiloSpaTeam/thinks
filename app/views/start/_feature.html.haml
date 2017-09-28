@@ -1,8 +1,8 @@
 - if direction == 'ltr'
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.text-right.text-center-mobile
+  .row.mb-5.pt-5.pb-5
+    .col-md-6.col-sm-5.col-xs-12.text-center.text-sm-right.mt-auto.mb-auto
       = image_tag "feature_" + number.to_s, height: 170
-    .col-md-5.col-sm-7.col-xs-12.text-center-mobile.feature-text
+    .col-md-5.col-sm-7.col-xs-12.text-xs-center
       .col-md-12.col-xs-12
         %h2.margin-top-10
           = t 'start.index.feature_' + number.to_s
@@ -10,10 +10,10 @@
         %h4.margin-top-0
           = t 'start.index.feature_description_' + number.to_s
 - else
-  .row.margin-bottom-80
-    .col-md-5.col-sm-5.col-xs-12.visible-xs.text-center-mobile
+  .row.mb-5
+    .col-md-6.col-sm-5.col-xs-12.d-block.d-sm-none.text-center.mt-auto.mb-auto
       = image_tag "feature_" + number.to_s, height: 170
-    .col-md-5.col-md-offset-2.col-sm-7.col-xs-12.text-center-mobile.feature-text
+    .col-md-5.ml-md-auto.col-sm-7.col-xs-12.text-center.text-sm-right
       .col-md-12.col-xs-12
         %h2.margin-top-10
           = t 'start.index.feature_' + number.to_s
@@ -25,5 +25,5 @@
           %noscript
             %a{href: "https://liberapay.com/penguyman/donate"}
               %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
-    .col-md-4.col-sm-5.col-xs-12.hidden-xs
+    .col-md-6.mr-md-auto.col-sm-5.col-xs-12.d-none.d-sm-block.mt-auto.mb-auto
       = image_tag "feature_" + number.to_s, height: 170
