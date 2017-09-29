@@ -20,40 +20,40 @@
     .row
       .col-md-6.col-xs-6.text-muted
         = link_to "http://www.unitoo.pw" do
-          = image_tag("logo_unitoo_ext", class: "hidden-xs pull-left", height: 24, style: 'margin-top: -3px;')
-          = image_tag("logo_unitoo", class: "visible-xs pull-left", height: 24, style: 'margin-top: -3px;')
-        %span.margin-left-10{ style: 'color: white;' }
+          = image_tag("logo_unitoo_ext", class: "d-none d-sm-block pull-left", height: 24, style: 'margin-top: -3px;')
+          = image_tag("logo_unitoo", class: "d-block d-sm-none pull-left", height: 24, style: 'margin-top: -3px;')
+        %span.pull-left.ml-2.text-white
           ©
           = DateTime.now.year
       .col-md-6.col-xs-6.text-muted.text-right
         = link_to "https://github.com/UnitooTeam", :style => 'text-decoration: none;', class: 'social-icon' do
-          %i.fa.fa-github.fa-lg.fa-2x
+          = icon("github", class: "fa-lg fa-2x ml-2")
         = link_to "https://framasphere.org/people/624807a05dd9013563562a0000053625", :style => 'text-decoration: none;', class: 'social-icon' do
-          %i.fa.fa-asterisk.fa-lg.fa-2x.margin-left-10
+          = icon("asterisk", class: "fa-lg fa-2x ml-2")
         = link_to "https://mastodon.at/@unitoo", class: 'social-icon' do
-          = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'margin-left-10'
-    %hr.margin-top-0
+          = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'ml-2'
+    %hr.mw-100
     .row
-      .col-md-6.col-xs-12
-        %h2
+      .col-md-6.col-xs-12.text-left
+        %h4.text-white
           About us
-        %div.hidden
+        %div
           = link_to "What is Thinks?"
-        %div.hidden
+        %div
           = link_to "Who we are?"
-        = application_version
-      .col-md-6.col-xs-12
-        %h2
+        -# = application_version
+      .col-md-6.col-xs-12.text-right
+        %h4.text-white
           = t ".help"
         %div
           = link_to t(".faqs"), faqs_path
-        %div.hidden
+        %div
           = link_to "Agile Handbook"
-        %div.hidden
+        %div
           = link_to "Support"
-        %div.hidden
+        %div
           = link_to "Terms of use"
-        %div.hidden
+        %div
           = link_to "Privacy policy"
-        %div.hidden
+        %div
           = link_to "Cookie policy"

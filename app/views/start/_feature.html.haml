@@ -20,10 +20,5 @@
       .col-md-12.col-xs-12
         %h4.margin-top-0
           = t 'start.index.feature_description_' + number.to_s
-        - if number == 4
-          %script{src: "https://liberapay.com/penguyman/widgets/button.js"}
-          %noscript
-            %a{href: "https://liberapay.com/penguyman/donate"}
-              %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
     .col-md-6.mr-md-auto.col-sm-5.col-xs-12.d-none.d-sm-block.mt-auto.mb-auto
       = image_tag "feature_" + number.to_s, height: 170

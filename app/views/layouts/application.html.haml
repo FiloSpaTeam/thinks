@@ -20,20 +20,8 @@
   %head
     = render 'shared/header'
   %body{:class => "#{controller.controller_name}"}
-    - if content_for?(:body)
-      = yield(:body)
-    - else
-      = render 'shared/navbar'
-      - if current_page?(start_index_path) || current_page?(root_path)
-        = yield
-      - else
-        .container
-          -# - if thinker_signed_in?
-          -#   .sidebar.no-print
-          -#     = render 'layouts/sidebar'
-          %div{ thinker_signed_in? ? {:class => :main} : {} }
-            = bootstrap_flash
-            = yield
+    = render 'shared/navbar'
+    = yield
     = yield :charts_js
     = render 'shared/footer'
   = render 'shared/noscript'

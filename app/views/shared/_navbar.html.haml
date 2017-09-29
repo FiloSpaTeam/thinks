@@ -149,17 +149,17 @@
 -#               = icon('sign-in', :class => "fa-lg")
 -#               = t(".sign_in")
 
-%nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+%nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top{ class: current_page?(start_index_path) || current_page?(root_path) ? "" : 'navbar-shrink' }
   .container
-    %a.navbar-brand{ href: "#" }
-      = image_tag "logo_scritta", height: 30
+    = link_to root_path, class: 'navbar-brand' do
+      = image_tag "logo_scritta", height: 36
     %button.navbar-toggler.navbar-toggler-right{type: "button", "data-toggle": "collapse", "data-target": "#menuResponsive", "aria-controls": "menuResponsive", "aria-expanded": "false", "aria-label": "Toggle navigation"}
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#menuResponsive
       %ul.navbar-nav.ml-auto
         %li.nav-item
-          %a.nav-link
-            Log in
+          = link_to new_thinker_session_path, class: 'nav-link' do
+            = t("layouts.application.sign_in")
         %li.nav-item
-          %a.nav-link
-            Sign up
+          = link_to new_thinker_registration_path, class: 'nav-link' do
+            = t("layouts.application.sign_up")
