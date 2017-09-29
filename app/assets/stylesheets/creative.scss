@@ -8,6 +8,9 @@ html {
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;}
 body.start {
+  section {
+    padding: 100px 0; }
+
   .btn {
     font-weight: 700;
     text-transform: uppercase;
@@ -57,8 +60,7 @@ p {
   color: rgba(255, 255, 255, 0.7); }
 
 section {
-  padding: 100px 0; }
-
+    padding: 40px 0 80px 0; }
 .section-heading {
   margin-top: 0; }
 

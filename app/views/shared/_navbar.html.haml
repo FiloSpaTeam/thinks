@@ -156,6 +156,7 @@
     %button.navbar-toggler.navbar-toggler-right{type: "button", "data-toggle": "collapse", "data-target": "#menuResponsive", "aria-controls": "menuResponsive", "aria-expanded": "false", "aria-label": "Toggle navigation"}
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#menuResponsive
+      = render partial: 'layouts/flash_messages', locals: { flash: flash }
       %ul.navbar-nav.ml-auto
         %li.nav-item
           = link_to new_thinker_session_path, class: 'nav-link' do

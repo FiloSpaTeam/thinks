@@ -1,0 +1,5 @@
+- flash.each do |type, message|
+  .ml-auto.d-none.d-lg-block.w-50.text-center{ class: "#{flash_class(type)}" }
+    .container.font-weight-bold
+      = flash_icon(type)
+      = message
