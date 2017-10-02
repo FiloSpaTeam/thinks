@@ -88,6 +88,7 @@ en:
   backlogging: "Backlogging"
   draft: "Draft"
   founder: "Founder"
+  messages: "Messages"
 
   start:
     index:
@@ -109,8 +110,10 @@ en:
     freedom_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">Free partecipation to every repository</h4><h4 class=\"mb-2\">Community support</h4>"
     beginner: "Beginner"
     beginner_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">10 closed repository</h4><h4 class=\"mb-2\">Community support</h4>"
+    beginner_btn: "Buy now"
     creator: "Creator"
     creator_description: "<h4 class=\"mb-2\">&infin; free access-type repositories</h4><h4 class=\"mb-2\">&infin; closed access repository</h4><h4 class=\"mb-2\">Customer care support</h4>"
+    creator_btn: "Upgrade"
 
   layouts:
     application:
@@ -566,6 +569,9 @@ en:
       new:
         log_in      : "Log in"
         remember_me : "Remember me"
+        email_address: "Email address"
+        password: "Password"
+        example_otp: "123456"
     registrations:
       new:
         sign_up           : "Sign up"

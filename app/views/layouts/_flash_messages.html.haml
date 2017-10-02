@@ -1,5 +1,9 @@
-- flash.each do |type, message|
+- errors = devise_error_messages!
+- if errors.empty?
+  - errors = flash
+- errors.each do |type, message|
   .ml-auto.d-none.d-lg-block.w-50.text-center{ class: "#{flash_class(type)}" }
-    .container.font-weight-bold
-      = flash_icon(type)
-      = message
+    .container.font-weight-bold.mx-auto{ style: "max-height: 22px; overflow-y: hidden;" }
+      = message.html_safe
+    %a.text-secondary{"data-toggle": "modal", href: "#modal-flash"}
+      = icon('ellipsis-h', class: 'fa-lg')

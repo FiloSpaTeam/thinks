@@ -1,22 +1,21 @@
-.card{ class: offer.module == 'beginner' ? "bg-dark text-white" : "" }
+.card{ style: offer.module == 'beginner' ? "box-shadow: 0px 4px 20px 0px #999;" : "" }
   .card-header
     %h3.card-title.text-center
       = t('offer.' + offer.module)
   .card-body
-    .card-text{ style: offer.module == 'beginner' ? "min-height: 200px;" : "min-height: 180px;" }
+    .card-text{ style: "min-height: 200px;" }
       %ul{ style: 'margin-left: -20px;' }
         = t('offer.' + offer.description).html_safe
     %h2.text-center
       - unless offer.module == 'freedom'
         = number_to_currency(offer.price, unit: "€")
       - else
-        \##
-  .panel-footer.border-top-0.text-center
-    - if offer.module == 'freedom'
-      %script{src: "https://liberapay.com/penguyman/widgets/button.js"}
-      %noscript
-        %a{href: "https://liberapay.com/penguyman/donate"}
-          %img{src: "https://liberapay.com/assets/widgets/donate.svg"}
+        Free
+  .panel-footer.border-top-0.text-center.p-3
+    - unless offer.module == 'freedom'
+      .btn.btn-default.btn-block.rounded{ class: offer.module == 'beginner' ? "btn-primary" : "" }
+        = t("offer." + offer.module + "_btn")
     - else
-      .btn.btn-block.btn-lg.btn-default{ class: offer.module == 'beginner' ? "btn-primary" : "" }
-        Buy now
+      = link_to new_thinker_registration_path, class: 'btn btn-block btn-default rounded' do
+        = t("layouts.application.sign_up")
+

@@ -34,15 +34,6 @@ module ApplicationHelper
     end
   end
 
-  def flash_icon(level)
-    case level
-    when 'notice' then icon('info', class: 'ml-1 fa-lg')
-    when 'success' then icon('check', class: 'ml-1 fa-lg')
-    when 'error' then icon('times', class: 'ml-1 fa-lg')
-    when 'alert' then icon('exclamation', class: 'ml-1 fa-lg')
-    end
-  end
-
   def link_to_button(path, text, icon_source)
     link_to(path, :class => "#{active_link_if_current(path)} pull-right btn btn-default", :title => t(text), :role => "button") do
       icon(icon_source, :class => "dark-grey") +

@@ -86,7 +86,7 @@ body {
   -webkit-tap-highlight-color: #222222; }
 
 #mainNav {
-  border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+  border-bottom: 1px solid rgba(34, 34, 34, 0.2);
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.2s;
@@ -132,7 +132,7 @@ body {
         #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
             color: $main-color; }
       #mainNav.navbar-shrink {
-        border-color: rgba(34, 34, 34, 0.05);
+        border-color: rgba(34, 34, 34, 0.2);
         background-color: white; }
         #mainNav.navbar-shrink .navbar-brand {
           font-size: 16px;
@@ -155,7 +155,7 @@ header.masthead {
   -o-background-size: cover;
   background-size: cover; }
   header.masthead .header-content {
-    background-color: rgba(0,0,0,0.65);
+    background-color: rgba(0,0,0,0.35);
     position: relative;
     width: 100%;
     padding: 150px 15px 100px; }

@@ -1,13 +1,20 @@
-(function($) {
+$(function($) {
     "use strict"; // Start of use strict
     // Collapse the navbar when page is scrolled
-    if ($('body').hasClass('start')) {
-        $(window).scroll(function() {
+
+    $(window).scroll(function() {
+        if ($('body').hasClass('start')) {
             if ($("#mainNav").offset().top > 100) {
                 $("#mainNav").addClass("navbar-shrink");
             } else {
                 $("#mainNav").removeClass("navbar-shrink");
             }
-        });
+        }
+    });
+
+    if ($(window).width() < 992) {
+        if ($('#modal-flash').attr('data-has-messages') == 'true') {
+            $("#modal-flash").modal('show');
+        }
     }
-})(jQuery); // End of use strict
+}); // End of use strict

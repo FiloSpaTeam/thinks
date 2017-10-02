@@ -17,10 +17,10 @@
 
 module DeviseHelper
   def devise_error_messages!
-    return "" if resource.errors.empty?
+    return "" if defined?(resource).nil? || resource.errors.empty?
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
-    flash.now[:error] = "<ul>#{messages}</ul>"
+    flash.now[:error] = "<ul class='mb-0' style='margin-left: -20px;'>#{messages}</ul>"
 
     return ''
   end

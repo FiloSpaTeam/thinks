@@ -24,13 +24,13 @@
             = t ".log_in"
           .form-group
             = f.label :email, :class => "control-label required"
-            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true
+            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true, placeholder: t('.email_address')
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to "Need an account?", new_registration_path(resource_name)
           .form-group
             = f.label :password, :class => "control-label required"
-            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true
+            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true, placeholder: t('.password')
             - if devise_mapping.registerable?
               %p.help-block
                 = link_to "Forgot your password?", new_password_path(resource_name)
@@ -41,7 +41,7 @@
                   %strong
                     = t(:otp_code)
               #collapseFilters.collapse
-                = f.text_field :otp_attempt, class: 'form-control'
+                = f.text_field :otp_attempt, class: 'form-control', placeholder: t(".example_otp")
           - if devise_mapping.rememberable?
             .checkbox
               = f.label :remember_me, :class => "control-label" do

@@ -149,6 +149,7 @@
 -#               = icon('sign-in', :class => "fa-lg")
 -#               = t(".sign_in")
 
+= render partial: 'layouts/flash_messages_mobile', locals: { flash: flash }
 %nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top{ class: current_page?(start_index_path) || current_page?(root_path) ? "" : 'navbar-shrink' }
   .container
     = link_to root_path, class: 'navbar-brand' do

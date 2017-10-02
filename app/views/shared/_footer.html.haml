@@ -18,31 +18,33 @@
 %footer.footer
   .container
     .row
-      .col-md-6.col-xs-6.text-muted
-        = link_to "http://www.unitoo.pw" do
-          = image_tag("logo_unitoo_ext", class: "d-none d-sm-block pull-left", height: 24, style: 'margin-top: -3px;')
-          = image_tag("logo_unitoo", class: "d-block d-sm-none pull-left", height: 24, style: 'margin-top: -3px;')
-        %span.pull-left.ml-2.text-white
-          ©
-          = DateTime.now.year
-      .col-md-6.col-xs-6.text-muted.text-right
-        = link_to "https://github.com/UnitooTeam", :style => 'text-decoration: none;', class: 'social-icon' do
-          = icon("github", class: "fa-lg fa-2x ml-2")
-        = link_to "https://framasphere.org/people/624807a05dd9013563562a0000053625", :style => 'text-decoration: none;', class: 'social-icon' do
-          = icon("asterisk", class: "fa-lg fa-2x ml-2")
-        = link_to "https://mastodon.at/@unitoo", class: 'social-icon' do
-          = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'ml-2'
-    %hr.mw-100
-    .row
-      .col-md-6.col-xs-12.text-left
+      .col-12.col-sm-4
+        %div.mb-4
+          = link_to "http://www.unitoo.pw" do
+            = image_tag("logo_unitoo_ext", height: 28, style: 'margin-top: -3px;')
+        %div.mb-3
+          = link_to "https://github.com/UnitooTeam", :style => 'text-decoration: none;', class: 'social-icon' do
+            = icon("github", class: "fa-lg fa-2x ml-2")
+          = link_to "https://framasphere.org/people/624807a05dd9013563562a0000053625", :style => 'text-decoration: none;', class: 'social-icon' do
+            = icon("asterisk", class: "fa-lg fa-2x ml-2")
+          = link_to "https://mastodon.at/@unitoo", class: 'social-icon' do
+            = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'ml-2'
+        %div
+          %small.text-white
+            Unitoo di Maradonna Claudio, ©
+            = DateTime.now.year
+            %br
+            Via Borgo da mare 70/B, 63076, Monteprandone, AP, Italy
+            %br
+            VAT N.: 02324570445
+      .col-12.col-sm-4.mt-4.mt-sm-0
         %h4.text-white
           About us
         %div
           = link_to "What is Thinks?"
         %div
           = link_to "Who we are?"
-        -# = application_version
-      .col-md-6.col-xs-12.text-right
+      .col-12.col-sm-4.mt-4.mt-sm-0
         %h4.text-white
           = t ".help"
         %div
