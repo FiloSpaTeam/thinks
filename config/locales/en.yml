@@ -571,7 +571,9 @@ en:
         remember_me : "Remember me"
         email_address: "Email address"
         password: "Password"
+        confirm_password: "Confirm password"
         example_otp: "123456"
+        your_name: "Your name"
     registrations:
       new:
         sign_up           : "Sign up"
