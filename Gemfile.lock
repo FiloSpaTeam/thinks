@@ -121,6 +121,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    gravtastic (3.2.6)
     groupdate (2.5.3)
       activesupport (>= 3)
     haml (4.0.7)
@@ -347,6 +348,7 @@ DEPENDENCIES
   dotenv-rails (= 2.1.0)
   font-awesome-sass (~> 4.7.0)
   friendly_id (~> 5.1.0)
+  gravtastic
   groupdate (~> 2.5.1)
   haml (~> 4.0.7)
   haml-rails (~> 0.9.0)

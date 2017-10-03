@@ -2,8 +2,10 @@
 - if errors.empty?
   - errors = flash
 - errors.each do |type, message|
-  .ml-auto.d-none.d-lg-block.w-50.text-center{ class: "#{flash_class(type)}" }
+  .ml-auto.d-none.d-lg-block.w-50.text-center.alert.alert-dismissible.p-0.mb-0{ class: "#{flash_class(type)}" }
     .container.font-weight-bold.mx-auto{ style: "max-height: 22px; overflow-y: hidden;" }
       = message.html_safe
     %a.text-secondary{"data-toggle": "modal", href: "#modal-flash"}
       = icon('ellipsis-h', class: 'fa-lg')
+    %a.text-danger.ml-5{href: "#", "data-dismiss": "alert"}
+      = icon('remove', class: 'fa-lg')

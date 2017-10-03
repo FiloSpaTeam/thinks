@@ -31,6 +31,9 @@ class Thinker < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  include Gravtastic
+  gravtastic secure: true, filetype: :gif
+
   has_attachment :avatar, accept: [:jpg, :png]
 
   has_and_belongs_to_many :teams, class_name: 'Project'

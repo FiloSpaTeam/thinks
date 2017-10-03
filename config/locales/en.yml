@@ -497,6 +497,7 @@ en:
       my_profile: "My profile"
       my_projects: "My projects"
       logout: "Logout"
+      profile: "Profile"
     projectbar:
       goals: "Goals"
       team: "Team"

@@ -97,6 +97,9 @@ gem 'groupdate', '~> 2.5.1'
 gem 'active_median', '~> 0.1.2'
 gem 'chartkick', '~> 2.0.0'
 
+# Extra
+gem 'gravtastic'
+
 # API
 gem 'rabl', '0.12.0'
 gem 'oj', '2.17.1'

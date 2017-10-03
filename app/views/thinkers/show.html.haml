@@ -33,9 +33,7 @@
         - if @thinker.avatar?
           = cl_image_tag(@thinker.avatar.path, alt: t('.photo'), size: '200x200', crop: :thumb, gravity: :face)
         - else
-          .square.bg-gray
-          %span.help-block
-            = t('.image_not_defined')
+          = image_tag @thinker.gravatar_url
       .col-md-8
         .row
           %label.control-label

@@ -159,9 +159,40 @@
     .collapse.navbar-collapse#menuResponsive
       = render partial: 'layouts/flash_messages', locals: { flash: flash }
       %ul.navbar-nav.ml-auto
-        %li.nav-item
-          = link_to new_thinker_session_path, class: 'nav-link' do
-            = t("layouts.application.sign_in")
-        %li.nav-item
-          = link_to new_thinker_registration_path, class: 'nav-link' do
-            = t("layouts.application.sign_up")
+        - if thinker_signed_in?
+          %li.nav-item
+            = link_to notifications_path, :class => "nav-link" do
+              = notification_icon(Notification.user(current_thinker))
+              = t(".notifications")
+          %li.nav-item.dropdown
+            = link_to "javascript:;", :class => "dropdown-toggle  nav-link", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
+              = icon('user', :class => "fa-lg dark-grey")
+              = t(".profile")
+              = content_tag(:span, "", :class => :caret)
+            %div.dropdown-menu.dropdown-menu-right
+              %a.dropdown-item{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
+                %strong{ style: 'font-size: 13px;' }
+                  = current_thinker.name
+                %br
+                %small.font-italic
+                  = current_thinker.email
+              = link_to dashboard_thinker_path(current_thinker), class: 'dropdown-item' do
+                = icon('home')
+                = t(".dashboard")
+              = link_to thinker_projects_path(current_thinker), class: 'dropdown-item' do
+                = icon('folder')
+                = t(".my_projects")
+              = link_to thinker_path(current_thinker), class: 'dropdown-item' do
+                = icon('user')
+                = t(".my_profile")
+              .dropdown-divider
+              = link_to destroy_thinker_session_path, :method => :delete, class: 'dropdown-item' do
+                = icon('sign-out')
+                = t(".logout")
+        - else
+          %li.nav-item
+            = link_to new_thinker_session_path, class: 'nav-link' do
+              = t("layouts.application.sign_in")
+          %li.nav-item
+            = link_to new_thinker_registration_path, class: 'nav-link' do
+              = t("layouts.application.sign_up")
