@@ -23,63 +23,9 @@
 
 /* Sticky footer styles
 -------------------------------------------------- */
-.footer {
-  position: absolute;
-  width: 100%;
-  // height: 150px;
-  padding-bottom: 20px;
-  z-index: 9999;
+#footer {
+  padding: 25px 0;
   background-color: #333;
-
-  .text-muted {
-    margin: 20px 0;
-    font-size: 13px;
-  }
-
-  .container {
-      padding: 0;
-      padding-right: 15px;
-      padding-left: 15px;
-
-      h2 {
-          color: #BCBCBC;
-      }
-
-      hr {
-          border-top: 1px solid #888;
-      }
-
-      .social-icon {
-          color: white;
-          text-decoration: none;
-
-          &:hover {
-              color: #DC911B;
-          }
-      }
-  }
-
-  ul {
-    float: right;
-    margin-top: 20px;
-    padding: 0;
-  }
-
-  li {
-    margin-left: 40px;
-    display: inline-block;
-    text-align: left;
-
-    a {
-      color: #666;
-
-      &:hover {
-        background-color: transparent !important;
-        text-decoration: none;
-        color: #333;
-      }
-    }
-  }
 }
 
 div .alert {
