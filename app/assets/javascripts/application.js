@@ -17,6 +17,7 @@
 //= require bootstrap-datepicker
 //= require smart_listing
 //= require holder
+//= require jquery.easing
 //= require jquery.ui.widget
 //= require jquery.iframe-transport
 //= require jquery.fileupload
