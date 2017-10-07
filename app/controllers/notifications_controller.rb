@@ -26,18 +26,17 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    notifications_scope = Notification
-                          .user(current_thinker)
-                          .order('project_id DESC')
-                          .order('created_at DESC')
+    projects_id = Notification
+                  .user(current_thinker)
+                  .distinct
+                  .pluck(:project_id)
 
-    notifications_scope = apply_filters(notifications_scope, params[:filters]) if params[:filters].present?
+    projects = Project.where('id IN (?)', projects_id)
+                      .includes(:notifications)
 
     @notifications = smart_listing_create :notifications,
-                                          notifications_scope,
+                                          projects,
                                           partial: 'notifications/list'
-
-    @notifications = @notifications.group_by { |n| [n.controller, n.model, n.model_id] }
   end
 
   # GET /notifications/1

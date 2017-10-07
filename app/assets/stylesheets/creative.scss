@@ -331,9 +331,9 @@ header.masthead {
   padding: 15px 30px; }
 
 footer {
+    box-shadow: 0px 500px 0px 500px #333;
     background-color: #333;
-	  padding:25px 0;
-	  text-align:center }
+	  padding:25px 0;}
 
 footer span.copyright {
 	  font-size:90%;
@@ -368,3 +368,6 @@ ul.social-buttons li a {
 	  background-color:#222}
 ul.social-buttons li a:active,ul.social-buttons li a:focus,ul.social-buttons li a:hover {
 	  background-color:#4087c7}
+
+.sticky-top-5 {
+    top: 5rem;}

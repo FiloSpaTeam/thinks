@@ -33,7 +33,7 @@
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
         = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
-  %h2
+  %h2.mt-5
     = t 'shared.projectsettingsbar.sprint_and_release_date'
   = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
   .form-group
@@ -45,11 +45,11 @@
     = f.label :release_at, :class => 'control-label'
     = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
     %span#help-release_at.help-block= t ".release_at_help"
-  %h2
+  %h2.mt-5
     = t 'projects.modal_contribution_preferences.conditions_of_participations'
   .form-group
     = f.text_area :contribution_text, :class => 'form-control', :rows => 15, :placeholder => t(".placeholder_contribution_text"), "aria-describedby" => "help-description"
-  %h2
+  %h2.mt-5
     = t 'shared.projectsettingsbar.links'
   = t('shared.projectsettingsbar.links_introduction').html_safe
   .form-group
@@ -81,7 +81,7 @@
     = f.text_area :donate_button, :class => 'form-control', :rows => 4
     %span#help-donate-button.help-block
       = t "get_donate_button_from_paypal"
-  %h2
+  %h2.mt-5
     = t 'shared.projectsettingsbar.logo_and_main_image'
   .form-group
     = f.label :logo, :class => 'control-label'

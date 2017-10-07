@@ -26,6 +26,9 @@
       - unless thinker_signed_in?
         = link_to new_thinker_registration_path, class: 'btn btn-primary btn-lg' do
           = t(".sign_up")
+      - else
+        = link_to new_project_path, class: 'btn btn-primary btn-lg' do
+          = t(".start_a_new_project")
 
 %section.bg-primary
   .container

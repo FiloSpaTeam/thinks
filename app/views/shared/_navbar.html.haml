@@ -170,8 +170,8 @@
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %div.dropdown-menu.dropdown-menu-right
-              %a.dropdown-item{ style: 'padding-bottom: 5px; padding-left: 20px; padding-right: 20px;' }
-                %strong{ style: 'font-size: 13px;' }
+              %a.dropdown-item.disabled
+                %strong
                   = current_thinker.name
                 %br
                 %small.font-italic

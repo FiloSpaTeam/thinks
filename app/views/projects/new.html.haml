@@ -15,6 +15,34 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%h1
-  =t('.new')
-= render :partial => 'form'
+.container
+  .row
+    %main.col-sm-9
+      %h1.mb-5
+        =t('.new')
+      = render partial: 'projects/form'
+    .d-none.d-sm-block.col-sm-3.sticky-top.sticky-top-5.h-25
+      %ul.list-unstyled
+        %li
+          %a{ href: '#title_and_description' }
+            Title and description
+          %ul.list-unstyled.pl-4
+            %li
+              Ciao
+            %li
+              Ciao
+        %li
+          %a{ href: '#title_and_description' }
+            Title and description
+        %li
+          %a{ href: '#title_and_description' }
+            Title and description
+        %li
+          %a{ href: '#title_and_description' }
+            Title and description
+        %li
+          %a{ href: '#title_and_description' }
+            Title and description
+      .mt-4
+        %button.btn.btn-block.btn-success
+          Salva
