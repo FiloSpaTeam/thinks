@@ -53,6 +53,6 @@ module Rethink
       "#{html_tag}<input type='hidden' class='has-error'>".html_safe
     end
 
-    require 'attachinary/orm/active_record' # active_record or mongoid
+    #require 'attachinary/orm/active_record' # active_record or mongoid
   end
 end

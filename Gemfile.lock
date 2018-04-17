@@ -55,14 +55,10 @@ GEM
       tzinfo (~> 1.1)
     arel (9.0.0)
     ast (2.4.0)
-    attachinary (1.3.1)
-      cloudinary (~> 1.1.0)
-      rails (>= 3.2)
     attr_encrypted (3.1.0)
       encryptor (~> 3.0.0)
     autoprefixer-rails (8.3.0)
       execjs
-    aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootsnap (1.3.0)
@@ -81,9 +77,6 @@ GEM
       mime-types (>= 1.16)
     chartkick (2.0.2)
     chunky_png (1.3.10)
-    cloudinary (1.1.7)
-      aws_cf_signer
-      rest-client
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -106,8 +99,6 @@ GEM
       devise (~> 4.0)
       railties (< 5.3)
       rotp (~> 2.0)
-    domain_name (0.5.20170404)
-      unf (>= 0.0.5, < 1.0.0)
     encryptor (3.0.0)
     erubi (1.7.1)
     erubis (2.7.0)
@@ -148,14 +139,12 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
     i18n (1.0.0)
       concurrent-ruby (~> 1.0)
     i18n-js (3.0.5)
       i18n (>= 0.6.6, < 2)
-    impressionist (1.5.2)
-      nokogiri (~> 1.6)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -170,6 +159,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     libv8 (3.16.14.19)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -187,7 +180,6 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
-    netrc (0.11.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -252,10 +244,6 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rest-client (2.0.2)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     rotp (2.1.2)
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
@@ -269,6 +257,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
+    ruby_dep (1.5.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
     sass (3.5.6)
@@ -321,9 +310,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.9)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.5)
     unicode-display_width (1.3.0)
     validates_timeliness (4.0.2)
       timeliness (~> 0.3.7)
@@ -344,7 +330,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_median (~> 0.1.2)
-  attachinary
   bcrypt (~> 3.1.7)
   bootsnap
   bootstrap (~> 4.0.0.beta)
@@ -352,7 +337,6 @@ DEPENDENCIES
   byebug
   carrierwave
   chartkick (~> 2.0.0)
-  cloudinary
   coffee-rails (~> 4.2)
   devise
   devise-two-factor
@@ -367,12 +351,13 @@ DEPENDENCIES
   hightop (~> 0.1.4)
   holder_rails (~> 2.9.0)
   i18n-js (>= 3.0.0.rc11)
-  impressionist (~> 1.5.2)
+  impressionist
   jbuilder (~> 2.0)
   jquery-easing-rails
   jquery-rails
   json
   kaminari
+  listen
   method_source (>= 0.8.2)
   oj
   paranoia (~> 2.2)

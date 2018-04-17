@@ -16,7 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Thinker < ActiveRecord::Base
-  acts_as_token_authenticatable
+  #acts_as_token_authenticatable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -34,7 +34,7 @@ class Thinker < ActiveRecord::Base
   include Gravtastic
   gravtastic secure: true, filetype: :gif
 
-  has_attachment :avatar, accept: [:jpg, :png]
+  #has_attachment :avatar, accept: [:jpg, :png]
 
   has_and_belongs_to_many :teams, class_name: 'Project'
   has_and_belongs_to_many :notifications

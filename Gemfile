@@ -20,8 +20,8 @@ gem 'puma', group: :production
 gem 'rails_12factor', group: :production
 gem 'heroku-deflater', group: :production
 gem 'carrierwave'
-gem 'cloudinary'
-gem 'attachinary'
+# gem 'cloudinary'
+# gem 'attachinary'
 
 # Bootstrap SASS port
 gem 'bootstrap', '~> 4.0.0.beta'
@@ -49,7 +49,7 @@ gem 'haml-rails'
 gem 'smart_listing', '1.2.0'
 
 # Statistics about views
-gem 'impressionist', '~> 1.5.2'
+gem 'impressionist'
 
 # Pagination
 gem 'kaminari'
@@ -116,6 +116,7 @@ gem 'seed_dump'
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', group: :development
 
+gem 'listen'
 group :development, :test do
   # Linters
   gem 'haml_lint'

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   put 'notifications/:project_id/read_all', to: 'notifications#read_all', as: 'notifications_read_all'
   get 'notifications_check' => 'notifications#check'
 
-  mount Attachinary::Engine => '/attachinary'
+  #mount Attachinary::Engine => '/attachinary'
 
   resources :goals
   resources :cycles

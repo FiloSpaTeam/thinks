@@ -23,8 +23,8 @@ class Project < ActiveRecord::Base
 
   is_impressionable counter_cache: true
 
-  has_attachment :main_image, accept: [:jpg, :png]
-  has_attachment :logo, accept: [:jpg, :png]
+  #has_attachment :main_image, accept: [:jpg, :png]
+  #has_attachment :logo, accept: [:jpg, :png]
 
   attr_accessor :skip_motto_validation
 
