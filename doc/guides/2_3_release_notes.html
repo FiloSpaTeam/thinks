@@ -485,7 +485,7 @@ render :show
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class PostsController &lt; ApplicationController
   Users = {"dhh" =&gt; "secret"}
-  before_filter :authenticate
+  before_action :authenticate
 
   def secret
     render :text =&gt; "Password Required!"

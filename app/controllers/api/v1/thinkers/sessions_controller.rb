@@ -3,7 +3,7 @@ class Api::V1::Thinkers::SessionsController < Devise::SessionsController
 
   skip_before_filter :verify_authenticity_token
 
-  before_filter :validate_auth_token, :except => :create
+  before_action :validate_auth_token, :except => :create
 
   include Devise::Controllers::Helpers
   include Api::V1::BaseHelper

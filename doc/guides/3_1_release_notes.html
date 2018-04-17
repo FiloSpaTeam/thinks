@@ -410,7 +410,7 @@ $ rails new myapp -j prototype
 class PostsController &lt; ApplicationController
   USER_NAME, PASSWORD = "dhh", "secret"
 
-  before_filter :authenticate, :except =&gt; [ :index ]
+  before_action :authenticate, :except =&gt; [ :index ]
 
   def index
     render :text =&gt; "Everyone can see me!"
