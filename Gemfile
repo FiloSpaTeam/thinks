@@ -41,8 +41,8 @@ gem 'i18n-js', '>= 3.0.0.rc11'
 gem 'holder_rails', '~> 2.9.0'
 
 # HAML
-gem 'haml', '~> 4.0.7'
-gem 'haml-rails', '~> 0.9.0'
+gem 'haml'
+gem 'haml-rails'
 
 # Filter for views
 gem 'smart_listing', '1.2.0'

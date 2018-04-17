@@ -120,12 +120,13 @@ GEM
     gravtastic (3.2.6)
     groupdate (2.5.3)
       activesupport (>= 3)
-    haml (4.0.7)
+    haml (5.0.4)
+      temple (>= 0.8.0)
       tilt
-    haml-rails (0.9.0)
+    haml-rails (1.0.0)
       actionpack (>= 4.0.1)
       activesupport (>= 4.0.1)
-      haml (>= 4.0.6, < 5.0)
+      haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     haml_lint (0.27.0)
@@ -352,8 +353,8 @@ DEPENDENCIES
   friendly_id (~> 5.1.0)
   gravtastic
   groupdate (~> 2.5.1)
-  haml (~> 4.0.7)
-  haml-rails (~> 0.9.0)
+  haml
+  haml-rails
   haml_lint
   heroku-deflater
   hightop (~> 0.1.4)
