@@ -16,7 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Thinkers::SessionsController < Devise::SessionsController
-  skip_before_filter :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

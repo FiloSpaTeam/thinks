@@ -21,8 +21,8 @@
 //= require jquery.ui.widget
 //= require jquery.iframe-transport
 //= require jquery.fileupload
-//= require cloudinary/jquery.cloudinary
-//= require attachinary
+// require cloudinary/jquery.cloudinary
+// require attachinary
 //= require chartkick
 //= require i18n.js
 //= require i18n/translations

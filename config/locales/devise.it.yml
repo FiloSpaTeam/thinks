@@ -1,0 +1,60 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  devise:
+    confirmations:
+      confirmed: "La tua email è stata confermata con successo."
+      send_instructions: "Riceverai delle istruzioni via email su come confermare il tuo indirizzo in pochi minuti."
+      send_paranoid_instructions: "Se la tua email dovesse esistere nei nostri database, riceverai una mail con le istruzioni per attivare l'indirizzo in pochi minuti."
+    failure:
+      already_authenticated: "Sei già loggato."
+      inactive: "Il tuo account non è ancora attivo."
+      invalid: "Password or %{authentication_keys} invalida."
+      locked: "Il tuo account è bloccato."
+      last_attempt: "Ultimo tentativo prima che l'account venga bloccato."
+      not_found_in_database: "Utente non esistente."
+      timeout: "La tua sessione è scaduta. Fai il login per continuare."
+      unauthenticated: "Fai il login prima di continuare."
+      unconfirmed: "Email non confermata, confermarla prima di continuare."
+    mailer:
+      confirmation_instructions:
+        subject: "Istruzioni per la conferma indirizzo"
+      reset_password_instructions:
+        subject: "Istruzioni per il reset della password"
+      unlock_instructions:
+        subject: "Istruzioni per sbloccare l'account"
+    omniauth_callbacks:
+      failure: "Impossibile autenticarsi da %{kind} poiché \"%{reason}\"."
+      success: "Autenticato con successo dall'account %{kind}."
+    passwords:
+      no_token: "Non puoi accedere a questa pagina se non tramite l'email di reset password. Se hai utilizzato quest'ultima, verifica di aver utilizzato il link fornito per esteso compreso di parametri."
+      send_instructions: "Riceverai una mail con le istruzioni su come resettare la password in pochi minuti."
+      send_paranoid_instructions: "Se la tua mail dovesse esistere nei nostri database, riceverai una mail con il link per resettare la password in pochi minuti."
+      updated: "La tua password è stata modificata con successo. Sei loggato ora."
+      updated_not_active: "La tua password è stata modificata con successo."
+    registrations:
+      destroyed: "Il tuo account è stato cancellato con successo. Speriamo di rivederti presto."
+      signed_up: "Benvenuto! La registrazione è avvenuta con successo."
+      signed_up_but_inactive: "La registrazione è avvenuta con successo. Tuttavia prima di poterti autenticare l'account necessita di attivazione."
+      signed_up_but_locked: "La registrazione è avvenuta con successo. Tuttavia non possiamo autenticarti in quanto l'account risulta bloccato."
+      signed_up_but_unconfirmed: "Un messaggio con un link di conferma è stato inviato alla mail fornita. Clicca sul link per attivare il tuo account."
+      update_needs_confirmation: "Il tuo account è stato aggiornato con successo, ma dobbiamo verificare il tuo nuovo indirizzo di posta. Clicca il link che ti è stato inviato per confermare la mail."
+      updated: "Il tuo account è stato aggiornato con successo."
+    sessions:
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      already_signed_out: "Signed out successfully."
+    unlocks:
+      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"

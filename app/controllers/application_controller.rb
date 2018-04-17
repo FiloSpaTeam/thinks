@@ -33,6 +33,8 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+
+    @locale = I18n.locale
   end
 
   def default_url_options(options = {})
@@ -69,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_in) << :otp_attempt
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
   end
 
   def set_project
