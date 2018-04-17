@@ -65,6 +65,8 @@ GEM
     aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootsnap (1.3.0)
+      msgpack (~> 1.0)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
@@ -183,11 +185,13 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4)
     multi_json (1.13.1)
     netrc (0.11.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    oj (3.5.1)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     paranoia (2.4.1)
@@ -204,6 +208,8 @@ GEM
       pry (~> 0.11)
       yard (~> 0.9.11)
     puma (3.11.4)
+    rabl (0.13.1)
+      activesupport (>= 2.3.14)
     rack (2.0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -340,6 +346,7 @@ DEPENDENCIES
   active_median (~> 0.1.2)
   attachinary
   bcrypt (~> 3.1.7)
+  bootsnap
   bootstrap (~> 4.0.0.beta)
   bootstrap-datepicker-rails (= 1.5.0)
   byebug
@@ -367,12 +374,14 @@ DEPENDENCIES
   json
   kaminari
   method_source (>= 0.8.2)
+  oj
   paranoia (~> 2.2)
   pg (~> 0.18)
   pry
   pry-doc (>= 0.6.0)
   puma
-  rails (~> 5.1)
+  rabl
+  rails (~> 5.2.0)
   rails-i18n!
   rails_12factor
   redcarpet (~> 3.4.0)

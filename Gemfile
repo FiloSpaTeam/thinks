@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 ruby '2.4.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2.0'
 gem 'rails-i18n', github: 'UnitooTeam/rails-i18n', branch: 'master'
+gem 'bootsnap'
 gem 'validates_timeliness', '~> 4.0'
 
 # PostgreSQL support
@@ -82,13 +83,13 @@ gem 'devise-two-factor'
 gem 'rqrcode-rails3'
 
 # API Token authentication
-#gem 'simple_token_authentication', '~> 1.0'
+# gem 'simple_token_authentication', '~> 1.0'
 
 # Friendly urls
 gem 'friendly_id', '~> 5.1.0'
 
 # Env
-#gem 'dotenv-rails', '2.1.0'
+# gem 'dotenv-rails', '2.1.0'
 
 # Charts
 gem 'hightop', '~> 0.1.4'
@@ -100,8 +101,8 @@ gem 'chartkick', '~> 2.0.0'
 gem 'gravtastic'
 
 # API
-#gem 'rabl', '0.12.0'
-#gem 'oj', '2.17.1'
+gem 'rabl'
+gem 'oj'
 
 # Database dump
 gem 'seed_dump'
