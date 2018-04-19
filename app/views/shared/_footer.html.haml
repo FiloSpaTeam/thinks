@@ -15,47 +15,41 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%footer.footer.text-center
+%footer.text-center.bg-light
   .container
     .row
-      .col-12.col-sm-4
-        %div.mb-4
-          = link_to "http://www.unitoo.pw" do
-            = image_tag("logo_unitoo_ext", height: 28, style: 'margin-top: -3px;')
-        %div.mb-3
-          = link_to "https://github.com/UnitooTeam", :style => 'text-decoration: none;', class: 'social-icon' do
-            = icon("github", class: "fa-lg fa-2x ml-2 text-white")
-          = link_to "https://framasphere.org/people/624807a05dd9013563562a0000053625", :style => 'text-decoration: none;', class: 'social-icon' do
-            = icon("asterisk", class: "fa-lg fa-2x ml-2 text-white")
-          = link_to "https://mastodon.at/@unitoo", class: 'social-icon' do
-            = image_tag "mastodon.png", width: 24, style: 'margin-top: -5px;', class: 'ml-2'
-        %div
-          %small.text-white
-            Unitoo di Maradonna Claudio, ©
-            = DateTime.now.year
-            %br
-            Via Borgo da mare 70/B, 63076, Monteprandone, AP, Italy
-            %br
-            VAT N.: 02324570445
-      .col-12.col-sm-4.mt-4.mt-sm-0
-        %h4.text-white
-          About us
-        %div
-          = link_to "What is Thinks?"
-        %div
-          = link_to "Who we are?"
-      .col-12.col-sm-4.mt-4.mt-sm-0
-        %h4.text-white
-          = t ".help"
-        %div
-          = link_to t(".faqs"), faqs_path
-        %div
-          = link_to "Agile Handbook"
-        %div
-          = link_to "Support"
-        %div
-          = link_to "Terms of use"
-        %div
-          = link_to "Privacy policy"
-        %div
-          = link_to "Cookie policy"
+      .col-sm-8.mx-auto
+        %span.copyright
+          Copyright © Unitoo 
+          = Date.current.year
+        %span.form-text.small
+          The website is released under the terms of <i>AGPLv3</i> license. <br> You can find the sources here: 
+          = link_to 'GitHub', 'https://github.com/UnitooTeam/unitoo.site'
+          %br
+          All the images (not valid for logo) are released under the <i>CC0</i> license. What is? 
+          = link_to 'CreativeCommons', 'https://creativecommons.org/share-your-work/public-domain/cc0/'
+        %ul.list-inline.social-buttons.mt-4.mb-3
+          %li.list-inline-item
+            %a{ href: "https://github.com/UnitooTeam" }
+              = icon "fab", "github"
+          %li.list-inline-item
+            %a{ href:"https://framasphere.org/people/624807a05dd9013563562a0000053625" }
+              = icon "fas", "asterisk"
+          %li.list-inline-item
+            %a{ href:"https://mastodon.at/@unitoo" }
+              = image_tag "mastodon.png", width: 20, style: 'margin-top: -3px;'
+          %li.list-inline-item
+            %a{ href:"https://squeet.me/profile/unitoo" }
+              = image_tag "friendica.png", width: 20, style: 'margin-top: -3px;'
+          %li.list-inline-item
+            %a{ href:"https://twitter.com/UnitooInc" }
+              = icon "fab", "twitter"
+          %li.list-inline-item
+            %a{ href:"https://www.facebook.com/UnitooInc/" }
+              = icon "fab", "facebook-f"
+          %li.list-inline-item
+            %a{ href:"https://liberapay.com/Unitoo/" }
+              = image_tag "liberapay.png", width: 20, style: 'margin-top: -3px;'
+
+        .small
+          Unitoo di Claudio Maradonna, Via Borgo da Mare 70/B, Monteprandone, 63076 (AP) - 02324570445 - REA: AP-204883 - info@unitoo.pw - +39 393 6320924
