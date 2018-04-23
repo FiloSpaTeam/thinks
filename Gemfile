@@ -29,8 +29,8 @@ gem 'font-awesome-sass', '~> 5.0.6'
 gem 'json'
 gem 'slim-rails', '~> 3.1.2'
 
-# Datepicker Bootstrap (maybe we can do without that?)
 gem 'bootstrap-datepicker-rails', '1.5.0'
+gem 'bootstrap-show-password-rails'
 
 # Time in words
 gem 'time_ago_in_words'
