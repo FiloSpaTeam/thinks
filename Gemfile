@@ -24,12 +24,12 @@ gem 'carrierwave'
 # gem 'attachinary'
 
 # Bootstrap SASS port
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '~> 4.1.0'
 gem 'font-awesome-sass', '~> 5.0.6'
 gem 'json'
 gem 'slim-rails', '~> 3.1.2'
 
-gem 'bootstrap-datepicker-rails', '1.5.0'
+gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-show-password-rails'
 
 # Time in words
@@ -46,7 +46,7 @@ gem 'haml'
 gem 'haml-rails'
 
 # Filter for views
-gem 'smart_listing', '1.2.0'
+gem 'smart_listing'
 
 # Statistics about views
 gem 'impressionist'
