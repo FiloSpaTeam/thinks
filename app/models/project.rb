@@ -60,11 +60,13 @@ class Project < ActiveRecord::Base
   enum status: %i[draft active suspended]
 
   validates :title, length: { in: 2..60 }, uniqueness: true
-  validates :motto, length: { maximum: 240 }, presence: true, if: 'self.project.nil? && self.skip_motto_validation.nil?'
+  validates :motto, length: { maximum: 240 }, presence: true, if: lambda {
+    project.nil? && skip_motto_validation.nil?
+  }
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true
-  validates :recruitment_text, presence: true, if: 'self.with_recruiting?'
+  validates :recruitment_text, presence: true, if: -> { with_recruiting? }
 
   after_save :check_if_past_project
   after_save :update_contribution_thinker
