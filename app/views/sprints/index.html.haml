@@ -20,12 +20,12 @@
     %li.pull-left
       - if @project.suspended
         = link_to resume_project_path(@project), method: :put, class: 'line-height-25 line-height-35' do
-          = icon('play-circle-o', class: 'fa-lg dark-grey')
+          = icon('fas', 'play-circle-o', class: 'fa-lg dark-grey')
           %span.hidden-xs
             =t(".resume")
       - elsif @project.started?
         = link_to suspend_project_path(@project), method: :put, data: { confirm: t('.do_you_want_suspend') }, class: 'line-height-25 line-height-35' do
-          = icon('stop-circle-o', class: 'fa-lg dark-grey')
+          = icon('fas', 'stop-circle-o', class: 'fa-lg dark-grey')
           %span.hidden-xs
             =t(".suspend")
 

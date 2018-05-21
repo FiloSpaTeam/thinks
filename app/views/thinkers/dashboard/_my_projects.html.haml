@@ -20,7 +20,7 @@
     = t ".my_projects"
     .btn-group.pull-right
       %a.hidden-xxs.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters_projects].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearchMyProjects' }
-        = icon('search', class: 'dark-grey')
+        = icon('fas', 'search', class: 'dark-grey')
         %span.hidden-xs
           Search
     .collapse.margin-top-10#collapseSearchMyProjects{ class: any_filter?(params[:filters_projects]) ? 'in' : '' }
@@ -28,14 +28,14 @@
         .input-group.form-group.margin-bottom-0
           %span.input-group-btn
             = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
-              = icon('undo', class: 'dark-grey')
+              = icon('fas', 'undo', class: 'dark-grey')
           = text_field_tag 'filters_projects[title_or_description]', filter_value(:title_or_description, :filters_projects), :class => 'form-control', autocomplete: 'off'
           %span.input-group-btn
             - if @active_filters.present?
               %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters_projects]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-                = icon('filter', class: 'dark-grey')
+                = icon('fas', 'filter', class: 'dark-grey')
             %button.btn.btn-primary{ type: 'submit' }
-              = icon('search', class: 'fa-inverse')
+              = icon('fas', 'search', class: 'fa-inverse')
   .panel-body.panel-fixed-height.scrollbar
     %table.table.table-condensed.table-hover
       %tbody

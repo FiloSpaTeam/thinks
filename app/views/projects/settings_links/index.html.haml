@@ -26,7 +26,7 @@
     = form_for @project, url: project_settings_links_path, method: :post, :html => { :class => '' } do |f|
       .form-group
         = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.links_help_1'), 'data-html' => 'true' do
-          = icon('info-circle')
+          = icon('fas', 'info-circle')
         = f.label :category_id, :class => 'control-label'
         = f.select :category_id, content_tag(:option,'Select one...',:value => "") + options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
       .form-group

@@ -20,15 +20,15 @@
     .input-group.form-group
       %span.input-group-btn
         = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
-          = icon('undo', class: 'dark-grey')
+          = icon('fas', 'undo', class: 'dark-grey')
       = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
       %span.input-group-btn
 
         - if @active_filters.present?
           %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-            = icon('filter', class: 'dark-grey')
+            = icon('fas', 'filter', class: 'dark-grey')
         %button.btn.btn-primary{ type: 'submit' }
-          = icon('search', class: 'fa-inverse')
+          = icon('fas', 'search', class: 'fa-inverse')
     = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 
 -# TODO create breadcrumb filters
@@ -47,7 +47,7 @@
               %h5
                 %strong
                   = t "task"
-                  = icon('filter')
+                  = icon('fas', 'filter')
             = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
               - @statuses.each do |status|
                 = content_tag(:li) do
@@ -57,7 +57,7 @@
               = menu_divider
               = content_tag(:li) do
                 = link_to("filters[with_deleted_at]" => 1, remote: true) do
-                  = icon('trash-o')
+                  = icon('fas', 'trash-o')
                   = t('projects.recruitments.rejected')
     %tbody
       - unless smart_listing.empty?
@@ -69,7 +69,7 @@
               - unless task.deleted?
                 .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
               - else
-                = icon('trash-o', :class => 'fa-2x')
+                = icon('fas', 'trash-o', :class => 'fa-2x')
             %td{ style: 'width: 100%;' }
               .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm

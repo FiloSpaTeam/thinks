@@ -189,11 +189,11 @@
                   \##{task.serial}
                   by #{task.thinker.name}
           %li.list-group-item.list-group-item-success
-            = icon('check-square-o', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
+            = icon('fas', 'check-square-o', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
             - comment_approved = task.comments.approved.first
             = comment_approved.text
           %li.list-group-item.active
-            = icon('quote-left', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
+            = icon('fas', 'quote-left', :class => 'fa-lg pull-left', :style => "margin-top: 3px;")
             = comment_approved.reason.text
   - if @section && @section >= Projects::Statistic.sections[:s_third]
     %h3{ style: 'page-break-before: always;' }

@@ -18,7 +18,7 @@
 = form_for [@project_form, @goal] do |f|
   .form-group.required
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('.popover_content_release'), 'data-html' => 'true' do
-      = icon('info-circle')
+      = icon('fas', 'info-circle')
     = f.label :release_id, t('.release'), :class => "control-label"
     = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @goal.release_id), {include_blank: t('no_release')}, :class => "form-control"
   .form-group.required

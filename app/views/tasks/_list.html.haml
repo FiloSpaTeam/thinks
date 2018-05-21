@@ -20,15 +20,15 @@
     .input-group.form-group
       %span.input-group-btn
         = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
-          = icon('undo', class: 'dark-grey')
+          = icon('fas', 'undo', class: 'dark-grey')
       = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
       %span.input-group-btn
 
         - if @active_filters.present?
           %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-            = icon('filter', class: 'dark-grey')
+            = icon('fas', 'filter', class: 'dark-grey')
         %button.btn.btn-primary{ type: 'submit' }
-          = icon('search', class: 'fa-inverse')
+          = icon('fas', 'search', class: 'fa-inverse')
     = render partial: 'shared/filters', :locals => { :filters => @active_filters }
 
 -# TODO create breadcrumb filters
@@ -47,7 +47,7 @@
               %h5
                 %strong
                   = t "task"
-                  = icon('filter')
+                  = icon('fas', 'filter')
             = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
               - @statuses.each do |status|
                 = content_tag(:li) do
@@ -135,7 +135,7 @@
             - else
               %td.vertical-align-middle.col-lg-2
                 = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
-                  = icon('history', class: 'dark-grey fa-lg')
+                  = icon('fas', 'history', class: 'dark-grey fa-lg')
                   %span.hidden-xs
                     Reopen
       - else

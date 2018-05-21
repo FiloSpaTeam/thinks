@@ -6,7 +6,7 @@
     .container.font-weight-bold.mx-auto.row{ style: "max-height: 22px; overflow-y: hidden;" }
       .col-1.pr-0
         %a.text-danger{href: "#", "data-dismiss": "alert"}
-          = icon('remove', class: 'fa-lg')
+          = icon('fas', 'remove', class: 'fa-lg')
       .col-11.text-left.text-truncate.pl-1
         %a.text-secondary{"data-toggle": "modal", href: "#modal-flash", class: "#{flash_class(type)}"}
           = message.html_safe

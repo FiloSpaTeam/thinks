@@ -27,32 +27,32 @@
     - election_poll = election_polls.where(team_role: member.team_role).where(status: ElectionPoll.statuses[:active])
     - if election_poll.exists?
       - if member.thinker == current_thinker or !@project.part_of_team?(current_thinker)
-        = icon('warning', :class => "text-warning", :title => t('elections_in_progress'))
+        = icon('fas', 'warning', :class => "text-warning", :title => t('elections_in_progress'))
         - number_of_days = 21 - (DateTime.now - election_poll.first.created_at.to_datetime).to_i
         = t('remaining_days', days: number_of_days)
       - else
         %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseElectionPoll#{ election_poll.first.id }", :href => "#collapseElectionPoll#{ election_poll.first.id }" }
-          = icon('edit', :class => "dark-grey")
+          = icon('fas', 'edit', :class => "dark-grey")
           - number_of_days = 21 - (DateTime.now - election_poll.first.created_at.to_datetime).to_i
           = t('remaining_days', days: number_of_days)
     - elsif member.thinker == current_thinker
       = link_to project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('leave_the_team'), method: :delete, data: { confirm: t('are_you_sure_want_leave_team') } do
-        = icon('remove', :class => "text-danger")
+        = icon('fas', 'remove', :class => "text-danger")
     - if scrum_master?(@project) && current_thinker != member.thinker
       - ban = member.thinker.ban(@project)
       - if ban.present?
         = link_to unban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => ban.reason, class: "btn-unlock" do
-          = icon('unlock-alt', :class => "text-warning", :style => "margin-left: 10px;")
+          = icon('fas', 'unlock-alt', :class => "text-warning", :style => "margin-left: 10px;")
       - else
         = link_to ban_project_team_path(project_id: @project, id: member.thinker, team_role_id: member.team_role.id), :title => t('ban_from_project'), class: "btn-lock" do
-          = icon('lock', :class => "text-danger", :style => "margin-left: 10px;")
+          = icon('fas', 'lock', :class => "text-danger", :style => "margin-left: 10px;")
 
     - if current_thinker != member.thinker
       - contribution = member.thinker.contributions.where(project: @project).first
       - if Contribution.intensities[contribution.intensity] == Contribution.intensities[:watching]
-        = icon('eye', :class => "text-primary", :style => "margin-left: 10px;", :title => "Watching")
+        = icon('fas', 'eye', :class => "text-primary", :style => "margin-left: 10px;", :title => "Watching")
       - elsif Contribution.intensities[contribution.intensity] == Contribution.intensities[:partecipate]
-        = icon('group', :class => "text-primary", :style => "margin-left: 10px;", :title => "Partecipating")
+        = icon('fas', 'group', :class => "text-primary", :style => "margin-left: 10px;", :title => "Partecipating")
   - if election_poll.exists?
     .collapse{ id: "collapseElectionPoll#{ election_poll.first.id }", style: "margin-top: 20px; margin-bottom: 0px;" }
       - if @project.part_of_team?(current_thinker) and !election_poll.first.voters.where(thinker: current_thinker).exists?

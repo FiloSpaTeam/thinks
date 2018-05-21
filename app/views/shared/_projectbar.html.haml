@@ -21,31 +21,31 @@
     = yield :page_actions
     %li.dropdown.border-left.pull-left
       %a.line-height-25.line-height-35#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
-        = icon('folder-open-o', :class => "dark-grey fa-lg")
+        = icon('fas', 'folder-open-o', :class => "dark-grey fa-lg")
         %span.caret
       %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }
         - if @project.active? || scrum_master?(@project)
           %li{ title: t('.brief') }
             = link_to brief_project_path(project) do
-              = icon('map-o', class: "dark-grey")
+              = icon('fas', 'map-o', class: "dark-grey")
               %span= t(".brief")
           = menu_divider
         %li{ title: t('.goals') }
           = link_to project_goals_path(project) do
-            = icon('crosshairs', :class => "dark-grey")
+            = icon('fas', 'crosshairs', :class => "dark-grey")
             %span= t(".goals")
         %li{ title: t('.releases') }
           = link_to project_releases_path(project) do
-            = icon('flag-checkered', :class => "dark-grey")
+            = icon('fas', 'flag-checkered', :class => "dark-grey")
             %span= t(".releases")
         %li{ class: (project.started? ? '' : 'disabled'), title: (project.started? ? t('.sprints') : t('project_not_started')) }
           = link_to project_sprints_path(project) do
-            = icon('flag', :class => "dark-grey")
+            = icon('fas', 'flag', :class => "dark-grey")
             %span= t(".sprints")
         - if project.with_recruiting?
           = menu_divider
           %li{ title: t('.recruitment') }
             = link_to project_recruitments_path(project) do
-              = icon('user-plus', :class => "dark-grey")
+              = icon('fas', 'user-plus', :class => "dark-grey")
               %span= t(".recruitment")
 

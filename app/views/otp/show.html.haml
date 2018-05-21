@@ -25,13 +25,13 @@
         .list-group-item
           - if @thinker.otp_required_for_login
             = link_to(disable_otp_path(@thinker), :title => t('disable') , :role => "button", "data-method" => :put, class: "btn pull-right", data: { confirm: t(".are_you_sure_want_disable_otp") }) do
-              = icon('times', :class => "fa-lg")
+              = icon('fas', 'times', :class => "fa-lg")
               Disable
             %strong
               OTP Enabled
           - else
             = link_to(enable_otp_path(@thinker), :title => t('enable') , :role => "button", "data-method" => :put, class: "btn pull-right") do
-              = icon('check', :class => "fa-lg")
+              = icon('fas', 'check', :class => "fa-lg")
               Enable
             %strong
               OTP Disabled
@@ -40,7 +40,7 @@
             .list-group-item
               Codes
               = link_to(otp_path(@thinker), :title => t('hide') , :role => "button", class: "btn pull-right") do
-                = icon('eye-slash', :class => 'fa-lg dark-grey')
+                = icon('fas', 'eye-slash', :class => 'fa-lg dark-grey')
                 = t 'hide'
             .list-group-item
               %strong
@@ -57,7 +57,7 @@
             .list-group-item
               Codes
               %a.btn.pull-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
-                = icon('eye', :class => 'fa-lg dark-grey')
+                = icon('fas', 'eye', :class => 'fa-lg dark-grey')
                 = t 'show'
 
 #div-password-confirmation.modal.fade{ tabindex: -1, role: 'dialog' }

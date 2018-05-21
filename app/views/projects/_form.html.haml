@@ -26,7 +26,7 @@
     = f.text_field :motto, :class => 'form-control', :placeholder => "My motto", :required => true
   .form-group.required
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.description_help_1'), 'data-html' => 'true' do
-      = icon('info-circle')
+      = icon('fas', 'info-circle')
     = f.label :description, :class => 'control-label'
     = f.text_area :description, :class => 'form-control has-counter', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what i'm sharing.", "aria-describedby" => "help-description", :required => true
     %span#help-description.help-block
@@ -38,7 +38,7 @@
   = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
   .form-group
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
-      = icon('info-circle')
+      = icon('fas', 'info-circle')
     = f.label :cycle_id, :class => "control-label"
     = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
   .form-group
@@ -54,7 +54,7 @@
   = t('shared.projectsettingsbar.links_introduction').html_safe
   .form-group
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.links_help_1'), 'data-html' => 'true' do
-      = icon('info-circle')
+      = icon('fas', 'info-circle')
     = f.label :category_id, :class => 'control-label'
     = f.select :category_id, content_tag(:option,'Select one...',:value => "") + options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
   .form-group
@@ -90,7 +90,7 @@
       = t "shared.projectsettingsbar.square_image"
   .form-group
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.logo_and_main_image_help_1', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
-      = icon('info-circle')
+      = icon('fas', 'info-circle')
     = f.label :main_image, :class => 'control-label'
     = f.attachinary_file_field :main_image
     %span#help-main-image.help-block

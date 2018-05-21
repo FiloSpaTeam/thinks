@@ -25,7 +25,7 @@
   - if @project.subprojects.exists?
     %li.dropdown.pull-left
       %a.line-height-25.line-height-35#dropdown-subprojects{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
-        = icon('sitemap', :class => "dark-grey fa-lg")
+        = icon('fas', 'sitemap', :class => "dark-grey fa-lg")
         %span.hidden-xs
           Subprojects
         %span.caret
@@ -36,7 +36,7 @@
               - if subproject.logo
                 = cl_image_tag(subproject.logo.path, { size: '20x20' }) 
               - else
-                = icon('folder')
+                = icon('fas', 'folder')
               %span=subproject.title
 = render :partial => 'shared/projectbar', locals: { project: @project }
 %ul.nav.nav-tabs

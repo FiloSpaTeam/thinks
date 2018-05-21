@@ -30,7 +30,7 @@
         = f.select :approach_type, options_for_select(Project.approach_types.keys.map{ |key| [t("projects.approach_type.#{key}"), key] }, @project.approach_type), {}, :class => "form-control", 'data-reference-value' => :agile
       .form-group.required
         = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
-          = icon('info-circle')
+          = icon('fas', 'info-circle')
         = f.label :cycle_id, :class => "control-label"
         = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
       .form-group

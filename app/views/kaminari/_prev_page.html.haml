@@ -18,4 +18,4 @@
 %li.hidden-xs
   = link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, :rel => 'prev', :remote => remote
 %li.visible-xs.previous
-  = link_to_unless current_page.first?, icon('caret-left', :class => 'fa-2x dark-grey'), url, :rel => 'prev', :remote => remote
+  = link_to_unless current_page.first?, icon('fas', 'caret-left', :class => 'fa-2x dark-grey'), url, :rel => 'prev', :remote => remote

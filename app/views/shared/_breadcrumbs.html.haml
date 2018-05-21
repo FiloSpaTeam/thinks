@@ -5,13 +5,13 @@
         - if project.project.logo
           = cl_image_tag(project.project.logo.path, { size: '20x20' }) 
         - else
-          = icon('sitemap')
+          = icon('fas', 'sitemap')
   %li.clip-text.breadcrumb-li{ style: 'margin-top: 9px;' }
     = link_to project_path(project), title: project.title do
       - if project.logo
         = cl_image_tag(project.logo.path, { size: '20x20' }) 
       - else
-        = icon('folder')
+        = icon('fas', 'folder')
       %strong.hidden-xs{ class: (@breadcrumbs.nil? ? '' : 'hidden-sm') + (project.visible ? '' : 'font-italic') }
         = project.title
   - if @breadcrumbs.present?
