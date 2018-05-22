@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require turbolinks
 //= require popper
 //= require bootstrap
 //= require smart_listing
@@ -29,4 +30,5 @@
 //= require bootstrap-star-rating/theme.min.js
 //= require bootstrap-star-rating/locales/LANG.js
 //= require bootstrap-show-password
-//= require_tree .
+
+//= require init

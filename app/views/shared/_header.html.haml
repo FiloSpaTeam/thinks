@@ -43,27 +43,9 @@
 / Size should be 32 x 32 pixels
 = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
 = javascript_include_tag "https://www.google.com/jsapi"
-= javascript_include_tag 'application'
+= javascript_include_tag 'application', 'data-turbolinks-track': "true"
 -# = cloudinary_js_config
 %script{ defer: true }
-  :plain
-    $(document).ready(function() {
-      $('.attachinary-input').attachinary();
-      $('[data-toggle="popover"]').popover();
-
-      $('input.has-error').each(function() {
-        $(this).closest('div').addClass('has-error');
-      });
-
-      $('body').on('change', '.smart-listing-controls input', function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-
-        $('#filters_last').val($this.attr('name'));
-        $this.closest('form').submit();
-      });
-    });
   - if thinker_signed_in?
     :plain
       $(document).ready(function() {
