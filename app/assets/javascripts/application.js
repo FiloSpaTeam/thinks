@@ -30,5 +30,4 @@
 //= require bootstrap-star-rating/theme.min.js
 //= require bootstrap-star-rating/locales/LANG.js
 //= require bootstrap-show-password
-
 //= require init

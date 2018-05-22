@@ -157,13 +157,13 @@
     %button.navbar-toggler.navbar-toggler-right{type: "button", "data-toggle": "collapse", "data-target": "#menuResponsive", "aria-controls": "menuResponsive", "aria-expanded": "false", "aria-label": "Toggle navigation"}
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#menuResponsive
-      = render partial: 'layouts/flash_messages', locals: { flash: flash }
       - if thinker_signed_in?
         %ul.navbar-nav.mr-auto
           %li.nav-item
             = link_to projects_path, class: 'nav-link' do
               = icon('fas', 'globe', class: 'fa-lg')
               = t(".projects")
+      = render partial: 'layouts/flash_messages', locals: { flash: flash }
       %ul.navbar-nav.ml-auto
         - if thinker_signed_in?
           %li.nav-item
