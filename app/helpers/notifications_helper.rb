@@ -109,9 +109,9 @@ module NotificationsHelper
 
   def notification_icon(notifications, dimension = 'fa-lg')
     if notifications.empty?
-      icon('comments', class: "#{dimension} notification-icon dark-grey")
+      icon('fas', 'comments', class: "#{dimension} notification-icon")
     else
-      icon('commenting', class: "#{dimension} notification-icon dark-grey")
+      icon('fas','commenting', class: "#{dimension} notification-icon")
     end
   end
 end

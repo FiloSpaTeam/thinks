@@ -29,7 +29,6 @@ gem 'font-awesome-sass', '~> 5.0.6'
 gem 'json'
 gem 'slim-rails', '~> 3.1.2'
 
-gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-show-password-rails'
 
 # Time in words

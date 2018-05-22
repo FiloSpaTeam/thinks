@@ -52,10 +52,6 @@ p {
 .bg-primary {
   background-color: $main-color !important; }
 
-.bg-dark {
-  color: white;
-  background-color: #222222 !important; }
-
 .text-faded {
   color: rgba(255, 255, 255, 0.7); }
 
@@ -331,8 +327,7 @@ header.masthead {
   padding: 15px 30px; }
 
 footer {
-    box-shadow: 0px 500px 0px 500px #f8f9fa;
-    background-color: #333;
+    box-shadow: 0px 500px 0px 500px $dark;
 	  padding:25px 0;}
 
 footer span.copyright {

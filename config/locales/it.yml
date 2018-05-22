@@ -470,6 +470,7 @@ it:
     footer:
       faqs: "FAQs"
     navbar:
+      projects: "Projects"
       how_does_it_works: "How does it works"
       notifications: "Notifications"
       dashboard: "Dashboard"

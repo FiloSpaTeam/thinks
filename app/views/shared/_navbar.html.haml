@@ -158,15 +158,21 @@
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#menuResponsive
       = render partial: 'layouts/flash_messages', locals: { flash: flash }
+      - if thinker_signed_in?
+        %ul.navbar-nav.mr-auto
+          %li.nav-item
+            = link_to projects_path, class: 'nav-link' do
+              = icon('fas', 'globe', class: 'fa-lg')
+              = t(".projects")
       %ul.navbar-nav.ml-auto
         - if thinker_signed_in?
           %li.nav-item
             = link_to notifications_path, :class => "nav-link" do
-              = notification_icon('fas', Notification.user(current_thinker))
+              = notification_icon(Notification.user(current_thinker))
               = t(".notifications")
           %li.nav-item.dropdown
             = link_to "javascript:;", :class => "dropdown-toggle  nav-link", "data-toggle" => :dropdown, :role => :button, "aria-haspopup" => :true, "aria-expanded" => :false do
-              = icon('fas', 'user', :class => "fa-lg dark-grey")
+              = icon('fas', 'user', :class => "fa-lg")
               = t(".profile")
               = content_tag(:span, "", :class => :caret)
             %div.dropdown-menu.dropdown-menu-right
