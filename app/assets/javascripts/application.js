@@ -31,3 +31,8 @@
 //= require bootstrap-star-rating/locales/LANG.js
 //= require bootstrap-show-password
 //= require init
+//= require app.project
+//= require app.project.task
+//= require app.project.team
+//= require app.project.comment
+//= require app.project.settings

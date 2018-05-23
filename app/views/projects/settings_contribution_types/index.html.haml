@@ -36,7 +36,7 @@
           = render partial: 'shared/markdown_syntax'
           = t "activerecord.attributes.project.contribution_text"
         = f.text_area :contribution_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
-        %span.help-block
+        %span.form-text.text-muted
           = t ".help_contribution_text"
       %hr
       = f.submit nil, :class => 'btn btn-primary'

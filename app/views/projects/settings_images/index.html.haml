@@ -25,15 +25,15 @@
     = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
       .form-group
         = f.label :logo, :class => 'control-label'
-        = f.attachinary_file_field :logo
-        %span#help-main-image.help-block
+        -# = f.attachinary_file_field :logo
+        %span#help-main-image.form-text.text-muted
           = t "shared.projectsettingsbar.square_image"
       .form-group
         = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.logo_and_main_image_help_1'), 'data-html' => 'true' do
           = icon('fas', 'info-circle')
         = f.label :main_image, :class => 'control-label'
-        = f.attachinary_file_field :main_image
-        %span#help-main-image.help-block
+        -# = f.attachinary_file_field :main_image
+        %span#help-main-image.form-text.text-muted
           = t "shared.projectsettingsbar.landscape_image"
       %hr
       = f.submit nil, :class => 'btn btn-primary'

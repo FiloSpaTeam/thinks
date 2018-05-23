@@ -21,7 +21,7 @@
   .form-group.required
     = f.label :title, :class => "control-label"
     = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
-    %span#help-title.help-block
+    %span#help-title.form-text.text-muted
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_title }
         = @chars_max_title - f.object.title.try('length').to_i
@@ -30,7 +30,7 @@
       = render partial: 'shared/markdown_syntax'
       = t ".description"
     = f.text_area :description, :class => 'form-control', :rows => 8, :placeholder => "Everything that helps team to understand why you want contribute, how and when.", "aria-describedby" => "help-description"
-    %span#help-description.help-block= t "char_minimum", chars: @chars_min_description
+    %span#help-description.form-text.text-muted= t "char_minimum", chars: @chars_min_description
   %hr
   = f.submit t('.send'), :class => "btn btn-primary", data: { confirm: "Are you sure? (you cannot modify later)" }
   = link_to t('back'), :back, :class => "btn btn-default"

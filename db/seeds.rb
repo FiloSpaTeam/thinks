@@ -120,7 +120,8 @@ licenses_list = [
   ['gnuv',           'GNUVerbatim',       'https://www.gnu.org/licenses/licenses.html#VerbatimCopying'],
   ['ccbynd',         'CCBYND3',           'http://creativecommons.org/licenses/by-nd/3.0/legalcode'],
   ['ccbynd4',        'CCBYND4',           'https://creativecommons.org/licenses/by-nd/4.0/legalcode'],
-  ['hpnd',           'HPND',              'http://directory.fsf.org/wiki/License:Historical_Permission_Notice_and_Disclaimer']
+  ['hpnd',           'HPND',              'http://directory.fsf.org/wiki/License:Historical_Permission_Notice_and_Disclaimer'],
+  ['unfree',         'NonFree',           '']
 ]
 
 licenses_list.each do |name, description, url|

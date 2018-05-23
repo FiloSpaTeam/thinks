@@ -24,7 +24,7 @@
       .form-group.has-feedback
         = label_tag :owner, nil, :class => 'control-label'
         = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
-        %span#help-owner-email.help-block
+        %span#help-owner-email.form-text.text-muted
           = t ".change_owner_email"
       %hr
       = f.submit 'Transfer', :class => 'btn btn-primary'

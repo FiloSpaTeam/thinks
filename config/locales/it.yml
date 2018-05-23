@@ -198,14 +198,14 @@ it:
       current_goal: "Current goal"
       workload_in_time: "Workload (timeline)"
     modal_contribution_preferences:
-      conditions_of_participations: "Conditions of participations"
+      conditions_of_participations: "Chi può partecipare e come?"
       update_contribution: "Update contribution"
       help_block_text_skill: "Green text if skill matches your skills"
       skill_requirements: "Skill requirements"
       your_contribution: "Your contribution"
       no_skill_requirements: "Any skill is appreciated"
     new:
-      new        : "New project"
+      new        : "Nuovo progetto"
       created_by : "created by"
     edit:
       edit       : "Edit project"
@@ -227,6 +227,8 @@ it:
       sorry_no_project_found_with: "Sorry but we didn't find any project with <b>\"<ins>%{result}</ins>\"</b>"
       sorry_no_project_under_category: "Sorry but we didn't find any project under category <b>\"<ins>%{result}</ins>\"</b>"
     form:
+      title_and_description: "Tutto ha un nome, anche il tuo progetto."
+      help_license: "Sono disponibili solo <strong>licenze Free Software (as in freedom) compatibili</strong>. Per le license personalizzate, seleziona \"Non libera\", e specifica il link per download."
       change_owner_email: "Enter a valid email of an registered user."
       urls       : "URLs"
       dates      : "Dates"
@@ -508,7 +510,7 @@ it:
       link_to_master_project: "Link to another project"
       skill_requirements: "Skill requirements"
       description: "Title and description"
-      sprint_and_release_date: "Sprint and release date"
+      sprint_and_release_date: "Impostazioni per il ciclo di lavoro"
       developments_approach: "Development's approach"
       sprint_and_release_date_introduction: "
         <p>
@@ -523,8 +525,7 @@ it:
         </p>"
       sprint_and_release_date_help_1: "<strong>There are no bad choices.</strong><br>Depends on the period in which you want to focus the workload.<br><br><strong>FAQ - Can i change working period later? (TODO)</strong>"
       sprint_and_release_date_help_2: "This describe the minimum team number needed to satisfy the workload of the development. As you can understand, more workload, more team members.<br><br><strong>How does it works? - Automatic task handling (TODO)</strong>"
-      links: "Category, license and links"
-      links_introduction: "<p>You can select only <strong>Free Software (as in freedom) compatible licenses</strong>.</p>"
+      links: "Seleziona una categoria, una licenza e specifica i link associati"
       links_help_1: "Choose the right category and everyone can see your project under that."
       logo_and_main_image: "Logo and main image"
       logo_and_main_image_help_1: "Used to represent the project on the main page<br><br><a href='%{image_url}' download='template-main-image.svg'>Download template for Inkscape (CC-BY-SA)</a>"
@@ -541,8 +542,9 @@ it:
         documentation_url : "Documentation"
         cycle_id: "Working period" 
         release_at: "Release date"
-        contribution_text: "Conditions of participation"
-        recruitment_text: "Text for recruitment"
+        contribution_text: "Condizioni per la partecipazione"
+        recruitment_text: "Condizioni per il reclutamento"
+        contribution_type: "Tipologia di contributo"
 
   # Devise section
   devise:

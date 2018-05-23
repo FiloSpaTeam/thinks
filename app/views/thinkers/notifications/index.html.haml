@@ -34,7 +34,7 @@
           %label.control-label
             = t('.minimum_consideration_for_sending')
           %input.form-control{ type:"text", readonly: true, value: t(".minimum_consideration_for_sending_#{@thinker.notifications_preference.sending_type}") }
-          %span.help-block
+          %span.form-text.text-muted
             = t('.minimum_consideration_for_sending_description')
             %ul
               - NotificationsPreference.minimum_considerations_for_sendings.each do |i|

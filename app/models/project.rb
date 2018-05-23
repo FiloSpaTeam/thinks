@@ -55,7 +55,7 @@ class Project < ActiveRecord::Base
   belongs_to :category
   belongs_to :project
 
-  enum contribution_type: %i[open with_recruiting]
+  enum contribution_type: %i[open with_recruiting closed]
   enum approach_type: %i[agile waterfall]
   enum status: %i[draft active suspended]
 

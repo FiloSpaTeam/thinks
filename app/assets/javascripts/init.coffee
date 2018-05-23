@@ -4,6 +4,7 @@ App.Api ||= {}
 App.init = ->
   # $('.attachinary-input').attachinary()
   $('[data-toggle="popover"]').popover()
+  $('a, span, i, div').tooltip()
 
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click ->
     if location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') and location.hostname == this.hostname

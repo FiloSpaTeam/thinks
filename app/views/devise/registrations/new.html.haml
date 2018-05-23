@@ -29,13 +29,13 @@
             = f.label :email, :class => "control-label required"
             = f.email_field :email, class: "form-control", required: true, placeholder: t("devise.sessions.new.email_address")
             - if devise_mapping.registerable?
-              %p.help-block
+              %p.form-text.text-muted
                 = link_to t(".already_signed_up"), new_session_path(resource_name)
           .form-group{ :class => set_has_error_form_group(resource, :password) }
             = f.label :password, :class => "control-label"
             = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', required: true, "data-eye-class": 'fa', 'data-eye-open-class': 'fa-eye', 'data-eye-close-class': 'fa-eye-slash', placeholder: t('devise.sessions.new.password')
             - if @minimum_password_length
-              %p.help-block
+              %p.form-text.text-muted
                 = t "char_minimum", chars: @minimum_password_length
           .form-group{ :class => set_has_error_form_group(resource, :password_confirmation) }
             = f.label :password_confirmation, :class => "control-label required"

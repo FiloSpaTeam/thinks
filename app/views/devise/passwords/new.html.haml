@@ -26,9 +26,9 @@
             = f.label :email
             = f.email_field :email, autofocus: true, class: "form-control"
             - if devise_mapping.registerable?
-              %p.help-block
+              %p.form-text.text-muted
                 = link_to t(".need_account"), new_registration_path(resource_name)
-              %p.help-block
+              %p.form-text.text-muted
                 = link_to t("devise.registrations.new.already_signed_up"), new_session_path(resource_name)
           = f.submit t(".send_reset_password"), class: "btn btn-primary"
 

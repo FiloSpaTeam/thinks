@@ -36,7 +36,7 @@
               - if @project.skills.empty?
                 = t ".no_skill_requirements"
               - else
-                %span.help-block
+                %span.form-text.text-muted
                   = t ".help_block_text_skill"
                 %ul
                   - @project.skills.each do |skill|
