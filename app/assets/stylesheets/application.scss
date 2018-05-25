@@ -69,11 +69,9 @@ a {
 }
 
 .dropdown-menu {
-    .active {
-        a {
-            color: #262626;
-            background-color: $light-grey;
-        }
+    .dropdown-item.active {
+        background-color: $main-color;
+        color: white;
     }
 
     ul.list-group {

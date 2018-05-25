@@ -1,15 +1,82 @@
 it:
+  remaining_chars: "Caratteri rimanenti: "
+  select: "Seleziona"
+  save: "Salva"
+  back: "Torna indietro"
+
+  alerts:
+    no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
+
+  shared:
+    navbar:
+      projects: "Progetti"
+      notifications: "Notifiche"
+      profile: "Profilo"
+      dashboard: "Dashboard"
+      my_projects: "I miei progetti"
+      my_profile: "Preferenze"
+      logout: "Logout"
+
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
     form_text_main_image: "Immagine panoramica, 1080x670 (jpg, png)"
+    info_main_image: "Utilizzata nella pagina principale del progetto.<br><br>Disponibile un <a href='%{image_url}' download='template-main-image.svg'><i class='fa fa-link fa-sm'>template</i></a> (Inkscape, CC-BY-SA) per un uso ottimale."
+    info_description: "Un testo di moderata lunghezza che spiega bene <strong>la missione del progetto, lo scopo</strong> e perché vuoi realizzarlo.<br><br>Se ritieni che il tuo progetto possa avere delle similitudini con altri, illustra i tuoi punti di forza.<br><br>Utilizza markdown per scrivere e ricorda che la prima riga appare nelle cards come breve riassunto."
+    info_category: "La categoria giusta permette una buona indicizzazione del progetto."
+    form_text_license: "Solo licenze GNU GPL compatibili. Per specificarne una non libera, utilizzare la voce 'NonFree' e specificare un URL per il download"
+    form_text_donate_button: "<a rel='nofollow' target='_blank' href='https://liberapay.com/'><i class='fa fa-external-link-alt'>Liberapay</i></a> (o piattaforme simili) forniscono pulsanti per le donazioni con relativo codice HTML"
+    info_cycle_id: "<strong>Adatta il periodo alla reale difficoltà degli sprint.</strong><br>Lo Sprint deve rappresentare un periodo minimo in cui si riesce ad ottenere un valore aggiunto in termini di lavoro."
+    form_text_release_at: "Se selezioni una data passata, il progetto è dichiarato \"in sviluppo\""
 
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
       placeholder_title: "Gotham City"
       placeholder_motto: "Batman ci salverà tutti"
+      placeholder_description: "Descrizione moderata del progetto. Ricorda che puoi usare MARKDOWN per enfatizzare il testo e che la prima riga appare nelle cards dedicate al progetto."
+      links: "Categoria, documentazione, sorgenti, licenza..."
+      conditions_of_participations: "Condizioni per la partecipazione"
+      placeholder_contribution_text: "Tutto quello che può interessare eventuali candidati alla partecipazione. Cosa si richiede, quali sono le regole necessarie per una buona collaborazione, eventuali metodi di pagamento e/o valutazione economica del lavoro svolto..."
+      minimum_settings_for_work: "Impostazioni minime per il contributo"
+      minimum_settings_for_work_description: "
+      <p>
+        Impostare una data per il rilascio è importante ma non obbligatorio. Permette di definire il giorno in cui i lavori avranno inizio. Fino a quel momento si potranno creare e definire i lavori e gli obiettivi da raggiungere.
+        Quando il progetto avrà inizio ognuno potrà contribuire svolgendo i lavori prestabiliti.
+        <br><br>
+        I periodi di lavoro sono scanditi attraverso un ciclo chiamato \"Sprint\" personalizzabile da 1, 2 e 4 settimane. Vi permetterà di capire la velocità dei singoli e dell'intero gruppo di lavoro rispetto al carico totale del progetto.
+      </p>
+      "
 
     new:
-      mainTitle: "Nuovo progetto"
+      main_title: "Nuovo progetto"
+
+  start:
+    index:
+      heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"
+      heading_subtitle: "Esprimi te stesso al meglio, sempre"
+      start_a_new_project: "Inizia ora. Crea il tuo progetto."
+      section_1_title: "<i>Thinks</i> guida le persone all'interno del progetto fornendo strumenti semplici ed essenziali."
+      section_1_description: "Un network di persone che voglio lavorare solo su ciò che più amano."
+      section_1_button: "Scopri come avviene"
+      feature_1: "Semplicità in principio"
+      feature_description_1: "I progetti migliori nascono dal contributo dei singoli. Noi vogliamo far sì che ognuno possa contribuire intuitivamente nei vari progetti."
+      feature_2: "Obiettivo sempre sotto tiro"
+      feature_description_2: "Molte cose sono importanti, alcune però lo sono maggiormente in certi momenti. Stabilite voi i vostri e create uno scopo; focalizzate le energie e raggiungetelo."
+      feature_3: "Tutto ha un senso"
+      feature_description_3: "Gli obiettivi convogliano energia. Per utilizzarla al meglio questa deve essere indirizzata verso una meta. Stabilite le tappe e passo dopo passo il vostro progetto sarà realtà."
+      feature_4: "Libertà"
+      feature_description_4: "Come è per voi importante, lo è per noi. Crediamo nel software libero e siamo i primi a dimostrarlo."
+
+  category:
+    software: "Software"
+    web_applications: "Applicazioni web/Siti"
+    robotic: "Robotica"
+    domotic: "Domotica"
+    artworks: "Arte grafica"
+
+  cycle:
+    id_1: "1 settimana"
+    id_2: "2 settimane"
+    id_3: "4 settimane"
 
   activerecord:
     attributes:
@@ -18,3 +85,13 @@ it:
         motto: "Motto"
         description: "Descrizione"
         main_image: "Immagine di copertina"
+        category_id: "Categoria di appartenenza"
+        license_id: "Licenza"
+        home_url: "Home del progetto"
+        source_code_url: "Codici sorgenti"
+        documentation_url: "Documentazione"
+        mailing_list_url: "Link della mailing list"
+        donate_button: "Pulsante (HTML) delle donazioni"
+        contribution_type: "Tipologia di partecipazione"
+        cycle_id: "Periodo di sviluppo"
+        release_at: "Data di inizio lavori"

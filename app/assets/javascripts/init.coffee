@@ -1,7 +1,12 @@
 window.App ||= {}
-App.Api ||= {}
 
 App.init = ->
+  $(document).ajaxError (e, xhr, settings) ->
+    location.reload() if xhr.status == 401
+
+  $('input.has-error').each ->
+    $(this).closest('div').addClass('has-error')
+
   # $('.attachinary-input').attachinary()
   $('[data-toggle="popover"]').popover()
   $('a, span, i, div').tooltip()
@@ -9,7 +14,7 @@ App.init = ->
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click ->
     if location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') and location.hostname == this.hostname
       target = $(this.hash)
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']')
+      target = if target.length then target else $('[name=' + this.hash.slice(1) + ']')
       if target.length
         $('html, body').animate({
           scrollTop: (target.offset().top - 70)
@@ -27,9 +32,6 @@ App.init = ->
     if $('#modal-flash').attr('data-has-messages') == 'true'
       $("#modal-flash").modal('show')
 
-  $('input.has-error').each ->
-    $(this).closest('div').addClass('has-error')
-
   $('body').on 'change', '.smart-listing-controls input', (e) ->
     e.preventDefault()
 
@@ -38,8 +40,18 @@ App.init = ->
     $('#filters_last').val($this.attr('name'))
     $this.closest('form').submit()
 
-  $(document).ajaxError (e, xhr, settings) ->
-    location.reload() if xhr.status == 401
+  $('.has-counter').keyup ->
+    counter      = $(this)
+                   .parent()
+                   .find('.counter')
+    max_length   = counter.data('maximum-length')
+    diff         = max_length - $(this).val().length
+    counter.text(diff)
+
+    if diff < 0
+      counter.addClass('text-danger')
+    else
+      counter.removeClass('text-danger')
 
 $(document).on "turbolinks:load", ->
   App.init()

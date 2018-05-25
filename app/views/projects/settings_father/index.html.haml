@@ -33,7 +33,7 @@
       = form_for @project, url: project_settings_father_index_path(@project), method: :post do |f|
         .form-group
           = text_field_tag "project[serial]", nil, :type => "text", :class => "form-control"
-          %span#help-serial.form-text.text-muted
+          %small#help-serial.form-text.text-muted
             = t ".help_serial"
         = f.submit t(".link_to_master_project"), :class => 'btn btn-primary'
     - else

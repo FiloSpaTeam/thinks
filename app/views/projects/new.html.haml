@@ -15,34 +15,26 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.container
+.container.pb-5
   .row
     %main.col-sm-9
       %h1.mb-5
-        = t('.mainTitle')
+        = t('.main_title')
       = render partial: 'projects/form'
     .d-none.d-sm-block.col-sm-3.sticky-top.sticky-top-5.h-25
-      %ul.list-unstyled
+      %ol
         %li
-          %a.js-scroll-trigger{ href: '#title_and_description' }
-            1: General description
-          %ul.list-unstyled.pl-4
-            %li
-              Title
-            %li
-              Description
+          %a.js-scroll-trigger{ href: '#title_and_description', 'data-turbolinks': 'false' }
+            = t('projects.form.title_and_description')
         %li
-          %a{ href: '#title_and_description' }
-            Title and description
+          %a.js-scroll-trigger{ href: '#links', 'data-turbolinks': 'false' }
+            = t('projects.form.links')
         %li
-          %a{ href: '#title_and_description' }
-            Title and description
+          %a.js-scroll-trigger{ href: '#conditions_of_participations', 'data-turbolinks': 'false' }
+            = t('projects.form.conditions_of_participations')
         %li
-          %a{ href: '#title_and_description' }
-            Title and description
-        %li
-          %a{ href: '#title_and_description' }
-            Title and description
+          %a.js-scroll-trigger{ href: '#minimum_settings', 'data-turbolinks': 'false' }
+            = t('projects.form.minimum_settings')
       .mt-4
         %button.btn.btn-block.btn-success
-          Salva
+          = t('save')

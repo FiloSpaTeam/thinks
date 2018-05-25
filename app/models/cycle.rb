@@ -16,4 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Cycle < ActiveRecord::Base
+  def t_description
+    I18n.t("cycle.id_#{id}")
+  end
 end

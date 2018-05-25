@@ -27,78 +27,92 @@
   .form-group
     = f.label :logo, :class => 'control-label'
     -# = f.attachinary_file_field :logo
-    %span#help-main-image.form-text.text-muted
+    %small#help-main-image.form-text.text-muted
       = t "projects.form_text_logo"
   .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.logo_and_main_image_help_1', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('projects.info_main_image', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
     = f.label :main_image, :class => 'control-label'
     -# = f.attachinary_file_field :main_image
-    %span#help-main-image.form-text.text-muted
-      = t "shared.projectsettingsbar.landscape_image"
+    %small#help-main-image.form-text.text-muted
+      = t "projects.form_text_main_image"
   .form-group.required
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.description_help_1'), 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('projects.info_description'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
     = f.label :description, :class => 'control-label'
     = f.text_area :description, :class => 'form-control has-counter', :rows => 15, :placeholder => t('.placeholder_description'), "aria-describedby" => "help-description", :required => true
-    %span#help-description.form-text.text-muted
+    %small#help-description.form-text.text-muted
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => Project.validators_on(:description)[0].options[:maximum] }
         -# TODO: move from here
         = Project.validators_on(:description)[0].options[:maximum] - f.object.description.try('length').to_i
-  %h2.mt-5
-    = t 'shared.projectsettingsbar.links'
+  %h2#links.mt-5
+    = t '.links'
   .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.links_help_1'), 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('projects.info_category'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
     = f.label :category_id, :class => 'control-label'
-    = f.select :category_id, content_tag(:option,'Select one...',:value => "") + options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
+    = f.select :category_id, content_tag(:option, t('select'), :value => "") + options_from_collection_for_select(Category.all, 'id', 'name', @project.category_id), {}, :class => 'form-control'
   .form-group
     = f.label :license_id, :class => 'control-label'
-    = f.select :license_id, content_tag(:option,'Select one...',:value => "") + options_from_collection_for_select(License.all.order(:name), 'id', 'description', @project.license_id), {}, :class => 'form-control'
-    %span.form-text.text-muted
-      = t('.help_license').html_safe
+    = f.select :license_id, content_tag(:option,t('select'),:value => "") + options_from_collection_for_select(License.all.order(:name), 'id', 'description', @project.license_id), {}, :class => 'form-control'
+    %small.form-text.text-muted
+      = t('projects.form_text_license').html_safe
   .form-group.has-feedback
     = f.label :home_url, :class => 'control-label'
-    = f.text_field :home_url, :class => 'form-control'
-    %i.glyphicon.glyphicon-home.form-control-feedback
+    .input-group
+      .input-group-prepend
+        %span.input-group-text
+          = icon('fas', 'home')
+      = f.text_field :home_url, :class => 'form-control'
   .form-group.has-feedback
     = f.label :source_code_url, :class => 'control-label'
-    = f.text_field :source_code_url, :class => 'form-control'
-    %i.glyphicon.glyphicon-cd.form-control-feedback
+    .input-group
+      .input-group-prepend
+        %span.input-group-text
+          = icon('fas', 'compact-disc')
+      = f.text_field :source_code_url, :class => 'form-control'
   .form-group.has-feedback
     = f.label :documentation_url, :class => 'control-label'
-    = f.text_field :documentation_url, :class => 'form-control'
+    .input-group
+      .input-group-prepend
+        %span.input-group-text
+          = icon('fas', 'book')
+      = f.text_field :documentation_url, :class => 'form-control'
     %i.glyphicon.glyphicon-book.form-control-feedback
   .form-group.has-feedback
     = f.label :mailing_list_url, :class => 'control-label'
-    = f.text_field :mailing_list_url, :class => 'form-control'
+    .input-group
+      .input-group-prepend
+        %span.input-group-text
+          = icon('fas', 'envelope')
+      = f.text_field :mailing_list_url, :class => 'form-control'
     %i.glyphicon.glyphicon-envelope.form-control-feedback
   .form-group.has-feedback
     = f.label :donate_button, :class => 'control-label'
     = f.text_area :donate_button, :class => 'form-control', :rows => 4
-    %span#help-donate-button.form-text.text-muted
-      = t "get_donate_button_from_paypal"
-  %h2.mt-5
-    = t 'projects.modal_contribution_preferences.conditions_of_participations'
+    %small#help-donate-button.form-text.text-muted
+      = t("projects.form_text_donate_button").html_safe
+  %h2#conditions_of_participations.mt-5
+    = t '.conditions_of_participations'
   .form-group
     = f.label :contribution_type, class: 'control-label'
-    = f.select :contribution_type, content_tag(:option,'Select one...',:value => "") + options_for_select(Project.contribution_types.keys.to_a, @project.license_id), {}, :class => 'form-control'
+    = f.select :contribution_type, content_tag(:option,t('select'),:value => "") + options_for_select(Project.contribution_types.keys.to_a, @project.license_id), {}, :class => 'form-control'
   .form-group
     = f.text_area :contribution_text, :class => 'form-control', :rows => 15, :placeholder => t(".placeholder_contribution_text"), "aria-describedby" => "help-description"
-  %h2.mt-5
-    = t 'shared.projectsettingsbar.sprint_and_release_date'
-  = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
+  %h2#minimum_settings.mt-5
+    = t '.minimum_settings_for_work'
+  = t('.minimum_settings_for_work_description').html_safe
   .form-group
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('projects.info_cycle_id'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
     = f.label :cycle_id, :class => "control-label"
-    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+    = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 't_description', @project.cycle_id), {}, :class => "form-control"
   .form-group
     = f.label :release_at, :class => 'control-label'
-    = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
-    %span#help-release_at.form-text.text-muted= t ".release_at_help"
-  %hr
-  = f.submit nil, :class => 'btn btn-primary'
-  = link_to t('back'), :back, :class => "btn btn-default"
-= init_counter_textarea
+    = f.date_field :release_at, :class => 'form-control', :placeholder => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+    %small#help-release_at.form-text.text-muted= t "projects.form_text_release_at"
+  .actions
+    = f.submit t('save'), :class => 'btn btn-success'
+    = link_to t('back'), :back, :class => "btn btn-default"
+

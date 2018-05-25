@@ -40,25 +40,9 @@
         %p.text-faded
           = t('.section_1_description').html_safe
         %a.btn.btn-default.btn-xl{href: "#services"}
-          Understand how
+          = t('.section_1_button')
 
 %section
   .container
     - for i in 1..4 do
       = render partial: 'start/feature', locals: { direction: i % 2 == 0 ? 'rtl' : 'ltr', number: i }
-%hr
-%section
-  .container
-    .row.mb-3
-      .col-md-5.col-sm-5.col-xs-12.text-center.text-sm-right
-        = image_tag "coins"
-      .col-md-2.col-sm-2.col-xs-12.mt-auto.mb-auto.text-center
-        %h1.text-center
-          Pricing
-    .row
-      .col-lg-4.col-md-4.col-sm-4.col-xs-12
-        = render partial: 'start/price', locals: { offer: @offers[0] }
-      .col-lg-4.col-md-4.col-sm-4.col-xs-12
-        = render partial: 'start/price', locals: { offer: @offers[1] }
-      .col-lg-4.col-md-4.col-sm-4.col-xs-12
-        = render partial: 'start/price', locals: { offer: @offers[2] }

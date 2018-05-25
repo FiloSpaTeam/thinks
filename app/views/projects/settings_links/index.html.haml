@@ -51,7 +51,7 @@
       .form-group.has-feedback
         = f.label :donate_button, :class => 'control-label'
         = f.text_area :donate_button, :class => 'form-control', :rows => 4
-        %span#help-donate-button.form-text.text-muted
+        %small#help-donate-button.form-text.text-muted
           = t "get_donate_button_from_paypal"
       %hr
       = f.submit nil, :class => 'btn btn-primary'

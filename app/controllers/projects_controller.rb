@@ -26,15 +26,10 @@ class ProjectsController < ApplicationController
   before_action :thinker!, only: [:edit, :update, :destroy]
 
   def index
-    @minimum_good_number_of_projects = 10
-    @projects_count = Project.count
-    if @projects_count > @minimum_good_number_of_projects
-      @most_popular = Project.limit(6)
+    redirect_to new_project_path, alert: t('alerts.no_projects_visible') if Project.count.zero?
 
-      @categories = Category.order(:t_name).limit(10)
-    else
-      redirect_to start_index_url
-    end
+    @most_popular = Project.limit(6)
+    @categories   = Category.order(:t_name).limit(10)
   end
 
   # GET /projects

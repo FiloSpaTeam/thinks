@@ -85,37 +85,14 @@ module ApplicationHelper
     (100 * value) / total
   end
 
-  def init_counter_textarea
-    javascript_tag(
-      "$(document).ready(function() {
-          var textarea     = $('.has-counter');
-
-          textarea.keyup(function() {
-            var counter      = $(this)
-                                 .parent()
-                                 .find('.counter');
-            var max_length   = counter.data('maximum-length');
-            var diff         = max_length - $(this).val().length;
-            counter.text(diff);
-
-            if (diff < 0) {
-              counter.addClass('text-danger');
-            } else {
-              counter.removeClass('text-danger');
-            }
-          });
-        });", defer: 'defer');
-  end
-
   def highlights_searched_text(text, search)
     return text if search.to_s.empty?
+    return unless text.present?
 
-    if text.present?
-      text
-        .strip
-        .gsub(/#{search}/i) { |s| "<u><span class='text-danger'>#{s}</span></u>" }
-        .html_safe
-    end
+    text
+      .strip
+      .gsub(/#{search}/i) { |s| "<u><span class='text-danger'>#{s}</span></u>" }
+      .html_safe
   end
 
   def active_filter?(filter, value = nil)
