@@ -26,7 +26,7 @@
       .list-group
         - smart_listing.collection.each_with_index do |thinker, index|
           .list-group-item{ style: 'height: 122px;' }
-            .pull-left.margin-right-10
+            .float-left.margin-right-10
               - if thinker.avatar?
                 = cl_image_tag(thinker.avatar.path, alt: t('.photo'), size: '100x100', crop: :thumb, gravity: :face)
               - else

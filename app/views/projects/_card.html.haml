@@ -36,7 +36,7 @@
           = t("category.#{project.category.t_name}")
         - else
           &nbsp;
-        %span.pull-right{ style: 'margin-top: 2px;' }
+        %span.float-right{ style: 'margin-top: 2px;' }
           - if project.started?
             = t "started"
           - elsif project.suspended?

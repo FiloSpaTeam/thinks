@@ -22,8 +22,8 @@
   - if member.thinker.avatar
     = cl_image_tag(member.thinker.avatar.path, { size: '30x30', class: 'pull-left team-member-img' })
   - else
-    %img.team-member-img.pull-left{ "data-src" => "holder.js/30x30" }
-  .pull-right
+    %img.team-member-img.float-left{ "data-src" => "holder.js/30x30" }
+  .float-right
     - election_poll = election_polls.where(team_role: member.team_role).where(status: ElectionPoll.statuses[:active])
     - if election_poll.exists?
       - if member.thinker == current_thinker or !@project.part_of_team?(current_thinker)

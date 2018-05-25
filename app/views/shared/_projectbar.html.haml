@@ -15,37 +15,32 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.navbar.navbar-default.hidden-xxs.hidden-xs
+%nav.navbar.navbar-light.bg-light.hidden-xxs.hidden-xs
   = render :partial => "shared/breadcrumbs", locals: { project: @project }
-  %ul.nav.navbar-nav.navbar-right.margin-right-0.navbar-right-margin-0.pull-right
+  %ul.nav.navbar-nav.navbar-right.margin-right-0.navbar-right-margin-0.float-right
     = yield :page_actions
-    %li.dropdown.border-left.pull-left
-      %a.line-height-25.line-height-35#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
-        = icon('fas', 'folder-open-o', :class => "dark-grey fa-lg")
+    %li.dropdown.border-left.float-left
+      %a.dropdown-toggle.text-dark.line-height-25.line-height-35#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
+        = icon('far', 'folder-open')
         %span.caret
-      %ul.dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }
+      .dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }
         - if @project.active? || scrum_master?(@project)
-          %li{ title: t('.brief') }
-            = link_to brief_project_path(project) do
-              = icon('fas', 'map-o', class: "dark-grey")
-              %span= t(".brief")
-          = menu_divider
-        %li{ title: t('.goals') }
-          = link_to project_goals_path(project) do
+          = link_to brief_project_path(project), class: 'dropdown-item' do
+            = icon('fas', 'map', class: "dark-grey")
+            %span= t(".brief")
+          .dropdown-divider
+          = link_to project_goals_path(project), class: 'dropdown-item' do
             = icon('fas', 'crosshairs', :class => "dark-grey")
             %span= t(".goals")
-        %li{ title: t('.releases') }
-          = link_to project_releases_path(project) do
+          = link_to project_releases_path(project), class: 'dropdown-item' do
             = icon('fas', 'flag-checkered', :class => "dark-grey")
             %span= t(".releases")
-        %li{ class: (project.started? ? '' : 'disabled'), title: (project.started? ? t('.sprints') : t('project_not_started')) }
-          = link_to project_sprints_path(project) do
+          = link_to project_sprints_path(project), class: 'dropdown-item' do
             = icon('fas', 'flag', :class => "dark-grey")
             %span= t(".sprints")
-        - if project.with_recruiting?
-          = menu_divider
-          %li{ title: t('.recruitment') }
-            = link_to project_recruitments_path(project) do
+          - if project.with_recruiting?
+            .dropdown-divider
+            = link_to project_recruitments_path(project), class: 'dropdown-item' do
               = icon('fas', 'user-plus', :class => "dark-grey")
               %span= t(".recruitment")
 

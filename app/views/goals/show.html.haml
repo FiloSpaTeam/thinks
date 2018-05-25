@@ -17,13 +17,13 @@
 
 - content_for :page_actions do
   - if @goal.thinker == current_thinker
-    %li.pull-left
+    %li.float-left
       = link_to edit_goal_path(@goal), :class => "line-height-25 line-height-35" do
         = icon('fas', 'edit', class: 'dark-grey fa-lg')
         %span.hidden-xs
           = t('edit')
     - if @goal.tasks.ready_to_sprint.present?
-      %li.pull-left
+      %li.float-left
         = link_to "Get tasks in sprint!", tasks_in_sprint_goal_path(@goal), :class => "", :method => :put
 = render partial: 'shared/projectbar', locals: { project: @goal.project }
 .row

@@ -17,7 +17,7 @@
 
 - content_for :page_actions do
   - if (@thinker == current_thinker)
-    %li.pull-left
+    %li.float-left
       = link_to edit_thinker_path(@thinker), title: 'Edit', class: 'line-height-25 line-height-35' do
         = icon('fas', 'edit', class: 'dark-grey fa-lg')
         %span.hidden-xs

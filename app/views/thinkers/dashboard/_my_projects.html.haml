@@ -18,7 +18,7 @@
 .panel.panel-default
   .panel-heading
     = t ".my_projects"
-    .btn-group.pull-right
+    .btn-group.float-right
       %a.hidden-xxs.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters_projects].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearchMyProjects' }
         = icon('fas', 'search', class: 'dark-grey')
         %span.hidden-xs

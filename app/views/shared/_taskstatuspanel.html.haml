@@ -21,12 +21,12 @@
       %li.list-group-item.hidden-xs
         %strong
           Count views
-        %span.pull-right
+        %span.float-right
           = task.impressions_count.to_i
       %li.list-group-item
         %strong
           Release
-        %span.pull-right
+        %span.float-right
           - if task.release.present?
             = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
           - else
@@ -34,7 +34,7 @@
       %li.list-group-item
         %strong
           Goal
-        %span.pull-right
+        %span.float-right
           - if task.goal.present?
             = link_to task.goal.title.truncate(20), goal_path(task.goal), :title => task.goal.title
           - else
@@ -42,7 +42,7 @@
       %lu.list-group-item
         %strong
           Father
-        %span.pull-right
+        %span.float-right
           - if task.father.present?
             = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
           - else
@@ -60,28 +60,28 @@
     %li.list-group-item
       %strong
         = t('tasks.status')
-      %span.pull-right
+      %span.float-right
         - unless task.recruitment
           - if task.deleted?
             = t('closed')
           - else
-            .round-sm.pull-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+            .round-sm.float-left{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
             = t("projects.tasks.#{task.status.translation_code}")
         - else
           - if task.deleted?
-            .round-sm.pull-left{ :class => "bg-danger" }
+            .round-sm.float-left{ :class => "bg-danger" }
             = t('refused')
           - elsif task.done?
-            .round-sm.pull-left{ :class => "bg-success" }
+            .round-sm.float-left{ :class => "bg-success" }
             = t('accepted')
           - else
-            .round-sm.pull-left{ :class => "bg-backlog" }
+            .round-sm.float-left{ :class => "bg-backlog" }
             = t('waiting')
     - unless task.recruitment
       - unless task.deleted? && task.done?
         - if task.ratings.where(thinker: current_thinker).present?
           %li.list-group-item
-            %span.pull-right
+            %span.float-right
               = task.ratings.where(thinker: current_thinker).first.value.to_f
             %strong=t('.your_rating')
           %li.list-group-item{style: 'border-top: none;'}
@@ -119,7 +119,7 @@
       %li.list-group-item
         %strong
           Closed at
-        %span.pull-right
+        %span.float-right
           = task.deleted_at.to_s(:short)
       %li.list-group-item
         %strong
@@ -130,20 +130,20 @@
       %li.list-group-item.hidden-xs
         %strong
           Created at
-        %span.pull-right
+        %span.float-right
           = task.created_at.to_s(:short)
         %br
-          %span.pull-right
+          %span.float-right
             %small
               %i
                 = task.thinker.name
       %li.list-group-item
         %strong
           Updated at
-        %span.pull-right
+        %span.float-right
           = task.updated_at.to_s(:short)
         %br
-          %span.pull-right
+          %span.float-right
             %small
               %i
                 = task.updater.name
@@ -154,7 +154,7 @@
       %li.list-group-item
         %strong
           = t('tasks.workload')
-        %span.pull-right
+        %span.float-right
           = workload_description(task)
     - if task.contributed?(current_thinker) && !task.deleted?
       .panel-footer
@@ -180,7 +180,7 @@
         %strong
           = t('tasks.worker')
         - if !task.worker.nil?
-          %span.pull-right{ :title => task.worker.name }
+          %span.float-right{ :title => task.worker.name }
             = task.worker.name.try(:truncate, 20)
           - if (task.worker == current_thinker || scrum_master?(task.project)) && task.status != Status.done.first
             %strong

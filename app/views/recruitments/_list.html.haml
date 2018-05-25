@@ -52,7 +52,7 @@
               - @statuses.each do |status|
                 = content_tag(:li) do
                   = link_to("filters[status_id]" => status, remote: true) do
-                    .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
+                    .round-sm.float-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.recruitments.#{status.translation_code}")
               = menu_divider
               = content_tag(:li) do
@@ -71,7 +71,7 @@
               - else
                 = icon('fas', 'trash-o', :class => 'fa-2x')
             %td{ style: 'width: 100%;' }
-              .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+              .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
                 %small.dark-grey
                   \##{task.serial}

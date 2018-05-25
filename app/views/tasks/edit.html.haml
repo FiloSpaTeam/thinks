@@ -17,7 +17,7 @@
 
 - content_for :page_actions do
   - if thinker_signed_in? && current_thinker.ban(@task.project).nil? && @task.project.participant?(current_thinker)
-    %li.pull-left.hidden-xxs
+    %li.float-left.hidden-xxs
       = link_to new_project_task_path(@task.project), title: 'New task', class: 'line-height-25 line-height-35' do
         = icon('fas', 'plus-square-o', class: 'dark-grey fa-lg')
         %span.hidden-xs

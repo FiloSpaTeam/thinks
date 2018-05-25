@@ -44,7 +44,7 @@
       - smart_listing.collection.each do |goal|
         %tr
           %td
-            %a.pull-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
+            %a.float-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
               = icon('fas', 'tasks', :class => "dark-grey")
             %strong.hidden-xs.hidden-sm
               %small.dark-grey

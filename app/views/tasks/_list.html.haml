@@ -52,7 +52,7 @@
               - @statuses.each do |status|
                 = content_tag(:li) do
                   = link_to("filters[status_id]" => status, remote: true) do
-                    .round-sm.pull-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
+                    .round-sm.float-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.tasks.#{status.translation_code}")
         - unless filter_value(:with_deleted_at)
           %td.text-center
@@ -77,7 +77,7 @@
             %td.hidden-xs.vertical-align-middle{ style: 'max-width: 38px; width: 38px;' }
               .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
             %td
-              .round-sm.pull-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+              .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
                 %small.dark-grey
                   \##{task.serial}

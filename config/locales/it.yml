@@ -15,7 +15,14 @@ it:
       dashboard: "Dashboard"
       my_projects: "I miei progetti"
       my_profile: "Preferenze"
-      logout: "Logout"
+      logout: "Esci"
+    projectbar:
+      brief: "Brief"
+      goals: "Obiettivi"
+      releases: "Pianificazioni"
+      sprints: "Sprints"
+      tasks: "Lavori"
+      recruitment: "Reclutamento"
 
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
@@ -54,6 +61,7 @@ it:
       heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"
       heading_subtitle: "Esprimi te stesso al meglio, sempre"
       start_a_new_project: "Inizia ora. Crea il tuo progetto."
+      sign_up: "Iscriviti ora"
       section_1_title: "<i>Thinks</i> guida le persone all'interno del progetto fornendo strumenti semplici ed essenziali."
       section_1_description: "Un network di persone che voglio lavorare solo su ciò che più amano."
       section_1_button: "Scopri come avviene"
@@ -65,6 +73,20 @@ it:
       feature_description_3: "Gli obiettivi convogliano energia. Per utilizzarla al meglio questa deve essere indirizzata verso una meta. Stabilite le tappe e passo dopo passo il vostro progetto sarà realtà."
       feature_4: "Libertà"
       feature_description_4: "Come è per voi importante, lo è per noi. Crediamo nel software libero e siamo i primi a dimostrarlo."
+
+  breadcrumbs:
+    project_recruitments_path: "<i class='fa fa-user-plus'></i> <span class='hidden-xs hidden-sm'>Recruitments</span>"
+    project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs hidden-sm'>Tasks</span>"
+    project_releases_path: "<i class='fa fa-flag-checkered'></i> <span class='hidden-xs hidden-sm'>Releases</span>"
+    project_goals_path: "<i class='fa fa-crosshairs'></i> <span class='hidden-xs hidden-sm'>Goals</span>"
+    project_sprints_path: "<i class='fa fa-flag'></i> <span class='hidden-xs hidden-sm'>Sprints</span>"
+    new_survey: "New survey"
+    survey: "Survey"
+
+  layouts:
+    application:
+      sign_in: "Accedi"
+      sign_up: "Iscriviti"
 
   category:
     software: "Software"

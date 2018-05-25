@@ -47,16 +47,16 @@
                 Secrets
             .list-group-item
               Code
-              %span.pull-right
+              %span.float-right
                 = @thinker.otp_secret
             .list-group-item{ style: "height: 119px;" }
               QRCode
-              .pull-right
+              .float-right
                 = raw RQRCode::render_qrcode(current_thinker.otp_provisioning_uri(current_thinker.email), :svg, :level => :l, :unit => 2)
           - else
             .list-group-item
               Codes
-              %a.btn.pull-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
+              %a.btn.float-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
                 = icon('fas', 'eye', :class => 'fa-lg dark-grey')
                 = t 'show'
 
