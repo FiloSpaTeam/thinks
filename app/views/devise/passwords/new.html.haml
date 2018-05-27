@@ -15,13 +15,12 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.row
-  .col-md-8.col-md-offset-2.col-sm-6.col-sm-offset-3.col-xs-12
-    .panel.panel-default
-      .panel-body
+%section
+  .container
+    .row
+      .col-md-5.mx-auto
         = form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
           %h1= t ".forgot_password"
-          = bootstrap_flash
           .form-group
             = f.label :email
             = f.email_field :email, autofocus: true, class: "form-control"

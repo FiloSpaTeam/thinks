@@ -20,31 +20,30 @@
     .row
       .col-md-5.mx-auto
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-          %h1.mb-4
-            = t ".log_in"
+          %h1= t ".log_in"
           .form-group
             = f.label :email, :class => "control-label required"
-            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true, placeholder: t('.email_address')
+            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true, placeholder: t('projects.placeholder_email')
             - if devise_mapping.registerable?
               %p.form-text.text-muted
-                = link_to "Need an account?", new_registration_path(resource_name)
+                = link_to t('.need_an_account'), new_registration_path(resource_name)
           .form-group
             = f.label :password, :class => "control-label required"
-            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true, placeholder: t('.password'), "data-eye-class": 'fa', 'data-eye-open-class': 'fa-eye', 'data-eye-close-class': 'fa-eye-slash'
+            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true, placeholder: t('projects.placeholder_password'), "data-eye-class": 'fa', 'data-eye-open-class': 'fa-eye', 'data-eye-close-class': 'fa-eye-slash'
             - if devise_mapping.registerable?
               %p.form-text.text-muted
-                = link_to "Forgot your password?", new_password_path(resource_name)
+                = link_to t('.forgot_your_password'), new_password_path(resource_name)
           - if devise_mapping.two_factor_authenticatable?
             .form-group
               %label.control-label
                 %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseFilters", :href => "#collapseFilters" }
                   %strong
-                    = t(:otp_code)
+                    = t('.do_you_have_an_otp_code')
               #collapseFilters.collapse
-                = f.text_field :otp_attempt, class: 'form-control', placeholder: t(".example_otp")
+                = f.text_field :otp_attempt, class: 'form-control', placeholder: t("projects.placeholder_otp")
           - if devise_mapping.rememberable?
             .checkbox
               = f.label :remember_me, :class => "control-label" do
                 = f.check_box :remember_me, tabindex: 3
-                = t ".remember_me"
+                = t "activerecord.attributes.project.remember_me"
           = f.submit t(".log_in"), class: "btn btn-success btn-block", tabindex: 4
