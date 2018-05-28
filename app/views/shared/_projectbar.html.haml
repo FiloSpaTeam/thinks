@@ -15,15 +15,15 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-%nav.navbar.navbar-light.bg-light.hidden-xxs.hidden-xs
-  = render :partial => "shared/breadcrumbs", locals: { project: @project }
-  %ul.nav.navbar-nav.navbar-right.margin-right-0.navbar-right-margin-0.float-right
+= render :partial => "shared/breadcrumbs", locals: { project: @project }
+%nav.navbar.navbar-light.navbar-expand-lg.border.hidden-xxs.hidden-xs
+  %ul.navbar-nav.ml-auto
     = yield :page_actions
-    %li.dropdown.border-left.float-left
+    %li.nav-item.dropdown.border-left.float-left
       %a.dropdown-toggle.text-dark.line-height-25.line-height-35#dropdown-btns-project{ type: :button, "data-toggle" => :dropdown, "aria-haspopup" => :true, "aria-expanded" => :false, href: "javascript:;" }
         = icon('far', 'folder-open')
         %span.caret
-      .dropdown-menu.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }
+      .dropdown-menu.dropdown-menu-right.dropdown-mobile{ "aria-labelledby" => "dropdown-btns-project" }
         - if @project.active? || scrum_master?(@project)
           = link_to brief_project_path(project), class: 'dropdown-item' do
             = icon('fas', 'map', class: "dark-grey")

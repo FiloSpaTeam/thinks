@@ -1,8 +1,11 @@
 it:
+  messages: "Messaggi di sistema"
+  char_minimum: "Caratteri minimi richiesti: %{chars}"
   remaining_chars: "Caratteri rimanenti: "
   select: "Seleziona"
   save: "Salva"
   back: "Torna indietro"
+  close: "Chiudi"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
@@ -34,10 +37,6 @@ it:
     form_text_donate_button: "<a rel='nofollow' target='_blank' href='https://liberapay.com/'><i class='fa fa-external-link-alt'>Liberapay</i></a> (o piattaforme simili) forniscono pulsanti per le donazioni con relativo codice HTML"
     info_cycle_id: "<strong>Adatta il periodo alla reale difficoltà degli sprint.</strong><br>Lo Sprint deve rappresentare un periodo minimo in cui si riesce ad ottenere un valore aggiunto in termini di lavoro."
     form_text_release_at: "Se selezioni una data passata, il progetto è dichiarato \"in sviluppo\""
-    placeholder_email: "test@test.org"
-    placeholder_password: "Esempio: kf9or%c@QT2^"
-    placeholder_otp: "123456"
-
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
       placeholder_title: "Gotham City"
@@ -77,6 +76,12 @@ it:
       feature_4: "Libertà"
       feature_description_4: "Come è per voi importante, lo è per noi. Crediamo nel software libero e siamo i primi a dimostrarlo."
 
+  thinkers:
+    placeholder_email: "test@test.org"
+    placeholder_password: "Esempio: kf9or%c@QT2^"
+    placeholder_otp: "123456"
+    placeholder_name: "Bruce Wayne"
+
   breadcrumbs:
     project_recruitments_path: "<i class='fa fa-user-plus'></i> <span class='hidden-xs hidden-sm'>Recruitments</span>"
     project_tasks_path: "<i class='fa fa-tasks'></i> <span class='hidden-xs hidden-sm'>Tasks</span>"
@@ -88,12 +93,23 @@ it:
 
   devise:
     sessions:
+      thinker:
+        signed_in: "Accesso effettuato"
+
       new:
         log_in: "Accedi"
         placeholder_email: ""
         need_an_account: "Hai bisogno di un account?"
         do_you_have_an_otp_code: "Hai un codice OTP da inserire?"
         forgot_your_password: "Hai dimenticato la password?"
+    registrations:
+      new:
+        sign_up: "Registrati"
+        already_signed_up: "Hai già un account?"
+    passwords:
+      new:
+        forgot_password: "Password dimenticata?"
+        send_reset_password: "Invia link per resettare la password"
 
   layouts:
     application:
@@ -129,4 +145,7 @@ it:
         contribution_type: "Tipologia di partecipazione"
         cycle_id: "Periodo di sviluppo"
         release_at: "Data di inizio lavori"
+      thinker:
+        name: "Nome"
         remember_me: "Mantieni attiva la sessione"
+        password_confirmation: "Conferma password"

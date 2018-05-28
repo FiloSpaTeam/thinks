@@ -23,11 +23,11 @@
           %h1= t ".forgot_password"
           .form-group
             = f.label :email
-            = f.email_field :email, autofocus: true, class: "form-control"
+            = f.email_field :email, autofocus: true, class: "form-control", placeholder: t('thinkers.placeholder_email')
             - if devise_mapping.registerable?
-              %p.form-text.text-muted
-                = link_to t(".need_account"), new_registration_path(resource_name)
-              %p.form-text.text-muted
+              %small.form-text.text-muted
+                = link_to t("devise.sessions.new.need_an_account"), new_registration_path(resource_name)
+              %small.form-text.text-muted
                 = link_to t("devise.registrations.new.already_signed_up"), new_session_path(resource_name)
           = f.submit t(".send_reset_password"), class: "btn btn-primary"
 

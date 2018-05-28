@@ -23,15 +23,15 @@
           %h1= t ".log_in"
           .form-group
             = f.label :email, :class => "control-label required"
-            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true, placeholder: t('projects.placeholder_email')
+            = f.email_field :email, autofocus: true, class: "form-control", tabindex: 1, required: true, placeholder: t('thinkers.placeholder_email')
             - if devise_mapping.registerable?
-              %p.form-text.text-muted
+              %small.form-text.text-muted
                 = link_to t('.need_an_account'), new_registration_path(resource_name)
           .form-group
             = f.label :password, :class => "control-label required"
-            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true, placeholder: t('projects.placeholder_password'), "data-eye-class": 'fa', 'data-eye-open-class': 'fa-eye', 'data-eye-close-class': 'fa-eye-slash'
+            = f.password_field :password, autocomplete: "off", class: "form-control", 'data-toggle': 'password', tabindex: 2, required: true, placeholder: t('thinkers.placeholder_password'), "data-eye-class": 'fa', 'data-eye-open-class': 'fa-eye', 'data-eye-close-class': 'fa-eye-slash'
             - if devise_mapping.registerable?
-              %p.form-text.text-muted
+              %small.form-text.text-muted
                 = link_to t('.forgot_your_password'), new_password_path(resource_name)
           - if devise_mapping.two_factor_authenticatable?
             .form-group
@@ -40,7 +40,7 @@
                   %strong
                     = t('.do_you_have_an_otp_code')
               #collapseFilters.collapse
-                = f.text_field :otp_attempt, class: 'form-control', placeholder: t("projects.placeholder_otp")
+                = f.text_field :otp_attempt, class: 'form-control', placeholder: t("thinkers.placeholder_otp")
           - if devise_mapping.rememberable?
             .checkbox
               = f.label :remember_me, :class => "control-label" do
