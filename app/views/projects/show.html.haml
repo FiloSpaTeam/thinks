@@ -40,9 +40,10 @@
               %span=subproject.title
 .container-fluid
   .row
-    .col-md-2.col-lg-2.border-right
-    .col-md-10.col-lg-10
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
       = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
       %ul.nav.nav-tabs
         %li.nav-item{ role: "presentation" }
           %a.nav-link.active{ role: "tab", "aria-controls": "description", "data-toggle": "tab", href: "#tab-description" }
