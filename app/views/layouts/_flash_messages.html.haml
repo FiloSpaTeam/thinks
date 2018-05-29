@@ -8,5 +8,6 @@
         %a.text-danger{href: "#", "data-dismiss": "alert"}
           = icon('fas', 'remove', class: 'fa-lg')
       .col-11.text-left.text-truncate.pl-1
-        %a.text-secondary{"data-toggle": "modal", href: "#modal-flash", class: "#{flash_class(type)}"}
-          = message.html_safe
+        %small
+          %a.text-secondary{"data-toggle": "modal", href: "#modal-flash", class: "#{flash_class(type)}"}
+            = message.html_safe

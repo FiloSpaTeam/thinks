@@ -16,18 +16,22 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - content_for :page_actions do
-  %li.float-left.hidden-xxs
-    %a.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
-      = icon('fas', 'search', class: 'dark-grey')
-      %span.hidden-xs
-        Search
+  %a.list-group-item.list-group-item-action.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
+    = icon('fas', 'search', class: 'dark-grey')
+    %span.hidden-xs
+      Search
+  -# TODO: remove from here
   - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
-    %li.float-left.hidden-xxs
-      = link_to new_project_goal_path, :class => "line-height-25 line-height-35" do
-        = icon('fas', 'plus-square-o', class: 'fa-lg dark-grey')
-        %span.hidden-xs
-          = t('new')
+    = link_to new_project_goal_path, :class => "list-group-item list-group-item-action line-height-25 line-height-35" do
+      = icon('far', 'plus-square')
+      %span.hidden-xs
+        = t('new')
 
-= render partial: 'shared/projectbar', locals: { project: @project }
-#div-container-list
-  = smart_listing_render :goals
+.container-fluid
+  .row
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+      = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
+      #div-container-list
+        = smart_listing_render :goals

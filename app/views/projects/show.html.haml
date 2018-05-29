@@ -19,7 +19,7 @@
 
 - content_for :page_actions do
   - if @project.donate_button.present?
-    %li.nav-item.float-left.visible-xs
+    %li.d-block.d-md-none.list-group-item
       %div{ style: 'margin-top: 15px;' }
         = @project.donate_button.html_safe
   - if @project.subprojects.exists?
@@ -34,10 +34,11 @@
           %li
             = link_to project_path(subproject) do
               - if subproject.logo
-                = cl_image_tag(subproject.logo.path, { size: '20x20' }) 
+                = cl_image_tag(subproject.logo.path, { size: '20x20' })
               - else
                 = icon('fas', 'folder')
               %span=subproject.title
+
 .container-fluid
   .row
     .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
