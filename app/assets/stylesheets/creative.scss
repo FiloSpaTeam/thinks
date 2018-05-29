@@ -323,6 +323,17 @@ header.masthead {
     color: #F05F40;
     background-color: white; }
 
+.btn-outline-primary {
+    color: $main-color;
+    border-color: $main-color; }
+    .btn-outline-primary.focus, .btn-outline-primary:focus {
+        color: white;
+        border-color: $main-color;
+        background-color: $main-color; }
+    .btn-outline-primary:hover {
+        color: white;
+        border-color: $main-color;
+        background-color: $main-color; }
 
 .btn-xl {
   padding: 15px 30px; }

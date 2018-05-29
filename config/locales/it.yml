@@ -6,6 +6,12 @@ it:
   save: "Salva"
   back: "Torna indietro"
   close: "Chiudi"
+  update: "Aggiorna"
+  edit: "Modifica"
+  destroy: "Elimina"
+
+  filters:
+    reset: "Resetta filtri"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
@@ -39,6 +45,15 @@ it:
     form_text_donate_button: "<a rel='nofollow' target='_blank' href='https://liberapay.com/'><i class='fa fa-external-link-alt'>Liberapay</i></a> (o piattaforme simili) forniscono pulsanti per le donazioni con relativo codice HTML"
     info_cycle_id: "<strong>Adatta il periodo alla reale difficoltà degli sprint.</strong><br>Lo Sprint deve rappresentare un periodo minimo in cui si riesce ad ottenere un valore aggiunto in termini di lavoro."
     form_text_release_at: "Se selezioni una data passata, il progetto è dichiarato \"in sviluppo\""
+
+    skill_requirements: "Abilità richieste"
+    no_skill_requirements: "Nessuna abilità specifica richiesta"
+    conditions_of_participations: "Condizioni di partecipazione"
+    your_contribution: "La tua partecipazione"
+    contribution_text: "Regolamento per la partecipazione"
+    no_contribution_text: "Nessun testo specificato per le condizioni di partecipazione"
+    participation_preferences: "Impostazioni di partecipazione"
+
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
       placeholder_title: "Gotham City"
@@ -124,6 +139,10 @@ it:
     robotic: "Robotica"
     domotic: "Domotica"
     artworks: "Arte grafica"
+
+  team_roles:
+    product_owner: "Product Owner"
+    scrum_master: "Scrum Master"
 
   cycle:
     id_1: "1 settimana"

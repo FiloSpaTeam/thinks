@@ -18,6 +18,15 @@
 - model_class = Project
 
 - content_for :page_actions do
+  - if creator?(@project.thinker.id)
+    = link_to edit_project_path(@project), :class => 'list-group-item list-group-item-action' do
+      = icon('fas', 'edit')
+      %span= t('edit')
+  - if current_thinker.present?
+    %a.list-group-item.list-group-item-action{ type: "button", href: '#modal-contribution', "data-toggle": "modal" }
+      = icon('fas', 'hands-helping')
+      %span= t "projects.participation_preferences"
+    = render partial: 'modal_contribution_preferences'
   - if @project.donate_button.present?
     %li.d-block.d-md-none.list-group-item
       %div{ style: 'margin-top: 15px;' }
@@ -45,64 +54,47 @@
       = render :partial => 'shared/projectbar', locals: { project: @project }
     .col-md-10.col-lg-10.pt-3.pb-3
       = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      %ul.nav.nav-tabs
-        %li.nav-item{ role: "presentation" }
-          %a.nav-link.active{ role: "tab", "aria-controls": "description", "data-toggle": "tab", href: "#tab-description" }
-            = t ".description"
-        %li.nav-item{ role: "presentation" }
-          %a.nav-link{ role: "tab", "aria-controls": "details", "data-toggle": "tab", href: "#tab-details" }
-            = t ".details"
-      .panel.panel-default{ style: "border-top: 0; border-radius: 0 0 4px 4px;" }
-        .tab-content.panel-body
-          #tab-description.tab-pane.fade.in.active{ role: "tabpanel" }
-            %h3.text-center
-              = @project.title
-            %h4.text-center
-              %i
-                = @project.motto
-            .text-justify
-              = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
-              = markdown(@project.description)
-          #tab-details.tab-pane.fade{ role: "tabpanel" }
-            %h4.font-bold
-              = t ".projects.list.progress"
-            .progress
-              %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@project.progress_percentage}", :class => "progress-bar #{progress_bar_color(@project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{@project.progress_percentage}%;"}
-                = @project.progress_percentage
-                \%
-            = t('projects.goal_completed')
-            .row.margin-top-15
-              .col-md-4
-                %label.control-label
-                  = t ".team"
-                .scrollbar{ style: 'max-height: 450px;' }
-                  %table.table.table-condensed
-                    %tbody
+      .row
+        .col-md-10
+          %h3
+            = @project.title
+            \-
+            %small.font-italic
+              = @project.motto
+          .text-justify
+            = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
+            = markdown(@project.description)
+        .col-md-2.d-none
+          %h4.font-bold
+            = t ".projects.list.progress"
+          .progress
+            %div{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@project.progress_percentage}", :class => "progress-bar #{progress_bar_color(@project.progress_percentage)}", :role => "progressbar", :style => "min-width: 2em; width: #{@project.progress_percentage}%;"}
+              = @project.progress_percentage
+              \%
+          = t('projects.goal_completed')
+          .row.margin-top-15
+            .col-md-4
+              %label.control-label
+                = t ".team"
+              .scrollbar{ style: 'max-height: 450px;' }
+                %table.table.table-condensed
+                  %tbody
+                    %tr
+                      %td
+                        = @project.thinker.name
+                        (
+                        %strong.font-italic
+                          = t "founder"
+                        )
+                    - @project.team.each do |contribution|
                       %tr
                         %td
-                          = @project.thinker.name
-                          (
-                          %strong.font-italic
-                            = t "founder"
-                          )
-                      - @project.team.each do |contribution|
-                        %tr
-                          %td
-                            = contribution.thinker.name
-              .col-md-4
-                %label.control-label
-                  = t ".current_goal"
-                .scrollbar{ style: 'max-height: 450px;' }
-              .col-md-4
-                %label.control-label
-                  = t ".workload_in_time"
-                .scrollbar{ style: 'max-height: 450px;' }
-        - if current_thinker.present?
-          .panel-footer
-            - if current_thinker.present?
-              %button.btn.btn-default{ type: "button", "data-target": '#modal-contribution', "data-toggle": "modal" }
-                = t ".participation_preferences"
-              = render partial: 'modal_contribution_preferences'
-            - if creator?(@project.thinker.id)
-              = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(@project), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger pull-right'
-              = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(@project), :class => 'btn btn-primary pull-right margin-right-5'
+                          = contribution.thinker.name
+            .col-md-4
+              %label.control-label
+                = t ".current_goal"
+              .scrollbar{ style: 'max-height: 450px;' }
+            .col-md-4
+              %label.control-label
+                = t ".workload_in_time"
+              .scrollbar{ style: 'max-height: 450px;' }
