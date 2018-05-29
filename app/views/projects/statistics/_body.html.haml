@@ -94,7 +94,7 @@
       - tasks_in_progress = @statistic.tasks.in_progress
       - tasks_in_progress_last_sprint = tasks_in_progress.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
       .col-xs-4
-        %h4.dark-grey
+        %h4.text-dark
           %strong
             Average
         .row
@@ -113,13 +113,13 @@
             = "#{average_workload} (#{((thinker_tasks_done.sum(:workload) * 100 / average_workload) - 100).round(1)}%)"
 
       .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
-        %h4.dark-grey
+        %h4.text-dark
           %strong
             Last sprint
         = render partial: 'numeric_summary', locals: { sprint: last_sprint, tasks_done: tasks_done_last_sprint, tasks_in_progress: tasks_in_progress_last_sprint, average_tasks_done: average_tasks_done }
 
       .col-xs-4{ style: 'border-left: 1px solid #EEE;' }
-        %h4.dark-grey
+        %h4.text-dark
           %strong
             Previous sprint
         - if previous_previous_sprint.present?
@@ -174,16 +174,16 @@
             .text-center.float-right
               .col-xs-12.workload-table
                 = workload_description(task)
-            %small.dark-grey
+            %small.text-dark
               = task.end_at.to_s(:short)
               ·
               = link_to task.title, task_path(task)
-            .dark-grey
+            .text-dark
               %small
                 %em
                   = plain_text(task.description.squish)
                   -# = markdown(task.description)
-            .dark-grey
+            .text-dark
               %small
                 %strong
                   \##{task.serial}

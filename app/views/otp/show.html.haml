@@ -40,7 +40,7 @@
             .list-group-item
               Codes
               = link_to(otp_path(@thinker), :title => t('hide') , :role => "button", class: "btn pull-right") do
-                = icon('fas', 'eye-slash', :class => 'fa-lg dark-grey')
+                = icon('fas', 'eye-slash', :class => 'fa-lg')
                 = t 'hide'
             .list-group-item
               %strong
@@ -57,7 +57,7 @@
             .list-group-item
               Codes
               %a.btn.float-right{ type: 'button', 'data-toggle' => 'modal', href: '#div-password-confirmation' }
-                = icon('fas', 'eye', :class => 'fa-lg dark-grey')
+                = icon('fas', 'eye', :class => 'fa-lg')
                 = t 'show'
 
 #div-password-confirmation.modal.fade{ tabindex: -1, role: 'dialog' }

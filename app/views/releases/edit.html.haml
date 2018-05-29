@@ -19,7 +19,7 @@
   - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
     %li.float-left
       = link_to new_project_release_path(@project), :class => "line-height-25 line-height-35" do
-        = icon('fas', 'plus-square-o', class: 'fa-lg dark-grey')
+        = icon('fas', 'plus-square-o', class: 'fa-lg')
         %span.hidden-xs
           = t('new')
 

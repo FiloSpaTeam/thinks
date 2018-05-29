@@ -35,9 +35,9 @@
             - answers_thinker = AnswerThinker.where(sprint: sprint).where(thinker: current_thinker)
             - if answers_thinker.empty?
               %a.float-right.btn{ :href => new_sprint_survey_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get, style: 'margin-top: -7px;' }
-                = icon('fas', 'circle-o', :class => "dark-grey fa-lg")
+                = icon('fas', 'circle-o', :class => "fa-lg")
           %a.float-right.btn{ :href => sprint_survey_index_path(sprint), :title => t('survey') , :role => "button", "data-method" => :get, style: 'margin-top: -7px;' }
-            = icon('fas', 'file-text-o', :class => "dark-grey fa-lg", title: t(:results))
+            = icon('fas', 'file-text-o', :class => "fa-lg", title: t(:results))
       %li.list-group-item.text-center
         %i
           = t('.start_of_your_sprints')

@@ -19,14 +19,14 @@
   = smart_listing_controls_for :tasks do
     .input-group.form-group
       %span.input-group-btn
-        = link_to url_for, class: 'btn btn-default', title: t("reset_filters"), remote: true do
-          = icon('fas', 'undo', class: 'dark-grey')
+        = link_to url_for, class: 'btn btn-default', title: t("filters.reset"), remote: true do
+          = icon('fas', 'undo')
       = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
       %span.input-group-btn
 
         - if @active_filters.present?
           %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-            = icon('fas', 'filter', class: 'dark-grey')
+            = icon('fas', 'filter')
         %button.btn.btn-primary{ type: 'submit' }
           = icon('fas', 'search', class: 'fa-inverse')
     = render partial: 'shared/filters', :locals => { :filters => @active_filters }
@@ -79,7 +79,7 @@
             %td
               .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
               %strong.hidden-xs.hidden-sm
-                %small.dark-grey
+                %small.text-dark
                   \##{task.serial}
                   ·
                   = std_deviation_button(task)
@@ -97,19 +97,19 @@
                 = std_deviation_button(task)
                 ·
                 = link_to task.title, task_path(task)
-              .dark-grey.break-word
+              .text-dark.break-word
                 %small
                   %em
                     = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
               - if task.deleted?
-                .dark-grey.hidden-xs
+                .text-dark.hidden-xs
                   %small
                     closed at
                     %strong
                       = task.deleted_at.to_s(:long)
               - else
                 - if task.created_at == task.updated_at
-                  .dark-grey.hidden-xxs
+                  .text-dark.hidden-xxs
                     %small
                       created at
                       %strong
@@ -118,7 +118,7 @@
                       %i
                         #{task.updater.name}
                 - else
-                  .dark-grey.hidden-xxs
+                  .text-dark.hidden-xxs
                     %small
                       updated at
                       %strong
@@ -135,7 +135,7 @@
             - else
               %td.vertical-align-middle.col-lg-2
                 = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
-                  = icon('fas', 'history', class: 'dark-grey fa-lg')
+                  = icon('fas', 'history', class: 'fa-lg')
                   %span.hidden-xs
                     Reopen
       - else

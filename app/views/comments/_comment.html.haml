@@ -7,7 +7,7 @@
         .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
           %i.fa.fa-question.fa-2x.margin-top-5
     %td{ colspan: 2 }
-      .dark-grey
+      .text-dark
         %strong
           = comment.reason.thinker.name
         %small
@@ -31,7 +31,7 @@
           - if !task.in_progress? && !task.done? && comment.reason.nil?
             = delete_button(comment)
   %td
-    .dark-grey
+    .text-dark
       %strong
         = comment.thinker.name
       %small

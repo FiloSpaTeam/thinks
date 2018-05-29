@@ -32,7 +32,7 @@
         = t('remaining_days', days: number_of_days)
       - else
         %a{ :role => "button", "data-toggle" => "collapse", "aria-expanded" => "false", "aria-controls" => "collapseElectionPoll#{ election_poll.first.id }", :href => "#collapseElectionPoll#{ election_poll.first.id }" }
-          = icon('fas', 'edit', :class => "dark-grey")
+          = icon('fas', 'edit')
           - number_of_days = 21 - (DateTime.now - election_poll.first.created_at.to_datetime).to_i
           = t('remaining_days', days: number_of_days)
     - elsif member.thinker == current_thinker

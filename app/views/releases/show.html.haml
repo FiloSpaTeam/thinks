@@ -19,13 +19,13 @@
   - if scrum_master?(@release.project)
     %li.float-left
       = link_to edit_release_path(@release), :class => "line-height-25 line-height-35" do
-        = icon('fas', 'edit', class: 'fa-lg dark-grey')
+        = icon('fas', 'edit', class: 'fa-lg')
         %span.hidden-xs
           = t('edit')
 
     %li.float-left
       = link_to release_path(@release), :method => 'delete', :class => "line-height-25 line-height-35", :role => 'button' do
-        = icon('fas', 'trash-o', class: 'fa-lg dark-grey')
+        = icon('fas', 'trash-o', class: 'fa-lg')
         %span.hidden-xs
           = t('delete')
 

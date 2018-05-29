@@ -1,0 +1,4 @@
+%a.list-group-item.list-group-item-action.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
+  = icon('fas', 'search', class: 'text-dark')
+  %span.hidden-xs
+    = t('search')

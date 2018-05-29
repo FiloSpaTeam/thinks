@@ -20,23 +20,23 @@
     - if @task.deleted?
       %li.float-left.hidden-xxs
         = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
-          = icon('fas', 'history', class: 'dark-grey fa-lg')
+          = icon('fas', 'history', class: 'fa-lg')
           %span.hidden-xs
             Reopen
       %li.float-left.hidden-xxs
         = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35', data: { confirm: 'Are you sure?' } do
-          = icon('fas', 'trash-o', class: 'dark-grey fa-lg')
+          = icon('fas', 'trash-o', class: 'fa-lg')
           %span.hidden-xs
             Delete
     - elsif !@task.done?
       %li.float-left.hidden-xxs
         = link_to edit_task_path(@task), title: 'Edit', class: 'line-height-25 line-height-35' do
-          = icon('fas', 'edit', class: 'dark-grey fa-lg')
+          = icon('fas', 'edit', class: 'fa-lg')
           %span.hidden-xs
             Edit
       %li.float-left.hidden-xxs
         = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
-          = icon('fas', 'times-circle-o', class: 'dark-grey fa-lg')
+          = icon('fas', 'times-circle-o', class: 'fa-lg')
           %span.hidden-xs
             Close
 

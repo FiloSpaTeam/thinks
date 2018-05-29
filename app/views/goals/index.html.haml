@@ -16,16 +16,10 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - content_for :page_actions do
-  %a.list-group-item.list-group-item-action.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
-    = icon('fas', 'search', class: 'dark-grey')
-    %span.hidden-xs
-      Search
+  = render partial: 'projects/actions/search'
   -# TODO: remove from here
   - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
-    = link_to new_project_goal_path, :class => "list-group-item list-group-item-action line-height-25 line-height-35" do
-      = icon('far', 'plus-square')
-      %span.hidden-xs
-        = t('new')
+    = render partial: 'projects/actions/new', locals: { local_path: new_project_goal_path }
 
 .container-fluid
   .row

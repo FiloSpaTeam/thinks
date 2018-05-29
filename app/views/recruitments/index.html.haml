@@ -18,18 +18,18 @@
 - content_for :page_actions do
   %li.float-left
     %a.line-height-25.line-height-35{ role: "button", "data-toggle": "modal", "data-target": '#modal-recruitment-manifest' }
-      = icon('fas', 'file-text-o', class: 'dark-grey')
+      = icon('fas', 'file-text-o')
       %span.hidden-xs
         Manifest
   %li.float-left.hidden-xxs
     %a.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
-      = icon('fas', 'search', class: 'dark-grey')
+      = icon('fas', 'search')
       %span.hidden-xs
         Search
   - if thinker_signed_in? && current_thinker.ban(@project).nil? && @project.recruit?(current_thinker)
     %li.float-left.hidden-xxs
       = link_to new_project_recruitment_path, title: 'New task', class: 'line-height-25 line-height-35' do
-        = icon('fas', 'plus-square-o', class: 'dark-grey fa-lg')
+        = icon('fas', 'plus-square-o', class: 'fa-lg')
         %span.hidden-xs
           New
 

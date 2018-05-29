@@ -41,7 +41,7 @@
               %tr
                 %td
                   %strong.hidden-xs.hidden-sm
-                    %small.dark-grey
+                    %small.text-dark
                       = std_deviation_button(task)
                       ·
                       = project_button(task)
@@ -59,19 +59,19 @@
                     = std_deviation_button(task)
                     ·
                     = link_to task.title, task_path(task)
-                  .dark-grey.break-word
+                  .text-dark.break-word
                     %small
                       %em
                         = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
                   - if task.deleted?
-                    .dark-grey.hidden-xs
+                    .text-dark.hidden-xs
                       %small
                         closed at
                         %strong
                           = task.deleted_at.to_s(:long)
                   - else
                     - if task.created_at == task.updated_at
-                      .dark-grey.hidden-xxs
+                      .text-dark.hidden-xxs
                         %small
                           created at
                           %strong
@@ -80,7 +80,7 @@
                           %i
                             #{task.updater.name}
                     - else
-                      .dark-grey.hidden-xxs
+                      .text-dark.hidden-xxs
                         %small
                           updated at
                           %strong
@@ -120,7 +120,7 @@
                   %tr
                     %td
                       %strong.hidden-xs.hidden-sm
-                        %small.dark-grey
+                        %small.text-dark
                           = std_deviation_button(task)
                           ·
                           = project_button(task)
@@ -138,19 +138,19 @@
                         = std_deviation_button(task)
                         ·
                         = link_to task.title, task_path(task)
-                      .dark-grey.break-word
+                      .text-dark.break-word
                         %small
                           %em
                             = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
                       - if task.deleted?
-                        .dark-grey.hidden-xs
+                        .text-dark.hidden-xs
                           %small
                             closed at
                             %strong
                               = task.deleted_at.to_s(:long)
                       - else
                         - if task.created_at == task.updated_at
-                          .dark-grey.hidden-xxs
+                          .text-dark.hidden-xxs
                             %small
                               created at
                               %strong
@@ -159,7 +159,7 @@
                               %i
                                 #{task.updater.name}
                         - else
-                          .dark-grey.hidden-xxs
+                          .text-dark.hidden-xxs
                             %small
                               updated at
                               %strong
@@ -186,7 +186,7 @@
                   %tr
                     %td
                       %strong.hidden-xs.hidden-sm
-                        %small.dark-grey
+                        %small.text-dark
                           = std_deviation_button(task)
                           ·
                           = project_button(task)
@@ -204,18 +204,18 @@
                         = std_deviation_button(task)
                         ·
                         = link_to task.title, task_path(task)
-                      .dark-grey.break-word
+                      .text-dark.break-word
                         %small
                           %em
                             = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
                       - if task.deleted?
-                        .dark-grey.hidden-xs
+                        .text-dark.hidden-xs
                           %small
                             closed at
                             %strong
                               = task.deleted_at.to_s(:long)
                       - else
-                        .dark-grey.hidden-xxs
+                        .text-dark.hidden-xxs
                           %small
                             created at
                             %strong

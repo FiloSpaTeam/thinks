@@ -25,11 +25,9 @@
       = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
       .input-group-append
         .input-group-text.p-0
-
           - if @active_filters.present?
             %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-              = icon('fas', 'filter', class: 'dark-grey')
-      .input-group-append
+              = icon('fas', 'filter')
         %button.btn.btn-outline-primary{ type: 'submit' }
           = icon('fas', 'search')
     = render partial: 'shared/filters', :locals => { :filters => @active_filters }
@@ -48,24 +46,21 @@
         %tr
           %td
             %a.float-right.btn.hidden-xs{ :class => goal.tasks.empty? ? "disabled" : "", :href => goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), :title => tasks_title(goal) , :role => "button" }
-              = icon('fas', 'tasks', :class => "dark-grey")
-            %strong.hidden-xs.hidden-sm
-              %small.dark-grey
-                = goal.updated_at.to_s(:short)
+              = icon('fas', 'tasks')
+              %small.text-dark
                 ·
               = link_to goal.title.truncate(40), goal_path(goal), :title => goal.title
             %strong.visible-xs
               = link_to goal.title.truncate(50), goal_path(goal), :title => goal.title
             %strong.visible-sm
               = link_to goal.title, goal_path(goal)
-            .dark-grey.break-word
-              %small
-                %em
-                  = highlights_searched_text(plain_text(goal.description).truncate(150), @search)
-                .progress
-                  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
-                    = goal.progress
-                    \%
+            .text-dark.break-word
+              %em
+                = highlights_searched_text(plain_text(goal.description).truncate(150), @search)
+              .progress
+                .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
+                  = goal.progress
+                  \%
     - else
       %tr.warning
         %td.text-center

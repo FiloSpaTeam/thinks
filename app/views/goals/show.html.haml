@@ -19,7 +19,7 @@
   - if @goal.thinker == current_thinker
     %li.float-left
       = link_to edit_goal_path(@goal), :class => "line-height-25 line-height-35" do
-        = icon('fas', 'edit', class: 'dark-grey fa-lg')
+        = icon('fas', 'edit', class: 'fa-lg')
         %span.hidden-xs
           = t('edit')
     - if @goal.tasks.ready_to_sprint.present?
