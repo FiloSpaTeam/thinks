@@ -15,29 +15,33 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= render :partial => 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectsettingsbar'
-  .col-md-8
-    %h2
-      = t 'shared.projectsettingsbar.sprint_and_release_date'
-    = t('shared.projectsettingsbar.sprint_and_release_date_introduction').html_safe
+- content_for :page_actions do
+  = render partial: 'shared/projectsettingsbar'
 
-    = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
-      .form-group.required
-        = f.label :approach_type, :class => "control-label"
-        = f.select :approach_type, options_for_select(Project.approach_types.keys.map{ |key| [t("projects.approach_type.#{key}"), key] }, @project.approach_type), {}, :class => "form-control", 'data-reference-value' => :agile
-      .form-group.required
-        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
-          = icon('fas', 'info-circle')
-        = f.label :cycle_id, :class => "control-label"
-        = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
-      .form-group
-        = f.label :release_at, :class => 'control-label'
-        = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
-        %small#help-release_at.form-text.text-muted= t ".release_at_help"
-      %hr
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        projects_path, :class => 'btn btn-default'                   |
+.container-fluid
+  .row
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+      = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
+      %h2
+        = t 'shared.projectsettingsbar.developments_approach'
+      = t('projects.form.minimum_settings_for_work_description').html_safe
+
+      = form_for @project, url: project_settings_release_index_path, method: :post, :html => { :class => '' } do |f|
+        .form-group.required
+          = f.label :approach_type, :class => "control-label"
+          = f.select :approach_type, options_for_select(Project.approach_types.keys.map{ |key| [t("projects.approach_type.#{key}"), key] }, @project.approach_type), {}, :class => "form-control", 'data-reference-value' => :agile
+        .form-group.required
+          = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.sprint_and_release_date_help_1'), 'data-html' => 'true' do
+            = icon('fas', 'info-circle')
+          = f.label :cycle_id, :class => "control-label"
+          = f.select :cycle_id, options_from_collection_for_select(Cycle.all, 'id', 'description', @project.cycle_id), {}, :class => "form-control"
+        .form-group
+          = f.label :release_at, :class => 'control-label'
+          = f.text_field :release_at, :class => 'form-control', "data-provide" => 'datepicker', :placeholder => "yyyy-mm-dd", "data-date-format" => "yyyy-mm-dd", "aria-describedby" => "help-release_at"
+          %small#help-release_at.form-text.text-muted= t "projects.form_text_release_at"
+        %hr
+        = f.submit nil, :class => 'btn btn-primary'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+          projects_path, :class => 'btn btn-default'                   |

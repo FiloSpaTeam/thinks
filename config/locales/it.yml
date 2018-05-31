@@ -11,6 +11,7 @@ it:
   destroy: "Elimina"
   search: "Cerca"
   new: "Aggiungi"
+  cancel: "Annulla"
 
   filters:
     reset: "Resetta filtri"
@@ -36,6 +37,18 @@ it:
       sprints: "Sprints"
       tasks: "Lavori"
       recruitment: "Reclutamento"
+    projectsettingsbar:
+      settings: "Impostazioni"
+      description: "Titolo e descrizione"
+      developments_approach: "Impostazioni per il contributo"
+      links: "Link esterni"
+      images_settings: "Copertina e logo"
+      team: "Impostazioni del team"
+      skill_requirements: "Abilità richieste"
+      contribution_settings: "Condizioni per la partecipazione"
+      actions: "Ulteriori azioni"
+      transfer_project: "Trasferisci il progetto"
+      link_to_master_project: "Aggancia ad un progetto"
 
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
@@ -55,6 +68,10 @@ it:
     contribution_text: "Regolamento per la partecipazione"
     no_contribution_text: "Nessun testo specificato per le condizioni di partecipazione"
     participation_preferences: "Impostazioni di partecipazione"
+
+    approach_type:
+      agile: "Metodo agile"
+      waterfall: "Metodo a \"cascata\""
 
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
@@ -111,6 +128,9 @@ it:
     survey: "Survey"
 
   devise:
+    failure:
+      thinker:
+        unauthenticated: "Accedi prima di continuare"
     sessions:
       thinker:
         signed_in: "Accesso effettuato"
@@ -169,6 +189,7 @@ it:
         contribution_type: "Tipologia di partecipazione"
         cycle_id: "Periodo di sviluppo"
         release_at: "Data di inizio lavori"
+        approach_type: "Tipologia di approcio"
       thinker:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"
