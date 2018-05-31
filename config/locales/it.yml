@@ -10,7 +10,8 @@ it:
   edit: "Modifica"
   destroy: "Elimina"
   search: "Cerca"
-  new: "Aggiungi"
+  new: "Nuovo"
+  add: "Aggiungi"
   cancel: "Annulla"
 
   filters:
@@ -171,6 +172,34 @@ it:
     id_1: "1 settimana"
     id_2: "2 settimane"
     id_3: "4 settimane"
+
+  skill:
+    analytical_thinking: "Pensiero analitico"
+    attention_to_details: "Attenzione ai dettagli"
+    business_vision: "Orientato al business"
+    computer_scientist: "Conoscenze software particolari"
+    critical_thinking: "Pensiero critico"
+    curiosity: "Curiosità"
+    designer: "Designer"
+    discipline: "Disciplinato"
+    dont_invent_new_wheel: "Riutilizzare piuttosto che reinventare"
+    experience: "Esperienza nel campo"
+    fearless_refactor: "Refactoring senza timori"
+    guide_for_others: "Guida per gli altri"
+    license_expert: "Esperto di licenze"
+    maintainability: "Dedicato alla mantenibilità"
+    mathematician: "Matematico"
+    mobile_expert: "Esperto mobile"
+    multiple_languages: "Conoscenza di lingue multipli"
+    passion: "Passione"
+    patience: "Pazienza"
+    problem_solver: "Adatto alla risoluzione dei problemi"
+    quality_code: "Dedicato alla qualità del codice"
+    query_expert: "Esperto di linguaggi di interrogazione database"
+    quickly_learning: "Apprendimento veloce"
+    teamwork: "Lavoro in team"
+    user_experience_expert: "Esperto di User Experience"
+    vision: "Capace di prevedere a lungo termine"
 
   activerecord:
     attributes:

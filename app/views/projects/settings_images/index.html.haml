@@ -15,27 +15,29 @@
 
 -# Copyright (c) 2017, Claudio Maradonna
 
-= render :partial => 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectsettingsbar'
-  .col-md-8
-    %h2
-      = t 'shared.projectsettingsbar.logo_and_main_image'
-    = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
-      .form-group
-        = f.label :logo, :class => 'control-label'
-        -# = f.attachinary_file_field :logo
-        %small#help-main-image.form-text.text-muted
-          = t "shared.projectsettingsbar.square_image"
-      .form-group
-        = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'top', 'data-content' => t('shared.projectsettingsbar.logo_and_main_image_help_1'), 'data-html' => 'true' do
-          = icon('fas', 'info-circle')
-        = f.label :main_image, :class => 'control-label'
-        -# = f.attachinary_file_field :main_image
-        %small#help-main-image.form-text.text-muted
-          = t "shared.projectsettingsbar.landscape_image"
-      %hr
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        projects_path, :class => 'btn btn-default'                   |
+- content_for :page_actions do
+  = render partial: 'shared/projectsettingsbar'
+
+.container-fluid
+  .row
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+      = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
+      %h2
+        = t 'shared.projectsettingsbar.images_settings'
+      = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
+        .form-group
+          = f.label :logo, :class => 'control-label'
+          -# = f.attachinary_file_field :logo
+          %small#help-logo.form-text.text-muted
+            = t "projects.form_text_logo"
+        .form-group
+          = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('projects.info_main_image', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
+            = icon('fas', 'info-circle')
+          = f.label :main_image, :class => 'control-label'
+          -# = f.attachinary_file_field :main_image
+          %small#help-main-image.form-text.text-muted
+            = t "projects.form_text_main_image"
+        = f.submit t('update'), :class => 'btn btn-primary'
+        = link_to t('cancel'), projects_path, :class => 'btn btn-default'
