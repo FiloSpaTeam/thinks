@@ -15,18 +15,21 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= render :partial => 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectsettingsbar'
-  .col-md-8
-    = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
-      .form-group.has-feedback
-        = label_tag :owner, nil, :class => 'control-label'
-        = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
-        %small#help-owner-email.form-text.text-muted
-          = t ".change_owner_email"
-      %hr
-      = f.submit 'Transfer', :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        projects_path, :class => 'btn btn-default'                   |
+- content_for :page_actions do
+  = render partial: 'shared/projectsettingsbar'
+
+.container-fluid
+  .row
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+      = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
+      = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
+        .form-group.has-feedback
+          = label_tag t('activerecord.attributes.project.owner'), nil, :class => 'control-label'
+          = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
+          %small#help-owner-email.form-text.text-muted
+            = t ".change_owner_email"
+        %hr
+        = f.submit t('.transfer'), :class => 'btn btn-primary'
+        = link_to t('cancel'), projects_path, :class => 'btn btn-default'

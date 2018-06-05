@@ -91,9 +91,21 @@ it:
         I periodi di lavoro sono scanditi attraverso un ciclo chiamato \"Sprint\" personalizzabile da 1, 2 e 4 settimane. Vi permetterà di capire la velocità dei singoli e dell'intero gruppo di lavoro rispetto al carico totale del progetto.
       </p>
       "
+      placeholder_serial: "Codice seriale"
+      form_text_serial: "Devi ottenere il seriale contattando il proprietario del progetto a cui vuoi agganciarti"
 
     new:
       main_title: "Nuovo progetto"
+
+    settings_other:
+      index:
+        transfer: "Trasferisci"
+        change_owner_email: "Specifica la mail del nuovo proprietario"
+
+    settings_father:
+      index:
+        you_have_no_master_project_related: "Non fai parte di nessun progetto \"principale\"."
+        link_to: "Aggancia"
 
   start:
     index:
@@ -221,6 +233,7 @@ it:
         approach_type: "Tipologia di approcio"
         recruitment_text: "Regolamento per il reclutamento"
         contribution_text: "Regolamento per la partecipazione"
+        owner: "Proprietario"
       thinker:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"
