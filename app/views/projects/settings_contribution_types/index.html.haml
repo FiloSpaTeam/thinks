@@ -15,30 +15,34 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= render :partial => 'shared/projectbar', locals: { project: @project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectsettingsbar'
-  .col-md-8
-    %h2
-      = t 'shared.projectsettingsbar.contribution_settings'
-    = form_for @project, url: project_settings_contribution_types_path, method: :post, :html => { :class => '' } do |f|
-      .form-group.required
-        = f.label :contribution_type, :class => 'control-label'
-        = f.select :contribution_type, options_for_select(Project.contribution_types.keys.map{ |key| [t("projects.contribution_type.#{key}"), key] }, @project.contribution_type), {}, :class => 'form-control', 'data-reference-value' => :with_recruiting
-      .form-group.required
-        = f.label :recruitment_text, :class => "control-label" do
-          = render partial: 'shared/markdown_syntax'
-          = t "activerecord.attributes.project.recruitment_text"
-        = f.text_area :recruitment_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
-      .form-group
-        = f.label :contribution_text, :class => "control-label" do
-          = render partial: 'shared/markdown_syntax'
-          = t "activerecord.attributes.project.contribution_text"
-        = f.text_area :contribution_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
-        %small.form-text.text-muted
-          = t ".help_contribution_text"
-      %hr
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        projects_path, :class => 'btn btn-default'                   |
+- content_for :page_actions do
+  = render partial: 'shared/projectsettingsbar'
+
+.container-fluid
+  .row
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+      = render :partial => 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pt-3.pb-3
+      = render :partial => "shared/breadcrumbs", locals: { project: @project }
+      %h2
+        = t 'shared.projectsettingsbar.contribution_settings'
+      = form_for @project, url: project_settings_contribution_types_path, method: :post, :html => { :class => '' } do |f|
+        .form-group.required
+          = f.label :contribution_type, :class => 'control-label'
+          = f.select :contribution_type, options_for_select(Project.contribution_types.keys.map{ |key| [t("projects.contribution_type.#{key}"), key] }, @project.contribution_type), {}, :class => 'form-control', 'data-reference-value' => :with_recruiting
+        .form-group.required
+          = f.label :recruitment_text, :class => "control-label" do
+            = render partial: 'shared/markdown_syntax'
+            = t "activerecord.attributes.project.recruitment_text"
+          = f.text_area :recruitment_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
+        .form-group
+          = f.label :contribution_text, :class => "control-label" do
+            = render partial: 'shared/markdown_syntax'
+            = t "activerecord.attributes.project.contribution_text"
+          = f.text_area :contribution_text, :class => 'form-control', :rows => 8, "aria-describedby" => "help-description", :disabled => @project.open?
+          %small.form-text.text-muted
+            = t ".help_contribution_text"
+        %hr
+        = f.submit nil, :class => 'btn btn-primary'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+          projects_path, :class => 'btn btn-default'                   |

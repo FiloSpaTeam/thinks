@@ -219,6 +219,8 @@ it:
         cycle_id: "Periodo di sviluppo"
         release_at: "Data di inizio lavori"
         approach_type: "Tipologia di approcio"
+        recruitment_text: "Regolamento per il reclutamento"
+        contribution_text: "Regolamento per la partecipazione"
       thinker:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"
