@@ -3,9 +3,9 @@
 -#     %small.font-weight-bold= t('.specific_actions')
 -#   = yield :page_actions
 
-%nav.sticky-top.navbar.navbar-expand.border-bottom.pl-3.pl-3
+%nav.sticky-top.navbar.navbar-expand.navbar-light.bg-white.border-bottom.pl-3.pl-3{style:"top: 62px;"}
   %a.navbar-brand
-    = t("pages.#{controller.controller_name}.#{controller.action_name}", text: @title_text)
+    = t("pages.#{controller.controller_name}.#{controller.action_name}", description: @title_text).html_safe
 
   - if content_for?(:page_actions)
     .collapse.navbar-collapse

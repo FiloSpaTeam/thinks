@@ -1,5 +1,5 @@
 %nav{ 'aria-label': "breadcrumb" }
-  %ol.breadcrumb
+  %ol.breadcrumb.mb-0.rounded-0
     - unless project.project.nil?
       %li.clip-text.breadcrumb-item.hidden-xs
         = link_to project_path(project.project), title: project.project.title do

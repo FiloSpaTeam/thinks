@@ -20,6 +20,10 @@ it:
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
 
+  pages:
+    projects:
+      show: "Pagina principale - <strong>%{description}</strong>"
+
   shared:
     navbar:
       projects: "Progetti"

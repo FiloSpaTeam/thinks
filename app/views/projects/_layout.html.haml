@@ -3,9 +3,9 @@
     = render partial: 'modal_contribution_preferences'
 
   .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
+    .col-md-2.col-lg-2.pb-3.pl-0.pr-0.border-right
       = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3.pl-0.pr-0
+    .col-md-10.col-lg-10.pb-3.pl-0.pr-0
       = render :partial => "projects/actionbar", locals: { project: @project }
       .pl-3.pr-3.pt-3.pb-3
         = yield :page_content

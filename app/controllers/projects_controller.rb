@@ -79,6 +79,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @title_text = @project.title
+
     impressionist(@project, '', unique: [:impressionable_id, :user_id])
   end
 
