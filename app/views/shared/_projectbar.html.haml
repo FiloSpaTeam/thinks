@@ -27,10 +27,6 @@
     = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
       = icon('fas', 'map')
       %span= t(".brief")
-  - if content_for?(:page_actions)
-    %li.list-group-item.border-top-0
-      %small.font-weight-bold= t('.specific_actions')
-    = yield :page_actions
   -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
   -#   <div class="d-flex w-100 justify-content-between">
   -#     <h5 class="mb-1">List group item heading</h5>

@@ -1,0 +1,13 @@
+-# - if content_for?(:page_actions)
+-#   %li.list-group-item.border-top-0
+-#     %small.font-weight-bold= t('.specific_actions')
+-#   = yield :page_actions
+
+%nav.sticky-top.navbar.navbar-expand.border-bottom.pl-3.pl-3
+  %a.navbar-brand
+    = t("pages.#{controller.controller_name}.#{controller.action_name}", text: @title_text)
+
+  - if content_for?(:page_actions)
+    .collapse.navbar-collapse
+      %ul.navbar-nav.ml-auto
+        = yield :page_actions
