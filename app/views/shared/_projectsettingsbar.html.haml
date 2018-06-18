@@ -16,16 +16,16 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 %li.list-group-item.border-top-0
-  %small.font-italic=t('.settings')
+  %small.font-weight-bold=t('.settings')
 = link_to(t('.description'), edit_project_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(edit_project_path(@project)) ? 'active' : '' }")
 = link_to(t('.developments_approach'), project_settings_release_index_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_release_index_path(@project)) ? 'active' : '' }")
 = link_to(t('.links'), project_settings_links_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_links_path(@project)) ? 'active' : '' }")
 = link_to(t('.images_settings'), project_settings_images_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_images_path(@project)) ? 'active' : '' }")
 %li.list-group-item.border-top-0
-  %small.font-italic=t('.team')
+  %small.font-weight-bold=t('.team')
 = link_to(t('.skill_requirements'), project_settings_skills_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_skills_path(@project)) ? 'active' : '' }")
 = link_to(t('.contribution_settings'), project_settings_contribution_types_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_contribution_types_path(@project)) ? 'active' : '' }")
 %li.list-group-item.border-top-0
-  %small.font-italic=t('.actions')
+  %small.font-weight-bold=t('.actions')
 = link_to(t('.transfer_project'), project_settings_other_index_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_other_index_path(@project)) ? 'active' : '' }")
 = link_to(t('.link_to_master_project'), project_settings_father_index_path(@project), :class => "list-group-item list-group-item-action #{ current_page?(project_settings_father_index_path(@project)) ? 'active' : '' }")

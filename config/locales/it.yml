@@ -22,7 +22,10 @@ it:
 
   pages:
     projects:
-      show: "Pagina principale - <strong>%{description}</strong>"
+      show: "Pagina principale"
+      edit: "Modifica titolo e descrizione"
+    settings_release:
+      index: "Modifica impostazioni per il contributo"
 
   shared:
     navbar:

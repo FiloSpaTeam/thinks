@@ -1,11 +1,13 @@
 .container-fluid
   - if current_thinker.present?
-    = render partial: 'modal_contribution_preferences'
+    - if current_page? project_path(@project)
+      = render partial: 'projects/modal_contribution_preferences'
 
   .row
     .col-md-2.col-lg-2.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pb-3.pl-0.pr-0
-      = render :partial => "projects/actionbar", locals: { project: @project }
-      .pl-3.pr-3.pt-3.pb-3
+      = render partial: 'shared/projectbar', locals: { project: @project }
+    .col-md-10.col-lg-10.pl-0.pr-0.position-relative
+      = render partial: "projects/actionbar", locals: { project: @project }
+      .pl-3.pr-3.pt-3.pb-5.mb-3
         = yield :page_content
+      = render partial: 'shared/breadcrumbs', locals: { project: @project }
