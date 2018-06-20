@@ -26,6 +26,12 @@ it:
       edit: "Modifica titolo e descrizione"
     settings_release:
       index: "Modifica impostazioni per il contributo"
+    settings_links:
+      index: "Modifica la categoria, la licenza o i link di riferimento"
+    settings_images:
+      index: "Modifica copertina e logo"
+    settings_skills:
+      index: "Modifica le abilità richieste"
 
   shared:
     navbar:
@@ -193,6 +199,8 @@ it:
     id_3: "4 settimane"
 
   skill:
+    no_skills: "Nessuna abilità richiesta"
+    max_number: "Il numero massimo di requisiti selezionabili è: %{number}"
     analytical_thinking: "Pensiero analitico"
     attention_to_details: "Attenzione ai dettagli"
     business_vision: "Orientato al business"
