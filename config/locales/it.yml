@@ -117,7 +117,7 @@ it:
 
     settings_father:
       index:
-        you_have_no_master_project_related: "Non fai parte di nessun progetto \"principale\"."
+        you_have_no_master_project_related: "Il progetto non fa parte di nessun progetto \"principale\"."
         link_to: "Aggancia"
 
   start:
