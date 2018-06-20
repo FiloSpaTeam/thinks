@@ -12,8 +12,7 @@
 
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
-
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018, Claudio Maradonna
 
 #modal-contribution.modal.fade{tabindex: "-1", role:"dialog"}
   .modal-dialog{role: "document"}
@@ -53,8 +52,10 @@
                 %li
                   = t "team_roles.#{role.team_role.t_name}"
           - else
+            - form_active = true
             = f.select 'intensity', options_for_select(Contribution.intensities.keys.to_a, @contribution.intensity), {}, class: 'form-control'
         .modal-footer
           %button.btn.btn-default{type: "button", "data-dismiss": "modal"}
             = t 'close'
-          = f.submit t('update'), class: 'btn btn-success'
+          - if form_active
+            = f.submit t('update'), class: 'btn btn-success'

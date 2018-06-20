@@ -15,21 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
-  = smart_listing_controls_for :tasks do
-    .input-group.form-group
-      %span.input-group-btn
-        = link_to url_for, class: 'btn btn-default', title: t("filters.reset"), remote: true do
-          = icon('fas', 'undo')
-      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
-      %span.input-group-btn
-
-        - if @active_filters.present?
-          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-            = icon('fas', 'filter')
-        %button.btn.btn-primary{ type: 'submit' }
-          = icon('fas', 'search', class: 'fa-inverse')
-    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+= render partial: 'shared/filters/layout', locals: { local_filters: ['status_id'], local_model: :tasks, local_text_field_name: 'search_title_and_description' }
 
 -# TODO create breadcrumb filters
 -#

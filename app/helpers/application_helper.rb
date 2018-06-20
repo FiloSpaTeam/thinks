@@ -136,6 +136,6 @@ module ApplicationHelper
     new_params[:filters] = new_params[:filters].reject { |_, v| v.blank? }
     new_params[:filters] = new_params[:filters].merge(key => value)
 
-    new_params
+    new_params.permit(key)
   end
 end

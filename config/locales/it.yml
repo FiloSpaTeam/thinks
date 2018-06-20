@@ -32,6 +32,12 @@ it:
       index: "Modifica copertina e logo"
     settings_skills:
       index: "Modifica le abilità richieste"
+    settings_contribution_types:
+      index: "Modifica le impostazioni per la partecipazione"
+    settings_other:
+      index: "Trasferisci il progetto"
+    settings_father:
+      index: "Aggancia il progetto ad un altro"
 
   shared:
     navbar:
