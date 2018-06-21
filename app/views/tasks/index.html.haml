@@ -20,13 +20,13 @@
     %a.btn.btn-outline-secondary{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
       = icon('fas', 'search')
       %span.hidden-xs
-        Search
+        = t('filters.search')
   - if thinker_signed_in? && current_thinker.ban(@project).nil? && @project.participant?(current_thinker)
     %li.nav-item.ml-1
       = link_to new_project_task_path, title: 'New task', class: 'btn btn-outline-primary' do
         = icon('fas', 'plus')
         %span.hidden-xs
-          New
+          = t('new')
 
 - content_for :page_content do
   #div-container-list

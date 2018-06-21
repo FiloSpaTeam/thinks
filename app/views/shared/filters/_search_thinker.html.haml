@@ -1,13 +1,13 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[thinker_name]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".thinker")
+%li.nav-item.dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[thinker_name]") ? 'open' : '' }
+  %a.nav-link.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+    = t("filters.thinker")
     %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
+  .dropdown-menu.dropdown-filters-menu.p-0
+    .dropdown-header.pl-3.pr-3
       .input-group
-        = text_field_tag 'filters[thinker_name]', filter_value(:thinker_name), class: 'form-control', placeholder: t("search"), autocomplete: 'off'
-        %span.input-group-btn
-          %button.btn.btn-default{ type: "submit" }
+        = text_field_tag 'filters[thinker_name]', filter_value(:thinker_name), class: 'form-control-sm form-control', placeholder: t("search"), autocomplete: 'off'
+        .input-group-append
+          %button.btn.btn-outline-secondary{ type: "submit" }
             %i.fa.fa-search
     %ul.list-group.scrollbar
       - if @project_thinkers.present?

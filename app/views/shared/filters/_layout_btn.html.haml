@@ -1,0 +1,20 @@
+%li.nav-item.dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[#{local_active_filter}]") ? 'open' : '' }
+  %a.nav-link.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+    = t("filters.#{local_title}")
+    %span.caret
+  .dropdown-menu.dropdown-filters-menu.p-0
+    .dropdown-header.pl-3.pr-3
+      .input-group
+        = text_field_tag "filters[#{local_active_filter}]", filter_value(local_active_filter), class: 'form-control form-control-sm', placeholder: t("search"), autocomplete: 'off'
+        .input-group-append
+          %button.btn.btn-outline-secondary{ type: "submit" }
+            %i.fa.fa-search
+    %a.dropdown-item.p-0{ href: 'javascript:;' }
+      %ul.list-group.scrollbar
+        - local_results.each do |result|
+          = link_to url_for(url_for_filter(local_filter, result.id, local_conflicting_filters)), :class => "rounded-0 border-right-0 border-left-0 border-bottom-0 list-group-item #{ active_filter?(local_filter, result.id) ? 'list-group-item-info' : '' }", :remote => true do
+            = highlights_searched_text(result.visible_text, filter_value(local_active_search_filter))
+        - if local_results.empty?
+          %li.list-group-item.list-group-item-danger.rounded-0
+            %strong
+              = t('filters.no_results')

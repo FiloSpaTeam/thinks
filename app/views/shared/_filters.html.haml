@@ -16,11 +16,12 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - if filters.present?
-  #collapseFilters.collapse.well.hidden-xs.hidden-xxs{ :class => any_filter?(params[:filters], [:status_id]) ? 'in' : '' }
+  #collapseFilters.collapse.show.card.rounded-top{ style: 'margin-top: -1px;' }
     = hidden_field_tag 'filters[last]', filter_value(:last)
-    .row
-      .col-xs-12
-        %ul.nav.nav-pills
-          - filters.each do |filter|
-            - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
-              = render :partial => "shared/filters/#{filter}"
+    .card-body.pt-3.pb-3
+      .row.pl-3.pr-3
+        .col-xs-12
+          %ul.nav.nav-pills
+            - filters.each do |filter|
+              - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
+                = render :partial => "shared/filters/#{filter}"

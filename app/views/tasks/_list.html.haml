@@ -22,113 +22,106 @@
 -# .row
 -#   .col-xs-5.col-sm-3.col-xs-offset-7.col-sm-offset-9.text-right
 
-.panel-default.margin-top-5
-  %table.table.table-condensed.table-hover
-    %thead
-      %tr
-        %td.hidden-xs{ style: 'max-width: 38px; width: 38px;' }
-        %td
-          .dropdown.col-xs-7.col-sm-3.col-md-3.col-lg-3
-            %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
-              %h5
-                %strong
-                  = t "task"
-                  = icon('fas', 'filter')
-            = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
-              - @statuses.each do |status|
-                = content_tag(:li) do
-                  = link_to("filters[status_id]" => status, remote: true) do
-                    .round-sm.float-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
-                    = t("projects.tasks.#{status.translation_code}")
-        - unless filter_value(:with_deleted_at)
-          %td.text-center
-            .col-xs-12
-              %h5
-                %strong.hidden-xs
-                  = smart_listing.sortable 'Workload', :workload
-                %strong.visible-xs.hidden-xxs
-                  = smart_listing.sortable 'W.load', :workload
-          %td.col-lg-1.col-xs-1.col-sm-1.hidden-xs
-            %h5
-              %strong
-                = smart_listing.sortable 'View', :impressions_count
-        - else
-          %td.col-lg-2
-    %tbody
-      - unless smart_listing.empty?
-        - smart_listing.collection.each do |task|
-          -# - if !@search.empty?
-          -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
-          %tr
-            %td.hidden-xs.vertical-align-middle{ style: 'max-width: 38px; width: 38px;' }
-              .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
-            %td
-              .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
-              %strong.hidden-xs.hidden-sm
-                %small.text-dark
-                  \##{task.serial}
-                  ·
-                  = std_deviation_button(task)
-                  - unless task.goal.nil?
-                    ·
-                    = goal_button(task)
-                  - if task.children.present?
-                    ·
-                    = children_button
-                ·
-                = link_to task.title.truncate(30), task_path(task), :title => task.title
-              %strong.visible-xs
-                = link_to task.title.truncate(45), task_path(task), :title => task.title
-              %strong.visible-sm
-                = std_deviation_button(task)
-                ·
-                = link_to task.title, task_path(task)
-              .text-dark.break-word
-                %small
-                  %em
-                    = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
-              - if task.deleted?
-                .text-dark.hidden-xs
-                  %small
-                    closed at
-                    %strong
-                      = task.deleted_at.to_s(:long)
-              - else
-                - if task.created_at == task.updated_at
-                  .text-dark.hidden-xxs
-                    %small
-                      created at
-                      %strong
-                        = task.created_at.to_s(:short)
-                      by
-                      %i
-                        #{task.updater.name}
-                - else
-                  .text-dark.hidden-xxs
-                    %small
-                      updated at
-                      %strong
-                        = task.updated_at.to_s(:short)
-                      by
-                      %i
-                        #{task.updater.name}
-            - unless filter_value(:with_deleted_at)
-              %td.text-center.workload-table{ style: 'vertical-align: middle;' }
-                = workload_description(task)
-              %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
-                = task.impressions_count
-
-            - else
-              %td.vertical-align-middle.col-lg-2
-                = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
-                  = icon('fas', 'history', class: 'fa-lg')
-                  %span.hidden-xs
-                    Reopen
-      - else
-        %tr.warning
-          %td.text-center{ colspan: 4 }
+%table.table.table-condensed.table-hover.table-striped
+  %thead
+    %tr
+      %td.hidden-xs{ style: 'max-width: 38px; width: 38px;' }
+      %td
+        .dropdown.col-xs-12.col-sm-7.col-md-7.col-lg-7
+          %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
             %strong
-              No records found
+              = icon('fas', 'tasks', t( "tasks.table.th_task" ))
+          = content_tag(:div, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
+            %h6.dropdown-header
+              = t "tasks.table.header_task"
+            - @statuses.each do |status|
+              = link_to({ "filters[status_id]" => status, remote: true }, class: 'dropdown-item') do
+                .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
+                = t("tasks.statuses.#{status.translation_code}")
+      - unless filter_value(:with_deleted_at)
+        %td.text-center
+          %strong
+            = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_workload')), :workload
+        %td.col-lg-1.col-xs-1.col-sm-1
+          %strong
+            = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_view')), :impressions_count
+      - else
+        %td.col-lg-2
+  %tbody
+    - unless smart_listing.empty?
+      - smart_listing.collection.each do |task|
+        -# - if !@search.empty?
+        -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
+        %tr
+          %td.hidden-xs.vertical-align-middle{ style: 'max-width: 38px; width: 38px;' }
+            .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
+          %td
+            .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+            %strong.hidden-xs.hidden-sm
+              %small.text-dark
+                \##{task.serial}
+                ·
+                = std_deviation_button(task)
+                - unless task.goal.nil?
+                  ·
+                  = goal_button(task)
+                - if task.children.present?
+                  ·
+                  = children_button
+              ·
+              = link_to task.title.truncate(30), task_path(task), :title => task.title
+            %strong.visible-xs
+              = link_to task.title.truncate(45), task_path(task), :title => task.title
+            %strong.visible-sm
+              = std_deviation_button(task)
+              ·
+              = link_to task.title, task_path(task)
+            .text-dark.break-word
+              %small
+                %em
+                  = highlights_searched_text(plain_text(task.description.squish).truncate(120), @search)
+            - if task.deleted?
+              .text-dark.hidden-xs
+                %small
+                  closed at
+                  %strong
+                    = task.deleted_at.to_s(:long)
+            - else
+              - if task.created_at == task.updated_at
+                .text-dark.hidden-xxs
+                  %small
+                    created at
+                    %strong
+                      = task.created_at.to_s(:short)
+                    by
+                    %i
+                      #{task.updater.name}
+              - else
+                .text-dark.hidden-xxs
+                  %small
+                    updated at
+                    %strong
+                      = task.updated_at.to_s(:short)
+                    by
+                    %i
+                      #{task.updater.name}
+          - unless filter_value(:with_deleted_at)
+            %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+              = workload_description(task)
+            %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
+              = task.impressions_count
 
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
+          - else
+            %td.vertical-align-middle.col-lg-2
+              = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
+                = icon('fas', 'history', class: 'fa-lg')
+                %span.hidden-xs
+                  Reopen
+    - else
+      %tr.warning
+        %td.text-center{ colspan: 4 }
+          %strong
+            No records found
+
+= smart_listing.paginate
+= smart_listing.pagination_per_page_links

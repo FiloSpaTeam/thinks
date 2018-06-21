@@ -15,7 +15,17 @@ it:
   cancel: "Annulla"
 
   filters:
-    reset: "Resetta filtri"
+    search: "Cerca"
+    start: "Avvia"
+    reset: "Azzera filtri"
+    filters: "Filtri"
+    no_results: "Nessun risultato"
+
+    placeholder_search_text: "Costruzione di Gotham City.."
+
+    release: "Pianificazioni"
+    sprints: "Sprints"
+    goals: "Obiettivi"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
@@ -24,6 +34,8 @@ it:
     projects:
       show: "Pagina principale"
       edit: "Modifica titolo e descrizione"
+    tasks:
+      index: "Backlog - Lista dei lavori"
     settings_release:
       index: "Modifica impostazioni per il contributo"
     settings_links:
@@ -125,6 +137,21 @@ it:
       index:
         you_have_no_master_project_related: "Il progetto non fa parte di nessun progetto \"principale\"."
         link_to: "Aggancia"
+
+  tasks:
+    statuses:
+      backlog: "Backlog"
+      release: "Da pianificare"
+      sprint: "Sprint"
+      in_progress: "In lavorazione"
+      done: "Completati"
+
+    table:
+      header_task: "Filtra per stato di avanzamento"
+
+      th_task: "Lista dei lavori"
+      th_workload: "Carico di lavoro"
+      th_view: "Visitatori"
 
   start:
     index:

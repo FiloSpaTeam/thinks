@@ -81,6 +81,9 @@ a {
 //     }
 // }
 
+.dropdown-filters-menu {
+    min-width: 230px;}
+
 .scrollbar { overflow-y: auto; }
 .scroller { overflow-y: scroll; }
 
@@ -147,7 +150,7 @@ a {
 // @import "how_does_it_works";
 // @import "sprints";
 // @import "goals";
-// @import "tasks";
+@import "tasks";
 // @import "notifications";
 // @import "otp";
 // @import "operations";

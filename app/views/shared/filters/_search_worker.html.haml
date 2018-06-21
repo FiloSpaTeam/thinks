@@ -1,24 +1,13 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[worker_name]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".worker")
-    %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
-      - if !current_page?(project_goals_path)
-        .input-group
-          = text_field_tag 'filters[worker_name]', filter_value(:worker_name), class: 'form-control', placeholder: t("search"), autocomplete: 'off'
+- workers_filter = @project.workers.unscoped
+- if active_filter?(:worker_name)
+  - workers_filter = workers_filter.where("lower(name) LIKE '%#{params[:filters][:worker_name].downcase.strip}%'")
 
-          %span.input-group-btn
-            %button.btn.btn-default{ type: "submit" }
-              %i.fa.fa-search
-    %ul.list-group.scrollbar
-      - workers_filter = @project.workers.unscoped
-      - if active_filter?(:worker_name)
-        - workers_filter = workers_filter.where("lower(name) LIKE '%#{params[:filters][:worker_name].downcase.strip}%'")
-      - workers_filter.each do |worker|
-        = link_to url_for(url_for_filter(:worker_id, worker.slug, [:worker_name, :last])), :class => "list-group-item #{ active_filter?(:worker_id, worker.slug) ? 'list-group-item-info' : '' }", :remote => true do
-          = highlights_searched_text(worker.name, filter_value(:worker_name))
-      - if workers_filter.empty?
-        %li.list-group-item.list-group-item-danger
-          %strong
-            Not found
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: :worker_name, local_title: 'worker', local_results: workers_filter, local_filter: :worker_id, local_conflicting_filters: [:worker_name, :last], local_active_search_filter: :worker_name }
+
+-# - if !current_page?(project_goals_path)
+-#   .input-group
+-#     = text_field_tag 'filters[worker_name]', filter_value(:worker_name), class: 'form-control', placeholder: t("search"), autocomplete: 'off'
+
+-#     %span.input-group-btn
+-#       %button.btn.btn-default{ type: "submit" }
+-#         %i.fa.fa-search

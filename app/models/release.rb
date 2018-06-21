@@ -76,4 +76,8 @@ class Release < ActiveRecord::Base
 
     @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
   end
+
+  def visible_text
+    title
+  end
 end
