@@ -116,12 +116,12 @@
               = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
                 = icon('fas', 'history', class: 'fa-lg')
                 %span.hidden-xs
-                  Reopen
+                  = t('tasks.table.action_reopen')
     - else
       %tr.warning
         %td.text-center{ colspan: 4 }
           %strong
-            No records found
+            = t('tasks.table.no_results')
 
 = smart_listing.paginate
 = smart_listing.pagination_per_page_links

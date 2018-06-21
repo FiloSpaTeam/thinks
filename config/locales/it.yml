@@ -36,6 +36,7 @@ it:
       edit: "Modifica titolo e descrizione"
     tasks:
       index: "Backlog - Lista dei lavori"
+      new: "Aggiungi un nuovo lavoro al backlog"
     settings_release:
       index: "Modifica impostazioni per il contributo"
     settings_links:
@@ -153,6 +154,10 @@ it:
       th_workload: "Carico di lavoro"
       th_view: "Visitatori"
 
+      action_reopen: "Riapri"
+
+      no_results: "Nessun lavoro presente nel backlog"
+
   start:
     index:
       heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"
@@ -260,6 +265,10 @@ it:
     teamwork: "Lavoro in team"
     user_experience_expert: "Esperto di User Experience"
     vision: "Capace di prevedere a lungo termine"
+
+  views:
+    pagination:
+      total: "Totale dei risultati: "
 
   activerecord:
     attributes:

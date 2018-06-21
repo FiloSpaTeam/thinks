@@ -8,7 +8,7 @@
           - else
             = icon('fas', 'sitemap')
     %li.clip-text.breadcrumb-item
-      = link_to project_path(project), title: project.title do
+      = link_to project_path(project) do
         - if project.logo
           = cl_image_tag(project.logo.path, { size: '20x20' })
         - else
@@ -18,4 +18,4 @@
     - if @breadcrumbs.present?
       - @breadcrumbs.each_with_index do |value, index|
         %li.clip-text.breadcrumb-item{ class: index == 0 && @breadcrumbs.size > 1 ? 'hidden-xxs hidden-xs' : '' }
-          = link_to value[1].html_safe, eval(value[0]), title: strip_tags(value[1])
+          = link_to value[1].html_safe, eval(value[0])

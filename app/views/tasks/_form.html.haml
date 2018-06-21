@@ -16,12 +16,6 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 = form_for [@project_form, @task] do |f|
-  - if scrum_master?(@project)
-    .form-group
-      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "After associating to a release you can group by tasks with the next release, to help team to focalize specific requests.", 'data-html' => 'true' do
-        = icon('fas', 'info-circle')
-      = f.label :release_id, t('.release'), :class => "control-label"
-      = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @task.release_id), {include_blank: t('no_release')}, :class => "form-control"
   - unless @project.recruit?(current_thinker)
     .form-group
       = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => "Specify goal is important to reach the goal itself. The goal is defined in another page, but here you can link specific tasks to that.", 'data-html' => 'true' do
