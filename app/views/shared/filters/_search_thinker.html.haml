@@ -1,5 +1,5 @@
-%li.nav-item.dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[thinker_name]") ? 'open' : '' }
-  %a.nav-link.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
+.dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[thinker_name]") ? 'open' : '' }
+  %button.btn.btn-default.dropdown-toggle.mr-1{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
     = t("filters.thinker")
     %span.caret
   .dropdown-menu.dropdown-filters-menu.p-0
@@ -14,21 +14,21 @@
         - if active_filter?(:thinker_name)
           - @project_thinkers = @project_thinkers.where("lower(name) LIKE '%#{params[:filters][:thinker_name].downcase.strip}%'")
         - @project_thinkers.each do |thinker|
-          = link_to url_for(url_for_filter(:thinker_id, thinker.slug, [:thinker_name, :last])), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
+          = link_to url_for(url_for_filter(:thinker_id, thinker.slug, [:thinker_name, :last])), :class => "rounded-0 border-right-0 border-left-0 border-bottom-0 list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
             = highlights_searched_text(thinker.name, filter_value(:thinker_name))
         - if @project_thinkers.empty?
-          %li.list-group-item.list-group-item-danger
+          %li.list-group-item.list-group-item-danger.rounded-0.border-right-0.border-left-0.border-bottom-0
             %strong
-              Not found
+              = t('filters.no_results')
       - else
         - contributions_filter = @project.contributions.joins(:thinker)
         - if active_filter?(:thinker_name)
           - contributions_filter = contributions_filter.where("lower(thinkers.name) LIKE '%#{params[:filters][:thinker_name].downcase.strip}%'")
         - contributions_filter.each do |contribution|
           - thinker = contribution.thinker
-          = link_to url_for(url_for_filter(:thinker_id, thinker.slug, [:thinker_name, :last])), :class => "list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
+          = link_to url_for(url_for_filter(:thinker_id, thinker.slug, [:thinker_name, :last])), :class => "rounded-0 border-right-0 border-left-0 border-bottom-0 list-group-item #{ active_filter?(:thinker_id, thinker.slug) ? 'list-group-item-info' : '' }", :remote => true do
             = highlights_searched_text(thinker.name, filter_value(:thinker_name))
         - if contributions_filter.empty?
-          %li.list-group-item.list-group-item-danger
+          %li.list-group-item.list-group-item-danger.rounded-0.border-right-0.border-left-0.border-bottom-0
             %strong
-              Not found
+              = t('filters.no_results')

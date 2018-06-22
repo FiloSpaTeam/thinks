@@ -113,7 +113,7 @@ module ApplicationHelper
 
       except.each { |k| filter_c.delete k }
 
-      any = filter_c.any?
+      any = !filter_c.empty?
     end
 
     any
@@ -126,7 +126,7 @@ module ApplicationHelper
   end
 
   def url_for_filter(key, value, conflicting_filters = [])
-    new_params = params.dup
+    new_params = params.dup.permit!
 
     new_params[:filters] = {} unless new_params.key?(:filters)
     new_params[:filters] = new_params[:filters].except(key)
@@ -136,6 +136,6 @@ module ApplicationHelper
     new_params[:filters] = new_params[:filters].reject { |_, v| v.blank? }
     new_params[:filters] = new_params[:filters].merge(key => value)
 
-    new_params.permit(key)
+    new_params.permit!
   end
 end

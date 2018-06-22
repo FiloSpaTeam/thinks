@@ -21,11 +21,17 @@ it:
     filters: "Filtri"
     no_results: "Nessun risultato"
 
+    aria_label_toolbar: "Toolbar dei filtri"
+    aria_label_group: "Gruppo filtri"
+
     placeholder_search_text: "Costruzione di Gotham City.."
 
-    release: "Pianificazioni"
-    sprints: "Sprints"
-    goals: "Obiettivi"
+    release: "Pianificazione"
+    sprint: "Sprint"
+    goal: "Obiettivo"
+    worker: "Assegnato a"
+    thinker: "Pensato da"
+    closed: "Chiuso"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"

@@ -13,15 +13,18 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018, Claudio Maradonna
 
 - if filters.present?
-  #collapseFilters.collapse.show.card.rounded-top{ style: 'margin-top: -1px;' }
-    = hidden_field_tag 'filters[last]', filter_value(:last)
-    .card-body.pt-3.pb-3
-      .row.pl-3.pr-3
-        .col-xs-12
-          %ul.nav.nav-pills
-            - filters.each do |filter|
-              - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
-                = render :partial => "shared/filters/#{filter}"
+  #collapseFilters.collapse.show.mt-2.border-left.border-info{ style: 'border-left-width: 3px !important;' }
+    - if params.key?(:filters)
+      - params[:filters].each_pair do |index, value|
+        = hidden_field_tag "filters[#{index}]", value
+    = hidden_field_tag "filters[last]", filter_value(:last)
+    %strong{ style: 'padding-left: 0.75rem;' }
+      = t('filters.filters')
+    .btn-toolbar{ role: 'toolbar', "aria-label": t('filters.aria_label_toolbar') }
+      .btn-group{ role: 'group', "aria-label": t('filters.aria_label_group') }
+        - filters.each do |filter|
+          - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
+            = render :partial => "shared/filters/#{filter}"

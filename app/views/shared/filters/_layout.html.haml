@@ -1,4 +1,4 @@
-.collapse.mb-2#collapseSearch{ class: any_filter?(params[:filters], local_filters) ? 'in' : '' }
+.collapse.mb-2#collapseSearch{ class: any_filter?(params[:filters], local_filters) ? 'show' : '' }
   = smart_listing_controls_for local_model do
     .input-group
       .input-group-prepend
