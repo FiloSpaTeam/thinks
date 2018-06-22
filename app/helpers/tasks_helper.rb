@@ -65,7 +65,6 @@ module TasksHelper
     scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
                                                                                          params[:search_title_and_description].present?
 
-
     scope = scope.status_progress(params[:status_id]) if params.key?(:status_id) &&
                                                          params[:status_id].present?
 
@@ -96,14 +95,14 @@ module TasksHelper
 
   def std_deviation_button(task)
     link_to 'javascript:;', title: task.standard_deviation, role: 'button' do
-      icon('bullseye', class: 'dark-grey')
+      icon('fas', 'bullseye', class: 'text-dark')
     end
   end
 
   def project_button(task)
     if task.project.present?
       link_to project_path(task.project), title: task.project.title, role: 'button' do
-        icon('folder', class: 'dark-grey')
+        icon('fas', 'folder', class: 'text-dark')
       end
     end
   end

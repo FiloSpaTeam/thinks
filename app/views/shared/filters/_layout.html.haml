@@ -12,4 +12,5 @@
             = icon('fas', 'filter', t('filters.filters'))
         %button.btn.btn-outline-primary{ type: 'submit' }
           = icon('fas', 'search', t('filters.start'))
-    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
+    - if @active_filters.present?
+      = render partial: 'shared/filters', :locals => { :filters => @active_filters }

@@ -40,30 +40,31 @@
           %span.hidden-xs
             Close
 
-= render partial: 'shared/projectbar', locals: { project: @task.project }
+- content_for :page_content do
+  .row
+    .col-sm-4
+      -# = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
+    .col-sm-8
+      %h2.hidden-xs
+        Description
+      %h2.visible-xs
+        = @task.title
+      = markdown(@task.description)
+      %hr
+      %h3
+        Comments
+      .panel-default
+        - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
+          .panel-heading
+            = render :partial => 'comments/form'
+        %table.table.table-condensed#comments-list
+          %tbody
+            - if @comments.empty?
+              %tr.warning
+                %td.text-center
+                  %strong
+                    No comments yet
+            - @comments.each_with_index do |comment, index|
+              = render partial: 'comments/comment', locals: { comment: comment, task: @task }
 
-.row
-  .col-sm-4
-    = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
-  .col-sm-8
-    %h2.hidden-xs
-      Description
-    %h2.visible-xs
-      = @task.title
-    = markdown(@task.description)
-    %hr
-    %h3
-      Comments
-    .panel-default
-      - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
-        .panel-heading
-          = render :partial => 'comments/form'
-      %table.table.table-condensed#comments-list
-        %tbody
-          - if @comments.empty?
-            %tr.warning
-              %td.text-center
-                %strong
-                  No comments yet
-          - @comments.each_with_index do |comment, index|
-            = render partial: 'comments/comment', locals: { comment: comment, task: @task }
+= render partial: 'projects/layout'

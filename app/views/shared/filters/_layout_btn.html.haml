@@ -17,7 +17,7 @@
 
 .dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[#{local_active_filter}]") ? 'show' : '' }
   %button.btn.btn-default.dropdown-toggle.mr-1{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false", :type => 'button' }
-    = t("filters.#{local_title}")
+    = t("filters.#{local_filter}")
     %span.caret
   .dropdown-menu.dropdown-filters-menu.p-0{ :class => active_filter?(:last, "filters[#{local_active_filter}]") ? 'show' : '' }
     .dropdown-header.pl-3.pr-3

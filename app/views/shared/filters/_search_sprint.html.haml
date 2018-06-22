@@ -1,5 +1,7 @@
+- title = :sprint_title
+- serial = :sprint_serial
 - sprints_filter = @project.sprints
-- if active_filter?(:sprint_serial)
-  - sprints_filter = sprints_filter.where("lower(serial) LIKE '%#{params[:filters][:sprint_title].downcase.strip}%'")
+- if active_filter?(serial)
+  - sprints_filter = sprints_filter.where("lower(serial) LIKE '%#{params[:filters][title].downcase.strip}%'")
 
-= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: :sprint_serial, local_title: 'sprint', local_results: sprints_filter, local_filter: :sprint_id, local_conflicting_filters: [:sprint_serial, :last], local_active_search_filter: :sprint_title }
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: serial, local_results: sprints_filter, local_filter: :sprint_id, local_conflicting_filters: [serial, :last], local_active_search_filter: title }

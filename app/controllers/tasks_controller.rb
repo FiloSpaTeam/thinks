@@ -77,6 +77,8 @@ class TasksController < ApplicationController
        params[:filters].key?(:search_title_and_description)
       @search = params[:filters][:search_title_and_description].strip
     end
+
+    @filters_breadcrumbs
   end
 
   # GET /tasks/1

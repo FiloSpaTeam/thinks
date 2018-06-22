@@ -20,12 +20,12 @@
 - content_for :page_actions do
   - if current_thinker.present?
     %li.nav-item.ml-1
-      %a.btn.btn-outline-secondary{ type: "button", href: '#modal-contribution', "data-toggle": "modal" }
+      %a.btn.btn-default{ type: "button", href: '#modal-contribution', "data-toggle": "modal" }
         = icon('fas', 'hands-helping')
         %span= t "projects.participation_preferences"
   - if creator?(@project.thinker.id)
     %li.nav-item.ml-1
-      = link_to edit_project_path(@project), :class => 'btn btn-outline-primary' do
+      = link_to edit_project_path(@project), :class => 'btn btn-primary' do
         = icon('fas', 'edit')
         %span= t('edit')
   - if @project.donate_button.present?

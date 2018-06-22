@@ -28,3 +28,10 @@
         - filters.each do |filter|
           - if lookup_context.find_all("shared/filters/_#{filter}.html.haml").any?
             = render :partial => "shared/filters/#{filter}"
+
+    -# - unless @filters_breadcrumbs.nil?
+    -#   .btn-toolbar{ role: 'toolbar', "aria-label": t('filters.aria_label_toolbar_active') }
+    -#     .btn-group{ role: 'group', "aria-label": t('filters.aria_label_group_active') }
+    -#       - @filters_breadcrumbs.each_with_index do |index, value|
+    -#         %button.btn.btn-sm
+    -#           = t("filters.#{index}")

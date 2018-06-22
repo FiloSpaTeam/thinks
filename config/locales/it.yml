@@ -26,12 +26,12 @@ it:
 
     placeholder_search_text: "Costruzione di Gotham City.."
 
-    release: "Pianificazione"
-    sprint: "Sprint"
-    goal: "Obiettivo"
-    worker: "Assegnato a"
-    thinker: "Pensato da"
-    closed: "Chiuso"
+    release_id: "Pianificazione"
+    sprint_id: "Sprint"
+    goal_id: "Obiettivo"
+    worker_id: "Assegnato a"
+    thinker_id: "Pensato da"
+    with_deleted_at: "Scartato"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
@@ -88,6 +88,8 @@ it:
       actions: "Ulteriori azioni"
       transfer_project: "Trasferisci il progetto"
       link_to_master_project: "Aggancia ad un progetto"
+    markdown_syntax:
+      popover_content: "Maggiori informazioni qui: %{link}"
 
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
@@ -107,6 +109,9 @@ it:
     contribution_text: "Regolamento per la partecipazione"
     no_contribution_text: "Nessun testo specificato per le condizioni di partecipazione"
     participation_preferences: "Impostazioni di partecipazione"
+
+    no_goal: "Nessun obiettivo ancora stabilito"
+    no_tasks: "Nessun lavoro selezionabile"
 
     approach_type:
       agile: "Metodo agile"
@@ -146,6 +151,10 @@ it:
         link_to: "Aggancia"
 
   tasks:
+    info_goal: "È importante specificare l'obiettivo a cui appartiene un lavoro, proprio per permettere un maggiore controllo sulla pianificazione; tuttavia non è obbligatorio."
+    info_father: "Il \"lavoro padre\" stabilisce un lavoro che deve essere svolto prima di questo che si sta definendo ora.<br><br><i>Questa opzione non può essere modificata se il lavoro è stato assegnato oppure è stato completato.</i>"
+    placeholder_title: "Trovare il Bat-Segnale"
+    placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
     statuses:
       backlog: "Backlog"
       release: "Da pianificare"
@@ -301,3 +310,8 @@ it:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"
         password_confirmation: "Conferma password"
+      task:
+        goal_id: "Obiettivo di riferimento"
+        father_id: "Lavoro padre di riferimento"
+        title: "Titolo"
+        description: "Descrizione"

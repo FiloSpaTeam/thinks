@@ -1,5 +1,6 @@
+- title = :goal_title
 - goals_filter = @project.goals
-- if active_filter?(:goal_title)
-  - goals_filter = goals_filter.where("lower(title) LIKE '%#{params[:filters][:goal_title].downcase.strip}%'")
+- if active_filter?(title)
+  - goals_filter = goals_filter.where("lower(title) LIKE '%#{params[:filters][title].downcase.strip}%'")
 
-= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: :goal_title, local_title: 'goal', local_results: goals_filter, local_filter: :goal_id, local_conflicting_filters: [:goal_title, :last], local_active_search_filter: :goal_title }
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: title, local_results: goals_filter, local_filter: :goal_id, local_conflicting_filters: [title, :last], local_active_search_filter: title }

@@ -22,13 +22,12 @@
 -# .row
 -#   .col-xs-5.col-sm-3.col-xs-offset-7.col-sm-offset-9.text-right
 
-%table.table.table-condensed.table-hover.table-striped
+%table.table.table-condensed
   %thead
     %tr
-      %td.hidden-xs{ style: 'max-width: 38px; width: 38px;' }
-      %td
+      %td{ colspan: 2 }
         .dropdown.col-xs-12.col-sm-7.col-md-7.col-lg-7
-          %a#status-dropdown.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
+          %a#status-dropdown.btn.p-0.dropdown-toggle{ :type => "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true" }
             %strong
               = icon('fas', 'tasks', t( "tasks.table.th_task" ))
           = content_tag(:div, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
@@ -52,12 +51,11 @@
       - smart_listing.collection.each do |task|
         -# - if !@search.empty?
         -#   - tasks = tasks.sort_by{ |task| task.count_occurrences(@search); }.reverse
-        %tr
-          %td.hidden-xs.vertical-align-middle{ style: 'max-width: 38px; width: 38px;' }
-            .round-sm{ :class => "bg-#{color_list_round_div(task.status.translation_code)}", style: "width: 28px; height: 28px;" }
-          %td
-            .round-sm.float-left.status-div.visible-xs{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
-            %strong.hidden-xs.hidden-sm
+        %tr{ class: "bg-#{color_list_round_div(task.status.translation_code)}" }
+          %td.d-none.d-sm-table-cell.td-task-status
+          %td.bg-white
+            .round-sm.float-left.status-div.d-sm-none{ :class => "bg-#{color_list_round_div(task.status.translation_code)}" }
+            %strong.d-none.d-md-block
               %small.text-dark
                 \##{task.serial}
                 ·
@@ -69,10 +67,10 @@
                   ·
                   = children_button
               ·
-              = link_to task.title.truncate(30), task_path(task), :title => task.title
-            %strong.visible-xs
+              = link_to task.title, task_path(task)
+            %strong.d-sm-none
               = link_to task.title.truncate(45), task_path(task), :title => task.title
-            %strong.visible-sm
+            %strong.d-none.d-sm-block.d-md-none
               = std_deviation_button(task)
               ·
               = link_to task.title, task_path(task)
@@ -106,13 +104,13 @@
                     %i
                       #{task.updater.name}
           - unless filter_value(:with_deleted_at)
-            %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+            %td.bg-white.text-center.workload-table{ style: 'vertical-align: middle;' }
               = workload_description(task)
-            %td.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
+            %td.bg-white.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
               = task.impressions_count
 
           - else
-            %td.vertical-align-middle.col-lg-2
+            %td.bg-white.vertical-align-middle.col-lg-2
               = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
                 = icon('fas', 'history', class: 'fa-lg')
                 %span.hidden-xs
