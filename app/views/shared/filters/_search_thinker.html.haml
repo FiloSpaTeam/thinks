@@ -5,6 +5,10 @@
   .dropdown-menu.dropdown-filters-menu.p-0
     .dropdown-header.pl-3.pr-3
       .input-group
+        - if active_filter?(:thinker_id)
+          .input-group-prepend
+            = link_to url_for(url_for_filter('', '', [:thinker_id])), :class => "btn btn-danger", :remote => true do
+              %i.fa.fa-undo.text-light
         = text_field_tag 'filters[thinker_name]', filter_value(:thinker_name), class: 'form-control-sm form-control', placeholder: t("search"), autocomplete: 'off'
         .input-group-append
           %button.btn.btn-outline-secondary{ type: "submit" }

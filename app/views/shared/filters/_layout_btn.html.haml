@@ -24,7 +24,7 @@
       .input-group
         - if active_filter?(local_filter)
           .input-group-prepend
-            %a.btn.btn-danger
+            = link_to url_for(url_for_filter('', '', [local_filter])), :class => "btn btn-danger", :remote => true do
               %i.fa.fa-undo.text-light
         = text_field_tag "filters[#{local_active_filter}]", filter_value(local_active_filter), class: 'form-control form-control-sm', placeholder: t("search"), autocomplete: 'off'
         .input-group-append
