@@ -13,6 +13,7 @@ it:
   new: "Nuovo"
   add: "Aggiungi"
   cancel: "Annulla"
+  sending: "Invio in corso"
 
   filters:
     search: "Cerca"
@@ -155,6 +156,9 @@ it:
     info_father: "Il \"lavoro padre\" stabilisce un lavoro che deve essere svolto prima di questo che si sta definendo ora.<br><br><i>Questa opzione non può essere modificata se il lavoro è stato assegnato oppure è stato completato.</i>"
     placeholder_title: "Trovare il Bat-Segnale"
     placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
+
+    comments: "Commenti e considerazioni"
+
     statuses:
       backlog: "Backlog"
       release: "Da pianificare"
@@ -173,6 +177,10 @@ it:
 
       no_results: "Nessun lavoro presente nel backlog"
 
+  comments:
+    form_title: "Cosa ne pensi?"
+    no_comments: "Nessun commento/considerazione presente"
+    
   start:
     index:
       heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"

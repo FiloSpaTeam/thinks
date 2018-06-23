@@ -18,53 +18,40 @@
 - content_for :page_actions do
   - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
-      %li.float-left.hidden-xxs
-        = link_to reopen_task_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
-          = icon('fas', 'history', class: 'fa-lg')
+      %li.nav-item.ml-1
+        = link_to reopen_task_path(@task), :method => 'put' do
+          = icon('fas', 'history')
           %span.hidden-xs
             Reopen
-      %li.float-left.hidden-xxs
-        = link_to task_path(@task), :method => 'delete', title: 'Delete', class: 'line-height-25 line-height-35', data: { confirm: 'Are you sure?' } do
-          = icon('fas', 'trash-o', class: 'fa-lg')
+      %li.nav-item.ml-1
+        = link_to task_path(@task), :method => 'delete', data: { confirm: 'Are you sure?' } do
+          = icon('fas', 'trash-o')
           %span.hidden-xs
             Delete
     - elsif !@task.done?
-      %li.float-left.hidden-xxs
-        = link_to edit_task_path(@task), title: 'Edit', class: 'line-height-25 line-height-35' do
-          = icon('fas', 'edit', class: 'fa-lg')
-          %span.hidden-xs
-            Edit
-      %li.float-left.hidden-xxs
-        = link_to task_path(@task), :method => 'delete', title: 'Close', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
-          = icon('fas', 'times-circle-o', class: 'fa-lg')
-          %span.hidden-xs
-            Close
+      %li.nav-item.ml-1
+        = link_to task_path(@task), :method => 'delete', class: 'btn btn-danger btn-task-delete', role: 'button' do
+          = icon('fas', 'times-circle')
+          %span= t('close')
+      %li.nav-item.ml-1
+        = link_to edit_task_path(@task), class: 'btn btn-primary' do
+          = icon('fas', 'edit')
+          %span= t('edit')
 
 - content_for :page_content do
-  .row
-    .col-sm-4
-      -# = render partial: 'shared/taskstatuspanel', locals: { task: @task, workload_voted: @workload_voted }
-    .col-sm-8
-      %h2.hidden-xs
-        Description
-      %h2.visible-xs
-        = @task.title
-      = markdown(@task.description)
-      %hr
-      %h3
-        Comments
-      .panel-default
-        - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
-          .panel-heading
-            = render :partial => 'comments/form'
-        %table.table.table-condensed#comments-list
-          %tbody
-            - if @comments.empty?
-              %tr.warning
-                %td.text-center
-                  %strong
-                    No comments yet
-            - @comments.each_with_index do |comment, index|
-              = render partial: 'comments/comment', locals: { comment: comment, task: @task }
+  = markdown(@task.description)
+  %h5.font-weight-bold
+    = t('tasks.comments')
+  - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
+    = render :partial => 'comments/form'
+  %table.table.table-condensed#comments-list
+    %tbody
+      - if @comments.empty?
+        %tr.warning
+          %td.text-center
+            %strong
+              = t('comments.no_comments')
+      - @comments.each_with_index do |comment, index|
+        = render partial: 'comments/comment', locals: { comment: comment, task: @task }
 
 = render partial: 'projects/layout'
