@@ -9,6 +9,7 @@ it:
   update: "Aggiorna"
   edit: "Modifica"
   destroy: "Elimina"
+  delete: "Elimina"
   search: "Cerca"
   new: "Nuovo"
   add: "Aggiungi"
@@ -182,6 +183,7 @@ it:
   comments:
     form_title: "Cosa ne pensi?"
     no_comments: "Nessun commento/considerazione presente"
+    comment_title: "<strong>%{thinker}</strong> <small>ha commentato %{times_ago} fa</small>"
     
   start:
     index:

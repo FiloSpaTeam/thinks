@@ -21,7 +21,7 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version = '0.1.82.1447'
+    version = '0.2'
     content_tag(:div, 'v' + version, style: 'color: #BCBCBC;', class: 'margin-top-50 hidden-xs')
   end
 

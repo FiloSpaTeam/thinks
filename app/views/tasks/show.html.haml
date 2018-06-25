@@ -44,7 +44,7 @@
     = t('tasks.comments')
   - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
     = render :partial => 'comments/form'
-  %table.table.table-condensed#comments-list
+  %table.table.table-condensed.mt-2#comments-list
     %tbody
       - if @comments.empty?
         %tr.warning

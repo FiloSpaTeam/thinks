@@ -68,7 +68,7 @@
                     = cl_image_tag(comment.reason.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
                   - else
                     .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-                      %i.fa.fa-question.fa-2x.margin-top-5
+                      %i.fa.fa-question.fa-2x.mt-3
                 %td{ colspan: 2 }
                   .text-dark
                     %strong
@@ -85,10 +85,10 @@
                   = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
                 - else
                   .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-                    %i.fa.fa-question.fa-2x.margin-top-5
+                    %i.fa.fa-question.fa-2x.mt-3
 
                 - if !comment.approved
-                  %ul.no-padding.margin-top-5{ style: 'list-style: none;' }
+                  %ul.no-padding.mt-3{ style: 'list-style: none;' }
                     - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil? 
                       = edit_button(comment)
                       - if !@task.in_progress? && !@task.done? && comment.reason.nil?
