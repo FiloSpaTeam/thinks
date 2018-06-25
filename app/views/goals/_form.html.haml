@@ -20,7 +20,7 @@
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('goals.info_release'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
     = f.label :release_id, :class => "control-label"
-    = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @goal.release_id), {include_blank: t('no_release')}, :class => "form-control"
+    = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @goal.release_id), {include_blank: t('select')}, :class => "form-control", disabled: @project_releases.empty?
   .form-group.required
     = f.label :title, :class => "control-label"
     = f.text_field :title, :class => "form-control has-counter", :placeholder => t('goals.placeholder_title'), "aria-describedby" => "help-title"
