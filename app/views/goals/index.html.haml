@@ -13,7 +13,7 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018, Claudio Maradonna
 
 - content_for :page_actions do
   = render partial: 'projects/actions/search'
@@ -21,11 +21,8 @@
   - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
     = render partial: 'projects/actions/new', locals: { local_path: new_project_goal_path }
 
-.container-fluid
-  .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
-      = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      #div-container-list
-        = smart_listing_render :goals
+- content_for :page_content do
+  #div-container-list
+    = smart_listing_render :goals
+
+= render partial: 'projects/layout'

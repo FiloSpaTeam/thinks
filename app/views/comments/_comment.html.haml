@@ -21,7 +21,7 @@
 
     - if !comment.approved
       %ul.mb-0.p-0{ style: 'list-style: none;' }
-        - if comment.thinker == current_thinker && current_thinker.ban(task.project).nil? 
+        - if comment.thinker == current_thinker && current_thinker.ban(task.project).nil?
           = edit_button(comment)
           - if !task.in_progress? && !task.done? && comment.reason.nil?
             = delete_button(comment)

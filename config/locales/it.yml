@@ -47,6 +47,9 @@ it:
       new: "Aggiungi un nuovo lavoro al backlog"
       show: "%{description}"
       edit: "Modifica lavoro %{description}"
+    goals:
+      index: "Obiettivi del progetto"
+      new: "Aggiungi un nuovo obiettivo"
     settings_release:
       index: "Modifica impostazioni per il contributo"
     settings_links:
@@ -190,6 +193,11 @@ it:
     you_cannot_vote_yourself: "Non puoi auto-votarti"
     confirm_delete: "Sei sicuro di voler cancellare il commento? Il team potrebbe considerarlo comunque un'intervento positivo"
     
+  goals:
+    info_release: "Associare una pianificazione è importante ma non obbligatorio in questa fase. Permette di comprendere la priorità e le scadenze dei vari obiettivi e quindi dei singoli task."
+    placeholder_title: "Catturare Joker"
+    placeholder_description: "Joker è il super-cattivo e come tale non può girare a piede libero. Avete un piano migliore?"
+
   start:
     index:
       heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"
@@ -331,4 +339,8 @@ it:
         goal_id: "Obiettivo di riferimento"
         father_id: "Lavoro padre di riferimento"
         title: "Titolo"
+        description: "Descrizione"
+      goal:
+        release_id: "Pianificazione associata"
+        title: "Definizione"
         description: "Descrizione"
