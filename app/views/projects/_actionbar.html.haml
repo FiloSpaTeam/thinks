@@ -5,7 +5,7 @@
 
 %nav.sticky-top.navbar.navbar-expand.navbar-light.bg-white.border-bottom.pl-3.pl-3{style:"top: 62px;"}
   %a.navbar-brand.font-weight-bold
-    = t("pages.#{controller.controller_name}.#{controller.action_name}").html_safe
+    = t("pages.#{controller.controller_name}.#{controller.action_name}", description: @page_description).html_safe
 
   - if content_for?(:page_actions)
     .collapse.navbar-collapse

@@ -44,6 +44,8 @@ it:
     tasks:
       index: "Backlog - Lista dei lavori"
       new: "Aggiungi un nuovo lavoro al backlog"
+      show: "%{description}"
+      edit: "Modifica lavoro %{description}"
     settings_release:
       index: "Modifica impostazioni per il contributo"
     settings_links:

@@ -102,6 +102,8 @@ class TasksController < ApplicationController
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
       "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
     }
+
+    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\"" 
   end
 
   # GET /projects/1/tasks/new
@@ -136,6 +138,8 @@ class TasksController < ApplicationController
       "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
       'nil' => I18n.t('edit')
     }
+
+    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\"" 
 
     set_form
   end
@@ -380,6 +384,7 @@ class TasksController < ApplicationController
                     .tasks
                     .where.not(status: Status.done)
                     .where.not(status: Status.in_progress)
+                    .where.not(id: @task.id)
                     .where(recruitment: false)
                     .order('title')
   end
