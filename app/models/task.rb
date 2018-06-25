@@ -225,6 +225,10 @@ class Task < ActiveRecord::Base
     (title.scan(/#{search}/).count * 2) + description.scan(/#{search}/).count
   end
 
+  def visible_text
+    "##{serial} #{title}"
+  end
+
   private
 
   def update_goal_and_release

@@ -1,11 +1,32 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[progress_lower_than]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".progress")
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+
+-# Copyright (c) 2015,2018, Claudio Maradonna
+
+.dropdown{ :role => "presentation", :class => active_filter?(:last, "filters[progress_lower_than]") ? 'show' : '' }
+  %button.btn.btn-default.dropdown-toggle.mr-1{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false", :type => 'button' }
+    = t("filters.progress_lower_than")
     %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
+  .dropdown-menu.dropdown-filters.p-0{ :class => active_filter?(:last, "filters[progress_lower_than]") ? 'show' : '' }
+    .dropdown-header.pl-3.pr-3
       .input-group
-        = text_field_tag 'filters[progress_lower_than]', filter_value(:progress_lower_than), class: 'form-control', placeholder: t("lower_than"), autocomplete: 'off'
-        %span.input-group-btn
-          %button.btn.btn-default{ type: "submit" }
+        - if active_filter?(:progress_lower_than)
+          .input-group-prepend
+            = link_to url_for(url_for_filter('', '', [:progress_lower_than])), :class => "btn btn-danger", :remote => true do
+              %i.fa.fa-undo.text-light
+        = text_field_tag 'filters[progress_lower_than]', filter_value(:progress_lower_than), class: 'form-control form-control-sm', autocomplete: 'off'
+        .input-group-append
+          %button.btn.btn-outline-secondary{ type: "submit" }
             %i.fa.fa-search

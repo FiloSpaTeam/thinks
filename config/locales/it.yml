@@ -34,6 +34,7 @@ it:
     worker_id: "Assegnato a"
     thinker_id: "Pensato da"
     with_deleted_at: "Scartato"
+    progress_lower_than: "Progresso (% inferiore a)"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
