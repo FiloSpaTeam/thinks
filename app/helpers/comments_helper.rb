@@ -24,36 +24,29 @@ module CommentsHelper
 
   def delete_button(comment)
     content_tag(:li) do
-      link_to t('delete'), comment_path(comment), method: :delete, data: { confirm: 'Are you sure? Your comment will be deleted permanently with your vote.' }, class: 'small'
+      link_to t('delete'), comment_path(comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'small'
     end
   end
 
   def like_button(comment)
-    content_tag(:div, class: 'form-group') do
-      if comment.current_thinker?(current_thinker)
-        link_to 'javascript:;', :title => t('comments.you_cannot_vote_yourself') do
-          icon('fas', 'thumbs-up', class: 'fa-lg dark-grey') +
-            like_count(comment.impressionist_count)
-        end
-      elsif comment.impressionist_count(user_id: current_thinker.id).zero?
-        link_to like_comment_path(comment), :title => t('comments.vote') do
-          icon('fas', 'thumbs-up', class: 'fa-lg dark-grey') +
-            like_count(comment.impressionist_count)
-        end
-      else
-        link_to 'javascript:;', :title => t('comments.you_voted_yet') do
-          icon('fas', 'thumbs-up', class: 'fa-lg dark-grey') +
-            like_count(comment.impressionist_count)
-        end
+    if comment.current_thinker?(current_thinker)
+      link_to 'javascript:;', :title => t('comments.you_cannot_vote_yourself'), class: 'dropdown-item' do
+        icon('fas', 'thumbs-up', t('comments.likes', count: comment.impressionist_count, text: like_count(comment.impressionist_count)),class: 'text-dark')
+      end
+    elsif comment.impressionist_count(user_id: current_thinker.id).zero?
+      link_to like_comment_path(comment), :title => t('comments.vote') do
+        icon('fas', 'thumbs-up', t('comments.likes', count: comment.impressionist_count, text: like_count(comment.impressionist_count)),class: 'text-dark')
+      end
+    else
+      link_to 'javascript:;', :title => t('comments.you_voted_yet') do
+        icon('fas', 'thumbs-up', t('comments.likes', count: comment.impressionist_count, text: like_count(comment.impressionist_count)),class: 'text-dark')
       end
     end
   end
 
   def approve_button(comment)
-    content_tag(:div, class: 'form-group') do
-      link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
-        icon('fas', 'check', class: "fa-lg #{comment.approved ? 'dark-grey' : ''}")
-      end
+    link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'dropdown-item btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
+      icon('fas', 'check', class: "#{comment.approved ? 'text-dark' : ''}")
     end
   end
 

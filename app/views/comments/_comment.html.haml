@@ -31,6 +31,10 @@
     .form-group{ id: "comment-#{comment.id}" }
       = markdown(comment.text, true)
   %td.p-1.text-center{ width: 50, style: 'vertical-align: middle;' }
-    = like_button(comment)
-    - if !task.done? && task.worker == current_thinker && !task.deleted?
-      = approve_button(comment)
+    .dropdown.dropleft
+      %a.btn.dropdown-toggle{ role: 'button', 'href': '#', id: "dropdownComment#{comment.id}", "data-toggle": 'dropdown', "aria-haspopup": 'true', "aria-expanded": 'false' }
+        = icon('fas', 'ellipsis-v')
+      .dropdown-menu
+        = like_button(comment)
+        - if !task.done? && task.worker == current_thinker && !task.deleted?
+          = approve_button(comment)

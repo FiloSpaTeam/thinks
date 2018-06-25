@@ -181,9 +181,14 @@ it:
       no_results: "Nessun lavoro presente nel backlog"
 
   comments:
+    likes:
+      one: "Un \"mi piace\""
+      other: "%{text} \"mi piace\"" 
     form_title: "Cosa ne pensi?"
     no_comments: "Nessun commento/considerazione presente"
     comment_title: "<strong>%{thinker}</strong> <small>ha commentato %{times_ago} fa</small>"
+    you_cannot_vote_yourself: "Non puoi auto-votarti"
+    confirm_delete: "Sei sicuro di voler cancellare il commento? Il team potrebbe considerarlo comunque un'intervento positivo"
     
   start:
     index:
