@@ -13,27 +13,18 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018 Claudio Maradonna
 
 - content_for :page_actions do
   - if scrum_master?(@release.project)
-    %li.float-left
-      = link_to edit_release_path(@release), :class => "line-height-25 line-height-35" do
-        = icon('fas', 'edit', class: 'fa-lg')
-        %span.hidden-xs
-          = t('edit')
+    %li.nav-item.ml-1
+      = link_to release_path(@release), :method => 'delete', :class => "btn btn-danger", :role => 'button' do
+        = icon('fas', 'trash', t('delete'))
+    %li.nav-item.ml-1
+      = link_to edit_release_path(@release), :class => "btn btn-primary" do
+        = icon('fas', 'edit', t('edit'))
 
-    %li.float-left
-      = link_to release_path(@release), :method => 'delete', :class => "line-height-25 line-height-35", :role => 'button' do
-        = icon('fas', 'trash-o', class: 'fa-lg')
-        %span.hidden-xs
-          = t('delete')
+- content_for :page_content do
+  = markdown(@release.description)
 
-= render partial: 'shared/projectbar', locals: { project: @release.project }
-.row
-  .col-sm-4
-    = render partial: 'shared/releasestatuspanel', locals: { release: @release }
-  #div-container-list.col-sm-8
-    %h2
-      Description
-    = markdown(@release.description)
+= render partial: 'projects/layout'
