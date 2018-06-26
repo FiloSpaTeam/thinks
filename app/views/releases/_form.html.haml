@@ -26,7 +26,7 @@
       = t ".date_for_release"
   .form-group.required
     = f.label :title, :class => "control-label"
-    = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    = f.text_field :title, :class => "form-control has-counter", :placeholder => t('releases.placeholder_title'), "aria-describedby" => "help-title"
     %small#help-title.form-text.text-muted
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_title }
@@ -34,9 +34,9 @@
   .form-group.required
     = render partial: 'shared/markdown_syntax'
     = f.label :description, :class => "control-label"
-    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => "My beautiful and long description that help others to understand what this release gives.", "aria-describedby" => "help-description"
+    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => t('releases.placeholder_description'), "aria-describedby" => "help-description"
     %small#help-description.form-text.text-muted= t "char_in", chars_min: @chars_min_description, chars_max: @chars_max_description
   %hr
-  = f.submit nil, :class => "btn btn-primary"
+  = f.submit t('add'), :class => "btn btn-primary"
   = link_to t('back'), :back, :class => "btn btn-default"
 

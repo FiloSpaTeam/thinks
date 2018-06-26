@@ -1,6 +1,7 @@
 it:
   messages: "Messaggi di sistema"
   char_minimum: "Caratteri minimi richiesti: %{chars}"
+  char_in: "Lunghezza: tra %{chars_min} e %{chars_max} caratteri"
   remaining_chars: "Caratteri rimanenti: "
   select: "Seleziona"
   save: "Salva"
@@ -15,6 +16,8 @@ it:
   add: "Aggiungi"
   cancel: "Annulla"
   sending: "Invio in corso"
+  are_you_sure: "Sicuro di voler proseguire?"
+  discards: "Scarta"
 
   filters:
     search: "Cerca"
@@ -51,6 +54,9 @@ it:
     goals:
       index: "Obiettivi del progetto"
       new: "Aggiungi un nuovo obiettivo"
+      show: "Obiettivo %{description}"
+    releases:
+      new: "Aggiungi una nuova pianificazione"
     settings_release:
       index: "Modifica impostazioni per il contributo"
     settings_links:
@@ -176,7 +182,7 @@ it:
     table:
       header_task: "Filtra per stato di avanzamento"
 
-      th_task: "Lista dei lavori"
+      th_task: "Stato di avanzamento"
       th_workload: "Carico di lavoro"
       th_view: "Visitatori"
 
@@ -198,6 +204,14 @@ it:
     info_release: "Associare una pianificazione è importante ma non obbligatorio in questa fase. Permette di comprendere la priorità e le scadenze dei vari obiettivi e quindi dei singoli task."
     placeholder_title: "Catturare Joker"
     placeholder_description: "Joker è il super-cattivo e come tale non può girare a piede libero. Avete un piano migliore?"
+
+    plan_this_goal: "Pianifica questo obiettivo"
+
+    goal: "Obiettivo"
+
+  releases:
+    placeholder_title: "Missione \"Joker inside\""
+    placeholder_description: "Catturare Joker e' la nostra priorità oltre che ristabilire l'ordine. Una volta catturato interrogarlo per trovare il nascondiglio segreto."
 
   start:
     index:
@@ -344,4 +358,9 @@ it:
       goal:
         release_id: "Pianificazione associata"
         title: "Definizione"
+        description: "Descrizione"
+      release:
+        version: "Nome in codice"
+        end_at: "Termine stabilito"
+        title: "Titolo"
         description: "Descrizione"

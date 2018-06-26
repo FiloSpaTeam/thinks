@@ -53,7 +53,7 @@
       - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
         .panel-heading
           = render :partial => 'comments/form'
-      %table.table.table-condensed
+      %table.table.table-sm
         %tbody
           - if @comments.empty?
             %tr.warning
@@ -103,7 +103,7 @@
                     ago
                 .form-group{ id: "comment-#{comment.id}" }
                   = markdown(comment.text, true)
-              %td.text-center{ width: 50, style: 'vertical-align: middle;' }
+              %td.text-center.align-middle{ width: 50 }
                 = like_button(comment)
                 - if !@task.done? && @task.worker == current_thinker && !@task.deleted?
                   = approve_button(comment)

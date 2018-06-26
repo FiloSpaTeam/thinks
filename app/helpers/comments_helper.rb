@@ -17,20 +17,22 @@
 
 module CommentsHelper
   def edit_button(comment)
-    content_tag(:li) do
-      link_to t('edit'), edit_comment_path(comment), remote: true, method: :get, class: 'small'
+    link_to edit_comment_path(comment), remote: true, method: :get, class: 'dropdown-item small' do
+      icon('fas', 'pencil-alt', t('edit'), class: 'text-dark')
     end
   end
 
   def delete_button(comment)
     content_tag(:li) do
-      link_to t('delete'), comment_path(comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'small'
+      link_to comment_path(comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'dropdown-item small' do
+        icon('fas', 'trash', t('delete'), class: 'text-dark')
+      end
     end
   end
 
   def like_button(comment)
     if comment.current_thinker?(current_thinker)
-      link_to 'javascript:;', :title => t('comments.you_cannot_vote_yourself'), class: 'dropdown-item' do
+      link_to 'javascript:;', :title => t('comments.you_cannot_vote_yourself'), class: 'dropdown-item small' do
         icon('fas', 'thumbs-up', t('comments.likes', count: comment.impressionist_count, text: like_count(comment.impressionist_count)),class: 'text-dark')
       end
     elsif comment.impressionist_count(user_id: current_thinker.id).zero?
@@ -45,7 +47,7 @@ module CommentsHelper
   end
 
   def approve_button(comment)
-    link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'dropdown-item btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
+    link_to (comment.approved && comment.task.done? ? 'javascript:;' : approve_comment_path(comment)), class: 'dropdown-item small btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
       icon('fas', 'check', class: "#{comment.approved ? 'text-dark' : ''}")
     end
   end

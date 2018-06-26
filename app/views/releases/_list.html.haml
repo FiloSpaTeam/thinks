@@ -13,71 +13,53 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018 Claudio Maradonna
 
-.collapse#collapseSearch{ class: any_filter?(params[:filters]) ? 'in' : '' }
-  = smart_listing_controls_for :releases do
-    .input-group.form-group
-      .input-group-prepend
-        .input-group-text.p-0
-          = link_to url_for, class: 'btn btn-default', title: t("filters.reset"), remote: true do
-            = icon('fas', 'undo')
-      = text_field_tag 'filters[search_title_and_description]', filter_value(:search_title_and_description), :class => 'form-control', autocomplete: 'off'
-      .input-group-append
-        .input-group-text.p-0
-          - if @active_filters.present?
-            %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-              = icon('fas', 'filter')
-      .input-group-append
-        %button.btn.btn-outline-primary{ type: 'submit' }
-          = icon('fas', 'search')
-    = render partial: 'shared/filters', :locals => { :filters => @active_filters }
-.panel-default.mt-3
-  %table.table.table-condensed.table-hover#filterrific_results
-    %thead
-      %tr
-        %td
-          .col-xs-11
-            %h5
-              %strong
-                = t "release"
-    %tbody
-      - unless smart_listing.empty?
-        - smart_listing.collection.each do |release|
-          %tr
-            %td
-              %a.float-right.btn.hidden-xs{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
-                = icon('fas', 'tasks')
-              %strong.hidden-xs.hidden-sm
-                %small.text-dark
-                  - remaining_days = (DateTime.now.to_date - release.end_at).to_i
-                  - if (remaining_days > 0)
-                    %span.text-danger
-                      +
-                      = remaining_days
-                  - else
+= render partial: 'shared/filters/layout', locals: { local_filters: [], local_model: :goals, local_text_field_name: 'search_title_and_description' }
+
+%table.table.table-sm.table-hover#filterrific_results
+  %thead.d-none
+    %tr
+      %td.col-11
+      %td.col-1
+  %tbody
+    - unless smart_listing.empty?
+      - smart_listing.collection.each do |release|
+        %tr
+          %td
+            %strong.d-none.d-md-block
+              %small.text-dark
+                - remaining_days = (DateTime.now.to_date - release.end_at).to_i
+                - if (remaining_days > 0)
+                  %span.text-danger
+                    +
                     = remaining_days
-                  ·
-                  = release.end_at.to_s(:short)
-                  ·
-                = link_to release.title.truncate(40), release_path(release), :title => release.title
-                \- v#{release.version}
-              %strong.visible-xs
-                = link_to release.title.truncate(50), release_path(release), :title => release.title
-              %strong.visible-sm
-                = link_to release.title, release_path(release)
-              .text-dark
-                %small
-                  %em
-                    = highlights_searched_text(plain_text(release.description).truncate(150), @search)
-                  .progress
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
-                      = release.progress
-                      \%
-      - else
-        %tr.warning
-          %td.text-center{ colspan: 3 }
-            %strong
-              No records found
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
+                - else
+                  = remaining_days
+                ·
+                = release.end_at.to_s(:short)
+                ·
+              = link_to release.title, release_path(release)
+              \- v#{release.version}
+            %strong.d-sm-none
+              = link_to release.title.truncate(50), release_path(release), :title => release.title
+            %strong.d-none.d-sm-block.d-md-none
+              = link_to release.title, release_path(release)
+            .text-dark
+              %small
+                %em
+                  = highlights_searched_text(plain_text(release.description).truncate(150), @search)
+                .progress{ style: 'height: 1.5rem;' }
+                  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
+                    = release.progress
+                    \%
+          %td.border-left.align-middle
+            %a.btn{ :class => release.tasks.empty? ? "disabled" : "", :href => release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), :title => tasks_title(release) , :role => "button" }
+              = icon('fas', 'tasks')
+    - else
+      %tr.warning
+        %td.text-center{ colspan: 3 }
+          %strong
+            No records found
+= smart_listing.paginate
+= smart_listing.pagination_per_page_links

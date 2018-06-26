@@ -22,7 +22,7 @@
 -# .row
 -#   .col-xs-5.col-sm-3.col-xs-offset-7.col-sm-offset-9.text-right
 
-%table.table.table-condensed
+%table.table.table-sm
   %thead
     %tr
       %td{ colspan: 2 }
@@ -104,9 +104,9 @@
                     %i
                       #{task.updater.name}
           - unless filter_value(:with_deleted_at)
-            %td.bg-white.text-center.workload-table{ style: 'vertical-align: middle;' }
+            %td.bg-white.text-center.workload-table.align-middle
               = workload_description(task)
-            %td.bg-white.text-center.hidden-xs.font-bold{ style: 'vertical-align: middle;' }
+            %td.bg-white.text-center.hidden-xs.font-bold.align-middle
               = task.impressions_count
 
           - else
