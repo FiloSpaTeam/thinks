@@ -1,5 +1,5 @@
 %li.nav-item.ml-1
-  %a.btn.btn-outline-secondary{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
+  %a.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
     = icon('fas', 'search', class: 'text-dark')
     %span.hidden-xs
       = t('search')

@@ -16,17 +16,9 @@
 -# Copyright (c) 2018, Claudio Maradonna
 
 - content_for :page_actions do
-  %li.nav-item.ml-1
-    %a.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearch' }
-      = icon('fas', 'search')
-      %span.hidden-xs
-        = t('filters.search')
+  = render partial: 'projects/actions/search'
   - if thinker_signed_in? && current_thinker.ban(@project).nil? && @project.participant?(current_thinker)
-    %li.nav-item.ml-1
-      = link_to new_project_task_path, class: 'btn btn-primary' do
-        = icon('fas', 'plus')
-        %span.hidden-xs
-          = t('new')
+    = render partial: 'projects/actions/new', locals: { local_path: new_project_task_path }
 
 - content_for :page_content do
   #div-container-list
