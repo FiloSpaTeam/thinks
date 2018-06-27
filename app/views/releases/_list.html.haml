@@ -40,7 +40,7 @@
                 = release.end_at.to_s(:short)
                 ·
               = link_to release.title, release_path(release)
-              \- v#{release.version}
+              \- #{release.version}
             %strong.d-sm-none
               = link_to release.title.truncate(50), release_path(release), :title => release.title
             %strong.d-none.d-sm-block.d-md-none

@@ -46,6 +46,7 @@ it:
     projects:
       show: "Pagina principale"
       edit: "Modifica titolo e descrizione"
+      brief: "Piano d'azione"
     tasks:
       index: "Backlog - Lista dei lavori"
       new: "Aggiungi un nuovo lavoro al backlog"
@@ -128,6 +129,9 @@ it:
 
     no_goal: "Nessun obiettivo ancora stabilito"
     no_tasks: "Nessun lavoro selezionabile"
+
+    brief_description: "Ogni scheda rappresenta un piano stabilito. Le schede oscurate indicano che la parte è la stata completata."
+    hide_completed_release: "Nascondi le azioni completate"
 
     approach_type:
       agile: "Metodo agile"

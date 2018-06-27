@@ -19,6 +19,7 @@ class Release < ActiveRecord::Base
   belongs_to :project
 
   has_many :goals
+  has_many :tasks, through: :goals
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30, maximum: 1600 }
