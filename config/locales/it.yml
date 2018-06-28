@@ -137,6 +137,11 @@ it:
       agile: "Metodo agile"
       waterfall: "Metodo a \"cascata\""
 
+    contribution_type:
+        open: "Progetto aperto" 
+        with_recruiting: "Progetto aperto con reclutamento"
+        closed: "Progetto privato"
+
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
       placeholder_title: "Gotham City"
@@ -257,11 +262,11 @@ it:
     failure:
       thinker:
         unauthenticated: "Accedi prima di continuare"
+        invalid: "Autenticazione fallita: ricontrolla le credenziali d'accesso"
     sessions:
       thinker:
         signed_in: "Accesso effettuato"
         signed_out: "La sessione di lavoro è terminata. Ora godi la vita"
-
       new:
         log_in: "Accedi"
         placeholder_email: ""
@@ -337,6 +342,7 @@ it:
       project:
         title: "Titolo"
         motto: "Motto"
+        logo: "Logo"
         description: "Descrizione"
         main_image: "Immagine di copertina"
         category_id: "Categoria di appartenenza"

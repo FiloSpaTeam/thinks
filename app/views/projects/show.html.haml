@@ -95,4 +95,28 @@
             = t ".workload_in_time"
           .scrollbar{ style: 'max-height: 450px;' }
 
+- content_for :page_details do
+  %ul.list-group.list-group-flush
+    %li.list-group-item 
+      %small.font-weight-bold 
+        = t('activerecord.attributes.project.logo')
+    %li.list-group-item
+      %small.font-weight-bold 
+        = t('activerecord.attributes.project.contribution_type') 
+      %br
+      = t("projects.contribution_type.#{@project.contribution_type}")
+    %li.list-group-item
+      %small.font-weight-bold 
+        = t('activerecord.attributes.project.category_id')
+      %br
+      = t("category.#{@project.category.t_name}")
+    %li.list-group-item
+      %small.font-weight-bold
+        = t('shared.projectsettingsbar.links')
+        
+    = link_to @project.home_url, class: 'list-group-item list-group-item-action' do
+      = icon('fas', 'home')
+    %span= t("activerecord.attributes.project.home_url")
+
+
 = render partial: 'projects/layout'
