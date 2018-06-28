@@ -116,7 +116,16 @@
         
     = link_to @project.home_url, class: 'list-group-item list-group-item-action' do
       = icon('fas', 'home')
-    %span= t("activerecord.attributes.project.home_url")
+      %span= t("activerecord.attributes.project.home_url")
+    = link_to @project.source_code_url, class: 'list-group-item list-group-item-action' do
+      = icon('fas', 'compact-disc')
+      %span= t("activerecord.attributes.project.source_code_url")
+    = link_to @project.documentation_url, class: 'list-group-item list-group-item-action' do
+      = icon('fas', 'book')
+      %span= t("activerecord.attributes.project.documentation_url")
+    = link_to @project.mailing_list_url, class: 'list-group-item list-group-item-action' do
+      = icon('fas', 'envelope')
+      %span= t("activerecord.attributes.project.mailing_list_url")
 
 
 = render partial: 'projects/layout'
