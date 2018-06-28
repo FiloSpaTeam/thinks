@@ -97,35 +97,30 @@
 
 - content_for :page_details do
   %ul.list-group.list-group-flush
-    %li.list-group-item 
-      %small.font-weight-bold 
-        = t('activerecord.attributes.project.logo')
     %li.list-group-item
-      %small.font-weight-bold 
-        = t('activerecord.attributes.project.contribution_type') 
+      %small.font-weight-bold= t('activerecord.attributes.project.logo')
+    %li.list-group-item
+      %small.font-weight-bold= t('activerecord.attributes.project.contribution_type')
       %br
       = t("projects.contribution_type.#{@project.contribution_type}")
     %li.list-group-item
-      %small.font-weight-bold 
-        = t('activerecord.attributes.project.category_id')
+      %small.font-weight-bold= t('activerecord.attributes.project.category_id')
       %br
       = t("category.#{@project.category.t_name}")
     %li.list-group-item
       %small.font-weight-bold
         = t('shared.projectsettingsbar.links')
-        
-    = link_to @project.home_url, class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'home')
-      %span= t("activerecord.attributes.project.home_url")
-    = link_to @project.source_code_url, class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'compact-disc')
-      %span= t("activerecord.attributes.project.source_code_url")
-    = link_to @project.documentation_url, class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'book')
-      %span= t("activerecord.attributes.project.documentation_url")
-    = link_to @project.mailing_list_url, class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'envelope')
-      %span= t("activerecord.attributes.project.mailing_list_url")
-
+    - if @project.home_url.present?
+      = link_to @project.home_url, class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'home', t("activerecord.attributes.project.home_url"))
+    - if @project.source_code_url.present?
+      = link_to @project.source_code_url, class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'compact-disc', t("activerecord.attributes.project.source_code_url"))
+    - if @project.documentation_url.present?
+      = link_to @project.documentation_url, class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'book', t("activerecord.attributes.project.documentation_url"))
+    - if @project.mailing_list_url.present?
+      = link_to @project.mailing_list_url, class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'envelope', t("activerecord.attributes.project.mailing_list_url"))
 
 = render partial: 'projects/layout'
