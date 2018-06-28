@@ -3,7 +3,7 @@
 -#     %small.font-weight-bold= t('.specific_actions')
 -#   = yield :page_actions
 
-%nav.sticky-top.navbar.navbar-expand.navbar-light.bg-white.border-bottom.pl-3.pl-3{style:"top: 62px;"}
+%nav.sticky-top.navbar.navbar-expand.navbar-light.bg-white.border-bottom.pl-3.pr-3{style:"top: 62px;"}
   %a.navbar-brand.font-weight-bold
     = t("pages.#{controller.controller_name}.#{controller.action_name}", description: @page_description).html_safe
 
