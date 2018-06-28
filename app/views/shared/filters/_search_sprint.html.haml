@@ -1,18 +1,7 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[sprint_serial]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".sprint")
-    %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
-      = text_field_tag 'filters[sprint_serial]', filter_value(:sprint_title), class: "form-control", placeholder: t("search"), autocomplete: 'off'
-    %ul.list-group.scrollbar
-      - sprints_filter = @project.sprints
-      - if active_filter?(:sprint_serial)
-        - sprints_filter = sprints_filter.where("lower(serial) LIKE '%#{params[:filters][:sprint_title].downcase.strip}%'")
-      - sprints_filter.each do |sprint|
-        = link_to url_for(url_for_filter(:sprint_id, sprint.id, [:sprint_serial, :last])), :class => "list-group-item #{ active_filter?(:sprint_id, sprint.id) ? 'list-group-item-info' : '' }", :remote => true do
-          = highlights_searched_text(sprint.serial.to_s, filter_value(:sprint_title))
-      - if sprints_filter.empty?
-        %li.list-group-item.list-group-item-danger
-          %strong
-            Not found
+- title = :sprint_title
+- serial = :sprint_serial
+- sprints_filter = @project.sprints
+- if active_filter?(serial)
+  - sprints_filter = sprints_filter.where("lower(serial) LIKE '%#{params[:filters][title].downcase.strip}%'")
+
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: serial, local_results: sprints_filter, local_filter: :sprint_id, local_conflicting_filters: [serial, :last], local_active_search_filter: title }

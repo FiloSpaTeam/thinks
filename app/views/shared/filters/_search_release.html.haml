@@ -1,18 +1,6 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[release_title]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".release")
-    %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
-      = text_field_tag 'filters[release_title]', filter_value(:release_title), class: "form-control", placeholder: t("search"), autocomplete: 'off'
-    %ul.list-group.scrollbar
-      - releases_filter = @project.releases
-      - if active_filter?(:release_title)
-        - releases_filter = releases_filter.where("lower(title) LIKE '%#{params[:filters][:release_title].downcase.strip}%'")
-      - releases_filter.each do |release|
-        = link_to url_for(url_for_filter(:release_id, release.id, [:release_title, :last])), :class => "list-group-item #{ active_filter?(:release_id, release.id) ? 'list-group-item-info' : '' }", :remote => true do
-          = highlights_searched_text(release.title, filter_value(:release_title))
-      - if releases_filter.empty?
-        %li.list-group-item.list-group-item-danger
-          %strong
-            Not found
+- title = :release_title
+- releases_filter = @project.releases
+- if active_filter?(title)
+  - releases_filter = releases_filter.where("lower(title) LIKE '%#{params[:filters][title].downcase.strip}%'")
+
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: title, local_results: releases_filter, local_filter: :release_id, local_conflicting_filters: [title, :last], local_active_search_filter: title }

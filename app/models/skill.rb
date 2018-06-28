@@ -13,9 +13,13 @@
 # You should have received a copy of the GNU Affero Public License
 # along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
-# Copyright (c) 2015, Claudio Maradonna
+# Copyright (c) 2015,2018 Claudio Maradonna
 
 class Skill < ActiveRecord::Base
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :thinkers
+
+  def self.skills_max_number
+    8
+  end
 end

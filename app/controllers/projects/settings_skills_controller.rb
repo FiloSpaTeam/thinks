@@ -23,13 +23,14 @@ class Projects::SettingsSkillsController < ApplicationController
   before_action :thinker!
 
   def index
+    @skills_max_number = Skill.skills_max_number
   end
 
   def create
     @skill = Skill.find(skill_params[:skill_ids])
 
     respond_to do |format|
-      if @skill.nil?
+      if @skill.nil? && @project.skills.count < Skill.skills_max_number
         format.html { redirect_to project_settings_skills_path(@project), alert: 'Skill does not exists.' }
         format.json { render json: {}, status: :unprocessable_entity }
       else

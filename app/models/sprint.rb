@@ -116,6 +116,10 @@ class Sprint < ActiveRecord::Base
       .first
   end
 
+  def visible_text
+    serial.to_s
+  end
+
   private
 
   def generate_serial

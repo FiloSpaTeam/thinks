@@ -154,6 +154,8 @@ class ReleasesController < ApplicationController
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
       "release_path(#{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>"
     }
+
+    @page_description = "<i>#{@release.version} - #{@release.title}</i>"
   end
 
   def destroy

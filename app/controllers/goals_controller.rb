@@ -75,6 +75,8 @@ class GoalsController < ApplicationController
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
       "goal_path(#{@goal.id})"                 => @goal.title
     }
+
+    @page_description = "\"<i>#{@goal.title}</i>\"" 
   end
 
   # GET /goals/new
@@ -107,6 +109,7 @@ class GoalsController < ApplicationController
 
     @project_form = nil
     @project      = @goal.project
+    @project_releases = @project.releases.order('version')
 
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),

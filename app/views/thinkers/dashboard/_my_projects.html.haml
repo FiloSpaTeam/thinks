@@ -37,7 +37,7 @@
             %button.btn.btn-primary{ type: 'submit' }
               = icon('fas', 'search', class: 'fa-inverse')
   .panel-body.panel-fixed-height.scrollbar
-    %table.table.table-condensed.table-hover
+    %table.table.table-sm.table-hover
       %tbody
         - unless smart_listing.empty?
           - smart_listing.collection.each do |project|

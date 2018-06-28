@@ -69,4 +69,8 @@ class Thinker < ActiveRecord::Base
   def ban(project)
     banned_thinkers.where(project: project).first
   end
+
+  def visible_text
+    name
+  end
 end

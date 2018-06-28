@@ -1,21 +1,6 @@
-%li{ :role => "presentation", :class => active_filter?(:last, "filters[task_title]") ? 'open' : '' }
-  %a.dropdown-toggle{ "data-toggle" => "dropdown", :role => "button", "aria-haspopup" => "true", "aria-expanded" => "false" }
-    = t(".task")
-    %span.caret
-  %div.dropdown-menu.panel.panel-default{ :style => "padding: 0;" }
-    .panel-heading
-      .input-group
-        = text_field_tag 'filters[task_title]', filter_value(:task_title), class: "form-control", placeholder: t("search"), autocomplete: 'off'
-        %span.input-group-btn
-          %button.btn.btn-default{ type: "submit" }
-            %i.fa.fa-search
-    %ul.list-group.scrollbar
-      - tasks_filter = @project.tasks
-      - if active_filter?(:task_title)
-        - tasks_filter = tasks_filter.where("lower(title) LIKE '%#{params[:filters][:task_title].downcase.strip}%'")
-      - tasks_filter.each do |task|
-        = link_to url_for(url_for_filter(:task_id, task.id, [:task_title, :last])), :class => "list-group-item #{ active_filter?(:task_id, task.id) ? 'list-group-item-info' : '' }", :remote => true do
-          = highlights_searched_text(task.title, filter_value(:task_title))
-      - if tasks_filter.empty?
-        %li.list-group-item.list-group-item-danger
-          %strong Not found
+- title = :task_title
+- tasks_filter = @project.tasks
+- if active_filter?(title)
+  - tasks_filter = tasks_filter.where("lower(title) LIKE '%#{params[:filters][title].downcase.strip}%'")
+
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: title, local_results: tasks_filter, local_filter: :task_id, local_conflicting_filters: [title, :last], local_active_search_filter: title }

@@ -21,7 +21,7 @@ module ApplicationHelper
   require_dependency 'modules/redcarpet/render/cleanerhtml'
 
   def application_version
-    version = '0.1.82.1447'
+    version = '0.2'
     content_tag(:div, 'v' + version, style: 'color: #BCBCBC;', class: 'margin-top-50 hidden-xs')
   end
 
@@ -113,7 +113,7 @@ module ApplicationHelper
 
       except.each { |k| filter_c.delete k }
 
-      any = filter_c.any?
+      any = !filter_c.empty?
     end
 
     any
@@ -126,7 +126,7 @@ module ApplicationHelper
   end
 
   def url_for_filter(key, value, conflicting_filters = [])
-    new_params = params.dup
+    new_params = params.dup.permit!
 
     new_params[:filters] = {} unless new_params.key?(:filters)
     new_params[:filters] = new_params[:filters].except(key)
@@ -134,8 +134,8 @@ module ApplicationHelper
       new_params[:filters] = new_params[:filters].except(filter)
     end
     new_params[:filters] = new_params[:filters].reject { |_, v| v.blank? }
-    new_params[:filters] = new_params[:filters].merge(key => value)
+    new_params[:filters] = new_params[:filters].merge(key => value) unless key.empty?
 
-    new_params
+    new_params.permit!
   end
 end

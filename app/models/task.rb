@@ -45,8 +45,6 @@ class Task < ActiveRecord::Base
   before_create :generate_serial
   before_validation :default_values
 
-  before_save :set_release
-
   after_save :update_goal_and_release
 
   validates :title, length: { maximum: 60 }, presence: true
@@ -227,6 +225,10 @@ class Task < ActiveRecord::Base
     (title.scan(/#{search}/).count * 2) + description.scan(/#{search}/).count
   end
 
+  def visible_text
+    "##{serial} #{title}"
+  end
+
   private
 
   def update_goal_and_release
@@ -275,12 +277,5 @@ class Task < ActiveRecord::Base
 
   def default_values
     self.status ||= Status.backlog.first
-  end
-
-  def set_release
-    if self.status == Status.backlog.first &&
-       workloads.size >= project.minimum_team_number
-      self.status = Status.release.first
-    end
   end
 end

@@ -19,6 +19,7 @@ class Release < ActiveRecord::Base
   belongs_to :project
 
   has_many :goals
+  has_many :tasks, through: :goals
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30, maximum: 1600 }
@@ -75,5 +76,9 @@ class Release < ActiveRecord::Base
     total_tasks_done_number = tasks_done.count
 
     @progress_percentage = total_tasks_done_number * 100 / (total_tasks_number.nonzero? || 1)
+  end
+
+  def visible_text
+    title
   end
 end

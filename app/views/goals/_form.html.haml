@@ -16,14 +16,14 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 = form_for [@project_form, @goal] do |f|
-  .form-group.required
-    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('.popover_content_release'), 'data-html' => 'true' do
+  .form-group
+    = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('goals.info_release'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
-    = f.label :release_id, t('.release'), :class => "control-label"
-    = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @goal.release_id), {include_blank: t('no_release')}, :class => "form-control"
+    = f.label :release_id, :class => "control-label"
+    = f.select :release_id, options_from_collection_for_select(@project_releases, 'id', 'complete_title', @goal.release_id), {include_blank: t('select')}, :class => "form-control", disabled: @project_releases.empty?
   .form-group.required
     = f.label :title, :class => "control-label"
-    = f.text_field :title, :class => "form-control has-counter", :placeholder => "My simple title", "aria-describedby" => "help-title"
+    = f.text_field :title, :class => "form-control has-counter", :placeholder => t('goals.placeholder_title'), "aria-describedby" => "help-title"
     %small#help-title.form-text.text-muted
       = t "remaining_chars"
       %span.counter{ 'data-maximum-length' => @chars_max_title }
@@ -31,9 +31,8 @@
   .form-group.required
     = render partial: 'shared/markdown_syntax'
     = f.label :description, :class => "control-label"
-    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => t('.placeholder_description'), "aria-describedby" => "help-description"
+    = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => t('goals.placeholder_description'), "aria-describedby" => "help-description"
     %small#help-description.form-text.text-muted= t "char_minimum", chars: @chars_min_description
-  %hr
-  = f.submit nil, :class => "btn btn-primary"
+  = f.submit t('add'), :class => "btn btn-primary"
   = link_to t('back'), :back, :class => "btn btn-default"
 

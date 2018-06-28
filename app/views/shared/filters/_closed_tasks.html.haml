@@ -1,3 +1,5 @@
-= label_tag :closed, :class => "control-label pull-right" do
-  = check_box_tag('filters[with_deleted_at]', true, filter_value(:with_deleted_at))
-  = t "closed"
+- name = :with_deleted_at
+%li.nav-item{ role: 'presentation' }
+  = label_tag :closed, :class => "control-label nav-link" do
+    = check_box_tag('filters[#{name}]', true, filter_value(name))
+    = t "filters.#{name}"

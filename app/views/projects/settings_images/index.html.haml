@@ -13,31 +13,23 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2017, Claudio Maradonna
+-# Copyright (c) 2018, Claudio Maradonna
 
-- content_for :page_actions do
-  = render partial: 'shared/projectsettingsbar'
+- content_for :page_content do
+  = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
+    .form-group
+      = f.label :logo, :class => 'control-label'
+      -# = f.attachinary_file_field :logo
+      %small#help-logo.form-text.text-muted
+        = t "projects.form_text_logo"
+    .form-group
+      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('projects.info_main_image', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
+        = icon('fas', 'info-circle')
+      = f.label :main_image, :class => 'control-label'
+      -# = f.attachinary_file_field :main_image
+      %small#help-main-image.form-text.text-muted
+        = t "projects.form_text_main_image"
+    = f.submit t('update'), :class => 'btn btn-primary'
+    = link_to t('cancel'), projects_path, :class => 'btn btn-default'
 
-.container-fluid
-  .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
-      = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      %h2
-        = t 'shared.projectsettingsbar.images_settings'
-      = form_for @project, url: project_settings_images_path, method: :post, :html => { :class => '' } do |f|
-        .form-group
-          = f.label :logo, :class => 'control-label'
-          -# = f.attachinary_file_field :logo
-          %small#help-logo.form-text.text-muted
-            = t "projects.form_text_logo"
-        .form-group
-          = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('projects.info_main_image', image_url: image_url('/template_thinks_main_image.svg')), 'data-html' => 'true' do
-            = icon('fas', 'info-circle')
-          = f.label :main_image, :class => 'control-label'
-          -# = f.attachinary_file_field :main_image
-          %small#help-main-image.form-text.text-muted
-            = t "projects.form_text_main_image"
-        = f.submit t('update'), :class => 'btn btn-primary'
-        = link_to t('cancel'), projects_path, :class => 'btn btn-default'
+= render partial: 'projects/layout_settings'

@@ -1,46 +1,39 @@
 - if comment.approved && !comment.reason.nil?
   %tr.info
-    %td.hidden-xxs{ style: 'width: 40px;' }
+    %td.p-1.hidden-xxs{ style: 'width: 40px;' }
       - if comment.reason.thinker.avatar
         = cl_image_tag(comment.reason.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
       - else
         .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-          %i.fa.fa-question.fa-2x.margin-top-5
-    %td{ colspan: 2 }
+          %i.fa.fa-question.fa-2x.mt-3
+    %td.p-1{ colspan: 2 }
       .text-dark
-        %strong
-          = comment.reason.thinker.name
-        %small
-          commented
-          = time_ago_in_words(comment.reason.created_at)
-          ago
+        = t('comments.comment_title', thinker: comment.reason.thinker.name, times_ago: time_ago_in_words(comment.reason.created_at)).html_safe
       .form-group
         = markdown(comment.reason.text, true)
 %tr{ class: "#{comment.approved && !comment.reason.nil? ? 'success' : ''}" }
-  %td.hidden-xxs{ style: 'width: 40px;' }
+  %td.p-1.hidden-xxs{ style: 'width: 40px;' }
     - if comment.thinker.avatar
       = cl_image_tag(comment.thinker.avatar.path, { size: '60x60', crop: :thumb, gravity: :face, class: 'border-radius' })
     - else
       .text-center.bg-gray.border-radius{ style: 'width: 60px; height: 60px;' }
-        %i.fa.fa-question.fa-2x.margin-top-5
+        %i.fa.fa-question.fa-2x.mt-3
 
-    - if !comment.approved
-      %ul.no-padding.margin-top-5{ style: 'list-style: none;' }
-        - if comment.thinker == current_thinker && current_thinker.ban(task.project).nil? 
+  %td.p-1
+    .text-dark
+      = t('comments.comment_title', thinker: comment.thinker.name, times_ago: time_ago_in_words(comment.created_at)).html_safe
+    .form-group{ id: "comment-#{comment.id}" }
+      = markdown(comment.text, true)
+  %td.p-1.border-left.text-center.align-middle{ width: 50 }
+    .dropdown.dropleft
+      %a.btn.dropdown-toggle{ role: 'button', 'href': '#', id: "dropdownComment#{comment.id}", "data-toggle": 'dropdown', "aria-haspopup": 'true', "aria-expanded": 'false' }
+        = icon('fas', 'bars', class: 'fa-sm')
+      .dropdown-menu
+        - if !comment.approved && comment.thinker == current_thinker && current_thinker.ban(task.project).nil?
           = edit_button(comment)
           - if !task.in_progress? && !task.done? && comment.reason.nil?
             = delete_button(comment)
-  %td
-    .text-dark
-      %strong
-        = comment.thinker.name
-      %small
-        commented
-        = time_ago_in_words(comment.created_at)
-        ago
-    .form-group{ id: "comment-#{comment.id}" }
-      = markdown(comment.text, true)
-  %td.text-center{ width: 50, style: 'vertical-align: middle;' }
-    = like_button(comment)
-    - if !task.done? && task.worker == current_thinker && !task.deleted?
-      = approve_button(comment)
+          .dropdown-divider
+        = like_button(comment)
+        - if !task.done? && task.worker == current_thinker && !task.deleted?
+          = approve_button(comment)

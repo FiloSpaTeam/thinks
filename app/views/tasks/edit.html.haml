@@ -13,19 +13,17 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018 Claudio Maradonna
 
 - content_for :page_actions do
   - if thinker_signed_in? && current_thinker.ban(@task.project).nil? && @task.project.participant?(current_thinker)
-    %li.float-left.hidden-xxs
-      = link_to new_project_task_path(@task.project), title: 'New task', class: 'line-height-25 line-height-35' do
-        = icon('fas', 'plus-square-o', class: 'fa-lg')
-        %span.hidden-xs
-          New
+    %li.nav-item.ml-1
+      = link_to new_project_task_path(@task.project), class: 'btn btn-primary' do
+        = icon('fas', 'plus')
+        %span
+          = t('new')
 
-= render partial: 'shared/projectbar', locals: { project: @task.project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @task.project }
-  .col-md-8
-    = render :partial => 'form'
+- content_for :page_content do
+  = render :partial => 'form'
+
+= render partial: 'projects/layout'

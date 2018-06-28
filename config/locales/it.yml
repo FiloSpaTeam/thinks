@@ -1,6 +1,7 @@
 it:
   messages: "Messaggi di sistema"
   char_minimum: "Caratteri minimi richiesti: %{chars}"
+  char_in: "Lunghezza: tra %{chars_min} e %{chars_max} caratteri"
   remaining_chars: "Caratteri rimanenti: "
   select: "Seleziona"
   save: "Salva"
@@ -9,16 +10,70 @@ it:
   update: "Aggiorna"
   edit: "Modifica"
   destroy: "Elimina"
+  delete: "Elimina"
   search: "Cerca"
   new: "Nuovo"
   add: "Aggiungi"
   cancel: "Annulla"
+  sending: "Invio in corso"
+  are_you_sure: "Sicuro di voler proseguire?"
+  discards: "Scarta"
 
   filters:
-    reset: "Resetta filtri"
+    search: "Cerca"
+    start: "Avvia"
+    reset: "Azzera filtri"
+    filters: "Filtri"
+    no_results: "Nessun risultato"
+
+    aria_label_toolbar: "Toolbar dei filtri"
+    aria_label_group: "Gruppo filtri"
+
+    placeholder_search_text: "Costruzione di Gotham City.."
+
+    release_id: "Pianificazione"
+    sprint_id: "Sprint"
+    goal_id: "Obiettivo"
+    worker_id: "Assegnato a"
+    thinker_id: "Pensato da"
+    with_deleted_at: "Scartato"
+    progress_lower_than: "Progresso (% inferiore a)"
 
   alerts:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
+
+  pages:
+    projects:
+      show: "Pagina principale"
+      edit: "Modifica titolo e descrizione"
+      brief: "Piano d'azione"
+    tasks:
+      index: "Backlog - Lista dei lavori"
+      new: "Aggiungi un nuovo lavoro al backlog"
+      show: "%{description}"
+      edit: "Modifica lavoro %{description}"
+    goals:
+      index: "Obiettivi del progetto"
+      new: "Aggiungi un nuovo obiettivo"
+      show: "Obiettivo %{description}"
+    releases:
+      new: "Aggiungi una nuova pianificazione"
+      index: "Quadro generale delle pianificazioni"
+      show: "Piano %{description}"
+    settings_release:
+      index: "Modifica impostazioni per il contributo"
+    settings_links:
+      index: "Modifica la categoria, la licenza o i link di riferimento"
+    settings_images:
+      index: "Modifica copertina e logo"
+    settings_skills:
+      index: "Modifica le abilità richieste"
+    settings_contribution_types:
+      index: "Modifica le impostazioni per la partecipazione"
+    settings_other:
+      index: "Trasferisci il progetto"
+    settings_father:
+      index: "Aggancia il progetto ad un altro"
 
   shared:
     navbar:
@@ -50,6 +105,8 @@ it:
       actions: "Ulteriori azioni"
       transfer_project: "Trasferisci il progetto"
       link_to_master_project: "Aggancia ad un progetto"
+    markdown_syntax:
+      popover_content: "Maggiori informazioni qui: %{link}"
 
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
@@ -69,6 +126,12 @@ it:
     contribution_text: "Regolamento per la partecipazione"
     no_contribution_text: "Nessun testo specificato per le condizioni di partecipazione"
     participation_preferences: "Impostazioni di partecipazione"
+
+    no_goal: "Nessun obiettivo ancora stabilito"
+    no_tasks: "Nessun lavoro selezionabile"
+
+    brief_description: "Ogni scheda rappresenta un piano stabilito. Le schede oscurate indicano che la parte è la stata completata."
+    hide_completed_release: "Nascondi le azioni completate"
 
     approach_type:
       agile: "Metodo agile"
@@ -109,8 +172,58 @@ it:
 
     settings_father:
       index:
-        you_have_no_master_project_related: "Non fai parte di nessun progetto \"principale\"."
+        you_have_no_master_project_related: "Il progetto non fa parte di nessun progetto \"principale\"."
         link_to: "Aggancia"
+
+  tasks:
+    info_goal: "È importante specificare l'obiettivo a cui appartiene un lavoro, proprio per permettere un maggiore controllo sulla pianificazione; tuttavia non è obbligatorio."
+    info_father: "Il \"lavoro padre\" stabilisce un lavoro che deve essere svolto prima di questo che si sta definendo ora.<br><br><i>Questa opzione non può essere modificata se il lavoro è stato assegnato oppure è stato completato.</i>"
+    placeholder_title: "Trovare il Bat-Segnale"
+    placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
+
+    comments: "Commenti e considerazioni"
+
+    statuses:
+      backlog: "Backlog"
+      release: "Da pianificare"
+      sprint: "Sprint"
+      in_progress: "In lavorazione"
+      done: "Completati"
+
+    table:
+      header_task: "Filtra per stato di avanzamento"
+
+      th_task: "Stato di avanzamento"
+      th_workload: "Carico di lavoro"
+      th_view: "Visitatori"
+
+      action_reopen: "Riapri"
+
+      no_results: "Nessun lavoro presente nel backlog"
+
+  comments:
+    likes:
+      one: "Un \"mi piace\""
+      other: "%{text} \"mi piace\"" 
+    form_title: "Cosa ne pensi?"
+    no_comments: "Nessun commento/considerazione presente"
+    comment_title: "<strong>%{thinker}</strong> <small>ha commentato %{times_ago} fa</small>"
+    you_cannot_vote_yourself: "Non puoi auto-votarti"
+    confirm_delete: "Sei sicuro di voler cancellare il commento? Il team potrebbe considerarlo comunque un'intervento positivo"
+    
+  goals:
+    info_release: "Associare una pianificazione è importante ma non obbligatorio in questa fase. Permette di comprendere la priorità e le scadenze dei vari obiettivi e quindi dei singoli task."
+    placeholder_title: "Catturare Joker"
+    placeholder_description: "Joker è il super-cattivo e come tale non può girare a piede libero. Avete un piano migliore?"
+
+    plan_this_goal: "Pianifica questo obiettivo"
+
+    goal: "Obiettivo"
+
+  releases:
+    placeholder_title: "Missione \"Joker inside\""
+    placeholder_description: "Catturare Joker e' la nostra priorità oltre che ristabilire l'ordine. Una volta catturato interrogarlo per trovare il nascondiglio segreto."
+    form_text_end_at: "La data non è modificabile una volta inserite pianificazioni successive. Questo per avere una reale esperienza con la pianificazione del team."
 
   start:
     index:
@@ -191,6 +304,8 @@ it:
     id_3: "4 settimane"
 
   skill:
+    no_skills: "Nessuna abilità richiesta"
+    max_number: "Il numero massimo di requisiti selezionabili è: %{number}"
     analytical_thinking: "Pensiero analitico"
     attention_to_details: "Attenzione ai dettagli"
     business_vision: "Orientato al business"
@@ -218,6 +333,10 @@ it:
     user_experience_expert: "Esperto di User Experience"
     vision: "Capace di prevedere a lungo termine"
 
+  views:
+    pagination:
+      total: "Totale dei risultati: "
+
   activerecord:
     attributes:
       project:
@@ -244,3 +363,17 @@ it:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"
         password_confirmation: "Conferma password"
+      task:
+        goal_id: "Obiettivo di riferimento"
+        father_id: "Lavoro padre di riferimento"
+        title: "Titolo"
+        description: "Descrizione"
+      goal:
+        release_id: "Pianificazione associata"
+        title: "Definizione"
+        description: "Descrizione"
+      release:
+        version: "Nome in codice"
+        end_at: "Termine stabilito"
+        title: "Titolo"
+        description: "Descrizione"

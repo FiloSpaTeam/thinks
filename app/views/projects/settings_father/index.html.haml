@@ -13,32 +13,26 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018, Claudio Maradonna
 
-- content_for :page_actions do
-  = render partial: 'shared/projectsettingsbar'
+- content_for :page_content do
+  .text-justify
+    - if @project.project.present?
+      = link_to @project.project.title, @project.project
+      = cl_image_tag(@project.project.main_image.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 10px;' }) if @project.project.main_image
+      = markdown(@project.project.description)
+    - else
+      %i
+        %strong= t ".you_have_no_master_project_related"
+  %hr
+  - if @project.project.nil?
+    = form_for @project, url: project_settings_father_index_path(@project), method: :post do |f|
+      .form-group
+        = text_field_tag "project[serial]", nil, :type => "text", :class => "form-control", placeholder: t('projects.form.placeholder_serial')
+        %small#help-serial.form-text.text-muted
+          = t "projects.form.form_text_serial"
+      = f.submit t(".link_to"), :class => 'btn btn-primary'
+  - else
+    = link_to t('unlink'),  project_settings_father_path(@project, @project.project), :method => 'delete', :class => 'btn btn-danger', :data => {:confirm => 'Are you sure?'}
 
-.container-fluid
-  .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
-      = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      .text-justify
-        - if @project.project.present?
-          = link_to @project.project.title, @project.project
-          = cl_image_tag(@project.project.main_image.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 10px;' }) if @project.project.main_image
-          = markdown(@project.project.description)
-        - else
-          %i
-            %strong= t ".you_have_no_master_project_related"
-      %hr
-      - if @project.project.nil?
-        = form_for @project, url: project_settings_father_index_path(@project), method: :post do |f|
-          .form-group
-            = text_field_tag "project[serial]", nil, :type => "text", :class => "form-control", placeholder: t('projects.form.placeholder_serial')
-            %small#help-serial.form-text.text-muted
-              = t "projects.form.form_text_serial"
-          = f.submit t(".link_to"), :class => 'btn btn-primary'
-      - else
-        = link_to t('unlink'),  project_settings_father_path(@project, @project.project), :method => 'delete', :class => 'btn btn-danger', :data => {:confirm => 'Are you sure?'}
+= render partial: 'projects/layout_settings'

@@ -13,15 +13,9 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2018, Claudio Maradonna
 
-- content_for :page_actions do
-  - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
-    %li.nav-item.ml-1
-      = link_to new_project_goal_path(@project), :class => "btn btn-primary" do
-        = icon('fas', 'plus', t('new'))
-
-- content_for :page_content do
-  = render :partial => 'form'
+- content_for :page_menu do
+  = render partial: 'shared/projectsettingsbar'
 
 = render partial: 'projects/layout'

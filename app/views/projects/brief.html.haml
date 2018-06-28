@@ -13,36 +13,26 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2017, Claudio Maradonna
+-# Copyright (c) 2018, Claudio Maradonna
+- content_for :page_actions do
+  %li.nav-item.ml-1
+    %button.btn.btn-default.active{ type:"button", "data-toggle":"button", "aria-pressed":"true", autocomplete:"off", }
+      = t('projects.hide_completed_release')
 
-.container-fluid
-  .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
-      = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      %ul.nav.nav-tabs
-        - @releases.each_with_index do |release, index|
-          %li{ role: "presentation", class: index == 0 ? "active" : "" }
-            %a{ role: "tab", "aria-controls": "details", "data-toggle": "tab", href: "#tab-release-" + release.id.to_s }
+- content_for :page_content do
+  %p= t('projects.brief_description')
+  .card-columns
+    - @releases.each do |release|
+      .card
+        .card-body
+          %h5.card-title.font-weight-bold.text-center
+            = release.end_at.strftime(t('date.formats.long'))
+            %br
+            %small
               = release.title
-      .panel.panel-default{ style: "border-top: 0; border-radius: 0 0 4px 4px;" }
-        .tab-content.panel-body
-          - @releases.each_with_index do |release, index|
-            .tab-pane.fade{ role: "tabpanel", id: "tab-release-" + release.id.to_s, class: index == 0 ? 'active in' : ''}
-              .row
-                .col-md-4
-                  .text-justify
-                    = release.description
-                .col-md-8
-                  %table.table.table-condensed
-                    %tbody
-                      - release.goals.each do |goal|
-                        %tr
-                          %td
-                            = goal.title
-                            %table
-                              %tbody
-                                - goal.tasks do |task|
-                                  %tr
-                                    = task.title
+              %br
+              %span.font-italic
+                = release.version
+          = markdown(release.description)
+
+= render partial: 'projects/layout'

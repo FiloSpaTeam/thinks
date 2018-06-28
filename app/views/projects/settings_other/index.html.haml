@@ -13,23 +13,17 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018, Claudio Maradonna
 
-- content_for :page_actions do
-  = render partial: 'shared/projectsettingsbar'
+- content_for :page_content do
+  = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
+    .form-group.has-feedback
+      = label_tag t('activerecord.attributes.project.owner'), nil, :class => 'control-label'
+      = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
+      %small#help-owner-email.form-text.text-muted
+        = t ".change_owner_email"
+    %hr
+    = f.submit t('.transfer'), :class => 'btn btn-primary'
+    = link_to t('cancel'), projects_path, :class => 'btn btn-default'
 
-.container-fluid
-  .row
-    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
-      = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
-      = render :partial => "shared/breadcrumbs", locals: { project: @project }
-      = form_for @project, url: project_settings_other_index_path, method: :post, :html => { :class => '' } do |f|
-        .form-group.has-feedback
-          = label_tag t('activerecord.attributes.project.owner'), nil, :class => 'control-label'
-          = text_field_tag :owner_email, @project.thinker.email, :class => 'form-control'
-          %small#help-owner-email.form-text.text-muted
-            = t ".change_owner_email"
-        %hr
-        = f.submit t('.transfer'), :class => 'btn btn-primary'
-        = link_to t('cancel'), projects_path, :class => 'btn btn-default'
+= render partial: 'projects/layout_settings'

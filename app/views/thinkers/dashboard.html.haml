@@ -22,7 +22,7 @@
         .panel-heading
           = t ".what_im_doing"
         .panel-body.panel-fixed-height.scrollbar
-          %table.table.table-condensed.table-hover
+          %table.table.table-sm.table-hover
             %thead
               %tr
                 %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
@@ -88,7 +88,7 @@
                           by
                           %i
                             #{task.updater.name}
-                %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                %td.text-center.workload-table.align-middle
                   = workload_description(task)
       %div
         %ul.nav.nav-tabs{ role: 'tablist' }
@@ -101,7 +101,7 @@
         .panel.panel-default{ style: 'border-top: 0; border-radius: 0 0 4px 4px;' }
           .tab-content.panel-fixed-height.scrollbar.panel-body
             #tasks_done.tab-pane.active{ role: 'tabpanel' }
-              %table.table.table-condensed.table-hover
+              %table.table.table-sm.table-hover
                 %thead
                   %tr
                     %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
@@ -164,10 +164,10 @@
                               updated at
                               %strong
                                 = task.updated_at.to_s(:short)
-                    %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                    %td.text-center.workload-table.align-middle
                       = workload_description(task)
             #tasks_created.tab-pane{ role: 'tabpanel' }
-              %table.table.table-condensed.table-hover
+              %table.table.table-sm.table-hover
                 %thead
                   %tr
                     %td.col-lg-8.col-md-8.col-sm-8.col-xs-9
@@ -220,7 +220,7 @@
                             created at
                             %strong
                               = task.created_at.to_s(:short)
-                    %td.text-center.workload-table{ style: 'vertical-align: middle;' }
+                    %td.text-center.workload-table.align-middle
                       = workload_description(task)
     .col-md-6
       = smart_listing_render :my_projects

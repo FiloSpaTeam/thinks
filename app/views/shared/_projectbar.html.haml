@@ -23,37 +23,36 @@
         = project.motto
       - else
         = plain_text(project.description.lines.first)
-  - if @project.active? || scrum_master?(@project)
-    = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
-      = icon('fas', 'map')
-      %span= t(".brief")
-  - if content_for?(:page_actions)
-    %li.list-group-item.border-top-0
-      %small.font-weight-bold= t('.specific_actions')
-    = yield :page_actions
-  -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-  -#   <div class="d-flex w-100 justify-content-between">
-  -#     <h5 class="mb-1">List group item heading</h5>
-  -#     <small>3 days ago</small>
-  -#   </div>
-  -#   <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-  -#   <small>Donec id elit non mi porta.</small>
-  - if @project.active? || scrum_master?(@project)
-    %li.list-group-item
-      %small.font-weight-bold= t('.general_actions')
-    = link_to project_releases_path(project), class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'flag-checkered')
-      %span= t(".releases")
-    = link_to project_goals_path(project), class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'crosshairs')
-      %span= t(".goals")
-    = link_to project_tasks_path(project), class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'tasks')
-      %span= t(".tasks")
-    = link_to project_sprints_path(project), class: 'list-group-item list-group-item-action' do
-      = icon('fas', 'flag')
-      %span= t(".sprints")
-    - if project.with_recruiting?
-      = link_to project_recruitments_path(project), class: 'list-group-item list-group-item-action' do
-        = icon('fas', 'user-plus')
-        %span= t(".recruitment")
+  - if content_for? :page_menu
+    = yield :page_menu
+  - else
+    - if @project.active? || scrum_master?(@project)
+      = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
+        = icon('fas', 'map')
+        %span= t(".brief")
+    -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    -#   <div class="d-flex w-100 justify-content-between">
+    -#     <h5 class="mb-1">List group item heading</h5>
+    -#     <small>3 days ago</small>
+    -#   </div>
+    -#   <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    -#   <small>Donec id elit non mi porta.</small>
+    - if @project.active? || scrum_master?(@project)
+      %li.list-group-item
+        %small.font-weight-bold= t('.general_actions')
+      = link_to project_releases_path(project), class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'flag-checkered')
+        %span= t(".releases")
+      = link_to project_goals_path(project), class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'crosshairs')
+        %span= t(".goals")
+      = link_to project_tasks_path(project), class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'tasks')
+        %span= t(".tasks")
+      = link_to project_sprints_path(project), class: 'list-group-item list-group-item-action' do
+        = icon('fas', 'flag')
+        %span= t(".sprints")
+      - if project.with_recruiting?
+        = link_to project_recruitments_path(project), class: 'list-group-item list-group-item-action' do
+          = icon('fas', 'user-plus')
+          %span= t(".recruitment")
