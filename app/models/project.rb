@@ -58,6 +58,7 @@ class Project < ActiveRecord::Base
   enum contribution_type: %i[open with_recruiting closed]
   enum approach_type: %i[agile waterfall]
   enum status: %i[draft active suspended]
+  enum conditions: %i[start definition plan active]
 
   validates :title, length: { in: 2..60 }, uniqueness: true
   validates :motto, length: { maximum: 240 }, presence: true, if: lambda {
