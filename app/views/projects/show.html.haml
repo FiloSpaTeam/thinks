@@ -52,7 +52,7 @@
   .row
     .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-right
       = render :partial => 'shared/projectbar', locals: { project: @project }
-    .col-md-10.col-lg-10.pt-3.pb-3
+    .col-md-8.col-lg-8.pt-3.pb-3
       = render :partial => "shared/breadcrumbs", locals: { project: @project }
       .row
         .col-md-10
@@ -98,3 +98,6 @@
               %label.control-label
                 = t ".workload_in_time"
               .scrollbar{ style: 'max-height: 450px;' }
+
+    .col-md-2.col-lg-2.pt-3.pb-3.pl-0.pr-0.border-left
+      = render :partial => 'shared/projectdetails', locals: { project: @project }
