@@ -40,6 +40,6 @@
       = t "activerecord.attributes.task.description"
     = f.text_area :description, :class => 'form-control', :rows => 8, :placeholder => t('tasks.placeholder_description'), "aria-describedby" => "help-description"
     %small#help-description.form-text.text-muted= t "char_minimum", chars: @chars_min_description
-  = f.submit t('add'), :class => "btn btn-primary"
+  = f.submit @task.new_record? ? t('add') : t('edit'), :class => "btn btn-primary"
   = link_to t('back'), :back, :class => "btn btn-default"
 

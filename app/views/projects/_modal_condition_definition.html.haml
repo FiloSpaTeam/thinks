@@ -1,0 +1,30 @@
+-# This file is part of Thinks.
+
+-# Thinks is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero Public License as published by
+-# the Free Software Foundation, either version 3 of the License, or
+-# (at your option) any later version.
+
+-# Thinks is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero Public License for more details.
+
+-# You should have received a copy of the GNU Affero Public License
+-# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
+-# Copyright (c) 2018, Claudio Maradonna
+
+#modal-condition-definition.modal.fade.open-by-default{tabindex: "-1", role:"dialog"}
+  .modal-dialog{role: "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title= t ".modal_title"
+        %button{type: "button", class: "close", "data-dismiss": "modal", "aria-label": t('close')}
+          %span{"aria-hidden": "true"} &times;
+      .modal-body
+        = t('.modal_body').html_safe
+      .modal-footer
+        %button.btn.btn-default{type: "button", "data-dismiss": "modal"}
+          = t 'close'
+        = link_to new_project_task_path(@project, goal_id: @goal), class: 'btn btn-primary' do
+          = t('goals.add_task')

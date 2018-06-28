@@ -133,6 +133,16 @@ it:
     brief_description: "Ogni scheda rappresenta un piano stabilito. Le schede oscurate indicano che la parte è la stata completata."
     hide_completed_release: "Nascondi le azioni completate"
 
+    modal_condition_definition:
+      modal_title: "È ora di creare ed associare un lavoro"
+      modal_body: "
+      <p>
+        Creare un obiettivo è sicuramente un grande passo. Non rimane altro che stabilire il da farsi e poi pianificare l'obiettivo.
+        <br>
+        Ovviamente non dimenticare che puoi sempre creare ulteriori obiettivi e lavori da svolgere!
+      </p>
+      "
+
     approach_type:
       agile: "Metodo agile"
       waterfall: "Metodo a \"cascata\""
@@ -217,8 +227,11 @@ it:
     placeholder_description: "Joker è il super-cattivo e come tale non può girare a piede libero. Avete un piano migliore?"
 
     plan_this_goal: "Pianifica questo obiettivo"
+    add_task: "Aggiungi un lavoro"
 
     goal: "Obiettivo"
+
+    created: "Obiettivo %{title} aggiunto con successo"
 
   releases:
     placeholder_title: "Missione \"Joker inside\""

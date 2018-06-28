@@ -128,9 +128,9 @@ class GoalsController < ApplicationController
         @goal.thinker  = current_thinker
         @goal.progress = 0.0
 
-        if @goal.save
+        if @goal.save_and_check_project_condition
           create_notification(@goal, @goal.project)
-          format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
+          format.html { redirect_to @goal, notice: t('goals.created', title: @goal.title) }
           format.json { render :show, status: :created, location: @goal }
         else
           set_form_errors(@goal)

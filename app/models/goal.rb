@@ -84,4 +84,12 @@ class Goal < ActiveRecord::Base
   def visible_text
     title
   end
+
+  def save_and_check_project_condition
+    ActiveRecord::Base.transaction do
+      save
+
+      project.definition! if project.beginning?
+    end
+  end
 end

@@ -45,7 +45,7 @@ class Task < ActiveRecord::Base
   before_create :generate_serial
   before_validation :default_values
 
-  after_save :update_goal_and_release
+  after_save :update_goal_and_release, :update_project_condition
 
   validates :title, length: { maximum: 60 }, presence: true
   validates :description, length: { minimum: 30 }
@@ -262,6 +262,15 @@ class Task < ActiveRecord::Base
       rescue => ex
         puts ex.message
       end
+    end
+  end
+
+  # TODO Move to something in project.rb
+  def update_project_condition
+    if project.definition? && project.tasks.where.not(goal_id: nil).present?
+      project.plan!
+    else
+      project.definition!
     end
   end
 

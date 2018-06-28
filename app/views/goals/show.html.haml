@@ -15,14 +15,17 @@
 
 -# Copyright (c) 2015,2018 Claudio Maradonna
 
+- content_for :page_modals do
+  = render partial: 'projects/modal_condition_definition'
+
 - content_for :page_actions do
+  %li.nav-item.ml-1
+    = link_to new_project_task_path(@project, goal_id: @goal), class: 'btn btn-secondary' do
+      = icon('fas', 'plus', t('goals.add_task'))
   - if @goal.thinker == current_thinker
     %li.nav-item.ml-1
       = link_to edit_goal_path(@goal), class: 'btn btn-primary' do
         = icon('fas', 'edit', t('edit'))
-    - if @goal.tasks.ready_to_sprint.present?
-      %li.nav-item.ml-1
-        = link_to t('goals.plan_this_goal'), tasks_in_sprint_goal_path(@goal), :method => :put, class: 'btn btn-default'
 
 - content_for :page_content do
   = markdown(@goal.description)

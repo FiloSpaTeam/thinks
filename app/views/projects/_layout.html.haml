@@ -1,4 +1,6 @@
 .container-fluid
+  = yield :page_modals
+
   - if current_thinker.present?
     - if current_page? project_path(@project)
       = render partial: 'projects/modal_contribution_preferences'

@@ -53,5 +53,7 @@ App.init = ->
     else
       counter.removeClass('text-danger')
 
+  $('.modal.open-by-default').modal('show')
+
 $(document).on "turbolinks:load", ->
   App.init()
