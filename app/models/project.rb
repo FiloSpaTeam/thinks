@@ -116,6 +116,10 @@ class Project < ActiveRecord::Base
       .present?
   end
 
+  def has_goals?
+    return self.goals.any?
+  end
+
   def recruit?(thinker)
     return false if assigned_roles
                     .where(thinker: thinker)

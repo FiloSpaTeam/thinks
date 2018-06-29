@@ -142,6 +142,12 @@ it:
         Ovviamente non dimenticare che puoi sempre creare ulteriori obiettivi e lavori da svolgere!
       </p>
       "
+    modal_create_goal:
+        modal_title: "Inizia stabilendo un obiettivo"
+        modal_body: "
+            Quali sono gli step necessari per realizzare il tuo progetto? <br> 
+            Stabilisci un obiettivo in modo iniziare a programmare il lavoro nella direzione giusta.
+            "
 
     approach_type:
       agile: "Metodo agile"
@@ -228,6 +234,7 @@ it:
 
     plan_this_goal: "Pianifica questo obiettivo"
     add_task: "Aggiungi un lavoro"
+    add: "Crea un obiettivo"
 
     goal: "Obiettivo"
 
@@ -245,12 +252,12 @@ it:
       start_a_new_project: "Inizia ora. Crea il tuo progetto"
       sign_up: "Iscriviti ora"
       section_1_title: "<i>Thinks</i> guida le persone all'interno del progetto fornendo strumenti semplici ed essenziali."
-      section_1_description: "Un network di persone che voglio lavorare solo su ciò che più amano."
+      section_1_description: "Un network di persone che vogliono lavorare solo su ciò che più amano."
       section_1_button: "Scopri come avviene"
       feature_1: "Semplicità in principio"
       feature_description_1: "I progetti migliori nascono dal contributo dei singoli. Noi vogliamo far sì che ognuno possa contribuire intuitivamente nei vari progetti."
       feature_2: "Obiettivo sempre sotto tiro"
-      feature_description_2: "Molte cose sono importanti, alcune però lo sono maggiormente in certi momenti. Stabilite voi i vostri e create uno scopo; focalizzate le energie e raggiungetelo."
+      feature_description_2: "Molte cose sono importanti, alcune però lo sono maggiormente in certi momenti. Stabilite voi i vostri obiettivi e create uno scopo; focalizzate le energie e raggiungetelo."
       feature_3: "Tutto ha un senso"
       feature_description_3: "Gli obiettivi convogliano energia. Per utilizzarla al meglio questa deve essere indirizzata verso una meta. Stabilite le tappe e passo dopo passo il vostro progetto sarà realtà."
       feature_4: "Libertà"
