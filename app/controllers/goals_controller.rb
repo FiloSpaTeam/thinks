@@ -137,6 +137,7 @@ class GoalsController < ApplicationController
           set_validators_for_form_help
 
           @project_form = @project
+          @project_releases = @project.releases.order('version')
 
           format.html { render :new }
           format.json { render json: @goal.errors, status: :unprocessable_entity }

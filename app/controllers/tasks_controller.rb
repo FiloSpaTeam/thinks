@@ -158,7 +158,7 @@ class TasksController < ApplicationController
     @task.updater = current_thinker
 
     respond_to do |format|
-      if @task.save
+      if @task.save_and_check_project_condition
         create_notification(@task, @project)
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
