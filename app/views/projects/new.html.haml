@@ -21,20 +21,23 @@
       %h1.mb-5
         = t('.main_title')
       = render partial: 'projects/form'
-    .d-none.d-sm-block.col-sm-3.sticky-top.sticky-top-5.h-25
-      %ol
-        %li
-          %a.js-scroll-trigger{ href: '#title_and_description', 'data-turbolinks': 'false' }
-            = t('projects.form.title_and_description')
-        %li
-          %a.js-scroll-trigger{ href: '#links', 'data-turbolinks': 'false' }
-            = t('projects.form.links')
-        %li
-          %a.js-scroll-trigger{ href: '#conditions_of_participations', 'data-turbolinks': 'false' }
-            = t('projects.form.conditions_of_participations')
-        %li
-          %a.js-scroll-trigger{ href: '#minimum_settings', 'data-turbolinks': 'false' }
-            = t('projects.form.minimum_settings_for_work')
-      .mt-4
-        %button.btn.btn-block.btn-success
-          = t('save')
+    .d-none.d-sm-block.col-sm-3.sticky-top.sticky-top-5.h-25.card.p-0
+      .card-body
+        .card-title
+          %h3= t('projects.form.shortcuts')
+        %ol
+          %li
+            %a.js-scroll-trigger{ href: '#title_and_description', 'data-turbolinks': 'false' }
+              = t('projects.form.title_and_description')
+          %li
+            %a.js-scroll-trigger{ href: '#links', 'data-turbolinks': 'false' }
+              = t('projects.form.links')
+          %li
+            %a.js-scroll-trigger{ href: '#conditions_of_participations', 'data-turbolinks': 'false' }
+              = t('projects.form.conditions_of_participations')
+          %li
+            %a.js-scroll-trigger{ href: '#minimum_settings', 'data-turbolinks': 'false' }
+              = t('projects.form.minimum_settings_for_work')
+        .mt-4
+          %button.submit.btn.btn-block.btn-success{ "data-refers-to": "#new_project" }
+            = t('save')

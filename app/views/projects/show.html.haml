@@ -103,10 +103,11 @@
       %small.font-weight-bold= t('activerecord.attributes.project.contribution_type')
       %br
       = t("projects.contribution_type.#{@project.contribution_type}")
-    %li.list-group-item
-      %small.font-weight-bold= t('activerecord.attributes.project.category_id')
-      %br
-      = t("category.#{@project.category.t_name}")
+    - unless @project.category.nil?
+      %li.list-group-item
+        %small.font-weight-bold= t('activerecord.attributes.project.category_id')
+        %br
+        = t("category.#{@project.category.t_name}")
     %li.list-group-item
       %small.font-weight-bold
         = t('shared.projectsettingsbar.links')

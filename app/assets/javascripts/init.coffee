@@ -55,5 +55,11 @@ App.init = ->
 
   $('.modal.open-by-default').modal('show')
 
+  refers_to = $('button.submit').attr('data-refers-to')
+  if refers_to?
+    $('.submit').click ->
+      refer = $(@).attr('data-refers-to')
+      $(refer).submit()
+
 $(document).on "turbolinks:load", ->
   App.init()

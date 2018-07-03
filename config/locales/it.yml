@@ -171,6 +171,7 @@ it:
       "
       placeholder_serial: "Codice seriale"
       form_text_serial: "Devi ottenere il seriale contattando il proprietario del progetto a cui vuoi agganciarti"
+      shortcuts: "Scorciatoie"
 
     new:
       main_title: "Nuovo progetto"
