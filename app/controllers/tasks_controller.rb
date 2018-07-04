@@ -140,7 +140,7 @@ class TasksController < ApplicationController
       'nil' => I18n.t('edit')
     }
 
-    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\"" 
+    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\""
 
     set_form
   end
