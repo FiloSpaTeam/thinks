@@ -61,9 +61,7 @@ class Project < ActiveRecord::Base
   enum condition: %i[beginning definition plan work]
 
   validates :title, length: { in: 2..60 }, uniqueness: true
-  validates :motto, length: { maximum: 240 }, presence: true, if: lambda {
-    project.nil? && skip_motto_validation.nil?
-  }
+  validates :motto, length: { maximum: 240 }
   validates :description, length: { in: 2..1600 }
   validates :thinker_id, presence: true, on: :create
   validates :slug, presence: true

@@ -229,6 +229,14 @@ class Task < ActiveRecord::Base
     "##{serial} #{title}"
   end
 
+  def save_and_check_project_condition
+    ActiveRecord::Base.transaction do
+      save
+
+      project.plan! if project.definition?
+    end
+  end
+
   private
 
   def update_goal_and_release

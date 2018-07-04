@@ -59,9 +59,10 @@
     .col-md-10
       %h3
         = @project.title
-        \-
-        %small.font-italic
-          = @project.motto
+        - if @project.motto.present?
+          \-
+          %small.font-italic
+            = @project.motto
       .text-justify
         = cl_image_tag(@project.logo.path, { size: '200x200', class: 'pull-left project-img', style: 'margin-right: 25px;' }) if @project.logo
         = markdown(@project.description)
@@ -108,13 +109,15 @@
       %small.font-weight-bold= t('activerecord.attributes.project.contribution_type')
       %br
       = t("projects.contribution_type.#{@project.contribution_type}")
-    %li.list-group-item
-      %small.font-weight-bold= t('activerecord.attributes.project.category_id')
-      %br
-      = t("category.#{@project.category.t_name}")
-    %li.list-group-item
-      %small.font-weight-bold
-        = t('shared.projectsettingsbar.links')
+    - unless @project.category.nil?
+      %li.list-group-item
+        %small.font-weight-bold= t('activerecord.attributes.project.category_id')
+        %br
+        = t("category.#{@project.category.t_name}")
+    - if @project.home_url.present? || @project.source_code_url.present? || @project.documentation_url.present? || @project.mailing_list_url.present?
+      %li.list-group-item
+        %small.font-weight-bold
+          = t('shared.projectsettingsbar.links')
     - if @project.home_url.present?
       = link_to @project.home_url, class: 'list-group-item list-group-item-action' do
         = icon('fas', 'home', t("activerecord.attributes.project.home_url"))
