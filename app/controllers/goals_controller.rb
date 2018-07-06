@@ -76,7 +76,7 @@ class GoalsController < ApplicationController
       "goal_path(#{@goal.id})"                 => @goal.title
     }
 
-    @page_description = "\"<i>#{@goal.title}</i>\"" 
+    @page_description = "\"<i>#{@goal.title}</i>\""
   end
 
   # GET /goals/new

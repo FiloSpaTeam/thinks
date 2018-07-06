@@ -17,7 +17,7 @@
 
 - model_class = Project
 
-- if !@project.has_goals?
+- if @project.beginning?
   - content_for :page_modals do
     = render partial: 'projects/modal_create_goal'
 

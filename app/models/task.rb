@@ -230,11 +230,19 @@ class Task < ActiveRecord::Base
   end
 
   def save_and_check_project_condition
-    ActiveRecord::Base.transaction do
-      save
+    state = true
 
-      project.plan! if project.definition?
+    begin
+      transaction do
+        save
+
+        project.plan! if project.definition?
+      end
+    rescue ActiveRecord::RecordInvalid
+      state = false
     end
+
+    state
   end
 
   private

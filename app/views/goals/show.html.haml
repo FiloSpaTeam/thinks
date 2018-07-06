@@ -15,8 +15,9 @@
 
 -# Copyright (c) 2015,2018 Claudio Maradonna
 
-- content_for :page_modals do
-  = render partial: 'projects/modal_condition_definition'
+- if @project.definition?
+  - content_for :page_modals do
+    = render partial: 'projects/modal_condition_definition'
 
 - content_for :page_actions do
   %li.nav-item.ml-1

@@ -86,10 +86,18 @@ class Goal < ActiveRecord::Base
   end
 
   def save_and_check_project_condition
-    ActiveRecord::Base.transaction do
-      save
+    state = true
 
-      project.definition! if project.beginning?
+    begin
+      transaction do
+        save
+
+        project.definition! if project.beginning?
+      end
+    rescue ActiveRecord::RecordInvalid
+      state = false
     end
+
+    state
   end
 end
