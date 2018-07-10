@@ -116,6 +116,8 @@ class GoalsController < ApplicationController
       "goal_path(#{@goal.id})"                 => @goal.title,
       'nil' => I18n.t('edit')
     }
+
+    @page_description = "\"<i>#{@goal.title}</i>\""
   end
 
   # POST /goals

@@ -46,6 +46,7 @@
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_view')), :impressions_count
       - else
         %td.col-lg-2
+      %td{ width: 40 }
   %tbody
     - unless smart_listing.empty?
       - smart_listing.collection.each do |task|
@@ -81,9 +82,7 @@
             - if task.deleted?
               .text-dark.hidden-xs
                 %small
-                  closed at
-                  %strong
-                    = task.deleted_at.to_s(:long)
+                  = t('tasks.table.tr.closed_at', deleted_at: task.deleted_at.to_s(:long))
             - else
               - if task.created_at == task.updated_at
                 .text-dark.hidden-xxs
@@ -92,12 +91,7 @@
               - else
                 .text-dark.hidden-xxs
                   %small
-                    updated at
-                    %strong
-                      = task.updated_at.to_s(:short)
-                    by
-                    %i
-                      #{task.updater.name}
+                    = t('tasks.table.tr.updated_at', updated_at: task.updated_at.to_s(:short), updater: task.updater.name).html_safe
           - unless filter_value(:with_deleted_at)
             %td.bg-white.text-center.workload-table.align-middle
               = workload_description(task)
@@ -105,14 +99,26 @@
               = task.impressions_count
 
           - else
-            %td.bg-white.vertical-align-middle.col-lg-2
+            %td.bg-white.align-middle.col-lg-2
               = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
                 = icon('fas', 'history', class: 'fa-lg')
                 %span.hidden-xs
                   = t('tasks.table.action_reopen')
+          %td.bg-white.align-middle
+            .dropleft
+              %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ task.id }" }
+                = icon('fas', 'ellipsis-v')
+              .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ task.id }" }
+                = link_to t('show'), task_path(task), class: 'dropdown-item'
+                = link_to t('edit'), edit_task_path(task), class: 'dropdown-item'
+                .dropdown-divider
+                - if task.deleted?
+                  = link_to t('delete'), task_path(task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
+                - elsif !task.done?
+                = link_to t('discards'), task_path(task), :method => 'delete', role: 'button', class: 'dropdown-item'
     - else
       %tr.warning
-        %td.text-center{ colspan: 4 }
+        %td.text-center{ colspan: 5 }
           %strong
             = t('tasks.table.no_results')
 

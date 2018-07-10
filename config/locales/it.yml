@@ -18,6 +18,7 @@ it:
   sending: "Invio in corso"
   are_you_sure: "Sicuro di voler proseguire?"
   discards: "Scarta"
+  show: "Visualizza"
 
   filters:
     search: "Cerca"
@@ -56,6 +57,7 @@ it:
       index: "Obiettivi del progetto"
       new: "Aggiungi un nuovo obiettivo"
       show: "Obiettivo %{description}"
+      edit: "Modifica obiettivo %{description}"
     releases:
       new: "Aggiungi una nuova pianificazione"
       index: "Quadro generale delle pianificazioni"
@@ -218,6 +220,8 @@ it:
 
       tr:
         created_at: "creato il <strong>%{created_at}</strong> da <i>%{updater}</i>"
+        updated_at: "aggiornato il <strong>%{updated_at}</strong> da <i>%{updater}</i>"
+        deleted_at: "chiuso il <strong>%{deleted_at}</strong>"
 
   comments:
     likes:
