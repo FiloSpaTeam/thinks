@@ -20,8 +20,17 @@ module DeviseHelper
     return "" if defined?(resource).nil? || resource.errors.empty?
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
-    flash.now[:error] = "<ul class='mb-0' style='margin-left: -20px;'>#{messages}</ul>"
+    html = <<-HTML
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="#{ t('close') }">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <ul class='pl-3 mb-0'>
+      #{messages}
+      </ul>
+    </div>
+    HTML
 
-    return ''
+    html.html_safe
   end
 end

@@ -61,5 +61,11 @@ App.init = ->
       refer = $(@).attr('data-refers-to')
       $(refer).submit()
 
+  $.notify {
+    message: $('.alert').data('message')
+  }, {
+    type: $('.alert').data('type')
+  } if $('.alert').length > 0
+
 $(document).on "turbolinks:load", ->
   App.init()

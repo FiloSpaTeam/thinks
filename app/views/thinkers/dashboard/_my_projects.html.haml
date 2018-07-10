@@ -15,49 +15,45 @@
 
 -# Copyright (c) 2017, Claudio Maradonna
 
-.panel.panel-default
-  .panel-heading
-    = t ".my_projects"
-    .btn-group.float-right
-      %a.hidden-xxs.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters_projects].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearchMyProjects' }
-        = icon('fas', 'search')
-        %span.hidden-xs
-          Search
-    .collapse.margin-top-10#collapseSearchMyProjects{ class: any_filter?(params[:filters_projects]) ? 'in' : '' }
-      = smart_listing_controls_for :my_projects do
-        .input-group.form-group.margin-bottom-0
-          %span.input-group-btn
-            = link_to url_for, class: 'btn btn-default', title: t("filters.reset"), remote: true do
-              = icon('fas', 'undo')
-          = text_field_tag 'filters_projects[title_or_description]', filter_value(:title_or_description, :filters_projects), :class => 'form-control', autocomplete: 'off'
-          %span.input-group-btn
-            - if @active_filters.present?
-              %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters_projects]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
-                = icon('fas', 'filter')
-            %button.btn.btn-primary{ type: 'submit' }
-              = icon('fas', 'search', class: 'fa-inverse')
-  .panel-body.panel-fixed-height.scrollbar
-    %table.table.table-sm.table-hover
-      %tbody
-        - unless smart_listing.empty?
-          - smart_listing.collection.each do |project|
-            %tr
-              %td
-                %strong.hidden-xs.hidden-sm
-                  = link_to project.title.truncate(40), project_path(project), :title => project.title
-                %strong.visible-xs
-                  = link_to project.title.truncate(50), project_path(project), :title => project.title
-                %strong.visible-sm
-                  = link_to project.title, project_path(project)
-                .text-dark.break-word
-                  %small
-                    %em
-                      = highlights_searched_text(plain_text(project.description).truncate(150), @search)
-        - else
-          %tr.warning
-            %td.text-center
-              %strong
-                No records found
-  .panel-footer
-    = smart_listing.paginate
-    = smart_listing.pagination_per_page_links
+= t ".my_projects"
+.btn-group.float-right
+  %a.hidden-xxs.line-height-25.line-height-35{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': params[:filters_projects].try(:any?) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseSearchMyProjects' }
+    = icon('fas', 'search')
+    %span.hidden-xs
+      Search
+.collapse.margin-top-10#collapseSearchMyProjects{ class: any_filter?(params[:filters_projects]) ? 'in' : '' }
+  = smart_listing_controls_for :my_projects do
+    .input-group.form-group.margin-bottom-0
+      %span.input-group-btn
+        = link_to url_for, class: 'btn btn-default', title: t("filters.reset"), remote: true do
+          = icon('fas', 'undo')
+      = text_field_tag 'filters_projects[title_or_description]', filter_value(:title_or_description, :filters_projects), :class => 'form-control', autocomplete: 'off'
+      %span.input-group-btn
+        - if @active_filters.present?
+          %a.hidden-xs.btn.btn-default{ role: "button", 'data-toggle': 'collapse', 'aria-expanded': any_filter?(params[:filters_projects]) ? 'true' : 'false', 'aria-controls': 'collapseFilters', href: '#collapseFilters' }
+            = icon('fas', 'filter')
+        %button.btn.btn-primary{ type: 'submit' }
+          = icon('fas', 'search', class: 'fa-inverse')
+%table.table.table-sm.table-hover
+  %tbody
+    - unless smart_listing.empty?
+      - smart_listing.collection.each do |project|
+        %tr
+          %td
+            %strong.hidden-xs.hidden-sm
+              = link_to project.title.truncate(40), project_path(project), :title => project.title
+            %strong.visible-xs
+              = link_to project.title.truncate(50), project_path(project), :title => project.title
+            %strong.visible-sm
+              = link_to project.title, project_path(project)
+            .text-dark.break-word
+              %small
+                %em
+                  = highlights_searched_text(plain_text(project.description).truncate(150), @search)
+    - else
+      %tr.warning
+        %td.text-center
+          %strong
+            No records found
+= smart_listing.paginate
+= smart_listing.pagination_per_page_links

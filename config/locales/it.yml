@@ -106,7 +106,7 @@ it:
       transfer_project: "Trasferisci il progetto"
       link_to_master_project: "Aggancia ad un progetto"
     markdown_syntax:
-      popover_content: "Maggiori informazioni qui: %{link}"
+      popover_content: "Questa area di testo supporta Markdown. Maggiori informazioni qui: %{link}"
 
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"

@@ -30,6 +30,7 @@ gem 'json'
 gem 'slim-rails', '~> 3.1.2'
 
 gem 'bootstrap-show-password-rails'
+gem 'bootstrap-growl-rails'
 
 # Time in words
 gem 'time_ago_in_words'

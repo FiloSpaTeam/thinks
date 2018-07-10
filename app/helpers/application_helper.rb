@@ -25,13 +25,8 @@ module ApplicationHelper
     content_tag(:div, 'v' + version, style: 'color: #BCBCBC;', class: 'margin-top-50 hidden-xs')
   end
 
-  def flash_class(level)
-    case level
-    when 'notice' then 'text-info'
-    when 'success' then 'text-success'
-    when 'error' then 'text-danger'
-    when 'alert' then 'text-danger'
-    end
+  def bootstrap_class_for flash_type
+    { success: "success", error: "danger", alert: "warning", notice: "info" }[flash_type.to_sym] || flash_type.to_sym
   end
 
   def link_to_button(path, text, icon_source)

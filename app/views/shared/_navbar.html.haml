@@ -15,7 +15,6 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= render partial: 'layouts/flash_messages_mobile', locals: { flash: flash }
 %nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top{ class: current_page?(start_index_path) || current_page?(root_path) ? "" : 'navbar-shrink' }
   = link_to root_path, class: 'navbar-brand' do
     = image_tag "logo_scritta", height: 36
@@ -28,7 +27,6 @@
           = link_to projects_path, class: 'nav-link' do
             = icon('fas', 'globe', class: 'fa-lg')
             = t(".projects")
-    = render partial: 'layouts/flash_messages', locals: { flash: flash }
     %ul.navbar-nav.ml-auto
       - if thinker_signed_in?
         %li.nav-item

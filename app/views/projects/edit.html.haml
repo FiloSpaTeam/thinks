@@ -20,9 +20,9 @@
     .form-group.required
       = f.label :title, :class => 'control-label'
       = f.text_field :title, :class => 'form-control', :placeholder => "My project", :required => true
-    .form-group{ class: @project.project.nil? ? 'required' : '' }
+    .form-group
       = f.label :motto, :class => 'control-label'
-      = f.text_field :motto, :class => 'form-control', :placeholder => "My motto", :required => @project.project.nil?
+      = f.text_field :motto, :class => 'form-control', :placeholder => "My motto"
     .form-group.required
       = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('projects.info_description'), 'data-html' => 'true' do
         = icon('fas', 'info-circle')

@@ -21,6 +21,7 @@
     = render 'shared/header'
   %body{:class => "#{controller.controller_name}"}
     = render 'shared/navbar'
+    = render partial: 'layouts/flash_messages', locals: { flash: flash }
     = yield
     = yield :charts_js
     = render 'shared/footer'
