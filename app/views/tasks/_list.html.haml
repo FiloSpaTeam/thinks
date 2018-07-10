@@ -88,12 +88,7 @@
               - if task.created_at == task.updated_at
                 .text-dark.hidden-xxs
                   %small
-                    created at
-                    %strong
-                      = task.created_at.to_s(:short)
-                    by
-                    %i
-                      #{task.updater.name}
+                    = t('tasks.table.tr.created_at', created_at: task.created_at.to_s(:short), updater: task.updater.name).html_safe
               - else
                 .text-dark.hidden-xxs
                   %small

@@ -216,6 +216,9 @@ it:
 
       no_results: "Nessun lavoro presente nel backlog"
 
+      tr:
+        created_at: "creato il <strong>%{created_at}</strong> da <i>%{updater}</i>"
+
   comments:
     likes:
       one: "Un \"mi piace\""
