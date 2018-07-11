@@ -2,29 +2,15 @@ class App.Project
   constructor: ->
     this.m_active = true
 
-    _init() if m_active
+    this._init() if this.m_active
 
   _init: ->
     # initialize all you need to handle project in various pages
 
-    this.m_comments = _initComments()
-    this.m_settings = _initSettings()
-
-  _initTask: ->
-    return null unless $('.task').length
-    return new App.Project.Task
-
-  _initTeam: ->
-    return null unless $('.team').length
-    return new App.Project.Team
-
-  _initComments: ->
-    return null unless $('.comments').length
-    return new App.Project.Comment
-
-  _initSettings: ->
-    return null unless $('.settings').length
-    return new App.Project.Settings
+    this.m_tasks    = new App.Project.Task
+    this.m_comments = new App.Project.Comment if this.m_tasks != null
+    # this.m_team     = new App.Project.Team
+    # this.m_settings = new App.Project.Settings
 
 $(document).on "turbolinks:load", ->
   project = new App.Project if $('meta[name="project"]').length

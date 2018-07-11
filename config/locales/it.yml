@@ -19,6 +19,7 @@ it:
   are_you_sure: "Sicuro di voler proseguire?"
   discards: "Scarta"
   show: "Visualizza"
+  reopen: "Riapri"
 
   filters:
     search: "Cerca"
@@ -41,7 +42,13 @@ it:
     progress_lower_than: "Progresso (% inferiore a)"
 
   alerts:
+    operation_not_permitted: "Non hai adeguati permessi per questa azione."
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
+
+    specify_reason: "Devi specificare un motivo per scartare il lavoro selezionato."
+    task_deleted: "Lavoro \"%{title}\" cancellato."
+    task_discarded: "Lavoro \"%{title}\" scartato."
+    task_restored: "Lavoro \"%{title}\" ripristinato."
 
   pages:
     projects:
@@ -205,10 +212,10 @@ it:
       release: "Da pianificare"
       sprint: "Sprint"
       in_progress: "In lavorazione"
-      done: "Completati"
+      done: "Completato"
 
     table:
-      header_task: "Filtra per stato di avanzamento"
+      header: "Filtra per stato di avanzamento"
 
       th_task: "Stato di avanzamento"
       th_workload: "Carico di lavoro"
@@ -223,6 +230,10 @@ it:
         updated_at: "aggiornato il <strong>%{updated_at}</strong> da <i>%{updater}</i>"
         deleted_at: "chiuso il <strong>%{deleted_at}</strong>"
 
+    modal_discard:
+      title: "Scarta il lavoro \"%{title}\""
+      body: "Specifica le ragioni per cui ritieni questo lavoro \"da scartare\"."
+
   comments:
     likes:
       one: "Un \"mi piace\""
@@ -234,7 +245,7 @@ it:
     confirm_delete: "Sei sicuro di voler cancellare il commento? Il team potrebbe considerarlo comunque un'intervento positivo"
     
   goals:
-    info_release: "Associare una pianificazione è importante ma non obbligatorio in questa fase. Permette di comprendere la priorità e le scadenze dei vari obiettivi e quindi dei singoli task."
+    info_release: "Associare una pianificazione è importante ma non obbligatorio in questa fase. Permette di comprendere la priorità e le scadenze dei vari obiettivi e quindi dei singoli lavori."
     placeholder_title: "Catturare Joker"
     placeholder_description: "Joker è il super-cattivo e come tale non può girare a piede libero. Avete un piano migliore?"
 
@@ -243,8 +254,13 @@ it:
     add: "Crea un obiettivo"
 
     goal: "Obiettivo"
+    task: "Lavoro"
 
     created: "Obiettivo %{title} aggiunto con successo"
+
+    table:
+      header: "Lista degli obiettivi"
+      open_tasks: "Lista dei lavori associati"
 
   releases:
     placeholder_title: "Missione \"Joker inside\""

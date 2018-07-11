@@ -32,16 +32,16 @@
               = icon('fas', 'tasks', t( "tasks.table.th_task" ))
           = content_tag(:div, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
             %h6.dropdown-header
-              = t "tasks.table.header_task"
+              = t "tasks.table.header"
             - @statuses.each do |status|
               = link_to({ "filters[status_id]" => status, remote: true }, class: 'dropdown-item') do
                 .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
       - unless filter_value(:with_deleted_at)
-        %td.text-center
+        %td.text-center.col-xl-2.col-lg-3
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_workload')), :workload
-        %td.col-lg-1.col-xs-1.col-sm-1
+        %td.text-center.col-xl-2.col-lg-3
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_view')), :impressions_count
       - else
@@ -115,7 +115,10 @@
                 - if task.deleted?
                   = link_to t('delete'), task_path(task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
                 - elsif !task.done?
-                = link_to t('discards'), task_path(task), :method => 'delete', role: 'button', class: 'dropdown-item'
+                  %a.dropdown-item{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
+                    = t 'discards'
+                  - content_for :page_modals do
+                    = render partial: 'tasks/modal_discard', locals: { task: task }
     - else
       %tr.warning
         %td.text-center{ colspan: 5 }

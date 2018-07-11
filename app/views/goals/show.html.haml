@@ -20,6 +20,11 @@
     = render partial: 'projects/modal_condition_definition'
 
 - content_for :page_actions do
+  %li.nav-item.ml-1.dropdown
+    %a#dropdownExtraActions.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false' }
+      = icon('fas', 'ellipsis-v')
+    .dropdown-menu.dropdown-menu-right{ "aria-labelledby": "dropdownExtraActions" }
+      = link_to t('delete'), goal_path(@goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
   %li.nav-item.ml-1
     = link_to new_project_task_path(@project, goal_id: @goal), class: 'btn btn-secondary' do
       = icon('fas', 'plus', t('goals.add_task'))

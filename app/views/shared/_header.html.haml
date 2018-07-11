@@ -32,6 +32,9 @@
 
 %meta{ 'http-equiv': "x-dns-prefetch-control", content:"off" }
 
+- unless @project.nil?
+  %meta{ name:"project", value: @project.title, "data-slug": @project.slug }
+
 %link{ rel:"alternate", hreflang:"it", href: url_for(locale: 'it') }
 %link{ rel:"alternate", hreflang:"en", href: url_for(locale: 'en') }
 

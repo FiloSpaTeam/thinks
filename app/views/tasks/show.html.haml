@@ -19,23 +19,20 @@
   - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
       %li.nav-item.ml-1
-        = link_to reopen_task_path(@task), :method => 'put' do
-          = icon('fas', 'history')
-          %span.hidden-xs
-            Reopen
+        = link_to reopen_task_path(@task), :method => 'put', class: 'btn btn-secondary' do
+          = icon('fas', 'history', t('reopen'))
       %li.nav-item.ml-1
-        = link_to task_path(@task), :method => 'delete', data: { confirm: t('are_you_sure') } do
-          = icon('fas', 'trash-o')
-          %span= t('delete')
+        = link_to task_path(@task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'btn btn-danger' do
+          = icon('fas', 'trash-alt', t('delete'))
     - elsif !@task.done?
       %li.nav-item.ml-1
-        = link_to task_path(@task), :method => 'delete', class: 'btn btn-danger btn-task-delete', role: 'button' do
-          = icon('fas', 'times-circle')
-          %span= t('discards')
+        %a.btn.btn-default{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ @task.id }" }
+          = icon('fas', 'times-circle', t('discards'))
+      - content_for :page_modals do
+        = render partial: 'tasks/modal_discard', locals: { task: @task }
       %li.nav-item.ml-1
         = link_to edit_task_path(@task), class: 'btn btn-primary' do
-          = icon('fas', 'edit')
-          %span= t('edit')
+          = icon('fas', 'edit', t('edit'))
 
 - content_for :page_content do
   = markdown(@task.description)

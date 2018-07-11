@@ -17,9 +17,9 @@
 
 module GoalsHelper
   def tasks_title(goal)
-    pluralize(goal.tasks.count, 'task') + ", " +
-      pluralize(goal.tasks.done.count, 'task') + " done, " +
-      pluralize(goal.tasks.in_progress.count, 'task') + " in progress"
+    pluralize(goal.tasks.count, t('goals.task').downcase) + ", " +
+      pluralize(goal.tasks.done.count, t('tasks.statuses.done').downcase) +  ", " +
+      goal.tasks.in_progress.count.to_s + " " + t('tasks.statuses.in_progress').downcase
   end
 
   def release_btn_title(tasks_ready)

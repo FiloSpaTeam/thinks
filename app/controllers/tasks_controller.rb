@@ -204,23 +204,24 @@ class TasksController < ApplicationController
     respond_to do |format|
       if current_thinker == @task.thinker || scrum_master?(@task.project)
         if @task.deleted?
+          title = @task.title
           @task.really_destroy!
 
-          format.html { redirect_to project_tasks_url(@task.project), notice: 'Task was successfully deleted.' }
+          format.html { redirect_to project_tasks_url(@task.project), notice: t('alerts.task_deleted', title: title) }
         else
-          if params[:reason][:text].nil?
-            format.html { redirect_to @task, alert: 'You need to specify a reason.' }
+          if params[:task].nil? || params[:task][:reason].nil?
+            format.html { redirect_to @task, alert: t('alerts.specify_reason') }
           else
-            @task.destroy_and_associate_reason(params.require(:reason), current_thinker)
+            @task.destroy_and_associate_reason(params[:task][:reason], current_thinker)
             create_notification(@task, @task.project)
 
-            format.html { redirect_to @task, notice: 'Task was successfully closed.' }
+            format.html { redirect_to @task, notice: t('alerts.task_discarded', title: @task.title) }
           end
         end
 
         format.json { head :no_content }
       else
-        format.html { redirect_to @task, alert: 'You cannot destroy this task!' }
+        format.html { redirect_to @task, alert: t('alerts.operation_not_permitted') }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -326,7 +327,7 @@ class TasksController < ApplicationController
     create_notification(@task, @task.project)
     respond_to do |format|
       if params[:index].nil?
-        format.html { redirect_to @task, notice: 'You restored the task. Good job!' }
+        format.html { redirect_to @task, notice: t('alerts.task_restored', title: @task.title) }
       else
         format.html { redirect_to project_tasks_path(@task.project, 'filters[with_deleted_at]' => true), notice: 'You restored the task. Good job!' }
       end

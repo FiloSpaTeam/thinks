@@ -35,8 +35,7 @@ gem 'bootstrap-growl-rails'
 # Time in words
 gem 'time_ago_in_words'
 
-# Javascript I18n
-gem 'i18n-js', '>= 3.0.0.rc11'
+gem 'i18n-js', '~> 3.0.11'
 
 # Holder.js for placeholder images
 gem 'holder_rails', '~> 2.9.0'

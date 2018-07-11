@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Be sure to restart your server when you modify this file.
 
 # Add new inflection rules using the following format. Inflections
@@ -14,3 +15,9 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections(:it) do |inflect|
+  inflect.plural /\A([\w]*)o\z/i, '\1i'
+  inflect.plural /\A([\w]*)a\z/i, '\1e'
+  inflect.uncountable %w( attività )
+end
