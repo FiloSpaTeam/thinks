@@ -182,10 +182,10 @@ class GoalsController < ApplicationController
         @goal.destroy
 
         create_notification(@goal, @goal.project)
-        format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
+        format.html { redirect_to project_goals_path(@goal.project), notice: t('alerts.goal_deleted') }
         format.json { head :no_content }
       else
-        format.html { redirect_to @goal, alert: 'You cannot destroy this goal!' }
+        format.html { redirect_to @goal, alert: t('alerts.operation_not_permitted') }
         format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end
