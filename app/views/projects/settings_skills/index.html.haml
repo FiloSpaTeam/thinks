@@ -25,7 +25,7 @@
         - @project.skills.each do |skill|
           %li.list-group-item
             = link_to project_settings_skill_path(@project, skill), data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'float-right' do
-              = icon('fas', 'trash', :class => "text-danger fa-lg")
+              = icon('fas', 'eraser', :class => "text-danger fa-lg")
             = t "skill.#{skill.t_name}"
   %br
   - if @project.skills.count < 8

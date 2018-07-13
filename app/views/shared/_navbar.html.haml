@@ -45,17 +45,17 @@
               %br
               %small.font-italic
                 = current_thinker.email
-            = link_to dashboard_thinker_path(current_thinker), class: 'dropdown-item' do
+            = link_to dashboard_thinker_path(current_thinker), class: 'dropdown-item small' do
               = icon('fas', 'home')
               = t(".dashboard")
-            = link_to thinker_projects_path(current_thinker), class: 'dropdown-item' do
+            = link_to thinker_projects_path(current_thinker), class: 'dropdown-item small' do
               = icon('fas', 'folder')
               = t(".my_projects")
-            = link_to thinker_path(current_thinker), class: 'dropdown-item' do
+            = link_to thinker_path(current_thinker), class: 'dropdown-item small' do
               = icon('fas', 'user')
               = t(".my_profile")
             .dropdown-divider
-            = link_to destroy_thinker_session_path, :method => :delete, class: 'dropdown-item' do
+            = link_to destroy_thinker_session_path, :method => :delete, class: 'dropdown-item small' do
               = icon('fas', 'sign-out')
               = t(".logout")
       - else

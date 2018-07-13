@@ -28,7 +28,7 @@
           Release
         %span.float-right
           - if task.release.present?
-            = link_to task.release.title.truncate(20), release_path(task.release), :title => task.release.title
+            = link_to task.release.title.truncate(20), project_release_path(release.project, task.release), :title => task.release.title
           - else
             = t("not_defined_yet")
       %li.list-group-item

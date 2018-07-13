@@ -21,13 +21,13 @@
 
 - content_for :page_actions do
   %li.nav-item.ml-1.dropdown
-    %a#dropdownExtraActions.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false' }
-      = icon('fas', 'ellipsis-v')
+    %a#dropdownExtraActions.text-dark.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false' }
+      = icon('fas', 'bars', class: 'fa-sm')
     .dropdown-menu.dropdown-menu-right{ "aria-labelledby": "dropdownExtraActions" }
-      = link_to t('delete'), goal_path(@goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
-  %li.nav-item.ml-1
-    = link_to new_project_task_path(@project, goal_id: @goal), class: 'btn btn-secondary' do
-      = icon('fas', 'plus', t('goals.add_task'))
+      = link_to new_project_task_path(@project, goal_id: @goal), class: 'dropdown-item small' do
+        = icon('fas', 'plus', t('goals.add_task'))
+      .dropdown-divider
+      = link_to icon('fas', 'eraser', t('delete')), goal_path(@goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
   - if @goal.thinker == current_thinker
     %li.nav-item.ml-1
       = link_to edit_goal_path(@goal), class: 'btn btn-primary' do

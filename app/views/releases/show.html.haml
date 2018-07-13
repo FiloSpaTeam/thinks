@@ -18,10 +18,10 @@
 - content_for :page_actions do
   - if scrum_master?(@release.project)
     %li.nav-item.ml-1
-      = link_to release_path(@release), :method => 'delete', :class => "btn btn-danger", :role => 'button' do
-        = icon('fas', 'trash', t('delete'))
+      = link_to project_release_path(@release.project, @release), :method => 'delete', :class => "btn btn-danger", :role => 'button' do
+        = icon('fas', 'eraser', t('delete'))
     %li.nav-item.ml-1
-      = link_to edit_release_path(@release), :class => "btn btn-primary" do
+      = link_to edit_project_release_path(@release.project, @release), :class => "btn btn-primary" do
         = icon('fas', 'edit', t('edit'))
 
 - content_for :page_content do

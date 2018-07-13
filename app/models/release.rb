@@ -16,6 +16,9 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class Release < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :version, use: :slugged
+
   belongs_to :project
 
   has_many :goals
@@ -64,7 +67,7 @@ class Release < ActiveRecord::Base
   }
 
   def complete_title
-    "#{title} (v#{version})"
+    "#{title} (#{version})"
   end
 
   def progress_percentage

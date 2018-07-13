@@ -18,14 +18,14 @@
 module CommentsHelper
   def edit_button(comment)
     link_to edit_comment_path(comment), remote: true, method: :get, class: 'dropdown-item small' do
-      icon('fas', 'pencil-alt', t('edit'), class: 'text-dark')
+      icon('fas', 'edit', t('edit'), class: 'text-dark')
     end
   end
 
   def delete_button(comment)
     content_tag(:li) do
       link_to comment_path(comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'dropdown-item small' do
-        icon('fas', 'trash', t('delete'), class: 'text-dark')
+        icon('fas', 'eraser', t('delete'), class: 'text-dark')
       end
     end
   end

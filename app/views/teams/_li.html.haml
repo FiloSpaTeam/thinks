@@ -50,7 +50,7 @@
     - if current_thinker != member.thinker
       - contribution = member.thinker.contributions.where(project: @project).first
       - if Contribution.intensities[contribution.intensity] == Contribution.intensities[:watching]
-        = icon('fas', 'eye', :class => "text-primary", :style => "margin-left: 10px;", :title => "Watching")
+        = icon('far', 'eye', :class => "text-primary", :style => "margin-left: 10px;", :title => "Watching")
       - elsif Contribution.intensities[contribution.intensity] == Contribution.intensities[:partecipate]
         = icon('fas', 'group', :class => "text-primary", :style => "margin-left: 10px;", :title => "Partecipating")
   - if election_poll.exists?

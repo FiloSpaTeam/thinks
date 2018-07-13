@@ -96,7 +96,7 @@ class ReleasesController < ApplicationController
 
     @breadcrumbs = {
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
-      "release_path(#{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>",
+      "project_release_path(@release.project, #{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>",
       'nil' => I18n.t('edit')
     }
   end
@@ -113,7 +113,7 @@ class ReleasesController < ApplicationController
          .where(team_role: TeamRole.scrum_master.first)
          .exists? && @release.save
         create_notification(@release, @project)
-        format.html { redirect_to @release, notice: 'Release was successfully created.' }
+        format.html { redirect_to [@release.project, @release], notice: 'Release was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@release)
@@ -135,7 +135,7 @@ class ReleasesController < ApplicationController
          .where(team_role: TeamRole.scrum_master.first)
          .exists? && @release.update(release_params)
         create_notification(@release, @release.project)
-        format.html { redirect_to @release, notice: 'Release was successfully updated.' }
+        format.html { redirect_to [@release.project, @release], notice: 'Release was successfully updated.' }
         format.json { render :show, status: :ok, location: @release }
       else
         set_form_errors(@release)
@@ -152,7 +152,7 @@ class ReleasesController < ApplicationController
 
     @breadcrumbs = {
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
-      "release_path(#{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>"
+      "project_release_path(@release.project, #{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>"
     }
 
     @page_description = "<i>#{@release.version} - #{@release.title}</i>"
@@ -168,11 +168,11 @@ class ReleasesController < ApplicationController
 
           format.html { redirect_to project_releases_path(project), notice: 'Release is deleted.' }
         else
-          format.html { redirect_to @release, alert: 'This release has tasks associated.' }
+          format.html { redirect_to [@release.project, @release], alert: 'This release has tasks associated.' }
           format.json { render json: @release.errors, status: :unprocessable_entity }
         end
       else
-        format.html { redirect_to @release, alert: 'You cannot destroy this release!' }
+        format.html { redirect_to [@release.project, @release], alert: 'You cannot destroy this release!' }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end
@@ -181,7 +181,7 @@ class ReleasesController < ApplicationController
   private
 
   def set_release
-    @release = Release.find(params[:id])
+    @release = Release.friendly.find(params[:id])
   end
 
   def set_validators_for_form_help

@@ -17,7 +17,7 @@
 
 = render partial: 'shared/filters/layout', locals: { local_filters: [], local_model: :goals, local_text_field_name: 'search_title_and_description' }
 
-%table.table.table-sm.table-hover#filterrific_results
+%table.table.table-sm#filterrific_results
   %thead
     %tr
       %td
@@ -43,13 +43,13 @@
                   \%
           %td.border-left.align-middle.dropleft
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ goal.id }" }
-              = icon('fas', 'ellipsis-v')
+              = icon('fas', 'bars', class: 'fa-sm')
             .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ goal.id }" }
-              = link_to t('show'), goal_path(goal), class: 'dropdown-item'
-              = link_to t('edit'), edit_goal_path(goal), class: 'dropdown-item'
-              = link_to t('goals.table.open_tasks'), goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), class: "dropdown-item #{ goal.tasks.empty? ? 'disabled' : '' }", title: tasks_title(goal)
+              = link_to icon('far', 'eye', t('show')), goal_path(goal), class: 'dropdown-item small'
+              = link_to icon('fas', 'edit', t('edit')), edit_goal_path(goal), class: 'dropdown-item small'
+              = link_to link_to icon('fas', 'tasks', t('goals.table.open_tasks')), goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), class: "dropdown-item small #{ goal.tasks.empty? ? 'disabled' : '' }", title: tasks_title(goal)
               .dropdown-divider
-              = link_to t('delete'), goal_path(goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
+              = link_to icon('fas', 'eraser', t('delete')), goal_path(goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
     - else
       %tr.warning
         %td.text-center

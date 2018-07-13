@@ -133,4 +133,10 @@ module ApplicationHelper
 
     new_params.permit!
   end
+
+  # HTML Helpers
+
+  def middle_dot
+    '&#183;'.html_safe
+  end
 end

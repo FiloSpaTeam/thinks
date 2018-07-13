@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
     resources :statistics, only: [:show], controller: 'projects/statistics'
 
-    resources :releases, shallow: true
+    resources :releases
     resources :election_polls, shallow: true
     namespace :settings, :module => :projects do
       resources :links, :controller   => :settings_links, :only   => [:index, :create]

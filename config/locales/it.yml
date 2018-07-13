@@ -267,6 +267,10 @@ it:
     placeholder_description: "Catturare Joker e' la nostra priorità oltre che ristabilire l'ordine. Una volta catturato interrogarlo per trovare il nascondiglio segreto."
     form_text_end_at: "La data non è modificabile una volta inserite pianificazioni successive. Questo per avere una reale esperienza con la pianificazione del team."
 
+    table:
+      header: "Lista delle pianificazioni"
+      open_tasks: "Lista dei lavori associati"
+
   start:
     index:
       heading_title: "La via Agile per lavorare.<br>Semplicemente insieme"

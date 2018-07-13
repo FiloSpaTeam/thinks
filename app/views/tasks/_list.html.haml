@@ -34,14 +34,14 @@
             %h6.dropdown-header
               = t "tasks.table.header"
             - @statuses.each do |status|
-              = link_to({ "filters[status_id]" => status, remote: true }, class: 'dropdown-item') do
+              = link_to({ "filters[status_id]" => status, remote: true }, class: 'dropdown-item small') do
                 .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
       - unless filter_value(:with_deleted_at)
         %td.text-center.col-xl-2.col-lg-3
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_workload')), :workload
-        %td.text-center.col-xl-2.col-lg-3
+        %td.text-center.col-xl-2.col-lg-2
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_view')), :impressions_count
       - else
@@ -104,19 +104,19 @@
                 = icon('fas', 'history', class: 'fa-lg')
                 %span.hidden-xs
                   = t('tasks.table.action_reopen')
-          %td.bg-white.align-middle
+          %td.bg-white.align-middle.border-left
             .dropleft
               %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ task.id }" }
-                = icon('fas', 'ellipsis-v')
+                = icon('fas', 'bars', class: 'fa-sm')
               .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ task.id }" }
-                = link_to t('show'), task_path(task), class: 'dropdown-item'
-                = link_to t('edit'), edit_task_path(task), class: 'dropdown-item'
+                = link_to icon('far', 'eye', t('show')), task_path(task), class: 'dropdown-item small'
+                = link_to icon('fas', 'edit', t('edit')), edit_task_path(task), class: 'dropdown-item small'
                 .dropdown-divider
                 - if task.deleted?
-                  = link_to t('delete'), task_path(task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item'
+                  = link_to icon('fas', 'eraser', t('delete')), task_path(task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
                 - elsif !task.done?
-                  %a.dropdown-item{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
-                    = t 'discards'
+                  %a.dropdown-item.small{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
+                    = icon('fas', 'trash-alt', t('discards'))
                   - content_for :page_modals do
                     = render partial: 'tasks/modal_discard', locals: { task: task }
     - else

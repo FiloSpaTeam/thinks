@@ -20,6 +20,7 @@ class GoalsController < ApplicationController
   include ProjectsHelper
   include StatusesHelper
   include GoalsHelper
+  include ApplicationHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
@@ -76,7 +77,7 @@ class GoalsController < ApplicationController
       "goal_path(#{@goal.id})"                 => @goal.title
     }
 
-    @page_description = "\"<i>#{@goal.title}</i>\""
+    @page_description = middle_dot + " <i>#{@goal.title}</i>".html_safe
   end
 
   # GET /goals/new

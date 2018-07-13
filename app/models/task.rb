@@ -93,7 +93,7 @@ class Task < ActiveRecord::Base
   }
 
   scope :with_release, lambda { |release|
-    where(release: Release.find(release))
+    where(release: Release.friendly.find(release))
   }
 
   scope :with_sprint, lambda { |sprint_id|
@@ -252,7 +252,7 @@ class Task < ActiveRecord::Base
       begin
         if release.blank?
           unless release_id_was.blank?
-            release_was = Release.find(release_id_was)
+            release_was = Release.friendly.find(release_id_was)
             unless release_was.blank?
               release_was.progress = release_was.progress_percentage
               release_was.save

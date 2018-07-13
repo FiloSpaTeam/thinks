@@ -23,11 +23,11 @@
           = icon('fas', 'history', t('reopen'))
       %li.nav-item.ml-1
         = link_to task_path(@task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'btn btn-danger' do
-          = icon('fas', 'trash-alt', t('delete'))
+          = icon('fas', 'eraser', t('delete'))
     - elsif !@task.done?
       %li.nav-item.ml-1
         %a.btn.btn-default{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ @task.id }" }
-          = icon('fas', 'times-circle', t('discards'))
+          = icon('fas', 'trash-alt', t('discards'))
       - content_for :page_modals do
         = render partial: 'tasks/modal_discard', locals: { task: @task }
       %li.nav-item.ml-1
@@ -49,5 +49,18 @@
               = t('comments.no_comments')
       - @comments.each_with_index do |comment, index|
         = render partial: 'comments/comment', locals: { comment: comment, task: @task }
+
+- content_for :page_details do
+  %ul.list-group.list-group-flush
+    %li.list-group-item
+      %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
+      %br
+      - unless @task.goal_id.nil?
+        = @task.goal.title
+      - else
+        = form_for @task do |f|
+          .form-group
+            = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
+          = f.submit t('save'), :class => "btn btn-primary d-none"
 
 = render partial: 'projects/layout'
