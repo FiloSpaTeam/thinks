@@ -15,31 +15,21 @@
 
 -# Copyright (c) 2017, Claudio Maradonna
 
-.col-md-4.col-sm-6.col-xs-12
-  .panel.panel-default
-    .panel-heading.no-padding.text-center{ style: 'background-color: #fff;' }
-      - if project.subprojects.exists?
-        %i.fa.fa-sitemap.fa-lg{ 'data-toggle': 'popover', 'data-trigger': 'click', 'data-content': 'This project has subprojects.', 'data-placement': 'top', style: 'position: absolute; right: 20px; top: 5px;' }
-      = link_to project_path(project) do
-        - if project.main_image
-          = cl_image_tag(project.main_image.path, { style: 'width: auto; height: 180px; max-width: 100%' })
-        - else
-          %div.bg-info{ style: 'height: 180px; width: 100%;' }
-    .panel-body.min-height-160{ style: 'background-color: #FBFBFB;' }
-      = link_to project_path(project) do
-        %strong= project.title
-        %small.form-text.text-muted{ style: 'margin-bottom: 0; margin-top: 0;' }
-          = highlights_searched_text(plain_text(project.description.lines.first).truncate(150), filter_value(:title_or_description))
-    .panel-footer{ style: 'background-color: white; border-top: 0px;' }
-      %small
-        - if project.category.present?
-          = t("category.#{project.category.t_name}")
-        - else
-          &nbsp;
-        %span.float-right{ style: 'margin-top: 2px;' }
-          - if project.started?
-            = t "started"
-          - elsif project.suspended?
-            = t "suspended"
-          - else
-            = t "backlogging"
+.card
+  -# - if project.subprojects.exists?
+  -#   %i.fa.fa-sitemap.fa-lg{ 'data-toggle': 'popover', 'data-trigger': 'click', 'data-content': 'This project has subprojects.', 'data-placement': 'top', style: 'position: absolute; right: 20px; top: 5px;' }
+  - if project.main_image
+    = cl_image_tag(project.main_image.path, { style: 'width: auto; height: 180px; max-width: 100%', class: 'card-img-top' })
+  - else
+    %img.card-img-top{ src: project.alternative_image }
+  .card-body{ style: 'background-color: #FBFBFB;' }
+    = link_to project_path(project), class: 'card-title' do
+      %h5= project.title
+      %small.card-text.text-muted
+        = highlights_searched_text(plain_text(project.description.lines.first).truncate(150), filter_value(:title_or_description))
+    %br
+    %small.mt-2
+      - if project.category.present?
+        = t("category.#{project.category.t_name}")
+      - else
+        &nbsp;

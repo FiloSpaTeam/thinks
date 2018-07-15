@@ -21,7 +21,6 @@
   - content_for :page_modals do
     = render partial: 'projects/modal_create_goal'
 
-
 - content_for :page_actions do
   - if current_thinker.present?
     %li.nav-item.ml-1
@@ -58,6 +57,10 @@
   .row
     .col-md-10
       %h3
+        - if @project.logo
+          = cl_image_tag(@project.logo.path, { style: 'width: auto; height: 30px; max-width: 100%', class: 'mr-1' })
+        - else
+          %img.float-left.mr-1{ src: @project.alternative_image(30) }
         = @project.title
         - if @project.motto.present?
           \-
@@ -105,6 +108,11 @@
   %ul.list-group.list-group-flush
     %li.list-group-item
       %small.font-weight-bold= t('activerecord.attributes.project.logo')
+      %br
+      - if @project.logo
+        = cl_image_tag(@project.logo.path, { style: 'width: auto; height: 64px; max-width: 100%' })
+      - else
+        %img{ src: @project.alternative_image(64) }
     %li.list-group-item
       %small.font-weight-bold= t('activerecord.attributes.project.contribution_type')
       %br

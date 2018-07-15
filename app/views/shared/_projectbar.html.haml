@@ -17,6 +17,10 @@
 
 %ul.list-group.list-group-flush
   = link_to project_path(project), class: 'list-group-item list-group-item-action' do
+    - if project.logo
+      = cl_image_tag(project.logo.path, { style: 'width: auto; height: 30px; max-width: 100%', class: 'mr-1' })
+    - else
+      %img.float-left.mr-1{ src: project.alternative_image(38) }
     .font-weight-bold= project.title
     %small
       - if project.motto.present?

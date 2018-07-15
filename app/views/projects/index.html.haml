@@ -15,15 +15,13 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-.container.pb-5
-  %h2
-    Most popular
-  .row
+.container
+  %h2= t('.most_popular')
+  .card-deck
     - @most_popular.each do |project|
       = render partial: "projects/card", locals: { project: project }
   %hr.margin-bottom-50.margin-top-50
-  %h2
-    Most active
-  .row
+  %h2= t('.most_active')
+  .card-deck
     - @most_popular.each do |project|
       = render partial: "projects/card", locals: { project: project }

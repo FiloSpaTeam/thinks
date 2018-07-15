@@ -6,14 +6,14 @@
           - if project.project.logo
             = cl_image_tag(project.project.logo.path, { size: '20x20' })
           - else
-            = icon('fas', 'sitemap')
+            %img{ src: project.project.alternative_image(16) }
     %li.clip-text.breadcrumb-item
       = link_to project_path(project), class: 'text-dark' do
-        - if project.logo
-          = cl_image_tag(project.logo.path, { size: '20x20' })
-        - else
-          = icon('fas', 'folder')
         %strong.hidden-xs{ class: (@breadcrumbs.nil? ? '' : 'hidden-sm') + (project.visible ? '' : 'font-italic') }
+          - if project.logo
+            = cl_image_tag(project.logo.path, { size: '20x20' })
+          - else
+            %img{ src: project.alternative_image(18) }
           = project.title
     - if @breadcrumbs.present?
       - @breadcrumbs.each_with_index do |value, index|

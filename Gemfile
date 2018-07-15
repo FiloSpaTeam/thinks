@@ -37,7 +37,7 @@ gem 'time_ago_in_words'
 
 gem 'i18n-js', '~> 3.0.11'
 
-# Holder.js for placeholder images
+gem 'identicon'
 gem 'holder_rails', '~> 2.9.0'
 
 # HAML

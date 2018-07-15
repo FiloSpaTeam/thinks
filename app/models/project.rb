@@ -88,6 +88,10 @@ class Project < ActiveRecord::Base
     where(category: Category.find(category))
   }
 
+  def alternative_image(size = 128)
+    Identicon.data_url_for slug, size, [255, 255, 255, 255]
+  end
+
   def last_notification_update
     notifications.last
   end
