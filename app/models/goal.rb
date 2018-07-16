@@ -18,6 +18,9 @@
 class Goal < ActiveRecord::Base
   acts_as_paranoid
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :project
   belongs_to :thinker
   belongs_to :main, class_name: 'Goal', foreign_key: 'main_id'

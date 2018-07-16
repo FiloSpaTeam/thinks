@@ -39,7 +39,7 @@ class GoalsControllerTest < ActionController::TestCase
       post :create, project_id: @goal.project_id, goal: { title: 'Auth system', description: 'All related to authentication system, excluded OAuth!', project_id: @goal.project_id, thinker_id: 135_138_680 }
     end
 
-    assert_redirected_to goal_path(assigns(:goal))
+    assert_redirected_to project_goal_path(@project, assigns(:goal))
   end
 
   test 'should show goal' do
@@ -54,7 +54,7 @@ class GoalsControllerTest < ActionController::TestCase
 
   test 'should update goal' do
     patch :update, id: @goal, goal: {  }
-    assert_redirected_to goal_path(assigns(:goal))
+    assert_redirected_to project_goal_path(@project, assigns(:goal))
   end
 
   test 'should destroy goal' do

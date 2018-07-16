@@ -36,7 +36,7 @@
           Goal
         %span.float-right
           - if task.goal.present?
-            = link_to task.goal.title.truncate(20), goal_path(task.goal), :title => task.goal.title
+            = link_to task.goal.title.truncate(20), project_goal_path(@project, task.goal), :title => task.goal.title
           - else
             = t("not_defined_yet")
       %lu.list-group-item

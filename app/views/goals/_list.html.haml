@@ -29,11 +29,11 @@
         %tr
           %td
             %strong.d-none.d-md-block
-              = link_to goal.title, goal_path(goal)
+              = link_to goal.title, project_goal_path(@project, goal)
             %strong.d-sm-none
-              = link_to goal.title.truncate(50), goal_path(goal), :title => goal.title
+              = link_to goal.title.truncate(50), project_goal_path(@project, goal), :title => goal.title
             %strong.d-none.d-sm-block.d-md-none
-              = link_to goal.title, goal_path(goal)
+              = link_to goal.title, project_goal_path(@project, goal)
             .text-dark.break-word
               %em
                 = highlights_searched_text(plain_text(goal.description).truncate(150), @search)
@@ -45,11 +45,11 @@
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ goal.id }" }
               = icon('fas', 'bars', class: 'fa-sm')
             .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ goal.id }" }
-              = link_to icon('far', 'eye', t('show')), goal_path(goal), class: 'dropdown-item small'
-              = link_to icon('fas', 'edit', t('edit')), edit_goal_path(goal), class: 'dropdown-item small'
+              = link_to icon('far', 'eye', t('show')), project_goal_path(@project, goal), class: 'dropdown-item small'
+              = link_to icon('fas', 'edit', t('edit')), edit_project_goal_path(@project, goal), class: 'dropdown-item small'
               = link_to link_to icon('fas', 'tasks', t('goals.table.open_tasks')), goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filterrific[with_goal]" => goal), class: "dropdown-item small #{ goal.tasks.empty? ? 'disabled' : '' }", title: tasks_title(goal)
               .dropdown-divider
-              = link_to icon('fas', 'eraser', t('delete')), goal_path(goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+              = link_to icon('fas', 'eraser', t('delete')), project_goal_path(@project, goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
     - else
       %tr.warning
         %td.text-center

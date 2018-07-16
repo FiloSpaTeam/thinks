@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   #mount Attachinary::Engine => '/attachinary'
 
-  resources :goals
   resources :cycles
   devise_for :thinkers, :controllers => {
     :sessions      => 'thinkers/sessions',
@@ -116,7 +115,7 @@ Rails.application.routes.draw do
       resource :ratings, only: [:create], shallow: true
     end
 
-    resources :goals, shallow: true do
+    resources :goals do
       member do
         put :tasks_in_sprint
       end

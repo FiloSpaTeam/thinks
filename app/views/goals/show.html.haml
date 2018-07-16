@@ -27,10 +27,10 @@
       = link_to new_project_task_path(@project, goal_id: @goal), class: 'dropdown-item small' do
         = icon('fas', 'plus', t('goals.add_task'))
       .dropdown-divider
-      = link_to icon('fas', 'eraser', t('delete')), goal_path(@goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+      = link_to icon('fas', 'eraser', t('delete')), project_goal_path(@project, @goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
   - if @goal.thinker == current_thinker
     %li.nav-item.ml-1
-      = link_to edit_goal_path(@goal), class: 'btn btn-primary' do
+      = link_to edit_project_goal_path(@project, @goal), class: 'btn btn-primary' do
         = icon('fas', 'edit', t('edit'))
 
 - content_for :page_content do

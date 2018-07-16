@@ -18,7 +18,7 @@
 - content_for :page_actions do
   - if thinker_signed_in? && @project.assigned_roles.where(thinker: current_thinker).where(team_role: TeamRole.scrum_master.first).exists?
     %li.nav-item.ml-1
-      = link_to new_project_goal_path(@project), :class => "btn btn-primary" do
+      = link_to new_project_goal_path(@project, @project), :class => "btn btn-primary" do
         = icon('fas', 'plus', t('new'))
 
 - content_for :page_content do

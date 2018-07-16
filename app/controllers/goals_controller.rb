@@ -74,7 +74,7 @@ class GoalsController < ApplicationController
 
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
-      "goal_path(#{@goal.id})"                 => @goal.title
+      "project_goal_path(@project, #{@goal.id})"                 => @goal.title
     }
 
     @page_description = middle_dot + " <i>#{@goal.title}</i>".html_safe
@@ -114,7 +114,7 @@ class GoalsController < ApplicationController
 
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
-      "goal_path(#{@goal.id})"                 => @goal.title,
+      "project_goal_path(@project, #{@goal.id})"                 => @goal.title,
       'nil' => I18n.t('edit')
     }
 
@@ -198,7 +198,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       unless n_of_tasks_ready > 0
-        format.html { redirect_to goal_path(@goal), alert: "No task can be put in Sprint! Check out some and analize with your team!" }
+        format.html { redirect_to project_goal_path(@project, @goal), alert: "No task can be put in Sprint! Check out some and analize with your team!" }
       end
 
       if scrum_master?(@goal.project)
