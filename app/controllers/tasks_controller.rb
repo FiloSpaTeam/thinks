@@ -110,7 +110,7 @@ class TasksController < ApplicationController
   def new
     @task         = Task.new
     @task.project = @project
-    @task.goal_id = params[:goal_id] if params[:goal_id].present?
+    @task.goal    = Goal.friendly.find(params[:goal_id]) if params[:goal_id].present?
 
     @project_form = @project
 

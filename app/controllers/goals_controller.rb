@@ -229,6 +229,7 @@ class GoalsController < ApplicationController
   def set_goal
     @goal = Goal
             .includes(:project, :thinker, :tasks)
+            .friendly
             .find(params[:id])
   end
 

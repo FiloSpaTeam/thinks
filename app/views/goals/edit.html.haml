@@ -22,6 +22,6 @@
         = icon('fas', 'plus', t('new'))
 
 - content_for :page_content do
-  = render :partial => 'form'
+  = render :partial => 'form', locals: { url: project_goal_path }
 
 = render partial: 'projects/layout'

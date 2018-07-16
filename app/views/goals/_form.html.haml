@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= form_for [@project_form, @goal] do |f|
+= form_for [@project_form, @goal], url: url do |f|
   .form-group
     = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('goals.info_release'), 'data-html' => 'true' do
       = icon('fas', 'info-circle')
