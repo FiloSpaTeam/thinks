@@ -183,7 +183,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if (current_thinker == @task.thinker ||
           scrum_master?(@task.project)) &&
-          @task.update(task_params)
+          @task.check_and_update(task_params)
         create_notification(@task, @task.project)
 
         format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_updated', title: @task.title) }

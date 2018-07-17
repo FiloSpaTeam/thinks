@@ -240,6 +240,20 @@ class Task < ActiveRecord::Base
     state
   end
 
+  def check_and_update(params)
+    ActiveRecord::Base.transaction do
+      begin
+        if params.key?(:father_id) && params[:father_id].present?
+          params[:goal_id] = Task.friendly.find(params[:father_id]).goal.try(:id)
+        end
+
+        update(params)
+      rescue => ex
+        puts ex.message
+      end
+    end
+  end
+
   private
 
   def update_goal_and_release

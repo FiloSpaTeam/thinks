@@ -18,15 +18,15 @@
 = form_for [@project_form, @task], url: url do |f|
   - unless @project.recruit?(current_thinker)
     .form-group
-      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('tasks.info_goal'), 'data-html' => 'true' do
-        = icon('fas', 'info-circle')
-      = f.label :goal_id, :class => "control-label"
-      = f.select :goal_id, options_from_collection_for_select(@project_goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @project_goals.empty?
-    .form-group
       = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('tasks.info_father'), 'data-html' => 'true' do
         = icon('fas', 'info-circle')
       = f.label :father_id, :class => "control-label"
-      = f.select :father_id, options_from_collection_for_select(@father_tasks, 'id', 'title', @task.father_id), {include_blank: t('select')}, :class => "form-control", disabled: @father_tasks.empty?
+      = f.select :father_id, options_for_select(@father_tasks.map{ |ft| [ ft.title, ft.id, { "data-goal": ft.goal.try(:id) } ] }, selected_key = @task.father_id), {include_blank: t('select')}, :class => "form-control", disabled: @father_tasks.empty?
+    .form-group
+      = link_to 'javascript:;', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => t('tasks.info_goal'), 'data-html' => 'true' do
+        = icon('fas', 'info-circle')
+      = f.label :goal_id, :class => "control-label"
+      = f.select :goal_id, options_from_collection_for_select(@project_goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @project_goals.empty? || @task.father_id.present?
   .form-group.required
     = f.label :title, :class => "control-label"
     = f.text_field :title, :class => "form-control has-counter", :placeholder => t('tasks.placeholder_title'), "aria-describedby" => "help-title"
