@@ -18,6 +18,9 @@
 class Task < ActiveRecord::Base
   acts_as_paranoid
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   is_impressionable counter_cache: true
 
   has_many :votes
@@ -92,10 +95,6 @@ class Task < ActiveRecord::Base
     where(project: Project.friendly.find(project))
   }
 
-  scope :with_release, lambda { |release|
-    where(release: Release.friendly.find(release))
-  }
-
   scope :with_sprint, lambda { |sprint_id|
     sprint = Sprint.find(sprint_id)
 
@@ -124,10 +123,6 @@ class Task < ActiveRecord::Base
 
   scope :search_goal, lambda { |title|
     joins(:goal).where('goals.title LIKE ?', "%#{title}%")
-  }
-
-  scope :search_release, lambda { |title|
-    joins(:release).where('releases.title LIKE ?', "%#{title}%")
   }
 
   scope :search_thinker, lambda { |name|
@@ -250,18 +245,18 @@ class Task < ActiveRecord::Base
   def update_goal_and_release
     ActiveRecord::Base.transaction do
       begin
-        if release.blank?
-          unless release_id_was.blank?
-            release_was = Release.friendly.find(release_id_was)
-            unless release_was.blank?
-              release_was.progress = release_was.progress_percentage
-              release_was.save
-            end
-          end
-        else
-          release.progress = release.progress_percentage
-          release.save
-        end
+        # if release.blank?
+        #   unless release_id_was.blank?
+        #     release_was = Release.friendly.find(release_id_was)
+        #     unless release_was.blank?
+        #       release_was.progress = release_was.progress_percentage
+        #       release_was.save
+        #     end
+        #   end
+        # else
+        #   release.progress = release.progress_percentage
+        #   release.save
+        # end
 
         if goal.blank?
           unless goal_id_was.blank?

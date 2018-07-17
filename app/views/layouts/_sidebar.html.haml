@@ -32,8 +32,8 @@
       Working tasks
     %ul.nav.nav-sidebar
       - @thinker_tasks.each do |task|
-        %li{ :class => current_page?(task_path(task)) ? "active" : '' }
-          = link_to("<strong>##{task.serial}</strong> #{task.title}".html_safe, task_path(task), :title => task.title, :class => "clip-text")
+        %li{ :class => current_page?(project_task_path(@project, task)) ? "active" : '' }
+          = link_to("<strong>##{task.serial}</strong> #{task.title}".html_safe, project_task_path(@project, task), :title => task.title, :class => "clip-text")
   .active.tab-pane#following_projects{ :role => 'tabpanel' }
     %h3
       Following projects

@@ -17,14 +17,14 @@
 
 module CommentsHelper
   def edit_button(comment)
-    link_to edit_comment_path(comment), remote: true, method: :get, class: 'dropdown-item small' do
+    link_to edit_project_task_comment_path(comment.task.project, comment.task, comment), remote: true, method: :get, class: 'dropdown-item small' do
       icon('fas', 'edit', t('edit'), class: 'text-dark')
     end
   end
 
   def delete_button(comment)
     content_tag(:li) do
-      link_to comment_path(comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'dropdown-item small' do
+      link_to project_task_comment_path(comment.task.project, comment.task, comment), method: :delete, data: { confirm: t('comments.confirm_delete') }, class: 'dropdown-item small' do
         icon('fas', 'eraser', t('delete'), class: 'text-dark')
       end
     end

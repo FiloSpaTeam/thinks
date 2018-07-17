@@ -68,13 +68,13 @@
                   ·
                   = children_button
               ·
-              = link_to task.title, task_path(task)
+              = link_to task.title, project_task_path(@project, task)
             %strong.d-sm-none
-              = link_to task.title.truncate(45), task_path(task), :title => task.title
+              = link_to task.title.truncate(45), project_task_path(@project, task), :title => task.title
             %strong.d-none.d-sm-block.d-md-none
               = std_deviation_button(task)
               ·
-              = link_to task.title, task_path(task)
+              = link_to task.title, project_task_path(@project, task)
             .text-dark.break-word
               %small
                 %em
@@ -100,7 +100,7 @@
 
           - else
             %td.bg-white.align-middle.col-lg-2
-              = link_to reopen_task_path(task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
+              = link_to reopen_project_task_path(@project, task, :index => true), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do
                 = icon('fas', 'history', class: 'fa-lg')
                 %span.hidden-xs
                   = t('tasks.table.action_reopen')
@@ -109,11 +109,11 @@
               %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ task.id }" }
                 = icon('fas', 'bars', class: 'fa-sm')
               .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ task.id }" }
-                = link_to icon('far', 'eye', t('show')), task_path(task), class: 'dropdown-item small'
-                = link_to icon('fas', 'edit', t('edit')), edit_task_path(task), class: 'dropdown-item small'
+                = link_to icon('far', 'eye', t('show')), project_task_path(@project, task), class: 'dropdown-item small'
+                = link_to icon('fas', 'edit', t('edit')), edit_project_task_path(@project, task), class: 'dropdown-item small'
                 .dropdown-divider
                 - if task.deleted?
-                  = link_to icon('fas', 'eraser', t('delete')), task_path(task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+                  = link_to icon('fas', 'eraser', t('delete')), project_task_path(@project, task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
                 - elsif !task.done?
                   %a.dropdown-item.small{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
                     = icon('fas', 'trash-alt', t('discards'))

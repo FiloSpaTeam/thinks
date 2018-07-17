@@ -3,6 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .projects, .teams, .election_polls {
+    .card-columns {
+        @include media-breakpoint-only(xl) {
+            column-count: 4;
+        }
+    }
+
     .progress {
         min-width: 2em;
 

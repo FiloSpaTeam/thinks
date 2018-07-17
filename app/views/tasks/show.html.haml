@@ -31,7 +31,7 @@
       - content_for :page_modals do
         = render partial: 'tasks/modal_discard', locals: { task: @task }
       %li.nav-item.ml-1
-        = link_to edit_task_path(@task), class: 'btn btn-primary' do
+        = link_to edit_project_task_path(@task.project, @task), class: 'btn btn-primary' do
           = icon('fas', 'edit', t('edit'))
 
 - content_for :page_content do
@@ -39,7 +39,7 @@
   %h5.font-weight-bold
     = t('tasks.comments')
   - if @task.project.part_of_team?(current_thinker) && current_thinker.ban(@task.project).nil? && !@task.deleted?
-    = render :partial => 'comments/form'
+    = render :partial => 'comments/form', locals: { url: project_task_comments_path(@task.project, @task) }
   %table.table.table-sm.mt-2#comments-list
     %tbody
       - if @comments.empty?
@@ -58,7 +58,7 @@
       - unless @task.goal_id.nil?
         = @task.goal.title
       - else
-        = form_for @task do |f|
+        = form_for [@project,@task] do |f|
           .form-group
             = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
           = f.submit t('save'), :class => "btn btn-primary d-none"

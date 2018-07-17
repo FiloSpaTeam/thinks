@@ -143,7 +143,7 @@ class RecruitmentsController < ApplicationController
           format.html { redirect_to project_tasks_url(@task.project), alert: 'Demand already rejected!' }
         else
           if params[:reason][:text].nil?
-            format.html { redirect_to @task, alert: 'You need to specify a reason.' }
+            format.html { redirect_to project_task_path(@project, @task), alert: 'You need to specify a reason.' }
           else
             @task.destroy_and_associate_reason(params.require(:reason), current_thinker)
             create_notification(@task, @task.project)
@@ -180,7 +180,7 @@ class RecruitmentsController < ApplicationController
     @task.restore(recursive: true)
     create_notification(@task, @task.project)
     respond_to do |format|
-      format.html { redirect_to @task, notice: 'Now demand has another chance.' }
+      format.html { redirect_to project_task_path(@project, @task), notice: 'Now demand has another chance.' }
       format.json { render :show, status: :ok, location: @task }
     end
   end

@@ -100,7 +100,7 @@ class TasksController < ApplicationController
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
-      "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
+      "project_task_path('#{@project.slug}','#{@task.slug}')"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
     }
 
     @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\"" 
@@ -126,7 +126,7 @@ class TasksController < ApplicationController
   def edit
     if current_thinker != @task.thinker && !scrum_master?(@task.project)
       respond_to do |format|
-        format.html { redirect_to @task, alert: 'You cannot edit this.' }
+        format.html { redirect_to project_task_path(@project, @task), alert: 'You cannot edit this.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -136,7 +136,7 @@ class TasksController < ApplicationController
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
-      "task_path(#{@task.id})"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
+      "project_task_path('#{@project.slug}', '#{@task.slug}')"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>",
       'nil' => I18n.t('edit')
     }
 
@@ -160,7 +160,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save_and_check_project_condition
         create_notification(@task, @project)
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@task)
@@ -186,7 +186,7 @@ class TasksController < ApplicationController
           @task.update(task_params)
         create_notification(@task, @task.project)
 
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_updated', title: @task.title) }
         format.json { render :show, status: :ok, location: @task }
       else
         @project = @task.project
@@ -210,18 +210,18 @@ class TasksController < ApplicationController
           format.html { redirect_to project_tasks_url(@task.project), notice: t('alerts.task_deleted', title: title) }
         else
           if params[:task].nil? || params[:task][:reason].nil?
-            format.html { redirect_to @task, alert: t('alerts.specify_reason') }
+            format.html { redirect_to project_task_path(@project, @task), alert: t('alerts.specify_reason') }
           else
             @task.destroy_and_associate_reason(params[:task][:reason], current_thinker)
             create_notification(@task, @task.project)
 
-            format.html { redirect_to @task, notice: t('alerts.task_discarded', title: @task.title) }
+            format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_discarded', title: @task.title) }
           end
         end
 
         format.json { head :no_content }
       else
-        format.html { redirect_to @task, alert: t('alerts.operation_not_permitted') }
+        format.html { redirect_to project_task_path(@project, @task), alert: t('alerts.operation_not_permitted') }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -240,7 +240,7 @@ class TasksController < ApplicationController
 
           if @task.save
             create_notification(@task, @task.project)
-            format.html { redirect_to @task, notice: 'Task ready for this sprint! Good job!' }
+            format.html { redirect_to project_task_path(@project, @task), notice: 'Task ready for this sprint! Good job!' }
             format.json { render :show, status: :ok, location: @task }
           else
             format.html { render :edit }
@@ -269,7 +269,7 @@ class TasksController < ApplicationController
 
           if @task.save
             create_notification(@task, @task.project)
-            format.html { redirect_to @task, notice: 'Task is ready for next Sprint!' }
+            format.html { redirect_to project_task_path(@project, @task), notice: 'Task is ready for next Sprint!' }
             format.json { render :show, status: :ok, location: @task }
           else
             format.html { render :edit }
@@ -296,7 +296,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @task, notice: 'Your thinks is part of the workload now!' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Your thinks is part of the workload now!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -313,7 +313,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         create_notification(@task, @task.project)
-        format.html { redirect_to @task, notice: 'You have a new task to do! Good job!' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'You have a new task to do! Good job!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :show }
@@ -327,7 +327,7 @@ class TasksController < ApplicationController
     create_notification(@task, @task.project)
     respond_to do |format|
       if params[:index].nil?
-        format.html { redirect_to @task, notice: t('alerts.task_restored', title: @task.title) }
+        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.task_restored', title: @task.title) }
       else
         format.html { redirect_to project_tasks_path(@task.project, 'filters[with_deleted_at]' => true), notice: 'You restored the task. Good job!' }
       end
@@ -342,7 +342,7 @@ class TasksController < ApplicationController
 
     create_notification(@task, @task.project)
     respond_to do |format|
-      format.html { redirect_to @task, notice: 'You give up work. Good job!' }
+      format.html { redirect_to project_task_path(@project, @task), notice: 'You give up work. Good job!' }
       format.json { render :show, status: :ok, location: @task }
     end
   end
@@ -358,6 +358,7 @@ class TasksController < ApplicationController
     @task = Task
             .includes(:comments, :votes, :worker, :thinker, :project, :ratings)
             .with_deleted
+            .friendly
             .find(params[:id])
   end
 

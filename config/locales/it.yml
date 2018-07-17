@@ -49,6 +49,7 @@ it:
     task_deleted: "Lavoro \"%{title}\" cancellato."
     task_discarded: "Lavoro \"%{title}\" scartato."
     task_restored: "Lavoro \"%{title}\" ripristinato."
+    task_updated: "Lavoro \"%{title}\" aggiornato."
 
   pages:
     projects:

@@ -24,6 +24,6 @@
           = t('new')
 
 - content_for :page_content do
-  = render :partial => 'form'
+  = render :partial => 'form', locals: { url: project_task_path }
 
 = render partial: 'projects/layout'

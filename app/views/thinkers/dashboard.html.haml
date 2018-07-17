@@ -52,13 +52,13 @@
                         ·
                         = children_button
                     ·
-                    = link_to task.title.truncate(30), task_path(task), :title => task.title
+                    = link_to task.title.truncate(30), project_task_path(@project, task), :title => task.title
                   %strong.visible-xs
-                    = link_to task.title.truncate(45), task_path(task), :title => task.title
+                    = link_to task.title.truncate(45), project_task_path(@project, task), :title => task.title
                   %strong.visible-sm
                     = std_deviation_button(task)
                     ·
-                    = link_to task.title, task_path(task)
+                    = link_to task.title, project_task_path(@project, task)
                   .text-dark.break-word
                     %small
                       %em
@@ -131,13 +131,13 @@
                             ·
                             = children_button
                         ·
-                        = link_to task.title.truncate(30), task_path(task), :title => task.title
+                        = link_to task.title.truncate(30), project_task_path(@project, task.project, task), :title => task.title
                       %strong.visible-xs
-                        = link_to task.title.truncate(45), task_path(task), :title => task.title
+                        = link_to task.title.truncate(45), project_task_path(@project, task.project, task), :title => task.title
                       %strong.visible-sm
                         = std_deviation_button(task)
                         ·
-                        = link_to task.title, task_path(task)
+                        = link_to task.title, project_task_path(@project, task.project, task)
                       .text-dark.break-word
                         %small
                           %em
@@ -197,13 +197,13 @@
                             ·
                             = children_button
                         ·
-                        = link_to task.title.truncate(30), task_path(task), :title => task.title
+                        = link_to task.title.truncate(30), project_task_path(task.project, task), :title => task.title
                       %strong.visible-xs
-                        = link_to task.title.truncate(45), task_path(task), :title => task.title
+                        = link_to task.title.truncate(45), project_task_path(task.project, task), :title => task.title
                       %strong.visible-sm
                         = std_deviation_button(task)
                         ·
-                        = link_to task.title, task_path(task)
+                        = link_to task.title, project_task_path(task.project, task)
                       .text-dark.break-word
                         %small
                           %em
@@ -224,3 +224,5 @@
                       = workload_description(task)
     .col-md-6
       = smart_listing_render :my_projects
+  .row
+    // INSERT SOMETHING ABOUT LAST PROJECTS? -> SETTINGS: ACTIVE_NEWS_FROM_WORLD

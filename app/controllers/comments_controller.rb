@@ -63,16 +63,17 @@ class CommentsController < ApplicationController
 
   def update
     @task = @comment.task
+    @project = @task.project
 
     respond_to do |format|
       if current_thinker == @comment.thinker && @comment.update(comment_params)
         create_notification(@comment, @task.project)
-        format.html { redirect_to @task, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         set_form_errors(@comment)
 
-        format.html { redirect_to @task, alert: 'Error with comment update.' }
+        format.html { redirect_to project_task_path(@project, @task), alert: 'Error with comment update.' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -87,15 +88,15 @@ class CommentsController < ApplicationController
       if reason.text.empty?
         set_form_errors(reason)
 
-        format.html { redirect_to @task, alert: 'You need to specify a reason!' }
+        format.html { redirect_to project_task_path(@project, @task), alert: 'You need to specify a reason!' }
       elsif @task.worker == current_thinker && @comment.approve(reason)
         create_notification(@comment, @task.project)
-        format.html { redirect_to @task, notice: 'Solution approved! Task done!' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Solution approved! Task done!' }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@comment)
 
-        format.html { redirect_to @task }
+        format.html { redirect_to project_task_path(@project, @task) }
         format.json { render json: @task.comment, status: :unprocessable_entity }
       end
     end
@@ -131,7 +132,7 @@ class CommentsController < ApplicationController
   end
 
   def set_task
-    @task = Task.with_deleted.find(params[:task_id])
+    @task = Task.with_deleted.friendly.find(params[:task_id])
   end
 
   def set_comment

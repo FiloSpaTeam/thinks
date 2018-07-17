@@ -24,7 +24,7 @@ class RatingsController < ApplicationController
   def create
     respond_to do |format|
       if @task.ratings.where(thinker: current_thinker).present?
-        format.html { redirect_to @task, notice: 'You have already expressed your think about.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'You have already expressed your think about.' }
         format.json { render :show, status: :ok, location: @task }
         
       else
@@ -34,10 +34,10 @@ class RatingsController < ApplicationController
         rating.thinker = current_thinker
 
         if rating.save
-          format.html { redirect_to @task, notice: 'Thanks for rating this work.' }
+          format.html { redirect_to project_task_path(@project, @task), notice: 'Thanks for rating this work.' }
           format.json { render :show, status: :created, location: @task }
         else
-          format.html { redirect_to @task, alert: 'Your rating cannot be saved.' }
+          format.html { redirect_to project_task_path(@project, @task), alert: 'Your rating cannot be saved.' }
           format.json { render json: rating.errors, status: :unprocessable_entity }
         end
       end

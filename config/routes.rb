@@ -87,7 +87,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :tasks, shallow: true do
+    resources :tasks do
       member do
         put :sprint
         put :release
@@ -97,7 +97,7 @@ Rails.application.routes.draw do
         put :give_up
       end
 
-      resources :comments, only: [:create, :edit, :update, :destroy], shallow: true do
+      resources :comments, only: [:create, :edit, :update, :destroy] do
         resources :reasons, shallow: true
 
         member do

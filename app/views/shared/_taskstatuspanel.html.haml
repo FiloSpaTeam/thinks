@@ -44,7 +44,7 @@
           Father
         %span.float-right
           - if task.father.present?
-            = link_to task.father.title.truncate(20), task_path(task.father), :title => task.father.title
+            = link_to task.father.title.truncate(20), project_task_path(@project, task.father), :title => task.father.title
           - else
             = t("not_defined_yet")
       - if task.children.count.nonzero?
@@ -97,17 +97,17 @@
       - if task.status == Status.release.first
         .panel-footer
           - if task.ready?
-            = link_to "Get in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-primary btn-block"
+            = link_to "Get in Sprint!", sprint_project_task_path(@project, task), :method => :put, :class => "btn btn-primary btn-block"
           - else
             %strong
-              = link_to "Force in Sprint!", sprint_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+              = link_to "Force in Sprint!", sprint_project_task_path(@project, task), :method => :put, :class => "btn btn-warning btn-block"
               = t(".standard_deviation_too_high")
       - elsif task.status == Status.backlog.first && task.workloads.count > 0
         .panel-footer
-          = link_to "Force in Release", release_task_path(task), :method => :put, :class => "btn btn-warning btn-block"
+          = link_to "Force in Release", release_project_task_path(@project, task), :method => :put, :class => "btn btn-warning btn-block"
       - elsif task.status == Status.done.first && !task.recruitment
         .panel-footer
-          = link_to "Back to release", release_task_path(task), :method => :put, :class => "btn btn-danger btn-block"
+          = link_to "Back to release", release_project_task_path(@project, task), :method => :put, :class => "btn btn-danger btn-block"
     - elsif task.project.suspended
       %ul.list-group
         %li.list-group-item.text-danger{ style: 'border-top: none;' }
@@ -160,7 +160,7 @@
       .panel-footer
         - if workload_voted.nil?
           - if !task.in_progress? && !task.done?
-            = form_for task, :url => judge_task_path(task), method: :put do |f|
+            = form_for task, :url => judge_project_task_path(@project, task), method: :put do |f|
               .form-group
                 = f.label :workload, t('.define_workload'), class: "control-label"
                 = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
@@ -184,7 +184,7 @@
             = task.worker.name.try(:truncate, 20)
           - if (task.worker == current_thinker || scrum_master?(task.project)) && task.status != Status.done.first
             %strong
-              = link_to "Give up work", give_up_task_path(task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
+              = link_to "Give up work", give_up_project_task_path(@project, task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
         - elsif task.status == Status.sprint.first
           - if current_thinker.working_tasks.in_progress.present?
             %h4 No one is working over this but you have yet something to do ;-P
@@ -192,7 +192,7 @@
             %h4 The project is not started yet, wait. Your moment will come soon.
           - elsif task.workloads.size.nonzero?
             - if (task.father.present? && task.father.done?) || task.father.nil?
-              = link_to "Assigns me", assign_task_path(task), :method => :put, :class => "btn btn-success btn-block"
+              = link_to "Assigns me", assign_project_task_path(@project, task), :method => :put, :class => "btn btn-success btn-block"
             - else
               %h4 Complete the father task to work on this task.
           - else

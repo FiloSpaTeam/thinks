@@ -177,7 +177,7 @@
             %small.text-dark
               = task.end_at.to_s(:short)
               ·
-              = link_to task.title, task_path(task)
+              = link_to task.title, project_task_path(@project, task)
             .text-dark
               %small
                 %em

@@ -13,23 +13,23 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2017, Claudio Maradonna
+-# Copyright (c) 2017,2018 Claudio Maradonna
 
 .card
   -# - if project.subprojects.exists?
   -#   %i.fa.fa-sitemap.fa-lg{ 'data-toggle': 'popover', 'data-trigger': 'click', 'data-content': 'This project has subprojects.', 'data-placement': 'top', style: 'position: absolute; right: 20px; top: 5px;' }
   - if project.main_image
     = cl_image_tag(project.main_image.path, { style: 'width: auto; height: 180px; max-width: 100%', class: 'card-img-top' })
-  - else
-    %img.card-img-top{ src: project.alternative_image }
   .card-body{ style: 'background-color: #FBFBFB;' }
-    = link_to project_path(project), class: 'card-title' do
-      %h5= project.title
-      %small.card-text.text-muted
-        = highlights_searched_text(plain_text(project.description.lines.first).truncate(150), filter_value(:title_or_description))
-    %br
-    %small.mt-2
-      - if project.category.present?
+    .row
+      .col-2
+        %img{ src: project.alternative_image(32) }
+      .col-10
+        = link_to project_path(project), class: 'card-title' do
+          %h5= project.title
+          %small.card-text.text-muted
+            = highlights_searched_text(plain_text(project.description.lines.first).truncate(150), filter_value(:title_or_description))
+  - if project.category.present?
+    .card-footer
+      %small.text-muted
         = t("category.#{project.category.t_name}")
-      - else
-        &nbsp;

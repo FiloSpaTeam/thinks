@@ -17,7 +17,7 @@
 .modal.fade{ id: "modal-discard-task-#{ task.id }", tabindex: "-1", role: "dialog" }
   .modal-dialog{ role: "document" }
     .modal-content
-      = form_for task, html: { method: :delete } do |f|
+      = form_for [@project, task], html: { method: :delete } do |f|
         .modal-header
           %h5.modal-title= t( ".title", title: task.title )
           %button{type: "button", class: "close", "data-dismiss": "modal", "aria-label": t('close')}

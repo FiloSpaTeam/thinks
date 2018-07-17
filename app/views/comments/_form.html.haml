@@ -18,7 +18,7 @@
 - remote = false
 - if @comment.text.nil?
   - remote = true
-= form_for [@task, @comment], remote: remote do |f|
+= form_for [@task, @comment], remote: remote, url: url do |f|
   .form-group
     - if @comment.text.nil?
       = render partial: 'shared/markdown_syntax'

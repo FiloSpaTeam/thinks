@@ -16,6 +16,6 @@
 -# Copyright (c) 2018, Claudio Maradonna
 
 - content_for :page_content do
-  = render :partial => 'form'
+  = render :partial => 'form', locals: { url: project_tasks_path }
 
 = render partial: 'projects/layout'

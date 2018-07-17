@@ -17,11 +17,11 @@
 
 .container
   %h2= t('.most_popular')
-  .card-deck
+  .card-columns
     - @most_popular.each do |project|
       = render partial: "projects/card", locals: { project: project }
   %hr.margin-bottom-50.margin-top-50
   %h2= t('.most_active')
-  .card-deck
+  .card-columns
     - @most_popular.each do |project|
       = render partial: "projects/card", locals: { project: project }
