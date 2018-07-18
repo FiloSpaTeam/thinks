@@ -19,10 +19,10 @@
   - if (@task.thinker == current_thinker || @scrum_master) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
       %li.nav-item.ml-1
-        = link_to reopen_task_path(@task), :method => 'put', class: 'btn btn-secondary' do
+        = link_to reopen_project_task_path(@project, @task), :method => 'put', class: 'btn btn-secondary' do
           = icon('fas', 'history', t('reopen'))
       %li.nav-item.ml-1
-        = link_to task_path(@task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'btn btn-danger' do
+        = link_to project_task_path(@project, @task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'btn btn-danger' do
           = icon('fas', 'eraser', t('delete'))
     - elsif !@task.done?
       %li.nav-item.ml-1
@@ -55,12 +55,14 @@
     %li.list-group-item
       %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
       %br
-      - unless @task.goal_id.nil?
+      - if @task.goal.present?
         = @task.goal.title
-      - else
+      - elsif !@task.deleted?
         = form_for [@project,@task] do |f|
           .form-group
             = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
           = f.submit t('save'), :class => "btn btn-primary d-none"
+      - else
+        = t('tasks.no_goal')
 
 = render partial: 'projects/layout'

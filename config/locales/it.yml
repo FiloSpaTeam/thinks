@@ -209,6 +209,7 @@ it:
     placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
 
     comments: "Commenti e considerazioni"
+    no_goal: "Nessun obiettivo associato"
 
     statuses:
       backlog: "Backlog"

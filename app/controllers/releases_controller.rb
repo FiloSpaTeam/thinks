@@ -23,9 +23,10 @@ class ReleasesController < ApplicationController
 
   before_action :authenticate_thinker!, except: [:index]
 
-  before_action :set_project, only: [:new, :index, :create]
-  before_action :set_validators_for_form_help, only: [:new, :edit]
+  before_action :set_project
   before_action :set_release, only: [:show, :edit, :update, :destroy]
+
+  before_action :set_validators_for_form_help, only: [:new, :edit]
 
   def index
     releases_scope = Release
@@ -92,7 +93,6 @@ class ReleasesController < ApplicationController
     end
 
     @project_form = nil
-    @project      = @release.project
 
     @breadcrumbs = {
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
@@ -148,8 +148,6 @@ class ReleasesController < ApplicationController
   end
 
   def show
-    @project = @release.project
-
     @breadcrumbs = {
       "project_releases_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_releases_path'),
       "project_release_path(@release.project, #{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>"
@@ -160,19 +158,18 @@ class ReleasesController < ApplicationController
 
   def destroy
     respond_to do |format|
-      project = @release.project
       if @scrum_master
         if @release.tasks.empty?
-          destroy_notification(@release, project)
+          destroy_notification(@release, @project)
           @release.destroy
 
-          format.html { redirect_to project_releases_path(project), notice: 'Release is deleted.' }
+          format.html { redirect_to project_releases_path(@project), notice: 'Release is deleted.' }
         else
-          format.html { redirect_to [@release.project, @release], alert: 'This release has tasks associated.' }
+          format.html { redirect_to [@project, @release], alert: 'This release has tasks associated.' }
           format.json { render json: @release.errors, status: :unprocessable_entity }
         end
       else
-        format.html { redirect_to [@release.project, @release], alert: 'You cannot destroy this release!' }
+        format.html { redirect_to [@project, @release], alert: 'You cannot destroy this release!' }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
     end

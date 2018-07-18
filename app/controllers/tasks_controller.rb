@@ -17,7 +17,6 @@
 
 class TasksController < ApplicationController
   include ApplicationHelper
-  include ProjectsHelper
   include StatusesHelper
   include TasksHelper
   include SmartListing::Helper::ControllerExtensions
@@ -25,17 +24,17 @@ class TasksController < ApplicationController
 
   before_action :authenticate_thinker!
 
+  before_action :set_project
   before_action :set_task, only: [:show, :edit, :update, :destroy, :progress, :assign, :judge, :sprint, :release, :reopen, :give_up]
-  before_action :set_project, only: [:new, :index, :create]
 
   before_action :check_ban!, except: [:index]
   before_action :check_task!, only: [:show]
 
-  before_action :set_validators_for_form_help, only: [:new, :edit]
-  before_action :set_validators_for_show, only: [:show]
-
   before_action :teammate!, only: [:new, :create]
   before_action :check_assign!, only: [:assign]
+
+  before_action :set_validators_for_form_help, only: [:new, :edit]
+  before_action :set_validators_for_show, only: [:show]
 
   before_action :share_statuses, only: [:index, :destroy, :sprint, :assign, :give_up, :release]
 
@@ -93,7 +92,6 @@ class TasksController < ApplicationController
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
 
-    @project = @task.project
     @comment = Comment.new
 
     impressionist(@task, '', unique: [:impressionable_id, :user_id])
@@ -132,7 +130,6 @@ class TasksController < ApplicationController
     end
 
     @project_form = nil
-    @project      = @task.project
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
@@ -182,14 +179,13 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if (current_thinker == @task.thinker ||
-          @scrum_master &&
-          @task.check_and_update(task_params)
+          @scrum_master) &&
+         @task.check_and_update(task_params)
         create_notification(@task, @task.project)
 
         format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_updated', title: @task.title) }
         format.json { render :show, status: :ok, location: @task }
       else
-        @project = @task.project
         set_validators_for_form_help
 
         format.html { render :edit }
