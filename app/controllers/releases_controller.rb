@@ -161,7 +161,7 @@ class ReleasesController < ApplicationController
   def destroy
     respond_to do |format|
       project = @release.project
-      if scrum_master?(project)
+      if @scrum_master
         if @release.tasks.empty?
           destroy_notification(@release, project)
           @release.destroy

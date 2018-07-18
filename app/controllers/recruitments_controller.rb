@@ -138,7 +138,7 @@ class RecruitmentsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if scrum_master?(@task.project)
+      if @scrum_master
         if @task.deleted?
           format.html { redirect_to project_tasks_url(@task.project), alert: 'Demand already rejected!' }
         else
@@ -162,7 +162,7 @@ class RecruitmentsController < ApplicationController
 
   def approve
     respond_to do |format|
-      if scrum_master?(@task.project)
+      if @scrum_master
         @task.status = Status.done.first
         @task.save
 

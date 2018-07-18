@@ -62,6 +62,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url unless current_thinker.try(:admin?)
   end
 
+  def check_scrum_master!
+    redirect_to project_path(@project), alert: t('alert.not_scrum_master') unless @scrum_master
+
+  end
+
   def check_ban!
     unless current_thinker.ban(@project).nil?
       flash[:error] = 'You are banned!'
@@ -79,7 +84,13 @@ class ApplicationController < ActionController::Base
                .includes(:tasks, :sprints, :cycle,
                          :assigned_roles, :contributions,
                          :releases, :goals, :subprojects)
-               .friendly.find(params[:project_id])
+               .friendly.find(params[:project_id] || params[:id])
+
+    set_scrum_master
+  end
+
+  def set_scrum_master
+    @scrum_master = @project.scrum_master?(current_thinker)
   end
 
   # TODO move from here, something related to notification is better

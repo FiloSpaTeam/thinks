@@ -124,7 +124,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    if current_thinker != @task.thinker && !scrum_master?(@task.project)
+    if current_thinker != @task.thinker && @scrum_master
       respond_to do |format|
         format.html { redirect_to project_task_path(@project, @task), alert: 'You cannot edit this.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -150,7 +150,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    @task.release = nil unless scrum_master?(@project)
+    @task.release = nil unless @scrum_master
     @task.recruitment = true if @project.recruit?(current_thinker)
 
     @task.project = @project
@@ -182,7 +182,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if (current_thinker == @task.thinker ||
-          scrum_master?(@task.project)) &&
+          @scrum_master &&
           @task.check_and_update(task_params)
         create_notification(@task, @task.project)
 
@@ -202,7 +202,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     respond_to do |format|
-      if current_thinker == @task.thinker || scrum_master?(@task.project)
+      if current_thinker == @task.thinker || @scrum_master
         if @task.deleted?
           title = @task.title
           @task.really_destroy!
@@ -231,7 +231,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1/judge.json
   def sprint
     respond_to do |format|
-      if scrum_master?(@task.project)
+      if @scrum_master
         if @task.project.suspended
           format.html { redirect_to task_path(@task), alert: 'Currently the development is suspended.' }
           format.json { render json: {}, status: :unprocessable_entity }
@@ -258,7 +258,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1/judge.json
   def release
     respond_to do |format|
-      if scrum_master?(@task.project)
+      if @scrum_master
         if @task.project.suspended
           format.html { redirect_to task_path(@task), alert: 'Currently the development is suspended.' }
           format.json { render json: {}, status: :unprocessable_entity }

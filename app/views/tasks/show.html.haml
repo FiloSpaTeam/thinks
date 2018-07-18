@@ -16,7 +16,7 @@
 -# Copyright (c) 2015, Claudio Maradonna
 
 - content_for :page_actions do
-  - if (@task.thinker == current_thinker || scrum_master?(@task.project)) && current_thinker.ban(@task.project).nil?
+  - if (@task.thinker == current_thinker || @scrum_master) && current_thinker.ban(@task.project).nil?
     - if @task.deleted?
       %li.nav-item.ml-1
         = link_to reopen_task_path(@task), :method => 'put', class: 'btn btn-secondary' do

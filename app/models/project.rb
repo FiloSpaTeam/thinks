@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -15,6 +17,7 @@
 
 # Copyright (c) 2015, Claudio Maradonna
 
+# This is the model for projects
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -107,6 +110,14 @@ class Project < ActiveRecord::Base
   def part_of_team?(thinker)
     # thinker == self.thinker || !team.select { |contribution| contribution.thinker_id == thinker.id }.empty?
     assigned_roles.where(thinker: thinker).present?
+  end
+
+  def scrum_master?(thinker)
+    assigned_roles
+      .where(thinker: thinker)
+      .where('team_role_id IN (?)',
+      TeamRole.scrum_master.first)
+      .present?
   end
 
   def participant?(thinker)

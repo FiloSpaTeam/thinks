@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -13,26 +15,29 @@
 # You should have received a copy of the GNU Affero Public License
 # along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
-# Copyright (c) 2015, Claudio Maradonna
+# Copyright (c) 2015,2018 Claudio Maradonna
 
+# Handles goals of the project
 class GoalsController < ApplicationController
   include ActionView::Helpers::TextHelper
-  include ProjectsHelper
   include StatusesHelper
   include GoalsHelper
   include ApplicationHelper
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :tasks_in_sprint]
-  before_action :set_project, only: [:new, :index, :create]
-  before_action :set_validators_for_form_help, only: [:new, :edit]
-
-  before_action :check_ban!, except: [:index]
-
-  before_action :share_statuses, only: [:show, :edit, :tasks_in_sprint]
-
   before_action :authenticate_thinker!
+
+  before_action :set_project
+  before_action :set_goal, only: %i[show edit update destroy tasks_in_sprint]
+
+  before_action :check_ban!, except: %i[index]
+  before_action :check_scrum_master!, only: %i[new edit create
+                                               update tasks_in_sprint]
+
+  before_action :set_validators_for_form_help, only: %i[new edit]
+
+  before_action :share_statuses, only: %i[show edit tasks_in_sprint]
 
   # GET /goals
   # GET /goals.json
@@ -43,7 +48,8 @@ class GoalsController < ApplicationController
                   .order('progress DESC')
                   .order('created_at DESC')
 
-    goals_scope = apply_filters(goals_scope, params[:filters]) if params[:filters].present?
+    goals_scope = apply_filters(goals_scope, params[:filters]) if
+      params[:filters].present?
 
     smart_listing_create :goals,
                          goals_scope,
@@ -70,8 +76,6 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
-    @project = @goal.project
-
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
       "project_goal_path(@project, #{@goal.id})"                 => @goal.title
@@ -82,13 +86,6 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
-    unless scrum_master?(@project)
-      respond_to do |format|
-        format.html { redirect_to project_path(@project), alert: t('you_are_not_the_scrum_master') }
-        format.json { render json: {}, status: :unprocessable_entity }
-      end
-    end
-
     @goal         = Goal.new
     @project_form = @project
     @project_releases = @project.releases.order('version')
@@ -101,20 +98,12 @@ class GoalsController < ApplicationController
 
   # GET /goals/1/edit
   def edit
-    unless scrum_master?(@goal.project)
-      respond_to do |format|
-        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
-        format.json { render json: {}, status: :unprocessable_entity }
-      end
-    end
-
     @project_form = nil
-    @project      = @goal.project
     @project_releases = @project.releases.order('version')
 
     @breadcrumbs = {
       "project_goals_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_goals_path'),
-      "project_goal_path(@project, #{@goal.id})"                 => @goal.title,
+      "project_goal_path(@project, #{@goal.id})" => @goal.title,
       'nil' => I18n.t('edit')
     }
 
@@ -125,29 +114,25 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     respond_to do |format|
-      if scrum_master?(@project)
-        @goal          = Goal.new(goal_params)
-        @goal.project  = @project
-        @goal.thinker  = current_thinker
-        @goal.progress = 0.0
+      @goal          = Goal.new(goal_params)
+      @goal.project  = @project
+      @goal.thinker  = current_thinker
+      @goal.progress = 0.0
 
-        if @goal.save_and_check_project_condition
-          create_notification(@goal, @goal.project)
-          format.html { redirect_to @goal, notice: t('goals.created', title: @goal.title) }
-          format.json { render :show, status: :created, location: @goal }
-        else
-          set_form_errors(@goal)
-          set_validators_for_form_help
-
-          @project_form = @project
-          @project_releases = @project.releases.order('version')
-
-          format.html { render :new }
-          format.json { render json: @goal.errors, status: :unprocessable_entity }
-        end
+      if @goal.save_and_check_project_condition
+        create_notification(@goal, @goal.project)
+        puts @goal.errors.full_messages
+        format.html { redirect_to project_goal_path(@project, @goal), notice: t('alerts.created', subject: t('goals.goal'), title: @goal.title) }
+        format.json { render :show, status: :created, location: @goal }
       else
-        format.html { redirect_to project_path(@project), alert: t('you_are_not_the_scrum_master') }
-        format.json { render json: {}, status: :unprocessable_entity }
+        set_form_errors(@goal)
+        set_validators_for_form_help
+
+        @project_form = @project
+        @project_releases = @project.releases.order('version')
+
+        format.html { render :new }
+        format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -156,21 +141,18 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1.json
   def update
     respond_to do |format|
-      if scrum_master?(@goal.project)
-        if @goal.update(goal_params)
-          create_notification(@goal, @goal.project)
-          format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
-          format.json { render :show, status: :ok, location: @goal }
-        else
-          set_form_errors(@goal)
-          set_validators_for_form_help
-
-          format.html { render :edit }
-          format.json { render json: @goal.errors, status: :unprocessable_entity }
-        end
+      if @goal.update(goal_params)
+        create_notification(@goal, @goal.project)
+        format.html { redirect_to project_goal_path(@project, @goal), notice: t('alerts.updated', subject: t('goals.goal'), title: @goal.title) }
+        format.json { render :show, status: :ok, location: @goal }
       else
-        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
-        format.json { render json: {}, status: :unprocessable_entity }
+        set_form_errors(@goal)
+        set_validators_for_form_help
+
+        @project_releases = @project.releases.order('version')
+
+        format.html { render :edit }
+        format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -179,16 +161,11 @@ class GoalsController < ApplicationController
   # DELETE /goals/1.json
   def destroy
     respond_to do |format|
-      if scrum_master?(@goal.project)
-        @goal.destroy
+      @goal.destroy
 
-        create_notification(@goal, @goal.project)
-        format.html { redirect_to project_goals_path(@goal.project), notice: t('alerts.goal_deleted') }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @goal, alert: t('alerts.operation_not_permitted') }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
-      end
+      create_notification(@goal, @goal.project)
+      format.html { redirect_to project_goals_path(@goal.project), notice: t('alerts.deleted', subject: t('goals.goal'), title: @goal.title) }
+      format.json { head :no_content }
     end
   end
 
@@ -197,21 +174,16 @@ class GoalsController < ApplicationController
     n_of_tasks_ready = tasks_ready.count
 
     respond_to do |format|
-      unless n_of_tasks_ready > 0
+      unless n_of_tasks_ready.positive?
         format.html { redirect_to project_goal_path(@project, @goal), alert: "No task can be put in Sprint! Check out some and analize with your team!" }
       end
 
-      if scrum_master?(@goal.project)
-        tasks_ready.update_all(status_id: @statuses.sprint.first)
+      tasks_ready.update_all(status_id: @statuses.sprint.first)
 
-        create_notification(@goal, @goal.project)
+      create_notification(@goal, @goal.project)
 
-        format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to project_path(@goal.project), alert: t('you_are_not_the_scrum_master') }
-        format.json { render json: {}, status: :unprocessable_entity }
-      end
+      format.html { redirect_to project_goals_path(@goal.project), notice: pluralize(n_of_tasks_ready, "task") + ' was successfully get in sprint!' }
+      format.json { head :no_content }
     end
   end
 
@@ -235,6 +207,6 @@ class GoalsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def goal_params
-    params[:goal].permit(:title, :description)
+    params[:goal].permit(:title, :description, :release_id)
   end
 end
