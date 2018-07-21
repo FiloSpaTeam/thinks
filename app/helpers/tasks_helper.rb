@@ -51,8 +51,9 @@ module TasksHelper
   end
 
   def apply_filters(scope, params)
-    scope = scope.with_goal(params[:goal_id]) if params.key?(:goal_id) &&
-                                                 params[:goal_id].present?
+    scope = scope.with_goal(params[Enums::FiltersNames::GOAL]) if
+      params.key?(Enums::FiltersNames::GOAL) &&
+      params[Enums::FiltersNames::GOAL].present?
     scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
                                                        params[:release_id].present?
     scope = scope.with_sprint(params[:sprint_id]) if params.key?(:sprint_id) &&

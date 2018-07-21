@@ -261,6 +261,7 @@ it:
 
     table:
       header: "Lista degli obiettivi"
+      add_tasks: "Aggiungi un lavoro"
       open_tasks: "Lista dei lavori associati"
 
   releases:

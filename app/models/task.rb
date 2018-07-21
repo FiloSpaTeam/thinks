@@ -244,7 +244,7 @@ class Task < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       begin
         if params.key?(:father_id) && params[:father_id].present?
-          params[:goal_id] = Task.friendly.find(params[:father_id]).goal.try(:id)
+          params[Enums::FiltersNames::GOAL] = Task.friendly.find(params[:father_id]).goal.try(:id)
         end
 
         update(params)

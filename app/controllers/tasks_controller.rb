@@ -103,14 +103,14 @@ class TasksController < ApplicationController
       "project_task_path('#{@project.slug}','#{@task.slug}')"                 => "\##{@task.serial} <span class='hidden-xs'>#{@task.title}</span>"
     }
 
-    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\"" 
+    @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\""
   end
 
   # GET /projects/1/tasks/new
   def new
     @task         = Task.new
     @task.project = @project
-    @task.goal    = Goal.friendly.find(params[:goal_id]) if params[:goal_id].present?
+    @task.goal    = Goal.friendly.find(params[Enums::FiltersNames::GOAL]) if params[Enums::FiltersNames::GOAL].present?
 
     @project_form = @project
 
