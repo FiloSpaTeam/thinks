@@ -225,19 +225,15 @@ class Task < ActiveRecord::Base
   end
 
   def save_and_check_project_condition
-    state = true
+    transaction do
+      save!
 
-    begin
-      transaction do
-        save
-
-        project.plan! if project.definition?
-      end
-    rescue ActiveRecord::RecordInvalid
-      state = false
+      project.plan! if project.definition?
     end
 
-    state
+    true
+  rescue ActiveRecord::RecordInvalid => ex
+    false
   end
 
   def check_and_update(params)
@@ -258,36 +254,34 @@ class Task < ActiveRecord::Base
 
   def update_goal_and_release
     ActiveRecord::Base.transaction do
-      begin
-        # if release.blank?
-        #   unless release_id_was.blank?
-        #     release_was = Release.friendly.find(release_id_was)
-        #     unless release_was.blank?
-        #       release_was.progress = release_was.progress_percentage
-        #       release_was.save
-        #     end
-        #   end
-        # else
-        #   release.progress = release.progress_percentage
-        #   release.save
-        # end
+      # if release.blank?
+      #   unless release_id_was.blank?
+      #     release_was = Release.friendly.find(release_id_was)
+      #     unless release_was.blank?
+      #       release_was.progress = release_was.progress_percentage
+      #       release_was.save
+      #     end
+      #   end
+      # else
+      #   release.progress = release.progress_percentage
+      #   release.save
+      # end
 
-        if goal.blank?
-          unless goal_id_was.blank?
-            goal_was = Goal.find(goal_id_was)
-            unless goal_was.blank?
-              goal_was.progress = goal_was.progress_percentage
-              goal_was.save
-            end
+      if goal.blank?
+        unless goal_id_was.blank?
+          goal_was = Goal.find(goal_id_was)
+          unless goal_was.blank?
+            goal_was.progress = goal_was.progress_percentage
+            goal_was.save
           end
-        else
-          goal.progress = goal.progress_percentage
-          goal.save
         end
-      rescue => ex
-        puts ex.message
+      else
+        goal.progress = goal.progress_percentage
+        goal.save
       end
     end
+  rescue ActiveRecord::RecordInvalid => exception
+    false
   end
 
   # TODO Move to something in project.rb

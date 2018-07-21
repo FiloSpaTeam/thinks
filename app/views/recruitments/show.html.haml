@@ -16,7 +16,7 @@
 -# Copyright (c) 2017, Claudio Maradonna
 
 - content_for :page_actions do
-  - if scrum_master?(@task.project)
+  - if @scrum_master
     - if @task.deleted?
       %li.float-left.hidden-xxs
         = link_to reopen_recruitment_path(@task), :method => 'put', title: 'Reopen', class: 'line-height-25 line-height-35' do

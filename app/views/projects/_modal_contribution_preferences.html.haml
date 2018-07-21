@@ -45,7 +45,7 @@
                   = t("skills.#{skill.t_name}")
           .font-weight-bold.mt-3
             = t 'projects.your_contribution'
-          - if scrum_master?(@project) || product_owner?(@project)
+          - if @scrum_master || product_owner?(@project)
             - my_roles = @project.assigned_roles.where(thinker: current_thinker).order('team_role_id')
             %ul
               - my_roles.each do |role|

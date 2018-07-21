@@ -200,7 +200,7 @@ class ProjectsController < ApplicationController
 
   def suspend
     respond_to do |format|
-      if !scrum_master?(@project)
+      if !scrum_master?
         format.html { redirect_to @project, alert: 'You cannot suspend the project.' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       else
@@ -214,7 +214,7 @@ class ProjectsController < ApplicationController
 
   def resume
     respond_to do |format|
-      if !scrum_master?(@project)
+      if !scrum_master?
         format.html { redirect_to @project, alert: 'You cannot resume the project.' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       else

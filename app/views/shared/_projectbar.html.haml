@@ -30,7 +30,7 @@
   - if content_for? :page_menu
     = yield :page_menu
   - else
-    - if @project.active? || scrum_master?(@project)
+    - if @project.active? || @scrum_master
       = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
         = icon('fas', 'map', t(".brief"))
     -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
@@ -40,7 +40,7 @@
     -#   </div>
     -#   <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
     -#   <small>Donec id elit non mi porta.</small>
-    - if @project.active? || scrum_master?(@project)
+    - if @project.active? || @scrum_master
       %li.list-group-item
         %small.font-weight-bold= t('.general_actions')
       = link_to project_goals_path(project), class: 'list-group-item list-group-item-action' do

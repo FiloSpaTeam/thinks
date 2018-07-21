@@ -46,10 +46,12 @@ it:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
 
     specify_reason: "Devi specificare un motivo per scartare il lavoro selezionato."
-    task_deleted: "Lavoro \"%{title}\" cancellato."
-    task_discarded: "Lavoro \"%{title}\" scartato."
-    task_restored: "Lavoro \"%{title}\" ripristinato."
-    task_updated: "Lavoro \"%{title}\" aggiornato."
+
+    deleted: "%{subject} \"%{title}\" cancellato."
+    discarded: "%{subject} \"%{title}\" scartato."
+    restored: "%{subject} \"%{title}\" ripristinato."
+    updated: "%{subject} \"%{title}\" aggiornato."
+    created: "%{subject} \"%{title}\" aggiunto."
 
   pages:
     projects:
@@ -207,6 +209,7 @@ it:
     placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
 
     comments: "Commenti e considerazioni"
+    no_goal: "Nessun obiettivo associato"
 
     statuses:
       backlog: "Backlog"
@@ -256,8 +259,6 @@ it:
 
     goal: "Obiettivo"
     task: "Lavoro"
-
-    created: "Obiettivo %{title} aggiunto con successo"
 
     table:
       header: "Lista degli obiettivi"

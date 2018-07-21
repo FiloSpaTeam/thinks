@@ -92,7 +92,7 @@
             %li.list-group-item
               = render :partial => 'ratings/form', locals: { task: task }
 
-  - if (scrum_master?(task.project))
+  - if @scrum_master
     - if !task.deleted? && !task.project.suspended
       - if task.status == Status.release.first
         .panel-footer
@@ -182,7 +182,7 @@
         - if !task.worker.nil?
           %span.float-right{ :title => task.worker.name }
             = task.worker.name.try(:truncate, 20)
-          - if (task.worker == current_thinker || scrum_master?(task.project)) && task.status != Status.done.first
+          - if (task.worker == current_thinker || @scrum_master) && task.status != Status.done.first
             %strong
               = link_to "Give up work", give_up_project_task_path(@project, task), :method => :put, :data => {confirm: "Are you sure you want to give up work?"}, :class => "btn btn-danger btn-block"
         - elsif task.status == Status.sprint.first
