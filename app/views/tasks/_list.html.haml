@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2015, Claudio Maradonna
 
-= render partial: 'shared/filters/layout', locals: { local_filters: ['status_id'], local_model: :tasks, local_text_field_name: 'search_title_and_description' }
+= render partial: 'shared/filters/layout', locals: { local_filters: [Enums::FiltersNames::STATUS], local_model: :tasks, local_text_field_name: 'search_title_and_description' }
 
 -# TODO create breadcrumb filters
 -#
@@ -34,7 +34,7 @@
             %h6.dropdown-header
               = t "tasks.table.header"
             - @statuses.each do |status|
-              = link_to({ "filters[status_id]" => status, remote: true }, class: 'dropdown-item small') do
+              = link_to({ "filters[#{Enums::FiltersNames::STATUS}]" => status, remote: true }, class: 'dropdown-item small') do
                 .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
       - unless filter_value(:with_deleted_at)

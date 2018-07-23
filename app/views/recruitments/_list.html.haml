@@ -51,7 +51,7 @@
             = content_tag(:ul, nil, :class => "dropdown-menu", "aria-labelledby" => "status-dropdown") do
               - @statuses.each do |status|
                 = content_tag(:li) do
-                  = link_to("filters[status_id]" => status, remote: true) do
+                  = link_to("filters[#{Enums::FiltersNames:STATUS}]" => status, remote: true) do
                     .round-sm.float-left{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                     = t("projects.recruitments.#{status.translation_code}")
               = menu_divider

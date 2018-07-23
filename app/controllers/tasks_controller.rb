@@ -46,7 +46,7 @@ class TasksController < ApplicationController
                   .where(project: @project)
                   .where(recruitment: false)
 
-    tasks_scope = tasks_scope.where.not(status: Status.done.first) unless active_filter?(:status_id)
+    tasks_scope = tasks_scope.where.not(status: Status.done.first) unless active_filter?(Enums::FiltersNames::STATUS)
 
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
     tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
