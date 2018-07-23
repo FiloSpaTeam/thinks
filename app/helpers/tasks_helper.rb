@@ -54,20 +54,26 @@ module TasksHelper
     scope = scope.with_goal(params[Enums::FiltersNames::GOAL]) if
       params.key?(Enums::FiltersNames::GOAL) &&
       params[Enums::FiltersNames::GOAL].present?
-    scope = scope.with_release(params[:release_id]) if params.key?(:release_id) &&
-                                                       params[:release_id].present?
-    scope = scope.with_sprint(params[:sprint_id]) if params.key?(:sprint_id) &&
-                                                       params[:sprint_id].present?
-    scope = scope.with_thinker(params[:thinker_id]) if params.key?(:thinker_id) &&
-                                                       params[:thinker_id].present?
-    scope = scope.with_worker(params[:worker_id]) if params.key?(:worker_id) &&
-                                                     params[:worker_id].present?
+    scope = scope.with_release(params[Enums::FiltersNames::RELEASE]) if
+      params.key?(Enums::FiltersNames::RELEASE) &&
+      params[Enums::FiltersNames::RELEASE].present?
+    scope = scope.with_sprint(params[Enums::FiltersNames::SPRINT]) if
+      params.key?(Enums::FiltersNames::SPRINT) &&
+      params[Enums::FiltersNames::SPRINT].present?
+    scope = scope.with_thinker(params[Enums::FiltersNames::THINKER]) if
+      params.key?(Enums::FiltersNames::THINKER) &&
+      params[Enums::FiltersNames::THINKER].present?
+    scope = scope.with_worker(params[Enums::FiltersNames::WORKER]) if
+      params.key?(Enums::FiltersNames::WORKER) &&
+      params[Enums::FiltersNames::WORKER].present?
 
-    scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
-                                                                                         params[:search_title_and_description].present?
+    scope = scope.search_title_and_description(params[:search_title_and_description]) if
+      params.key?(:search_title_and_description) &&
+      params[:search_title_and_description].present?
 
-    scope = scope.status_progress(params[:status_id]) if params.key?(:status_id) &&
-                                                         params[:status_id].present?
+    scope = scope.status_progress(params[Enums::FiltersNames::STATUS]) if
+      params.key?(Enums::FiltersNames::STATUS) &&
+      params[Enums::FiltersNames::STATUS].present?
 
     scope = scope.with_deleted_at if params.key?(:with_deleted_at) &&
                                      params[:with_deleted_at].present?
@@ -76,7 +82,7 @@ module TasksHelper
   end
 
   def apply_sorter(scope, params)
-    key       = params.keys.last
+    key = params.keys.last
     # direction = params[:users_smart_listing][:sort].values.last
 
     # TODO
