@@ -15,7 +15,7 @@
 
 -# Copyright (c) 2017, Claudio Maradonna
 
-.collapse#collapseSearch{ class: any_filter?(params[:filters], ['status_id']) ? 'in' : '' }
+.collapse#collapseSearch{ class: any_filter?(params[:filters], [Enums::FiltersNames::STATUS]) ? 'in' : '' }
   = smart_listing_controls_for :recruitments do
     .input-group.form-group
       %span.input-group-btn

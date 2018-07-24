@@ -243,4 +243,8 @@ class Project < ActiveRecord::Base
 
     save
   end
+
+  def startup_phase
+
+  end
 end

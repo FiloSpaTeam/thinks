@@ -27,6 +27,8 @@
         = project.motto
       - else
         = plain_text(project.description.lines.first)
+  %li.list-group-item
+    = project.startup_phase
   - if content_for? :page_menu
     = yield :page_menu
   - else
