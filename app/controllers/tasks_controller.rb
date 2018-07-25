@@ -48,6 +48,11 @@ class TasksController < ApplicationController
 
     tasks_scope = tasks_scope.where.not(status: Status.done.first) unless active_filter?(Enums::FiltersNames::STATUS)
 
+    params[:filters].delete Enums::FiltersNames::DELETED_AT if
+      params[:filters].present? &&
+      params[:filters].key?(Enums::FiltersNames::DELETED_AT) &&
+      params[:filters][Enums::FiltersNames::DELETED_AT] == '0'
+
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
     tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
                                                                                     params[:tasks_smart_listing].key?(:sort)

@@ -75,8 +75,13 @@ module TasksHelper
       params.key?(Enums::FiltersNames::STATUS) &&
       params[Enums::FiltersNames::STATUS].present?
 
-    scope = scope.with_deleted_at if params.key?(:with_deleted_at) &&
-                                     params[:with_deleted_at].present?
+    if params.key?(Enums::FiltersNames::DELETED_AT) &&
+       params[Enums::FiltersNames::DELETED_AT].present? &&
+       params[Enums::FiltersNames::DELETED_AT]
+      scope = scope.with_deleted_at
+    else
+      params.delete Enums::FiltersNames::DELETED_AT
+    end
 
     scope
   end

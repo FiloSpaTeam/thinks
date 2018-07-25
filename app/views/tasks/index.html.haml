@@ -21,7 +21,7 @@
     = render partial: 'projects/actions/new', locals: { local_path: new_project_task_path }
 
 - content_for :page_content do
-  #div-container-list
+  #div-container-list{ 'data-turbolinks': 'false' }
     = smart_listing_render :tasks
 
 = render partial: 'projects/layout'

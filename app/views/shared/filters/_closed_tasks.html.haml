@@ -1,5 +1,6 @@
-- name = :with_deleted_at
+- name = Enums::FiltersNames::DELETED_AT
 %li.nav-item{ role: 'presentation' }
   = label_tag :closed, :class => "control-label nav-link" do
-    = check_box_tag('filters[#{name}]', true, filter_value(name))
+    = hidden_field_tag "filters[#{name}]", "0"
+    = check_box_tag("filters[#{name}]", true, filter_value(name))
     = t "filters.#{name}"

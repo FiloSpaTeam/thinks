@@ -37,7 +37,7 @@
               = link_to({ "filters[#{Enums::FiltersNames::STATUS}]" => status, remote: true }, class: 'dropdown-item small') do
                 .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
-      - unless filter_value(:with_deleted_at)
+      - unless filter_value(Enums::FiltersNames::DELETED_AT)
         %td.text-center.col-xl-2.col-lg-3
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_workload')), :workload
@@ -92,7 +92,7 @@
                 .text-dark.hidden-xxs
                   %small
                     = t('tasks.table.tr.updated_at', updated_at: task.updated_at.to_s(:short), updater: task.updater.name).html_safe
-          - unless filter_value(:with_deleted_at)
+          - unless filter_value(Enums::FiltersNames::DELETED_AT)
             %td.bg-white.text-center.workload-table.align-middle
               = workload_description(task)
             %td.bg-white.text-center.hidden-xs.font-bold.align-middle
