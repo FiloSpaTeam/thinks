@@ -5,5 +5,6 @@ module Enums
     THINKER = :thinker_id
     WORKER = :worker_id
     RELEASE = :release_id
+    SPRINT = :sprint_id
   end
 end

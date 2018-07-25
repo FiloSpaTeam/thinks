@@ -3,7 +3,7 @@
 - if active_filter?(name)
   - workers_filter = workers_filter.where("lower(name) LIKE '%#{params[:filters][name].downcase.strip}%'")
 
-= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: name, local_results: workers_filter, local_filter: :worker_id, local_conflicting_filters: [name, :last], local_active_search_filter: name }
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: name, local_results: workers_filter, local_filter: Enums::FiltersNames::WORKER, local_conflicting_filters: [name, :last], local_active_search_filter: name }
 
 -# - if !current_page?(project_goals_path)
 -#   .input-group
