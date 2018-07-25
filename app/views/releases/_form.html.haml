@@ -36,6 +36,5 @@
     = f.label :description, :class => "control-label"
     = f.text_area :description, :class => 'form-control', :rows => 15, :placeholder => t('releases.placeholder_description'), "aria-describedby" => "help-description"
     %small#help-description.form-text.text-muted= t "char_in", chars_min: @chars_min_description, chars_max: @chars_max_description
-  %hr
   = f.submit @release.new_record? ? t('add') : t('edit'), :class => "btn btn-primary"
   = link_to t('back'), :back, :class => "btn btn-default"

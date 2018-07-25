@@ -28,11 +28,14 @@
       - else
         = plain_text(project.description.lines.first)
   %li.list-group-item
-    = project.startup_phase
+    %small.font-weight-bold{ 'data-container': "body", 'data-toggle': "popover", 'data-placement': "right", 'data-content': t("projects.condition.info_#{project.condition}"), 'data-trigger': 'hover' }
+      = icon('fas', 'info-circle', t('activerecord.attributes.project.condition'))
+    %br
+    = t("projects.condition.#{project.condition}")
   - if content_for? :page_menu
     = yield :page_menu
   - else
-    - if @project.active? || @scrum_master
+    - if (@project.active? || @scrum_master) && @project.work?
       = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
         = icon('fas', 'map', t(".brief"))
     -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">

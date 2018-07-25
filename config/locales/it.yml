@@ -168,6 +168,17 @@ it:
         with_recruiting: "Progetto aperto con reclutamento"
         closed: "Progetto privato"
 
+    condition:
+      beginning: "Startup"
+      definition: "Definizione"
+      plan: "Pianificazione"
+      work: "In sviluppo"
+
+      info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessario per passare allo stato \"Definizione\". In questo stato potrai creare le varie pianificazioni."
+      info_definition: "Associa gli obiettivi alle pianificazioni prossime. Se stai lavorando in modalità Agile non potrai gestire più di 2 pianificazioni."
+      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Pianificazioni\" e inizia a gestire i tuoi lavori! Buona fortuna"
+      info_work: ""
+
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
       placeholder_title: "Gotham City"
@@ -408,6 +419,7 @@ it:
         recruitment_text: "Regolamento per il reclutamento"
         contribution_text: "Regolamento per la partecipazione"
         owner: "Proprietario"
+        condition: "Condizione"
       thinker:
         name: "Nome"
         remember_me: "Mantieni attiva la sessione"

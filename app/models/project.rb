@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero Public License
 # along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
-# Copyright (c) 2015, Claudio Maradonna
+# Copyright (c) 2015,2018 Claudio Maradonna
 
 # This is the model for projects
 class Project < ActiveRecord::Base
@@ -242,9 +242,5 @@ class Project < ActiveRecord::Base
     self.suspended = state
 
     save
-  end
-
-  def startup_phase
-
   end
 end
