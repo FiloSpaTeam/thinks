@@ -34,6 +34,8 @@ class Goal < ActiveRecord::Base
   validates_numericality_of :progress, greater_than_or_equal_to: 0
   validates_numericality_of :progress, less_than_or_equal_to: 100
 
+  after_save :update_project_condition
+
   scope :search_title, lambda { |title|
     where('title LIKE ?', "%#{title}%")
   }
@@ -88,15 +90,9 @@ class Goal < ActiveRecord::Base
     title
   end
 
-  def save_and_check_project_condition
-    ActiveRecord::Base.transaction do
-      save!
+  private
 
-      project.definition! if project.beginning?
-    end
-
-    true
-  rescue ActiveRecord::RecordInvalid => exception
-    false
+  def update_project_condition
+    project.update_project_condition
   end
 end

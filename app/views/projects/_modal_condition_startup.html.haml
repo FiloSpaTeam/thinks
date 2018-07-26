@@ -24,7 +24,7 @@
       .modal-body
         = t('.modal_body').html_safe
       .modal-footer
-        %button.btn.btn-default{type: "button", "data-dismiss": "modal"}
-          = t 'close'
-        = link_to new_project_goal_path(@project, @project), class: 'btn btn-primary' do
-          = t('goals.add')
+        = link_to new_project_goal_path(@project), class: 'btn btn-primary mr-auto' do
+          = t('projects.top_down')
+        = link_to new_project_task_path(@project), class: 'btn btn-primary' do
+          = t('projects.down_top')

@@ -160,9 +160,9 @@ class TasksController < ApplicationController
     @task.updater = current_thinker
 
     respond_to do |format|
-      if @task.save_and_check_project_condition
+      if @task.save
         create_notification(@task, @project)
-        format.html { redirect_to project_task_path(@project, @task), notice: 'Task was successfully created.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.created', title: @task.title, subject: t('tasks.task')) }
         format.json { render :show, status: :created, location: @task }
       else
         set_form_errors(@task)
@@ -188,7 +188,7 @@ class TasksController < ApplicationController
          @task.check_and_update(task_params)
         create_notification(@task, @task.project)
 
-        format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_updated', title: @task.title) }
+        format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.updated', title: @task.title) }
         format.json { render :show, status: :ok, location: @task }
       else
         set_validators_for_form_help

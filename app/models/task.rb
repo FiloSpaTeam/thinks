@@ -224,18 +224,6 @@ class Task < ActiveRecord::Base
     "##{serial} #{title}"
   end
 
-  def save_and_check_project_condition
-    transaction do
-      save!
-
-      project.plan! if project.definition?
-    end
-
-    true
-  rescue ActiveRecord::RecordInvalid => ex
-    false
-  end
-
   def check_and_update(params)
     ActiveRecord::Base.transaction do
       begin

@@ -119,7 +119,7 @@ class GoalsController < ApplicationController
       @goal.thinker  = current_thinker
       @goal.progress = 0.0
 
-      if @goal.save_and_check_project_condition
+      if @goal.save
         create_notification(@goal, @goal.project)
         puts @goal.errors.full_messages
         format.html { redirect_to project_goal_path(@project, @goal), notice: t('alerts.created', subject: t('goals.goal'), title: @goal.title) }

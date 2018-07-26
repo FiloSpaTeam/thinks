@@ -229,6 +229,11 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def update_project_condition
+    if beginning? && !tasks.count.nil? && goals.count.nil?
+    end
+  end
+
   def save_first_team_roles
     AssignedRole.find_or_create_by(project_id: id, team_role: TeamRole.product_owner.first) do |role|
       role.thinker = thinker

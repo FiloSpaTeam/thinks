@@ -50,7 +50,7 @@
         %small.font-weight-bold= t('.general_actions')
       = link_to project_goals_path(project), class: 'list-group-item list-group-item-action' do
         = icon('fas', 'crosshairs', t(".goals"))
-      = link_to project_tasks_path(project), class: "list-group-item list-group-item-action  #{ 'btn disabled' if @project.beginning? }" do
+      = link_to project_tasks_path(project), class: "list-group-item list-group-item-action" do
         = icon('fas', 'tasks', t(".tasks"))
       = link_to project_releases_path(project), class: "list-group-item list-group-item-action #{ 'btn disabled' if @project.beginning? || @project.definition? }" do
         = icon('fas', 'flag-checkered', t(".releases"))

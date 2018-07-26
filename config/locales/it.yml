@@ -139,6 +139,9 @@ it:
     no_contribution_text: "Nessun testo specificato per le condizioni di partecipazione"
     participation_preferences: "Impostazioni di partecipazione"
 
+    top_down: "Top-Down"
+    down_top: "Down-Top"
+
     no_goal: "Nessun obiettivo ancora stabilito"
     no_tasks: "Nessun lavoro selezionabile"
 
@@ -152,11 +155,16 @@ it:
         Creare un obiettivo è sicuramente un grande passo. Ora è necessario creare un lavoro ed associarlo all'obiettivo.<br>Solo in seguito potrai stabilire il piano operativo.
       </p>
       "
-    modal_create_goal:
-        modal_title: "Inizia stabilendo un obiettivo"
+    modal_condition_startup:
+        modal_title: "Fase di startup: Qual è la tua visione?"
         modal_body: "
+        <strong>Visione \"Top-down\"</strong><br>
             Quali sono gli step necessari per realizzare il tuo progetto? <br> 
-            Stabilisci un obiettivo in modo iniziare a programmare il lavoro nella direzione giusta.
+            Stabilisci gli obiettivi che ritieni opportuno raggiungere per il prossimo rilascio e successivamente associa dei lavori.
+        <br> <br>
+        <strong>Visione \"Down-Top\"</strong><br>
+        Preferisci determinare prima i lavori da svolgere? Nessun problema.<br>
+        Crea i lavori che ritieni opportuni ed in seguito associali ad un obiettivo.
             "
 
     approach_type:
@@ -219,6 +227,8 @@ it:
     placeholder_title: "Trovare il Bat-Segnale"
     placeholder_description: "Dopo numerose ricerche sembra che il segnale sia stato spostato verso ... Recarsi nel posto, valutare i parametri del segnale e captarne la posizione."
 
+    task: "Lavoro"
+    add: "Crea un lavoro"
     comments: "Commenti e considerazioni"
     no_goal: "Nessun obiettivo associato"
 
