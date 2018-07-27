@@ -21,10 +21,10 @@ class ReleasesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
-  before_action :authenticate_thinker!, except: [:index]
+  before_action :authenticate_thinker!
 
   before_action :set_project
-  before_action :set_release, only: [:show, :edit, :update, :destroy]
+  before_action :set_release, only: [:show, :edit, :update, :destroy, :active]
 
   before_action :set_validators_for_form_help, only: [:new, :edit]
 
@@ -54,6 +54,8 @@ class ReleasesController < ApplicationController
        params[:filters].key?(:search_title_and_description)
       @search = params[:filters][:search_title_and_description].strip
     end
+
+    @active_release = Release.where('active = true').first
   end
 
   def new
@@ -172,6 +174,16 @@ class ReleasesController < ApplicationController
         format.html { redirect_to [@project, @release], alert: 'You cannot destroy this release!' }
         format.json { render json: @release.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def active
+    active ||= params[:active]
+
+    respond_to do |format|
+      @release.update_attribute(:active, active)
+
+      format.html { redirect_to project_releases_path(@project), notice: t("alerts.release_#{active == 'true' ? 'activated' : 'deactivated'}", title: @release.title) }
     end
   end
 

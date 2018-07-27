@@ -66,7 +66,7 @@ Rails.application.routes.draw do
 
     resources :releases do
       member do
-        put :active
+        get :active
       end
     end
     resources :election_polls, shallow: true
@@ -119,11 +119,7 @@ Rails.application.routes.draw do
       resource :ratings, only: [:create], shallow: true
     end
 
-    resources :goals do
-      member do
-        put :tasks_in_sprint
-      end
-    end
+    resources :goals
   end
   resources :start, only: [:index]
   resources :how_does_it_works

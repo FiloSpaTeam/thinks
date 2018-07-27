@@ -229,15 +229,19 @@ class ProjectsController < ApplicationController
   def brief
     @releases = @project
                 .releases
-                .includes(:goals)
                 .where('progress < 100')
                 .order(:end_at)
 
-    if params.key?(:release)
-      @active_release = @releases.friendly.find(params['release_id'])
-    else
-      @active_release = @releases.first
-    end
+    @active_release = if params.key?(:release)
+                        @releases.friendly.find(params['release_id'])
+                      else
+                        @releases.where('active = true').first
+                      end
+
+    @unassigned_goals = @project.goals.where('goals.release_id IS NULL')
+    @assigned_goals = @active_release.goals
+
+    @assigned_tasks = @active_release.tasks
   end
 
   private

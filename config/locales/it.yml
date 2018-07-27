@@ -46,6 +46,8 @@ it:
     no_projects_visible: "Nessun progetto visibile. Vuoi essere il primo?"
 
     specify_reason: "Devi specificare un motivo per scartare il lavoro selezionato."
+    release_activated: "Pianificazione \"%{title}\" attivata."
+    release_deactivated: "Pianificazione \"%{title}\" disattivata."
 
     deleted: "%{subject} \"%{title}\" cancellato."
     discarded: "%{subject} \"%{title}\" scartato."
@@ -185,7 +187,7 @@ it:
 
       info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessario per passare allo stato \"Definizione\". In questo stato potrai creare le varie pianificazioni."
       info_definition: "Associa gli obiettivi alle pianificazioni prossime. Se stai lavorando in modalità Agile non potrai gestire più di 2 pianificazioni."
-      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Brief\" e inizia a gestire i tuoi lavori! Buona fortuna"
+      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Pianificazioni\" e inizia a gestire i tuoi lavori! Buona fortuna"
       info_work: ""
 
     form:
@@ -295,6 +297,8 @@ it:
     table:
       header: "Lista delle pianificazioni"
       open_tasks: "Lista dei lavori associati"
+      active: "Attiva"
+      deactive: "Disattiva"
 
   start:
     index:

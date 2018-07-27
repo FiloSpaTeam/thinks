@@ -22,6 +22,7 @@
     %tr
       %td
         %strong= t('releases.table.header')
+      %td{ width: 60 }
       %td{ width: 40 }
   %tbody
     - unless smart_listing.empty?
@@ -54,6 +55,11 @@
                   .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{release.progress}", :class => "#{progress_bar_color(release.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{release.progress}%;"}
                     = release.progress
                     \%
+          %td.border-left.align-middle
+            - if !@active_release
+              = link_to t('releases.table.active'), active_project_release_path(@project, release.id, active: 'true'), class: 'btn btn-primary'
+            - elsif release == @active_release
+              = link_to t('releases.table.deactive'), active_project_release_path(@project, @active_release.id, active: 'false'), class: 'btn btn-danger'
           %td.border-left.align-middle.dropleft
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ release.id }" }
               = icon('fas', 'bars', class: 'fa-sm')

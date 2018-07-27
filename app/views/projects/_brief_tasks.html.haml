@@ -1,0 +1,7 @@
+.card
+  .card-body
+    %h5.card-title= t('.title', count: tasks.count)
+    .card-text
+      -# TODO: Add something like a collapsable list group to see some goals
+    .card-footer
+      = link_to t('.go_to'), project_tasks_path(@project), class: 'btn btn-outline-primary'
