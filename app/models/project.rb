@@ -34,9 +34,9 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :languages
   has_and_belongs_to_many :skills
 
-  has_many :contributions
-  has_many :assigned_roles
-  has_many :dependencies
+  has_many :contributions, dependent: :destroy
+  has_many :assigned_roles, dependent: :destroy
+  has_many :dependencies, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :workloads, through: :tasks, dependent: :destroy
@@ -46,11 +46,11 @@ class Project < ActiveRecord::Base
       where('tasks.status_id = ?', Status.in_progress.first.id)
     end
   end
-  has_many :election_polls
-  has_many :releases
-  has_many :notifications
+  has_many :election_polls, dependent: :destroy
+  has_many :releases, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :banned_thinkers
-  has_many :subprojects, class_name: 'Project'
+  has_many :subprojects, class_name: 'Project', dependent: :nullify
 
   belongs_to :license
   belongs_to :thinker
@@ -229,9 +229,12 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def update_project_condition
-    if beginning? && !tasks.count.nil? && goals.count.nil?
-    end
+  def update_condition
+    work!
+    plan! if releases.where('active = true').count.zero?
+    definition! if releases.count.zero? ||
+                   tasks.where('tasks.goal_id > 0').count.zero?
+    beginning! if tasks.count.zero? || goals.count.zero?
   end
 
   def save_first_team_roles

@@ -188,10 +188,13 @@ class TasksController < ApplicationController
          @task.check_and_update(task_params)
         create_notification(@task, @task.project)
 
-        format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.updated', title: @task.title) }
+        format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.updated', title: @task.title, subject: t('tasks.task')) }
         format.json { render :show, status: :ok, location: @task }
       else
         set_validators_for_form_help
+        set_form
+
+        @page_description = "##{@task.serial} \"<i>#{@task.title}</i>\""
 
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -208,7 +211,7 @@ class TasksController < ApplicationController
           title = @task.title
           @task.really_destroy!
 
-          format.html { redirect_to project_tasks_url(@task.project), notice: t('alerts.task_deleted', title: title) }
+          format.html { redirect_to project_tasks_url(@task.project), notice: t('alerts.deleted', title: title, subject: t('tasks.task')) }
         else
           if params[:task].nil? || params[:task][:reason].nil?
             format.html { redirect_to project_task_path(@project, @task), alert: t('alerts.specify_reason') }
@@ -216,7 +219,7 @@ class TasksController < ApplicationController
             @task.destroy_and_associate_reason(params[:task][:reason], current_thinker)
             create_notification(@task, @task.project)
 
-            format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.task_discarded', title: @task.title) }
+            format.html { redirect_to project_task_path(@task.project, @task), notice: t('alerts.discarded', title: @task.title, subject: t('tasks.task')) }
           end
         end
 
@@ -325,10 +328,11 @@ class TasksController < ApplicationController
 
   def reopen
     @task.restore(recursive: true)
+    @task.save
     create_notification(@task, @task.project)
     respond_to do |format|
       if params[:index].nil?
-        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.task_restored', title: @task.title) }
+        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.restored', title: @task.title, subject: t('tasks.task')) }
       else
         format.html { redirect_to project_tasks_path(@task.project, 'filters[with_deleted_at]' => true), notice: 'You restored the task. Good job!' }
       end

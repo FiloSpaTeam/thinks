@@ -227,7 +227,17 @@ class ProjectsController < ApplicationController
   end
 
   def brief
-    @releases = @project.releases.includes(:goals).where('progress < 100').order(:end_at)
+    @releases = @project
+                .releases
+                .includes(:goals)
+                .where('progress < 100')
+                .order(:end_at)
+
+    if params.key?(:release)
+      @active_release = @releases.friendly.find(params['release_id'])
+    else
+      @active_release = @releases.first
+    end
   end
 
   private

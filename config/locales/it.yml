@@ -63,6 +63,7 @@ it:
       new: "Aggiungi un nuovo lavoro al backlog"
       show: "%{description}"
       edit: "Modifica lavoro %{description}"
+      update: "Modifica lavoro %{description}"
     goals:
       index: "Obiettivi del progetto"
       new: "Aggiungi un nuovo obiettivo"
@@ -99,7 +100,7 @@ it:
     projectbar:
       general_actions: "Azioni generali"
       specific_actions: "Azioni specifiche"
-      brief: "Sommario"
+      brief: "Brief"
       goals: "Obiettivi"
       releases: "Pianificazioni"
       sprints: "Sprints"
@@ -184,7 +185,7 @@ it:
 
       info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessario per passare allo stato \"Definizione\". In questo stato potrai creare le varie pianificazioni."
       info_definition: "Associa gli obiettivi alle pianificazioni prossime. Se stai lavorando in modalità Agile non potrai gestire più di 2 pianificazioni."
-      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Pianificazioni\" e inizia a gestire i tuoi lavori! Buona fortuna"
+      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Brief\" e inizia a gestire i tuoi lavori! Buona fortuna"
       info_work: ""
 
     form:

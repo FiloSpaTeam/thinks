@@ -21,7 +21,7 @@ class Release < ActiveRecord::Base
 
   belongs_to :project
 
-  has_many :goals
+  has_many :goals, dependent: :nullify
   has_many :tasks, through: :goals
 
   validates :title, length: { maximum: 60 }, presence: true
@@ -30,6 +30,9 @@ class Release < ActiveRecord::Base
   validates :version, presence: true
   validates_date :end_at
   validates_uniqueness_of :end_at, scope: :project_id
+
+  after_save :update_project_condition
+  after_destroy :update_project_condition
 
   scope :sorted_by, lambda { |sort_option|
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
@@ -83,5 +86,11 @@ class Release < ActiveRecord::Base
 
   def visible_text
     title
+  end
+
+  private
+
+  def update_project_condition
+    project.update_condition
   end
 end

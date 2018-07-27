@@ -15,20 +15,20 @@
 
 -# Copyright (c) 2018, Claudio Maradonna
 
+- @no_padding = true
 - content_for :page_content do
-  %p= t('projects.brief_description')
-  .card-columns
-    - @releases.each do |release|
-      .card
-        .card-body
-          %h5.card-title.font-weight-bold.text-center
-            = release.end_at.strftime(t('date.formats.long'))
-            %br
-            %small
-              = release.title
-              %br
-              %span.font-italic
-                = release.version
-          = markdown(release.description)
+  .row.mr-0.ml-0
+    .col-3.pl-0.pr-0
+      .list-group
+      - @releases.each_with_index do |release, index|
+        = link_to project_release_path(@project), class: 'list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded-0' do
+          = release.version
+          = middle_dot
+          = release.title
+    .col-9.border-left.pt-2
+      %h4
+        %small.float-right.text-dark
+          = @active_release.end_at.to_s(:long)
+        = @active_release.title
 
 = render partial: 'projects/layout'

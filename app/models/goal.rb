@@ -25,7 +25,7 @@ class Goal < ActiveRecord::Base
   belongs_to :thinker
   belongs_to :main, class_name: 'Goal', foreign_key: 'main_id'
 
-  has_many :tasks
+  has_many :tasks, dependent: :nullify
   has_many :revisions, class_name: 'Goal', foreign_key: 'main_id', dependent: :destroy
 
   validates :title, length: { maximum: 60 }, presence: true
@@ -35,6 +35,7 @@ class Goal < ActiveRecord::Base
   validates_numericality_of :progress, less_than_or_equal_to: 100
 
   after_save :update_project_condition
+  after_destroy :update_project_condition
 
   scope :search_title, lambda { |title|
     where('title LIKE ?', "%#{title}%")
@@ -93,6 +94,6 @@ class Goal < ActiveRecord::Base
   private
 
   def update_project_condition
-    project.update_project_condition
+    project.update_condition
   end
 end
