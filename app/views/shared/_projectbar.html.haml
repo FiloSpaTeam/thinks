@@ -13,7 +13,7 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018 Claudio Maradonna
 
 %ul.list-group.list-group-flush
   = link_to project_path(project), class: 'list-group-item list-group-item-action' do
@@ -35,7 +35,7 @@
   - if content_for? :page_menu
     = yield :page_menu
   - else
-    - if (@project.active? || @scrum_master)
+    - if @project.active?
       = link_to brief_project_path(project), class: 'list-group-item list-group-item-action border-top-0' do
         = icon('fas', 'map', t(".brief"))
     -# <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">

@@ -24,6 +24,7 @@ class Goal < ActiveRecord::Base
   belongs_to :project
   belongs_to :thinker
   belongs_to :main, class_name: 'Goal', foreign_key: 'main_id'
+  belongs_to :release
 
   has_many :tasks, dependent: :nullify
   has_many :revisions, class_name: 'Goal', foreign_key: 'main_id', dependent: :destroy
@@ -60,6 +61,10 @@ class Goal < ActiveRecord::Base
             ),
             task
           ])
+  }
+
+  scope :with_deleted_at, lambda {
+    only_deleted
   }
 
   scope :sorted_by, lambda { |sort_option|

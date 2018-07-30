@@ -119,7 +119,7 @@ class OperationsController < ApplicationController
   end
 
   def set_task
-    @task = Task.with_deleted.find(params[:task_id])
+    @task = Task.with_deleted.find(params[Enums::FiltersNames::TASK])
   end
 
   def set_project

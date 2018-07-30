@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enums
   class Filters
     PROGRESS_LOWER_THAN = :progress_lower_than
@@ -10,6 +12,6 @@ module Enums
     SEARCH_WORKER       = :search_worker
     SEARCH_THINKER      = :search_thinker
 
-    CLOSED_TASKS        = :closed_tasks
+    CLOSED              = :closed
   end
 end

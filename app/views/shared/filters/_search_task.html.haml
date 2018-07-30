@@ -3,4 +3,4 @@
 - if active_filter?(title)
   - tasks_filter = tasks_filter.where("lower(title) LIKE '%#{params[:filters][title].downcase.strip}%'")
 
-= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: title, local_results: tasks_filter, local_filter: :task_id, local_conflicting_filters: [title, :last], local_active_search_filter: title }
+= render partial: 'shared/filters/layout_btn', locals: { local_active_filter: title, local_results: tasks_filter, local_filter: Enums::FiltersNames::TASK, local_conflicting_filters: [title, :last], local_active_search_filter: title }

@@ -101,6 +101,8 @@ class ReleasesController < ApplicationController
       "project_release_path(@release.project, #{@release.id})" => "#{@release.version} <span class='hidden-xs'>- #{@release.title}</span>",
       'nil' => I18n.t('edit')
     }
+
+    @page_description = "\"<i>#{@release.title}</i>\""
   end
 
   def create

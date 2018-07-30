@@ -132,7 +132,7 @@ class CommentsController < ApplicationController
   end
 
   def set_task
-    @task = Task.with_deleted.friendly.find(params[:task_id])
+    @task = Task.with_deleted.friendly.find(params[Enums::FiltersNames::TASK])
   end
 
   def set_comment

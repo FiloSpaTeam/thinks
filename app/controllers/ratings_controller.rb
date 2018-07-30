@@ -53,7 +53,7 @@ class RatingsController < ApplicationController
   end
 
   def set_task
-    @task = Task.includes(:project, :ratings).with_deleted.find(params[:task_id])
+    @task = Task.includes(:project, :ratings).with_deleted.find(params[Enums::FiltersNames::TASK])
   end
 
   def teammate!

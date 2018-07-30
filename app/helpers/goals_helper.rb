@@ -30,11 +30,19 @@ module GoalsHelper
     scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
                                                                                          params[:search_title_and_description].present?
 
-    scope = scope.with_task(params[:task_id]) if params.key?(:task_id) &&
-                                                 params[:task_id].present?
+    scope = scope.with_task(params[Enums::FiltersNames::TASK]) if params.key?(Enums::FiltersNames::TASK) &&
+                                                 params[Enums::FiltersNames::TASK].present?
 
     scope = scope.progress_lower_than(params[:progress_lower_than]) if params.key?(:progress_lower_than) &&
                                                                        params[:progress_lower_than].present?
+
+    if params.key?(Enums::FiltersNames::DELETED_AT) &&
+       params[Enums::FiltersNames::DELETED_AT].present? &&
+       params[Enums::FiltersNames::DELETED_AT]
+      scope = scope.with_deleted_at
+    else
+      params.delete Enums::FiltersNames::DELETED_AT
+    end
 
     scope
   end

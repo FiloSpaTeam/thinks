@@ -36,4 +36,19 @@
 - content_for :page_content do
   = markdown(@goal.description)
 
+- content_for :page_details do
+  %ul.list-group.list-group-flush
+    %li.list-group-item
+      %small.font-weight-bold= t('activerecord.attributes.goal.release_id')
+      %br
+      - if @goal.release.present?
+        = @goal.release.title
+      - elsif !@goal.deleted?
+        = form_for [@project,@goal] do |f|
+          .form-group
+            = f.select :release_id, options_from_collection_for_select(@project.releases, 'id', 'title', @goal.release_id), {include_blank: t('select')}, :class => "form-control", disabled: @project.releases.empty?, onchange: 'this.form.submit()'
+          = f.submit t('save'), :class => "btn btn-primary d-none"
+      - else
+        = t('goals.no_release')
+
 = render partial: 'projects/layout'

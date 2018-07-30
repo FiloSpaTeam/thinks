@@ -69,7 +69,7 @@ class TasksController < ApplicationController
       Enums::Filters::SEARCH_GOAL,
       Enums::Filters::SEARCH_WORKER,
       Enums::Filters::SEARCH_THINKER,
-      Enums::Filters::CLOSED_TASKS
+      Enums::Filters::CLOSED
     ]
 
     @breadcrumbs = {

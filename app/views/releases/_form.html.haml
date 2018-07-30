@@ -21,7 +21,10 @@
     = f.text_field :version, :class => "form-control"
   .form-group.required
     = f.label :end_at, :class => "control-label"
-    = f.date_field :end_at, class: 'form-control', min: 7.days.from_now
+    - if @release.active
+      = f.date_field :end_at, class: 'form-control', readonly: true
+    - else
+      = f.date_field :end_at, class: 'form-control', min: @release.new_record? ? 7.days.from_now : @release.end_at
     %small#help-end-at.form-text.text-muted
       = t "releases.form_text_end_at"
   .form-group.required

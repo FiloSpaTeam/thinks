@@ -73,6 +73,7 @@ it:
       edit: "Modifica obiettivo %{description}"
     releases:
       new: "Aggiungi una nuova pianificazione"
+      edit: "Modifica pianificazione %{description}"
       index: "Quadro generale delle pianificazioni"
       show: "Piano %{description}"
     settings_release:
@@ -169,6 +170,16 @@ it:
         Preferisci determinare prima i lavori da svolgere? Nessun problema.<br>
         Crea i lavori che ritieni opportuni ed in seguito associali ad un obiettivo.
             "
+
+    brief_goals:
+      title: "Obiettivi assegnati: %{count}"
+      go_to: "Mostra tutti gli obiettivi"
+      no_results: "Nessun obiettivo disponibile"
+
+    brief_tasks:
+      title: "Lavori assegnati: %{count}"
+      go_to: "Mostra tutti i lavori"
+      no_results: "Nessun lavoro disponibile"
 
     approach_type:
       agile: "Metodo agile"
@@ -292,7 +303,7 @@ it:
   releases:
     placeholder_title: "Missione \"Joker inside\""
     placeholder_description: "Catturare Joker e' la nostra priorità oltre che ristabilire l'ordine. Una volta catturato interrogarlo per trovare il nascondiglio segreto."
-    form_text_end_at: "La data non è modificabile una volta inserite pianificazioni successive. Questo per avere una reale esperienza con la pianificazione del team."
+    form_text_end_at: "La data non è modificabile se la pianificazione è attiva/in sviluppo. Questo per avere una reale esperienza con la pianificazione del team."
 
     table:
       header: "Lista delle pianificazioni"

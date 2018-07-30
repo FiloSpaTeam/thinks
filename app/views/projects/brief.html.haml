@@ -15,9 +15,8 @@
 
 -# Copyright (c) 2018, Claudio Maradonna
 
-- @no_padding = true
 - content_for :page_content do
-  .card-columns
+  .card-deck
     = render partial: 'projects/brief_release', locals: { release: @active_release }
     = render partial: 'projects/brief_goals', locals: { goals: @assigned_goals }
     = render partial: 'projects/brief_tasks', locals: { tasks: @assigned_tasks }

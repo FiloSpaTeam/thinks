@@ -48,6 +48,11 @@ class GoalsController < ApplicationController
                   .order('progress DESC')
                   .order('created_at DESC')
 
+    params[:filters].delete Enums::FiltersNames::DELETED_AT if
+      params[:filters].present? &&
+      params[:filters].key?(Enums::FiltersNames::DELETED_AT) &&
+      params[:filters][Enums::FiltersNames::DELETED_AT] == '0'
+
     goals_scope = apply_filters(goals_scope, params[:filters]) if
       params[:filters].present?
 
@@ -59,7 +64,8 @@ class GoalsController < ApplicationController
     @active_filters = [
       Enums::Filters::SEARCH_INPUT,
       Enums::Filters::SEARCH_TASK,
-      Enums::Filters::PROGRESS_LOWER_THAN
+      Enums::Filters::PROGRESS_LOWER_THAN,
+      Enums::Filters::CLOSED
     ]
 
     @breadcrumbs = {
@@ -161,10 +167,16 @@ class GoalsController < ApplicationController
   # DELETE /goals/1.json
   def destroy
     respond_to do |format|
+      notice = if @goal.deleted?
+                 t('alerts.deleted', subject: t('goals.goal'), title: @goal.title)
+               else
+                 t('alerts.discarded', subject: t('goals.goal'), title: @goal.title)
+               end
+
       @goal.destroy
 
       create_notification(@goal, @goal.project)
-      format.html { redirect_to project_goals_path(@goal.project), notice: t('alerts.deleted', subject: t('goals.goal'), title: @goal.title) }
+      format.html { redirect_to project_goals_path(@goal.project), notice: notice }
       format.json { head :no_content }
     end
   end
@@ -201,6 +213,7 @@ class GoalsController < ApplicationController
   def set_goal
     @goal = Goal
             .includes(:project, :thinker, :tasks)
+            .with_deleted
             .friendly
             .find(params[:id])
   end

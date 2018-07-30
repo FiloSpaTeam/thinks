@@ -46,12 +46,16 @@
               = icon('fas', 'bars', class: 'fa-sm')
             .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ goal.id }" }
               = link_to icon('far', 'eye', t('show')), project_goal_path(@project, goal), class: 'dropdown-item small'
-              = link_to icon('fas', 'edit', t('edit')), edit_project_goal_path(@project, goal), class: 'dropdown-item small'
+              - unless goal.deleted?
+                = link_to icon('fas', 'edit', t('edit')), edit_project_goal_path(@project, goal), class: 'dropdown-item small'
+                .dropdown-divider
+                = link_to link_to icon('fas', 'plus', t('goals.table.add_tasks')), @project.tasks.empty? ? "javascript:;" : new_project_task_path(@project, "goal_id": goal), class: "dropdown-item small #{ @project.tasks.empty? ? 'disabled' : '' }"
+                = link_to link_to icon('fas', 'tasks', t('goals.table.open_tasks')), goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filters[#{ Enums::FiltersNames::GOAL }]" => goal.id), class: "dropdown-item small #{ goal.tasks.empty? ? 'disabled' : '' }", title: tasks_title(goal), "data-placement": 'left'
               .dropdown-divider
-              = link_to link_to icon('fas', 'plus', t('goals.table.add_tasks')), @project.tasks.empty? ? "javascript:;" : new_project_task_path(@project, "goal_id": goal), class: "dropdown-item small #{ @project.tasks.empty? ? 'disabled' : '' }"
-              = link_to link_to icon('fas', 'tasks', t('goals.table.open_tasks')), goal.tasks.empty? ? "javascript:;" : project_tasks_path(goal.project, "filters[#{ Enums::FiltersNames::GOAL }]" => goal.id), class: "dropdown-item small #{ goal.tasks.empty? ? 'disabled' : '' }", title: tasks_title(goal), "data-placement": 'left'
-              .dropdown-divider
-              = link_to icon('fas', 'eraser', t('delete')), project_goal_path(@project, goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+              - if goal.deleted?
+                = link_to icon('fas', 'eraser', t('delete')), project_goal_path(@project, goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+              - else
+                = link_to icon('fas', 'trash-alt', t('discards')), project_goal_path(@project, goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
     - else
       %tr.warning
         %td.text-center

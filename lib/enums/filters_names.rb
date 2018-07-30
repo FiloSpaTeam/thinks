@@ -1,6 +1,7 @@
 module Enums
   class FiltersNames
     GOAL = :goal_id
+    TASK = :task_id
     STATUS = :status_id
     THINKER = :thinker_id
     WORKER = :worker_id

@@ -235,6 +235,12 @@ class Project < ActiveRecord::Base
     definition! if releases.count.zero? ||
                    tasks.where('tasks.goal_id > 0').count.zero?
     beginning! if tasks.count.zero? || goals.count.zero?
+
+    if work?
+      active!
+    else
+      suspended!
+    end
   end
 
   def save_first_team_roles

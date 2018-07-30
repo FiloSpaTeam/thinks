@@ -23,9 +23,7 @@
         %span.hidden-xs
           = t('new')
 
-= render partial: 'shared/projectbar', locals: { project: @release.project }
-.row
-  .col-md-4
-    = render partial: 'shared/projectstatuspanel', locals: { project: @release.project }
-  .col-md-8
-    = render :partial => 'form', locals: { url: project_release_path }
+- content_for :page_content do
+  = render :partial => 'form', locals: { url: project_release_path }
+
+= render partial: 'projects/layout'
