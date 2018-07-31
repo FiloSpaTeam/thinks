@@ -40,6 +40,7 @@ it:
     thinker_id: "Pensato da"
     with_deleted_at: "Scartato"
     progress_lower_than: "Progresso (% inferiore a)"
+    with_children: "Includi sub-associati"
 
   alerts:
     operation_not_permitted: "Non hai adeguati permessi per questa azione."
@@ -245,6 +246,7 @@ it:
     add: "Crea un lavoro"
     comments: "Commenti e considerazioni"
     no_goal: "Nessun obiettivo associato"
+    has_children: "Questo lavoro ha sotto-lavori associati."
 
     statuses:
       backlog: "Backlog"
@@ -257,8 +259,8 @@ it:
       header: "Filtra per stato di avanzamento"
 
       th_task: "Stato di avanzamento"
+      th_goal: "Obiettivo"
       th_workload: "Carico di lavoro"
-      th_view: "Visitatori"
 
       action_reopen: "Riapri"
 
@@ -291,6 +293,8 @@ it:
     plan_this_goal: "Pianifica questo obiettivo"
     add_task: "Aggiungi un lavoro"
     add: "Crea un obiettivo"
+
+    no_release: "Non pianificato"
 
     goal: "Obiettivo"
     task: "Lavoro"

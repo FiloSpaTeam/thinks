@@ -87,7 +87,7 @@
       - previous_previous_sprint = nil
       - if previous_sprint.present?
         - previous_previous_sprint = previous_sprint.previous
-      - tasks_done      = @statistic.tasks.done
+      - tasks_done      = @statistic.tasks.is_done
 
       - tasks_done_last_sprint = tasks_done.where('end_at < ?', last_sprint.created_at).where('end_at >= ?', previous_sprint.try(:created_at))
 

@@ -22,7 +22,7 @@
     %tr
       %td
         %strong= t('goals.table.header')
-      %td{ width: 350 }
+      %td.text-center{ width: 350 }
         %strong= t('goals.table.release')
       %td{ width: 40 }
   %tbody
@@ -43,11 +43,13 @@
                 .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{goal.progress}", :class => "#{progress_bar_color(goal.progress)}", :role => "progressbar", :style => "min-width: 3em; width: #{goal.progress}%;"}
                   = goal.progress
                   \%
-          %td
+          %td.border-left.align-middle
             - if goal.release
               = link_to goal.release.title, project_release_path(@project, goal.release)
               %br
               = plain_text(goal.release.description).truncate(150)
+            - else
+              = t('goals.no_release')
           %td.border-left.align-middle.dropleft
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ goal.id }" }
               = icon('fas', 'bars', class: 'fa-sm')
@@ -62,7 +64,7 @@
               - if goal.deleted?
                 = link_to icon('fas', 'eraser', t('delete')), project_goal_path(@project, goal), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
               - else
-                = link_to icon('fas', 'trash-alt', t('discards')), goal.release.active? ? 'javascript:;' : project_goal_path(@project, goal), :method => 'delete', data: ({ confirm: t('are_you_sure') } unless goal.release.active?), class: "dropdown-item small #{ 'disabled' if goal.release.active? }"
+                = link_to icon('fas', 'trash-alt', t('discards')), goal.release.try(:active?) ? 'javascript:;' : project_goal_path(@project, goal), :method => 'delete', data: ({ confirm: t('are_you_sure') } unless goal.release.try(:active?)), class: "dropdown-item small #{ 'disabled' if goal.release.try(:active?) }"
     - else
       %tr.warning
         %td.text-center

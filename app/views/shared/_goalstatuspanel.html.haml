@@ -22,7 +22,7 @@
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(goal.tasks.release.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_sprint.size, goal.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(goal.tasks.in_progress.size, goal.tasks.size)}%;" }
-        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.done.size, goal.tasks.size)}%;" }
+        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(goal.tasks.is_done.size, goal.tasks.size)}%;" }
     = link_to project_tasks_path(@goal.project, "filters[goal_id]" => @goal) do
       =pluralize goal.tasks.size, 'task'
 
@@ -38,7 +38,7 @@
       = badge(goal.tasks.where('status_id = ? or status_id = ?', @statuses.in_progress.first, @statuses.sprint.first).sum(:workload))
       current
     .list-group-item
-      = badge(goal.tasks.done.sum(:workload))
+      = badge(goal.tasks.is_done.sum(:workload))
       done
     .list-group-item
       = badge(goal.tasks.average(:standard_deviation).try(:round, 2))

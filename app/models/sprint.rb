@@ -68,7 +68,7 @@ class Sprint < ActiveRecord::Base
           sprint.project = project
           sprint.save
 
-          tasks_last_sprint = project.tasks.done.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
+          tasks_last_sprint = project.tasks.is_done.where('updated_at < ?', sprint.created_at).where('updated_at > ?', last_sprint.created_at)
 
           last_sprint.obtained = tasks_last_sprint.sum(:workload)
           last_sprint.save

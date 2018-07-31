@@ -114,6 +114,19 @@ module ApplicationHelper
     any
   end
 
+  def sanitize_filters(params, filters)
+    filters.each do |filter|
+      params.delete filter if
+        params.key?(filter) &&
+        params[filter] == '0'
+    end
+
+    puts "SANITIZED"
+    puts params
+
+    params
+  end
+
   def filter_value(filter, key = :filters)
     params[key][filter] if params.key?(key) &&
                            params[key].key?(filter) &&

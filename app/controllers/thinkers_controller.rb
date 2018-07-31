@@ -64,13 +64,13 @@ class ThinkersController < ApplicationController
                                         default_sort: { created_at: 'desc' }
     @tasks_in_progress = current_thinker.working_tasks.order('updated_at DESC')
 
-    @tasks_done = current_thinker.tasks.done.order('updated_at DESC')
+    @tasks_done = current_thinker.tasks.is_done.order('updated_at DESC')
     @tasks_created = current_thinker.tasks.order('created_at DESC')
 
     @d = Date.today
     @week_stats = current_thinker
                   .tasks
-                  .done
+                  .is_done
                   .group(:created_at)
                   .where('updated_at >= ?', @d.beginning_of_week)
                   .where('updated_at <= ?', @d.end_of_week)

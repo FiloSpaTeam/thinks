@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -13,8 +15,9 @@
 # You should have received a copy of the GNU Affero Public License
 # along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
-# Copyright (c) 2015, Claudio Maradonna
+# Copyright (c) 2015,2018 Claudio Maradonna
 
+# Handle all tasks under goals
 class TasksController < ApplicationController
   include ApplicationHelper
   include StatusesHelper
@@ -45,13 +48,24 @@ class TasksController < ApplicationController
                   .includes(:status, :thinker, :updater, :goal, :children)
                   .where(project: @project)
                   .where(recruitment: false)
+                  .order({father_id: :asc}, {id: :desc})
+
+    @search = ''
+    if params.key?(:filters) &&
+       params[:filters].key?(:search_title_and_description)
+      @search = params[:filters][:search_title_and_description].strip
+
+      # params[:filters][Enums::FiltersNames::CHILDREN] = '1'
+
+      params[:filters] = sanitize_filters(params[:filters], [
+                                            Enums::FiltersNames::DELETED_AT,
+                                            Enums::FiltersNames::CHILDREN
+                                          ])
+    else
+      tasks_scope = tasks_scope.where('father_id IS NULL')
+    end
 
     tasks_scope = tasks_scope.where.not(status: Status.done.first) unless active_filter?(Enums::FiltersNames::STATUS)
-
-    params[:filters].delete Enums::FiltersNames::DELETED_AT if
-      params[:filters].present? &&
-      params[:filters].key?(Enums::FiltersNames::DELETED_AT) &&
-      params[:filters][Enums::FiltersNames::DELETED_AT] == '0'
 
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
     tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
@@ -69,20 +83,13 @@ class TasksController < ApplicationController
       Enums::Filters::SEARCH_GOAL,
       Enums::Filters::SEARCH_WORKER,
       Enums::Filters::SEARCH_THINKER,
-      Enums::Filters::CLOSED
+      Enums::Filters::CLOSED,
+      Enums::Filters::HAS_CHILDREN
     ]
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path')
     }
-
-    @search = ''
-    if params.key?(:filters) &&
-       params[:filters].key?(:search_title_and_description)
-      @search = params[:filters][:search_title_and_description].strip
-    end
-
-    @filters_breadcrumbs
   end
 
   # GET /tasks/1
@@ -392,6 +399,7 @@ class TasksController < ApplicationController
                     .where.not(status: Status.done)
                     .where.not(status: Status.in_progress)
                     .where.not(id: @task.id)
+                    .where('father_id IS NULL')
                     .where(recruitment: false)
                     .order('title')
   end

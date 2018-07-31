@@ -13,7 +13,7 @@
 -# You should have received a copy of the GNU Affero Public License
 -# along with Thinks.  If not, see <http://www.gnu.org/licenses/>.
 
--# Copyright (c) 2015, Claudio Maradonna
+-# Copyright (c) 2015,2018 Claudio Maradonna
 
 = render partial: 'shared/filters/layout', locals: { local_filters: [Enums::FiltersNames::STATUS], local_model: :tasks, local_text_field_name: 'search_title_and_description' }
 
@@ -37,13 +37,13 @@
               = link_to({ "filters[#{Enums::FiltersNames::STATUS}]" => status, remote: true }, class: 'dropdown-item small') do
                 .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
+      %td.text-center.col-xl-2.col-lg-2
+        %strong
+          = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_goal')), :goal
       - unless filter_value(Enums::FiltersNames::DELETED_AT)
         %td.text-center.col-xl-2.col-lg-3
           %strong
             = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_workload')), :workload
-        %td.text-center.col-xl-2.col-lg-2
-          %strong
-            = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_view')), :impressions_count
       - else
         %td.col-lg-2
       %td{ width: 40 }
@@ -59,8 +59,6 @@
             %strong.d-none.d-md-block
               %small.text-dark
                 \##{task.serial}
-                ·
-                = std_deviation_button(task)
                 - unless task.goal.nil?
                   ·
                   = goal_button(task)
@@ -92,11 +90,16 @@
                 .text-dark.hidden-xxs
                   %small
                     = t('tasks.table.tr.updated_at', updated_at: task.updated_at.to_s(:short), updater: task.updater.name).html_safe
+          %td.bg-white.align-middle
+            - if task.goal
+              = link_to task.goal.title, project_goal_path(@project, task.goal)
+              %br
+              = plain_text(task.goal.description).truncate(150)
+            - else
+              = t('tasks.no_goal')
           - unless filter_value(Enums::FiltersNames::DELETED_AT)
             %td.bg-white.text-center.workload-table.align-middle
               = workload_description(task)
-            %td.bg-white.text-center.hidden-xs.font-bold.align-middle
-              = task.impressions_count
 
           - else
             %td.bg-white.align-middle.col-lg-2

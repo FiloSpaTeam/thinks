@@ -13,5 +13,6 @@ module Enums
     SEARCH_THINKER      = :search_thinker
 
     CLOSED              = :closed
+    HAS_CHILDREN        = :with_children
   end
 end

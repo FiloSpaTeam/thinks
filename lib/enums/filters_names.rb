@@ -8,5 +8,6 @@ module Enums
     RELEASE = :release_id
     SPRINT = :sprint_id
     DELETED_AT = :with_deleted_at
+    CHILDREN = :with_children
   end
 end

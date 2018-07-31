@@ -42,7 +42,7 @@
         .progress-bar.progress-bar-info{ style: "width: #{percentage_from_value_and_total(project.tasks.release.size, project.tasks.size)}%;" }
         .progress-bar.progress-bar-danger{ style: "width: #{percentage_from_value_and_total(project.tasks.in_sprint.size, project.tasks.size)}%;" }
         .progress-bar.progress-bar-warning{ style: "width: #{percentage_from_value_and_total(project.tasks.in_progress.size, project.tasks.size)}%;" }
-        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.done.size, project.tasks.size)}%;" }
+        .progress-bar.progress-bar-success{ style: "width: #{percentage_from_value_and_total(project.tasks.is_done.size, project.tasks.size)}%;" }
     %strong
       = link_to project_tasks_path(project) do
         = pluralize project.tasks.size, 'task'
@@ -72,12 +72,12 @@
         in sprint
       .list-group-item
         - if project.sprint
-          = badge(project.tasks.done.with_sprint(project.sprint.id).sum(:workload))
+          = badge(project.tasks.is_done.with_sprint(project.sprint.id).sum(:workload))
         - else
           = badge(0.0)
         done (sprint)
       .list-group-item
-        = badge(project.tasks.done.sum(:workload))
+        = badge(project.tasks.is_done.sum(:workload))
         done (total)
       .list-group-item
         = badge(project.tasks.average(:standard_deviation).try(:round, 2))

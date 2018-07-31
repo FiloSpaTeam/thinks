@@ -83,6 +83,15 @@ module TasksHelper
       params.delete Enums::FiltersNames::DELETED_AT
     end
 
+    if params.key?(Enums::FiltersNames::CHILDREN) &&
+       params[Enums::FiltersNames::CHILDREN].present? &&
+       params[Enums::FiltersNames::CHILDREN]
+      scope = scope.where('father_id > 0 OR father_id IS NULL')
+    else
+      scope = scope.where('father_id IS NULL')
+      params.delete Enums::FiltersNames::CHILDREN
+    end
+
     scope
   end
 
@@ -100,8 +109,11 @@ module TasksHelper
                      current_thinker.id,
                      Status.done.first)
               .preload(:votes)
+    when 'goal'
+      scope = scope
+              .joins(:goal)
+              .preload(:goal)
     end
-
     scope
   end
 
@@ -121,13 +133,13 @@ module TasksHelper
 
   def goal_button(task)
     link_to project_goal_path(task.project, task.goal), title: task.goal.title, role: 'button' do
-      icon('crosshairs', class: 'dark-grey')
+      icon('fas', 'crosshairs', class: 'dark-grey')
     end
   end
 
   def children_button
-    link_to 'javascript:;', title: 'This task has children.' do
-      icon('sitemap', class: 'dark-grey')
+    link_to 'javascript:;', title: t('tasks.has_children') do
+      icon('fas', 'sitemap', class: 'dark-grey')
     end
   end
 end
