@@ -1,3 +1,2 @@
 - flash.each do |key, value|
-  - puts key
-  %div.alert.d-none{ "data-type": bootstrap_class_for(key), "data-message": value.html_safe }
+  %div.alert.d-none{ "data-type": bootstrap_class_for(key), "data-message": value }

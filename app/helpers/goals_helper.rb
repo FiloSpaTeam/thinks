@@ -18,7 +18,7 @@
 module GoalsHelper
   def tasks_title(goal)
     pluralize(goal.tasks.count, t('goals.task').downcase) + ", " +
-      pluralize(goal.tasks.done.count, t('tasks.statuses.done').downcase) +  ", " +
+      pluralize(goal.tasks.is_done.count, t('tasks.statuses.done').downcase) +  ", " +
       goal.tasks.in_progress.count.to_s + " " + t('tasks.statuses.in_progress').downcase
   end
 

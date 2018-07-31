@@ -18,18 +18,18 @@
 -# Copyright (c) 2018 Claudio Maradonna
 
 .card
-  .card-body
+  .p-3
     %h5.card-title.mb-0
       = icon('fas', 'crosshairs', t('.title', count: goals.count))
   .list-group.list-group-flush
     - goals.each do |goal|
       = link_to project_goal_path(@project, goal), class: 'list-group-item list-group-item-action' do
-        = goal.title
-        %br
+        .text-primary
+          = goal.title
         = plain_text(goal.description).truncate(150)
 
     - if goals.empty?
       .list-group-item
         = t('.no_results')
-  .card-footer
+  .card-footer.border-top-0
     = link_to t('.go_to'), project_goals_path(@project), class: 'btn btn-outline-primary', target: '_blank'

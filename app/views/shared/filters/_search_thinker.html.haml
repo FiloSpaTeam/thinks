@@ -4,7 +4,7 @@
     %span.caret
   .dropdown-menu.dropdown-filters-menu.p-0
     .dropdown-header.pl-3.pr-3
-      .input-group
+      .input-group.input-group-sm
         - if active_filter?(Enums::FiltersNames::THINKER)
           .input-group-prepend
             = link_to url_for(url_for_filter('', '', [Enums::FiltersNames::THINKER])), :class => "btn btn-danger", :remote => true do

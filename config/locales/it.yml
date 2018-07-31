@@ -196,10 +196,10 @@ it:
       plan: "Pianificazione"
       work: "In sviluppo"
 
-      info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessario per passare allo stato \"Definizione\". In questo stato potrai creare le varie pianificazioni."
-      info_definition: "Associa gli obiettivi alle pianificazioni prossime. Se stai lavorando in modalità Agile non potrai gestire più di 2 pianificazioni."
-      info_plan: "Cambia lo stato della pianificazione da passivo ad attivo nella pagina \"Pianificazioni\" e inizia a gestire i tuoi lavori! Buona fortuna"
-      info_work: ""
+      info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessari per definire il piano di sviluppo."
+      info_definition: "Hai definito lavori e obiettivi ma devi gestire le pianificazioni/rilasci, creandole e associandole agli obiettivi."
+      info_plan: "Ora che il tuo progetto ha un piano d'azione, vai nella pagina \"Pianificazioni\" e attiva la pianificazione! Buona fortuna"
+      info_work: "Il progetto è in fase di sviluppo. Se la pianificazione è in fase di svolgimento, e desideri cambiarla, è sufficiente impostare il progetto in fase di sospensione.<br>Cambiare una pianificazione in corso d'opera ha alcuni effetti collaterali!"
 
     form:
       title_and_description: "Tutto ha un nome, anche il tuo progetto."
@@ -297,6 +297,7 @@ it:
 
     table:
       header: "Lista degli obiettivi"
+      release: "Pianificazione"
       add_tasks: "Aggiungi un lavoro"
       open_tasks: "Lista dei lavori associati"
 
@@ -304,6 +305,11 @@ it:
     placeholder_title: "Missione \"Joker inside\""
     placeholder_description: "Catturare Joker e' la nostra priorità oltre che ristabilire l'ordine. Una volta catturato interrogarlo per trovare il nascondiglio segreto."
     form_text_end_at: "La data non è modificabile se la pianificazione è attiva/in sviluppo. Questo per avere una reale esperienza con la pianificazione del team."
+
+    goals: "Obiettivi associati: %{count}"
+    no_goals: "Nessun obiettivo associato"
+    tasks: "Lavori associati: %{count}"
+    no_tasks: "Nessun lavoro associato"
 
     table:
       header: "Lista delle pianificazioni"

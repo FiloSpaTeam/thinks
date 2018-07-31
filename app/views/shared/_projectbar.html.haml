@@ -28,7 +28,7 @@
       - else
         = plain_text(project.description.lines.first)
   %li.list-group-item
-    %small.font-weight-bold{ 'data-container': "body", 'data-toggle': "popover", 'data-placement': "right", 'data-content': t("projects.condition.info_#{project.condition}"), 'data-trigger': 'hover' }
+    %small.font-weight-bold{ 'data-container': "body", 'data-toggle': "popover", 'data-placement': "right", 'data-content': t("projects.condition.info_#{project.condition}"), 'data-trigger': 'hover', 'data-html': 'true' }
       = icon('fas', 'info-circle', t('activerecord.attributes.project.condition'))
     %br
     = t("projects.condition.#{project.condition}")

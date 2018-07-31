@@ -18,17 +18,17 @@
 -# Copyright (c) 2018 Claudio Maradonna
 
 .card
-  .card-body
+  .p-3
     %h5.card-title.mb-0= icon('fas', 'tasks', t('.title', count: tasks.count))
   .list-group.list-group-flush
     - tasks.each do |task|
       = link_to project_task_path(@project, task), class: 'list-group-item list-group-item-action' do
-        = task.title
-        %br
+        .text-primary
+          = task.title
         = plain_text(task.description).truncate(150)
 
     - if tasks.empty?
       .list-group-item
         = t('.no_results')
-  .card-footer
+  .card-footer.border-top-0
     = link_to t('.go_to'), project_tasks_path(@project), class: 'btn btn-outline-primary'

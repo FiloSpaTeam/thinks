@@ -152,7 +152,6 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    @task.release = nil unless @scrum_master
     @task.recruitment = true if @project.recruit?(current_thinker)
 
     @task.project = @project
@@ -160,7 +159,7 @@ class TasksController < ApplicationController
     @task.updater = current_thinker
 
     respond_to do |format|
-      if @task.save
+      if @task.sanitize_and_save
         create_notification(@task, @project)
         format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.created', title: @task.title, subject: t('tasks.task')) }
         format.json { render :show, status: :created, location: @task }

@@ -57,18 +57,18 @@
                     \%
           %td.border-left.align-middle
             - if !@active_release
-              = link_to t('releases.table.active'), active_project_release_path(@project, release.id, active: 'true'), class: 'btn btn-primary'
+              = link_to t('releases.table.active'), active_project_release_path(@project, release.id, active: 'true'), class: "btn btn-primary #{'disabled' unless @project.plan?}"
             - elsif release == @active_release
-              = link_to t('releases.table.deactive'), active_project_release_path(@project, @active_release.id, active: 'false'), class: 'btn btn-danger'
+              = link_to t('releases.table.deactive'), active_project_release_path(@project, @active_release.id, active: 'false'), class: "btn btn-danger #{'disabled' unless @project.suspended? }"
           %td.border-left.align-middle.dropleft
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ release.id }" }
               = icon('fas', 'bars', class: 'fa-sm')
             .dropdown-menu.dropdown-menu-left{ "aria-labelledby": "dropdownMenuEdit#{ release.id }" }
               = link_to icon('far', 'eye', t('show')), project_release_path(release.project, release), class: 'dropdown-item small'
               = link_to icon('fas', 'edit', t('edit')), edit_project_release_path(release.project, release), class: 'dropdown-item small'
-              = link_to icon('fas', 'tasks', t('releases.table.open_tasks')), release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), class: "dropdown-item small #{ release.tasks.empty? ? 'disabled' : '' }", title: tasks_title(release)
+              = link_to icon('fas', 'tasks', t('releases.table.open_tasks')), release.tasks.empty? ? "javascript:;" : project_tasks_path(release.project, "filterrific[with_release]" => release), class: "dropdown-item small #{ release.tasks.empty? ? 'disabled' : '' }", title: tasks_title(release), 'data-placement': 'left'
               .dropdown-divider
-              = link_to icon('fas', 'eraser', t('delete')), project_release_path(release.project, release), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
+              = link_to icon('fas', 'eraser', t('delete')), release.active? ? 'javascript:;' : project_release_path(release.project, release), :method => 'delete', data: ({ confirm: t('are_you_sure') } unless release.active?), class: "dropdown-item small #{ 'disabled' if release.active? }"
     - else
       %tr.warning
         %td.text-center{ colspan: 3 }

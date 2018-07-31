@@ -57,11 +57,11 @@ class Task < ActiveRecord::Base
   validates :status_id, presence: true, on: :create
   validates :thinker_id, presence: true, on: :create
 
-  scope :status_progress, ->(status) { where status: status }
+  scope :in_status, ->(status) { where status: status }
   scope :in_progress, -> { where status: Status.in_progress }
-  scope :done, -> { where status: Status.done }
-  scope :release, -> { where status: Status.release }
+  scope :in_release, -> { where status: Status.release }
   scope :in_sprint, -> { where status: Status.sprint }
+  scope :is_done, -> { where status: Status.done }
 
   scope :ready_to_sprint, lambda {
     where('standard_deviation < ?', 3).where(status: Status.release)
@@ -82,6 +82,12 @@ class Task < ActiveRecord::Base
 
   scope :with_goal, lambda { |goal|
     where(goal: goal)
+  }
+
+  scope :with_release, lambda { |release|
+    goals = Release.find(release).goals.select('id')
+
+    where('goal_id IN (?)', goals)
   }
 
   scope :with_worker, lambda { |worker|
@@ -237,6 +243,16 @@ class Task < ActiveRecord::Base
         puts ex.message
       end
     end
+  end
+
+  def sanitize_and_save
+    ActiveRecord::Base.transaction do
+      self.goal = father.goal if father.present?
+
+      save
+    end
+  rescue ActiveRecord::RecordInvalid => exception
+    false
   end
 
   private

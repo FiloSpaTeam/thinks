@@ -27,4 +27,31 @@
 - content_for :page_content do
   = markdown(@release.description)
 
+- content_for :page_details do
+  %ul.list-group.list-group-flush
+    %li.list-group-item
+      %small.font-weight-bold= t('releases.goals', count: @release.goals.count)
+    - unless @release.goals.count.zero?
+      - @release.goals.each do |goal|
+        = link_to project_goal_path(@project, goal), class: 'list-group-item list-group-item-action' do
+          .text-primary
+            = goal.title
+          = plain_text(goal.description).truncate(150)
+    - else
+      %li.list-group-item
+        = t('releases.no_goals')
+
+    %li.list-group-item
+      %small.font-weight-bold= t('releases.tasks', count: @release.tasks.count)
+      %br
+    - unless @release.tasks.count.zero?
+      - @release.tasks.each do |task|
+        = link_to project_task_path(@project, task), class: 'list-group-item list-group-item-action' do
+          .text-primary
+            = task.title
+          = plain_text(task.description).truncate(150)
+    - else
+      %li.list-group-item
+        = t('releases.no_tasks')
+
 = render partial: 'projects/layout'
