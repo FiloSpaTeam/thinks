@@ -215,7 +215,7 @@ class Task < ActiveRecord::Base
     has_liked
   end
 
-  def done?
+  def is_done?
     return true if status == Status.done.first
   end
 

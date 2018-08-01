@@ -71,14 +71,14 @@
           - if task.deleted?
             .round-sm.float-left{ :class => "bg-danger" }
             = t('refused')
-          - elsif task.done?
+          - elsif task.is_done?
             .round-sm.float-left{ :class => "bg-success" }
             = t('accepted')
           - else
             .round-sm.float-left{ :class => "bg-backlog" }
             = t('waiting')
     - unless task.recruitment
-      - unless task.deleted? && task.done?
+      - unless task.deleted? && task.is_done?
         - if task.ratings.where(thinker: current_thinker).present?
           %li.list-group-item
             %span.float-right
@@ -88,7 +88,7 @@
             %strong=t(:average)
             = text_field_tag :value, task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
         - else
-          - if task.done?
+          - if task.is_done?
             %li.list-group-item
               = render :partial => 'ratings/form', locals: { task: task }
 
@@ -159,7 +159,7 @@
     - if task.contributed?(current_thinker) && !task.deleted?
       .panel-footer
         - if workload_voted.nil?
-          - if !task.in_progress? && !task.done?
+          - if !task.in_progress? && !task.is_done?
             = form_for task, :url => judge_project_task_path(@project, task), method: :put do |f|
               .form-group
                 = f.label :workload, t('.define_workload'), class: "control-label"
@@ -191,7 +191,7 @@
           - elsif !task.project.started?
             %h4 The project is not started yet, wait. Your moment will come soon.
           - elsif task.workloads.size.nonzero?
-            - if (task.father.present? && task.father.done?) || task.father.nil?
+            - if (task.father.present? && task.father.is_done?) || task.father.nil?
               = link_to "Assigns me", assign_project_task_path(@project, task), :method => :put, :class => "btn btn-success btn-block"
             - else
               %h4 Complete the father task to work on this task.

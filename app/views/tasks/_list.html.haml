@@ -35,9 +35,9 @@
               = t "tasks.table.header"
             - @statuses.each do |status|
               = link_to({ "filters[#{Enums::FiltersNames::STATUS}]" => status, remote: true }, class: 'dropdown-item small') do
-                .round-sm.rounded.float-left.mt-1.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
+                .round-sm.rounded.float-left.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
-      %td.text-center.col-xl-2.col-lg-2
+      %td.col-xl-2.col-lg-2
         %strong
           = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_goal')), :goal
       - unless filter_value(Enums::FiltersNames::DELETED_AT)
@@ -59,9 +59,6 @@
             %strong.d-none.d-md-block
               %small.text-dark
                 \##{task.serial}
-                - unless task.goal.nil?
-                  ·
-                  = goal_button(task)
                 - if task.children.present?
                   ·
                   = children_button
@@ -90,7 +87,7 @@
                 .text-dark.hidden-xxs
                   %small
                     = t('tasks.table.tr.updated_at', updated_at: task.updated_at.to_s(:short), updater: task.updater.name).html_safe
-          %td.bg-white.align-middle
+          %td.bg-white.align-middle.small
             - if task.goal
               = link_to task.goal.title, project_goal_path(@project, task.goal)
               %br
@@ -117,7 +114,7 @@
                 .dropdown-divider
                 - if task.deleted?
                   = link_to icon('fas', 'eraser', t('delete')), project_task_path(@project, task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
-                - elsif !task.done?
+                - elsif !task.is_done?
                   %a.dropdown-item.small{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
                     = icon('fas', 'trash-alt', t('discards'))
                   - content_for :page_modals do

@@ -248,6 +248,13 @@ it:
     no_goal: "Nessun obiettivo associato"
     has_children: "Questo lavoro ha sotto-lavori associati."
 
+    discarded: "Scartato"
+
+    recruitment:
+      refused: "Rifiutata"
+      accepted: "Accettata"
+      waiting: "Attesa di valutazione"
+
     statuses:
       backlog: "Backlog"
       release: "Da pianificare"
@@ -461,10 +468,14 @@ it:
         remember_me: "Mantieni attiva la sessione"
         password_confirmation: "Conferma password"
       task:
+        created_at: "Creato il"
+        updated_at: "Aggiornato il"
         goal_id: "Obiettivo di riferimento"
         father_id: "Lavoro padre di riferimento"
         title: "Titolo"
         description: "Descrizione"
+        children: "Lavori sub-associati"
+        status: "Stato"
       goal:
         release_id: "Pianificazione associata"
         title: "Definizione"
