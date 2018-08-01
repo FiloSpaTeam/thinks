@@ -51,76 +51,88 @@
         = render partial: 'comments/comment', locals: { comment: comment, task: @task }
 
 - content_for :page_details do
-  %ul.list-group.list-group-flush
-    %li.list-group-item
-      %small.font-weight-bold= t('activerecord.attributes.task.created_at')
-      %br
-      %small= @task.created_at.to_s(:long)
-      %br
-      %br
-      %small.font-weight-bold= t('activerecord.attributes.task.updated_at')
-      %br
-      %small= @task.updated_at.to_s(:long)
-    %li.list-group-item
-      %small.font-weight-bold= t('activerecord.attributes.task.status')
-      %br
-      - unless @task.recruitment
-        - if @task.deleted?
-          = t('tasks.discarded')
-        - else
-          .round-sm.rounded.float-left.mr-1{ :class => "bg-#{color_list_round_div(@task.status.translation_code)}" }
-          = t("tasks.statuses.#{@task.status.translation_code}")
-      - else
-        - if @task.deleted?
-          .round-sm.float-left{ :class => "bg-danger" }
-          = t('tasks.recruitment.refused')
-        - elsif @task.is_done?
-          .round-sm.float-left{ :class => "bg-success" }
-          = t('tasks.recruitment.accepted')
-        - else
-          .round-sm.float-left{ :class => "bg-backlog" }
-          = t('tasks.recruitment.waiting')
+  %nav
+    .nav.nav-tabs.mt-1{ role: 'tablist' }
+      %a#tab-details.nav-item.nav-link.active{ 'data-toggle': 'tab', href: '#t-details', role: 'tab', 'aria-controls': 't-details', 'aria-selected': 'true' }
+        = t('.details')
+      %a#tab-status.nav-item.nav-link{ 'data-toggle': 'tab', href: '#t-status', role: 'tab', 'aria-controls': 't-status', 'aria-selected': 'false' }
+        = t('.status')
+      %a#tab-operations.nav-item.nav-link{ 'data-toggle': 'tab', href: '#t-operations', role: 'tab', 'aria-controls': 't-operations', 'aria-selected': 'false' }
+        = t('.operations')
+  #tab-page-details.tab-content
+    #t-details.tab-pane.show.fade.active{ role: 'tabpanel', 'aria-labelledby': 'tab-details' }
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          %small.font-weight-bold= t('activerecord.attributes.task.created_at')
+          %br
+          %small= @task.created_at.to_s(:long)
+          %br
+          %br
+          %small.font-weight-bold= t('activerecord.attributes.task.updated_at')
+          %br
+          %small= @task.updated_at.to_s(:long)
 
-    %li.list-group-item
-      %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
-      %br
-      - if @task.goal.present?
-        = link_to @task.goal.title, project_goal_path(@project, @task.goal)
-      - elsif !@task.deleted?
-        = form_for [@project,@task] do |f|
-          .form-group
-            = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
-          = f.submit t('save'), :class => "btn btn-primary d-none"
-      - else
-        = t('tasks.no_goal')
-    - if @task.father.present?
-      %li.list-group-item
-        %small.font-weight-bold= t('activerecord.attributes.task.father_id')
-        %br
-        = link_to @task.father.title, project_task_path(@project, @task.father)
-    - if @task.children.count.nonzero?
-      %li.list-group-item
-        %small.font-weight-bold= t('activerecord.attributes.task.children')
-        %br
-        %ul.pl-0{style: "max-height: 200px;overflow-y: auto;list-style-position: inside;"}
-          - @task.children.each do |child|
-            %li
-              = link_to project_task_path(@project, child) do
-                %small= child.title
-
-    - unless @task.recruitment
-      - unless @task.deleted? && @task.is_done?
-        - if @task.ratings.where(thinker: current_thinker).present?
+        %li.list-group-item
+          %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
+          %br
+          - if @task.goal.present?
+            = link_to @task.goal.title, project_goal_path(@project, @task.goal)
+          - elsif !@task.deleted?
+            = form_for [@project,@task] do |f|
+              .form-group
+                = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
+              = f.submit t('save'), :class => "btn btn-primary d-none"
+          - else
+            = t('tasks.no_goal')
+        - if @task.father.present?
           %li.list-group-item
-            %span.float-right
-              = @task.ratings.where(thinker: current_thinker).first.value.to_f
-            %strong=t('.your_rating')
-          %li.list-group-item{style: 'border-top: none;'}
-            %strong=t(:average)
-            = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
-        - else
-          - if @task.is_done?
-            %li.list-group-item
-              = render partial: 'ratings/form', locals: { task: @task }
+            %small.font-weight-bold= t('activerecord.attributes.task.father_id')
+            %br
+            = link_to @task.father.title, project_task_path(@project, @task.father)
+        - if @task.children.count.nonzero?
+          %li.list-group-item
+            %small.font-weight-bold= t('activerecord.attributes.task.children')
+            %br
+            %ul.pl-0{style: "max-height: 200px;overflow-y: auto;list-style-position: inside;"}
+              - @task.children.each do |child|
+                %li
+                  = link_to project_task_path(@project, child) do
+                    %small= child.title
+
+        - unless @task.recruitment
+          - unless @task.deleted? && @task.is_done?
+            - if @task.ratings.where(thinker: current_thinker).present?
+              %li.list-group-item
+                %span.float-right
+                  = @task.ratings.where(thinker: current_thinker).first.value.to_f
+                %strong=t('.your_rating')
+              %li.list-group-item{style: 'border-top: none;'}
+                %strong=t(:average)
+                = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
+            - else
+              - if @task.is_done?
+                %li.list-group-item
+                  = render partial: 'ratings/form', locals: { task: @task }
+    #t-status.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-status' }
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          %small.font-weight-bold= t('activerecord.attributes.task.status')
+          %br
+          - unless @task.recruitment
+            - if @task.deleted?
+              = t('tasks.discarded')
+            - else
+              .round-sm.rounded.float-left.mr-1{ :class => "bg-#{color_list_round_div(@task.status.translation_code)}" }
+              = t("tasks.statuses.#{@task.status.translation_code}")
+          - else
+            - if @task.deleted?
+              .round-sm.rounded.float-left{ :class => "bg-danger" }
+              = t('tasks.recruitment.refused')
+            - elsif @task.is_done?
+              .round-sm.rounded.float-left{ :class => "bg-success" }
+              = t('tasks.recruitment.accepted')
+            - else
+              .round-sm.rounded.float-left{ :class => "bg-backlog" }
+              = t('tasks.recruitment.waiting')
 
 = render partial: 'projects/layout'

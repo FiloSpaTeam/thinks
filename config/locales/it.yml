@@ -282,6 +282,11 @@ it:
       title: "Scarta il lavoro \"%{title}\""
       body: "Specifica le ragioni per cui ritieni questo lavoro \"da scartare\"."
 
+    show:
+      details: "Dettagli"
+      status: "Stato"
+      operations: "Operazioni"
+
   comments:
     likes:
       one: "Un \"mi piace\""
