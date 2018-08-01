@@ -120,7 +120,9 @@
           %br
           - unless @task.recruitment
             - if @task.deleted?
-              = t('tasks.discarded')
+              = icon('fas', 'trash-alt', t('tasks.discarded'))
+              %br
+              %p.mt-2.small= @task.reason.text
             - else
               .round-sm.rounded.float-left.mr-1{ :class => "bg-#{color_list_round_div(@task.status.translation_code)}" }
               = t("tasks.statuses.#{@task.status.translation_code}")
@@ -134,5 +136,24 @@
             - else
               .round-sm.rounded.float-left{ :class => "bg-backlog" }
               = t('tasks.recruitment.waiting')
+    #t-operations.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-operations' }
+      %ul.list-group.list-group-flush{ style: 'max-height: 250px;overflow-y: auto;' }
+        - if @task.operations.empty?
+          .list-group-item= t("tasks.no_operations")
+        - first = false
+        - @task.operations.each_with_index do |operation, index|
+          = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
+            - if (!operation.done && !first)
+              - first = true
+              - if current_thinker == @task.worker
+                = destroy_button(operation)
+                = done_button(operation)
+            %strong
+              = operation.serial.to_s + ': '
+            = operation.text
+      - if current_thinker == @task.worker
+        = form_for [@task, Operation.new] do |f|
+          = f.text_field :text, :class => 'form-control'
+          = f.submit t(".add"), :class => "btn btn-primary"
 
 = render partial: 'projects/layout'

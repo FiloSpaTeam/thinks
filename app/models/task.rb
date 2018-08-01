@@ -140,7 +140,7 @@ class Task < ActiveRecord::Base
     joins(:thinker, :worker).where('thinkers.name LIKE ?', "%#{name}%")
   }
 
-  def destroy_and_associate_reason(reason, current_thinker)
+  def destroy_and_associate_reason(reason_text, current_thinker)
     ActiveRecord::Base.transaction do
       begin
         self.worker = nil
@@ -152,7 +152,7 @@ class Task < ActiveRecord::Base
         reason = Reason
                  .where(related: self).first_or_create
 
-        reason.text    = reason
+        reason.text    = reason_text
         reason.thinker = current_thinker
 
         reason.save

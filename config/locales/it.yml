@@ -247,6 +247,7 @@ it:
     comments: "Commenti e considerazioni"
     no_goal: "Nessun obiettivo associato"
     has_children: "Questo lavoro ha sotto-lavori associati."
+    no_operations: "Non ci sono processi operativi specificati."
 
     discarded: "Scartato"
 
