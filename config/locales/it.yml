@@ -40,7 +40,7 @@ it:
     thinker_id: "Pensato da"
     with_deleted_at: "Scartato"
     progress_lower_than: "Progresso (% inferiore a)"
-    with_children: "Includi sub-associati"
+    with_children: "Includi sub-lavori"
 
   alerts:
     operation_not_permitted: "Non hai adeguati permessi per questa azione."
@@ -152,6 +152,7 @@ it:
 
     brief_description: "Ogni scheda rappresenta un piano stabilito. Le schede oscurate indicano che la parte è la stata completata."
     hide_completed_release: "Nascondi le azioni completate"
+    suspended: "Sviluppo sospeso"
 
     modal_condition_definition:
       modal_title: "È ora di creare ed associare un lavoro"
@@ -248,8 +249,22 @@ it:
     no_goal: "Nessun obiettivo associato"
     has_children: "Questo lavoro ha sotto-lavori associati."
     no_operations: "Non ci sono processi operativi specificati."
-
+    you_cannot_vote: "Tu non puoi votare."
+    you_voted: "Hai votato: %{vote}"
+    give_up: "Abbandona il lavoro"
+    not_assigned_but_you_are_busy: "Non ci sono assegnazioni per questo lavoro, tuttavia tu sei già impegnato."
+    project_not_started: "Il progetto è ancora in fase di definizione. Arriverà il tuo momento."
+    assign_me: "Voglio lavorarci"
+    no_opinions: "Nessuno ha condiviso opinioni o votato. Sii il primo!"
+    not_ready_for_work: "Il team non ha ancora pianificato lo sviluppo di questo lavoro. Se credi sia necessario svilupparlo ora, rivolgiti al tuo team o al responsabile per evidenziarne l'importanza."
+    workload: "Workload"
     discarded: "Scartato"
+
+    to_sprint: "Sposta in Sprint"
+    to_sprint_forced: "Forza in Sprint"
+    standard_deviation_too_high: "Il team non ha espresso pareri concordi sul workload che il lavoro sviluppa. Suggeriamo un ulteriore giro di votazioni prima del passaggio in Sprint."
+    to_release_forced: "Forza in Release"
+    to_release: "Retrocedi in Release"
 
     recruitment:
       refused: "Rifiutata"
@@ -482,6 +497,7 @@ it:
         description: "Descrizione"
         children: "Lavori sub-associati"
         status: "Stato"
+        impressions_count: "Visualizzazioni"
       goal:
         release_id: "Pianificazione associata"
         title: "Definizione"

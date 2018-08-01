@@ -48,7 +48,7 @@ class TasksController < ApplicationController
                   .includes(:status, :thinker, :updater, :goal, :children)
                   .where(project: @project)
                   .where(recruitment: false)
-                  .order({father_id: :asc}, {id: :desc})
+                  .order(father_id: :asc)
 
     @search = ''
     if params.key?(:filters) &&
@@ -103,10 +103,10 @@ class TasksController < ApplicationController
                         .order(approved: :desc, created_at: :desc)
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
-
     @comment = Comment.new
 
     impressionist(@task, '', unique: [:impressionable_id, :user_id])
+    @scrum_master = @project.scrum_master?(current_thinker)
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),
