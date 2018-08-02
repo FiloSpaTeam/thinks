@@ -109,11 +109,8 @@ module TasksHelper
                      current_thinker.id,
                      Status.done.first)
               .preload(:votes)
-    when 'goal'
-      scope = scope
-              .joins(:goal)
-              .preload(:goal)
     end
+
     scope
   end
 

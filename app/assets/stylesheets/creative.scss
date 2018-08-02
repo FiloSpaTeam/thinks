@@ -335,6 +335,11 @@ header.masthead {
         border-color: $main-color;
         background-color: $main-color; }
 
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #DC911B;
+    border-color: #DC911B;}
+
 .btn-xl {
   padding: 15px 30px; }
 

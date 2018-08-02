@@ -48,7 +48,7 @@ class TasksController < ApplicationController
                   .includes(:status, :thinker, :updater, :goal, :children)
                   .where(project: @project)
                   .where(recruitment: false)
-                  .order({father_id: :asc}, {id: :desc})
+                  .order(father_id: :desc, serial: :desc)
 
     @search = ''
     if params.key?(:filters) &&
@@ -61,15 +61,18 @@ class TasksController < ApplicationController
                                             Enums::FiltersNames::DELETED_AT,
                                             Enums::FiltersNames::CHILDREN
                                           ])
-    else
-      tasks_scope = tasks_scope.where('father_id IS NULL')
     end
 
+    tasks_scope = tasks_scope.where('father_id IS NULL') unless params.key?(:filters)
     tasks_scope = tasks_scope.where.not(status: Status.done.first) unless active_filter?(Enums::FiltersNames::STATUS)
 
     tasks_scope = apply_filters(tasks_scope, params[:filters]) if params[:filters].present?
-    tasks_scope = apply_sorter(tasks_scope, params[:tasks_smart_listing][:sort]) if params.key?(:tasks_smart_listing) &&
-                                                                                    params[:tasks_smart_listing].key?(:sort)
+
+    if params.key?(:tasks_smart_listing) &&
+       params[:tasks_smart_listing].key?(:sort)
+      tasks_scope = apply_sorter(tasks_scope,
+                                 params[:tasks_smart_listing][:sort])
+    end
 
     smart_listing_create :tasks,
                          tasks_scope,
@@ -103,10 +106,10 @@ class TasksController < ApplicationController
                         .order(approved: :desc, created_at: :desc)
     @reason           = @comment_approved.try(:reason) || Reason.new
     @workload_voted   = @task.votes.where(thinker: current_thinker).first
-
     @comment = Comment.new
 
     impressionist(@task, '', unique: [:impressionable_id, :user_id])
+    @scrum_master = @project.scrum_master?(current_thinker)
 
     @breadcrumbs = {
       "project_tasks_path('#{@project.slug}')" => I18n.t('breadcrumbs.project_tasks_path'),

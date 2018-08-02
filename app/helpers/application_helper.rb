@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -121,9 +122,6 @@ module ApplicationHelper
         params[filter] == '0'
     end
 
-    puts "SANITIZED"
-    puts params
-
     params
   end
 
@@ -151,5 +149,9 @@ module ApplicationHelper
 
   def middle_dot
     '&#183;'.html_safe
+  end
+
+  def sub_arrow
+    '↳'.html_safe
   end
 end

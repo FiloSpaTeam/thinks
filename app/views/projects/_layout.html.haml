@@ -8,11 +8,11 @@
   .row
     .col-md-2.col-lg-2.pb-3.pl-0.pr-0.border-right
       = render partial: 'shared/projectbar', locals: { project: @project }
-    .pl-0.pr-0.position-relative{class: content_for?(:page_details) ? "col-md-8" : "col-md-10" }
+    .pl-0.pr-0.position-relative{class: content_for?(:page_details) ? "col-md-7" : "col-md-10" }
       = render partial: "projects/actionbar", locals: { project: @project }
       %div{ class: @no_padding ? 'mb-3' : 'pl-3 pr-3 pt-3 pb-5 mb-3' }
         = yield :page_content
       = render partial: 'shared/breadcrumbs', locals: { project: @project }
     - if content_for? :page_details
-      .col-md-2.col-lg-2.pb-3.pl-0.pr-0.border-left
+      .col-md-3.pb-3.pl-0.pr-0.border-left
         = yield :page_details

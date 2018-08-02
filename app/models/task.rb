@@ -202,7 +202,7 @@ class Task < ActiveRecord::Base
   def liked?(thinker)
     has_liked = false
 
-    comments.each do |comment| 
+    comments.each do |comment|
       next has_liked = true unless has_liked &&
                                    !comment.impressionist_count(user_id: thinker).zero?
     end
@@ -212,6 +212,10 @@ class Task < ActiveRecord::Base
 
   def is_done?
     return true if status == Status.done.first
+  end
+
+  def in_release?
+    return true if status == Status.release.first
   end
 
   def in_progress?

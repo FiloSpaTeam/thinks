@@ -72,6 +72,11 @@
           %br
           %small= @task.updated_at.to_s(:long)
 
+        %li.list-group-item.hidden-xs
+          %small.font-weight-bold= t('activerecord.attributes.task.impressions_count')
+          %br
+          = @task.impressions_count.to_i
+
         %li.list-group-item
           %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
           %br
@@ -136,29 +141,86 @@
             - else
               .round-sm.rounded.float-left{ :class => "bg-backlog" }
               = t('tasks.recruitment.waiting')
+        - unless @task.recruitment
+          - unless @task.deleted? && @task.is_done?
+            - if @task.ratings.where(thinker: current_thinker).present?
+              %li.list-group-item
+                %span.float-right
+                  = @task.ratings.where(thinker: current_thinker).first.value.to_f
+                %strong=t('.your_rating')
+              %li.list-group-item{style: 'border-top: none;'}
+                %strong=t(:average)
+                = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
+            - else
+              - if @task.is_done?
+                %li.list-group-item
+                  = render :partial => 'ratings/form', locals: { task: @task }
+
+        - if @scrum_master
+          - if !@task.deleted? && !@task.project.suspended?
+            - if @task.status == Status.release.first
+              -# TODO: implement function ready
+              - if true || @task.ready?
+                = link_to t('tasks.to_sprint'), sprint_project_task_path(@project, @task), :method => :put, :class => "btn btn-primary btn-block"
+              - else
+                %strong
+                  = link_to t('tasks.to_sprint_forced'), sprint_project_task_path(@project, @task), :method => :put, :class => "btn btn-warning btn-block"
+                  = t("tasks.standard_deviation_too_high")
+            - elsif @task.status == Status.backlog.first && @task.workloads.count > 0
+              = link_to t('tasks.to_release_forced'), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-warning btn-block"
+            - elsif @task.status == Status.done.first && !@task.recruitment
+              = link_to t('tasks.to_release_back'), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-danger btn-block"
+          - elsif @task.project.suspended?
+            %li.list-group-item.text-danger{ style: 'border-top: none;' }
+              = t('projects.suspended')
+
         %li.list-group-item
           %span.float-right
             = workload_description(@task)
-          %small.font-weight-bold= t('tasks.table.th_workload')
-          - if @task.contributed?(current_thinker) && !@task.deleted?
-            .panel-footer
-              - if workload_voted.nil?
-                - if !@task.in_progress? && !@task.done?
-                  = form_for @task, :url => judge_task_path(@task), method: :put do |f|
+          %small.font-weight-bold= t('tasks.workload')
+          - if !@task.deleted?
+            - if @task.in_release?
+              - if @workload_voted.nil?
+                - if !@task.in_progress? && !@task.is_done?
+                  = form_for @task, :url => judge_project_task_path(@project, @task), method: :put do |f|
                     .form-group
                       = f.label :workload, t('.define_workload'), class: "control-label"
                       = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
                     = f.submit t("submit"), :class => "btn btn-primary"
                 - else
-                  %strong
-                    = t ".you_cannot_vote"
+                  %strong= t "tasks.you_cannot_vote"
               - else
                 .text-right{ style: 'padding-right: 15px;' }
                   %strong
-                    - if workload_voted.workload.value > 100
-                      = t "tasks.show.you_voted", vote: '∞'
+                    - if @workload_voted.workload.value > 100
+                      = t "tasks.you_voted", vote: '∞'
                     - else
-                      = t "tasks.show.you_voted", vote: workload_voted.workload.value
+                      = t "tasks.you_voted", vote: @workload_voted.workload.value
+
+        %li.list-group-item
+          %small.font-weight-bold= t('tasks.worker')
+          - if !@task.worker.nil?
+            %span.float-right{ :title => @task.worker.name }
+              = @task.worker.name.try(:truncate, 20)
+            - if (@task.worker == current_thinker || @scrum_master) && @task.status != Status.done.first
+              %strong
+                = link_to t('tasks.give_up'), give_up_project_task_path(@project, @task), :method => :put, :data => {confirm: t('are_you_sure')}, :class => "btn btn-danger btn-block"
+          - elsif @task.status == Status.sprint.first
+            - if current_thinker.working_tasks.in_progress.present?
+              %div= t('tasks.not_assigned_but_you_are_busy')
+            - elsif !@task.project.started?
+              %div= t('tasks.project_not_started')
+            - elsif @task.workloads.size.nonzero?
+              -# TODO: Need to change, if children are completed so i can assign father task
+              -# - if (@task.father.present? && @task.father.is_done?) || @task.father.nil?
+              = link_to t('tasks.assign_me'), assign_project_task_path(@project, @task), :method => :put, :class => "btn btn-success btn-block"
+              -# - else
+              -#   %h4 Complete the father @task to work on this @task.
+            - else
+              %div= t('tasks.no_opinions')
+          - else
+            %div= t('tasks.not_ready_for_work')
+
     #t-operations.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-operations' }
       %ul.list-group.list-group-flush{ style: 'max-height: 250px;overflow-y: auto;' }
         - if @task.operations.empty?

@@ -57,9 +57,9 @@
                     \%
           %td.border-left.align-middle
             - if !@active_release
-              = link_to t('releases.table.active'), active_project_release_path(@project, release.id, active: 'true'), class: "btn btn-primary #{'disabled' unless @project.plan?}"
+              = link_to t('releases.table.active'), active_project_release_path(@project, release.id, active: 'true'), class: "btn btn-primary #{'disabled' if !@project.plan? || !release.activable?}"
             - elsif release == @active_release
-              = link_to t('releases.table.deactive'), active_project_release_path(@project, @active_release.id, active: 'false'), class: "btn btn-danger #{'disabled' unless @project.suspended? }"
+              = link_to t('releases.table.deactive'), active_project_release_path(@project, @active_release.id, active: 'false'), class: "btn btn-danger"
           %td.border-left.align-middle.dropleft
             %a.btn.dropdown-toggle{ href: '#', role: 'button', "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": 'false', id: "dropdownMenuEdit#{ release.id }" }
               = icon('fas', 'bars', class: 'fa-sm')

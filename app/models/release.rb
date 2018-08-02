@@ -88,6 +88,30 @@ class Release < ActiveRecord::Base
     title
   end
 
+  def activable?
+    goals.count.positive? && tasks.count.positive?
+  end
+
+  def activate_for_work(active)
+    ActiveRecord::Base.transaction do
+      begin
+        update_attributes!(active: active)
+
+        status = if active
+                   Status.release.first
+                 else
+                   Status.backlog.first
+                 end
+
+        tasks.each do |task|
+          task.update_attributes!(status: status)
+        end
+      rescue => ex
+        puts ex.message
+      end
+    end
+  end
+
   private
 
   def update_project_condition

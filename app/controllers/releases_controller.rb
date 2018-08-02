@@ -183,7 +183,7 @@ class ReleasesController < ApplicationController
     active ||= params[:active]
 
     respond_to do |format|
-      @release.update_attribute(:active, active)
+      @release.activate_for_work(active)
 
       format.html { redirect_to project_releases_path(@project), notice: t("alerts.release_#{active == 'true' ? 'activated' : 'deactivated'}", title: @release.title) }
     end

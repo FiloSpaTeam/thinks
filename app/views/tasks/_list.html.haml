@@ -38,8 +38,6 @@
                 .round-sm.rounded.float-left.mr-2{ :class => "bg-#{color_list_round_div(status.translation_code)}" }
                 = t("tasks.statuses.#{status.translation_code}")
       %td.col-xl-2.col-lg-2
-        %strong
-          = smart_listing.sortable icon('fas', 'caret-down', t('tasks.table.th_goal')), :goal
       - unless filter_value(Enums::FiltersNames::DELETED_AT)
         %td.text-center.col-xl-2.col-lg-3
           %strong
@@ -63,7 +61,7 @@
                   ·
                   = children_button
               ·
-              = link_to task.title, project_task_path(@project, task)
+              = link_to ((sub_arrow if task.father.present?).to_s + task.title), project_task_path(@project, task)
             %strong.d-sm-none
               = link_to task.title.truncate(45), project_task_path(@project, task), :title => task.title
             %strong.d-none.d-sm-block.d-md-none
@@ -88,12 +86,13 @@
                   %small
                     = t('tasks.table.tr.updated_at', updated_at: task.updated_at.to_s(:short), updater: task.updater.name).html_safe
           %td.bg-white.align-middle.small
-            - if task.goal
-              = link_to task.goal.title, project_goal_path(@project, task.goal)
-              %br
-              = plain_text(task.goal.description).truncate(150)
-            - else
-              = t('tasks.no_goal')
+            - unless task.father.present?
+              - if task.goal
+                = link_to task.goal.title, project_goal_path(@project, task.goal)
+                %br
+                = plain_text(task.goal.description).truncate(150)
+              - else
+                = t('tasks.no_goal')
           - unless filter_value(Enums::FiltersNames::DELETED_AT)
             %td.bg-white.text-center.workload-table.align-middle
               = workload_description(task)
