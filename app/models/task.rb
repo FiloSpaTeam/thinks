@@ -199,11 +199,6 @@ class Task < ActiveRecord::Base
     votes.where(thinker: thinker).first().present?
   end
 
-  def contributed?(thinker)
-    comments = self.comments
-    comments.where(thinker: thinker).present? || liked?(thinker)
-  end
-
   def liked?(thinker)
     has_liked = false
 
