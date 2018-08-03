@@ -50,6 +50,9 @@ it:
     release_activated: "Pianificazione \"%{title}\" attivata."
     release_deactivated: "Pianificazione \"%{title}\" disattivata."
 
+    vote_saved: "Grazie per aver espresso un parere per \"%{title}\"!"
+    task_ready_for_assignment: "Il task è ora pronto per essere assegnato."
+
     deleted: "%{subject} \"%{title}\" cancellato."
     discarded: "%{subject} \"%{title}\" scartato."
     restored: "%{subject} \"%{title}\" ripristinato."
@@ -257,15 +260,18 @@ it:
     assign_me: "Voglio lavorarci"
     no_opinions: "Nessuno ha condiviso opinioni o votato. Sii il primo!"
     not_ready_for_work: "Il team non ha ancora pianificato lo sviluppo di questo lavoro. Se credi sia necessario svilupparlo ora, rivolgiti al tuo team o al responsabile per evidenziarne l'importanza."
+    not_ready_for_worker: "Il lavoro è stato pianificato, ma ancora non è pronto per essere assegnato."
     workload: "Carico di lavoro"
     worker: "Incaricato"
     discarded: "Scartato"
+    no_votes: "Nessuno ha espresso pareri sul carico di lavoro. Se vuoi spostare forzatamente lo stato in \"Sprint\", dovrai esprimere un valore."
 
     to_sprint: "Sposta in Sprint"
     to_sprint_forced: "Forza in Sprint"
-    standard_deviation_too_high: "Il team non ha espresso pareri concordi sul workload che il lavoro sviluppa. Suggeriamo un ulteriore giro di votazioni prima del passaggio in Sprint."
+    standard_deviation_too_high: "Il team non ha espresso pareri concordi sul carico di lavoro che il lavoro sviluppa. Suggeriamo un ulteriore giro di votazioni prima del passaggio in Sprint."
     to_release_forced: "Forza in Release"
     to_release: "Retrocedi in Release"
+    define_workload: "Esprimi il tuo parere sul carico che il lavoro sviluppa."
 
     recruitment:
       refused: "Rifiutata"
@@ -274,7 +280,7 @@ it:
 
     statuses:
       backlog: "Backlog"
-      release: "Da pianificare"
+      release: "Pianificato"
       sprint: "Sprint"
       in_progress: "In lavorazione"
       done: "Completato"

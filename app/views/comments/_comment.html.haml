@@ -31,9 +31,9 @@
       .dropdown-menu
         - if !comment.approved && comment.thinker == current_thinker && current_thinker.ban(task.project).nil?
           = edit_button(comment)
-          - if !task.in_progress? && !task.is_done? && comment.reason.nil?
+          - if !task.in_progress? && !task.done? && comment.reason.nil?
             = delete_button(comment)
           .dropdown-divider
         = like_button(comment)
-        - if !task.is_done? && task.worker == current_thinker && !task.deleted?
+        - if !task.done? && task.worker == current_thinker && !task.deleted?
           = approve_button(comment)

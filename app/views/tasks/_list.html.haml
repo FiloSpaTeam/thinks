@@ -113,7 +113,7 @@
                 .dropdown-divider
                 - if task.deleted?
                   = link_to icon('fas', 'eraser', t('delete')), project_task_path(@project, task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'dropdown-item small'
-                - elsif !task.is_done?
+                - elsif !task.done?
                   %a.dropdown-item.small{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ task.id }" }
                     = icon('fas', 'trash-alt', t('discards'))
                   - content_for :page_modals do

@@ -171,6 +171,7 @@ class Task < ActiveRecord::Base
   def variance
     votes = workloads.pluck(:id)
 
+    return -1 if votes.empty?
     return 0 if votes.length == 1
 
     average = id_average
@@ -183,7 +184,13 @@ class Task < ActiveRecord::Base
   end
 
   def standard_deviation
-    @standard_deviation ||= Math.sqrt(variance).to_int
+    v = variance
+    @standard_deviation ||= (v.positive? ? Math.sqrt().to_int : v)
+  end
+
+  def ready?
+    sd = standard_deviation
+    sd.positive? && sd < 3
   end
 
   def progress
@@ -210,8 +217,12 @@ class Task < ActiveRecord::Base
     has_liked
   end
 
-  def is_done?
+  def done?
     return true if status == Status.done.first
+  end
+
+  def in_sprint?
+    return true if status == Status.sprint.first
   end
 
   def in_release?

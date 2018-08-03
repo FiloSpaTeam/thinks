@@ -56,6 +56,10 @@ class Release < ActiveRecord::Base
     where('progress < ?', value)
   }
 
+  scope :only_active, lambda {
+    where('active = true')
+  }
+
   scope :with_task, lambda { |task|
     where([
             %(

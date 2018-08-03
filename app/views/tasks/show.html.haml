@@ -24,7 +24,7 @@
       %li.nav-item.ml-1
         = link_to project_task_path(@project, @task), :method => 'delete', data: { confirm: t('are_you_sure') }, class: 'btn btn-danger' do
           = icon('fas', 'eraser', t('delete'))
-    - elsif !@task.is_done?
+    - elsif !@task.done?
       %li.nav-item.ml-1
         %a.btn.btn-default{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ @task.id }" }
           = icon('fas', 'trash-alt', t('discards'))
@@ -105,7 +105,7 @@
                     %small= child.title
 
         - unless @task.recruitment
-          - unless @task.deleted? && @task.is_done?
+          - unless @task.deleted? && @task.done?
             - if @task.ratings.where(thinker: current_thinker).present?
               %li.list-group-item
                 %span.float-right
@@ -115,9 +115,10 @@
                 %strong=t(:average)
                 = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
             - else
-              - if @task.is_done?
+              - if @task.done?
                 %li.list-group-item
                   = render partial: 'ratings/form', locals: { task: @task }
+
     #t-status.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-status' }
       %ul.list-group.list-group-flush
         %li.list-group-item
@@ -130,19 +131,37 @@
               %p.mt-2.small= @task.reason.text
             - else
               .round-sm.rounded.float-left.mr-1{ :class => "bg-#{color_list_round_div(@task.status.translation_code)}" }
-              = t("tasks.statuses.#{@task.status.translation_code}")
+              %div= t("tasks.statuses.#{@task.status.translation_code}")
+              - if @scrum_master
+                - if @project.suspended?
+                  .text-danger
+                    = t('projects.suspended')
+                - elsif !@task.deleted?
+                  - if @task.status == Status.release.first
+                    - if @task.workloads.count.positive?
+                      - if @workload_voted.present?
+                        = link_to icon('fas', 'bolt', t('tasks.to_sprint')), sprint_project_task_path(@project, @task), :method => :put, :class => "btn btn-outline-primary"
+                      - unless @task.ready?
+                        .font-italic= t("tasks.standard_deviation_too_high")
+                    - else
+                      .font-italic= t("tasks.no_votes")
+                  - elsif @task.status == Status.backlog.first && @task.workloads.count > 0
+                    = link_to icon('fas', 'bolt', t('tasks.to_release_forced')), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-outline-warning"
+                  - elsif @task.status == Status.done.first && !@task.recruitment
+                    = link_to icon('fas', 'bolt', t('tasks.to_release_back')), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-outline-danger"
+
           - else
             - if @task.deleted?
               .round-sm.rounded.float-left{ :class => "bg-danger" }
-              = t('tasks.recruitment.refused')
-            - elsif @task.is_done?
+              %div= t('tasks.recruitment.refused')
+            - elsif @task.done?
               .round-sm.rounded.float-left{ :class => "bg-success" }
-              = t('tasks.recruitment.accepted')
+              %div= t('tasks.recruitment.accepted')
             - else
               .round-sm.rounded.float-left{ :class => "bg-backlog" }
-              = t('tasks.recruitment.waiting')
+              %div= t('tasks.recruitment.waiting')
         - unless @task.recruitment
-          - unless @task.deleted? && @task.is_done?
+          - unless @task.deleted? && @task.done?
             - if @task.ratings.where(thinker: current_thinker).present?
               %li.list-group-item
                 %span.float-right
@@ -152,53 +171,35 @@
                 %strong=t(:average)
                 = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
             - else
-              - if @task.is_done?
+              - if @task.done?
                 %li.list-group-item
                   = render :partial => 'ratings/form', locals: { task: @task }
 
-        - if @scrum_master
-          - if !@task.deleted? && !@task.project.suspended?
-            - if @task.status == Status.release.first
-              -# TODO: implement function ready
-              - if true || @task.ready?
-                = link_to t('tasks.to_sprint'), sprint_project_task_path(@project, @task), :method => :put, :class => "btn btn-primary btn-block"
-              - else
-                %strong
-                  = link_to t('tasks.to_sprint_forced'), sprint_project_task_path(@project, @task), :method => :put, :class => "btn btn-warning btn-block"
-                  = t("tasks.standard_deviation_too_high")
-            - elsif @task.status == Status.backlog.first && @task.workloads.count > 0
-              = link_to t('tasks.to_release_forced'), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-warning btn-block"
-            - elsif @task.status == Status.done.first && !@task.recruitment
-              = link_to t('tasks.to_release_back'), release_project_task_path(@project, @task), :method => :put, :class => "btn btn-danger btn-block"
-          - elsif @task.project.suspended?
-            %li.list-group-item.text-danger{ style: 'border-top: none;' }
-              = t('projects.suspended')
-
         %li.list-group-item
-          %span.float-right
+          %span.badge.badge-dark.float-right
             = workload_description(@task)
-          %small.font-weight-bold= t('tasks.workload')
+          .small.font-weight-bold
+            = icon('fas', 'weight', t('tasks.workload'))
           - if !@task.deleted?
             - if @task.in_release?
               - if @workload_voted.nil?
-                - if !@task.in_progress? && !@task.is_done?
+                - if !@task.in_progress? && !@task.done?
                   = form_for @task, :url => judge_project_task_path(@project, @task), method: :put do |f|
                     .form-group
-                      = f.label :workload, t('.define_workload'), class: "control-label"
-                      = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {}, :class => "form-control"
-                    = f.submit t("submit"), :class => "btn btn-primary"
+                      = f.label :workload, t('tasks.define_workload'), class: "control-label"
+                      = f.select :workload, options_from_collection_for_select(Workload.all, :id, :description), {include_blank: t('select')}, :class => "form-control", required: true
+                    = f.submit t("save"), :class => "btn btn-primary"
                 - else
                   %strong= t "tasks.you_cannot_vote"
               - else
-                .text-right{ style: 'padding-right: 15px;' }
-                  %strong
-                    - if @workload_voted.workload.value > 100
-                      = t "tasks.you_voted", vote: '∞'
-                    - else
-                      = t "tasks.you_voted", vote: @workload_voted.workload.value
+                .text-right.font-weight-bold
+                  - if @workload_voted.workload.value > 100
+                    = t "tasks.you_voted", vote: '∞'
+                  - else
+                    = t "tasks.you_voted", vote: @workload_voted.workload.value
 
         %li.list-group-item
-          %small.font-weight-bold= t('tasks.worker')
+          %small.font-weight-bold= icon('fas', 'user', t('tasks.worker'))
           - if !@task.worker.nil?
             %span.float-right{ :title => @task.worker.name }
               = @task.worker.name.try(:truncate, 20)
@@ -208,16 +209,16 @@
           - elsif @task.status == Status.sprint.first
             - if current_thinker.working_tasks.in_progress.present?
               %div= t('tasks.not_assigned_but_you_are_busy')
-            - elsif !@task.project.started?
-              %div= t('tasks.project_not_started')
-            - elsif @task.workloads.size.nonzero?
+            - elsif @task.in_sprint?
               -# TODO: Need to change, if children are completed so i can assign father task
-              -# - if (@task.father.present? && @task.father.is_done?) || @task.father.nil?
-              = link_to t('tasks.assign_me'), assign_project_task_path(@project, @task), :method => :put, :class => "btn btn-success btn-block"
+              -# - if (@task.father.present? && @task.father.done?) || @task.father.nil?
+              = link_to t('tasks.assign_me'), assign_project_task_path(@project, @task), :method => :put, :class => "btn btn-success"
               -# - else
               -#   %h4 Complete the father @task to work on this @task.
             - else
               %div= t('tasks.no_opinions')
+          - elsif @task.in_release?
+            %div= t('tasks.not_ready_for_worker')
           - else
             %div= t('tasks.not_ready_for_work')
 

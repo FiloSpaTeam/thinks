@@ -241,7 +241,7 @@ class Project < ActiveRecord::Base
     if work?
       active!
     else
-      suspended!
+      suspended! unless draft?
     end
   end
 

@@ -41,7 +41,6 @@ class ReleasesController < ApplicationController
 
     @active_filters = [
       Enums::Filters::SEARCH_INPUT,
-      Enums::Filters::SEARCH_TASK,
       Enums::Filters::PROGRESS_LOWER_THAN
     ]
 
@@ -55,7 +54,7 @@ class ReleasesController < ApplicationController
       @search = params[:filters][:search_title_and_description].strip
     end
 
-    @active_release = Release.where('active = true').first
+    @active_release = @project.releases.only_active.first
   end
 
   def new

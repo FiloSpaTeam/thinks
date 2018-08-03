@@ -245,7 +245,7 @@ class TasksController < ApplicationController
   def sprint
     respond_to do |format|
       if @scrum_master
-        if @task.project.suspended
+        if @task.project.suspended?
           format.html { redirect_to task_path(@task), alert: 'Currently the development is suspended.' }
           format.json { render json: {}, status: :unprocessable_entity }
         else
@@ -253,7 +253,7 @@ class TasksController < ApplicationController
 
           if @task.save
             create_notification(@task, @task.project)
-            format.html { redirect_to project_task_path(@project, @task), notice: 'Task ready for this sprint! Good job!' }
+            format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.task_ready_for_assignment') }
             format.json { render :show, status: :ok, location: @task }
           else
             format.html { render :edit }
@@ -309,7 +309,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to project_task_path(@project, @task), notice: 'Your thinks is part of the workload now!' }
+        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.tasks_vote_saved', title: @task.title) }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }

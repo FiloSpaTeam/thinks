@@ -23,7 +23,7 @@
           = icon('fas', 'history', class: 'fa-lg')
           %span.hidden-xs
             Another chance
-    - elsif !@task.is_done?
+    - elsif !@task.done?
       %li.float-left.hidden-xxs
         = link_to recruitment_path(@task), :method => 'delete', title: 'Reject', class: 'btn-task-delete line-height-25 line-height-35', role: 'button' do
           = icon('fas', 'times-circle-o', class: 'fa-lg')
@@ -91,7 +91,7 @@
                   %ul.no-padding.mt-3{ style: 'list-style: none;' }
                     - if comment.thinker == current_thinker && current_thinker.ban(@task.project).nil? 
                       = edit_button(comment)
-                      - if !@task.in_progress? && !@task.is_done? && comment.reason.nil?
+                      - if !@task.in_progress? && !@task.done? && comment.reason.nil?
                         = delete_button(comment)
               %td
                 .text-dark
@@ -105,5 +105,5 @@
                   = markdown(comment.text, true)
               %td.text-center.align-middle{ width: 50 }
                 = like_button(comment)
-                - if !@task.is_done? && @task.worker == current_thinker && !@task.deleted?
+                - if !@task.done? && @task.worker == current_thinker && !@task.deleted?
                   = approve_button(comment)

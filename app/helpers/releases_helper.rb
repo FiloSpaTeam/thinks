@@ -20,8 +20,9 @@ module ReleasesHelper
     scope = scope.search_title_and_description(params[:search_title_and_description]) if params.key?(:search_title_and_description) &&
                                                                                          params[:search_title_and_description].present?
 
-    scope = scope.with_task(params[Enums::FiltersNames::TASK]) if params.key?(Enums::FiltersNames::TASK) &&
-                                                 params[Enums::FiltersNames::TASK].present?
+    scope = scope.with_task(params[Enums::FiltersNames::TASK]) if
+      params.key?(Enums::FiltersNames::TASK) &&
+      params[Enums::FiltersNames::TASK].present?
 
     scope = scope.progress_lower_than(params[:progress_lower_than]) if params.key?(:progress_lower_than) &&
                                                                        params[:progress_lower_than].present?
