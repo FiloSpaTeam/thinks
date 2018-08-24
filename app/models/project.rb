@@ -233,8 +233,13 @@ class Project < ActiveRecord::Base
     work!
     plan! if releases.where('active = true').count.zero?
     definition! if releases.count.zero? ||
-                   tasks.where('tasks.goal_id > 0').count.zero? ||
-                   goals.where('goals.release_id > 0').count.zero?
+                   tasks
+                   .without_deleted
+                   .where('tasks.goal_id > 0')
+                   .where('tasks.father_id IS NULL').count.zero? ||
+                   goals
+                   .without_deleted
+                   .where('goals.release_id > 0').count.zero?
 
     beginning! if tasks.count.zero? || goals.count.zero?
 

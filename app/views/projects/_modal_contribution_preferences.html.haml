@@ -42,7 +42,7 @@
             %ul
               - @project.skills.each do |skill|
                 %li{ class: current_thinker.present? && current_thinker.skills.where(id: skill.id).count > 0 ? 'text-success' : '' }
-                  = t("skills.#{skill.t_name}")
+                  = t("skill.#{skill.t_name}")
           .font-weight-bold.mt-3
             = t 'projects.your_contribution'
           - if @scrum_master || product_owner?(@project)

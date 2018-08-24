@@ -131,6 +131,7 @@ it:
   projects:
     form_text_logo: "Quadrato, 256x256 (jpg, png)"
     form_text_main_image: "Immagine panoramica, 1080x670 (jpg, png)"
+    form_text_text_skill: "In verde le skill da te corrisposte."
     info_main_image: "Utilizzata nella pagina principale del progetto.<br><br>Disponibile un <a href='%{image_url}' download='template-main-image.svg'><i class='fa fa-link fa-sm'>template</i></a> (Inkscape, CC-BY-SA) per un uso ottimale."
     info_description: "Un testo di moderata lunghezza che spiega bene <strong>la missione del progetto, lo scopo</strong> e perché vuoi realizzarlo.<br><br>Se ritieni che il tuo progetto possa avere delle similitudini con altri, illustra i tuoi punti di forza.<br><br>Utilizza markdown per scrivere e ricorda che la prima riga appare nelle cards come breve riassunto."
     info_category: "La categoria giusta permette una buona indicizzazione del progetto."
@@ -202,7 +203,7 @@ it:
       work: "In sviluppo"
 
       info_beginning: "Il progetto è appena iniziato. Crea i lavori e gli obiettivi necessari per definire il piano di sviluppo."
-      info_definition: "Hai definito lavori e obiettivi ma devi gestire le pianificazioni/rilasci, creandole e associandole agli obiettivi."
+      info_definition: "Hai definito lavori e obiettivi ma devi gestire le pianificazioni/rilasci, creandone e associandone almeno una agli obiettivi."
       info_plan: "Ora che il tuo progetto ha un piano d'azione, vai nella pagina \"Pianificazioni\" e attiva la pianificazione! Buona fortuna"
       info_work: "Il progetto è in fase di sviluppo.<br>Puoi sempre modificare una pianificazione, disattivandone lo sviluppo; tuttavia ricorda che ci saranno delle conseguenze come far tornare i lavori associati in Backlog!"
 

@@ -20,7 +20,7 @@
 .card
   .p-3
     %h5.card-title.mb-0= icon('fas', 'tasks', t('.title', count: tasks.count))
-  .list-group.list-group-flush
+  .list-group.list-group-flush{ style: 'flex: 1 1 auto;' }
     - tasks.each do |task|
       = link_to project_task_path(@project, task), class: "list-group-item list-group-item-action" do
         .round-sm.rounded.float-left.mr-1{ class: "bg-#{color_list_round_div(task.status.translation_code)}", style: 'width: 1.2rem; height: 1.2rem;' }

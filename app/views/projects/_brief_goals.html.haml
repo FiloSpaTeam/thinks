@@ -21,7 +21,7 @@
   .p-3
     %h5.card-title.mb-0
       = icon('fas', 'crosshairs', t('.title', count: goals.count))
-  .list-group.list-group-flush
+  .list-group.list-group-flush{ style: 'flex: 1 1 auto;' }
     - goals.each do |goal|
       = link_to project_goal_path(@project, goal), class: 'list-group-item list-group-item-action' do
         .text-primary
