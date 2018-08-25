@@ -41,27 +41,23 @@ class Comment < ActiveRecord::Base
     thinker == current_thinker
   end
 
-  def approve(p_reason)
+  def approve
     ActiveRecord::Base.transaction do
-      begin
-        task = self.task
+      task = self.task
 
-        task.status = Status.done.first
-        task.end_at = DateTime.now
-        task.save
+      task.status = Status.done.first
+      task.end_at = DateTime.now
+      task.save
 
-        unless approved
-          task.comments.approved.update_all(approved: false)
+      unless approved
+        task.comments.approved.update_all(approved: false)
 
-          self.approved = true
-          save
-
-          p_reason.related = self
-          p_reason.save
-        end
-      rescue => ex
-        puts ex.message
+        self.approved = true
+        save
       end
     end
+  rescue ActiveRecord::RecordInvalid => ex
+    puts ex.message
+    false
   end
 end

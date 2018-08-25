@@ -22,7 +22,6 @@ class OperationsController < ApplicationController
   before_action :set_task
   before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
   before_action :check_worker!, except: [:index, :destroy, :done]
-  before_action :set_project, only: [:index]
 
   # GET /operations
   # GET /operations.json
@@ -75,7 +74,7 @@ class OperationsController < ApplicationController
     respond_to do |format|
       if @task.worker == current_thinker && @operation.save
         create_notification(@operation, @operation.task.project)
-        format.html { redirect_to task_operations_path(@task), notice: 'Operation done.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Operation done.' }
         format.json { render :show, status: :created, location: @operation }
       else
         format.html { render :new }
@@ -122,10 +121,6 @@ class OperationsController < ApplicationController
 
   def set_task
     @task = Task.with_deleted.friendly.find(params[:task_id])
-  end
-
-  def set_project
-    @project = @task.project
   end
 
   # Use callbacks to share common setup or constraints between actions.

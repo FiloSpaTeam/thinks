@@ -16,6 +16,7 @@
 # Copyright (c) 2015, Claudio Maradonna
 
 class CommentsController < ApplicationController
+  before_action :set_project
   before_action :set_task, only: [:create]
   before_action :set_comment, only: [:approve, :edit, :update, :destroy, :like]
   before_action :set_validators_for_form_help, only: [:edit]
@@ -80,16 +81,9 @@ class CommentsController < ApplicationController
   end
 
   def approve
-    reason = Reason.new(reason_params)
-    reason.thinker = current_thinker
-
     @task = @comment.task
     respond_to do |format|
-      if reason.text.empty?
-        set_form_errors(reason)
-
-        format.html { redirect_to project_task_path(@project, @task), alert: 'You need to specify a reason!' }
-      elsif @task.worker == current_thinker && @comment.approve(reason)
+      if @task.worker == current_thinker && @comment.approve
         create_notification(@comment, @task.project)
         format.html { redirect_to project_task_path(@project, @task), notice: 'Solution approved! Task done!' }
         format.json { render :show, status: :created, location: @task }

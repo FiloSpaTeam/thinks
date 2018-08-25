@@ -104,21 +104,6 @@
                   = link_to project_task_path(@project, child) do
                     %small= child.title
 
-        - unless @task.recruitment
-          - unless @task.deleted? && @task.done?
-            - if @task.ratings.where(thinker: current_thinker).present?
-              %li.list-group-item
-                %span.float-right
-                  = @task.ratings.where(thinker: current_thinker).first.value.to_f
-                %strong=t('.your_rating')
-              %li.list-group-item{style: 'border-top: none;'}
-                %strong=t(:average)
-                = text_field_tag :value, @task.ratings.average(:value), class: 'rating', 'data-size': 'xxs', 'data-step': 1, 'data-show-caption': 'false', 'data-show-clear': 'false', 'data-display-only': true, 'data-container-class': 'pull-right', 'data-theme': 'krajee-fa'
-            - else
-              - if @task.done?
-                %li.list-group-item
-                  = render partial: 'ratings/form', locals: { task: @task }
-
     #t-status.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-status' }
       %ul.list-group.list-group-flush
         %li.list-group-item
@@ -223,23 +208,28 @@
             %div= t('tasks.not_ready_for_work')
 
     #t-operations.tab-pane.fade{ role: 'tabpanel', 'aria-labelledby': 'tab-operations' }
-      %ul.list-group.list-group-flush{ style: 'max-height: 250px;overflow-y: auto;' }
+      - if current_thinker == @task.worker
+        = form_for [@project, @task, Operation.new], html: { class: 'p-2' } do |f|
+          .form-group
+            = f.label :text, class: 'control-label'
+            = f.text_field :text, :class => 'form-control'
+          = f.submit t("add"), :class => "btn btn-primary"
+      %ul.list-group.list-group-flush{ style: 'max-height: 60vh;overflow-y: auto;' }
         - if @task.operations.empty?
           .list-group-item= t("tasks.no_operations")
         - first = false
         - @task.operations.each_with_index do |operation, index|
-          = content_tag(:li, :class => "list-group-item #{operation.done ? 'list-group-item-success' : ''}") do
+          = content_tag(:li, :class => 'list-group-item') do
             - if (!operation.done && !first)
               - first = true
               - if current_thinker == @task.worker
                 = destroy_button(operation)
                 = done_button(operation)
-            %strong
-              = operation.serial.to_s + ': '
-            = operation.text
-      - if current_thinker == @task.worker
-        = form_for [@project, @task, Operation.new] do |f|
-          = f.text_field :text, :class => 'form-control'
-          = f.submit t("add"), :class => "btn btn-primary"
+            - if operation.done
+              = icon('fas', 'check', class: 'text-dark')
+              %del= operation.text
+            - else
+              %strong= operation.serial.to_s + ': '
+              = operation.text
 
 = render partial: 'projects/layout'

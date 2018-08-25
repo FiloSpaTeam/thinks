@@ -4,4 +4,5 @@ class App.Project.Task
       $('#task_goal_id').prop('disabled', $(this).val() != '')
       $('#task_goal_id').val($('option:selected', this).attr('data-goal')) if $('option:selected', this).attr('data-goal')
 
-    $('form.smart-listing-controls[data-smart-listing="tasks"]')
+    $('.rating').change ->
+      $(this).next().text(I18n.t('star', $(this).val()))

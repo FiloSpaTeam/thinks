@@ -18,6 +18,7 @@
 class RatingsController < ApplicationController
   before_action :authenticate_thinker!
 
+  before_action :set_project
   before_action :set_task
   before_action :teammate!
 
@@ -26,7 +27,6 @@ class RatingsController < ApplicationController
       if @task.ratings.where(thinker: current_thinker).present?
         format.html { redirect_to project_task_path(@project, @task), notice: 'You have already expressed your think about.' }
         format.json { render :show, status: :ok, location: @task }
-        
       else
         rating = Rating.new(rating_params)
 
@@ -53,7 +53,7 @@ class RatingsController < ApplicationController
   end
 
   def set_task
-    @task = Task.includes(:project, :ratings).with_deleted.find(params[Enums::FiltersNames::TASK])
+    @task = Task.includes(:project, :ratings).with_deleted.friendly.find(params[:task_id])
   end
 
   def teammate!

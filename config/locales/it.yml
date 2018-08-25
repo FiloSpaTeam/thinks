@@ -20,6 +20,8 @@ it:
   discards: "Scarta"
   show: "Visualizza"
   reopen: "Riapri"
+  approve: "Approva"
+  submit: "Invia"
 
   filters:
     search: "Cerca"
@@ -273,7 +275,7 @@ it:
     to_sprint_forced: "Forza in Sprint"
     standard_deviation_too_high: "Il team non ha espresso pareri concordi sul carico di lavoro che il lavoro sviluppa. Suggeriamo un ulteriore giro di votazioni prima del passaggio in Sprint."
     to_release_forced: "Forza in Release"
-    to_release: "Retrocedi in Release"
+    to_release_back: "Riporta in Release"
     define_workload: "Esprimi il tuo parere sul carico che il lavoro sviluppa."
 
     recruitment:
@@ -312,6 +314,9 @@ it:
       details: "Dettagli"
       status: "Stato"
       operations: "Operazioni"
+
+    ratings:
+      title: "Valuta il lavoro!"
 
   comments:
     likes:
@@ -512,6 +517,8 @@ it:
         release_id: "Pianificazione associata"
         title: "Definizione"
         description: "Descrizione"
+      operation:
+        text: "Descrizione"
       release:
         version: "Nome in codice"
         end_at: "Termine stabilito"

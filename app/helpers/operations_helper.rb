@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -17,14 +19,14 @@
 
 module OperationsHelper
   def done_button(operation)
-    link_to done_project_task_operation_path(@project, operation.task, operation), :class => "pull-right btn actions", :role => "button", :title => t("done"), method: :put do
-      content_tag(:span, "", :class => "glyphicon glyphicon-ok", "aria-hidden" => "true")
+    link_to done_project_task_operation_path(@project, operation.task, operation), class: 'float-right btn btn-sm actions', role: 'button', method: :put do
+      icon('fas', 'check', class: 'text-success')
     end
   end
 
   def destroy_button(operation)
-    link_to project_task_operation_path(@project, operation.task, operation), :class => "pull-right btn actions", :role => "button", :title => t("remove"), method: :delete do
-      content_tag(:span, '', :class => 'glyphicon glyphicon-remove', 'aria-hidden' => 'true')
+    link_to project_task_operation_path(@project, operation.task, operation), class: 'float-right btn btn-sm actions', role: 'button', title: t('delete'), method: :delete do
+      icon('fas', 'eraser', class: 'text-danger')
     end
   end
 end

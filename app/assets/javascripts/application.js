@@ -26,9 +26,6 @@
 //= require chartkick
 //= require i18n.js
 //= require i18n/translations
-//= require bootstrap-star-rating/star-rating.min.js
-//= require bootstrap-star-rating/theme.min.js
-//= require bootstrap-star-rating/locales/LANG.js
 //= require bootstrap-show-password
 //= require bootstrap-notify
 //= require init

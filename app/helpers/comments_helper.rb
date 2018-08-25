@@ -47,8 +47,8 @@ module CommentsHelper
   end
 
   def approve_button(comment)
-    link_to (comment.approved && comment.task.done? ? 'javascript:;' : ''), class: 'dropdown-item small btn-approve', 'data-approved' => comment.approved.to_s, :title => t('approve') do
-      icon('fas', 'check', class: "#{comment.approved ? 'text-dark' : ''}")
+    link_to approve_project_task_comment_path(@project, comment.task, comment), class: 'dropdown-item small' do
+      icon('fas', 'check', t('approve'), class: comment.approved ? 'text-dark' : '')
     end
   end
 
