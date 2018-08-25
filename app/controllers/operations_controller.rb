@@ -17,8 +17,10 @@
 
 class OperationsController < ApplicationController
   before_action :authenticate_thinker!
+
+  before_action :set_project
+  before_action :set_task
   before_action :set_operation, only: [:show, :edit, :update, :destroy, :done]
-  before_action :set_task, only: [:index, :new, :create]
   before_action :check_worker!, except: [:index, :destroy, :done]
   before_action :set_project, only: [:index]
 
@@ -57,7 +59,7 @@ class OperationsController < ApplicationController
     respond_to do |format|
       if @operation.save
         create_notification(@operation, @operation.task.project)
-        format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully added.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Operation was successfully added.' }
         format.json { render :show, status: :created, location: @operation }
       else
         format.html { render :new }
@@ -105,9 +107,9 @@ class OperationsController < ApplicationController
     respond_to do |format|
       if @task.worker == current_thinker && @operation.destroy_and_update_serial
         destroy_notification(@operation, @operation.task.project)
-        format.html { redirect_to task_operations_path(@task), notice: 'Operation was successfully destroyed.' }
+        format.html { redirect_to project_task_path(@project, @task), notice: 'Operation was successfully destroyed.' }
       else
-        format.html { redirect_to task_operations_path(@task), alert: 'You cannot delete operations.' }
+        format.html { redirect_to project_task_path(@project, @task), alert: 'You cannot delete operations.' }
       end
     end
   end
@@ -119,7 +121,7 @@ class OperationsController < ApplicationController
   end
 
   def set_task
-    @task = Task.with_deleted.find(params[Enums::FiltersNames::TASK])
+    @task = Task.with_deleted.friendly.find(params[:task_id])
   end
 
   def set_project

@@ -52,6 +52,8 @@ it:
 
     vote_saved: "Grazie per aver espresso un parere per \"%{title}\"!"
     task_ready_for_assignment: "Il task è ora pronto per essere assegnato."
+    task_not_editable: "Il task è pianificato per lo sviluppo e non è modificabile."
+    task_vote_saved: "Il voto è stato salvato. Grazie."
 
     deleted: "%{subject} \"%{title}\" cancellato."
     discarded: "%{subject} \"%{title}\" scartato."

@@ -110,7 +110,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :operations, shallow: true, except: [:new, :show] do
+      resources :operations, except: [:new, :show] do
         member do
           put :done
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is part of Thinks.
 
 # Thinks is free software: you can redistribute it and/or modify
@@ -15,6 +17,7 @@
 
 # Copyright (c) 2015, Claudio Maradonna
 
+# The model that handle tasks and their relationship
 class Task < ActiveRecord::Base
   acts_as_paranoid
 
@@ -221,6 +224,10 @@ class Task < ActiveRecord::Base
     return true if status == Status.done.first
   end
 
+  def in_backlog?
+    return true if status == Status.backlog.first
+  end
+
   def in_sprint?
     return true if status == Status.sprint.first
   end
@@ -243,16 +250,16 @@ class Task < ActiveRecord::Base
 
   def check_and_update(params)
     ActiveRecord::Base.transaction do
-      begin
-        if params.key?(:father_id) && params[:father_id].present?
-          params[Enums::FiltersNames::GOAL] = Task.friendly.find(params[:father_id]).goal.try(:id)
-        end
+      params[Enums::FiltersNames::GOAL] = Task.friendly.find(params[:father_id]).goal.try(:id) if
+        params.key?(:father_id) &&
+        params[:father_id].present?
 
-        update(params)
-      rescue => ex
-        puts ex.message
-      end
+      children.update_all(goal_id: goal.try(:id)) if children.present?
+
+      update(params)
     end
+  rescue ActiveRecord::RecordInvalid => ex
+    false
   end
 
   def sanitize_and_save

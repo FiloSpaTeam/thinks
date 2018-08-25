@@ -16,7 +16,7 @@
 -# Copyright (c) 2018, Claudio Maradonna
 
 - content_for :page_content do
-  .card-deck
+  .card-group
     = render partial: 'projects/brief_release', locals: { release: @active_release }
     = render partial: 'projects/brief_goals', locals: { goals: @assigned_goals }
     = render partial: 'projects/brief_tasks', locals: { tasks: @assigned_tasks }

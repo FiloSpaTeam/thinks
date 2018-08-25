@@ -26,12 +26,12 @@
           = icon('fas', 'eraser', t('delete'))
     - elsif !@task.done?
       %li.nav-item.ml-1
-        %a.btn.btn-default{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ @task.id }" }
+        %a.btn.btn-default{ role: "button", 'data-toggle': 'modal', href: "#modal-discard-task-#{ @task.id }", class: "#{ 'disabled' unless @task.in_backlog? }" }
           = icon('fas', 'trash-alt', t('discards'))
       - content_for :page_modals do
         = render partial: 'tasks/modal_discard', locals: { task: @task }
       %li.nav-item.ml-1
-        = link_to edit_project_task_path(@task.project, @task), class: 'btn btn-primary' do
+        = link_to edit_project_task_path(@task.project, @task), class: "btn btn-primary #{ 'disabled' unless @task.in_backlog? }" do
           = icon('fas', 'edit', t('edit'))
 
 - content_for :page_content do
@@ -80,9 +80,9 @@
         %li.list-group-item
           %small.font-weight-bold= t('activerecord.attributes.task.goal_id')
           %br
-          - if @task.goal.present?
+          - if @task.goal.present? || @task.father.try(:goal)
             = link_to @task.goal.title, project_goal_path(@project, @task.goal)
-          - elsif !@task.deleted?
+          - elsif !@task.deleted? && @task.father.nil?
             = form_for [@project,@task] do |f|
               .form-group
                 = f.select :goal_id, options_from_collection_for_select(@task.project.goals, 'id', 'title', @task.goal_id), {include_blank: t('select')}, :class => "form-control", disabled: @task.project.goals.empty?, onchange: 'this.form.submit()'
@@ -238,8 +238,8 @@
               = operation.serial.to_s + ': '
             = operation.text
       - if current_thinker == @task.worker
-        = form_for [@task, Operation.new] do |f|
+        = form_for [@project, @task, Operation.new] do |f|
           = f.text_field :text, :class => 'form-control'
-          = f.submit t(".add"), :class => "btn btn-primary"
+          = f.submit t("add"), :class => "btn btn-primary"
 
 = render partial: 'projects/layout'

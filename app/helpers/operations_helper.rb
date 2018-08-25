@@ -17,13 +17,13 @@
 
 module OperationsHelper
   def done_button(operation)
-    link_to done_operation_path(operation), :class => "pull-right btn actions", :role => "button", :title => t("done"), method: :put do
+    link_to done_project_task_operation_path(@project, operation.task, operation), :class => "pull-right btn actions", :role => "button", :title => t("done"), method: :put do
       content_tag(:span, "", :class => "glyphicon glyphicon-ok", "aria-hidden" => "true")
     end
   end
 
   def destroy_button(operation)
-    link_to operation_path(operation), :class => "pull-right btn actions", :role => "button", :title => t("remove"), method: :delete do
+    link_to project_task_operation_path(@project, operation.task, operation), :class => "pull-right btn actions", :role => "button", :title => t("remove"), method: :delete do
       content_tag(:span, '', :class => 'glyphicon glyphicon-remove', 'aria-hidden' => 'true')
     end
   end

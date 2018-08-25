@@ -32,6 +32,7 @@ class TasksController < ApplicationController
 
   before_action :check_ban!, except: [:index]
   before_action :check_task!, only: [:show]
+  before_action :prevent_edit!, only: [:edit, :update, :destroy]
 
   before_action :teammate!, only: [:new, :create]
   before_action :check_assign!, only: [:assign]
@@ -424,6 +425,13 @@ class TasksController < ApplicationController
     if current_thinker.working_tasks.in_progress.present?
       flash[:alert] = 'You have already something to do :P'
       redirect_to task_path(@task)
+    end
+  end
+
+  def prevent_edit!
+    if @task.status != Status.backlog.first
+      flash[:alert] = t('alerts.task_not_editable')
+      redirect_to project_task_path(@project, @task)
     end
   end
 
