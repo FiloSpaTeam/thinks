@@ -67,7 +67,7 @@
                 = link_to icon('fas', 'trash-alt', t('discards')), goal.release.try(:active?) ? 'javascript:;' : project_goal_path(@project, goal), :method => 'delete', data: ({ confirm: t('are_you_sure') } unless goal.release.try(:active?)), class: "dropdown-item small #{ 'disabled' if goal.release.try(:active?) }"
     - else
       %tr.warning
-        %td.text-center
+        %td.text-center{ colspan: 3 }
           %strong
             No records found
 

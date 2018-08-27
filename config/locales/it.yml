@@ -418,6 +418,8 @@ it:
       new:
         sign_up: "Registrati"
         already_signed_up: "Hai già un account?"
+      thinker:
+        signed_up: "Condividi et impera. Buon divertimento!"
     passwords:
       new:
         forgot_password: "Password dimenticata?"
