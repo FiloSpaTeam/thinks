@@ -310,7 +310,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.tasks_vote_saved', title: @task.title) }
+        format.html { redirect_to project_task_path(@project, @task), notice: t('alerts.task_vote_saved', title: @task.title) }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
